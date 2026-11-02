@@ -1,0 +1,891 @@
+{
+ "sources": {
+  "sngcat": {
+   "title": "SNG Barratt Jaguar XK8 parts catalogue",
+   "url": "https://cdn.sngbarratt.com/catalogues/new/sng_cat_xk8_en.pdf",
+   "publisher": "SNG Barratt",
+   "kind": "vendor"
+  },
+  "bp-x100": {
+   "title": "British Parts X100 catalogue",
+   "url": "https://www.britishparts.co.uk/classic-jaguar/jaguar-x100-xk-xkr-1996-2006",
+   "publisher": "British Parts UK",
+   "kind": "vendor"
+  },
+  "jr-parts": {
+   "title": "JagRepair Parts & Suppliers",
+   "url": "http://www.jagrepair.com/PartsandSuppliers.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-links": {
+   "title": "JagRepair Links",
+   "url": "http://www.jagrepair.com/ForumsandLinks.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-pulley": {
+   "title": "Installing an XKR supercharger 3 PSI pulley upgrade",
+   "url": "http://www.jagrepair.com/images/NonStandardMods/Installing%20an%20XKR%20%20superrcharger%203%20PSI%20pulley%20upgrade.pdf",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "growler": {
+   "title": "Timing chains, tensioners and peace of mind, GROWLER Winter 2010/11",
+   "url": "https://www.xk8-parts.com/wp-content/uploads/2013/02/Jaguar-XK8-XKR-V8-Engine-Timing-Chain-and-Tensioners-Article.pdf",
+   "publisher": "XKEC GROWLER",
+   "kind": "enthusiast"
+  },
+  "ph-softtop": {
+   "title": "XKR soft top replacement / repair",
+   "url": "https://www.pistonheads.com/gassing/topic.asp?h=0&f=85&t=1939514",
+   "publisher": "PistonHeads",
+   "kind": "forum"
+  },
+  "joc-hood": {
+   "title": "Hood specialist required",
+   "url": "https://www.jaguarownersclub.com/forums/topic/26025-hood-specialist-required/",
+   "publisher": "Jaguar Owners Club",
+   "kind": "forum"
+  },
+  "jf-exhaust-best": {
+   "title": "Best Exhaust for XK8? Apr 2016",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/best-exhaust-xk8-aftermarket-company-jags-general-161370/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-exhaust-regrets": {
+   "title": "Any 4.0 XK8 exhaust Regrets?",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/any-4-0-xk8-exhaust-regrets-83314/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-uj": {
+   "title": "rear universal joints, Mar 2026",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/rear-universal-joints-295268/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-ainet": {
+   "title": "Alpine AI Net Aux In Solution for DAB+",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/alpine-ai-net-aux-solution-dab-275304/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "dcs": {
+   "title": "Discount Car Stereo Jaguar adapters",
+   "url": "https://www.discountcarstereo.com/JAG-CDR.html",
+   "publisher": "Discount Car Stereo",
+   "kind": "vendor"
+  },
+  "trustpilot-eurojag": {
+   "title": "Eurojag Limited reviews",
+   "url": "https://www.trustpilot.com/review/www.eurojag.com",
+   "publisher": "Trustpilot",
+   "kind": "reference"
+  },
+  "breakerlink": {
+   "title": "Find New & Used Jaguar XK8 Parts & Spares",
+   "url": "https://www.breakerlink.com/cars/jaguar/xk8/",
+   "publisher": "BreakerLink",
+   "kind": "reference"
+  },
+  "synetiq": {
+   "title": "Synetiq parts breaking listing for XK8 X100 engine",
+   "url": "https://www.synetiq.co.uk/parts-breaking/details/engine-jaguar-xk8-x100-1996-on-convertible-3996-290-petrol-automatic-aj26-aj27/-/1140965",
+   "publisher": "Synetiq",
+   "kind": "vendor"
+  },
+  "scraplocal": {
+   "title": "Scrap Local Jaguar dismantlers",
+   "url": "https://scraplocal.co.uk/vehicle-brands/jaguar",
+   "publisher": "Scrap Local",
+   "kind": "reference"
+  },
+  "xk8parts": {
+   "title": "Jaguar XK8 and XKR Parts and Accessories",
+   "url": "https://www.xk8-parts.com/",
+   "publisher": "DCR AutoParts",
+   "kind": "vendor"
+  },
+  "jsne": {
+   "title": "Jaguar XK8 XKR V8 timing chain tensioner kit",
+   "url": "https://jaguarspares-northeast.co.uk/product/jaguar-xk8-xkr-timing-chain-and-tensioner-kit/",
+   "publisher": "Jaguar Spares North East",
+   "kind": "vendor"
+  },
+  "ashwood": {
+   "title": "Secondary timing chain tensioner C2A1511",
+   "url": "https://www.ashwoodjagparts.co.uk/product-page/secondary-timing-chain-tensioner-r-h-jaguar-xk8-xkr-4-0-4-2-96-06-c2a1511",
+   "publisher": "Ashwood Jag Parts",
+   "kind": "vendor"
+  },
+  "rimmer": {
+   "title": "Rimmer Bros part RJ1047 timing kit",
+   "url": "https://rimmerbros.com/Item--i-RJ1047",
+   "publisher": "Rimmer Bros",
+   "kind": "vendor"
+  },
+  "polybush": {
+   "title": "Polybush XK8 / XK8R category",
+   "url": "https://www.polybush.co.uk/product-category/jaguar/xk8-xk8r/",
+   "publisher": "Polybush",
+   "kind": "vendor"
+  },
+  "powerflex": {
+   "title": "Powerflex XK8, XKR X100",
+   "url": "https://www.powerflex.co.uk/products/XK8+XK8R-2611/1.html",
+   "publisher": "Powerflex",
+   "kind": "vendor"
+  },
+  "gt2i": {
+   "title": "Powerflex bushes Jaguar XK8, XKR X100",
+   "url": "https://www.gt2i.ch/en/bush-per-vehicle/1007995-powerflex-bushes-jaguar-daimler-xk8-xkr-x100-1996-2006.html",
+   "publisher": "GT2i",
+   "kind": "vendor"
+  },
+  "goodridge38101": {
+   "title": "Goodridge Jaguar XK8 brake lines 38101",
+   "url": "https://fidanza.com/goodridge-jaguar-xk8-brake-lines-38101",
+   "publisher": "Fidanza",
+   "kind": "vendor"
+  },
+  "nitron": {
+   "title": "Nitron NTR R1 System Jaguar XK8",
+   "url": "https://www.elite-performance.com/products/nitron-ntr-r1-system-jaguar-xk8",
+   "publisher": "Elite Performance",
+   "kind": "vendor"
+  },
+  "powerhouse": {
+   "title": "Jaguar Supercharger 4.0 and 4.2 V8 Upper Pulleys",
+   "url": "https://powerhouse.uk/jaguar-supercharger-4-0-and-4-2-v8-upper-pulleys/",
+   "publisher": "Powerhouse Automotive",
+   "kind": "specialist"
+  },
+  "paramount": {
+   "title": "Must Have Jaguar XK Upgrades",
+   "url": "https://paramount-performance.com/must-have-jaguar-xk-upgrades/",
+   "publisher": "Paramount Performance",
+   "kind": "specialist"
+  },
+  "viezu": {
+   "title": "Jaguar XK XKR Suspension, Handling and Tuning Upgrades",
+   "url": "https://viezu.com/blog/jaguar-xk-xkr-suspension-handling-and-tuning-upgrades/",
+   "publisher": "Viezu",
+   "kind": "specialist"
+  },
+  "eurotoys": {
+   "title": "Eurotoys Ltd",
+   "url": "https://www.eurotoysltd.com/",
+   "publisher": "Eurotoys",
+   "kind": "vendor"
+  },
+  "incartec": {
+   "title": "InCarTec XK8 interface",
+   "url": "https://www.incartec.co.uk/product/Jaguar-XK8-XKR-1996-1999-steering-wheel-control-interface-PREMIUM-AUDIO-29-615-ALP",
+   "publisher": "InCarTec",
+   "kind": "vendor"
+  },
+  "which-jagtech": {
+   "title": "Nottingham JagTech Ltd, Which? Trusted Traders",
+   "url": "https://trustedtraders.which.co.uk/businesses/nottingham-jagtech-ltd/",
+   "publisher": "Which?",
+   "kind": "reference"
+  },
+  "cc-kings": {
+   "title": "2000 Jaguar XKR X100 auction listing naming service history",
+   "url": "https://www.carandclassic.com/auctions/2000-jaguar-xkr-x100-8Wqjjn",
+   "publisher": "Car & Classic",
+   "kind": "reference"
+  },
+  "blackcircles": {
+   "title": "Blackcircles 245/45R18",
+   "url": "https://www.blackcircles.com/tyres/245-45-18",
+   "publisher": "Blackcircles",
+   "kind": "vendor"
+  },
+  "jec": {
+   "title": "Jaguar Enthusiasts' Club",
+   "url": "https://jec.org.uk/",
+   "publisher": "JEC",
+   "kind": "enthusiast"
+  },
+  "jdc": {
+   "title": "The Jaguar Drivers' Club",
+   "url": "https://www.jaguardriver.co.uk/",
+   "publisher": "JDC",
+   "kind": "enthusiast"
+  },
+  "jdht": {
+   "title": "Jaguar Daimler Heritage Trust",
+   "url": "https://www.jaguarheritage.com/",
+   "publisher": "JDHT",
+   "kind": "reference"
+  },
+  "jag-club-nl": {
+   "title": "Jaguar Club Nederland",
+   "url": "https://www.jaguarclub.nl/",
+   "publisher": "jaguarclub.nl",
+   "kind": "enthusiast"
+  },
+  "limora": {
+   "title": "Limora spare parts for classic cars",
+   "url": "https://www.limora.com/en/",
+   "publisher": "Limora",
+   "kind": "vendor"
+  },
+  "supersprint": {
+   "title": "Supersprint XKR rear section listing via Madness Autoworks",
+   "url": "https://madnessautoworks.com/jaguar-xkr-performance-exhaust-supersprint-rear-section-left-side-w-valve-4-2i-v8-300164287",
+   "publisher": "Madness Autoworks",
+   "kind": "vendor"
+  },
+  "moss": {
+   "title": "Moss Motors upgraded secondary tensioner",
+   "url": "https://mossmotors.com/c2a-1511-v-8-right-secondary-timing-chain-tensioner-upgraded",
+   "publisher": "Moss Motors",
+   "kind": "vendor"
+  },
+  "fcp": {
+   "title": "FCP Euro XK8 parts",
+   "url": "https://www.fcpeuro.com/Jaguar-parts/XK8/Cooling-System/",
+   "publisher": "FCP Euro",
+   "kind": "vendor"
+  },
+  "terrys": {
+   "title": "Terry's Jaguar Parts",
+   "url": "https://www.terrysjag.com/",
+   "publisher": "Terry's Jaguar Parts",
+   "kind": "vendor"
+  },
+  "david-manners": {
+   "title": "Jaguar and Daimler Car Parts from David Manners Limited",
+   "url": "https://jagspares.co.uk/",
+   "publisher": "David Manners",
+   "kind": "vendor"
+  },
+  "forum-ice": {
+   "title": "1999 Aftermarket ICE Upgrade",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/1999-aftermarket-ice-upgrade-ipod-bluetooth-facia-steering-wheel-controls-56937/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  }
+ },
+ "items": [
+  {
+   "id": "sng-barratt",
+   "name": "SNG Barratt",
+   "url": "https://www.sngbarratt.com/",
+   "region": "UK, US, FR, NL",
+   "sells": "New Jaguar parts, its own XK8 catalogue PDF, Bell sports exhaust, Brembo, Polybush, EBC, Adamesh mesh, trim",
+   "note": "First call for part numbers. Bridgnorth head office, plus Manchester NH, Charney-les-Macon and Oisterwijk branches. Catalogue is a free X100 parts reference.",
+   "src": [
+    "sngcat"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "david-manners",
+   "name": "David Manners",
+   "url": "https://jagspares.co.uk/",
+   "region": "UK",
+   "sells": "Jaguar and Daimler car parts",
+   "note": "www.davidmanners.co.uk redirects here. X100 stock depth not checked, so ring with part numbers.",
+   "src": [
+    "david-manners"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "british-parts",
+   "name": "British Parts UK",
+   "url": "https://www.britishparts.co.uk/classic-jaguar/jaguar-x100-xk-xkr-1996-2006",
+   "region": "UK",
+   "sells": "X100 catalogue with live ex-VAT prices: timing kits, poly and rebuild kits, Bilstein, EBC, braided hoses, gearbox service parts",
+   "note": "Best public X100 price list found. Prices shown + VAT by default. Enter your VIN at checkout so staff can check fit. Telephone 01438 354810 on site.",
+   "src": [
+    "bp-x100"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "rimmer-bros",
+   "name": "Rimmer Bros",
+   "url": "https://rimmerbros.com/",
+   "region": "UK",
+   "sells": "British car parts including Jaguar V8 timing kits such as RJ1047",
+   "note": "RJ1047 is listed against X308, so confirm fit for X100. Worth a price check, not a first stop for X100.",
+   "src": [
+    "rimmer"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "xk8-parts",
+   "name": "XK8 Parts (DCR AutoParts)",
+   "url": "https://www.xk8-parts.com/",
+   "region": "UK",
+   "sells": "Independent X100 and X150 parts, used parts, books, tool hire, worldwide mail order",
+   "note": "Run by Dave Roche, who wrote the GROWLER timing article. Based in Drumnadrochit, Inverness-shire. Tool hire is the useful bit for a DIY timing job.",
+   "src": [
+    "xk8parts",
+    "growler"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "jaguar-spares-north-east",
+   "name": "Jaguar Spares North East",
+   "url": "https://jaguarspares-northeast.co.uk/",
+   "region": "UK",
+   "sells": "Jaguar spares including a full X100 4.0 timing chain and tensioner kit",
+   "note": "Kit listing: 2 top and 2 lower tensioners, 2 primary and 2 secondary chains, 4 guides, 8 bolts, to engine 0108122359.",
+   "src": [
+    "jsne"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "ashwood-jag-parts",
+   "name": "Ashwood Jag Parts",
+   "url": "https://www.ashwoodjagparts.co.uk/",
+   "region": "UK",
+   "sells": "Jaguar parts and accessories, including C2A1511 secondary tensioner",
+   "note": "Useful for individual tensioners.",
+   "src": [
+    "ashwood"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "polybush",
+   "name": "Polybush",
+   "url": "https://www.polybush.co.uk/product-category/jaguar/xk8-xk8r/",
+   "region": "UK",
+   "sells": "Polyurethane bushes for XK8/XK8R, including a 12-bush front kit",
+   "note": "Maker. Prices shown inc VAT.",
+   "src": [
+    "polybush"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "powerflex",
+   "name": "Powerflex",
+   "url": "https://www.powerflex.co.uk/products/XK8+XK8R-2611/1.html",
+   "region": "UK",
+   "sells": "Polyurethane bushes by position for X100, Road and Black series",
+   "note": "Maker. Buy only the positions you need.",
+   "src": [
+    "powerflex"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "goodridge",
+   "name": "Goodridge",
+   "url": "https://www.goodridge.co.uk/",
+   "region": "UK",
+   "sells": "Braided brake hose kits, X100 kit 38101",
+   "note": "UK price not found.",
+   "src": [
+    "goodridge38101"
+   ],
+   "conf": "single",
+   "research": "Home page answered HTTP 429 once and 200 on recheck."
+  },
+  {
+   "id": "milltek",
+   "name": "Milltek Sport",
+   "url": "https://www.millteksport.com/",
+   "region": "UK",
+   "sells": "Stainless exhausts",
+   "note": "A 2016 forum post says it listed XK8 4.0 systems. No current X100 page confirmed, so ask before relying on it.",
+   "src": [
+    "jf-exhaust-best"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "adamesh",
+   "name": "Adamesh",
+   "url": "https://www.adamesh.co.uk/",
+   "region": "UK",
+   "sells": "Stainless sports exhaust sections and mesh grilles for Jaguars",
+   "note": "An owner paid about £400 plus fitting in 2012.",
+   "src": [
+    "jf-exhaust-regrets",
+    "sngcat"
+   ],
+   "conf": "corroborated",
+   "research": "Site rate-limited the automated check (HTTP 429)."
+  },
+  {
+   "id": "nitron",
+   "name": "Nitron Suspension",
+   "url": "https://www.nitron.com/",
+   "region": "UK",
+   "sells": "Coilovers, NTR R1 kit listed for 1996-2006 XK8 via a US retailer",
+   "note": "Special order, call for a UK price. XKR fit not confirmed.",
+   "src": [
+    "nitron"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "paramount-performance",
+   "name": "Paramount Performance",
+   "url": "https://paramount-performance.com/",
+   "region": "UK",
+   "sells": "XK8/XKR pulleys, remaps, sports cats, springs, bushes",
+   "note": "Tuner. Its power figures are seller claims, and some pages disagree.",
+   "src": [
+    "paramount"
+   ],
+   "conf": "single",
+   "research": "Refuses automated fetches (HTTP 403), read through search results only."
+  },
+  {
+   "id": "powerhouse-automotive",
+   "name": "Powerhouse Automotive",
+   "url": "https://powerhouse.uk/",
+   "region": "UK",
+   "sells": "Stainless 6% and 10% upper pulleys for Jaguar 4.0 and 4.2, fitting at Chesterfield",
+   "note": "Half a day on site. Mail-order snout machining offered. Prices on its guide pages were about three years old.",
+   "src": [
+    "powerhouse"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "viezu",
+   "name": "Viezu",
+   "url": "https://viezu.com/",
+   "region": "UK",
+   "sells": "Tuning files, suspension work",
+   "note": "Generic tuning business with an XKR blog page. Nothing X100-specific proven.",
+   "src": [
+    "viezu"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "nottingham-jagtech",
+   "name": "Nottingham JagTech",
+   "url": "https://www.nottinghamjagtech.com/",
+   "region": "UK (Midlands)",
+   "sells": "Independent Jaguar servicing and repair, classic and modern",
+   "note": "Which? Trusted Traders listing says over 50 years' Jaguar experience. X100 work not separately confirmed.",
+   "src": [
+    "which-jagtech"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "kings-road-garage",
+   "name": "Kings Road Garage",
+   "url": "https://www.kingsroadgarage.co.uk/",
+   "region": "UK (Hertfordshire)",
+   "sells": "Prestige car sales and servicing",
+   "note": "Named in one XKR's service history as a Jaguar specialist. One data point only.",
+   "src": [
+    "cc-kings"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "incartec",
+   "name": "InCarTec",
+   "url": "https://incartec.co.uk/",
+   "region": "UK",
+   "sells": "Car audio interfaces, including X100 steering control and amp interfaces",
+   "note": "Part 29-615-ALP for Premium cars. Patch lead depends on radio brand.",
+   "src": [
+    "incartec"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "hoodtech",
+   "name": "HoodTech",
+   "url": "https://hoodtech.co.uk/",
+   "region": "UK (Chester)",
+   "sells": "Convertible roof repair and replacement",
+   "note": "Recommended on the Jaguar Owners Club forum. Site title reads Britain's Leading Independent Convertible Roof Centre (own claim).",
+   "src": [
+    "joc-hood"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "the-hood-guys",
+   "name": "The Hood Guys",
+   "url": "https://www.thehoodguys.co.uk/",
+   "region": "UK (Birmingham)",
+   "sells": "Convertible hood supply and fit",
+   "note": "Forum recommendation from Kings Heath, Birmingham.",
+   "src": [
+    "joc-hood"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "cayman-autos",
+   "name": "Cayman Autos",
+   "url": "https://caymanautos.co.uk/",
+   "region": "UK (Berkshire)",
+   "sells": "Convertible roof, hood and soft top repair",
+   "note": "Suggested on PistonHeads for an XKR hood in 2021.",
+   "src": [
+    "ph-softtop"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "ce-moore",
+   "name": "C E Moore",
+   "url": "https://www.cemoore.co.uk/",
+   "region": "UK",
+   "sells": "Convertible hoods and car upholstery",
+   "note": "Recommended on PistonHeads for an XKR. The forum called it a Jaguar specialist; its site describes hoods and upholstery.",
+   "src": [
+    "ph-softtop"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "eurojag",
+   "name": "Eurojag",
+   "url": "https://www.eurojag.com/",
+   "region": "UK",
+   "sells": "Jaguar breakers: used XK8 parts, including Brembo calipers and panels",
+   "note": "Claims to be the largest independent Jaguar specialist in the UK. Trustpilot 4.5 from 13 reviews, with mixed recent comments. Also sells on eBay.",
+   "src": [
+    "trustpilot-eurojag"
+   ],
+   "conf": "single",
+   "research": "Site rate-limited the automated check (HTTP 429)."
+  },
+  {
+   "id": "breakerlink",
+   "name": "BreakerLink",
+   "url": "https://www.breakerlink.com/cars/jaguar/xk8/",
+   "region": "UK",
+   "sells": "Search service across UK breakers for XK8 parts",
+   "note": "A request service, not a breaker. States a minimum one-month guarantee.",
+   "src": [
+    "breakerlink"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "synetiq",
+   "name": "Synetiq",
+   "url": "https://www.synetiq.co.uk/",
+   "region": "UK",
+   "sells": "Salvage and parts breaking, X100 engines listed",
+   "note": "Big dismantler. Stock changes.",
+   "src": [
+    "synetiq"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "scrap-local",
+   "name": "Scrap Local",
+   "url": "https://scraplocal.co.uk/",
+   "region": "UK",
+   "sells": "Directory of Jaguar dismantlers by area",
+   "note": "Directory only. The Jaguar page redirected to the home page on 1 Nov 2026, so start there.",
+   "src": [
+    "scraplocal"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "blackcircles",
+   "name": "Blackcircles",
+   "url": "https://www.blackcircles.com/tyres/245-45-18",
+   "region": "UK",
+   "sells": "Tyres with local fitting",
+   "note": "Used here for tyre prices. Any similar fitter works.",
+   "src": [
+    "blackcircles"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "jec",
+   "name": "Jaguar Enthusiasts' Club",
+   "url": "https://jec.org.uk/",
+   "region": "UK",
+   "sells": "Jaguar club and forum",
+   "note": "Forum is at forums.jec.org.uk.",
+   "src": [
+    "jec"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "jdc",
+   "name": "Jaguar Drivers' Club",
+   "url": "https://www.jaguardriver.co.uk/",
+   "region": "UK",
+   "sells": "Owners' club",
+   "note": "General Jaguar club.",
+   "src": [
+    "jdc"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "xkec",
+   "name": "XK Enthusiasts' Club (XKEC)",
+   "url": "https://www.xkec.co.uk/",
+   "region": "UK",
+   "sells": "X100 owners' club, GROWLER magazine",
+   "note": "Named by the GROWLER article and JagRepair's links.",
+   "src": [
+    "growler",
+    "jr-links"
+   ],
+   "conf": "corroborated",
+   "research": "Refuses automated fetches (HTTP 403), so the site was not read."
+  },
+  {
+   "id": "jaguar-owners-club",
+   "name": "Jaguar Owners Club forum",
+   "url": "https://www.jaguarownersclub.com/",
+   "region": "UK",
+   "sells": "Free independent forum with an X100 section",
+   "note": "Useful for UK garage recommendations.",
+   "src": [
+    "joc-hood"
+   ],
+   "conf": "single",
+   "research": "Refuses automated fetches (HTTP 403)."
+  },
+  {
+   "id": "jdht",
+   "name": "Jaguar Daimler Heritage Trust",
+   "url": "https://www.jaguarheritage.com/",
+   "region": "UK",
+   "sells": "Heritage archive",
+   "note": "Check here for build records.",
+   "src": [
+    "jdht"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "jag-lovers",
+   "name": "Jag-lovers Forums",
+   "url": "https://forums.jag-lovers.com/",
+   "region": "Global",
+   "sells": "Long-running owner forum with an XK8 section",
+   "note": "Best free technical archive with Jaguar Forums.",
+   "src": [
+    "jr-links"
+   ],
+   "conf": "corroborated",
+   "research": "The older jag-lovers.org pages refused automated fetches."
+  },
+  {
+   "id": "jaguar-forums",
+   "name": "Jaguar Forums",
+   "url": "https://www.jaguarforums.com/",
+   "region": "US, global",
+   "sells": "Busy X100 forum",
+   "note": "Good for install write-ups and part numbers. Check dates on old advice.",
+   "src": [
+    "jr-links"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "jagrepair",
+   "name": "JagRepair (Gus Glikas)",
+   "url": "http://www.jagrepair.com/",
+   "region": "US",
+   "sells": "Free how-to pages and PDFs for X100",
+   "note": "Use http: the https address did not respond. Best free DIY site for X100 roof, cooling and mods.",
+   "src": [
+    "jr-parts"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "moss-motors",
+   "name": "Moss Motors",
+   "url": "https://mossmotors.com/",
+   "region": "US",
+   "sells": "Jaguar parts including upgraded tensioners and alloy thermostat housings",
+   "note": "US-based. Compare with UK prices plus shipping and duty.",
+   "src": [
+    "moss"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fcp-euro",
+   "name": "FCP Euro",
+   "url": "https://www.fcpeuro.com/Jaguar-parts/XK8/Cooling-System/",
+   "region": "US",
+   "sells": "XK8 parts catalogue",
+   "note": "Useful in the US.",
+   "src": [
+    "fcp"
+   ],
+   "conf": "single",
+   "research": "Site may show a bot check."
+  },
+  {
+   "id": "terrys-jaguar",
+   "name": "Terry's Jaguar Parts",
+   "url": "https://www.terrysjag.com/",
+   "region": "US",
+   "sells": "Jaguar parts",
+   "note": "US Jaguar parts supplier. X100 stock depth not checked.",
+   "src": [
+    "terrys"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "coventry-west",
+   "name": "Coventry West",
+   "url": "https://www.coventrywest.com/",
+   "region": "US",
+   "sells": "Jaguar and Land Rover parts",
+   "note": "Listed by JagRepair. An owner bought a used X300 switch cover here in 2011.",
+   "src": [
+    "jr-parts",
+    "forum-ice"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "jagbits",
+   "name": "JagBits",
+   "url": "https://www.jagbits.com/",
+   "region": "US",
+   "sells": "New and used Jaguar parts",
+   "note": "Listed new UJs at $43 in March 2026.",
+   "src": [
+    "jf-uj",
+    "jr-parts"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "eurotoys",
+   "name": "Eurotoys Ltd",
+   "url": "https://www.eurotoysltd.com/",
+   "region": "US (Illinois)",
+   "sells": "Jaguar performance parts: pulleys, low-temp thermostat, timing tool rental",
+   "note": "Tensioner tool rental is the useful item. Check X100 fit.",
+   "src": [
+    "eurotoys",
+    "jr-pulley"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "mina-gallery",
+   "name": "Mina Gallery",
+   "url": "https://minagallery.com/",
+   "region": "US",
+   "sells": "Jaguar performance parts: springs, pulleys, exhaust parts",
+   "note": "Named by owners for springs and pulleys. Site now leads with newer Jaguars, so check X100 stock.",
+   "src": [
+    "jr-pulley",
+    "jf-exhaust-best"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "discount-car-stereo",
+   "name": "Discount Car Stereo",
+   "url": "https://www.discountcarstereo.com/JAG-CDR.html",
+   "region": "US",
+   "sells": "X100 aux and Bluetooth adapters for the Ai-NET CD plug",
+   "note": "Late 1997 to 2006 only. Early 1997 8-pin DIN cars not covered.",
+   "src": [
+    "dcs",
+    "jf-ainet"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "rockauto",
+   "name": "RockAuto",
+   "url": "https://www.rockauto.com/",
+   "region": "US",
+   "sells": "Discount parts catalogue, UJ cross references",
+   "note": "An owner says it is much cheaper for UJs but did not list all model years.",
+   "src": [
+    "jf-uj"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "limora",
+   "name": "Limora",
+   "url": "https://www.limora.com/en/",
+   "region": "EU (Germany)",
+   "sells": "Spare parts for classic cars",
+   "note": "EU option. X100 cover not checked.",
+   "src": [
+    "limora"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "gt2i",
+   "name": "GT2i",
+   "url": "https://www.gt2i.ch/en/bush-per-vehicle/1007995-powerflex-bushes-jaguar-daimler-xk8-xkr-x100-1996-2006.html",
+   "region": "CH",
+   "sells": "Powerflex bushes for X100",
+   "note": "Swiss retailer.",
+   "src": [
+    "gt2i"
+   ],
+   "conf": "single",
+   "research": "Refused the automated check (HTTP 403); seen through search results."
+  },
+  {
+   "id": "supersprint",
+   "name": "Supersprint",
+   "url": "https://www.supersprint.com/",
+   "region": "EU (Italy)",
+   "sells": "Exhausts, including a listed rear section for XKR 4.2",
+   "note": "Listed through a US reseller. Confirm X100 against X150.",
+   "src": [
+    "supersprint"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "jaguar-club-nl",
+   "name": "Jaguar Club Nederland",
+   "url": "https://www.jaguarclub.nl/",
+   "region": "EU (Netherlands)",
+   "sells": "Owners' club",
+   "note": "Local contact point for EU owners.",
+   "src": [
+    "jag-club-nl"
+   ],
+   "conf": "single"
+  }
+ ],
+ "gaps": [
+  "Web search budget ran out, so no further vendor hunting was possible. A proper list of X100-focused UK independent garages still needs a phone round or club advice.",
+  "KWE (Knowles Wilkins Engineering), named by owners as a well known UK Jaguar specialist: the kwecars.com domain redirected automated checks to a gambling site on 1 Nov 2026, so it is left out and should not be followed until its real address is confirmed.",
+  "XKs Unlimited: www.xks.com returned a bare 'xks.pro' page on 1 Nov 2026, so it is left out until the current site is confirmed. Welsh Enterprises: www.welshent.com answered HTTP 307 to automated checks and could not be read, so it is left out.",
+  "Candidates tried with no working URL on the addresses guessed: Chiltern of Bovingdon, P&K Thornton (Lambley, Nottingham, covered by Classic & Sports Car but post-war classic focus), Suffolk & Turley, Aldridge Trimming, Robbins, Double S Exhausts, Twyford Moors, Jagbits UK, jaguar-daimler-club.de. Not a claim that those firms have closed.",
+  "International Jaguar XK Club (xkclub.com) covers XK 120, 140 and 150 only, so it was left out.",
+  "bellautoservices.co.uk is a York 4x4 specialist, not the Bell exhaust maker, so it is excluded. No separate Bell exhaust site was confirmed. Buy Bell through SNG.",
+  "No EU X100 specialist garage was verified. German search found no reliable names.",
+  "Several sites refused automated checks on 1 Nov 2026 (HTTP 403 or 429): Paramount, Adamesh, Eurojag, GT2i, EBC, Demon Tweeks, Autobutler, Jaguar Owners Club, xkec.co.uk. Goodridge answered 429 once and 200 later. All other listed URLs returned 200."
+ ]
+}

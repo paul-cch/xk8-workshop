@@ -1,0 +1,2011 @@
+{
+ "sources": {
+  "jtp922": {
+   "title": "XK range 4.0 Litre V8 Vehicle Maintenance Sheet, JTP 922 (VIN 001036 to 031302)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtp923": {
+   "title": "XK range 4.0 Litre V8 Vehicle Maintenance Sheet, JTP 923 (99 MY 031303 to 042775; 2000 MY A00083 to A11050)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtp924": {
+   "title": "XK range 4.0 Litre V8 Vehicle Maintenance Sheet, JTP 924 (2001 MY A11051 onwards)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtp925": {
+   "title": "XK range 4.2 Litre V8 Vehicle Maintenance Sheet, JTP 925 (2003 MY)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "ms-my1997": {
+   "title": "XK8 Maintenance Schedules MY1997 (UK), JJM 10 23 14/70",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "ms-uk": {
+   "title": "Maintenance Schedules, 1997 to 2003 Model Years (UK), JJM 10 23 99/80",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "passport-2002": {
+   "title": "Passport to Service, 2002 Model Year (USA), JJM 18 11 99/20, Vehicle Maintenance Schedule pages 26-27",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my2003": {
+   "title": "JTIS v2.1 XK Range service manual data, MY2003 and MY2004, section 307-01",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "vc-my2002": {
+   "title": "XK8/XKR Vehicle Care Handbook, 2002 to 2003 Model Years (UK), JJM 10 16 14/20",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jcna-tensioners": {
+   "title": "A Warning for Jaguar V8 Owners",
+   "url": "https://www.jcna.com/v8-chain-tensioners-problems",
+   "publisher": "Jaguar Clubs of North America",
+   "kind": "enthusiast"
+  },
+  "jl-early-xk8": {
+   "title": "Need info on early XK8 models (forum thread)",
+   "url": "https://forums.jag-lovers.com/t/need-info-on-early-xk8-models/354322",
+   "publisher": "Jag-lovers forum",
+   "kind": "forum"
+  },
+  "jec-hood-oil": {
+   "title": "Convertible Hood Oil (forum thread)",
+   "url": "https://forums.jec.org.uk/viewtopic.php?p=64376",
+   "publisher": "Jaguar Enthusiasts Club forum",
+   "kind": "forum"
+  },
+  "jl-diff-howto": {
+   "title": "2001 XKR Differential Fluid Change - How To",
+   "url": "https://forums.jag-lovers.com/t/2001-xkr-differential-fluid-change-how-to-applies-to-xk8-xj8-and-xjr/383320",
+   "publisher": "Jag-lovers forum",
+   "kind": "forum"
+  }
+ },
+ "items": [
+  {
+   "id": "service.10k",
+   "intervalMiles": 10000,
+   "intervalMonths": 12,
+   "title": "10,000 mile or 12 month service",
+   "tasks": [
+    {
+     "text": "Renew engine oil, oil filter and drain plug sealing washer.",
+     "parts": [
+      "engine.oil-filter",
+      "engine.oil-drain-plug"
+     ],
+     "jobs": [
+      "oil-filter"
+     ]
+    },
+    {
+     "text": "Visually check under the bonnet and underbody for fluid leaks.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Inspect brake pads for wear. Check disc condition on pad change.",
+     "parts": [
+      "brakes.pad-front",
+      "brakes.pad-rear",
+      "brakes.disc-front",
+      "brakes.disc-rear"
+     ],
+     "jobs": [
+      "brake-pads-front",
+      "brake-pads-rear"
+     ]
+    },
+    {
+     "text": "Check accessory drive belt tension wear indicator. Replace the belt or belts if necessary.",
+     "parts": [
+      "engine.drive-belt",
+      "engine.belt-tensioner"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ]
+    },
+    {
+     "text": "Grease axle shaft universal joints.",
+     "parts": [
+      "driveline.universal-joint"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up brake fluid level.",
+     "parts": [
+      "brakes.fluid-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up coolant level.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up windscreen washer reservoir.",
+     "parts": [
+      "electrical.washer-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up battery electrolyte level.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up power steering fluid level.",
+     "parts": [
+      "steering.pas-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check tyre pressures, tread depth, general condition, signs of uneven wear and suitability, including the spare. Record tread depth.",
+     "parts": [
+      "wheels.tyre"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Carry out a road test.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Renew windscreen wiper blade rubbers.",
+     "parts": [
+      "electrical.wiper-blade"
+     ],
+     "jobs": []
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "jtp922",
+    "jtp923",
+    "jtp924",
+    "jtp925"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.20k",
+   "intervalMiles": 20000,
+   "intervalMonths": 24,
+   "title": "20,000 mile or 24 month service",
+   "tasks": [
+    {
+     "text": "Renew engine oil, oil filter and drain plug sealing washer.",
+     "parts": [
+      "engine.oil-filter",
+      "engine.oil-drain-plug"
+     ],
+     "jobs": [
+      "oil-filter"
+     ]
+    },
+    {
+     "text": "Visually check under the bonnet and underbody for fluid leaks.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Inspect brake pads for wear. Check disc condition on pad change.",
+     "parts": [
+      "brakes.pad-front",
+      "brakes.pad-rear",
+      "brakes.disc-front",
+      "brakes.disc-rear"
+     ],
+     "jobs": [
+      "brake-pads-front",
+      "brake-pads-rear"
+     ]
+    },
+    {
+     "text": "Check accessory drive belt tension wear indicator. Replace the belt or belts if necessary.",
+     "parts": [
+      "engine.drive-belt",
+      "engine.belt-tensioner"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ]
+    },
+    {
+     "text": "Grease axle shaft universal joints.",
+     "parts": [
+      "driveline.universal-joint"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up brake fluid level.",
+     "parts": [
+      "brakes.fluid-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up coolant level.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up windscreen washer reservoir.",
+     "parts": [
+      "electrical.washer-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up battery electrolyte level.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up power steering fluid level.",
+     "parts": [
+      "steering.pas-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check tyre pressures, tread depth, general condition, signs of uneven wear and suitability, including the spare. Record tread depth.",
+     "parts": [
+      "wheels.tyre"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Carry out a road test.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Renew windscreen wiper blade rubbers.",
+     "parts": [
+      "electrical.wiper-blade"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Renew air cleaner element.",
+     "parts": [
+      "induction.air-filter"
+     ],
+     "jobs": [
+      "air-filter"
+     ],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ]
+     }
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "jtp922",
+    "jtp923",
+    "jtp924",
+    "jtp925"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.30k",
+   "intervalMiles": 30000,
+   "intervalMonths": 36,
+   "title": "30,000 mile or 36 month service",
+   "tasks": [
+    {
+     "text": "Renew engine oil, oil filter and drain plug sealing washer.",
+     "parts": [
+      "engine.oil-filter",
+      "engine.oil-drain-plug"
+     ],
+     "jobs": [
+      "oil-filter"
+     ]
+    },
+    {
+     "text": "Visually check under the bonnet and underbody for fluid leaks.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Inspect brake pads for wear. Check disc condition on pad change.",
+     "parts": [
+      "brakes.pad-front",
+      "brakes.pad-rear",
+      "brakes.disc-front",
+      "brakes.disc-rear"
+     ],
+     "jobs": [
+      "brake-pads-front",
+      "brake-pads-rear"
+     ]
+    },
+    {
+     "text": "Check accessory drive belt tension wear indicator. Replace the belt or belts if necessary.",
+     "parts": [
+      "engine.drive-belt",
+      "engine.belt-tensioner"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ]
+    },
+    {
+     "text": "Grease axle shaft universal joints.",
+     "parts": [
+      "driveline.universal-joint"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up brake fluid level.",
+     "parts": [
+      "brakes.fluid-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up coolant level.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up windscreen washer reservoir.",
+     "parts": [
+      "electrical.washer-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up battery electrolyte level.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up power steering fluid level.",
+     "parts": [
+      "steering.pas-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check tyre pressures, tread depth, general condition, signs of uneven wear and suitability, including the spare. Record tread depth.",
+     "parts": [
+      "wheels.tyre"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Carry out a road test.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Renew windscreen wiper blade rubbers.",
+     "parts": [
+      "electrical.wiper-blade"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Renew air cleaner element.",
+     "parts": [
+      "induction.air-filter"
+     ],
+     "jobs": [
+      "air-filter"
+     ],
+     "appliesTo": {
+      "induction": [
+       "na"
+      ]
+     }
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "jtp922",
+    "jtp923",
+    "jtp924",
+    "jtp925"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.40k",
+   "intervalMiles": 40000,
+   "intervalMonths": 48,
+   "title": "40,000 mile or 48 month service",
+   "tasks": [
+    {
+     "text": "Renew engine oil, oil filter and drain plug sealing washer.",
+     "parts": [
+      "engine.oil-filter",
+      "engine.oil-drain-plug"
+     ],
+     "jobs": [
+      "oil-filter"
+     ]
+    },
+    {
+     "text": "Visually check under the bonnet and underbody for fluid leaks.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Inspect brake pads for wear. Check disc condition on pad change.",
+     "parts": [
+      "brakes.pad-front",
+      "brakes.pad-rear",
+      "brakes.disc-front",
+      "brakes.disc-rear"
+     ],
+     "jobs": [
+      "brake-pads-front",
+      "brake-pads-rear"
+     ]
+    },
+    {
+     "text": "Check accessory drive belt tension wear indicator. Replace the belt or belts if necessary.",
+     "parts": [
+      "engine.drive-belt",
+      "engine.belt-tensioner"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ]
+    },
+    {
+     "text": "Grease axle shaft universal joints.",
+     "parts": [
+      "driveline.universal-joint"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up brake fluid level.",
+     "parts": [
+      "brakes.fluid-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up coolant level.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up windscreen washer reservoir.",
+     "parts": [
+      "electrical.washer-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up battery electrolyte level.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up power steering fluid level.",
+     "parts": [
+      "steering.pas-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check tyre pressures, tread depth, general condition, signs of uneven wear and suitability, including the spare. Record tread depth.",
+     "parts": [
+      "wheels.tyre"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Carry out a road test.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Renew windscreen wiper blades complete.",
+     "parts": [
+      "electrical.wiper-blade"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Renew air cleaner element.",
+     "parts": [
+      "induction.air-filter"
+     ],
+     "jobs": [
+      "air-filter"
+     ],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ]
+     }
+    },
+    {
+     "text": "Renew supercharger drive belt.",
+     "parts": [
+      "induction.sc-drive-belt"
+     ],
+     "jobs": [
+      "sc-belt"
+     ],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ]
+     }
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "jtp922",
+    "jtp923",
+    "jtp924",
+    "jtp925"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.50k",
+   "intervalMiles": 50000,
+   "intervalMonths": 60,
+   "title": "50,000 mile or 60 month service",
+   "tasks": [
+    {
+     "text": "Renew engine oil, oil filter and drain plug sealing washer.",
+     "parts": [
+      "engine.oil-filter",
+      "engine.oil-drain-plug"
+     ],
+     "jobs": [
+      "oil-filter"
+     ]
+    },
+    {
+     "text": "Visually check under the bonnet and underbody for fluid leaks.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Inspect brake pads for wear. Check disc condition on pad change.",
+     "parts": [
+      "brakes.pad-front",
+      "brakes.pad-rear",
+      "brakes.disc-front",
+      "brakes.disc-rear"
+     ],
+     "jobs": [
+      "brake-pads-front",
+      "brake-pads-rear"
+     ]
+    },
+    {
+     "text": "Check accessory drive belt tension wear indicator. Replace the belt or belts if necessary.",
+     "parts": [
+      "engine.drive-belt",
+      "engine.belt-tensioner"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ]
+    },
+    {
+     "text": "Grease axle shaft universal joints.",
+     "parts": [
+      "driveline.universal-joint"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up brake fluid level.",
+     "parts": [
+      "brakes.fluid-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up coolant level.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up windscreen washer reservoir.",
+     "parts": [
+      "electrical.washer-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up battery electrolyte level.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up power steering fluid level.",
+     "parts": [
+      "steering.pas-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check tyre pressures, tread depth, general condition, signs of uneven wear and suitability, including the spare. Record tread depth.",
+     "parts": [
+      "wheels.tyre"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Carry out a road test.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Renew windscreen wiper blade rubbers.",
+     "parts": [
+      "electrical.wiper-blade"
+     ],
+     "jobs": []
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "jtp922",
+    "jtp923",
+    "jtp924",
+    "jtp925"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.60k",
+   "intervalMiles": 60000,
+   "intervalMonths": 72,
+   "title": "60,000 mile or 72 month service",
+   "tasks": [
+    {
+     "text": "Renew engine oil, oil filter and drain plug sealing washer.",
+     "parts": [
+      "engine.oil-filter",
+      "engine.oil-drain-plug"
+     ],
+     "jobs": [
+      "oil-filter"
+     ]
+    },
+    {
+     "text": "Visually check under the bonnet and underbody for fluid leaks.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Inspect brake pads for wear. Check disc condition on pad change.",
+     "parts": [
+      "brakes.pad-front",
+      "brakes.pad-rear",
+      "brakes.disc-front",
+      "brakes.disc-rear"
+     ],
+     "jobs": [
+      "brake-pads-front",
+      "brake-pads-rear"
+     ]
+    },
+    {
+     "text": "Check accessory drive belt tension wear indicator. Replace the belt or belts if necessary.",
+     "parts": [
+      "engine.drive-belt",
+      "engine.belt-tensioner"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ]
+    },
+    {
+     "text": "Grease axle shaft universal joints.",
+     "parts": [
+      "driveline.universal-joint"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up brake fluid level.",
+     "parts": [
+      "brakes.fluid-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up coolant level.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up windscreen washer reservoir.",
+     "parts": [
+      "electrical.washer-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up battery electrolyte level.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up power steering fluid level.",
+     "parts": [
+      "steering.pas-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check tyre pressures, tread depth, general condition, signs of uneven wear and suitability, including the spare. Record tread depth.",
+     "parts": [
+      "wheels.tyre"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Carry out a road test.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Renew windscreen wiper blade rubbers.",
+     "parts": [
+      "electrical.wiper-blade"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Renew air cleaner element.",
+     "parts": [
+      "induction.air-filter"
+     ],
+     "jobs": [
+      "air-filter"
+     ],
+     "appliesTo": {
+      "induction": [
+       "na"
+      ]
+     }
+    },
+    {
+     "text": "Renew air cleaner element.",
+     "parts": [
+      "induction.air-filter"
+     ],
+     "jobs": [
+      "air-filter"
+     ],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ]
+     }
+    },
+    {
+     "text": "Renew fuel filter.",
+     "parts": [
+      "fuel.filter"
+     ],
+     "jobs": [
+      "fuel-filter"
+     ]
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "jtp922",
+    "jtp923",
+    "jtp924",
+    "jtp925"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.70k-us",
+   "intervalMiles": 70000,
+   "intervalMonths": null,
+   "title": "70,000 mile service, US 2002 book",
+   "tasks": [
+    {
+     "text": "Renew engine oil, oil filter and drain plug sealing washer.",
+     "parts": [
+      "engine.oil-filter",
+      "engine.oil-drain-plug"
+     ],
+     "jobs": [
+      "oil-filter"
+     ]
+    },
+    {
+     "text": "Visually check under the bonnet and underbody for fluid leaks.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Inspect brake pads for wear. Check disc condition on pad change.",
+     "parts": [
+      "brakes.pad-front",
+      "brakes.pad-rear",
+      "brakes.disc-front",
+      "brakes.disc-rear"
+     ],
+     "jobs": [
+      "brake-pads-front",
+      "brake-pads-rear"
+     ]
+    },
+    {
+     "text": "Check accessory drive belt tension wear indicator. Replace the belt or belts if necessary.",
+     "parts": [
+      "engine.drive-belt",
+      "engine.belt-tensioner"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ]
+    },
+    {
+     "text": "Check and top up brake fluid level.",
+     "parts": [
+      "brakes.fluid-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up windscreen washer reservoir.",
+     "parts": [
+      "electrical.washer-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up battery electrolyte level.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up power steering fluid level.",
+     "parts": [
+      "steering.pas-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check tyre pressures, tread depth, general condition, signs of uneven wear and suitability, including the spare. Record tread depth.",
+     "parts": [
+      "wheels.tyre"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Carry out a road test.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Renew windscreen wiper blade rubbers.",
+     "parts": [
+      "electrical.wiper-blade"
+     ],
+     "jobs": []
+    }
+   ],
+   "appliesTo": {
+    "market": [
+     "us"
+    ],
+    "myFrom": 2002,
+    "myTo": 2002
+   },
+   "src": [
+    "passport-2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.80k-us",
+   "intervalMiles": 80000,
+   "intervalMonths": null,
+   "title": "80,000 mile service, US 2002 book",
+   "tasks": [
+    {
+     "text": "Renew engine oil, oil filter and drain plug sealing washer.",
+     "parts": [
+      "engine.oil-filter",
+      "engine.oil-drain-plug"
+     ],
+     "jobs": [
+      "oil-filter"
+     ]
+    },
+    {
+     "text": "Visually check under the bonnet and underbody for fluid leaks.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Inspect brake pads for wear. Check disc condition on pad change.",
+     "parts": [
+      "brakes.pad-front",
+      "brakes.pad-rear",
+      "brakes.disc-front",
+      "brakes.disc-rear"
+     ],
+     "jobs": [
+      "brake-pads-front",
+      "brake-pads-rear"
+     ]
+    },
+    {
+     "text": "Check accessory drive belt tension wear indicator. Replace the belt or belts if necessary.",
+     "parts": [
+      "engine.drive-belt",
+      "engine.belt-tensioner"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ]
+    },
+    {
+     "text": "Check and top up brake fluid level.",
+     "parts": [
+      "brakes.fluid-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up windscreen washer reservoir.",
+     "parts": [
+      "electrical.washer-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up battery electrolyte level.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up power steering fluid level.",
+     "parts": [
+      "steering.pas-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check tyre pressures, tread depth, general condition, signs of uneven wear and suitability, including the spare. Record tread depth.",
+     "parts": [
+      "wheels.tyre"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Carry out a road test.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Renew windscreen wiper blades complete.",
+     "parts": [
+      "electrical.wiper-blade"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Renew air cleaner element.",
+     "parts": [
+      "induction.air-filter"
+     ],
+     "jobs": [
+      "air-filter"
+     ],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ]
+     }
+    },
+    {
+     "text": "Renew supercharger drive belt.",
+     "parts": [
+      "induction.sc-drive-belt"
+     ],
+     "jobs": [
+      "sc-belt"
+     ],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ]
+     }
+    }
+   ],
+   "appliesTo": {
+    "market": [
+     "us"
+    ],
+    "myFrom": 2002,
+    "myTo": 2002
+   },
+   "src": [
+    "passport-2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.90k-us",
+   "intervalMiles": 90000,
+   "intervalMonths": null,
+   "title": "90,000 mile service, US 2002 book",
+   "tasks": [
+    {
+     "text": "Renew engine oil, oil filter and drain plug sealing washer.",
+     "parts": [
+      "engine.oil-filter",
+      "engine.oil-drain-plug"
+     ],
+     "jobs": [
+      "oil-filter"
+     ]
+    },
+    {
+     "text": "Visually check under the bonnet and underbody for fluid leaks.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Inspect brake pads for wear. Check disc condition on pad change.",
+     "parts": [
+      "brakes.pad-front",
+      "brakes.pad-rear",
+      "brakes.disc-front",
+      "brakes.disc-rear"
+     ],
+     "jobs": [
+      "brake-pads-front",
+      "brake-pads-rear"
+     ]
+    },
+    {
+     "text": "Check accessory drive belt tension wear indicator. Replace the belt or belts if necessary.",
+     "parts": [
+      "engine.drive-belt",
+      "engine.belt-tensioner"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ]
+    },
+    {
+     "text": "Check and top up brake fluid level.",
+     "parts": [
+      "brakes.fluid-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up windscreen washer reservoir.",
+     "parts": [
+      "electrical.washer-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up battery electrolyte level.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up power steering fluid level.",
+     "parts": [
+      "steering.pas-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check tyre pressures, tread depth, general condition, signs of uneven wear and suitability, including the spare. Record tread depth.",
+     "parts": [
+      "wheels.tyre"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Carry out a road test.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Renew windscreen wiper blade rubbers.",
+     "parts": [
+      "electrical.wiper-blade"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Renew air cleaner element.",
+     "parts": [
+      "induction.air-filter"
+     ],
+     "jobs": [
+      "air-filter"
+     ],
+     "appliesTo": {
+      "induction": [
+       "na"
+      ]
+     }
+    }
+   ],
+   "appliesTo": {
+    "market": [
+     "us"
+    ],
+    "myFrom": 2002,
+    "myTo": 2002
+   },
+   "src": [
+    "passport-2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.100k-us",
+   "intervalMiles": 100000,
+   "intervalMonths": null,
+   "title": "100,000 mile service, US 2002 book",
+   "tasks": [
+    {
+     "text": "Renew engine oil, oil filter and drain plug sealing washer.",
+     "parts": [
+      "engine.oil-filter",
+      "engine.oil-drain-plug"
+     ],
+     "jobs": [
+      "oil-filter"
+     ]
+    },
+    {
+     "text": "Visually check under the bonnet and underbody for fluid leaks.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Inspect brake pads for wear. Check disc condition on pad change.",
+     "parts": [
+      "brakes.pad-front",
+      "brakes.pad-rear",
+      "brakes.disc-front",
+      "brakes.disc-rear"
+     ],
+     "jobs": [
+      "brake-pads-front",
+      "brake-pads-rear"
+     ]
+    },
+    {
+     "text": "Check and top up brake fluid level.",
+     "parts": [
+      "brakes.fluid-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up windscreen washer reservoir.",
+     "parts": [
+      "electrical.washer-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up battery electrolyte level.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check and top up power steering fluid level.",
+     "parts": [
+      "steering.pas-reservoir"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Check tyre pressures, tread depth, general condition, signs of uneven wear and suitability, including the spare. Record tread depth.",
+     "parts": [
+      "wheels.tyre"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Carry out a road test.",
+     "parts": [],
+     "jobs": []
+    },
+    {
+     "text": "Renew windscreen wiper blade rubbers.",
+     "parts": [
+      "electrical.wiper-blade"
+     ],
+     "jobs": []
+    },
+    {
+     "text": "Renew air cleaner element.",
+     "parts": [
+      "induction.air-filter"
+     ],
+     "jobs": [
+      "air-filter"
+     ],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ]
+     }
+    },
+    {
+     "text": "Renew accessory drive belt.",
+     "parts": [
+      "engine.drive-belt"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ]
+    },
+    {
+     "text": "Replace spark plugs.",
+     "parts": [
+      "ignition.spark-plug"
+     ],
+     "jobs": [
+      "spark-plugs"
+     ],
+     "appliesTo": {
+      "induction": [
+       "na"
+      ]
+     }
+    }
+   ],
+   "appliesTo": {
+    "market": [
+     "us"
+    ],
+    "myFrom": 2002,
+    "myTo": 2002
+   },
+   "src": [
+    "passport-2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.brake-fluid",
+   "intervalMiles": null,
+   "intervalMonths": 24,
+   "title": "Renew brake fluid every 2 years, regardless of mileage",
+   "tasks": [
+    {
+     "text": "Renew brake fluid completely. Use only fluid to specification.",
+     "parts": [
+      "brakes.fluid-reservoir"
+     ],
+     "jobs": [
+      "brake-bleed"
+     ]
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "jtp922",
+    "jtp923",
+    "jtp924",
+    "jtp925",
+    "ms-my1997"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.coolant-early",
+   "intervalMiles": 60000,
+   "intervalMonths": 48,
+   "title": "Renew coolant every 4 years or 60,000 miles",
+   "tasks": [
+    {
+     "text": "Drain, flush and refill the cooling system with ESD-M97B49-A coolant.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": [
+      "coolant-drain-refill"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 1999,
+    "vinTo": "042634"
+   },
+   "src": [
+    "jtp922",
+    "jtp923",
+    "ms-my1997"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.coolant-oat",
+   "intervalMiles": 150000,
+   "intervalMonths": 60,
+   "title": "Renew coolant every 5 years or 150,000 miles",
+   "tasks": [
+    {
+     "text": "Drain, flush and refill the cooling system with WSS M97B44-D orange coolant.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": [
+      "coolant-drain-refill"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "myFrom": 1999,
+    "vinFrom": "042635"
+   },
+   "src": [
+    "jtp923",
+    "jtp924",
+    "jtp925",
+    "passport-2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.coolant-specific-gravity",
+   "intervalMiles": 10000,
+   "intervalMonths": 12,
+   "title": "Check coolant specific gravity at each service",
+   "tasks": [
+    {
+     "text": "Check coolant specific gravity as part of the coolant level check.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": []
+    }
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 1999,
+    "vinTo": "042634"
+   },
+   "src": [
+    "jtp922",
+    "jtp923"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.spark-plugs-early",
+   "intervalMiles": 30000,
+   "intervalMonths": null,
+   "title": "Renew spark plugs every 30,000 miles",
+   "tasks": [
+    {
+     "text": "Renew spark plugs at 30,000 and 60,000 miles.",
+     "parts": [
+      "ignition.spark-plug"
+     ],
+     "jobs": [
+      "spark-plugs"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "vinTo": "031302"
+   },
+   "src": [
+    "jtp922"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.spark-plugs-na-99-on",
+   "intervalMiles": 70000,
+   "intervalMonths": null,
+   "title": "Renew spark plugs every 70,000 miles, naturally aspirated",
+   "tasks": [
+    {
+     "text": "Renew spark plugs at 70,000 miles.",
+     "parts": [
+      "ignition.spark-plug"
+     ],
+     "jobs": [
+      "spark-plugs"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "na"
+    ],
+    "myTo": 2002,
+    "vinFrom": "031303"
+   },
+   "src": [
+    "jtp923",
+    "jtp924"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.spark-plugs-sc-99-on",
+   "intervalMiles": 30000,
+   "intervalMonths": null,
+   "title": "Renew spark plugs every 30,000 miles, supercharged",
+   "tasks": [
+    {
+     "text": "Renew spark plugs at 30,000 miles.",
+     "parts": [
+      "ignition.spark-plug"
+     ],
+     "jobs": [
+      "spark-plugs"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "sc"
+    ],
+    "myTo": 2002,
+    "vinFrom": "031303"
+   },
+   "src": [
+    "jtp923",
+    "jtp924"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.spark-plugs-4-2",
+   "intervalMiles": 100000,
+   "intervalMonths": null,
+   "title": "Renew spark plugs every 100,000 miles",
+   "tasks": [
+    {
+     "text": "Renew spark plugs at 100,000 miles.",
+     "parts": [
+      "ignition.spark-plug"
+     ],
+     "jobs": [
+      "spark-plugs"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ],
+    "myFrom": 2003
+   },
+   "src": [
+    "jtp925"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.spark-plugs-us-sc",
+   "intervalMiles": 60000,
+   "intervalMonths": null,
+   "title": "US 2002 book: replace spark plugs at 60,000 miles, supercharged",
+   "tasks": [
+    {
+     "text": "Replace spark plugs at 60,000 miles.",
+     "parts": [
+      "ignition.spark-plug"
+     ],
+     "jobs": [
+      "spark-plugs"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "market": [
+     "us"
+    ],
+    "induction": [
+     "sc"
+    ],
+    "myFrom": 2002,
+    "myTo": 2002
+   },
+   "src": [
+    "passport-2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.spark-plugs-us-na",
+   "intervalMiles": 100000,
+   "intervalMonths": null,
+   "title": "US 2002 book: replace spark plugs at 100,000 miles, naturally aspirated",
+   "tasks": [
+    {
+     "text": "Replace spark plugs at 100,000 miles.",
+     "parts": [
+      "ignition.spark-plug"
+     ],
+     "jobs": [
+      "spark-plugs"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "market": [
+     "us"
+    ],
+    "induction": [
+     "na"
+    ],
+    "myFrom": 2002,
+    "myTo": 2002
+   },
+   "src": [
+    "passport-2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.spark-plugs-leaded",
+   "intervalMiles": 20000,
+   "intervalMonths": null,
+   "title": "Leaded fuel markets only: renew spark plugs at 10,000, 30,000 and 50,000 miles",
+   "tasks": [
+    {
+     "text": "Renew spark plugs at 10,000, 30,000 and 50,000 miles.",
+     "parts": [
+      "ignition.spark-plug"
+     ],
+     "jobs": [
+      "spark-plugs"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 2002
+   },
+   "src": [
+    "jtp922",
+    "jtp923",
+    "jtp924"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.accessory-belt",
+   "intervalMiles": 100000,
+   "intervalMonths": null,
+   "title": "Renew front accessory drive belt at 100,000 miles",
+   "tasks": [
+    {
+     "text": "Renew accessory drive belt.",
+     "parts": [
+      "engine.drive-belt"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ]
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "jtp922",
+    "jtp923",
+    "jtp924",
+    "jtp925",
+    "passport-2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.pollen-filter-early",
+   "intervalMiles": 70000,
+   "intervalMonths": 36,
+   "title": "Renew pollen filters every 3 years or 70,000 miles",
+   "tasks": [
+    {
+     "text": "Renew pollen filters where fitted, or more often in polluted conditions.",
+     "parts": [
+      "hvac.cabin-filter"
+     ],
+     "jobs": [
+      "cabin-filter"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 2000
+   },
+   "src": [
+    "jtp922",
+    "jtp923"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.pollen-filter-late",
+   "intervalMiles": 10000,
+   "intervalMonths": 12,
+   "title": "Renew pollen filters at every service",
+   "tasks": [
+    {
+     "text": "Renew pollen filters where fitted.",
+     "parts": [
+      "hvac.cabin-filter"
+     ],
+     "jobs": [
+      "cabin-filter"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "myFrom": 2001
+   },
+   "src": [
+    "jtp924",
+    "jtp925"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.severe-conditions",
+   "intervalMiles": null,
+   "intervalMonths": 6,
+   "title": "Severe driving conditions: maintain at 6 monthly intervals",
+   "tasks": [
+    {
+     "text": "Dust, unmetalled roads, high ambient heat, severe cold, or salted roads: carry out maintenance every 6 months. The US book says the same for a high proportion of short journeys.",
+     "parts": [],
+     "jobs": []
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "ms-my1997",
+    "passport-2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.gearbox-6hp26-severe",
+   "intervalMiles": 30000,
+   "intervalMonths": null,
+   "title": "ZF 6HP26 severe duty: change transmission fluid at 30,000 miles",
+   "tasks": [
+    {
+     "text": "Normal use is filled for life. Under severe duty change the fluid every 30,000 miles, using Shell M1375.4 only.",
+     "parts": [
+      "transmission.sump-pan"
+     ],
+     "jobs": [
+      "gearbox-service"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ],
+    "myFrom": 2003
+   },
+   "src": [
+    "jtis-my2003"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.corrosion-inspection",
+   "intervalMiles": null,
+   "intervalMonths": 12,
+   "title": "Annual corrosion perforation inspection",
+   "tasks": [
+    {
+     "text": "Carry out the corrosion (perforation) inspection every 12 months, recorded in the service record book. Tied to the original 6 year warranty, but a useful yearly check on an old car.",
+     "parts": [
+      "body.shell"
+     ],
+     "jobs": []
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "ms-my1997"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.owner-weekly-checks",
+   "intervalMiles": null,
+   "intervalMonths": null,
+   "title": "Owner checks, weekly or before a long journey",
+   "tasks": [
+    {
+     "text": "Check engine oil, brake fluid, power steering fluid, coolant, battery level where applicable, washer reservoir, tyre pressures including spare, and all lights and warning systems.",
+     "parts": [],
+     "jobs": []
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "ms-my1997"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "service.no-factory-interval",
+   "intervalMiles": null,
+   "intervalMonths": null,
+   "title": "Filled for life: no factory change interval",
+   "tasks": [
+    {
+     "text": "Jaguar lists the final drive, automatic transmission and supercharger as oil filled for life, and they normally need no topping up.",
+     "parts": [
+      "driveline.differential",
+      "transmission.gearbox",
+      "induction.supercharger"
+     ],
+     "jobs": []
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "vc-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "age.timing-chain-tensioners",
+   "intervalMiles": null,
+   "intervalMonths": null,
+   "title": "Age: replace early plastic timing chain tensioners",
+   "tasks": [
+    {
+     "text": "Early V8 secondary tensioner housings go brittle with age. Failures are reported around 50,000 to 70,000 miles, and two or more jumped teeth can destroy the engine. A cold start rattle is the warning: stop the engine and tow it. Jaguar bulletin 303-30 gave a revised tensioner from engine number 98102106XX. JCNA advises doing primary and secondary tensioners, all four chains, and worn sprockets. No factory interval exists.",
+     "parts": [
+      "engine.chain-tensioner-primary",
+      "engine.chain-tensioner-secondary"
+     ],
+     "jobs": [
+      "chain-tensioners",
+      "chain-tensioner-42"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 2002
+   },
+   "src": [
+    "jcna-tensioners",
+    "jl-early-xk8"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "age.water-pump-thermostat",
+   "intervalMiles": null,
+   "intervalMonths": null,
+   "title": "Age: water pump, thermostat and top hoses",
+   "tasks": [
+    {
+     "text": "Owners report replacing the water pump, thermostat and top hoses with age. One 2004 car had its thermostat done at about 61,000 miles. No factory interval.",
+     "parts": [
+      "cooling.water-pump",
+      "cooling.thermostat"
+     ],
+     "jobs": [
+      "water-pump",
+      "thermostat-housing"
+     ]
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "jl-early-xk8"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "age.expansion-tank",
+   "intervalMiles": null,
+   "intervalMonths": null,
+   "title": "Age: plastic coolant expansion tank",
+   "tasks": [
+    {
+     "text": "One owner reports the plastic expansion tank failing every 25,000 to 30,000 miles.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": []
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "jl-early-xk8"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "age.gearbox-fluid",
+   "intervalMiles": 60000,
+   "intervalMonths": null,
+   "title": "Age: gearbox fluid change at owner discretion",
+   "tasks": [
+    {
+     "text": "Jaguar calls the fluid lifetime. One owner had his changed at over 60,000 miles at an independent shop. Treat this as owner choice, use only the specified fluid for your box, and note a pan drain leaves the converter full.",
+     "parts": [
+      "transmission.sump-pan"
+     ],
+     "jobs": [
+      "gearbox-service"
+     ]
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "jl-early-xk8"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "age.diff-oil",
+   "intervalMiles": null,
+   "intervalMonths": null,
+   "title": "Age: final drive oil change at owner discretion",
+   "tasks": [
+    {
+     "text": "Filled for life per Jaguar, with no drain plug. One owner pumped it out through the fill port and refilled with synthetic 75W-140.",
+     "parts": [
+      "driveline.differential"
+     ],
+     "jobs": [
+      "diff-oil"
+     ]
+    }
+   ],
+   "appliesTo": {},
+   "src": [
+    "jl-diff-howto"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "age.convertible-top-hydraulics",
+   "intervalMiles": null,
+   "intervalMonths": null,
+   "title": "Age: convertible top hydraulic fluid",
+   "tasks": [
+    {
+     "text": "Owners report the fluid gelling with age, with the top refusing to fold. Flushing with fresh fluid several times is the reported fix.",
+     "parts": [
+      "roof.pump"
+     ],
+     "jobs": [
+      "hood-hydraulics"
+     ]
+    }
+   ],
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "src": [
+    "jec-hood-oil",
+    "jl-early-xk8"
+   ],
+   "conf": "community"
+  }
+ ],
+ "gaps": [
+  "UK factory sheets stop at 60,000 miles; the only book read that runs on to 100,000 is the 2002 US one, so 70k to 100k is tagged US only. The UK pattern after 60k is assumed to repeat but is not documented.",
+  "intervalMonths on 20k to 60k is 12 months per 10,000 miles, by the sheets rule of 10,000 miles or 12 months whichever comes first. The US 70k to 100k pages give no months, so those stay null.",
+  "US books for MY1997-2001 and MY2003 on, and any MY2004-06 UK sheet, were not transcribed. JTIS 2.1 sheets stop at MY2003. MY2004-06 schedule assumed unchanged.",
+  "The US 2002 list has no line for greasing axle shaft universal joints or checking coolant level, so the US milestone records leave both out. The UK sheets include both.",
+  "Age-related tasks have no factory interval. All age items are enthusiast or forum evidence. Search budget ran out before specialist sources (PistonHeads, Honest John, JagRepair) were reached, so suspension bushes, brake hoses and steering rack age items are missing.",
+  "Coolant crossover and valley pipe ageing appeared in search summaries from sources that could not be opened, so it is left out here.",
+  "No job exists yet for wiper blades, expansion tank replacement or universal joint greasing, so those service tasks link to no job."
+ ]
+}

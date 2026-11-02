@@ -1,0 +1,3309 @@
+{
+ "sources": {
+  "jag2003guide": {
+   "title": "2003 Model Year XK Service Training Technical Guide (publication T2003XK, issued 30 Sep 2002)",
+   "url": "http://www.jagrepair.com/images/AutoRepairPhotos/2003-xk-service-training-guide.pdf",
+   "publisher": "Jaguar Cars North America, hosted by JagRepair.com",
+   "kind": "factory"
+  },
+  "jag2001brochure": {
+   "title": "Jaguar XK Series brochure, 2001 international edition, specification and equipment pages",
+   "url": "http://www.auto-brochures.com/makes/Jaguar/XK/Jaguar_int%20XK_2001.pdf",
+   "publisher": "Jaguar Cars Ltd, hosted by auto-brochures.com",
+   "kind": "factory"
+  },
+  "jag2006brochure": {
+   "title": "Jaguar XK 2006 US brochure and specifications",
+   "url": "http://www.auto-brochures.com/makes/Jaguar/XK/Jaguar_US%20XK_2006.pdf",
+   "publisher": "Jaguar Cars North America, hosted by auto-brochures.com",
+   "kind": "factory"
+  },
+  "jdht1997": {
+   "title": "1997 Jaguar XK8 Coupe, collection sheet (P55 XKB)",
+   "url": "https://www.jaguarheritage.com/vehicles/1997%20Jaguar%20XK8%20coupe.pdf",
+   "publisher": "Jaguar Daimler Heritage Trust",
+   "kind": "factory"
+  },
+  "mossVin": {
+   "title": "First-Generation XK8 & XKR Chassis and Engine Numbers, 1997-2006",
+   "url": "https://mossmotors.com/media/PDFs/vin-information-xk8-and-xkr-1997-2006.pdf",
+   "publisher": "Moss Motors",
+   "kind": "vendor"
+  },
+  "sng": {
+   "title": "XK8 parts catalogue (2013 edition)",
+   "url": "https://cdn.sngbarratt.com/catalogues/new/sng_cat_xk8_en.pdf",
+   "publisher": "SNG Barratt",
+   "kind": "vendor"
+  },
+  "bremboCoupe40": {
+   "title": "Brake catalogue, Jaguar XK 8 Coupe (X100) 4.0",
+   "url": "https://www.bremboparts.com/europe/en/catalogue/jaguar-xk-8-coupe-x100-4-0/000009989-1",
+   "publisher": "Brembo",
+   "kind": "vendor"
+  },
+  "bremboConvR42": {
+   "title": "Brake catalogue, Jaguar XK 8 Convertible (X100) R 4.2",
+   "url": "https://www.bremboparts.com/europe/en/catalogue/jaguar-xk-8-convertible-x100-r-4-2/000016990-1",
+   "publisher": "Brembo",
+   "kind": "vendor"
+  },
+  "mossC2a1512": {
+   "title": "V-8 left secondary timing chain tensioner, upgraded (C2A-1512)",
+   "url": "https://mossmotors.com/c2a-1512-v-8-left-secondary-timing-chain-tensioner-upgraded",
+   "publisher": "Moss Motors",
+   "kind": "vendor"
+  },
+  "mossBlade": {
+   "title": "Chain tensioner blade, outboard, to 4.0 V8 0108122359",
+   "url": "https://mossmotors.com/nca2025abjag-chain-tensioner-blade-outboard-to-4-0-v8-0108122359",
+   "publisher": "Moss Motors",
+   "kind": "vendor"
+  },
+  "nhtsa": {
+   "title": "vPIC VIN decoder API, built from manufacturer VIN submissions. Patterns tested 1 Nov 2026",
+   "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/SAJGX2748VC012550?format=json",
+   "publisher": "US National Highway Traffic Safety Administration",
+   "kind": "reference"
+  },
+  "auscarBulletins": {
+   "title": "Recalls: Jaguar X100 XK8 and XKR (recalls and technical service bulletins with VIN ranges)",
+   "url": "https://australiancar.reviews/?p=47121",
+   "publisher": "australiancar.reviews",
+   "kind": "reference"
+  },
+  "auscarXk": {
+   "title": "Jaguar X100 XK8 and XKR model guide",
+   "url": "https://www.australiancar.reviews/model/xk/feed",
+   "publisher": "australiancar.reviews",
+   "kind": "reference"
+  },
+  "ams": {
+   "title": "Jaguar XK8 (X100) technische Daten",
+   "url": "https://www.auto-motor-und-sport.de/oldtimer/jaguar-xk8-x100-gebrauchte-sportwagen-coupe-ab-8000-euro/technische-daten/",
+   "publisher": "auto motor und sport",
+   "kind": "reference"
+  },
+  "km77Xk8a": {
+   "title": "Jaguar XK8 Coupe 10/1996-09/2002 data sheet",
+   "url": "https://www.km77.com/coches/jaguar/xk/1996/coupe/8/xk8-coupe/datos",
+   "publisher": "km77",
+   "kind": "reference"
+  },
+  "km77Xkra": {
+   "title": "Jaguar XKR Coupe 10/1996-09/2002 data sheet",
+   "url": "https://www.km77.com/coches/jaguar/xk/1996/coupe/r/xkr-coupe/datos",
+   "publisher": "km77",
+   "kind": "reference"
+  },
+  "km77Xk8b": {
+   "title": "Jaguar XK8 Coupe 09/2002-03/2005 data sheet",
+   "url": "https://www.km77.com/coches/jaguar/xk/1996/coupe/8/xk8-coupe2/datos",
+   "publisher": "km77",
+   "kind": "reference"
+  },
+  "km77Xkrb": {
+   "title": "Jaguar XKR Coupe 09/2002-03/2005 data sheet",
+   "url": "https://www.km77.com/coches/jaguar/xk/1996/coupe/r/xkr-coupe2/datos",
+   "publisher": "km77",
+   "kind": "reference"
+  },
+  "km77Info": {
+   "title": "Jaguar XK (2003) general information",
+   "url": "https://www.km77.com/coches/jaguar/xk/1996/coupe/informacion",
+   "publisher": "km77",
+   "kind": "reference"
+  },
+  "supercars96": {
+   "title": "1996 Jaguar XK8 Convertible specifications",
+   "url": "https://www.supercars.net/blog/?p=61090",
+   "publisher": "supercars.net",
+   "kind": "reference"
+  },
+  "supercars00": {
+   "title": "2000 Jaguar XKR Convertible specifications",
+   "url": "https://www.supercars.net/blog/?p=56839",
+   "publisher": "supercars.net",
+   "kind": "reference"
+  },
+  "goauto2002": {
+   "title": "First drive: Jaguar XK power boost",
+   "url": "https://www.goauto.com.au/amp/jaguar/xk/first-drive-jaguar-xk-power-boost/2002-10-02/1874.html",
+   "publisher": "GoAuto",
+   "kind": "reference"
+  },
+  "goauto2003": {
+   "title": "Jaguar XK8 convertible review, 2003",
+   "url": "https://web1.goauto.com.au/car-reviews/jaguar/xk/xk8-convertible/2003-07-29/34352.html",
+   "publisher": "GoAuto",
+   "kind": "reference"
+  },
+  "carsguide2004": {
+   "title": "Jaguar XK8 2004 dimensions",
+   "url": "https://www.carsguide.com.au/jaguar/xk8/car-dimensions/2004",
+   "publisher": "CarsGuide",
+   "kind": "reference"
+  },
+  "carsales1997": {
+   "title": "Jaguar XK8 1997 overview, Classic specification",
+   "url": "https://www.carsales.com.au/research/jaguar/xk8/1997/classic/fdce7977-333f-4f3e-8eb3-b6a1d7b48d63/",
+   "publisher": "carsales",
+   "kind": "reference"
+  },
+  "automoli": {
+   "title": "Where to find the VIN plate, Jaguar XK8 1999",
+   "url": "https://www.automoli.com/us/page/vin-number-identification-plate-location/JAGUAR/XK8/year/1999/699f3896-b584-11e2-9734-8c89a515ffe2",
+   "publisher": "automoli",
+   "kind": "reference"
+  },
+  "pistonheads": {
+   "title": "PH Buying Guide: Jaguar XK8/XKR (X100)",
+   "url": "https://www.pistonheads.com/news/ph-buying-guides/ph-buying-guide-jaguar-xk8-xkr-x100/27195",
+   "publisher": "PistonHeads",
+   "kind": "reference"
+  },
+  "motorious": {
+   "title": "The Dangers Of Nikasil Cylinder Linings In Your Jaguar XK8",
+   "url": "https://www.motorious.com/articles/highlights/nikasil-cylinder-linings-jaguar-xk8-xkr",
+   "publisher": "Motorious",
+   "kind": "reference"
+  },
+  "supercarsGuide": {
+   "title": "Buying a Jaguar XK8/XKR: Tips for a Happy Jaguar Purchase",
+   "url": "https://www.supercars.net/blog/?p=304986",
+   "publisher": "supercars.net",
+   "kind": "reference"
+  },
+  "wikiX100": {
+   "title": "Jaguar XK (X100)",
+   "url": "https://en.wikipedia.org/wiki/Jaguar_XK_(X100)",
+   "publisher": "Wikipedia",
+   "kind": "reference"
+  },
+  "wikiAjv8": {
+   "title": "Jaguar AJ-V8 engine",
+   "url": "https://en.wikipedia.org/wiki/Jaguar_AJ-V8_engine",
+   "publisher": "Wikipedia",
+   "kind": "reference"
+  },
+  "wikiZf5": {
+   "title": "ZF 5HP transmission",
+   "url": "https://en.wikipedia.org/wiki/ZF_5HP_transmission",
+   "publisher": "Wikipedia",
+   "kind": "reference"
+  },
+  "wikiNag": {
+   "title": "Mercedes-Benz 5G-Tronic transmission",
+   "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_5G-Tronic_transmission",
+   "publisher": "Wikipedia",
+   "kind": "reference"
+  },
+  "youcanic": {
+   "title": "Jaguar VIN Decoder",
+   "url": "https://www.youcanic.com/jaguar-vin-decoder/",
+   "publisher": "YOUCANIC",
+   "kind": "reference"
+  },
+  "jec": {
+   "title": "Jaguar XK8 X100 model history",
+   "url": "https://jaguarenthusiasts.club/en/jaguar-xk8-x100",
+   "publisher": "jaguarenthusiasts.club",
+   "kind": "enthusiast"
+  },
+  "jcnaWarning": {
+   "title": "A warning for Jaguar V8 owners",
+   "url": "https://www.jcna.com/v8-chain-tensioners-problems",
+   "publisher": "Jaguar Clubs of North America",
+   "kind": "enthusiast"
+  },
+  "jlEngine": {
+   "title": "XK8: replacing a 1996 XK8 engine with one from a 2002 car",
+   "url": "https://forums.jag-lovers.com/t/xk8-replacing-a-1996-xk8-engine-with-one-from-a-2002-car/247681",
+   "publisher": "Jag-Lovers forums",
+   "kind": "forum"
+  },
+  "jlCylinders": {
+   "title": "X300: determining cylinders X308",
+   "url": "https://forums.jag-lovers.com/t/x300-determining-cylinders-x308/228130",
+   "publisher": "Jag-Lovers forums",
+   "kind": "forum"
+  },
+  "jcnaComment": {
+   "title": "JCNA forum discussion of tensioner design breaks",
+   "url": "https://jcna.com/comment/2098",
+   "publisher": "Jaguar Clubs of North America forum",
+   "kind": "forum"
+  },
+  "engTips": {
+   "title": "V8 firing orders thread, quoting a Jaguar technical guide. Page refused automated fetch, wording taken from the search result",
+   "url": "https://eng-tips.com/threads/v8-firing-orders.195178",
+   "publisher": "Eng-Tips",
+   "kind": "forum"
+  },
+  "joc": {
+   "title": "XK 5.0 ltr miss fire, bank naming discussion. Page refused automated fetch, wording taken from the search result",
+   "url": "https://www.jaguarownersclub.com/forums/topic/27776-xk-50-ltr-miss-fire",
+   "publisher": "Jaguar Owners Club forums",
+   "kind": "forum"
+  },
+  "handhXkr": {
+   "title": "1999 Jaguar XKR Convertible, lot listing",
+   "url": "https://handh.co.uk/auction/lot/117-1999-jaguar-xkr-convertible/?lot=58323",
+   "publisher": "H&H Classics",
+   "kind": "reference"
+  },
+  "classicTraderXkr": {
+   "title": "1998 Jaguar XKR convertible listing",
+   "url": "https://www.classic-trader.com/au/cars/listing/jaguar/xk/xkr/1998/447602",
+   "publisher": "Classic Trader",
+   "kind": "reference"
+  },
+  "carandclassic2002": {
+   "title": "2002 Jaguar XK8 auction listing",
+   "url": "https://www.carandclassic.com/au/car/C1506824",
+   "publisher": "Car & Classic",
+   "kind": "reference"
+  },
+  "swva2004": {
+   "title": "2004 Jaguar XK8 4.2 auction record",
+   "url": "https://www.swva.co.uk/?p=68373",
+   "publisher": "SWVA",
+   "kind": "reference"
+  },
+  "classicDriver2006": {
+   "title": "2006 Jaguar XKR coupe listing",
+   "url": "https://www.classicdriver.com/en/car/jaguar/xkr/2006/1134159",
+   "publisher": "Classic Driver",
+   "kind": "reference"
+  },
+  "hagertyXkr2002": {
+   "title": "2002 Jaguar XKR past sale",
+   "url": "https://www.hagerty.com/valuation-tools/past-sales/2002-jaguar-xkr/SAJAC42N72PA30199/72aa696c-c357-4af5-95cc-17fb819894a5",
+   "publisher": "Hagerty",
+   "kind": "reference"
+  },
+  "hagertyXk82004": {
+   "title": "2004 Jaguar XK8 past sale",
+   "url": "https://www.hagerty.com/valuation-tools/past-sales/2004-jaguar-xk8/SAJAC42P852A41554/d44cc755-a34d-481c-b240-951b63f4230f",
+   "publisher": "Hagerty",
+   "kind": "reference"
+  },
+  "hagertyXk82006": {
+   "title": "2006 Jaguar XK8 past sale",
+   "url": "https://www.hagerty.com/valuation-tools/past-sales/2006-jaguar-xk8/SAJDA42C262A48050/3f279076-f2a7-4e83-be66-e9b4beb83a3b",
+   "publisher": "Hagerty",
+   "kind": "reference"
+  },
+  "fastcarcheck": {
+   "title": "VIN check SAJAC42J4YPA10305",
+   "url": "https://fastcarcheck.uk/vin-check/SAJAC42J4YPA10305",
+   "publisher": "fastcarcheck.uk",
+   "kind": "reference"
+  },
+  "classicCom": {
+   "title": "1997 Jaguar XK8 SAJGX2748VC012550",
+   "url": "https://www.classic.com/veh/1997-jaguar-xk8-sajgx2748vc012550-4VwRaln/",
+   "publisher": "classic.com",
+   "kind": "reference"
+  },
+  "decodethis": {
+   "title": "VIN record SAJDA42B333A36857",
+   "url": "https://decodethis.com/web/vin/SAJDA42B333A36857",
+   "publisher": "decodethis.com",
+   "kind": "reference"
+  },
+  "vsb": {
+   "title": "Jaguar Vehicle Specifications book, editions 09/2003 and 07/2004",
+   "url": "http://jagrepair.com/images/AutoRepairPhotos/vsb_09_2003.pdf",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "tsb-206-08": {
+   "title": "Jaguar Service Technical Bulletin 206-08: Uprated front brake discs and calipers",
+   "url": "http://jagrepair.com/images/TSB/TSB2/XJ_XK/206Brakes/206-08%20uprated%20brakes.pdf",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "tsb-303-30": {
+   "title": "Jaguar Service Technical Bulletin 303-30: Noise during start up, revised timing chain tensioners",
+   "url": "http://jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-30%20Revised%20Timing%20Chain%20Tensioners.pdf",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "tsb-303-68": {
+   "title": "Jaguar Service Technical Bulletin 303-68: Start-up and idle rattle, primary or secondary chain tensioner",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-68%20Start-up%20and%20Idle%20Rattle.pdf",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "vc-my1997": {
+   "title": "XK8 Vehicle Care, 1997 to 1998 Model Years (UK), JJM 10 16 14/80",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "vc-my1999": {
+   "title": "XK8 Vehicle Care, 1998.75 and 1999 Model Years (UK), JJM 10 16 14/87",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "vc-my2000": {
+   "title": "XK8/XKR Vehicle Care, 2000 Model Year (UK), JJM 10 16 14/00",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my1997": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY1997 (dataset jvk1997en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my2000": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY2000 (dataset jyk2000en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "hb-my2003": {
+   "title": "XK8/XKR Driver's Handbook, 2003 Model Year (UK), JJM 10 02 14/30",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "hb-my2004": {
+   "title": "XK8/XKR Driver's Handbook, 2004.5 Model Year (UK), JJM 10 02 14/45",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "ajv8-guide": {
+   "title": "AJ-V8 engine and 5HP24 transmission technical guide",
+   "url": "http://jagrepair.com/images/AutoRepairPhotos/AJV8%20engine%205HP24%20transmission.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  }
+ },
+ "items": [
+  {
+   "firingOrder": "1A-1B-4A-2A-2B-3A-3B-4B",
+   "id": "xk8-40-aj26-coupe",
+   "label": "XK8 4.0 coupe (AJ26, on/off VVT)",
+   "engine": "4.0",
+   "induction": "na",
+   "body": "coupe",
+   "myFrom": 1997,
+   "myTo": 1998,
+   "vinFrom": "001001",
+   "vinTo": "031302",
+   "engineCode": "AJ26",
+   "boreMm": 86,
+   "strokeMm": 86,
+   "displacementCc": 3996,
+   "compression": 10.75,
+   "powerPs": 294,
+   "powerBhp": 290,
+   "powerRpm": 6100,
+   "torqueNm": 393,
+   "torqueRpm": 4250,
+   "redlineRpm": 7100,
+   "transmission": "ZF 5HP24 5-speed automatic",
+   "gearRatios": [
+    3.57,
+    2.2,
+    1.51,
+    1,
+    0.8
+   ],
+   "reverseRatio": 4.1,
+   "finalDrive": 3.06,
+   "tyresFront": "245/50 ZR17",
+   "tyresRear": "245/50 ZR17",
+   "wheels": "8J x 17 alloy all round. 18-inch 8J front and 9J rear came as an option, standard with CATS.",
+   "brakeDiscFrontMm": 305,
+   "brakeDiscRearMm": 305,
+   "massKg": 1615,
+   "zeroToSixtySec": 6.4,
+   "topSpeedMph": 155,
+   "src": [
+    "jag2001brochure",
+    "jdht1997",
+    "wikiZf5",
+    "ams",
+    "supercars96",
+    "bremboCoupe40",
+    "sng",
+    "jlEngine",
+    "mossVin",
+    "auscarBulletins",
+    "vsb",
+    "vc-my1997",
+    "ajv8-guide"
+   ],
+   "conf": "factory",
+   "fieldProv": {
+    "gearRatios": {
+     "conf": "corroborated",
+     "src": [
+      "ams",
+      "supercars96"
+     ]
+    },
+    "reverseRatio": {
+     "conf": "single",
+     "src": [
+      "ams"
+     ]
+    },
+    "finalDrive": {
+     "conf": "factory",
+     "src": [
+      "vsb",
+      "vc-my1997"
+     ]
+    },
+    "redlineRpm": {
+     "conf": "single",
+     "src": [
+      "ajv8-guide"
+     ]
+    },
+    "engineCode": {
+     "conf": "community",
+     "src": [
+      "jlEngine",
+      "wikiAjv8"
+     ]
+    },
+    "powerPs": {
+     "conf": "corroborated",
+     "src": [
+      "wikiAjv8",
+      "jag2001brochure"
+     ]
+    },
+    "brakeDiscFrontMm": {
+     "conf": "corroborated",
+     "src": [
+      "bremboCoupe40",
+      "sng"
+     ]
+    },
+    "brakeDiscRearMm": {
+     "conf": "corroborated",
+     "src": [
+      "bremboCoupe40",
+      "jag2003guide"
+     ]
+    }
+   },
+   "note": "Figures come from the MY2001 brochure, which quotes the same 290 bhp and 393 Nm as the launch car. Moss starts MY1997 at 001246, bulletins start at 001001. The VIN limit is the usual AJ26 to AJ27 point, but the engine number is the reliable check. km77 lists a European 284 CV and 375 Nm. auto motor und sport prints first gear as 3.75, while supercars.net gives 3.57 and the 5HP24 design value is 3.571, so 3.75 reads as a misprint. Final drive 3.06:1 is factory for every XK, 4.0 and 4.2, NA and SC; Mexico market cars take 3.27:1. Kerb weight is the Jaguar figure with standard equipment; options add weight. All cars in this record have Nikasil bores unless the engine was replaced under warranty. Jaguar lists maximum speed (limited) as 7100 rpm. 6800 rpm is the kickdown upshift point, not the limit. supercars.net labelled 6800 as the redline.",
+   "kickdownUpshiftRpm": 6800
+  },
+  {
+   "firingOrder": "1A-1B-4A-2A-2B-3A-3B-4B",
+   "id": "xk8-40-aj27-coupe",
+   "label": "XK8 4.0 coupe (AJ27, continuous VVT)",
+   "engine": "4.0",
+   "induction": "na",
+   "body": "coupe",
+   "myFrom": 1999,
+   "myTo": 2002,
+   "vinFrom": "031303",
+   "vinTo": "A30644",
+   "engineCode": "AJ27",
+   "boreMm": 86,
+   "strokeMm": 86,
+   "displacementCc": 3996,
+   "compression": 10.75,
+   "powerPs": 294,
+   "powerBhp": 290,
+   "powerRpm": 6100,
+   "torqueNm": 393,
+   "torqueRpm": 4250,
+   "redlineRpm": 7100,
+   "transmission": "ZF 5HP24 5-speed automatic",
+   "gearRatios": [
+    3.57,
+    2.2,
+    1.51,
+    1,
+    0.8
+   ],
+   "reverseRatio": 4.1,
+   "finalDrive": 3.06,
+   "tyresFront": "245/50 ZR17",
+   "tyresRear": "245/50 ZR17",
+   "wheels": "8J x 17 Lamina all round as standard. 18-inch Impeller (8J front, 9J rear, 245/45 and 255/45 tyres) optional and standard with CATS. Later 19-inch and 20-inch R Performance options.",
+   "brakeDiscFrontMm": 325,
+   "brakeDiscRearMm": 305,
+   "massKg": 1615,
+   "zeroToSixtySec": 6.4,
+   "topSpeedMph": 155,
+   "src": [
+    "jag2001brochure",
+    "jag2003guide",
+    "wikiZf5",
+    "ams",
+    "supercars96",
+    "sng",
+    "jlEngine",
+    "auscarBulletins",
+    "vsb",
+    "vc-my1997",
+    "ajv8-guide",
+    "tsb-206-08"
+   ],
+   "conf": "factory",
+   "fieldProv": {
+    "gearRatios": {
+     "conf": "corroborated",
+     "src": [
+      "ams",
+      "supercars96"
+     ]
+    },
+    "reverseRatio": {
+     "conf": "single",
+     "src": [
+      "ams"
+     ]
+    },
+    "finalDrive": {
+     "conf": "factory",
+     "src": [
+      "vsb",
+      "vc-my1997"
+     ]
+    },
+    "redlineRpm": {
+     "conf": "single",
+     "src": [
+      "ajv8-guide"
+     ]
+    },
+    "engineCode": {
+     "conf": "community",
+     "src": [
+      "jlEngine",
+      "auscarBulletins"
+     ]
+    },
+    "powerPs": {
+     "conf": "corroborated",
+     "src": [
+      "wikiAjv8",
+      "jag2001brochure"
+     ]
+    },
+    "brakeDiscFrontMm": {
+     "conf": "factory",
+     "src": [
+      "tsb-206-08",
+      "jag2003guide"
+     ]
+    },
+    "brakeDiscRearMm": {
+     "conf": "factory",
+     "src": [
+      "jag2003guide"
+     ]
+    }
+   },
+   "note": "Front discs are 305 mm to VIN 037347 and 325 mm from VIN 037348, per TSB 206-08. The value shown is the later size. Bores changed from Nikasil to steel liners on 18 August 2000, so this record covers both. Treat any engine numbered 000818xxxx as unconfirmed. auto motor und sport prints first gear as 3.75, while supercars.net gives 3.57 and the 5HP24 design value is 3.571, so 3.75 reads as a misprint. Final drive 3.06:1 is factory for every XK, 4.0 and 4.2, NA and SC; Mexico market cars take 3.27:1. Kerb weight is the Jaguar figure with standard equipment; options add weight. Jaguar lists maximum speed (limited) as 7100 rpm. 6800 rpm is the kickdown upshift point, not the limit. supercars.net labelled 6800 as the redline.",
+   "kickdownUpshiftRpm": 6800,
+   "brakeDiscFrontByVin": [
+    {
+     "vinTo": "037347",
+     "mm": 305
+    },
+    {
+     "vinFrom": "037348",
+     "mm": 325
+    }
+   ]
+  },
+  {
+   "firingOrder": "1A-1B-4A-2A-2B-3A-3B-4B",
+   "id": "xkr-40-aj26s-coupe",
+   "label": "XKR 4.0 coupe (AJ26S)",
+   "engine": "4.0",
+   "induction": "sc",
+   "body": "coupe",
+   "myFrom": 1998,
+   "myTo": 1999,
+   "vinFrom": "024687",
+   "vinTo": "042775",
+   "engineCode": "AJ26S",
+   "boreMm": 86,
+   "strokeMm": 86,
+   "displacementCc": 3996,
+   "compression": 9,
+   "powerPs": 375,
+   "powerBhp": 370,
+   "powerRpm": 6150,
+   "torqueNm": 525,
+   "torqueRpm": 3600,
+   "redlineRpm": 6200,
+   "transmission": "Mercedes-Benz W5A580 (722.6) 5-speed automatic",
+   "gearRatios": [
+    3.59,
+    2.19,
+    1.41,
+    1,
+    0.83
+   ],
+   "reverseRatio": 3.16,
+   "finalDrive": 3.06,
+   "tyresFront": "245/45 ZR18",
+   "tyresRear": "255/45 ZR18",
+   "wheels": "8J x 18 front, 9J x 18 rear.",
+   "brakeDiscFrontMm": 325,
+   "brakeDiscRearMm": 305,
+   "massKg": 1640,
+   "zeroToSixtySec": 5.2,
+   "topSpeedMph": 155,
+   "src": [
+    "jag2001brochure",
+    "jdht1997",
+    "wikiAjv8",
+    "wikiNag",
+    "supercars00",
+    "mossVin",
+    "sng",
+    "jag2003guide",
+    "vsb",
+    "tsb-206-08"
+   ],
+   "conf": "factory",
+   "fieldProv": {
+    "gearRatios": {
+     "conf": "corroborated",
+     "src": [
+      "supercars00",
+      "wikiNag"
+     ]
+    },
+    "reverseRatio": {
+     "conf": "single",
+     "src": [
+      "wikiNag"
+     ]
+    },
+    "finalDrive": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "redlineRpm": {
+     "conf": "single",
+     "src": [
+      "supercars00"
+     ]
+    },
+    "engineCode": {
+     "conf": "corroborated",
+     "src": [
+      "wikiAjv8",
+      "auscarXk"
+     ]
+    },
+    "powerPs": {
+     "conf": "single",
+     "src": [
+      "pistonheads"
+     ]
+    },
+    "brakeDiscFrontMm": {
+     "conf": "factory",
+     "src": [
+      "tsb-206-08"
+     ]
+    },
+    "brakeDiscRearMm": {
+     "conf": "corroborated",
+     "src": [
+      "bremboCoupe40",
+      "jag2003guide"
+     ]
+    },
+    "compression": {
+     "conf": "single",
+     "src": [
+      "vsb",
+      "jag2001brochure"
+     ]
+    }
+   },
+   "note": "Moss lists this first XKR run as model year 1998.75, starting at VIN 024687, which matches the XKR launch of May 1998. Factory conflict on compression: the Vehicle Specifications book gives 8.9:1 (plus or minus 0.5), the handbooks and brochure 9.0:1. supercars.net prints third gear as 1.14, which reads as a misprint of 1.41. Gear ratios are the W5A580 family values, no Jaguar-specific table was found. The XKR did not use VVT on the 4.0. Kerb weight is the Jaguar figure with standard equipment; options add weight. Final drive 3.06:1 is factory for every XK; Mexico market cars take 3.27:1."
+  },
+  {
+   "firingOrder": "1A-1B-4A-2A-2B-3A-3B-4B",
+   "id": "xkr-40-aj27s-coupe",
+   "label": "XKR 4.0 coupe (AJ27S)",
+   "engine": "4.0",
+   "induction": "sc",
+   "body": "coupe",
+   "myFrom": 2000,
+   "myTo": 2002,
+   "vinFrom": "A00001",
+   "vinTo": "A30644",
+   "engineCode": "AJ27S",
+   "boreMm": 86,
+   "strokeMm": 86,
+   "displacementCc": 3996,
+   "compression": 9,
+   "powerPs": 375,
+   "powerBhp": 370,
+   "powerRpm": 6150,
+   "torqueNm": 525,
+   "torqueRpm": 3600,
+   "redlineRpm": 6200,
+   "transmission": "Mercedes-Benz W5A580 (722.6) 5-speed automatic",
+   "gearRatios": [
+    3.59,
+    2.19,
+    1.41,
+    1,
+    0.83
+   ],
+   "reverseRatio": 3.16,
+   "finalDrive": 3.06,
+   "tyresFront": "245/45 ZR18",
+   "tyresRear": "255/45 ZR18",
+   "wheels": "8J x 18 Double Five front, 9J x 18 rear as standard. 19-inch Apollo and 20-inch R Performance wheels optional.",
+   "brakeDiscFrontMm": 325,
+   "brakeDiscRearMm": 305,
+   "massKg": 1640,
+   "zeroToSixtySec": 5.2,
+   "topSpeedMph": 155,
+   "src": [
+    "jag2001brochure",
+    "jag2003guide",
+    "wikiAjv8",
+    "wikiNag",
+    "supercars00",
+    "auscarBulletins",
+    "km77Xkra",
+    "vsb"
+   ],
+   "conf": "factory",
+   "fieldProv": {
+    "gearRatios": {
+     "conf": "corroborated",
+     "src": [
+      "supercars00",
+      "wikiNag"
+     ]
+    },
+    "reverseRatio": {
+     "conf": "single",
+     "src": [
+      "wikiNag"
+     ]
+    },
+    "finalDrive": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "redlineRpm": {
+     "conf": "single",
+     "src": [
+      "supercars00"
+     ]
+    },
+    "engineCode": {
+     "conf": "single",
+     "src": [
+      "wikiAjv8"
+     ]
+    },
+    "powerPs": {
+     "conf": "single",
+     "src": [
+      "pistonheads"
+     ]
+    },
+    "brakeDiscFrontMm": {
+     "conf": "factory",
+     "src": [
+      "jag2003guide"
+     ]
+    },
+    "brakeDiscRearMm": {
+     "conf": "factory",
+     "src": [
+      "jag2003guide"
+     ]
+    },
+    "compression": {
+     "conf": "single",
+     "src": [
+      "vsb",
+      "jag2001brochure"
+     ]
+    }
+   },
+   "note": "Disc sizes are the standard fit. Cars with the optional Brembo R Performance brakes run 355 mm front and 330 mm rear, see changes. km77 lists a European 363 CV and 505 Nm, and 245/45 tyres all round, against the Jaguar brochure's 370 bhp, 525 Nm and 255/45 rears. Bulletins put the first XKR of this run at A00001 and most other MY2000 parts at A00083. Bores changed from Nikasil to steel liners on 18 August 2000; treat any engine numbered 000818xxxx as unconfirmed. Kerb weight is the Jaguar figure with standard equipment; options add weight. Final drive 3.06:1 is factory for every XK; Mexico market cars take 3.27:1. Factory conflict on compression: the Vehicle Specifications book gives 8.9:1 (plus or minus 0.5), the handbooks and brochure 9.0:1."
+  },
+  {
+   "firingOrder": "1A-1B-4A-2A-2B-3A-3B-4B",
+   "id": "xk8-42-aj34-coupe",
+   "label": "XK8 4.2 coupe (AJ34)",
+   "engine": "4.2",
+   "induction": "na",
+   "body": "coupe",
+   "myFrom": 2003,
+   "myTo": 2006,
+   "vinFrom": "A30645",
+   "vinTo": null,
+   "engineCode": "AJ34",
+   "boreMm": 86,
+   "strokeMm": 90.3,
+   "displacementCc": 4196,
+   "compression": 11,
+   "powerPs": 304,
+   "powerBhp": 300,
+   "powerRpm": 6000,
+   "torqueNm": 420,
+   "torqueRpm": 4100,
+   "redlineRpm": null,
+   "transmission": "ZF 6HP26 6-speed automatic",
+   "gearRatios": [
+    4.17,
+    2.34,
+    1.52,
+    1.14,
+    0.87,
+    0.69
+   ],
+   "reverseRatio": 3.4,
+   "finalDrive": 3.06,
+   "tyresFront": "245/50 ZR17",
+   "tyresRear": "245/50 ZR17",
+   "wheels": "European listing shows 8J x 17 all round, and SNG lists Lamina and Gemini 17-inch wheels. Late US cars use 8J x 18 front, 9J x 18 rear Aris with 245/45 and 255/45 tyres. 19-inch Atlas optional.",
+   "brakeDiscFrontMm": 325,
+   "brakeDiscRearMm": 305,
+   "massKg": 1695,
+   "zeroToSixtySec": 6.1,
+   "topSpeedMph": 155,
+   "src": [
+    "jag2003guide",
+    "jag2006brochure",
+    "km77Xk8b",
+    "sng",
+    "goauto2002",
+    "wikiX100",
+    "hb-my2004",
+    "vsb"
+   ],
+   "conf": "factory",
+   "fieldProv": {
+    "powerPs": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "powerBhp": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "torqueNm": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "massKg": {
+     "conf": "factory",
+     "src": [
+      "hb-my2004"
+     ]
+    },
+    "tyresFront": {
+     "conf": "single",
+     "src": [
+      "km77Xk8b"
+     ]
+    },
+    "tyresRear": {
+     "conf": "single",
+     "src": [
+      "km77Xk8b"
+     ]
+    },
+    "zeroToSixtySec": {
+     "conf": "factory",
+     "src": [
+      "jag2006brochure"
+     ]
+    },
+    "finalDrive": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "engineCode": {
+     "conf": "single",
+     "src": [
+      "jag2003guide",
+      "vsb"
+     ]
+    }
+   },
+   "note": "Power and torque are the UK DIN figures from the Vehicle Specifications book. The Jaguar North America documents quote SAE 293 or 294 bhp at 6000 rpm and 303 lb ft (411 Nm) at 4100 rpm, and km77 uses that same 411 Nm. The 17-inch tyre size is from the Spanish km77 sheet, so check the UK fit on the car. 0-60 is the US brochure figure; Wikipedia gives 6.4 and 6.6 s to 97 km/h. Kerb weight is the UK handbook MY2004.5 figure with no options. The MY2003 handbook prints convertibles higher (1847 and 1862 kg). 1685 and 1735 kg are US guide figures only, and the US 2006 brochure gives 3,779 lb (1,714 kg) coupe and 3,980 lb (1,805 kg) convertible. Brembo brakes were an XK8 option with 20-inch wheels. Jaguar's own papers disagree on the engine code: the Vehicle Specifications spark plug table lists XK 2003-on as AJ33 V8, TSB 100-22 and the training guide say AJ34."
+  },
+  {
+   "firingOrder": "1A-1B-4A-2A-2B-3A-3B-4B",
+   "id": "xkr-42-aj34-coupe",
+   "label": "XKR 4.2 coupe (AJ34 supercharged)",
+   "engine": "4.2",
+   "induction": "sc",
+   "body": "coupe",
+   "myFrom": 2003,
+   "myTo": 2006,
+   "vinFrom": "A30645",
+   "vinTo": null,
+   "engineCode": "AJ34",
+   "boreMm": 86,
+   "strokeMm": 90.3,
+   "displacementCc": 4196,
+   "compression": 9.1,
+   "powerPs": 406,
+   "powerBhp": 400,
+   "powerRpm": 6100,
+   "torqueNm": 553,
+   "torqueRpm": 3500,
+   "redlineRpm": null,
+   "transmission": "ZF 6HP26 6-speed automatic",
+   "gearRatios": [
+    4.17,
+    2.34,
+    1.52,
+    1.14,
+    0.87,
+    0.69
+   ],
+   "reverseRatio": 3.4,
+   "finalDrive": 3.06,
+   "tyresFront": "245/45 ZR18",
+   "tyresRear": "255/45 ZR18",
+   "wheels": "8J x 18 front, 9J x 18 rear (Hydra on the late US cars). 20-inch Detroit, Montreal and Sepang optional with 255/35 ZR20 front and 285/30 ZR20 rear.",
+   "brakeDiscFrontMm": 355,
+   "brakeDiscRearMm": 330,
+   "massKg": 1745,
+   "zeroToSixtySec": 5.2,
+   "topSpeedMph": 155,
+   "src": [
+    "jag2003guide",
+    "jag2006brochure",
+    "km77Xkrb",
+    "goauto2002",
+    "wikiX100",
+    "wikiAjv8",
+    "pistonheads",
+    "hb-my2004",
+    "vsb"
+   ],
+   "conf": "factory",
+   "fieldProv": {
+    "powerPs": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "powerBhp": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "torqueNm": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "massKg": {
+     "conf": "factory",
+     "src": [
+      "hb-my2004"
+     ]
+    },
+    "zeroToSixtySec": {
+     "conf": "factory",
+     "src": [
+      "jag2006brochure"
+     ]
+    },
+    "finalDrive": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "engineCode": {
+     "conf": "single",
+     "src": [
+      "jag2003guide",
+      "vsb"
+     ]
+    }
+   },
+   "note": "Power and torque are the UK DIN figures from the Vehicle Specifications book. Jaguar North America quotes SAE 390 bhp and 399 lb ft (541 Nm), and the factory guide labels the engine AJ34 for both XK8 and XKR, while Wikipedia and some guides use AJ33 and AJ34S. The MY2003 factory wiring notes say the VVT solenoids are on the naturally aspirated engine only; the 2006 US brochure lists variable cam phasing on the XKR too, and Wikipedia says VVT was added to the supercharged engine later. Check the car, do not assume. Kerb weight is the UK handbook MY2004.5 figure with no options. The MY2003 handbook prints convertibles higher (1847 and 1862 kg). 1685 and 1735 kg are US guide figures only, and the 2006 US brochure gives 3,865 lb (1,753 kg) coupe and 4,042 lb (1,833 kg) convertible. Jaguar's own papers disagree on the engine code: the Vehicle Specifications spark plug table lists XK 2003-on as AJ33 V8, TSB 100-22 and the training guide say AJ34."
+  },
+  {
+   "firingOrder": "1A-1B-4A-2A-2B-3A-3B-4B",
+   "id": "xk8-40-aj26-convertible",
+   "label": "XK8 4.0 convertible (AJ26, on/off VVT)",
+   "engine": "4.0",
+   "induction": "na",
+   "body": "convertible",
+   "myFrom": 1997,
+   "myTo": 1998,
+   "vinFrom": "001001",
+   "vinTo": "031302",
+   "engineCode": "AJ26",
+   "boreMm": 86,
+   "strokeMm": 86,
+   "displacementCc": 3996,
+   "compression": 10.75,
+   "powerPs": 294,
+   "powerBhp": 290,
+   "powerRpm": 6100,
+   "torqueNm": 393,
+   "torqueRpm": 4250,
+   "redlineRpm": 7100,
+   "transmission": "ZF 5HP24 5-speed automatic",
+   "gearRatios": [
+    3.57,
+    2.2,
+    1.51,
+    1,
+    0.8
+   ],
+   "reverseRatio": 4.1,
+   "finalDrive": 3.06,
+   "tyresFront": "245/50 ZR17",
+   "tyresRear": "245/50 ZR17",
+   "wheels": "8J x 17 alloy all round. 18-inch 8J front and 9J rear came as an option, standard with CATS.",
+   "brakeDiscFrontMm": 305,
+   "brakeDiscRearMm": 305,
+   "massKg": 1705,
+   "zeroToSixtySec": 6.7,
+   "topSpeedMph": 155,
+   "src": [
+    "jag2001brochure",
+    "jdht1997",
+    "wikiZf5",
+    "ams",
+    "supercars96",
+    "bremboCoupe40",
+    "sng",
+    "jlEngine",
+    "mossVin",
+    "auscarBulletins",
+    "vsb",
+    "vc-my1997",
+    "ajv8-guide"
+   ],
+   "conf": "factory",
+   "fieldProv": {
+    "gearRatios": {
+     "conf": "corroborated",
+     "src": [
+      "ams",
+      "supercars96"
+     ]
+    },
+    "reverseRatio": {
+     "conf": "single",
+     "src": [
+      "ams"
+     ]
+    },
+    "finalDrive": {
+     "conf": "factory",
+     "src": [
+      "vsb",
+      "vc-my1997"
+     ]
+    },
+    "redlineRpm": {
+     "conf": "single",
+     "src": [
+      "ajv8-guide"
+     ]
+    },
+    "engineCode": {
+     "conf": "community",
+     "src": [
+      "jlEngine",
+      "wikiAjv8"
+     ]
+    },
+    "powerPs": {
+     "conf": "corroborated",
+     "src": [
+      "wikiAjv8",
+      "jag2001brochure"
+     ]
+    },
+    "brakeDiscFrontMm": {
+     "conf": "corroborated",
+     "src": [
+      "bremboCoupe40",
+      "sng"
+     ]
+    },
+    "brakeDiscRearMm": {
+     "conf": "corroborated",
+     "src": [
+      "bremboCoupe40",
+      "jag2003guide"
+     ]
+    }
+   },
+   "note": "Figures come from the MY2001 brochure, which quotes the same 290 bhp and 393 Nm as the launch car. Moss starts MY1997 at 001246, bulletins start at 001001. The VIN limit is the usual AJ26 to AJ27 point, but the engine number is the reliable check. km77 lists a European 284 CV and 375 Nm. auto motor und sport prints first gear as 3.75, while supercars.net gives 3.57 and the 5HP24 design value is 3.571, so 3.75 reads as a misprint. Final drive 3.06:1 is factory for every XK, 4.0 and 4.2, NA and SC; Mexico market cars take 3.27:1. Kerb weight is the Jaguar figure with standard equipment; options add weight. All cars in this record have Nikasil bores unless the engine was replaced under warranty. Jaguar lists maximum speed (limited) as 7100 rpm. 6800 rpm is the kickdown upshift point, not the limit. supercars.net labelled 6800 as the redline.",
+   "kickdownUpshiftRpm": 6800
+  },
+  {
+   "firingOrder": "1A-1B-4A-2A-2B-3A-3B-4B",
+   "id": "xk8-40-aj27-convertible",
+   "label": "XK8 4.0 convertible (AJ27, continuous VVT)",
+   "engine": "4.0",
+   "induction": "na",
+   "body": "convertible",
+   "myFrom": 1999,
+   "myTo": 2002,
+   "vinFrom": "031303",
+   "vinTo": "A30644",
+   "engineCode": "AJ27",
+   "boreMm": 86,
+   "strokeMm": 86,
+   "displacementCc": 3996,
+   "compression": 10.75,
+   "powerPs": 294,
+   "powerBhp": 290,
+   "powerRpm": 6100,
+   "torqueNm": 393,
+   "torqueRpm": 4250,
+   "redlineRpm": 7100,
+   "transmission": "ZF 5HP24 5-speed automatic",
+   "gearRatios": [
+    3.57,
+    2.2,
+    1.51,
+    1,
+    0.8
+   ],
+   "reverseRatio": 4.1,
+   "finalDrive": 3.06,
+   "tyresFront": "245/50 ZR17",
+   "tyresRear": "245/50 ZR17",
+   "wheels": "8J x 17 Lamina all round as standard. 18-inch Impeller (8J front, 9J rear, 245/45 and 255/45 tyres) optional and standard with CATS. Later 19-inch and 20-inch R Performance options.",
+   "brakeDiscFrontMm": 325,
+   "brakeDiscRearMm": 305,
+   "massKg": 1705,
+   "zeroToSixtySec": 6.7,
+   "topSpeedMph": 155,
+   "src": [
+    "jag2001brochure",
+    "jag2003guide",
+    "wikiZf5",
+    "ams",
+    "supercars96",
+    "sng",
+    "jlEngine",
+    "auscarBulletins",
+    "vsb",
+    "vc-my1997",
+    "ajv8-guide",
+    "tsb-206-08"
+   ],
+   "conf": "factory",
+   "fieldProv": {
+    "gearRatios": {
+     "conf": "corroborated",
+     "src": [
+      "ams",
+      "supercars96"
+     ]
+    },
+    "reverseRatio": {
+     "conf": "single",
+     "src": [
+      "ams"
+     ]
+    },
+    "finalDrive": {
+     "conf": "factory",
+     "src": [
+      "vsb",
+      "vc-my1997"
+     ]
+    },
+    "redlineRpm": {
+     "conf": "single",
+     "src": [
+      "ajv8-guide"
+     ]
+    },
+    "engineCode": {
+     "conf": "community",
+     "src": [
+      "jlEngine",
+      "auscarBulletins"
+     ]
+    },
+    "powerPs": {
+     "conf": "corroborated",
+     "src": [
+      "wikiAjv8",
+      "jag2001brochure"
+     ]
+    },
+    "brakeDiscFrontMm": {
+     "conf": "factory",
+     "src": [
+      "tsb-206-08",
+      "jag2003guide"
+     ]
+    },
+    "brakeDiscRearMm": {
+     "conf": "factory",
+     "src": [
+      "jag2003guide"
+     ]
+    }
+   },
+   "note": "Front discs are 305 mm to VIN 037347 and 325 mm from VIN 037348, per TSB 206-08. The value shown is the later size. Bores changed from Nikasil to steel liners on 18 August 2000, so this record covers both. Treat any engine numbered 000818xxxx as unconfirmed. auto motor und sport prints first gear as 3.75, while supercars.net gives 3.57 and the 5HP24 design value is 3.571, so 3.75 reads as a misprint. Final drive 3.06:1 is factory for every XK, 4.0 and 4.2, NA and SC; Mexico market cars take 3.27:1. Kerb weight is the Jaguar figure with standard equipment; options add weight. Jaguar lists maximum speed (limited) as 7100 rpm. 6800 rpm is the kickdown upshift point, not the limit. supercars.net labelled 6800 as the redline.",
+   "kickdownUpshiftRpm": 6800,
+   "brakeDiscFrontByVin": [
+    {
+     "vinTo": "037347",
+     "mm": 305
+    },
+    {
+     "vinFrom": "037348",
+     "mm": 325
+    }
+   ]
+  },
+  {
+   "firingOrder": "1A-1B-4A-2A-2B-3A-3B-4B",
+   "id": "xkr-40-aj26s-convertible",
+   "label": "XKR 4.0 convertible (AJ26S)",
+   "engine": "4.0",
+   "induction": "sc",
+   "body": "convertible",
+   "myFrom": 1998,
+   "myTo": 1999,
+   "vinFrom": "024687",
+   "vinTo": "042775",
+   "engineCode": "AJ26S",
+   "boreMm": 86,
+   "strokeMm": 86,
+   "displacementCc": 3996,
+   "compression": 9,
+   "powerPs": 375,
+   "powerBhp": 370,
+   "powerRpm": 6150,
+   "torqueNm": 525,
+   "torqueRpm": 3600,
+   "redlineRpm": 6200,
+   "transmission": "Mercedes-Benz W5A580 (722.6) 5-speed automatic",
+   "gearRatios": [
+    3.59,
+    2.19,
+    1.41,
+    1,
+    0.83
+   ],
+   "reverseRatio": 3.16,
+   "finalDrive": 3.06,
+   "tyresFront": "245/45 ZR18",
+   "tyresRear": "255/45 ZR18",
+   "wheels": "8J x 18 front, 9J x 18 rear.",
+   "brakeDiscFrontMm": 325,
+   "brakeDiscRearMm": 305,
+   "massKg": 1750,
+   "zeroToSixtySec": 5.3,
+   "topSpeedMph": 155,
+   "src": [
+    "jag2001brochure",
+    "jdht1997",
+    "wikiAjv8",
+    "wikiNag",
+    "supercars00",
+    "mossVin",
+    "sng",
+    "jag2003guide",
+    "vsb",
+    "tsb-206-08"
+   ],
+   "conf": "factory",
+   "fieldProv": {
+    "gearRatios": {
+     "conf": "corroborated",
+     "src": [
+      "supercars00",
+      "wikiNag"
+     ]
+    },
+    "reverseRatio": {
+     "conf": "single",
+     "src": [
+      "wikiNag"
+     ]
+    },
+    "finalDrive": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "redlineRpm": {
+     "conf": "single",
+     "src": [
+      "supercars00"
+     ]
+    },
+    "engineCode": {
+     "conf": "corroborated",
+     "src": [
+      "wikiAjv8",
+      "auscarXk"
+     ]
+    },
+    "powerPs": {
+     "conf": "single",
+     "src": [
+      "pistonheads"
+     ]
+    },
+    "brakeDiscFrontMm": {
+     "conf": "factory",
+     "src": [
+      "tsb-206-08"
+     ]
+    },
+    "brakeDiscRearMm": {
+     "conf": "corroborated",
+     "src": [
+      "bremboCoupe40",
+      "jag2003guide"
+     ]
+    },
+    "compression": {
+     "conf": "single",
+     "src": [
+      "vsb",
+      "jag2001brochure"
+     ]
+    }
+   },
+   "note": "Moss lists this first XKR run as model year 1998.75, starting at VIN 024687, which matches the XKR launch of May 1998. Factory conflict on compression: the Vehicle Specifications book gives 8.9:1 (plus or minus 0.5), the handbooks and brochure 9.0:1. supercars.net prints third gear as 1.14, which reads as a misprint of 1.41. Gear ratios are the W5A580 family values, no Jaguar-specific table was found. The XKR did not use VVT on the 4.0. Kerb weight is the Jaguar figure with standard equipment; options add weight. Final drive 3.06:1 is factory for every XK; Mexico market cars take 3.27:1."
+  },
+  {
+   "firingOrder": "1A-1B-4A-2A-2B-3A-3B-4B",
+   "id": "xkr-40-aj27s-convertible",
+   "label": "XKR 4.0 convertible (AJ27S)",
+   "engine": "4.0",
+   "induction": "sc",
+   "body": "convertible",
+   "myFrom": 2000,
+   "myTo": 2002,
+   "vinFrom": "A00001",
+   "vinTo": "A30644",
+   "engineCode": "AJ27S",
+   "boreMm": 86,
+   "strokeMm": 86,
+   "displacementCc": 3996,
+   "compression": 9,
+   "powerPs": 375,
+   "powerBhp": 370,
+   "powerRpm": 6150,
+   "torqueNm": 525,
+   "torqueRpm": 3600,
+   "redlineRpm": 6200,
+   "transmission": "Mercedes-Benz W5A580 (722.6) 5-speed automatic",
+   "gearRatios": [
+    3.59,
+    2.19,
+    1.41,
+    1,
+    0.83
+   ],
+   "reverseRatio": 3.16,
+   "finalDrive": 3.06,
+   "tyresFront": "245/45 ZR18",
+   "tyresRear": "255/45 ZR18",
+   "wheels": "8J x 18 Double Five front, 9J x 18 rear as standard. 19-inch Apollo and 20-inch R Performance wheels optional.",
+   "brakeDiscFrontMm": 325,
+   "brakeDiscRearMm": 305,
+   "massKg": 1750,
+   "zeroToSixtySec": 5.3,
+   "topSpeedMph": 155,
+   "src": [
+    "jag2001brochure",
+    "jag2003guide",
+    "wikiAjv8",
+    "wikiNag",
+    "supercars00",
+    "auscarBulletins",
+    "km77Xkra",
+    "vsb"
+   ],
+   "conf": "factory",
+   "fieldProv": {
+    "gearRatios": {
+     "conf": "corroborated",
+     "src": [
+      "supercars00",
+      "wikiNag"
+     ]
+    },
+    "reverseRatio": {
+     "conf": "single",
+     "src": [
+      "wikiNag"
+     ]
+    },
+    "finalDrive": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "redlineRpm": {
+     "conf": "single",
+     "src": [
+      "supercars00"
+     ]
+    },
+    "engineCode": {
+     "conf": "single",
+     "src": [
+      "wikiAjv8"
+     ]
+    },
+    "powerPs": {
+     "conf": "single",
+     "src": [
+      "pistonheads"
+     ]
+    },
+    "brakeDiscFrontMm": {
+     "conf": "factory",
+     "src": [
+      "jag2003guide"
+     ]
+    },
+    "brakeDiscRearMm": {
+     "conf": "factory",
+     "src": [
+      "jag2003guide"
+     ]
+    },
+    "compression": {
+     "conf": "single",
+     "src": [
+      "vsb",
+      "jag2001brochure"
+     ]
+    }
+   },
+   "note": "Disc sizes are the standard fit. Cars with the optional Brembo R Performance brakes run 355 mm front and 330 mm rear, see changes. km77 lists a European 363 CV and 505 Nm, and 245/45 tyres all round, against the Jaguar brochure's 370 bhp, 525 Nm and 255/45 rears. Bulletins put the first XKR of this run at A00001 and most other MY2000 parts at A00083. Bores changed from Nikasil to steel liners on 18 August 2000; treat any engine numbered 000818xxxx as unconfirmed. Kerb weight is the Jaguar figure with standard equipment; options add weight. Final drive 3.06:1 is factory for every XK; Mexico market cars take 3.27:1. Factory conflict on compression: the Vehicle Specifications book gives 8.9:1 (plus or minus 0.5), the handbooks and brochure 9.0:1."
+  },
+  {
+   "firingOrder": "1A-1B-4A-2A-2B-3A-3B-4B",
+   "id": "xk8-42-aj34-convertible",
+   "label": "XK8 4.2 convertible (AJ34)",
+   "engine": "4.2",
+   "induction": "na",
+   "body": "convertible",
+   "myFrom": 2003,
+   "myTo": 2006,
+   "vinFrom": "A30645",
+   "vinTo": null,
+   "engineCode": "AJ34",
+   "boreMm": 86,
+   "strokeMm": 90.3,
+   "displacementCc": 4196,
+   "compression": 11,
+   "powerPs": 304,
+   "powerBhp": 300,
+   "powerRpm": 6000,
+   "torqueNm": 420,
+   "torqueRpm": 4100,
+   "redlineRpm": null,
+   "transmission": "ZF 6HP26 6-speed automatic",
+   "gearRatios": [
+    4.17,
+    2.34,
+    1.52,
+    1.14,
+    0.87,
+    0.69
+   ],
+   "reverseRatio": 3.4,
+   "finalDrive": 3.06,
+   "tyresFront": "245/50 ZR17",
+   "tyresRear": "245/50 ZR17",
+   "wheels": "European listing shows 8J x 17 all round, and SNG lists Lamina and Gemini 17-inch wheels. Late US cars use 8J x 18 front, 9J x 18 rear Aris with 245/45 and 255/45 tyres. 19-inch Atlas optional.",
+   "brakeDiscFrontMm": 325,
+   "brakeDiscRearMm": 305,
+   "massKg": 1785,
+   "zeroToSixtySec": 6.3,
+   "topSpeedMph": 155,
+   "src": [
+    "jag2003guide",
+    "jag2006brochure",
+    "km77Xk8b",
+    "sng",
+    "goauto2002",
+    "wikiX100",
+    "hb-my2004",
+    "vsb"
+   ],
+   "conf": "factory",
+   "fieldProv": {
+    "powerPs": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "powerBhp": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "torqueNm": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "massKg": {
+     "conf": "factory",
+     "src": [
+      "hb-my2004"
+     ]
+    },
+    "tyresFront": {
+     "conf": "single",
+     "src": [
+      "km77Xk8b"
+     ]
+    },
+    "tyresRear": {
+     "conf": "single",
+     "src": [
+      "km77Xk8b"
+     ]
+    },
+    "zeroToSixtySec": {
+     "conf": "factory",
+     "src": [
+      "jag2006brochure"
+     ]
+    },
+    "finalDrive": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "engineCode": {
+     "conf": "single",
+     "src": [
+      "jag2003guide",
+      "vsb"
+     ]
+    }
+   },
+   "note": "Power and torque are the UK DIN figures from the Vehicle Specifications book. The Jaguar North America documents quote SAE 293 or 294 bhp at 6000 rpm and 303 lb ft (411 Nm) at 4100 rpm, and km77 uses that same 411 Nm. The 17-inch tyre size is from the Spanish km77 sheet, so check the UK fit on the car. 0-60 is the US brochure figure; Wikipedia gives 6.4 and 6.6 s to 97 km/h. Kerb weight is the UK handbook MY2004.5 figure with no options. The MY2003 handbook prints convertibles higher (1847 and 1862 kg). 1685 and 1735 kg are US guide figures only, and the US 2006 brochure gives 3,779 lb (1,714 kg) coupe and 3,980 lb (1,805 kg) convertible. Brembo brakes were an XK8 option with 20-inch wheels. Jaguar's own papers disagree on the engine code: the Vehicle Specifications spark plug table lists XK 2003-on as AJ33 V8, TSB 100-22 and the training guide say AJ34."
+  },
+  {
+   "firingOrder": "1A-1B-4A-2A-2B-3A-3B-4B",
+   "id": "xkr-42-aj34-convertible",
+   "label": "XKR 4.2 convertible (AJ34 supercharged)",
+   "engine": "4.2",
+   "induction": "sc",
+   "body": "convertible",
+   "myFrom": 2003,
+   "myTo": 2006,
+   "vinFrom": "A30645",
+   "vinTo": null,
+   "engineCode": "AJ34",
+   "boreMm": 86,
+   "strokeMm": 90.3,
+   "displacementCc": 4196,
+   "compression": 9.1,
+   "powerPs": 406,
+   "powerBhp": 400,
+   "powerRpm": 6100,
+   "torqueNm": 553,
+   "torqueRpm": 3500,
+   "redlineRpm": null,
+   "transmission": "ZF 6HP26 6-speed automatic",
+   "gearRatios": [
+    4.17,
+    2.34,
+    1.52,
+    1.14,
+    0.87,
+    0.69
+   ],
+   "reverseRatio": 3.4,
+   "finalDrive": 3.06,
+   "tyresFront": "245/45 ZR18",
+   "tyresRear": "255/45 ZR18",
+   "wheels": "8J x 18 front, 9J x 18 rear (Hydra on the late US cars). 20-inch Detroit, Montreal and Sepang optional with 255/35 ZR20 front and 285/30 ZR20 rear.",
+   "brakeDiscFrontMm": 355,
+   "brakeDiscRearMm": 330,
+   "massKg": 1824,
+   "zeroToSixtySec": 5.3,
+   "topSpeedMph": 155,
+   "src": [
+    "jag2003guide",
+    "jag2006brochure",
+    "km77Xkrb",
+    "goauto2002",
+    "wikiX100",
+    "wikiAjv8",
+    "pistonheads",
+    "hb-my2004",
+    "vsb"
+   ],
+   "conf": "factory",
+   "fieldProv": {
+    "powerPs": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "powerBhp": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "torqueNm": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "massKg": {
+     "conf": "factory",
+     "src": [
+      "hb-my2004"
+     ]
+    },
+    "zeroToSixtySec": {
+     "conf": "factory",
+     "src": [
+      "jag2006brochure"
+     ]
+    },
+    "finalDrive": {
+     "conf": "factory",
+     "src": [
+      "vsb"
+     ]
+    },
+    "engineCode": {
+     "conf": "single",
+     "src": [
+      "jag2003guide",
+      "vsb"
+     ]
+    }
+   },
+   "note": "Power and torque are the UK DIN figures from the Vehicle Specifications book. Jaguar North America quotes SAE 390 bhp and 399 lb ft (541 Nm), and the factory guide labels the engine AJ34 for both XK8 and XKR, while Wikipedia and some guides use AJ33 and AJ34S. The MY2003 factory wiring notes say the VVT solenoids are on the naturally aspirated engine only; the 2006 US brochure lists variable cam phasing on the XKR too, and Wikipedia says VVT was added to the supercharged engine later. Check the car, do not assume. Kerb weight is the UK handbook MY2004.5 figure with no options. The MY2003 handbook prints convertibles higher (1847 and 1862 kg). 1685 and 1735 kg are US guide figures only, and the 2006 US brochure gives 3,865 lb (1,753 kg) coupe and 4,042 lb (1,833 kg) convertible. Jaguar's own papers disagree on the engine code: the Vehicle Specifications spark plug table lists XK 2003-on as AJ33 V8, TSB 100-22 and the training guide say AJ34."
+  }
+ ],
+ "gaps": [
+  "This file was built from the 2003 MY training guide, the 2001 and 2006 brochures and the JDHT sheet. A later audit added the Vehicle Specifications book, JTIS, handbooks and bulletins for the values it corrected. Fields not named in that audit still rest on the original sources.",
+  "Front and rear overhang: no published value. Tried spec databases, brochures and blueprint sites. Length minus wheelbase and a photo estimate are in the notes only.",
+  "Redline for the 4.2 engines: no source found. The 4.0 NA limit comes from one Jaguar guide, and the XKR 6200 rpm from one site.",
+  "W5A580 ratios are family values. No Jaguar-specific table for the XKR was found, and reverse comes from Wikipedia only.",
+  "Whether and when the supercharged 4.2 gained VVT: the MY2003 guide says naturally aspirated only, the 2006 US brochure says variable cam phasing, and no VIN or engine break was found.",
+  "Position by position VIN table from Jaguar: not found. UK meanings for positions 4, 6, 9 and 11, the J versus N engine letters and US position 5 code N are unconfirmed. No UK pre-2000 XKR coupe VIN found.",
+  "Firing order: the wording comes from a search result for an Eng-Tips thread, which refused a direct fetch. A Jaguar page stating it was not read. OBD cylinder number mapping needs confirming in JTIS.",
+  "Tensioner: date and engine number for aluminium bodied tensioners in production, and which tensioner the first 4.2 engines used, were not found. A JCNA post reporting second design parts on 4.2 engines was only seen as a search result.",
+  "Rear disc size on the 2000 R Performance option: 300 mm and 330 mm are both reported.",
+  "The last X100 VIN: not found. Highest seen is A48684 in bulletin JTB00070.",
+  "Sites that refused automated fetches: Jaguar Owners Club forums, Eng-Tips, Tomorrow's Technician, WhichCar, Encycarpedia, carfromjapan. Classic & Sports Car returned an empty page, and drives.today refused the connection, so a claim about MY2002 seat changes was dropped. The web search allowance ran out mid task, so later work used direct fetches of known pages only.",
+  "Rear track: Jaguar handbooks print 1504 mm, MY2000 prints 1508 mm, the press prints 1498 mm. Measure a car before modelling to the millimetre.",
+  "Liner break: no Jaguar document gives the Nikasil to steel engine number. 18 August 2000 is the best date.",
+  "MY2001 first VIN: A11051 in bulletins, A11140 in the Vehicle Specifications book."
+ ],
+ "vin": {
+  "summary": "An X100 VIN has 17 characters and starts SAJ. The format changed at model year 2000 and UK and US cars are coded differently, so pick the right format below before reading any position. The last six characters are the most useful: they fix the build position, and parts breaks are quoted against them.",
+  "howToRead": [
+   "Read the VIN off the car, not the paperwork. Compare the windscreen plate, door pillar label and V5C.",
+   "Look at character 12. A number means a pre-2000 VIN with a six-digit serial (up to 042775). An A means MY2000 or later, with A followed by five digits.",
+   "Use the serial against the table below to get the model year. On UK pre-2000 cars this is the only way, because position 10 is not a year code.",
+   "Pick the format that matches the first five characters and read the body and engine positions.",
+   "For Nikasil, tensioners and engine type, read the engine number as well. The VIN only says what the car left the factory with, and many engines were replaced."
+  ],
+  "plateLocations": {
+   "text": "Label on the left-hand B pillar above the door striker plate. VIN stamping on the right-hand side of the luggage compartment. Quick reference plate visible through the left-hand lower corner of the windscreen.",
+   "src": [
+    "vsb"
+   ],
+   "conf": "factory"
+  },
+  "modelYearBySerial": [
+   {
+    "my": 1997,
+    "startSerial": "001246",
+    "note": "Bulletins quote 001001 as the first number."
+   },
+   {
+    "my": 1998,
+    "startSerial": "018108"
+   },
+   {
+    "my": 1998.75,
+    "startSerial": "024687",
+    "note": "XKR arrives. SNG quotes the same VIN for supercharged-only parts."
+   },
+   {
+    "my": 1999,
+    "startSerial": "031303",
+    "endSerial": "042775",
+    "note": "AJ27 VVT engine on naturally aspirated cars. The numeric series ends at 042775."
+   },
+   {
+    "my": 2000,
+    "startSerial": "A00116",
+    "note": "New A series. The Vehicle Specifications VIN table starts at A00116; A00016 in Moss looks like a misprint. Bulletins still use A00083 and A00001 for some parts."
+   },
+   {
+    "my": 2001,
+    "startSerial": "A11051",
+    "conf": "single",
+    "note": "Factory split: the Vehicle Specifications book starts MY2001 at A11140, while TSBs 211-06, 303-27 and 303-59 use A11051 and 303-52 ends MY2000 at A11050. Treat A11051 to A11139 as ambiguous."
+   },
+   {
+    "my": 2002,
+    "startSerial": "A24196",
+    "note": "Moss prints this as the MY2002 start. Bulletin 303-68 ends at A24195, which matches."
+   },
+   {
+    "my": 2003,
+    "startSerial": "A30645",
+    "note": "The factory guide prints A30654. Moss, SNG and bulletins all use A30645, so that is treated as a typing error."
+   },
+   {
+    "my": 2003.5,
+    "startSerial": "A35155"
+   },
+   {
+    "my": 2004,
+    "startSerial": "A36874"
+   },
+   {
+    "my": 2004.5,
+    "startSerial": "A40265",
+    "note": "Facelift point. SNG breaks most body parts here."
+   },
+   {
+    "my": 2005,
+    "startSerial": "A42348"
+   },
+   {
+    "my": 2006,
+    "startSerial": "A44686"
+   }
+  ],
+  "modelYearBySerialSrc": [
+   "mossVin",
+   "sng",
+   "auscarBulletins",
+   "jag2003guide",
+   "vsb"
+  ],
+  "modelYearBySerialConf": "corroborated",
+  "yearCodes": {
+   "1": 2001,
+   "2": 2002,
+   "3": 2003,
+   "4": 2004,
+   "5": 2005,
+   "6": 2006,
+   "V": 1997,
+   "W": 1998,
+   "X": 1999,
+   "Y": 2000
+  },
+  "yearCodesNote": "Standard position 10 codes. They work on US VINs for all years and UK VINs from MY2000. The code can run ahead of the registration: SAJAC41P452A42587 is a 2004-registered car coded 5 for MY2005.",
+  "formats": [
+   {
+    "id": "uk-pre2000",
+    "label": "UK and European cars, MY1997 to MY1999",
+    "pattern": "SAJ J G A E D 3 A R 015648",
+    "appliesTo": {
+     "market": [
+      "uk"
+     ],
+     "myFrom": 1997,
+     "myTo": 1999,
+     "vinTo": "042775"
+    },
+    "positions": [
+     {
+      "pos": "1-3",
+      "meaning": "Jaguar, built in the UK",
+      "codes": {
+       "SAJ": "Jaguar UK"
+      }
+     },
+     {
+      "pos": "4",
+      "meaning": "Seen as J on every sample. Exact meaning not confirmed.",
+      "codes": {
+       "J": "all samples"
+      }
+     },
+     {
+      "pos": "5",
+      "meaning": "Model line",
+      "codes": {
+       "G": "XK8 and XKR"
+      }
+     },
+     {
+      "pos": "6",
+      "meaning": "Not confirmed. A on most samples, K on one.",
+      "codes": {
+       "A": "most samples",
+       "K": "SAJJGKED3AR014145, meaning unknown"
+      }
+     },
+     {
+      "pos": "7",
+      "meaning": "Body",
+      "codes": {
+       "E": "coupe",
+       "F": "convertible"
+      }
+     },
+     {
+      "pos": "8",
+      "meaning": "Engine",
+      "codes": {
+       "D": "4.0 naturally aspirated",
+       "F": "4.0 supercharged"
+      }
+     },
+     {
+      "pos": "9",
+      "meaning": "Fixed 3 on all samples. Fails the standard check digit sum, so do not treat a mismatch as a fake VIN."
+     },
+     {
+      "pos": "10",
+      "meaning": "Fixed A on all samples. Not a year code. Generic decoders read it as 2010."
+     },
+     {
+      "pos": "11",
+      "meaning": "Fixed R on all samples, a plant or line code."
+     },
+     {
+      "pos": "12-17",
+      "meaning": "Six-digit build serial"
+     }
+    ],
+    "src": [
+     "jdht1997",
+     "handhXkr",
+     "classicTraderXkr",
+     "nhtsa"
+    ],
+    "conf": "single",
+    "note": "Worked out from listed VINs, not a Jaguar table. Coupe with D is confirmed by the JDHT car, convertible with F by two XKR convertibles. No UK pre-2000 XKR coupe VIN (expected SAJJGAEF) was found."
+   },
+   {
+    "id": "uk-2000on",
+    "label": "UK and European cars, MY2000 onward",
+    "pattern": "SAJ A C 41 P 4 5 2 A42587",
+    "appliesTo": {
+     "market": [
+      "uk"
+     ],
+     "myFrom": 2000,
+     "myTo": 2006,
+     "vinFrom": "A00001"
+    },
+    "positions": [
+     {
+      "pos": "1-3",
+      "meaning": "Jaguar, built in the UK",
+      "codes": {
+       "SAJ": "Jaguar UK"
+      }
+     },
+     {
+      "pos": "4",
+      "meaning": "Gearbox on European cars",
+      "codes": {
+       "A": "automatic"
+      }
+     },
+     {
+      "pos": "5",
+      "meaning": "Security code on European cars",
+      "codes": {
+       "C": "all samples"
+      }
+     },
+     {
+      "pos": "6-7",
+      "meaning": "Body",
+      "codes": {
+       "41": "coupe",
+       "42": "convertible"
+      }
+     },
+     {
+      "pos": "8",
+      "meaning": "Engine",
+      "codes": {
+       "M": "4.0 naturally aspirated, one sample",
+       "J": "4.0 supercharged, one MY2000 sample",
+       "N": "4.0 supercharged, two MY2002 samples",
+       "P": "4.2 naturally aspirated",
+       "R": "4.2 supercharged"
+      }
+     },
+     {
+      "pos": "9",
+      "meaning": "Check digit. All eight samples tested pass."
+     },
+     {
+      "pos": "10",
+      "meaning": "Model year code"
+     },
+     {
+      "pos": "11",
+      "meaning": "Line code, all decode to Browns Lane. On every sample checked N and 2 are naturally aspirated, P and 3 supercharged. A useful cross-check, not a documented rule."
+     },
+     {
+      "pos": "12-17",
+      "meaning": "A plus five-digit build serial"
+     }
+    ],
+    "src": [
+     "youcanic",
+     "carandclassic2002",
+     "swva2004",
+     "classicDriver2006",
+     "hagertyXkr2002",
+     "hagertyXk82004",
+     "fastcarcheck",
+     "nhtsa"
+    ],
+    "conf": "single",
+    "note": "The YOUCANIC tables explain positions 4 to 7 and list P and R as Mexico market codes, though UK-sold cars carry them. Why 4.0 supercharged cars show both J and N is not explained by any source found."
+   },
+   {
+    "id": "us-pre2000",
+    "label": "US and Canadian cars, MY1997 to MY1999",
+    "pattern": "SAJ G X 2 7 4 8 V C 012550",
+    "appliesTo": {
+     "market": [
+      "us"
+     ],
+     "myFrom": 1997,
+     "myTo": 1999,
+     "vinTo": "042775"
+    },
+    "positions": [
+     {
+      "pos": "1-3",
+      "meaning": "Jaguar, built in the UK",
+      "codes": {
+       "SAJ": "Jaguar UK"
+      }
+     },
+     {
+      "pos": "4",
+      "meaning": "Model",
+      "codes": {
+       "G": "XK8"
+      }
+     },
+     {
+      "pos": "5",
+      "meaning": "Restraint system. Both decode as XK8.",
+      "codes": {
+       "X": "dual front airbags",
+       "N": "seen on XK8, meaning not confirmed"
+      }
+     },
+     {
+      "pos": "6",
+      "meaning": "Body",
+      "codes": {
+       "2": "convertible",
+       "5": "coupe"
+      }
+     },
+     {
+      "pos": "7",
+      "meaning": "Engine and emissions",
+      "codes": {
+       "0": "4.0 emission L, twin canister (MY1999)",
+       "2": "4.0 twin canister",
+       "7": "4.0"
+      }
+     },
+     {
+      "pos": "8",
+      "meaning": "Transmission and steering",
+      "codes": {
+       "4": "automatic, seen on all samples"
+      }
+     },
+     {
+      "pos": "9",
+      "meaning": "Check digit"
+     },
+     {
+      "pos": "10",
+      "meaning": "Model year code"
+     },
+     {
+      "pos": "11",
+      "meaning": "Plant",
+      "codes": {
+       "C": "Browns Lane"
+      }
+     },
+     {
+      "pos": "12-17",
+      "meaning": "Six-digit build serial"
+     }
+    ],
+    "src": [
+     "nhtsa",
+     "youcanic",
+     "classicCom"
+    ],
+    "conf": "corroborated",
+    "note": "No US XKR in this format: the XKR reached North America for MY2000."
+   },
+   {
+    "id": "us-2000on",
+    "label": "US and Canadian cars, MY2000 onward",
+    "pattern": "SAJ D A 42 B 3 3 3 A36857",
+    "appliesTo": {
+     "market": [
+      "us"
+     ],
+     "myFrom": 2000,
+     "myTo": 2006,
+     "vinFrom": "A00001"
+    },
+    "positions": [
+     {
+      "pos": "1-3",
+      "meaning": "Jaguar, built in the UK",
+      "codes": {
+       "SAJ": "Jaguar UK"
+      }
+     },
+     {
+      "pos": "4",
+      "meaning": "Market and restraint code",
+      "codes": {
+       "D": "all samples"
+      }
+     },
+     {
+      "pos": "5",
+      "meaning": "Gearbox on North American cars",
+      "codes": {
+       "A": "automatic"
+      }
+     },
+     {
+      "pos": "6-7",
+      "meaning": "Body",
+      "codes": {
+       "41": "coupe",
+       "42": "convertible"
+      }
+     },
+     {
+      "pos": "8",
+      "meaning": "Engine and market",
+      "codes": {
+       "C": "XK8",
+       "B": "XKR",
+       "D": "Canada emissions, MY2003 on"
+      }
+     },
+     {
+      "pos": "9",
+      "meaning": "Check digit"
+     },
+     {
+      "pos": "10",
+      "meaning": "Model year code"
+     },
+     {
+      "pos": "11",
+      "meaning": "Line code, as for UK cars: N and 2 naturally aspirated, P and 3 supercharged on samples checked."
+     },
+     {
+      "pos": "12-17",
+      "meaning": "A plus five-digit build serial"
+     }
+    ],
+    "src": [
+     "nhtsa",
+     "youcanic",
+     "decodethis",
+     "hagertyXk82006"
+    ],
+    "conf": "corroborated"
+   }
+  ],
+  "engineNumber": {
+   "format": "Ten digits in the form YYMMDDHHMM, the date and time the engine was built. 0008181043 would be 18 August 2000 at 10:43.",
+   "locations": [
+    {
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ]
+     },
+     "text": "Early engines: on a boss at the base of the thermostat tower on the left of the engine.",
+     "src": [
+      "jlEngine"
+     ],
+     "conf": "community"
+    },
+    {
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ]
+     },
+     "text": "Later engines (2001 on, per one forum source) and per Moss: on a vertical rib on the left of the block, just above the steering rack, seen from underneath.",
+     "src": [
+      "mossVin",
+      "jlEngine"
+     ],
+     "conf": "corroborated"
+    },
+    {
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ]
+     },
+     "text": "Stamped on the left side of the engine on the B bank oil drain channel.",
+     "src": [
+      "jag2003guide"
+     ],
+     "conf": "factory"
+    }
+   ],
+   "note": "JCNA gives a third location, upper front of the engine under the centre plastic cover, on a 1998 car. Jag-Lovers states left as the driver's side, which is a US LHD car: use the car's left.",
+   "keyBreaks": [
+    {
+     "engineNumber": "98102106XX",
+     "meaning": "Second design secondary tensioner starts",
+     "changeId": "tensioner-gen2"
+    },
+    {
+     "engineNumber": "000818xxxx",
+     "meaning": "Steel liners start on 18 August 2000. The exact number is unconfirmed",
+     "changeId": "nikasil-to-steel"
+    },
+    {
+     "engineNumber": "0108130000",
+     "meaning": "Third generation tensioners, chains and sprockets start. Old parts end at 0108122359",
+     "changeId": "tensioner-gen3"
+    }
+   ],
+   "src": [
+    "mossVin",
+    "auscarBulletins",
+    "sng",
+    "jag2003guide",
+    "jlEngine",
+    "jcnaWarning"
+   ],
+   "conf": "corroborated"
+  },
+  "examples": [
+   {
+    "vin": "SAJJGAED3AR015648",
+    "car": "1997 XK8 coupe, UK RHD, the Jaguar Daimler Heritage Trust car P55 XKB, built 2 June 1997",
+    "format": "uk-pre2000",
+    "decoded": {
+     "body": "E, coupe",
+     "engine": "D, 4.0 naturally aspirated",
+     "modelYear": "Serial 015648 sits between 001246 and 018108, so MY1997",
+     "market": "SAJJG prefix, UK and Europe"
+    },
+    "lesson": "Position 10 here is A, which online decoders read as 2010. The serial gives the true year, and this matches the build date on the JDHT sheet.",
+    "src": [
+     "jdht1997",
+     "mossVin"
+    ],
+    "conf": "factory"
+   },
+   {
+    "vin": "SAJJGAFF3AR040722",
+    "car": "1999 XKR convertible, UK",
+    "format": "uk-pre2000",
+    "decoded": {
+     "body": "F, convertible",
+     "engine": "F, 4.0 supercharged",
+     "modelYear": "Serial 040722 is after 031303 and before the 042775 end, so MY1999",
+     "market": "SAJJG prefix"
+    },
+    "lesson": "Note that F means different things at positions 7 and 8.",
+    "src": [
+     "handhXkr",
+     "mossVin"
+    ],
+    "conf": "single"
+   },
+   {
+    "vin": "SAJAC41M12NA29165",
+    "car": "2002 XK8 coupe, UK auction",
+    "format": "uk-2000on",
+    "decoded": {
+     "body": "41, coupe",
+     "engine": "M, 4.0 naturally aspirated",
+     "modelYear": "Position 10 is 2, MY2002. Serial A29165 agrees",
+     "market": "SAJAC prefix"
+    },
+    "lesson": "Position 12 is A, so this is the new series. Tensioners cannot be judged from this VIN alone. Read the engine number.",
+    "src": [
+     "carandclassic2002",
+     "mossVin"
+    ],
+    "conf": "single"
+   },
+   {
+    "vin": "SAJAC41P452A42587",
+    "car": "2004-registered XK8 4.2 coupe, UK",
+    "format": "uk-2000on",
+    "decoded": {
+     "body": "41, coupe",
+     "engine": "P, 4.2 naturally aspirated",
+     "modelYear": "Position 10 is 5, MY2005. Serial A42587 is just after the A42348 start of MY2005",
+     "market": "SAJAC prefix"
+    },
+    "lesson": "Registration year and model year can differ by one. Use the VIN when ordering parts.",
+    "src": [
+     "swva2004",
+     "mossVin"
+    ],
+    "conf": "single"
+   },
+   {
+    "vin": "SAJAC41R263A48322",
+    "car": "2006 XKR coupe, RHD",
+    "format": "uk-2000on",
+    "decoded": {
+     "body": "41, coupe",
+     "engine": "R, 4.2 supercharged",
+     "modelYear": "Position 10 is 6, MY2006",
+     "market": "SAJAC prefix"
+    },
+    "lesson": "A very late car. It has the facelift parts because the serial is after A40265.",
+    "src": [
+     "classicDriver2006",
+     "mossVin"
+    ],
+    "conf": "single"
+   },
+   {
+    "vin": "SAJGX2748VC012550",
+    "car": "1997 XK8 convertible, US",
+    "format": "us-pre2000",
+    "decoded": {
+     "body": "2, convertible",
+     "engine": "7, 4.0",
+     "modelYear": "Position 10 is V, MY1997",
+     "market": "SAJGX prefix, North America"
+    },
+    "lesson": "US VINs pass the check digit sum and carry a year code even before 2000.",
+    "src": [
+     "classicCom",
+     "nhtsa"
+    ],
+    "conf": "corroborated"
+   },
+   {
+    "vin": "SAJDA42B333A36857",
+    "car": "2003 XKR convertible, US",
+    "format": "us-2000on",
+    "decoded": {
+     "body": "42, convertible",
+     "engine": "B, XKR, 4.2 supercharged",
+     "modelYear": "Position 10 is 3, MY2003. Serial A36857 is 17 cars before the A36874 start of MY2004",
+     "market": "SAJDA prefix, North America"
+    },
+    "lesson": "Model year changes fall where the Moss table says they do.",
+    "src": [
+     "decodethis",
+     "nhtsa",
+     "mossVin"
+    ],
+    "conf": "corroborated"
+   }
+  ],
+  "myths": [
+   {
+    "claim": "A six-digit serial means Nikasil, and an A-prefix serial means steel liners.",
+    "truth": "Not reliable. The A series began in 1999 for MY2000, while Nikasil blocks were still being fitted until August 2000. One engine dated 4 June 2000 in a MY2001 car still had Nikasil bores.",
+    "src": [
+     "motorious",
+     "mossVin",
+     "auscarBulletins",
+     "jlEngine"
+    ],
+    "conf": "corroborated"
+   }
+  ],
+  "src": [
+   "mossVin",
+   "nhtsa",
+   "youcanic",
+   "jdht1997",
+   "jag2003guide",
+   "sng"
+  ],
+  "conf": "corroborated",
+  "note": "The Vehicle Specifications book gives a full VIN table from MY1997. No Jaguar table of VIN positions was found. US position data comes from NHTSA patterns, tested by varying characters on 1 Nov 2026; UK position data is inferred from public VINs."
+ },
+ "dimensions": {
+  "lengthMm": {
+   "value": 4760,
+   "unit": "mm",
+   "src": [
+    "ams",
+    "km77Xk8a",
+    "supercars96",
+    "jag2006brochure",
+    "wikiX100"
+   ],
+   "conf": "corroborated",
+   "byVariant": [
+    {
+     "appliesTo": {
+      "myFrom": 1997,
+      "myTo": 2004,
+      "vinTo": "A40264"
+     },
+     "value": 4760,
+     "src": [
+      "ams",
+      "km77Xk8a",
+      "carsales1997"
+     ],
+     "conf": "corroborated"
+    },
+    {
+     "appliesTo": {
+      "vinFrom": "A40265"
+     },
+     "value": 4775,
+     "src": [
+      "jag2006brochure",
+      "wikiX100"
+     ],
+     "conf": "factory"
+    }
+   ],
+   "note": "The later length comes from 188.0 in in the 2006 brochure. Linking it to VIN A40265 is an inference from the facelift bumper parts in the SNG catalogue."
+  },
+  "widthMm": {
+   "value": 1829,
+   "unit": "mm",
+   "src": [
+    "ams",
+    "supercars96",
+    "carsguide2004",
+    "auscarXk"
+   ],
+   "conf": "corroborated",
+   "note": "Excludes mirrors. km77 and GoAuto give 2015 mm with mirrors, the 2006 brochure gives 81.7 in (2075 mm) including mirrors. Wikipedia gives 1830 mm and then 1800 mm for 2005-06, which no other source supports."
+  },
+  "heightMm": {
+   "value": 1296,
+   "unit": "mm",
+   "src": [
+    "ams",
+    "km77Xk8a",
+    "carsguide2004",
+    "carsales1997",
+    "jag2006brochure",
+    "wikiX100",
+    "goauto2002"
+   ],
+   "conf": "corroborated",
+   "byVariant": [
+    {
+     "appliesTo": {
+      "body": [
+       "coupe"
+      ]
+     },
+     "value": 1296,
+     "src": [
+      "ams",
+      "km77Xk8a",
+      "carsguide2004"
+     ],
+     "conf": "corroborated"
+    },
+    {
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     },
+     "value": 1306,
+     "src": [
+      "carsales1997",
+      "carsguide2004",
+      "auscarXk"
+     ],
+     "conf": "corroborated"
+    },
+    {
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ],
+      "induction": [
+       "na"
+      ],
+      "body": [
+       "coupe"
+      ],
+      "myFrom": 2006,
+      "myTo": 2006,
+      "market": [
+       "us"
+      ]
+     },
+     "value": 1283,
+     "src": [
+      "jag2006brochure"
+     ],
+     "conf": "factory"
+    },
+    {
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ],
+      "induction": [
+       "na"
+      ],
+      "body": [
+       "convertible"
+      ],
+      "myFrom": 2006,
+      "myTo": 2006,
+      "market": [
+       "us"
+      ]
+     },
+     "value": 1295,
+     "src": [
+      "jag2006brochure"
+     ],
+     "conf": "factory"
+    },
+    {
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ],
+      "induction": [
+       "sc"
+      ],
+      "body": [
+       "coupe"
+      ],
+      "myFrom": 2006,
+      "myTo": 2006,
+      "market": [
+       "us"
+      ]
+     },
+     "value": 1278,
+     "src": [
+      "jag2006brochure"
+     ],
+     "conf": "factory"
+    },
+    {
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ],
+      "induction": [
+       "sc"
+      ],
+      "body": [
+       "convertible"
+      ],
+      "myFrom": 2006,
+      "myTo": 2006,
+      "market": [
+       "us"
+      ]
+     },
+     "value": 1288,
+     "src": [
+      "jag2006brochure"
+     ],
+     "conf": "factory"
+    }
+   ],
+   "note": "The factory figures are converted from 50.5, 51.0, 50.3 and 50.7 in. Wikipedia applies the 1283 and 1295 mm heights from 1999 onward. The R Performance Handling Pack lowers the ride height, so measure if the height matters."
+  },
+  "wheelbaseMm": {
+   "value": 2588,
+   "unit": "mm",
+   "src": [
+    "jag2006brochure",
+    "ams",
+    "km77Xk8a",
+    "wikiX100"
+   ],
+   "conf": "factory",
+   "note": "Factory 101.9 in. supercars.net rounds to 2591 mm for the 1996 car, and some listings round to 259 cm."
+  },
+  "trackFrontMm": {
+   "value": 1504,
+   "unit": "mm",
+   "src": [
+    "vc-my1997",
+    "vc-my1999",
+    "ams",
+    "km77Xk8a",
+    "supercars96",
+    "goauto2003",
+    "carsales1997"
+   ],
+   "conf": "factory",
+   "note": "Jaguar handbooks print 1504 mm; the MY2000 handbook prints 1508 mm and is the outlier. The same value is listed for 4.0 and 4.2 cars."
+  },
+  "trackRearMm": {
+   "value": 1504,
+   "unit": "mm",
+   "src": [
+    "vc-my1997",
+    "vc-my1999",
+    "ams",
+    "km77Xk8a",
+    "goauto2003",
+    "carsales1997",
+    "supercars96"
+   ],
+   "conf": "single",
+   "note": "Jaguar handbooks for MY1997, MY1999 and MY2002 print 1504 mm rear. The MY2000 handbook prints 1508 front and rear and is the outlier. 1498 mm is the press figure (auto motor und sport, km77, GoAuto) and supercars.net gives 1499 mm. The handbook text is OCR, so confirm on the page image."
+  },
+  "groundClearanceMm": {
+   "value": 164,
+   "unit": "mm",
+   "src": [
+    "vc-my1997"
+   ],
+   "conf": "factory",
+   "byVariant": [
+    {
+     "appliesTo": {
+      "body": [
+       "coupe"
+      ]
+     },
+     "value": 164,
+     "src": [
+      "vc-my1997"
+     ],
+     "conf": "factory"
+    },
+    {
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     },
+     "value": 162,
+     "src": [
+      "vc-my1997"
+     ],
+     "conf": "factory"
+    }
+   ],
+   "note": "Factory minimum at gross vehicle weight, not unladen. An Australian listing of the 4.2 coupe shows the same 164 mm as unladen."
+  },
+  "frontOverhangMm": {
+   "value": null,
+   "unit": "mm",
+   "src": [],
+   "conf": null,
+   "note": "No published figure found. Length minus wheelbase gives 2172 mm of total overhang (2187 mm on the late car). Scaled from the near-centred side photos, the front share is about 0.39 to 0.44, so roughly 850 to 950 mm. That is a photo estimate for modelling, not a measured value."
+  },
+  "rearOverhangMm": {
+   "value": null,
+   "unit": "mm",
+   "src": [],
+   "conf": null,
+   "note": "No published figure found. The same photo estimate gives roughly 1220 to 1320 mm. Take it off a real car with a plumb line before relying on it."
+  }
+ },
+ "changes": [
+  {
+   "id": "launch",
+   "date": "1996-03",
+   "system": "body",
+   "title": "XK8 launch",
+   "what": "The XK8 coupe was shown at Geneva in March 1996 and the convertible at New York in April. Sales began in October 1996 as MY1997, with the 4.0 AJ26 and ZF five-speed automatic.",
+   "appliesTo": {
+    "myFrom": 1997
+   },
+   "src": [
+    "jdht1997",
+    "jec",
+    "auscarXk"
+   ],
+   "conf": "factory",
+   "scope": "new-state"
+  },
+  {
+   "id": "crank-damper",
+   "date": "1997-02",
+   "system": "engine",
+   "title": "Crank damper locking revised",
+   "what": "Loose crankshaft dampers were addressed with Loctite or a split-cone lock on later engines. Bulletin 303-05 covers early VINs.",
+   "scope": "affected-range",
+   "appliesTo": {
+    "vinFrom": "001001",
+    "vinTo": "006380"
+   },
+   "src": [
+    "auscarBulletins"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "rear-subframe-bolts",
+   "date": "1997",
+   "system": "rear-suspension",
+   "title": "Rear subframe bolts changed",
+   "what": "Rear frame carrier bolts change at VIN 005495.",
+   "appliesTo": {
+    "vinFrom": "005495"
+   },
+   "src": [
+    "sng"
+   ],
+   "conf": "single",
+   "scope": "new-state"
+  },
+  {
+   "id": "zf-supersessions",
+   "date": "1997-1999",
+   "system": "transmission",
+   "title": "5HP24 assembly part changes",
+   "what": "The exchange gearbox number changes at VIN 009695, 018108 and 031303. Quote the VIN when ordering an exchange unit.",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "na"
+    ]
+   },
+   "src": [
+    "sng"
+   ],
+   "conf": "single",
+   "scope": "new-state"
+  },
+  {
+   "id": "cats",
+   "date": "1997",
+   "system": "front-suspension",
+   "title": "CATS adaptive damping",
+   "what": "CATS was an option on the XK8 and standard on the XKR. Jaguar's MY2001 option list ties it to 18-inch wheels and sport-tune steering. It uses adaptive dampers and an accelerometer. Wikipedia dates availability on the convertible to 1997.",
+   "appliesTo": {},
+   "src": [
+    "jag2001brochure",
+    "sng",
+    "wikiX100"
+   ],
+   "conf": "factory",
+   "note": "Identify it by the damper part numbers and the accelerometer, not by the wheels.",
+   "scope": "new-state"
+  },
+  {
+   "id": "coolant-pump",
+   "date": "1997-1998",
+   "system": "cooling",
+   "title": "Nylon impeller coolant pump",
+   "what": "Early pumps with nylon impellers can wear and break up, which risks overheating. Bulletin 303-60 covers replacement.",
+   "scope": "affected-range",
+   "appliesTo": {
+    "vinFrom": "001036",
+    "vinTo": "028000"
+   },
+   "src": [
+    "auscarBulletins"
+   ],
+   "conf": "single",
+   "note": "The source also prints a later range after 82001, which looks like a typing error."
+  },
+  {
+   "id": "xkr-launch",
+   "date": "1998-05",
+   "system": "induction",
+   "title": "XKR arrives, with Mercedes gearbox",
+   "what": "The supercharged XKR arrived in May 1998 from VIN 024687 (Moss MY1998.75). It uses an Eaton M112 supercharger, 9.0:1 compression, no VVT, and the Mercedes W5A580 five-speed in place of the ZF. North America got it for MY2000.",
+   "appliesTo": {
+    "induction": [
+     "sc"
+    ],
+    "vinFrom": "024687"
+   },
+   "src": [
+    "jag2003guide",
+    "jag2001brochure",
+    "mossVin",
+    "sng",
+    "jec",
+    "wikiAjv8"
+   ],
+   "conf": "factory",
+   "scope": "new-state"
+  },
+  {
+   "id": "servotronic-ii",
+   "date": "1998",
+   "system": "steering",
+   "title": "Servotronic II steering",
+   "what": "Servotronic II power steering replaced the first version across the range. No VIN break found.",
+   "appliesTo": {
+    "myFrom": 1998
+   },
+   "src": [
+    "wikiX100",
+    "jec"
+   ],
+   "conf": "corroborated",
+   "scope": "new-state"
+  },
+  {
+   "id": "tensioner-gen2",
+   "date": "1998-10",
+   "system": "engine",
+   "title": "Second design secondary tensioner",
+   "what": "Bulletin 303-30, dated 12/98, added a revised, spring assisted secondary tensioner to stop the cold start rattle on 1997-99 MY cars. A coil spring presses on the piston head, and a separate clip holds the piston part compressed for fitting. It kept the plastic body, so it can still crack with age and mileage.",
+   "engineNumberFrom": "98102106XX",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ]
+   },
+   "src": [
+    "jcnaWarning",
+    "auscarBulletins",
+    "jcnaComment",
+    "tsb-303-30",
+    "tsb-303-68"
+   ],
+   "conf": "factory",
+   "note": "Engine 98102106XX reads as a 21 October 1998 build, which is why the date here is October and the bulletin December. It is an engine number, not a VIN. Bolts 10-14 Nm. TSB 303-68 adds that new secondary tensioners need the shorter bolts.",
+   "scope": "new-state",
+   "bulletinDate": "1998-12"
+  },
+  {
+   "id": "aj26-to-aj27",
+   "date": "1998",
+   "system": "engine",
+   "title": "AJ26 to AJ27, continuous VVT",
+   "what": "Naturally aspirated cars moved to continuously variable inlet cam timing for MY1999. The change brought a higher output oil pump, an oil temperature sensor and a second cam sensor. To tell them apart: AJ26 has a vacuum dashpot on the throttle body and VVT solenoids on the front of the timing cover, AJ27 has neither, with solenoids through the cam covers and blanking plates on the timing cover.",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "na"
+    ],
+    "vinFrom": "031303"
+   },
+   "src": [
+    "jlEngine",
+    "sng",
+    "auscarBulletins",
+    "wikiAjv8",
+    "auscarXk"
+   ],
+   "conf": "corroborated",
+   "note": "VIN 031303 is where parts and bulletins break, but a Jag-Lovers specialist warns that only the engine number is reliable. Wikipedia also says the supercharged engine took AJ27 specification for 2000. Service exchange engines may have changed what is fitted.",
+   "scope": "new-state"
+  },
+  {
+   "id": "front-discs-325",
+   "date": "1999",
+   "system": "brakes",
+   "title": "Front discs 305 mm to 325 mm",
+   "what": "Naturally aspirated XK8 front discs grew from 305 x 28 mm to 325 x 28.5 mm with matching calipers from VIN 037348, the same front brakes as the XKR. Supercharged cars already had 325 mm.",
+   "appliesTo": {
+    "induction": [
+     "na"
+    ],
+    "vinFrom": "037348"
+   },
+   "src": [
+    "sng",
+    "jag2003guide",
+    "tsb-206-08"
+   ],
+   "conf": "factory",
+   "note": "TSB 206-08, dated 02/00. The date here is from where the VIN sits in MY1999. The Brembo catalogue break at VIN 031303 does not apply to naturally aspirated cars. 16-inch wheels no longer fit from this VIN.",
+   "scope": "new-state"
+  },
+  {
+   "id": "xk8-roof-fluid",
+   "date": "1999",
+   "system": "roof",
+   "title": "Roof hydraulic fluid",
+   "what": "Pentosin CHF 11S replaced the earlier fluid from VIN 037189 after gelling caused slow or erratic roof action.",
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ],
+    "vinFrom": "037189"
+   },
+   "src": [
+    "auscarBulletins"
+   ],
+   "conf": "single",
+   "scope": "new-state"
+  },
+  {
+   "id": "wishbone-bush",
+   "date": "1999",
+   "system": "front-suspension",
+   "title": "Front lower wishbone bush revised",
+   "what": "Front bushes could split on cars in the range below. The revised part is MNE 1360CA.",
+   "scope": "affected-range",
+   "appliesTo": {
+    "vinFrom": "034426",
+    "vinTo": "A06104"
+   },
+   "src": [
+    "auscarBulletins",
+    "sng"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "my2000-a-series",
+   "date": "1999",
+   "system": "body",
+   "title": "New A-series VINs and AJ27S",
+   "what": "VINs moved from six digits to A plus five digits for MY2000. SNG breaks many parts at A00083. Wikipedia says the supercharged engine took AJ27 specification at this point.",
+   "appliesTo": {
+    "vinFrom": "A00001"
+   },
+   "src": [
+    "mossVin",
+    "sng",
+    "wikiAjv8"
+   ],
+   "conf": "corroborated",
+   "scope": "new-state"
+  },
+  {
+   "id": "abs-plus",
+   "date": "1999-10",
+   "system": "brakes",
+   "title": "ABS Plus update",
+   "what": "An October 1999 update added ABS Plus, seat belt pretensioners and rain sensing wipers on the XKR.",
+   "appliesTo": {
+    "myFrom": 2000
+   },
+   "src": [
+    "auscarXk"
+   ],
+   "conf": "single",
+   "scope": "new-state"
+  },
+  {
+   "id": "brake-switch",
+   "date": "2000",
+   "system": "brakes",
+   "title": "Brake pedal switch improved",
+   "what": "Cars before VIN A03098 can stick in Park or show FAILSAFE from a faulty pedal switch. The improved switch fits from A03098.",
+   "appliesTo": {
+    "vinFrom": "A03098"
+   },
+   "src": [
+    "auscarBulletins"
+   ],
+   "conf": "single",
+   "scope": "new-state"
+  },
+  {
+   "id": "r-performance-brembo",
+   "date": "2000-07",
+   "system": "brakes",
+   "title": "Brembo R Performance brakes",
+   "what": "Brembo aluminium four-piston brakes arrived as an XKR R Performance option. They became standard on the XKR for MY2003 at 355 mm front and 330 mm rear, and optional on the XK8 with 20-inch wheels.",
+   "appliesTo": {
+    "induction": [
+     "sc"
+    ]
+   },
+   "src": [
+    "auscarXk",
+    "jag2003guide",
+    "km77Info",
+    "goauto2002",
+    "jag2006brochure",
+    "bremboConvR42"
+   ],
+   "conf": "factory",
+   "note": "The 355 and 330 mm sizes are factory for MY2003. For the 2000 option, one source lists 355 x 32 front and 300 x 28 rear. km77 gives 355 x 32 and 330 x 28. The 2006 US brochure gives 13.98 x 0.87 in (22 mm) front, which conflicts on thickness. Brembo's own replacement catalogue lists only a 305 x 20 mm rear for the R 4.2, which does not match the factory 330 mm. Bulletin 206-11 covers vibration on Brembo cars after A22191.",
+   "scope": "new-state"
+  },
+  {
+   "id": "nikasil-to-steel",
+   "date": "2000-08",
+   "system": "engine",
+   "title": "Nikasil bores to steel liners",
+   "what": "High sulphur fuel wore the Nikasil bore coating and caused compression loss. Jaguar replaced many engines under warranty, then switched to steel liners on 18 August 2000. Treat any engine numbered 000818xxxx as unconfirmed.",
+   "engineNumberFrom": "000818xxxx",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ]
+   },
+   "src": [
+    "auscarBulletins",
+    "mossVin",
+    "jlEngine",
+    "supercarsGuide",
+    "wikiAjv8",
+    "pistonheads"
+   ],
+   "conf": "community",
+   "note": "The figure 0008181043 traces to the JagRepair article and PistonHeads, neither factory, and Moss prints only 000818xxx. SNG breaks the piston ring kit JLM20929 to JLM21635 at 0008180925 (NA) and 0008180854 (SC), before 1043. No Jaguar document with the liner break was found. Moss says iron liners while bulletin sources say steel. Classic & Sports Car, as quoted by a search result, gives October 1999, and Motorious says about 2000. Engine number is the test, plus the warranty history file, because a replacement engine can sit in an early car. No VIN equivalent exists: a June 2000 engine in a MY2001 car still had Nikasil.",
+   "scope": "new-state"
+  },
+  {
+   "id": "my2001-freshening",
+   "date": "2000-11",
+   "system": "body",
+   "title": "MY2001 mid-cycle update",
+   "what": "Jaguar calls MY2001 a mid-cycle freshening. It starts at VIN A11051 with new tail lights, bumper and wheel changes and improved safety equipment.",
+   "appliesTo": {
+    "vinFrom": "A11051"
+   },
+   "src": [
+    "jag2003guide",
+    "auscarXk",
+    "mossVin",
+    "vsb"
+   ],
+   "conf": "single",
+   "scope": "new-state",
+   "note": "Factory split on the first VIN: the Vehicle Specifications book starts MY2001 at A11140; TSBs 211-06, 303-27 and 303-59 use A11051, and 303-52 ends MY2000 at A11050. Treat A11051 to A11139 as ambiguous."
+  },
+  {
+   "id": "tensioner-gen3",
+   "date": "2001-08",
+   "system": "engine",
+   "title": "Metal tensioners, new chains and sprockets",
+   "what": "From engine 0108130000 the 4.0 took all-metal third generation tensioners, revised secondary chains, new crank and cam sprockets, new tensioner blades and guides, and a revised crankshaft. Parts lists stop the old items at engine 0108122359. Older engines can be upgraded, and when moving from plastic tensioners Moss says two JFB10607B bolts are needed per tensioner.",
+   "engineNumberFrom": "0108130000",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ]
+   },
+   "src": [
+    "sng",
+    "auscarBulletins",
+    "jlEngine",
+    "mossBlade",
+    "mossC2a1512"
+   ],
+   "conf": "corroborated",
+   "note": "A Jag-Lovers specialist also calls these multi-row chains. The end of bulletin 303-68 at VIN A24195 fits this date, and so does the MY2002 start. A JCNA post reported 4.2 engines as late as 2005 still carrying second design tensioners, and aluminium housing service parts were announced in early 2005, so inspect under the cam cover on any car where history is missing.",
+   "scope": "new-state"
+  },
+  {
+   "id": "front-pads-a24196",
+   "date": "2001",
+   "system": "brakes",
+   "title": "Front pad part change",
+   "what": "Standard front pads change from JLM1829 to JLM21917 at VIN A24196.",
+   "appliesTo": {
+    "vinFrom": "A24196"
+   },
+   "src": [
+    "sng"
+   ],
+   "conf": "single",
+   "scope": "new-state"
+  },
+  {
+   "id": "my2002-trim",
+   "date": "2002",
+   "system": "body",
+   "title": "Clear lens headlamps and trim",
+   "what": "Clear lens front headlamps arrived along with new colours, wheels and badging. No VIN break found.",
+   "appliesTo": {
+    "myFrom": 2002
+   },
+   "src": [
+    "wikiX100"
+   ],
+   "conf": "single",
+   "scope": "new-state"
+  },
+  {
+   "id": "my2003-engine",
+   "date": "2002-09",
+   "system": "engine",
+   "title": "4.2 litre AJ34 replaces 4.0",
+   "what": "MY2003 brought the 86 x 90.3 mm 4196 cc AJ34 in both forms, with a stiffer block and bedplate, a new sump, new inlet cam, injectors and a smaller ECM. There were 880 new parts out of 2400 on the car. All cars from VIN A30645.",
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ],
+    "vinFrom": "A30645"
+   },
+   "src": [
+    "jag2003guide",
+    "sng",
+    "mossVin",
+    "goauto2002"
+   ],
+   "conf": "factory",
+   "note": "The factory guide prints the first VIN as A30654. Moss, SNG and bulletins all use A30645. GoAuto adds oil-cooled pistons and a 4 mm longer stroke.",
+   "scope": "new-state"
+  },
+  {
+   "id": "my2003-gearbox",
+   "date": "2002-09",
+   "system": "transmission",
+   "title": "ZF 6HP26 replaces both five-speeds",
+   "what": "The ZF 6HP26 six-speed replaced both the ZF 5HP24 and the Mercedes W5A580 from MY2003. The controller is built into the gearbox, and the J-gate manual side became electronic. A 3.06:1 final drive is given for both XK8 and XKR.",
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ],
+    "vinFrom": "A30645"
+   },
+   "src": [
+    "jag2003guide"
+   ],
+   "conf": "factory",
+   "note": "Claims that the 4.2 used a Mercedes box are wrong. SNG lists 4.2 exchange units breaking at A36998 and A41780 (its text prints A26998, which looks like a typing error).",
+   "scope": "new-state"
+  },
+  {
+   "id": "my2003-systems",
+   "date": "2002-09",
+   "system": "fuel",
+   "title": "MY2003 systems changes",
+   "what": "MY2003 also brought EGR on the 4.2, a returnless fuel system with a new tank, one fuel pump on supercharged cars instead of two, a pedal position sensor at the bulkhead replacing the one in the throttle body, DSC, Panic Brake Assist, an updated immobiliser and HID headlights.",
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ],
+    "vinFrom": "A30645"
+   },
+   "src": [
+    "jag2003guide"
+   ],
+   "conf": "factory",
+   "scope": "new-state"
+  },
+  {
+   "id": "my2003-brakes",
+   "date": "2002-09",
+   "system": "brakes",
+   "title": "XKR gets Brembo as standard",
+   "what": "XKR models use Brembo 355 mm front and 330 mm rear rotors, with silver calipers carrying the R logo. Cross drilled rotors are optional. XK8 rotors stay at 325 and 305 mm.",
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ],
+    "vinFrom": "A30645"
+   },
+   "src": [
+    "jag2003guide"
+   ],
+   "conf": "factory",
+   "scope": "new-state"
+  },
+  {
+   "id": "reverse-recall",
+   "date": "2004-01",
+   "system": "transmission",
+   "title": "Recall on MY2002-03 automatics",
+   "what": "Australian recall PRA 2004/6743: the gearbox may select Reverse with Drive showing while stationary, with no warning.",
+   "appliesTo": {
+    "myFrom": 2002,
+    "myTo": 2003
+   },
+   "src": [
+    "auscarBulletins"
+   ],
+   "conf": "single",
+   "note": "The source covers Australian-delivered cars only and gives no VIN range. Check whether UK cars were included.",
+   "scope": "new-state"
+  },
+  {
+   "id": "wheels",
+   "date": "1997-2006",
+   "system": "wheels",
+   "title": "Wheel range",
+   "what": "Jaguar listed 17-inch Lamina 8J on the XK8, 18-inch Impeller 8J and 9J as the CATS option, and 18-inch Double Five 8J and 9J on the XKR at MY2001. SNG lists Gemini, Flute, Centaur, Aris, Hydra, Milan, Apollo, Atlas, Detroit, Paris, Montreal, Sepang and RX2. The late US cars use Aris on the XK8 and Hydra on the XKR, with Atlas 19-inch and 20-inch Detroit, Montreal and Sepang options. 20-inch fitment is 9J front and 10J rear with 255/35 and 285/30 tyres.",
+   "appliesTo": {},
+   "src": [
+    "jag2001brochure",
+    "jag2006brochure",
+    "sng"
+   ],
+   "conf": "factory",
+   "note": "No full table tying each wheel to model years was found. A full-size spare is not available with 18-inch wheels on the MY2001 list.",
+   "scope": "new-state"
+  },
+  {
+   "id": "main-bearing-bolts",
+   "date": "2003-2004",
+   "system": "engine",
+   "title": "Main bearing bolt and converter setscrew changes",
+   "what": "The 114 mm main bearing bolt changes at VIN A40154, and the torque converter setscrew changes at A36273.",
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ]
+   },
+   "src": [
+    "sng"
+   ],
+   "conf": "single",
+   "scope": "new-state"
+  },
+  {
+   "id": "facelift-2005",
+   "date": "2004",
+   "system": "body",
+   "title": "Final facelift",
+   "what": "The last visual update has bigger front and rear spoilers, a redesigned grille and new wheels. SNG breaks grille, bumper, trim and glass finisher parts at VIN A40265, which Moss lists as MY2004.5. Overall length rises to 188.0 in (4775 mm) on the 2006 US brochure.",
+   "appliesTo": {
+    "vinFrom": "A40265"
+   },
+   "src": [
+    "sng",
+    "mossVin",
+    "wikiX100",
+    "auscarXk",
+    "jag2006brochure"
+   ],
+   "conf": "corroborated",
+   "note": "Sources date this as spring 2004 or January 2005. Trust the VIN break for parts.",
+   "scope": "new-state"
+  },
+  {
+   "id": "end-of-production",
+   "date": "2005-05",
+   "system": "body",
+   "title": "End of production",
+   "what": "The last X100 was built at Browns Lane on 27 May 2005 and went to the Jaguar Daimler Heritage Trust. Sales ran into MY2006, which starts at VIN A44686. Totals are about 90,000 to 91,400 cars depending on source.",
+   "appliesTo": {
+    "vinFrom": "A44686"
+   },
+   "src": [
+    "wikiX100",
+    "jec",
+    "mossVin",
+    "sng",
+    "pistonheads"
+   ],
+   "conf": "corroborated",
+   "scope": "new-state"
+  }
+ ],
+ "changesScopeNote": "scope new-state: appliesTo is the cars that have the change. scope affected-range: appliesTo is the cars at risk from the fault the change addressed.",
+ "firing": {
+  "order": "1A-1B-4A-2A-2B-3A-3B-4B",
+  "numericJaguarBankStyle": "1-5-4-2-6-3-7-8",
+  "numericAlternatingStyle": "1-2-7-3-4-5-6-8",
+  "banks": [
+   {
+    "name": "A bank",
+    "side": "Right-hand bank, seen from the driver's seat looking forward",
+    "cylinders": [
+     "1A",
+     "2A",
+     "3A",
+     "4A"
+    ],
+    "front": "1A",
+    "obdBank": 1
+   },
+   {
+    "name": "B bank",
+    "side": "Left-hand bank, seen from the driver's seat looking forward",
+    "cylinders": [
+     "1B",
+     "2B",
+     "3B",
+     "4B"
+    ],
+    "front": "1B",
+    "obdBank": 2
+   }
+  ],
+  "howToCount": "Each bank counts from the front of the engine, so 1A and 1B are nearest the radiator and 4A and 4B are nearest the bulkhead. Right and left are the car's own right and left, on RHD and LHD alike, so on a UK car the A bank is on the driver's side.",
+  "note": "The written order comes from a thread quoting a Jaguar technical guide. Wikipedia gives AJ26 as 1-2-7-3-4-5-6-8 and says the AJ37 string 1-5-4-2-6-3-7-8 is the same order with different numbering. Both strings land on the same physical sequence if the first counts 1A, 1B, 2A, 2B and so on, and the second counts 1 to 4 on A bank and 5 to 8 on B bank. That mapping is our reasoning, not a quote. A Jag-Lovers reply puts 1-4 on the right bank and 5-8 on the left with 1 and 5 at the front, and a Jaguar Owners Club thread is unsure which side is bank 1. Before chasing a cylinder code such as P0305, confirm the numbering in JTIS or with a coil swap: move the coil and see if the code follows.",
+  "src": [
+   "engTips",
+   "wikiAjv8",
+   "sng",
+   "jag2003guide",
+   "jlCylinders",
+   "joc"
+  ],
+  "conf": "corroborated"
+ }
+}

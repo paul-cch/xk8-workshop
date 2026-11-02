@@ -1,0 +1,4500 @@
+{
+ "sources": {
+  "jag-battery": {
+   "title": "Battery Care Manual: vehicle quiescent current testing",
+   "url": "http://www.jagrepair.com/images/AutoRepairPhotos/Current%20Testing.pdf",
+   "publisher": "Jaguar Land Rover (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "jag-dtc-03": {
+   "title": "DTC Summaries: Jaguar XK-TYPE 2003 Model Year",
+   "url": "https://host.jcna.com/sites/default/files/XKTYPE.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JCNA)",
+   "kind": "factory"
+  },
+  "jag-dtc-9702": {
+   "title": "DTC Summaries: XJ Sedan Range, XK8 Range through 2002 MY and XJS Range",
+   "url": "https://host.jcna.com/sites/default/files/NONSTYPE.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JCNA)",
+   "kind": "factory"
+  },
+  "jcna-6hp": {
+   "title": "XK8 2003 gearbox fault and hard shifting",
+   "url": "https://host.jcna.com/comment/3184",
+   "publisher": "JCNA forum",
+   "kind": "forum"
+  },
+  "jcna-abs": {
+   "title": "XK8 ABS light",
+   "url": "https://jcna.com/comment/1914",
+   "publisher": "JCNA forum",
+   "kind": "forum"
+  },
+  "jcna-cool": {
+   "title": "XK8 99 and 2000 engine coolant leaks",
+   "url": "https://jcna.com/comment/5098",
+   "publisher": "JCNA forum",
+   "kind": "forum"
+  },
+  "jcna-start": {
+   "title": "2000 XK8 convertible won't start",
+   "url": "https://jcna.com/comment/2407",
+   "publisher": "JCNA forum",
+   "kind": "forum"
+  },
+  "jcna-tens": {
+   "title": "R: Timing chain tensioner",
+   "url": "https://jcna.com/comment/9751",
+   "publisher": "JCNA forum",
+   "kind": "forum"
+  },
+  "jec-drain": {
+   "title": "Battery drain; testing the current draw",
+   "url": "https://forums.jec.org.uk/viewtopic.php?p=47591",
+   "publisher": "JEC Forums",
+   "kind": "forum"
+  },
+  "jec-hood": {
+   "title": "Convertible hood oil",
+   "url": "https://forums.jec.org.uk/viewtopic.php?p=64376",
+   "publisher": "JEC Forums",
+   "kind": "forum"
+  },
+  "jec-valley": {
+   "title": "Head gaskets replacement costs (valley pipe note)",
+   "url": "https://forums.jec.org.uk/viewtopic.php?p=83951",
+   "publisher": "JEC Forums",
+   "kind": "forum"
+  },
+  "jl-absback": {
+   "title": "2001 XK8 back home again",
+   "url": "https://forums.jag-lovers.com/t/2001-xk8-back-home-again-yes-they-can-be-brought-back-to-life-for-a-price/393795",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-abspump": {
+   "title": "1997 XK8 convertible ABS pump replacement",
+   "url": "https://forums.jag-lovers.com/t/1997-xk8-convertable-abs-pump-replacement/357625",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-buy": {
+   "title": "[xk8] Need advice on purchasing a used XK8",
+   "url": "https://forums.jag-lovers.com/t/xk8-need-advice-on-purchasing-a-used-xk8/247662",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-clunk": {
+   "title": "Metal noise while driving (rear clunk, older Jaguar)",
+   "url": "https://forums.jag-lovers.com/t/metal-noise-while-driving/431084",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-gearbox": {
+   "title": "[xk8] Gearbox symptoms and diagnosis help",
+   "url": "https://forums.jag-lovers.com/t/xk8-gearbox-symptoms-and-diagnosis-help/249041",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-hes": {
+   "title": "[xk8] Hesitation and engine warning light",
+   "url": "https://forums.jag-lovers.com/t/xk8-hesitation-and-engine-warning-light/246969",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-limp": {
+   "title": "Limp mode, tried almost everything",
+   "url": "https://forums.jag-lovers.com/t/limp-mode-tried-almost-everything/392659",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-p1121": {
+   "title": "P1121 throttle body",
+   "url": "https://forums.jag-lovers.com/t/p1121-throttle-body-accelerator-demand-sensor-a-circuit-range-performance/423576",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-rad": {
+   "title": "[xk8] Radiator and hoses on 97 XK8",
+   "url": "https://forums.jag-lovers.com/t/xk8-radiator-and-hoses-on-97-xk8/247142",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-roof": {
+   "title": "Help with a problem (XK8 top latch)",
+   "url": "https://forums.jag-lovers.com/t/help-with-a-problem/367755",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-rough": {
+   "title": "Rough ride on bumpy roads",
+   "url": "https://forums.jag-lovers.com/t/rough-ride-on-bumpy-roads/366704",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-rp": {
+   "title": "Disconnect diagnostics system (restricted performance)",
+   "url": "https://forums.jag-lovers.com/t/disconnect-diagnostics-system/375805",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-seminar": {
+   "title": "News from the JEC X308/XK8 seminar: notes on a talk by David Marks, independent Jaguar specialist, 2005",
+   "url": "https://forums.jag-lovers.com/t/x300-news-from-x308-seminar/225029",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-speedo": {
+   "title": "Speedometer and odometer no longer working",
+   "url": "https://forums.jag-lovers.com/t/speedometer-and-odometer-no-longer-working/375509",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-tens": {
+   "title": "[xk8] Tensioners",
+   "url": "https://forums.jag-lovers.com/t/xk8-tensioners/249550",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-thermo": {
+   "title": "[xk8] Replacing the thermostat housing",
+   "url": "https://forums.jag-lovers.com/t/xk8-replacing-the-thermostat-housing-am-i-missing-a-trick/248814",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jr-abs": {
+   "title": "Jaguar ABS repairs",
+   "url": "http://www.jagrepair.com/ABSModuleRepairs.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-ac": {
+   "title": "A/C compressor replacement and flush",
+   "url": "http://www.jagrepair.com/JaguarXK8CompressorReplacementFlush.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-bclutch": {
+   "title": "Transmission ZF 5HP24 repair",
+   "url": "http://www.jagrepair.com/TransmissionZF5HP24.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-brake": {
+   "title": "XK8 brake switch replacement",
+   "url": "http://www.jagrepair.com/XK8BrakeSwitchReplacement.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-coolprobe": {
+   "title": "Coolant tank level testing",
+   "url": "http://www.jagrepair.com/CoolantTankLevelTesting1999xk8.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-crossover": {
+   "title": "Water pump and crossover pipe, XK8",
+   "url": "http://www.jagrepair.com/WaterPumpCrossoverPipexk8.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-gearbox": {
+   "title": "XK8 transmission trouble",
+   "url": "http://www.jagrepair.com/JaguarXK8TransmissionTrouble.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-heaterpump": {
+   "title": "Auxiliary heater pump",
+   "url": "http://www.jagrepair.com/HeaterPumpMotor.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-hyd": {
+   "title": "XK8 and XKR hydraulic system evaluation",
+   "url": "http://www.jagrepair.com/HydSystemEvaluationXK8XKR.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-lean": {
+   "title": "P0171 and P0174 code notes",
+   "url": "http://www.jagrepair.com/images/AutoRepairPhotos/P0171.pdf",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-misfire": {
+   "title": "P0300 to P0308 code notes",
+   "url": "http://www.jagrepair.com/images/AutoRepairPhotos/P0300%20to%20P0308.pdf",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-nik": {
+   "title": "Nikasil engine blocks",
+   "url": "http://www.jagrepair.com/NikasilEngineBlocks.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-nikstart": {
+   "title": "Nikasil no start, cylinder washing",
+   "url": "http://www.jagrepair.com/NikasilNoStartCylinderWashing.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-nostart": {
+   "title": "Jaguar XK, XJ and S-Type no start",
+   "url": "http://www.jagrepair.com/JaguarXKXJSTypeNoStart.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-parasitic": {
+   "title": "Jaguar parasitic test",
+   "url": "http://www.jagrepair.com/JaguarParasiticTest.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-plugs": {
+   "title": "XK8 plug replacement",
+   "url": "http://www.jagrepair.com/PlugReplacementXK8.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-remote": {
+   "title": "Remote for 1999 XK8",
+   "url": "http://www.jagrepair.com/Remotefor1999xk8.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-roof": {
+   "title": "Jaguar XK8 roof troubleshooting",
+   "url": "http://www.jagrepair.com/JaguarXK8RoofTroubleshooting%201997-2006.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-rp": {
+   "title": "Restricted performance, 1999 XK8",
+   "url": "http://www.jagrepair.com/RestrictedPerformance.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-seat": {
+   "title": "Seat control module repair",
+   "url": "http://www.jagrepair.com/SeatControlModuleRepairXK8.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-tbplug": {
+   "title": "Throttle body plugs, P0121",
+   "url": "http://www.jagrepair.com/ThrottleBodyPlugs.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-thermo": {
+   "title": "Thermostat housing, 4.0 XK8",
+   "url": "http://www.jagrepair.com/ThermostatHousing4XK8.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-window": {
+   "title": "XK8 window reset",
+   "url": "http://www.jagrepair.com/XK8windowReset.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "moss-mount": {
+   "title": "XK8 and XKR spring/damper mount repair and upgrade kit",
+   "url": "https://mossmotors.com/mja2170bd-1-xk8-and-xkr-spring-damper-mount-repair-and-upgrade-kit",
+   "publisher": "Moss Motors",
+   "kind": "vendor"
+  },
+  "motorious": {
+   "title": "Jaguar XK8/XKR buying guide",
+   "url": "https://www.motorious.com/articles/highlights/jaguar-xk8-xkr-buying-guide/",
+   "publisher": "Motorious",
+   "kind": "reference"
+  },
+  "octane": {
+   "title": "Jaguar XK8 and XKR (X100) buying guide",
+   "url": "https://www.octane-magazine.com/articles/jaguar-xk8-xkr-x100-buying-guide-history-and-review/",
+   "publisher": "Octane",
+   "kind": "reference"
+  },
+  "ph-body": {
+   "title": "Jaguar X100 buying guide: body",
+   "url": "https://www.pistonheads.com/news/ph-buying-guide-contents/jaguar-x100-buying-guide-body/27198",
+   "publisher": "PistonHeads",
+   "kind": "reference"
+  },
+  "ph-chassis": {
+   "title": "Jaguar X100 buying guide: rolling chassis",
+   "url": "https://www.pistonheads.com/features/ph-buying-guides/ph-buying-guide-jaguar-xk8-xkr-x100/27197",
+   "publisher": "PistonHeads",
+   "kind": "reference"
+  },
+  "ph-interior": {
+   "title": "Jaguar X100 buying guide: interior",
+   "url": "https://www.pistonheads.com/features/ph-buying-guides/ph-buying-guide-jaguar-xk8-xkr-x100/27199",
+   "publisher": "PistonHeads",
+   "kind": "reference"
+  },
+  "ph-powertrain": {
+   "title": "Jaguar X100 buying guide: powertrain",
+   "url": "https://www.pistonheads.com/features/ph-buying-guides/ph-buying-guide-jaguar-xk8-xkr-x100/27196",
+   "publisher": "PistonHeads",
+   "kind": "reference"
+  },
+  "tsb-100-17": {
+   "title": "Jaguar Service Technical Bulletin 100-17: Engine oil capacity, increased level",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/100General%20Info/100-17%20oil%20level.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-100-23": {
+   "title": "Jaguar Service Technical Bulletin 100-23: Drive belt noise after cold start, XKR",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/100General%20Info/100-23%20belt%20noise.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-100-36": {
+   "title": "Jaguar Service Technical Bulletin 100-36: Engine drive belt noise diagnosis",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/100General%20Info/100-36%20belt%20noise%20diag.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-204-01": {
+   "title": "Jaguar Service Technical Bulletin 204-01: Front suspension noise diagnosis",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/204-01%20XK%20susp%20noise.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-204-03": {
+   "title": "Jaguar Service Technical Bulletin 204-03: Knocking noise, rear subframe bushing",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/204Suspension/204-03%20XK%20rear%20knock.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-204-10": {
+   "title": "Jaguar Service Technical Bulletin 204-10: Rear hub carrier fulcrum bolts",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/204Suspension/204-10%20rear%20fulcrum%20bolt.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-204-15": {
+   "title": "Jaguar Service Technical Bulletin 204-15: Vibration felt through steering wheel or seats",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/204Suspension/204-15%20wheel%20shimmy.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-204-17": {
+   "title": "Jaguar Service Technical Bulletin 204-17: Vibration and shimmy, tire radial force variation",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/204Suspension/204-17am%20wheel%20shimmy.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-204-S499": {
+   "title": "Jaguar Service Technical Bulletin 204-S499: Lower wishbone front bushing change of specification",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/204Suspension/204-S499am%20bushing%20specs.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-205-03": {
+   "title": "Jaguar Service Technical Bulletin 205-03: Oil leak, pinion oil seal",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/205Driveline/205-03%20pinion%20leak.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-206-01AM": {
+   "title": "Jaguar Service Technical Bulletin 206-01AM: Parking brake poor release",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/206Brakes/206-01AM%20park%20brake%20release.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-206-04": {
+   "title": "Jaguar Service Technical Bulletin 206-04: Brake disc vibration diagnosis",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/206Brakes/206-04%20brake%20vibration.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-206-07": {
+   "title": "Jaguar Service Technical Bulletin 206-07: Selector lever difficult shift from Park, brake lamps remain lit, failsafe message",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/206-07AM3.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-206-11": {
+   "title": "Jaguar Service Technical Bulletin 206-11: Vibration when braking, Brembo brakes",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/206Brakes/206-11%20brake%20vibration.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-211-01": {
+   "title": "Jaguar Service Technical Bulletin 211-01: Steering rack leak at transfer pipe union nut",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/211Streering/211-01%20steering%20rack%20leak.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-211-02am": {
+   "title": "Jaguar Service Technical Bulletin 211-02am: Steering rack oil seal and pinion valve housing",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/211Streering/211-02am%20steering%20pinion%20seal.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-211-05": {
+   "title": "Jaguar Service Technical Bulletin 211-05: Noisy Servotronic II steering racks",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/211Streering/211-05%20noisey%20steering.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-211-06": {
+   "title": "Jaguar Service Technical Bulletin 211-06: Steering rack knocking or rattling",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/211Streering/211-06%20steering%20knock.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-05": {
+   "title": "Jaguar Service Technical Bulletin 303-05: Crankshaft damper loose",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-05%20crank%20damper%20loose.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-11a": {
+   "title": "Jaguar Service Technical Bulletin 303-11a: Poor heater performance, coolant specification change",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-11Am%20Poor%20Heater.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-14": {
+   "title": "Jaguar Service Technical Bulletin 303-14: Low coolant level warning lamp",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-14%20Low%20Coolant%20Level.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-15": {
+   "title": "Jaguar Service Technical Bulletin 303-15: Cooling system bleed lines",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-15.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-26": {
+   "title": "Jaguar Service Technical Bulletin 303-26: Oil weep, rear face of cylinder heads",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-26%20oil%20weep%20from%20head.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-29": {
+   "title": "Jaguar Service Technical Bulletin 303-29: Idle quality, spark plugs revised gaps",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-29%20spark%20plug%20gap.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-30": {
+   "title": "Jaguar Service Technical Bulletin 303-30: Noise during start up, install revised timing chain tensioners",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-30%20Revised%20Timing%20Chain%20Tensioners.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-35a": {
+   "title": "Jaguar Service Technical Bulletin 303-35a: Difficult cold start, ECM flash reprogramming",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-35Am2%20ECM%20Flash%20Reprogramming.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-39": {
+   "title": "Jaguar Service Technical Bulletin 303-39: Long cranking, difficult warm or hot start",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-39am%20Long%20Cranking.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-43": {
+   "title": "Jaguar Service Technical Bulletin 303-43: Drivability diagnosis, AJ26 engines",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-43%20AJ26%20Drivability%20Diagnosis.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-44": {
+   "title": "Jaguar Service Technical Bulletin 303-44: Spark plug corona stain",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-44%20Corona%20Stain.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-46": {
+   "title": "Jaguar Service Technical Bulletin 303-46: MIL, DTC P0442, P0455, P0446, canister close valve",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-46.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-47": {
+   "title": "Jaguar Service Technical Bulletin 303-47: Hesitation, surging, detonation, poor throttle response flowcharts",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-47%20AJ26%20Diagnostic%20Flowcharts.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-48a": {
+   "title": "Jaguar Service Technical Bulletin 303-48a: Coolant leakage, heater hoses",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-48am.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-49": {
+   "title": "Jaguar Service Technical Bulletin 303-49: Restricted Performance displayed, AJ27 SC engines",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-49%20Restricted%20Performance.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-50": {
+   "title": "Jaguar Service Technical Bulletin 303-50: Engine oil leakage, loose oil cooler lines",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-50%20Engine%20Oil%20Leakage.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-51": {
+   "title": "Jaguar Service Technical Bulletin 303-51: Oil leaks from oil filter",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-51%20Leaks%20From%20Oil%20Filter.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-52": {
+   "title": "Jaguar Service Technical Bulletin 303-52: Difficult or non-start and hesitation, AJ27 NA engines",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-52%20Difficult%20Or%20Non-Start.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-53": {
+   "title": "Jaguar Service Technical Bulletin 303-53: Hesitation when cold, AJ27 SC engines",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-53%20Hesitation%20When%20Cold.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-54": {
+   "title": "Jaguar Service Technical Bulletin 303-54: Overheating, thermostat stuck closed",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-54%20Overheating.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-55": {
+   "title": "Jaguar Service Technical Bulletin 303-55: Hard start or non start, AJ26 diagnostic flowcharts",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-55%20Hard%20Start.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-57a": {
+   "title": "Jaguar Service Technical Bulletin 303-57a: Loss of engine performance, intake ducts loose",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-57am2%20Loss%20Of%20Engine%20Performance.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-58": {
+   "title": "Jaguar Service Technical Bulletin 303-58: Check engine MIL, DTC P0121, connector material mismatch",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-58.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-59": {
+   "title": "Jaguar Service Technical Bulletin 303-59: Chirping noise from accessory drive belt",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-59%20Misaligned%20Belt.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-60": {
+   "title": "Jaguar Service Technical Bulletin 303-60: Coolant pumps, identifying impeller material",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-60am.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-61": {
+   "title": "Jaguar Service Technical Bulletin 303-61: Fuel vapor odor in interior, convertibles",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-61%20Fuel%20Vapor%20Odor.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-62": {
+   "title": "Jaguar Service Technical Bulletin 303-62: Ticking noise from left side footwell",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-62am%20Ticking%20Noise.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-63": {
+   "title": "Jaguar Service Technical Bulletin 303-63: Fuel smell or DTC P0455 stored",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-63.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-66": {
+   "title": "Jaguar Service Technical Bulletin 303-66: Engine pinging, check fuel trims",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-66%20Engine%20Pinging.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-67": {
+   "title": "Jaguar Service Technical Bulletin 303-67: Rough idle and hesitation, contaminated injectors",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-67%20Rough%20Idle.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-68": {
+   "title": "Jaguar Service Technical Bulletin 303-68: Start-up and idle rattle, primary or secondary chain tensioner",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-68%20Start-up%20and%20Idle%20Rattle.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-S490a": {
+   "title": "Jaguar Service Technical Bulletin 303-S490a: Alternator mounting bracket contact, replace drive belt",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-S490Am%20Alternator%20Mounting%20Bracket.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-S498": {
+   "title": "Jaguar Service Technical Bulletin 303-S498: Engine Fail Safe displayed, replace throttle body",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-S498am-1.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-S514": {
+   "title": "Jaguar Service Technical Bulletin 303-S514: Operation of throttle while in closed position",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-S514am%20Operation%20Of%20Throttle.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-S841": {
+   "title": "Jaguar Service Technical Bulletin 303-S841: Corroded filter vent pipe, canister close valve",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-S841.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-S846a": {
+   "title": "Jaguar Service Technical Bulletin 303-S846a: Oil cooler feed pipe and hose failure",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-S846am%20Oil%20Hose%20Failure.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-307-01": {
+   "title": "Jaguar Service Technical Bulletin 307-01: Selector lever cable adjustment",
+   "url": "http://www.jagrepair.com/images/TSB/307-01-1.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-307-11": {
+   "title": "Jaguar Service Technical Bulletin 307-11: ZF 5HP24 replace transmission, recall R478",
+   "url": "http://www.jagrepair.com/images/TSB/307-11.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-307-14": {
+   "title": "Jaguar Service Technical Bulletin 307-14: Shift quality issues, harsh engagement with engine cold",
+   "url": "http://www.jagrepair.com/images/TSB/NewDocuments4-23-13/307-14.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-307-15": {
+   "title": "Jaguar Service Technical Bulletin 307-15: MIL, DTC P0741, replace torque converter",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/307-15.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-310-06a": {
+   "title": "Jaguar Service Technical Bulletin 310-06a: Carbon deposits on throttle blade",
+   "url": "http://www.jagrepair.com/images/TSB/310-06am3.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-310-09": {
+   "title": "Jaguar Service Technical Bulletin 310-09: EVAP DTC P0455 background information",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/310-09.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-310-S509": {
+   "title": "Jaguar Service Technical Bulletin 310-S509: Fuel filler cap difficult to install",
+   "url": "http://www.jagrepair.com/images/TSB/NewDocuments4-23-13/310-S509am%20Fuel%20Filler%20Cap%20Difficult%20To%20Install.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-413-03": {
+   "title": "Jaguar Service Technical Bulletin 413-03: Intermittent instruments and false warnings, harness connector latch",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/413-03.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-413-S484": {
+   "title": "Jaguar Service Technical Bulletin 413-S484: Instrument pack CAN failure",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/413-S484am2%20INSTPK%20CAN%20failure.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-414-06A": {
+   "title": "Jaguar Service Technical Bulletin 414-06A: Intermittently discharged battery diagnostic procedure",
+   "url": "http://www.jagrepair.com/images/TSB/NewDocuments4-23-13/414-06am.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-501-01": {
+   "title": "Jaguar Service Technical Bulletin 501-01: Convertible soft top manual closing procedure",
+   "url": "http://www.jagrepair.com/images/TSB/501-01AM%20Conv%20Manual%20Closing.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-501-11": {
+   "title": "Jaguar Service Technical Bulletin 501-11: Convertible top electrical system, component descriptions and diagnosis",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/501-11am.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-501-49": {
+   "title": "Jaguar Service Technical Bulletin 501-49: Rear quarter window regulator failure",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/501-49.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-501-52": {
+   "title": "Jaguar Service Technical Bulletin 501-52: Wind noise, water leaks, split door seal",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/501Body/501-52%20Wind%20Noise,%20Water%20Leaks,.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-501-53": {
+   "title": "Jaguar Service Technical Bulletin 501-53: Water entry into vehicle",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/501Body/501-53%20Water%20Entry%20Into%20Vehicle.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-501-54": {
+   "title": "Jaguar Service Technical Bulletin 501-54: Door latch issues, door ajar switch",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/501Body/501-54%20Door%20Latch%20Issues.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-600-03a": {
+   "title": "Jaguar Service Technical Bulletin 600-03a: Part-load engine breather, scheduled cleaning",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/600Maintenance/600-03am3%20Part-Load%20Engine%20Breather.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-list": {
+   "title": "Jaguar XK8 Technical Service Bulletins by model year (titles only)",
+   "url": "https://automotix.net/autorepair/diy/2000-jaguar-xk8-tsb.html",
+   "publisher": "Automotix",
+   "kind": "reference"
+  },
+  "youcanic-722": {
+   "title": "Mercedes 722.6 5G transmission valve body conductor plate replacement",
+   "url": "https://www.youcanic.com/mercedes-7226-5g-transmission-valve-body-conductor-plate-replacement/",
+   "publisher": "YOUCANIC",
+   "kind": "specialist"
+  },
+  "jtis-my1997": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY1997 (dataset jvk1997en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my2000": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY2000 (dataset jyk2000en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "wm": {
+   "title": "XK8 2003 to 2006 Workshop Manual, 4.2L and 4.2L S/C, VIN A30645 to A48684",
+   "url": "http://jagrepair.com/images/AutoRepairPhotos/CarPDFFiles/XK8%20'03%20-%20'06%20Workshop%20Manual.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  }
+ },
+ "items": [
+  {
+   "id": "restricted-performance",
+   "symptom": "Restricted performance message on the dash",
+   "system": "engine",
+   "when": "While driving or after a cold start, often with the engine capped at about 3000 rpm",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Weak battery or low voltage",
+     "likelihood": "high",
+     "test": "Charge the battery fully, then have it load tested. Jaguar says investigate if open circuit voltage sits around 12.45 to 12.49 V. If the message clears with a healthy battery, the battery was the cause.",
+     "fix": "Fit a good battery and clear the codes.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": [
+      "battery-drain-test"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Misfire from plugs or coils",
+     "likelihood": "high",
+     "test": "Read the codes for P0300 to P0308, P0351 to P0358, P1313 or P1314. These set the 3000 rpm cap. Swap the coil with the next cylinder and see if the code follows.",
+     "fix": "Replace the failed coil and fit fresh plugs. One 1999 owner cured repeat messages with plugs and coil packs.",
+     "parts": [
+      "ignition.spark-plug",
+      "ignition.coil"
+     ],
+     "jobs": [
+      "spark-plugs",
+      "coil-on-plug"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Throttle or pedal sensor fault",
+     "likelihood": "med",
+     "test": "Look for P0121 to P0123, P1121 to P1123, P1222 to P1224, P1229 and P1240 to P1243. Move the throttle plug and wires by hand with the engine idling to find a loose connector.",
+     "fix": "Reseat or repair the plug, or fit a throttle body. See the Engine Fail Safe entry.",
+     "parts": [
+      "induction.throttle-body"
+     ],
+     "jobs": [
+      "throttle-body-clean"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Knock sensor or its harness",
+     "likelihood": "med",
+     "test": "Look for P0327, P0328, P0332 or P0333. A 1999 XK8 showed the message for weeks with few codes, then P0328. The dealer found harness damage at the front, then a failed sensor.",
+     "fix": "Repair the harness and replace the sensor.",
+     "parts": [
+      "ignition.knock-sensor",
+      "electrical.harness"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "ABS module or CAN fault",
+     "likelihood": "med",
+     "test": "Read the ABS module as well as the engine. P1637 or C-codes point here. One 2001 car limped until a bad ABS connection was found.",
+     "fix": "Fix the ABS fault first. See ABS TRAC failure.",
+     "parts": [
+      "electrical.abs-module",
+      "electrical.harness"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Brake switch out of step",
+     "likelihood": "med",
+     "test": "Look for P1571. Check whether cruise has stopped working and the brake lights stay on. On 1997-2000 XKs the bulletin covers this.",
+     "fix": "Fit the improved brake pedal switch. Securing nuts are 3 Nm per the bulletin.",
+     "parts": [
+      "brakes.pedal"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myTo": 2000
+     }
+    },
+    {
+     "label": "Calibration, 2000-02 XKR",
+     "likelihood": "low",
+     "test": "Only if no codes are stored and VIN is A00083-A22973. Repair any stored faults first.",
+     "fix": "Reflash the ECM with WDS as in TSB 303-49.",
+     "parts": [
+      "electrical.ecm"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ],
+      "myFrom": 2000,
+      "myTo": 2002
+     }
+    },
+    {
+     "label": "Loose charge air ducts on an XKR",
+     "likelihood": "low",
+     "test": "Check the ducts between supercharger and intercooler for a poor fit, VIN A00001-A33944.",
+     "fix": "Fit the revised ducts and clamp plates.",
+     "parts": [
+      "induction.supercharger"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ],
+      "myTo": 2003
+     }
+    }
+   ],
+   "src": [
+    "jag-dtc-9702",
+    "tsb-303-49",
+    "tsb-303-57a",
+    "tsb-206-07",
+    "jr-rp",
+    "jl-rp",
+    "jl-limp",
+    "jec-drain",
+    "jr-nostart"
+   ],
+   "conf": "factory",
+   "first": [
+    "Check the battery first: a weak battery alone can trigger this.",
+    "Read the codes.",
+    "If a cylinder code shows, swap that coil with the next cylinder, then check its plug."
+   ],
+   "drive": "If the check engine light is flashing, treat it as stop: ease off, stop somewhere safe and read the code. See P1313 and P1314."
+  },
+  {
+   "id": "engine-fail-safe",
+   "symptom": "Engine Fail Safe message, car barely revs above idle",
+   "system": "induction",
+   "when": "Sudden loss of power, sometimes after a hard downshift",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Throttle position plug loose or corroded",
+     "likelihood": "high",
+     "test": "On 1999-2001 AJ27 cars, gold sensor terminals meet tin harness terminals. Remove the intake elbow, inspect the plug and check the retaining stay is not broken. If wiggling the wires brings power back, this is it.",
+     "fix": "Fit gold terminals to the harness as in TSB 303-58 and secure the plug. An owner used a cable tie when the stay had broken.",
+     "parts": [
+      "induction.throttle-body",
+      "electrical.harness"
+     ],
+     "jobs": [
+      "throttle-body-clean"
+     ],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "myFrom": 1999,
+      "myTo": 2001
+     }
+    },
+    {
+     "label": "1999 throttle body from a bad batch",
+     "likelihood": "high",
+     "test": "VIN 036938-042591 on 1999 NA cars. Remove the engine covers and read the date code on the throttle position sensor. Codes 10T5 to 11T25 mean replace.",
+     "fix": "Replace the throttle body (Service Action S498). Rebuilt units exist. One owner chased P1121 for a year before a new throttle body fixed it.",
+     "parts": [
+      "induction.throttle-body"
+     ],
+     "jobs": [
+      "throttle-body-clean"
+     ],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ],
+      "myFrom": 1999,
+      "myTo": 1999
+     }
+    },
+    {
+     "label": "Throttle not relearned after battery work",
+     "likelihood": "med",
+     "test": "P1224 just after the battery has been off. The factory check for this code is ignition on for more than 3 minutes.",
+     "fix": "Clear the code, let the throttle adapt, then retest.",
+     "parts": [
+      "induction.throttle-body"
+     ],
+     "jobs": [
+      "throttle-body-clean"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Throttle motor, relay or sensor supply",
+     "likelihood": "med",
+     "test": "Codes P1229, P1251, P1631 or P1240 to P1243. Check the relay and its feed.",
+     "fix": "Replace the relay or repair the wiring. If the motor has failed, replace the throttle body.",
+     "parts": [
+      "induction.throttle-body"
+     ],
+     "jobs": [
+      "throttle-body-clean"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Pedal sensor or cable slack",
+     "likelihood": "med",
+     "test": "P1121 on a 4.0 can come from the cable between pedal and sensor. Check adjustment before buying a sensor.",
+     "fix": "Adjust the cable or replace the sensor.",
+     "parts": [
+      "induction.throttle-body"
+     ],
+     "jobs": [
+      "throttle-body-clean"
+     ],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "jag-dtc-9702",
+    "tsb-303-S498",
+    "tsb-303-58",
+    "jr-tbplug",
+    "jl-p1121",
+    "jl-limp"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "gearbox-fault",
+   "symptom": "Gearbox fault or transmission fault message",
+   "system": "transmission",
+   "when": "Often just after selecting D, or on a cold start after standing",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Low battery",
+     "likelihood": "high",
+     "test": "Charge and load test the battery first. A 2003 XK8 with P0780, P0781, P0782 and P0773 was quoted a $7,300 gearbox. A good battery and software reflash cured it.",
+     "fix": "Fit a good battery, clear codes and recheck. Reflash the TCM if needed.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": [
+      "battery-drain-test"
+     ],
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ]
+     }
+    },
+    {
+     "label": "Selector cable or rotary switch",
+     "likelihood": "high",
+     "test": "P0706 is the classic code. Check the selector is not binding and the cable ball joints are not dry. With the lever in N, confirm the gearbox lever is in true N: full rearward then two detents forward.",
+     "fix": "Adjust the cable as in TSB 307-01. Ball pin nut is 7 to 10 Nm. Clean the rotary switch plug.",
+     "parts": [
+      "transmission.selector-cable",
+      "transmission.gearbox"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ]
+     }
+    },
+    {
+     "label": "Dirty or loose plug at the gearbox or TCM",
+     "likelihood": "med",
+     "test": "Disconnect the battery, clean the gearbox and switch plugs and check the locking ring is home.",
+     "fix": "Clean with contact cleaner and refit.",
+     "parts": [
+      "electrical.harness"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "CAN or ABS fault",
+     "likelihood": "med",
+     "test": "Codes P1797, P1796, P1720 mean read the ECM and ABS too.",
+     "fix": "Fix the module that reports the first fault.",
+     "parts": [
+      "electrical.abs-module",
+      "electrical.tcm"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Hard failure inside the box",
+     "likelihood": "med",
+     "test": "P1722 or ratio codes with a slip or roaring noise. Drop the pan and look for metal.",
+     "fix": "Rebuild or replace. See the entry for no drive.",
+     "parts": [
+      "transmission.gearbox"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "jag-dtc-9702",
+    "jag-dtc-03",
+    "tsb-307-01",
+    "jl-gearbox",
+    "jr-gearbox",
+    "jcna-6hp",
+    "jr-bclutch"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "stuck-in-one-gear",
+   "symptom": "Stuck in one gear, car moves like a slug",
+   "system": "transmission",
+   "when": "After a clunk or a warning, usually with Gearbox Fault showing",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "ZF box in limp home (XK8 4.0)",
+     "likelihood": "high",
+     "test": "Stuck in 4th or 5th. Read the TCM. Most limp modes clear at the next key-on if the fault has gone, except P0715.",
+     "fix": "Fix what the code points to, then clear it.",
+     "parts": [
+      "electrical.tcm",
+      "transmission.gearbox"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ]
+     }
+    },
+    {
+     "label": "Mercedes box electronic limp (XKR 4.0)",
+     "likelihood": "high",
+     "test": "After a restart, only 2nd and reverse work. The selected gear is held until you turn off, then wait 10 seconds. An electrical fault is stored.",
+     "fix": "Fix the fault and clear the code. Speed sensor and solenoid codes such as P0715 and P0753 point to the conductor plate.",
+     "parts": [
+      "transmission.valve-body"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "sc"
+      ]
+     }
+    },
+    {
+     "label": "Mercedes box mechanical limp (XKR 4.0)",
+     "likelihood": "med",
+     "test": "Stuck in 3rd. It resets at the next key-on if the fault has gone. P0730 or low fluid.",
+     "fix": "Check fluid level. PistonHeads warns output shaft and planetary gears can let go and seize the box.",
+     "parts": [
+      "transmission.gearbox"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "sc"
+      ]
+     }
+    },
+    {
+     "label": "6HP26 limp (4.2)",
+     "likelihood": "med",
+     "test": "Mechanical or electronic limp with TCM codes. Check the battery first.",
+     "fix": "Follow the code. Many name the TCM and control valve unit as one item.",
+     "parts": [
+      "electrical.tcm",
+      "transmission.gearbox"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "jag-dtc-9702",
+    "jag-dtc-03",
+    "ph-powertrain",
+    "youcanic-722"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "no-drive",
+   "symptom": "Put it in D and nothing happens until the revs rise",
+   "system": "transmission",
+   "when": "Pulling away, worse when warm. A clunk as it engages",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Worn or broken internals in the ZF box",
+     "likelihood": "high",
+     "test": "Check the fluid level and condition. Drop the pan and look for shavings. P1722 is a common code. One 113,000 mile car failed its B clutch hub and scored the forward drum.",
+     "fix": "Overhaul with the later dimpled hub, or fit a replacement box. The specialist said fluid changes would not have saved it.",
+     "parts": [
+      "transmission.gearbox"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ]
+     }
+    },
+    {
+     "label": "Retaining clip worn through (ZF)",
+     "likelihood": "med",
+     "test": "PistonHeads reports a steel clip wearing through its surround and falling out, causing slip or needing revs before Drive engages.",
+     "fix": "Gearbox specialist repair.",
+     "parts": [
+      "transmission.gearbox"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ]
+     }
+    },
+    {
+     "label": "1999 recalled gearbox",
+     "likelihood": "low",
+     "test": "VIN 031401-038608. Check the recall R478 was done. The fault could lock the driveline at very low speed.",
+     "fix": "Jaguar replaced the box under the recall.",
+     "parts": [
+      "transmission.gearbox"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ],
+      "myFrom": 1999,
+      "myTo": 1999
+     }
+    },
+    {
+     "label": "Fluid low",
+     "likelihood": "med",
+     "test": "Engine running in Park. Start with the fluid under 30 C, take the fill plug out on the right side of the box, cycle the selector, top up to overflow and finish before 50 C. With the engine off the reading is false.",
+     "fix": "Find the leak and refill with the right fluid.",
+     "parts": [
+      "transmission.gearbox"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "ph-powertrain",
+    "jl-seminar",
+    "jr-bclutch",
+    "tsb-307-11",
+    "jag-dtc-9702",
+    "jtis-my1997"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "harsh-shifts",
+   "symptom": "Harsh shifts or a thump into gear",
+   "system": "transmission",
+   "when": "Cold engine, or 1-2 at low speed",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Cold idle speed issue, XK8 2000-02",
+     "likelihood": "high",
+     "test": "Thump N to D or N to R with the idle at 1300 rpm in the first 30 seconds, coolant under 40 °C.",
+     "fix": "Install a new TCM per TSB 307-14 for VIN A00083-A30644.",
+     "parts": [
+      "electrical.tcm"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ],
+      "myFrom": 2000,
+      "myTo": 2002
+     }
+    },
+    {
+     "label": "6-speed adaptive drift",
+     "likelihood": "high",
+     "test": "Harsh shifts on a 2003-06 car. Check the battery, then the software level.",
+     "fix": "Reprogram the TCM and ECM. Title of the bulletin says adaptive shift strategy drift.",
+     "parts": [
+      "electrical.tcm"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ]
+     }
+    },
+    {
+     "label": "Torque converter clutch lining, 2003",
+     "likelihood": "med",
+     "test": "P0741 logged, VIN A30645-A35726.",
+     "fix": "Fit the modified torque converter.",
+     "parts": [
+      "transmission.torque-converter"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ],
+      "myFrom": 2003,
+      "myTo": 2003
+     }
+    },
+    {
+     "label": "Lost CAN torque data",
+     "likelihood": "low",
+     "test": "P1643 with a limited throttle.",
+     "fix": "Fix the CAN fault between TCM and ECM.",
+     "parts": [
+      "electrical.tcm"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-307-14",
+    "tsb-307-15",
+    "tsb-list",
+    "jcna-6hp",
+    "jag-dtc-9702"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "pulsing-at-cruise",
+   "symptom": "Pulsing or shudder at 55 to 70 mph",
+   "system": "transmission",
+   "when": "Steady cruise with light throttle",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Gearbox control or valve body",
+     "likelihood": "med",
+     "test": "One 1999 XK8 pulsed at 55, 65 and 70 mph and was slow going into gear. Valve body testing, a TCM repair and a new valve body did not cure it.",
+     "fix": "That car needed a replacement gearbox. Check fluid and shavings before spending on parts.",
+     "parts": [
+      "transmission.valve-body",
+      "transmission.gearbox"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ]
+     }
+    },
+    {
+     "label": "Selector cable out of adjustment",
+     "likelihood": "med",
+     "test": "Stays in first until you select 4 manually, then shifts properly.",
+     "fix": "Adjust the cable per TSB 307-01.",
+     "parts": [
+      "transmission.selector-cable"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "jr-gearbox"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "wont-leave-park",
+   "symptom": "Gear lever will not come out of Park",
+   "system": "transmission",
+   "when": "With foot on brake and engine running",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Brake switch",
+     "likelihood": "high",
+     "test": "Check the brake lights work. Lever stuck and brake lights stuck on point the same way. Bulletin covers VIN 001001-A03097.",
+     "fix": "Fit the improved brake pedal switch, 3 Nm on the nuts.",
+     "parts": [
+      "brakes.pedal"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myTo": 2000
+     }
+    },
+    {
+     "label": "Instrument pack CAN fault, 2000 MY",
+     "likelihood": "med",
+     "test": "Also multiple warnings, blank message centre and gauges at zero. VIN A00116-A05322.",
+     "fix": "New instrument pack back plate per Service Action S484.",
+     "parts": [
+      "electrical.instrument-pack"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myFrom": 2000,
+      "myTo": 2000
+     }
+    }
+   ],
+   "src": [
+    "tsb-206-07",
+    "tsb-413-S484"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "no-start-cranks",
+   "symptom": "Cranks but will not start",
+   "system": "fuel",
+   "when": "Any time",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Selector not reading Park",
+     "likelihood": "high",
+     "test": "Move the lever to N and try. Or ignition on, foot on brake, shift to N and firmly back to P. P1517 stops injection.",
+     "fix": "Adjust the cable or replace the switch.",
+     "parts": [
+      "transmission.gearbox",
+      "transmission.selector-cable"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Inertia switch tripped",
+     "likelihood": "med",
+     "test": "Smell and look for fuel leaks before resetting. Then press the rubber cap on top of the switch. 1997-2002 cars: next to the fuse box at the left end of the fascia. 2003-on cars: behind the left cowl side trim.",
+     "fix": "Reset it. If it trips again, look for the cause.",
+     "parts": [
+      "electrical.inertia-switch"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Fuel pump, relay or fuse",
+     "likelihood": "med",
+     "test": "With key on you should hear the pump. Check fuses and relays in the boot. Swap a like relay. Check pressure at the Schrader valve on the rail.",
+     "fix": "Replace the relay or pump. XKRs have two pumps.",
+     "parts": [
+      "fuel.pump"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "No spark, crank sensor",
+     "likelihood": "med",
+     "test": "Check coil fuses and test for spark. P0335 means the crank signal is missing.",
+     "fix": "Replace the sensor.",
+     "parts": [
+      "ignition.ckp-sensor"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Nikasil bores, cold start",
+     "likelihood": "med",
+     "test": "Pre-August 2000 engine that has stood. Low compression when cold. Long cranking eventually brings it to life with a lot of smoke.",
+     "fix": "Compression and leakage test, then see the Nikasil weak spot.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "myTo": 2001
+     }
+    },
+    {
+     "label": "Key or transponder",
+     "likelihood": "low",
+     "test": "Try the spare key. P1260 points here.",
+     "fix": "Have the key or module checked.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jr-nostart",
+    "jcna-start",
+    "tsb-303-43",
+    "jag-dtc-9702",
+    "jr-nikstart",
+    "tsb-303-55",
+    "jtis-my1997",
+    "jtis-my2000",
+    "wm"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "no-crank",
+   "symptom": "Nothing happens when you turn the key",
+   "system": "electrical",
+   "when": "Any time",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Flat battery",
+     "likelihood": "high",
+     "test": "Check voltage and power at each fuse box. Clean the terminals and the ground point.",
+     "fix": "Open the boot with the key, jump or charge. See the Flat battery job, and the entry for a flat battery after a week.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": [
+      "flat-battery",
+      "battery-drain-test"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Selector switch not in P",
+     "likelihood": "med",
+     "test": "On the XKR 4.0, P0706 at start-up means no crank and an unlit J-gate.",
+     "fix": "Clean or replace the linear switch.",
+     "parts": [
+      "interior.j-gate"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "sc"
+      ]
+     }
+    },
+    {
+     "label": "Inertia switch",
+     "likelihood": "low",
+     "test": "Reset the switch.",
+     "fix": "Press the cap down.",
+     "parts": [
+      "electrical.inertia-switch"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jr-nostart",
+    "jag-dtc-9702",
+    "tsb-414-06A"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "long-crank-hot",
+   "symptom": "Long cranking when hot",
+   "system": "fuel",
+   "when": "Hot restart after a short stop",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Leaking injector",
+     "likelihood": "med",
+     "test": "Jaguar test: warm the car for 10 minutes, hold 2000 rpm for a minute in the workshop, then idle and stop. Then time the restart.",
+     "fix": "Replace the leaking injectors.",
+     "parts": [
+      "fuel.injector"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ],
+      "myTo": 1998
+     }
+    },
+    {
+     "label": "Fuel tank pressure control valve",
+     "likelihood": "med",
+     "test": "Jaguar says check the Rochester valve first on 1997-98 XK8s.",
+     "fix": "Replace the valve.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ],
+      "myTo": 1998
+     }
+    }
+   ],
+   "src": [
+    "tsb-303-39",
+    "tsb-303-55"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "cold-start-after-short-trip",
+   "symptom": "Hard to start cold after moving the car a short way the day before",
+   "system": "engine",
+   "when": "Cold morning after a very short run",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "ECM calibration, 1999-2000 XK8",
+     "likelihood": "high",
+     "test": "VIN 031303-A11050. Complaint is difficult or no start from cold after a short move the day before.",
+     "fix": "Reflash the ECM per TSB 303-52.",
+     "parts": [
+      "electrical.ecm"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ],
+      "myFrom": 1999,
+      "myTo": 2000
+     }
+    },
+    {
+     "label": "ECM calibration, AJ26",
+     "likelihood": "med",
+     "test": "1997-98 VIN 001036-020733. Not all 1998 ECMs can be reflashed.",
+     "fix": "Service Action S479 reflash.",
+     "parts": [
+      "electrical.ecm"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ],
+      "myTo": 1998
+     }
+    }
+   ],
+   "src": [
+    "tsb-303-52",
+    "tsb-303-35a"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "stalls-slowing-down",
+   "symptom": "Stalls when slowing or at a junction",
+   "system": "induction",
+   "when": "Coasting to a stop, often cold",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Sticky throttle on an AJ26",
+     "likelihood": "high",
+     "test": "Engine cold, intake trunking off. Watch the butterfly at key-on: it should close then open to idle. Press it shut with a finger: it should return smoothly.",
+     "fix": "Clean the throttle body and bore per TSB 310-06. Clean the part-load breather too or it comes back.",
+     "parts": [
+      "induction.throttle-body",
+      "engine.breather"
+     ],
+     "jobs": [
+      "throttle-body-clean"
+     ],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "myTo": 1999
+     }
+    },
+    {
+     "label": "Throttle closed position fault",
+     "likelihood": "med",
+     "test": "Service Action S514. Engine could cut out while the car still runs on. 1997-98 XK VIN 001036-031302.",
+     "fix": "ECM reprogram up to VIN 020734, or throttle body VIN 020735-031302.",
+     "parts": [
+      "induction.throttle-body",
+      "electrical.ecm"
+     ],
+     "jobs": [
+      "throttle-body-clean"
+     ],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ],
+      "myTo": 1998
+     }
+    },
+    {
+     "label": "ECM relay or fuel pump relay",
+     "likelihood": "med",
+     "test": "Check the white date code on the relay and swap in a known good one. Jaguar lists these first for stalling soon after start.",
+     "fix": "Replace the relay.",
+     "parts": [
+      "electrical.ecm",
+      "fuel.pump"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "myTo": 1999
+     }
+    }
+   ],
+   "src": [
+    "tsb-303-43",
+    "tsb-310-06a",
+    "tsb-303-S514",
+    "tsb-600-03a"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "hesitation",
+   "symptom": "Hesitation or flat spot, poor throttle response",
+   "system": "induction",
+   "when": "On pull away or at light throttle",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Blocked part-load breather",
+     "likelihood": "high",
+     "test": "The tube at the front of the left cam cover. Pull it off and probe the restrictor with a straightened paperclip. Jaguar scheduled this every 10,000 miles on 1997-2001 cars.",
+     "fix": "Clean the restrictor. Take care with brittle plastic clips.",
+     "parts": [
+      "engine.breather"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myTo": 2001
+     }
+    },
+    {
+     "label": "Dirty or sticky throttle",
+     "likelihood": "high",
+     "test": "Inspect for soft carbon in the bore and on the blade.",
+     "fix": "Clean the throttle body.",
+     "parts": [
+      "induction.throttle-body"
+     ],
+     "jobs": [
+      "throttle-body-clean"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Cold hesitation, 2001 XKR",
+     "likelihood": "med",
+     "test": "VIN A11051-A27187, pulling away during warm-up.",
+     "fix": "Reflash the ECM per TSB 303-53.",
+     "parts": [
+      "electrical.ecm"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ],
+      "myFrom": 2001,
+      "myTo": 2001
+     }
+    },
+    {
+     "label": "Contaminated injectors, 4.2",
+     "likelihood": "med",
+     "test": "Check long term fuel trim. Over 10% with secure intake parts points at the injectors.",
+     "fix": "Pressurised injector clean per TSB 303-67.",
+     "parts": [
+      "fuel.injector"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "ph-powertrain",
+    "tsb-600-03a",
+    "tsb-303-47",
+    "tsb-303-53",
+    "tsb-303-67",
+    "tsb-303-52",
+    "jl-hes"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "rough-idle-misfire",
+   "symptom": "Rough idle or misfire",
+   "system": "ignition",
+   "when": "Idle, or under load",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Failed coil",
+     "likelihood": "high",
+     "test": "Pull each coil connector in turn at idle. The one that changes nothing is the bad cylinder. Swap coils with the neighbour; if the code moves, the coil is bad.",
+     "fix": "Replace the coil.",
+     "parts": [
+      "ignition.coil"
+     ],
+     "jobs": [
+      "coil-on-plug"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Oil in the plug well",
+     "likelihood": "med",
+     "test": "Remove the coil and look. Oil means the cam cover or plug well seal is leaking, or the plug was loose. Check you have not overfilled the oil.",
+     "fix": "Fit new cam cover and well gaskets.",
+     "parts": [
+      "engine.cam-cover-gasket",
+      "ignition.coil"
+     ],
+     "jobs": [
+      "coil-on-plug"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Spark plug worn or wrong gap",
+     "likelihood": "med",
+     "test": "Check gaps to TSB 303-29. A stain on the plug insulator is corona, not blow-by, and needs no action.",
+     "fix": "Fit new plugs.",
+     "parts": [
+      "ignition.spark-plug"
+     ],
+     "jobs": [
+      "spark-plugs"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Whole bank misfiring",
+     "likelihood": "low",
+     "test": "If all cylinders on a bank misfire, suspect cam timing on that side.",
+     "fix": "Check timing and chains.",
+     "parts": [
+      "engine.chain-tensioner-secondary",
+      "engine.chain-primary"
+     ],
+     "jobs": [
+      "chain-tensioners",
+      "chain-tensioner-42"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Low compression on neighbouring cylinders",
+     "likelihood": "low",
+     "test": "Two side by side may mean head gasket. Compression test.",
+     "fix": "Investigate further.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jr-misfire",
+    "jag-dtc-9702",
+    "jag-dtc-03",
+    "motorious",
+    "tsb-303-29",
+    "tsb-303-44",
+    "jr-plugs"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "flashing-engine-light",
+   "symptom": "Check engine light flashing",
+   "system": "ignition",
+   "when": "Under load",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Misfire bad enough to damage the catalyst",
+     "likelihood": "high",
+     "test": "Read the cylinder code plus P1313 or P1314.",
+     "fix": "Ease off at once and fix the misfire before driving on.",
+     "parts": [
+      "ignition.spark-plug",
+      "ignition.coil",
+      "exhaust.downpipe-cat"
+     ],
+     "jobs": [
+      "spark-plugs",
+      "coil-on-plug"
+     ],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jag-dtc-9702",
+    "jag-dtc-03"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "lean-codes",
+   "symptom": "Engine light with P0171 or P0174, too lean",
+   "system": "fuel",
+   "when": "Light load, idle and cruise",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Air leak after the MAF",
+     "likelihood": "high",
+     "test": "Check engine vacuum: below 18 inches suggests a leak or mechanical problem. Smoke test, or listen for hissing. The bellows and seals on the intake pipe are prime suspects.",
+     "fix": "Repair the leak. Long term trim of 25% sets the code. Let it relearn after the repair.",
+     "parts": [
+      "induction.intake-pipe"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Leaking intake manifold O-ring, 2002",
+     "likelihood": "med",
+     "test": "Hissing noise and drivability issues with P0171 and P0174 on 2002 cars.",
+     "fix": "Fit the O-ring. Bulletin title only.",
+     "parts": [
+      "induction.intake-pipe"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myFrom": 2002,
+      "myTo": 2002
+     }
+    },
+    {
+     "label": "MAF sensor",
+     "likelihood": "med",
+     "test": "If only the MAF reading is off, and the pipe is sound, suspect the sensor. Clean first.",
+     "fix": "Clean or replace.",
+     "parts": [
+      "induction.maf-sensor"
+     ],
+     "jobs": [
+      "maf-clean"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Low fuel pressure",
+     "likelihood": "med",
+     "test": "Test at the Schrader valve. Filter or pump weak.",
+     "fix": "Replace the filter or pump.",
+     "parts": [
+      "fuel.filter",
+      "fuel.pump"
+     ],
+     "jobs": [
+      "fuel-filter"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "After the fix it still runs badly",
+     "likelihood": "low",
+     "test": "ECM has adapted to the old fault.",
+     "fix": "Do the idle speed relearn in TSB 303-01 with brakes on, in D, in a safe place.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jag-dtc-9702",
+    "jr-lean",
+    "tsb-list",
+    "tsb-303-66"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fuel-smell",
+   "symptom": "Smell of fuel",
+   "system": "fuel",
+   "when": "Parked or in the cabin, often in warm weather",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Purge valve corroded shut",
+     "likelihood": "high",
+     "test": "1999-2002 XK. Run the purge check. DTCs disable purge and cause the smell, so clear codes first.",
+     "fix": "Fit the modified valve, filter and hose per TSB 303-63.",
+     "parts": [
+      "fuel.evap"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myFrom": 1999,
+      "myTo": 2002
+     }
+    },
+    {
+     "label": "Tank to body seal on convertibles",
+     "likelihood": "med",
+     "test": "1999-2003 convertible with fuel vapour in the cabin, VIN 031303-A35945, purge check passed.",
+     "fix": "Add the extra tank to body seal per TSB 303-61.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ],
+      "myFrom": 1999,
+      "myTo": 2003
+     }
+    },
+    {
+     "label": "Perished fuel hoses at the rear",
+     "likelihood": "med",
+     "test": "Inspect hoses behind the rear axle for cracking. Motorious flags these.",
+     "fix": "Replace them. Do not drive with a live leak.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-303-61",
+    "tsb-303-63",
+    "motorious"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "evap-code",
+   "symptom": "Engine light with P0455 or P0442, no other symptoms",
+   "system": "fuel",
+   "when": "After filling up, or at random",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Fuel cap",
+     "likelihood": "high",
+     "test": "Fit the cap and click it. Clear the code and retest. 2001-03 cars had a revised cap.",
+     "fix": "Replace the cap if the seal is poor.",
+     "parts": [
+      "fuel.filler"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Purge valve stuck shut",
+     "likelihood": "high",
+     "test": "A high share of P0455 cases on 1998-2000 XKs are no vacuum rather than a leak. Test purge.",
+     "fix": "Replace the valve.",
+     "parts": [
+      "fuel.evap"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Canister close valve full of rust",
+     "likelihood": "med",
+     "test": "2000-01 XK, VIN A00083-A13691, or Service Action S841/S845 on 1999-2003. Vent pipe corrodes inside.",
+     "fix": "Replace valve and vent pipe.",
+     "parts": [
+      "fuel.evap"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-310-09",
+    "tsb-303-46",
+    "tsb-310-S509",
+    "tsb-303-S841"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "cold-start-rattle",
+   "symptom": "Ticking or rattle at cold start",
+   "system": "engine",
+   "when": "First seconds after a cold start, or at idle",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Failing secondary chain tensioner",
+     "likelihood": "high",
+     "test": "Jaguar recognises rattle at start and idle up to VIN A24195. Take off the cam covers and inspect. Original plastic bodies crack with no warning. Look for cracks, loose pieces and worn slippers.",
+     "fix": "Fit revised tensioners in pairs. If a primary has failed, change all four. Use the shorter bolts. Secondary tensioner bolts are 10 to 14 Nm, per TSB 303-30.",
+     "parts": [
+      "engine.chain-tensioner-secondary"
+     ],
+     "jobs": [
+      "chain-tensioners",
+      "chain-tensioner-42"
+     ],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ]
+     }
+    },
+    {
+     "label": "Primary tensioner or guides",
+     "likelihood": "high",
+     "test": "Remove the timing covers. A 1999 XK8 at 60,000 miles showed cracked secondaries and primary rails cracked through.",
+     "fix": "Replace tensioners, guides and any damaged chain as a set.",
+     "parts": [
+      "engine.chain-tensioner-primary",
+      "engine.chain-guide-primary",
+      "engine.chain-primary"
+     ],
+     "jobs": [
+      "chain-tensioners"
+     ],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ]
+     }
+    },
+    {
+     "label": "Worn upper chain tensioner, 4.2",
+     "likelihood": "med",
+     "test": "Take off the cam covers and inspect the two upper tensioners. The 4.2 has the later design, but owners report the upper pair as the most prone. Look for cracks, loose pieces and worn slippers.",
+     "fix": "Replace the worn tensioner, one bank at a time.",
+     "parts": [
+      "engine.chain-tensioner-secondary"
+     ],
+     "jobs": [
+      "chain-tensioner-42"
+     ],
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ]
+     }
+    },
+    {
+     "label": "Noise from elsewhere",
+     "likelihood": "low",
+     "test": "If the tensioners are good, listen at the belt, the injectors and the purge valve.",
+     "fix": "Treat the cause.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-303-68",
+    "tsb-303-30",
+    "motorious",
+    "jl-tens",
+    "jcna-tens",
+    "ph-powertrain",
+    "tsb-list"
+   ],
+   "conf": "factory",
+   "urgencyOn": [
+    {
+     "urgency": "soon",
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ]
+     },
+     "drive": "4.2 engines have the later tensioners, so this is a job for soon, not a reason to stop. Owners still report the upper pair as the most prone, so have them looked at, and stop driving if the noise grows."
+    },
+    {
+     "urgency": "soon",
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "vinFrom": "A24196"
+     },
+     "costFrom": "tensioners-plastic",
+     "drive": "Your serial is past A24195, the last car Jaguar’s bulletin covers for this rattle, so for this car it is a job for soon. A plastic tensioner fitted earlier is not ruled out: check what is on the engine before any long run, and stop driving if the noise grows."
+    }
+   ],
+   "risk": "A cracked tensioner lets the timing chain jump. Two or more teeth can wreck the engine, often with no other warning.",
+   "drive": "Do not drive it to see if the noise goes. Stop the engine and tow it to be checked.",
+   "weakspots": [
+    "tensioners-plastic"
+   ]
+  },
+  {
+   "id": "footwell-ticking",
+   "symptom": "Ticking from the left footwell at low speed",
+   "system": "fuel",
+   "when": "Low speed, 2003-05 cars",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "EVAP purge valve noise",
+     "likelihood": "high",
+     "test": "Tick moves with purge on a 2003-05 car, VIN A30645-A40920. It is not the engine.",
+     "fix": "Fit a new insulation pad. On earlier VINs fit the modified valve and reconfigure the ECM.",
+     "parts": [
+      "fuel.evap"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ],
+      "myFrom": 2003,
+      "myTo": 2005
+     }
+    }
+   ],
+   "src": [
+    "tsb-303-62"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "rattle-rough-after-start",
+   "symptom": "Bad rattle and rough running after start",
+   "system": "engine",
+   "when": "Sudden. May follow a bang",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Chain has jumped",
+     "likelihood": "high",
+     "test": "Do not keep cranking or driving. Remove the cam covers and check timing. Forum posts say one tooth makes it run rough and two or more can wreck the engine.",
+     "fix": "Replace tensioners and guides, reset timing, and check valves.",
+     "parts": [
+      "engine.chain-tensioner-primary",
+      "engine.chain-tensioner-secondary",
+      "engine.chain-guide-primary",
+      "engine.chain-primary"
+     ],
+     "jobs": [
+      "chain-tensioners",
+      "chain-tensioner-42"
+     ],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jl-tens"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "pinging",
+   "symptom": "Pinging under load",
+   "system": "engine",
+   "when": "4.2 cars, normal driving",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Lean mixture or calibration, 2003-04 XK8",
+     "likelihood": "high",
+     "test": "Check long and short term fuel trim. Over 7% means look for an air leak or fuel starvation.",
+     "fix": "Fix leaks. If none, reconfigure the ECM. Covers VIN A30645-A37134.",
+     "parts": [
+      "induction.intake-pipe",
+      "electrical.ecm"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.2"
+      ],
+      "induction": [
+       "na"
+      ],
+      "myFrom": 2003,
+      "myTo": 2004
+     }
+    }
+   ],
+   "src": [
+    "tsb-303-66"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "belt-chirp",
+   "symptom": "Chirping or squeal from the front of the engine",
+   "system": "engine",
+   "when": "Cold start, or at idle",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Misaligned drive belt, 2001-02",
+     "likelihood": "high",
+     "test": "VIN A11051-A30644. Check the A/C compressor dowel sticks out at least 3.2 mm.",
+     "fix": "Fit a new tensioner and belt. If the dowel is short, fit a new compressor and PAS bracket.",
+     "parts": [
+      "engine.drive-belt",
+      "engine.belt-tensioner"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ],
+     "appliesTo": {
+      "myFrom": 2001,
+      "myTo": 2002
+     }
+    },
+    {
+     "label": "XKR supercharger belt, 2003-04",
+     "likelihood": "med",
+     "test": "Noise after a cold start, VIN A30645-A41576.",
+     "fix": "Fit the revised belt.",
+     "parts": [
+      "engine.drive-belt"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ],
+      "myFrom": 2003,
+      "myTo": 2004
+     }
+    },
+    {
+     "label": "Suspect belt batch",
+     "likelihood": "low",
+     "test": "Date code 31-4140ET or 331-4140ET. Belt walks back and rubs the alternator bracket.",
+     "fix": "Replace the belt, VIN A09079-A11699.",
+     "parts": [
+      "engine.drive-belt"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ],
+     "appliesTo": {
+      "myFrom": 2000,
+      "myTo": 2001
+     }
+    }
+   ],
+   "src": [
+    "tsb-303-59",
+    "tsb-100-23",
+    "tsb-100-36",
+    "tsb-303-S490a"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "supercharger-noise",
+   "symptom": "Rumble from the supercharger",
+   "system": "induction",
+   "when": "XKR, rising with revs",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Worn supercharger bearings",
+     "likelihood": "high",
+     "test": "Listen at the blower with the engine running.",
+     "fix": "PistonHeads says this is not terminal and relatively cheap to fix.",
+     "parts": [
+      "induction.supercharger"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "ph-powertrain"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "oil-use-smoke",
+   "symptom": "Using oil or blue smoke",
+   "system": "engine",
+   "when": "Cold start or on a run",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Bore wear on Nikasil engines",
+     "likelihood": "high",
+     "test": "Pre-18 August 2000 engine. Do a blow-by test: David Marks gave 9 to 13 litres per minute as typical, with many over 20 and fine. Check for crud in the air inlet tube.",
+     "fix": "Fit a replacement engine or short block. See the weak spot.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "myTo": 2001
+     }
+    },
+    {
+     "label": "Burns oil after overheating",
+     "likelihood": "med",
+     "test": "David Marks says AJ-V8s do burn oil, which he put down to overheating.",
+     "fix": "Fix the cooling, then monitor.",
+     "parts": [
+      "cooling.thermostat",
+      "cooling.water-pump"
+     ],
+     "jobs": [
+      "thermostat-housing",
+      "water-pump"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Wrong reading on the dipstick",
+     "likelihood": "low",
+     "test": "2000 MY-on cars take 1.0 litre more, with a new dipstick from VIN F00464 on XJ. Check you have the right stick.",
+     "fix": "Fit the correct dipstick.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {
+      "myFrom": 2000
+     }
+    }
+   ],
+   "src": [
+    "jl-seminar",
+    "jl-buy",
+    "jr-nik",
+    "tsb-100-17",
+    "motorious"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "oil-leak",
+   "symptom": "Oil leak from the engine",
+   "system": "engine",
+   "when": "Parked",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Oil filter loose",
+     "likelihood": "high",
+     "test": "Check for oil around the filter.",
+     "fix": "Fit a new filter at 18 Nm with the filter wrench.",
+     "parts": [
+      "engine.oil-filter"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Rear of the cylinder head",
+     "likelihood": "med",
+     "test": "Oil at the back of a head, at the inner of the two threaded holes.",
+     "fix": "Fit a bolt with a Dowty washer at 15 Nm.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Cam cover gasket",
+     "likelihood": "med",
+     "test": "Look along the covers and at the join with the timing cover. Sealant is needed there.",
+     "fix": "Fit a gasket set.",
+     "parts": [
+      "engine.cam-cover-gasket"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Loose oil cooler lines, 2000 XKR",
+     "likelihood": "med",
+     "test": "VIN A00876-A11051.",
+     "fix": "Fit the modified pipes.",
+     "parts": [
+      "engine.oil-cooler"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ],
+      "myFrom": 2000,
+      "myTo": 2000
+     }
+    },
+    {
+     "label": "Oil cooler hose crimp, 2004-05",
+     "likelihood": "med",
+     "test": "VIN A39699-A41740. Date code 43 03, or illegible, means replace. Can lose oil and power.",
+     "fix": "Replace both hoses. Stop if leaking.",
+     "parts": [
+      "engine.oil-cooler"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myFrom": 2004,
+      "myTo": 2005
+     }
+    }
+   ],
+   "src": [
+    "tsb-303-26",
+    "tsb-303-51",
+    "tsb-303-50",
+    "tsb-303-S846a",
+    "motorious"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "overheating",
+   "symptom": "Temperature gauge climbing, overheating",
+   "system": "cooling",
+   "when": "Traffic or a long hill",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Thermostat stuck shut",
+     "likelihood": "high",
+     "test": "Top hose stays cool with a hot engine. Applies to engines before number 0203230140. Do not open the cap hot: wait for it to cool, use a cloth, turn it slowly, and keep clear of the fans, which can run with the engine off.",
+     "fix": "Fit the revised thermostat, AJ8 5874, with a new seal. Bolts 8 to 10 Nm.",
+     "parts": [
+      "cooling.thermostat"
+     ],
+     "jobs": [
+      "thermostat-housing"
+     ],
+     "appliesTo": {
+      "myTo": 2002
+     }
+    },
+    {
+     "label": "Water pump impeller",
+     "likelihood": "high",
+     "test": "Remove the pulley and read the part number. 96JV-8501-CA to CD means replace, VIN 001036-028000.",
+     "fix": "Fit a new pump. Do not change later pumps as routine.",
+     "parts": [
+      "cooling.water-pump"
+     ],
+     "jobs": [
+      "water-pump"
+     ],
+     "appliesTo": {
+      "myTo": 1998
+     }
+    },
+    {
+     "label": "Air in the system",
+     "likelihood": "med",
+     "test": "Check bleed hoses at the tank on 1997 and 1998 cars differ. The thermostat bleed must go to the open fitting.",
+     "fix": "Reroute and bleed.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Radiator choked or fan not running",
+     "likelihood": "med",
+     "test": "Look for leaves and debris. Check fans run. P0480 or P1475 show no warning.",
+     "fix": "Clean or replace.",
+     "parts": [
+      "cooling.radiator",
+      "cooling.fan-cowl"
+     ],
+     "jobs": [
+      "radiator"
+     ],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-303-54",
+    "tsb-303-60",
+    "tsb-303-15",
+    "ph-powertrain",
+    "jag-dtc-9702",
+    "jl-seminar",
+    "motorious",
+    "jl-rad",
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "coolant-smell",
+   "symptom": "Coolant smell",
+   "system": "cooling",
+   "when": "After a run, or with the car parked",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Crossover pipe cracked",
+     "likelihood": "high",
+     "test": "With the engine off, key out and fans clear, wear gloves and gently squeeze the warm top hose, keeping your face away from the pipe. Never open the cap hot. One XK8 showed a 4 inch crack in the plastic pipe.",
+     "fix": "Replace the pipe: four bolts, three hoses and a sensor plug. Mind the plug stay.",
+     "parts": [
+      "cooling.crossover-pipe"
+     ],
+     "jobs": [
+      "crossover-pipe"
+     ],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ]
+     }
+    },
+    {
+     "label": "Thermostat housing",
+     "likelihood": "high",
+     "test": "Look for blisters, a gap or wet staining at the black housing. Original plastic breaks down. Rear bolts are hard to reach.",
+     "fix": "Fit an aluminium housing with new seals.",
+     "parts": [
+      "cooling.thermostat-housing"
+     ],
+     "jobs": [
+      "thermostat-housing"
+     ],
+     "appliesTo": {
+      "engine": [
+       "4.0"
+      ],
+      "induction": [
+       "na"
+      ]
+     }
+    },
+    {
+     "label": "Header tank cracked",
+     "likelihood": "med",
+     "test": "Run a finger along the bottom. Seen on XK8s leaking onto the manifold.",
+     "fix": "Replace the tank.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Heater hoses in the valley",
+     "likelihood": "med",
+     "test": "1997-99 XK, VIN 010343-042635. Coolant in the V, or from the rear.",
+     "fix": "Replace both heater hoses and flush. On a supercharged car the blower must come off.",
+     "parts": [
+      "cooling.valley-hose-feed",
+      "cooling.valley-hose-return"
+     ],
+     "jobs": [
+      "valley-hoses"
+     ],
+     "appliesTo": {
+      "induction": [
+       "na"
+      ],
+      "vinFrom": "010343",
+      "vinTo": "042635"
+     }
+    },
+    {
+     "label": "XKR valley pipe",
+     "likelihood": "med",
+     "test": "JEC: leaks first at the front end, under the supercharger. Pressure test.",
+     "fix": "Remove the supercharger to replace it. Not a beginner job.",
+     "parts": [],
+     "jobs": [
+      "valley-hoses"
+     ],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ]
+     }
+    },
+    {
+     "label": "Small drip on the catalyst",
+     "likelihood": "low",
+     "test": "Motorious says a glycol smell is often this, and detectable but minor. Find the source above it.",
+     "fix": "Fix the source.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "motorious",
+    "jr-crossover",
+    "jr-thermo",
+    "jcna-cool",
+    "tsb-303-48a",
+    "jec-valley",
+    "jl-thermo",
+    "tsb-303-60",
+    "wm"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "low-coolant-warning-tank-full",
+   "symptom": "Low coolant warning with a full tank",
+   "system": "cooling",
+   "when": "On start-up",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Float stuck",
+     "likelihood": "high",
+     "test": "With ignition on, check the float at the right rear corner of the tank.",
+     "fix": "Free the float.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Dirty level probe",
+     "likelihood": "med",
+     "test": "One owner found deposits on the probe changed the readings.",
+     "fix": "Clean the probe.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Really low",
+     "likelihood": "med",
+     "test": "If the tank is under a quarter, Motorious says stop. Top up cold with the right coolant.",
+     "fix": "Find the leak.",
+     "parts": [
+      "cooling.header-tank"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-303-14",
+    "jr-coolprobe",
+    "motorious"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "heater-cold",
+   "symptom": "Heater blows cold or weak",
+   "system": "hvac",
+   "when": "Warm engine",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Heater matrix blocked by old coolant",
+     "likelihood": "high",
+     "test": "At 2000 rpm with heat on full, under 40 °C at the left footwell duct is a fail. Applies up to VIN 042635.",
+     "fix": "Chemical flush per TSB 303-11, then the correct coolant.",
+     "parts": [],
+     "jobs": [
+      "valley-hoses"
+     ],
+     "appliesTo": {
+      "myTo": 1999
+     }
+    },
+    {
+     "label": "Auxiliary heater pump",
+     "likelihood": "med",
+     "test": "Pump motor runs but the head is blocked, or brushes are worn. B1968 may be set.",
+     "fix": "Clean or replace.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Thermostat stuck open",
+     "likelihood": "med",
+     "test": "P0128 and slow warm-up.",
+     "fix": "Replace the thermostat.",
+     "parts": [
+      "cooling.thermostat"
+     ],
+     "jobs": [
+      "thermostat-housing"
+     ],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-303-11a",
+    "jr-heaterpump",
+    "jag-dtc-9702"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "ac-not-cold",
+   "symptom": "Air conditioning not cold",
+   "system": "hvac",
+   "when": "Warm day",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Compressor failed",
+     "likelihood": "med",
+     "test": "Poor idle with A/C on and high side pressure bouncing. One compressor had broken reeds.",
+     "fix": "Replace compressor and dryer and flush. Recover refrigerant first.",
+     "parts": [
+      "hvac.compressor"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Pressure switch or clutch circuit",
+     "likelihood": "med",
+     "test": "B1858, B1861 or B1969. On 4.2, P0532 or P0533 stop the clutch.",
+     "fix": "Follow the code.",
+     "parts": [
+      "hvac.control-panel"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jr-ac",
+    "jag-dtc-9702",
+    "jag-dtc-03"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "flat-battery-week",
+   "symptom": "Battery flat after a week",
+   "system": "electrical",
+   "when": "After standing, often overnight in cold weather",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Battery itself",
+     "likelihood": "high",
+     "test": "Fully charge and load test. Open circuit around 12.45 to 12.49 V means run a drain test.",
+     "fix": "Replace it.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": [
+      "flat-battery",
+      "battery-drain-test"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Upstream oxygen sensor relay sticking on, 1999-2000",
+     "likelihood": "high",
+     "test": "VIN 031303-A01789 (XK8) or A00116-A01257 (XKR). Meter from centre of Fuse 10 to ground stud: under 0.4 V is normal, 2.5 V or more means the relay stayed in.",
+     "fix": "Fit the revised relay.",
+     "parts": [
+      "electrical.relay"
+     ],
+     "jobs": [
+      "battery-drain-test"
+     ],
+     "appliesTo": {
+      "myFrom": 1999,
+      "myTo": 2000
+     }
+    },
+    {
+     "label": "Excess quiescent drain",
+     "likelihood": "med",
+     "test": "Limit is under 30 mA after a 60 minute shutdown with the car locked. Use a clamp probe, not a multimeter in series unless it has at least a 10 A range, because the electronic throttle can blow a meter fuse. Every fuse pull restarts the sleep period.",
+     "fix": "Trace the circuit with the clamp. One owner found 1.09 A falling to 0.02 A in about 26 minutes.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": [
+      "flat-battery",
+      "battery-drain-test"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Wipers on intermittent, 2001-02",
+     "likelihood": "low",
+     "test": "Service Action S843 title on battery drain with wipers left on intermittent.",
+     "fix": "Check the action was done. Bulletin text not read.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {
+      "myFrom": 2001,
+      "myTo": 2002
+     }
+    },
+    {
+     "label": "Added accessories",
+     "likelihood": "low",
+     "test": "Trackers and similar raise the drain.",
+     "fix": "Disconnect and retest.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-414-06A",
+    "jag-battery",
+    "jr-parasitic",
+    "jec-drain",
+    "tsb-list"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "charge-warning",
+   "symptom": "Charge warning light",
+   "system": "electrical",
+   "when": "Driving",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Alternator",
+     "likelihood": "high",
+     "test": "Check charging voltage with the engine running. On 4.2, P1632.",
+     "fix": "Replace the alternator.",
+     "parts": [
+      "electrical.alternator"
+     ],
+     "jobs": [
+      "alternator"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Crankshaft damper moved, early 1997",
+     "likelihood": "med",
+     "test": "VIN 001001-006380. The damper shifts and upsets belt drive.",
+     "fix": "Repair per TSB 303-05.",
+     "parts": [
+      "engine.crank-damper"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myTo": 1997
+     }
+    },
+    {
+     "label": "Belt off or broken",
+     "likelihood": "med",
+     "test": "Look at the belt. It also drives water pump and steering.",
+     "fix": "Replace belt and tensioner. Stop if overheating.",
+     "parts": [
+      "engine.drive-belt",
+      "engine.belt-tensioner"
+     ],
+     "jobs": [
+      "accessory-belt"
+     ],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-303-05",
+    "jag-dtc-03"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "multiple-warnings",
+   "symptom": "Multiple warnings, gauges at zero",
+   "system": "electrical",
+   "when": "On starting or suddenly",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Instrument pack CAN short, 2000 MY",
+     "likelihood": "high",
+     "test": "VIN A00116-A05322. Also no message centre, no A/C and stuck in Park.",
+     "fix": "New back plate per S484.",
+     "parts": [
+      "electrical.instrument-pack"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myFrom": 2000,
+      "myTo": 2000
+     }
+    },
+    {
+     "label": "Cluster connector not latched, 1998",
+     "likelihood": "med",
+     "test": "VIN 029755-029891. Wiggle the wires at the cluster.",
+     "fix": "Repair the latch per TSB 413-03.",
+     "parts": [
+      "electrical.instrument-pack"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myFrom": 1998,
+      "myTo": 1998
+     }
+    },
+    {
+     "label": "Low battery",
+     "likelihood": "high",
+     "test": "Check and charge first.",
+     "fix": "Fit a good battery.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": [
+      "battery-drain-test"
+     ],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-413-S484",
+    "tsb-413-03",
+    "jl-limp"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "abs-trac-failure",
+   "symptom": "ABS and TRAC failure messages",
+   "system": "brakes",
+   "when": "At any speed, sometimes only at full lock",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Wheel speed sensor link harness",
+     "likelihood": "high",
+     "test": "Read the ABS module. C1145, C1155, C1165 or C1175. Front cables break from steering movement, first at full lock. Check resistance at the plug while flexing the wire.",
+     "fix": "Fit a new link harness or sensor.",
+     "parts": [
+      "electrical.harness",
+      "brakes.wheel-speed-sensor"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "ABS module pump solder joint",
+     "likelihood": "high",
+     "test": "C1095. A generic reader shows nothing. Brakes still work with no ABS. Pump spins on a bench with external power if the module is at fault.",
+     "fix": "Open the module and resolder the pump joints, or send it to a repair firm.",
+     "parts": [
+      "electrical.abs-module"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Sensor gap or dirt",
+     "likelihood": "med",
+     "test": "C1233 to C1236. Clean the sensor and reluctor. Do not push dirty fluid back through the block.",
+     "fix": "Clean or replace.",
+     "parts": [
+      "front-suspension.sensor-rotor"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Brake switch",
+     "likelihood": "med",
+     "test": "No codes, restart clears it, and it happened with cruise on. One XK8 with Fail Safe, gearbox and ABS warnings needed this.",
+     "fix": "Replace the switch.",
+     "parts": [
+      "brakes.pedal"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myTo": 2000
+     }
+    },
+    {
+     "label": "Low voltage",
+     "likelihood": "med",
+     "test": "B1676 sets below 9 V.",
+     "fix": "Check battery and charging.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": [
+      "battery-drain-test"
+     ],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jag-dtc-9702",
+    "jl-abspump",
+    "jl-absback",
+    "jcna-abs",
+    "jr-abs",
+    "jl-speedo",
+    "jr-brake"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "speedo-dead",
+   "symptom": "Speedometer dead, Low Brake Fluid and Incorrect Part Fitted",
+   "system": "brakes",
+   "when": "After ABS work",
+   "urgency": "stop",
+   "causes": [
+    {
+     "label": "Bent pins at the ABS module plug",
+     "likelihood": "high",
+     "test": "The ABS module is a link on the CAN bus and feeds the speedometer. Inspect pins after disturbing the plug. Pins 10, 11, 12 and 23 are not used.",
+     "fix": "Straighten pins carefully. One owner fixed it with pliers and a plastic card.",
+     "parts": [
+      "electrical.abs-module"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jl-speedo"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "stability-control-failure",
+   "symptom": "Stability control fault on a 2003-on car",
+   "system": "brakes",
+   "when": "Driving",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Steering angle sensor",
+     "likelihood": "med",
+     "test": "C1277, C1295, C1306 or C1307.",
+     "fix": "Check mounting and encoder ring, then replace.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Yaw and lateral sensor cluster",
+     "likelihood": "med",
+     "test": "C1279 to C1282, or U1909.",
+     "fix": "Check it is mounted tight. Replace if faulty.",
+     "parts": [
+      "steering.yaw-sensor"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Pressure or booster",
+     "likelihood": "med",
+     "test": "C1285 to C1288, C1997.",
+     "fix": "Follow the code.",
+     "parts": [
+      "brakes.booster"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jag-dtc-03"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "suspension-fault-cats",
+   "symptom": "Suspension fault message, hard ride",
+   "system": "front-suspension",
+   "when": "CATS cars",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Worn damper wiring",
+     "likelihood": "high",
+     "test": "The dampers default to firm. Check the wires between dampers and main loom. On 2003-on cars C1416 to C1432 name the corner.",
+     "fix": "Fit a replacement loom section.",
+     "parts": [
+      "front-suspension.damper"
+     ],
+     "jobs": [
+      "front-dampers-springs"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Failed damper",
+     "likelihood": "med",
+     "test": "Code names a solenoid after wiring is ruled out.",
+     "fix": "Fit a new damper. Expensive, so test first.",
+     "parts": [
+      "front-suspension.damper"
+     ],
+     "jobs": [
+      "front-dampers-springs"
+     ],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "ph-chassis",
+    "jag-dtc-03",
+    "octane"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "clunk-front",
+   "symptom": "Clunk from the front over bumps",
+   "system": "front-suspension",
+   "when": "Rough roads, low speed",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Anti-roll bar drop links",
+     "likelihood": "high",
+     "test": "Tiny play here is loud. Jaguar routine: lift, support under the lower spring seat, wheels off, check free play.",
+     "fix": "Fit new links. Have spares: undoing nuts often breaks them, says David Marks.",
+     "parts": [
+      "front-suspension.arb-link"
+     ],
+     "jobs": [
+      "arb-drop-links"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Lower ball joint",
+     "likelihood": "high",
+     "test": "Check with a pry bar for play. Fronts last 30,000 to 35,000 miles according to David Marks. Inner tyre wear is a clue.",
+     "fix": "Replace the joint.",
+     "parts": [
+      "front-suspension.lower-ball-joint"
+     ],
+     "jobs": [
+      "lower-ball-joint"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Damper top mount",
+     "likelihood": "high",
+     "test": "Look at the towers. Original foam bushes degrade and cause chatter.",
+     "fix": "Fit new mounts.",
+     "parts": [
+      "front-suspension.spring-damper"
+     ],
+     "jobs": [
+      "front-dampers-springs"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Upper ball joint",
+     "likelihood": "med",
+     "test": "Check for play and a missing boot.",
+     "fix": "Replace. Use the proper tool on the arm.",
+     "parts": [
+      "front-suspension.upper-ball-joint"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Wishbone bushes",
+     "likelihood": "med",
+     "test": "Pry the arms. 1999-2000 cars, VIN 034426-A06104, may have splitting lower front bushes.",
+     "fix": "Replace with the latest spec, MNE 1360CA.",
+     "parts": [
+      "front-suspension.lower-wishbone-front"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Wheel bearing end float",
+     "likelihood": "low",
+     "test": "Rock the wheel at top and bottom.",
+     "fix": "Replace. The front bearing is a sealed cartridge and cannot be adjusted.",
+     "parts": [
+      "front-suspension.wheel-bearing"
+     ],
+     "jobs": [
+      "wheel-bearing-front"
+     ],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-204-01",
+    "motorious",
+    "ph-chassis",
+    "jl-seminar",
+    "tsb-204-S499",
+    "moss-mount",
+    "jl-rough",
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "creak-front",
+   "symptom": "Creak from the front over bumps",
+   "system": "front-suspension",
+   "when": "Slow speed",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Upper fulcrum bushes seized",
+     "likelihood": "high",
+     "test": "Seized bushes wear the bolt hole oval in the subframe. Listen and inspect.",
+     "fix": "Free and replace before the hole wears.",
+     "parts": [
+      "front-suspension.upper-bush"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jl-rough"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "clunk-rear",
+   "symptom": "Clunk from the rear over bumps",
+   "system": "rear-suspension",
+   "when": "Potholes and speed humps",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Rear subframe bushing moved",
+     "likelihood": "high",
+     "test": "Jaguar: bush moves out of place in the subframe.",
+     "fix": "Remove the subframe, press out, roughen and bond in new bushes with two part epoxy.",
+     "parts": [
+      "rear-suspension.subframe-bush"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Damper top mounts",
+     "likelihood": "high",
+     "test": "Remove the damper to see. A solid clunk is typical, and it does not show by pushing on the car. From older Jaguars.",
+     "fix": "Fit new mount parts.",
+     "parts": [
+      "rear-suspension.spring-damper"
+     ],
+     "jobs": [
+      "rear-dampers-springs"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "A-frame bushes",
+     "likelihood": "med",
+     "test": "PistonHeads says they wear. Lever them.",
+     "fix": "Fit new bushes. Keep shims in place.",
+     "parts": [
+      "rear-suspension.subframe"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Handbrake equaliser rattle",
+     "likelihood": "low",
+     "test": "Up to VIN 009013. Rattle on rough roads.",
+     "fix": "Adjust and add the return spring.",
+     "parts": [
+      "brakes.handbrake-cable"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myTo": 1997
+     }
+    },
+    {
+     "label": "Wrong fulcrum bolts, 1998",
+     "likelihood": "low",
+     "test": "VIN 025588-026519. Check they were replaced.",
+     "fix": "Fit correct bolts.",
+     "parts": [
+      "rear-suspension.hub-carrier"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myFrom": 1998,
+      "myTo": 1998
+     }
+    }
+   ],
+   "src": [
+    "tsb-204-03",
+    "ph-chassis",
+    "jl-clunk",
+    "tsb-206-01AM",
+    "tsb-204-10"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "steering-knock",
+   "symptom": "Knock through the steering wheel",
+   "system": "steering",
+   "when": "Low speed bumps, or turning",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Lower column without rubber coupling",
+     "likelihood": "high",
+     "test": "Before VIN A11051. Check for a rubber coupling.",
+     "fix": "Fit the modified lower column and new return line.",
+     "parts": [
+      "steering.column-lower",
+      "steering.pas-hose"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myTo": 2000,
+      "vinTo": "A11050"
+     }
+    },
+    {
+     "label": "Rack return line",
+     "likelihood": "med",
+     "test": "After VIN A11051, or with the modified column.",
+     "fix": "Fit a new return line.",
+     "parts": [
+      "steering.pas-hose"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-211-06",
+    "ph-chassis"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "floaty-handling",
+   "symptom": "Floats and wanders",
+   "system": "front-suspension",
+   "when": "Faster roads",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Rear bushes of the front beam",
+     "likelihood": "high",
+     "test": "Inspect the vee mounts. PistonHeads ties a floaty feel to these.",
+     "fix": "Replace the mounts.",
+     "parts": [
+      "front-suspension.vee-mount"
+     ],
+     "jobs": [
+      "vee-mounts"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Tired rubber generally",
+     "likelihood": "med",
+     "test": "Age hardens bushes on low use cars.",
+     "fix": "Renew the front rubber.",
+     "parts": [
+      "front-suspension.lower-wishbone-front",
+      "front-suspension.arb-bush"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "ph-chassis",
+    "jl-rough"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "tyre-wear",
+   "symptom": "Uneven tyre wear",
+   "system": "wheels",
+   "when": "Inner front or rear edges",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Worn lower ball joints",
+     "likelihood": "high",
+     "test": "Inside of the front tyres wears faster.",
+     "fix": "Replace joints, then align.",
+     "parts": [
+      "front-suspension.lower-ball-joint"
+     ],
+     "jobs": [
+      "lower-ball-joint"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Worn rear suspension",
+     "likelihood": "med",
+     "test": "Rear uneven wear. Check the rear bushes.",
+     "fix": "Replace, then align.",
+     "parts": [
+      "rear-suspension.subframe",
+      "driveline.universal-joint"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jl-seminar",
+    "ph-chassis"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "vibration-speed",
+   "symptom": "Vibration at speed through wheel or seat",
+   "system": "wheels",
+   "when": "Motorway",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Wheel and tyre force variation",
+     "likelihood": "high",
+     "test": "Road force balance. Jaguar has a procedure.",
+     "fix": "Match tyres to wheels.",
+     "parts": [],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Universal joints",
+     "likelihood": "med",
+     "test": "Check all driveshaft joints. They act as the upper link.",
+     "fix": "Replace or lubricate.",
+     "parts": [
+      "driveline.universal-joint"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-204-15",
+    "tsb-204-17",
+    "ph-chassis"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "brake-judder",
+   "symptom": "Brake judder",
+   "system": "brakes",
+   "when": "Braking from speed",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Disc thickness variation",
+     "likelihood": "high",
+     "test": "Pulsing at the pedal. Mostly the front.",
+     "fix": "Replace discs and clean hubs.",
+     "parts": [
+      "brakes.disc-front"
+     ],
+     "jobs": [
+      "brake-discs-front"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Sticking front caliper",
+     "likelihood": "med",
+     "test": "Blue discs mean overheating from a stuck piston.",
+     "fix": "Overhaul or replace.",
+     "parts": [
+      "brakes.caliper-front"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Brembo cars, 2001-on",
+     "likelihood": "med",
+     "test": "Returns after new discs. VIN A22191-on.",
+     "fix": "Disc and hub optimisation.",
+     "parts": [
+      "brakes.disc-front"
+     ],
+     "jobs": [
+      "brake-discs-front"
+     ],
+     "appliesTo": {
+      "myFrom": 2001
+     }
+    }
+   ],
+   "src": [
+    "tsb-206-04",
+    "tsb-206-11",
+    "jl-seminar"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "handbrake-weak",
+   "symptom": "Handbrake weak or warning stays on",
+   "system": "brakes",
+   "when": "Parking",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Shoes set wrongly",
+     "likelihood": "high",
+     "test": "Limited adjustment and often set wrong, says David Marks.",
+     "fix": "Set up correctly.",
+     "parts": [
+      "brakes.handbrake-shoes"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Lever not returning, early 1997",
+     "likelihood": "med",
+     "test": "VIN 001001-009013.",
+     "fix": "Adjust and fit the extra spring.",
+     "parts": [
+      "brakes.handbrake-cable"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myTo": 1997
+     }
+    }
+   ],
+   "src": [
+    "tsb-206-01AM",
+    "ph-chassis",
+    "jl-seminar"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "wheel-bearing-noise",
+   "symptom": "Rumble or hum that changes with speed",
+   "system": "front-suspension",
+   "when": "Rising with speed, changes on bends",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Front wheel bearing",
+     "likelihood": "high",
+     "test": "Check end float. David Marks says fronts last 30,000 to 35,000 miles, and as little as 20,000 on XJRs, while rears last forever.",
+     "fix": "Replace promptly. Wear ruins tyres.",
+     "parts": [
+      "front-suspension.wheel-bearing"
+     ],
+     "jobs": [
+      "wheel-bearing-front"
+     ],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jl-seminar",
+    "ph-chassis",
+    "tsb-204-01"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "steering-leak-noise",
+   "symptom": "Power steering leak or metallic noise",
+   "system": "steering",
+   "when": "Parked or turning",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Transfer pipe O-ring",
+     "likelihood": "high",
+     "test": "Leak at a union nut on the rack.",
+     "fix": "Fit new O-rings before replacing the rack.",
+     "parts": [
+      "steering.rack"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Noisy transfer pipes, 1999-2000",
+     "likelihood": "med",
+     "test": "High-pitched or metallic noise, VIN 031303-A09646.",
+     "fix": "Fit the revised pipe kit in pairs.",
+     "parts": [
+      "steering.rack"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "myFrom": 1999,
+      "myTo": 2000
+     }
+    }
+   ],
+   "src": [
+    "tsb-211-01",
+    "tsb-211-05",
+    "tsb-211-02am"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "pinion-leak",
+   "symptom": "Oil dripping at the front of the differential",
+   "system": "driveline",
+   "when": "Parked",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Pinion seal",
+     "likelihood": "high",
+     "test": "Oil at the flange.",
+     "fix": "Seal comes as an assembly with the flange.",
+     "parts": [
+      "driveline.differential"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-205-03"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "roof-wont-close",
+   "symptom": "Roof will not close or latch",
+   "system": "roof",
+   "when": "Going up",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Basics",
+     "likelihood": "high",
+     "test": "Run the engine for this test. Jaguar says the engine should run to keep battery voltage up. Check the battery, roof fuses and relays in the boot, the pump T handle is fully clockwise, and the orange and blue solenoid plugs are on.",
+     "fix": "Fix what you find.",
+     "parts": [
+      "roof.pump",
+      "electrical.battery"
+     ],
+     "jobs": [
+      "hood-hydraulics",
+      "battery-drain-test"
+     ],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    },
+    {
+     "label": "Latch switch",
+     "likelihood": "high",
+     "test": "Top Latch Fail shows. Use the bulletin table: read the symptom both opening and closing. Hold the switch up to 35 to 40 seconds to let it time out.",
+     "fix": "Clean or replace the switch or wiring named.",
+     "parts": [
+      "roof.switch"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    },
+    {
+     "label": "Hose or fluid",
+     "likelihood": "high",
+     "test": "Slow, stalls, or fluid in the header. Check fluid level at the pump.",
+     "fix": "Refill, or replace hoses. Hoses are directional.",
+     "parts": [
+      "roof.hoses",
+      "roof.pump"
+     ],
+     "jobs": [
+      "hood-hydraulics"
+     ],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    },
+    {
+     "label": "Hoses swapped",
+     "likelihood": "med",
+     "test": "After a hose job. One owner found two reversed.",
+     "fix": "Swap them.",
+     "parts": [
+      "roof.hoses"
+     ],
+     "jobs": [
+      "hood-hydraulics"
+     ],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    },
+    {
+     "label": "Wrong speed signal",
+     "likelihood": "low",
+     "test": "Instrument pack shows wrong speed.",
+     "fix": "Fix the speed signal.",
+     "parts": [
+      "electrical.instrument-pack"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    },
+    {
+     "label": "Stuck open now",
+     "likelihood": "high",
+     "test": "Use the manual procedure: open the pump valve, unlatch with the 8 mm Allen key at the header plug, lift the roof gently. Damage occurs if done wrongly.",
+     "fix": "Fix before relying on it.",
+     "parts": [
+      "roof.latch-cylinder"
+     ],
+     "jobs": [
+      "hood-hydraulics"
+     ],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "tsb-501-11",
+    "jr-roof",
+    "jl-roof",
+    "jr-hyd",
+    "tsb-501-01"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "roof-wont-open",
+   "symptom": "Roof will not open",
+   "system": "roof",
+   "when": "Going down",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Latch closed switch shorted",
+     "likelihood": "med",
+     "test": "Rear glass lowers, latch lifts slightly, then pulls back after about 5 seconds.",
+     "fix": "Replace the switch.",
+     "parts": [
+      "roof.switch"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    },
+    {
+     "label": "Pump on manual or low voltage",
+     "likelihood": "high",
+     "test": "Quarter glass lowers but no unlatch. Check valve, fuses and solenoids.",
+     "fix": "Fix the basics.",
+     "parts": [
+      "roof.pump"
+     ],
+     "jobs": [
+      "hood-hydraulics"
+     ],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "tsb-501-11"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "roof-slow",
+   "symptom": "Roof slow or creaking",
+   "system": "roof",
+   "when": "Cold weather",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Old fluid",
+     "likelihood": "high",
+     "test": "A full cycle should take about 20 seconds. Much longer suggests thick fluid.",
+     "fix": "Flush with care. Messy and risks the trim.",
+     "parts": [
+      "roof.pump"
+     ],
+     "jobs": [
+      "hood-hydraulics"
+     ],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    },
+    {
+     "label": "Dry rams",
+     "likelihood": "med",
+     "test": "Rub a lightly oiled rag on the ram shafts.",
+     "fix": "Lubricate.",
+     "parts": [
+      "roof.lift-cylinder"
+     ],
+     "jobs": [
+      "hood-hydraulics"
+     ],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "ph-body",
+    "jr-roof",
+    "jl-roof",
+    "jec-hood"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "roof-fluid-leak",
+   "symptom": "Hydraulic fluid dripping from the header or in the cabin",
+   "system": "roof",
+   "when": "After use, staining on seats",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Header rail hose failed",
+     "likelihood": "high",
+     "test": "Look above the mirror. Hose pulls out of the crimp under pump pressure of about 1600 psi. Jaguar has a bulletin title on this leak.",
+     "fix": "Replace the hoses. Cover the interior.",
+     "parts": [
+      "roof.hoses"
+     ],
+     "jobs": [
+      "hood-hydraulics"
+     ],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    },
+    {
+     "label": "Ram seal",
+     "likelihood": "med",
+     "test": "Fluid at the rear corners. Seals can dislodge.",
+     "fix": "Rebuild or replace the ram.",
+     "parts": [
+      "roof.lift-cylinder"
+     ],
+     "jobs": [
+      "hood-hydraulics"
+     ],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "tsb-list",
+    "jr-hyd",
+    "jr-roof",
+    "jec-hood"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "quarter-window",
+   "symptom": "Rear quarter window will not move",
+   "system": "body",
+   "when": "With the roof",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Regulator base plate, 1999-2000",
+     "likelihood": "high",
+     "test": "VIN 041998-A07948. Drive cable detaches.",
+     "fix": "Repair per TSB 501-49.",
+     "parts": [
+      "body.window-regulator"
+     ],
+     "jobs": [
+      "window-regulator"
+     ],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ],
+      "myFrom": 1999,
+      "myTo": 2000
+     }
+    },
+    {
+     "label": "Roof not reporting latched",
+     "likelihood": "med",
+     "test": "Rises after the third press means Top Closed switch open.",
+     "fix": "Fix the switch.",
+     "parts": [
+      "roof.switch"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "tsb-501-49",
+    "tsb-501-11"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "door-window-wont-drop",
+   "symptom": "Door glass does not drop or reseal",
+   "system": "body",
+   "when": "Opening or closing door",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Window lost its memory",
+     "likelihood": "high",
+     "test": "Often weak battery: at 10.5 V or below they forget.",
+     "fix": "Hold down until a click, then up until a click, in the car with the door shut.",
+     "parts": [
+      "electrical.battery"
+     ],
+     "jobs": [
+      "battery-drain-test"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Motor or switch",
+     "likelihood": "low",
+     "test": "Reset does not help.",
+     "fix": "Replace.",
+     "parts": [
+      "body.window-regulator"
+     ],
+     "jobs": [
+      "window-regulator"
+     ],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jr-window",
+    "ph-interior",
+    "tsb-501-11"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "water-leak",
+   "symptom": "Water in the boot or cabin",
+   "system": "body",
+   "when": "After rain or washing",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Boot seal or seams",
+     "likelihood": "high",
+     "test": "Wet spare well: check the seal shape. Wet at sides or rear: flange or seams.",
+     "fix": "Refit or reseal.",
+     "parts": [
+      "body.door-seal"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Door glass height",
+     "likelihood": "med",
+     "test": "Convertible: the glass should line up with the A-post feature line.",
+     "fix": "Adjust the regulator stop.",
+     "parts": [
+      "body.window-regulator"
+     ],
+     "jobs": [
+      "window-regulator"
+     ],
+     "appliesTo": {
+      "body": [
+       "convertible"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "tsb-501-53",
+    "tsb-501-52"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fob-not-working",
+   "symptom": "Remote will not lock the car",
+   "system": "electrical",
+   "when": "Intermittent",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Dirty board",
+     "likelihood": "med",
+     "test": "Open it. Black marks at the buttons. Two CR2016 cells.",
+     "fix": "Clean with alcohol, then press unlock two or three times.",
+     "parts": [
+      "electrical.key-fob"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Dead or lost fob",
+     "likelihood": "med",
+     "test": "PistonHeads says new fobs need programming.",
+     "fix": "Have it programmed.",
+     "parts": [
+      "electrical.key-fob"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jr-remote",
+    "tsb-list",
+    "ph-interior"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "door-ajar",
+   "symptom": "Door ajar warnings or latch trouble",
+   "system": "body",
+   "when": "Any time",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Door ajar switch",
+     "likelihood": "high",
+     "test": "Fault traced to the switch.",
+     "fix": "The switch is now sold separately. Remove the lock, cable and handle as one.",
+     "parts": [
+      "body.door-latch"
+     ],
+     "jobs": [
+      "door-handle-lock"
+     ],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-501-54"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fuel-gauge",
+   "symptom": "Fuel gauge wrong",
+   "system": "fuel",
+   "when": "Any level",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Level sender or wiring",
+     "likelihood": "high",
+     "test": "P0460, or B1202 and B1204 on 2003 cars.",
+     "fix": "Check wiring, then the sender.",
+     "parts": [
+      "fuel.sender"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jag-dtc-9702",
+    "jag-dtc-03"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "headlamp-misting",
+   "symptom": "Misty headlamps",
+   "system": "electrical",
+   "when": "After rain",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Vent or lens",
+     "likelihood": "high",
+     "test": "Jaguar has guidelines on acceptable levels.",
+     "fix": "Improve ventilation, or fit the revised lens. Bulletin titles only.",
+     "parts": [
+      "electrical.headlamp"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "tsb-list"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "airbag-light",
+   "symptom": "Airbag light on",
+   "system": "electrical",
+   "when": "At start",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Stored fault",
+     "likelihood": "high",
+     "test": "On 2001-on cars count the flash code. Do not use a meter on airbag circuits.",
+     "fix": "Have it read with a capable tool.",
+     "parts": [
+      "electrical.airbag"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jag-dtc-9702",
+    "jag-dtc-03"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "cruise-dead",
+   "symptom": "Cruise control stops working",
+   "system": "electrical",
+   "when": "Any time",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Brake switch",
+     "likelihood": "high",
+     "test": "P1571.",
+     "fix": "Replace.",
+     "parts": [
+      "brakes.pedal"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    },
+    {
+     "label": "Steering wheel wiring",
+     "likelihood": "med",
+     "test": "P0566 to P0570. Thin wires break at the wheel. Feel along the insulation.",
+     "fix": "Repair or fit a new cassette reel.",
+     "parts": [
+      "steering.wheel"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jag-dtc-9702",
+    "jl-seminar",
+    "jr-brake",
+    "tsb-206-07"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "seat-wont-move",
+   "symptom": "Electric seat will not move",
+   "system": "interior",
+   "when": "Any time",
+   "urgency": "safe",
+   "causes": [
+    {
+     "label": "Seat control module",
+     "likelihood": "med",
+     "test": "Check fuses, then swap modules between seats. Board wear or spilled liquid.",
+     "fix": "Clean or repair the board.",
+     "parts": [
+      "electrical.seat-module"
+     ],
+     "jobs": [],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "jr-seat"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "intake-loss-xkr",
+   "symptom": "XKR feels down on power",
+   "system": "induction",
+   "when": "Under boost",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Loose charge air ducts",
+     "likelihood": "med",
+     "test": "VIN A00001-A33944.",
+     "fix": "Fit revised ducts and plates.",
+     "parts": [
+      "induction.supercharger"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ],
+      "myTo": 2003
+     }
+    },
+    {
+     "label": "Intercooler pump relay",
+     "likelihood": "med",
+     "test": "P1474 limits throttle to 30%.",
+     "fix": "Replace the relay.",
+     "parts": [
+      "induction.intercooler-pump"
+     ],
+     "jobs": [],
+     "appliesTo": {
+      "induction": [
+       "sc"
+      ]
+     }
+    }
+   ],
+   "src": [
+    "tsb-303-57a",
+    "jag-dtc-9702"
+   ],
+   "conf": "factory"
+  }
+ ],
+ "gaps": [
+  "Likelihood rankings are judgement based on how many sources mention each cause. Jaguar gives no failure rates.",
+  "Text of the Automotix-listed bulletins on wiper drain S843, hissing IMT O-ring, harsh 6-speed shifts, and P0780-P0785 was not read. Only titles were seen. The jagrepair.com copy of 501-33 (fluid flush) is a scan with no text layer and was not read.",
+  "Rear damper top mount evidence for clunks comes from older Jaguars on Jag-lovers, not the X100.",
+  "Web search budget for this run ran out, so no further searches were possible for 2004-06 specifics.",
+  "Part links were normalised against parts.json. Brake light switch still points to brakes.pedal, conductor plate to transmission.valve-body and rotary switch to transmission.gearbox, because those have no record of their own."
+ ]
+}

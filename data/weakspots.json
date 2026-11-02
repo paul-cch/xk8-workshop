@@ -1,0 +1,1323 @@
+{
+ "sources": {
+  "bcf-thermo": {
+   "title": "99 XJ8 thermostat housing failure",
+   "url": "https://www.britishcarforum.com/community/threads/99-xj8-thermostat-housing-failure.81702",
+   "publisher": "British Car Forum",
+   "kind": "forum"
+  },
+  "bp-x100": {
+   "title": "British Parts: Jaguar X100 XK and XKR 1996-2006 catalogue, prices read 1 Nov 2026",
+   "url": "https://www.britishparts.co.uk/classic-jaguar/jaguar-x100-xk-xkr-1996-2006",
+   "publisher": "British Parts UK",
+   "kind": "vendor"
+  },
+  "jag-battery": {
+   "title": "Battery Care Manual: vehicle quiescent current testing",
+   "url": "http://www.jagrepair.com/images/AutoRepairPhotos/Current%20Testing.pdf",
+   "publisher": "Jaguar Land Rover (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "jag-dtc-9702": {
+   "title": "DTC Summaries: XJ Sedan Range, XK8 Range through 2002 MY and XJS Range",
+   "url": "https://host.jcna.com/sites/default/files/NONSTYPE.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JCNA)",
+   "kind": "factory"
+  },
+  "jcna-abs": {
+   "title": "XK8 ABS light",
+   "url": "https://jcna.com/comment/1914",
+   "publisher": "JCNA forum",
+   "kind": "forum"
+  },
+  "jcna-cool": {
+   "title": "XK8 99 and 2000 engine coolant leaks",
+   "url": "https://jcna.com/comment/5098",
+   "publisher": "JCNA forum",
+   "kind": "forum"
+  },
+  "jcna-tens": {
+   "title": "R: Timing chain tensioner",
+   "url": "https://jcna.com/comment/9751",
+   "publisher": "JCNA forum",
+   "kind": "forum"
+  },
+  "jec-hood": {
+   "title": "Convertible hood oil",
+   "url": "https://forums.jec.org.uk/viewtopic.php?p=64376",
+   "publisher": "JEC Forums",
+   "kind": "forum"
+  },
+  "jec-valley": {
+   "title": "Head gaskets replacement costs (valley pipe note)",
+   "url": "https://forums.jec.org.uk/viewtopic.php?p=83951",
+   "publisher": "JEC Forums",
+   "kind": "forum"
+  },
+  "jl-absback": {
+   "title": "2001 XK8 back home again",
+   "url": "https://forums.jag-lovers.com/t/2001-xk8-back-home-again-yes-they-can-be-brought-back-to-life-for-a-price/393795",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-abspump": {
+   "title": "1997 XK8 convertible ABS pump replacement",
+   "url": "https://forums.jag-lovers.com/t/1997-xk8-convertable-abs-pump-replacement/357625",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-buy": {
+   "title": "[xk8] Need advice on purchasing a used XK8",
+   "url": "https://forums.jag-lovers.com/t/xk8-need-advice-on-purchasing-a-used-xk8/247662",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-clunk": {
+   "title": "Metal noise while driving (rear clunk, older Jaguar)",
+   "url": "https://forums.jag-lovers.com/t/metal-noise-while-driving/431084",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-hes": {
+   "title": "[xk8] Hesitation and engine warning light",
+   "url": "https://forums.jag-lovers.com/t/xk8-hesitation-and-engine-warning-light/246969",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-limp": {
+   "title": "Limp mode, tried almost everything",
+   "url": "https://forums.jag-lovers.com/t/limp-mode-tried-almost-everything/392659",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-roof": {
+   "title": "Help with a problem (XK8 top latch)",
+   "url": "https://forums.jag-lovers.com/t/help-with-a-problem/367755",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-rough": {
+   "title": "Rough ride on bumpy roads",
+   "url": "https://forums.jag-lovers.com/t/rough-ride-on-bumpy-roads/366704",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-seminar": {
+   "title": "News from the JEC X308/XK8 seminar: notes on a talk by David Marks, independent Jaguar specialist, 2005",
+   "url": "https://forums.jag-lovers.com/t/x300-news-from-x308-seminar/225029",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-tens": {
+   "title": "[xk8] Tensioners",
+   "url": "https://forums.jag-lovers.com/t/xk8-tensioners/249550",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-thermo": {
+   "title": "[xk8] Replacing the thermostat housing",
+   "url": "https://forums.jag-lovers.com/t/xk8-replacing-the-thermostat-housing-am-i-missing-a-trick/248814",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jr-bclutch": {
+   "title": "Transmission ZF 5HP24 repair",
+   "url": "http://www.jagrepair.com/TransmissionZF5HP24.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-crossover": {
+   "title": "Water pump and crossover pipe, XK8",
+   "url": "http://www.jagrepair.com/WaterPumpCrossoverPipexk8.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-hyd": {
+   "title": "XK8 and XKR hydraulic system evaluation",
+   "url": "http://www.jagrepair.com/HydSystemEvaluationXK8XKR.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-nik": {
+   "title": "Nikasil engine blocks",
+   "url": "http://www.jagrepair.com/NikasilEngineBlocks.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-nikstart": {
+   "title": "Nikasil no start, cylinder washing",
+   "url": "http://www.jagrepair.com/NikasilNoStartCylinderWashing.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-parasitic": {
+   "title": "Jaguar parasitic test",
+   "url": "http://www.jagrepair.com/JaguarParasiticTest.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-roof": {
+   "title": "Jaguar XK8 roof troubleshooting",
+   "url": "http://www.jagrepair.com/JaguarXK8RoofTroubleshooting%201997-2006.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-tbplug": {
+   "title": "Throttle body plugs, P0121",
+   "url": "http://www.jagrepair.com/ThrottleBodyPlugs.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-thermo": {
+   "title": "Thermostat housing, 4.0 XK8",
+   "url": "http://www.jagrepair.com/ThermostatHousing4XK8.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "moss-mount": {
+   "title": "XK8 and XKR spring/damper mount repair and upgrade kit",
+   "url": "https://mossmotors.com/mja2170bd-1-xk8-and-xkr-spring-damper-mount-repair-and-upgrade-kit",
+   "publisher": "Moss Motors",
+   "kind": "vendor"
+  },
+  "moss-vin": {
+   "title": "VIN information, XK8 and XKR 1997-2006",
+   "url": "https://mossmotors.com/media/PDFs/vin-information-xk8-and-xkr-1997-2006.pdf",
+   "publisher": "Moss Motors",
+   "kind": "vendor"
+  },
+  "motorious": {
+   "title": "Jaguar XK8/XKR buying guide",
+   "url": "https://www.motorious.com/articles/highlights/jaguar-xk8-xkr-buying-guide/",
+   "publisher": "Motorious",
+   "kind": "reference"
+  },
+  "motorious-nik": {
+   "title": "The dangers of Nikasil cylinder linings in your Jaguar XK8",
+   "url": "https://www.motorious.com/articles/highlights/nikasil-cylinder-linings-jaguar-xk8-xkr",
+   "publisher": "Motorious",
+   "kind": "reference"
+  },
+  "octane": {
+   "title": "Jaguar XK8 and XKR (X100) buying guide",
+   "url": "https://www.octane-magazine.com/articles/jaguar-xk8-xkr-x100-buying-guide-history-and-review/",
+   "publisher": "Octane",
+   "kind": "reference"
+  },
+  "ph-body": {
+   "title": "Jaguar X100 buying guide: body",
+   "url": "https://www.pistonheads.com/news/ph-buying-guide-contents/jaguar-x100-buying-guide-body/27198",
+   "publisher": "PistonHeads",
+   "kind": "reference"
+  },
+  "ph-chassis": {
+   "title": "Jaguar X100 buying guide: rolling chassis",
+   "url": "https://www.pistonheads.com/features/ph-buying-guides/ph-buying-guide-jaguar-xk8-xkr-x100/27197",
+   "publisher": "PistonHeads",
+   "kind": "reference"
+  },
+  "ph-powertrain": {
+   "title": "Jaguar X100 buying guide: powertrain",
+   "url": "https://www.pistonheads.com/features/ph-buying-guides/ph-buying-guide-jaguar-xk8-xkr-x100/27196",
+   "publisher": "PistonHeads",
+   "kind": "reference"
+  },
+  "tsb-204-01": {
+   "title": "Jaguar Service Technical Bulletin 204-01: Front suspension noise diagnosis",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/204-01%20XK%20susp%20noise.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-211-06": {
+   "title": "Jaguar Service Technical Bulletin 211-06: Steering rack knocking or rattling",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/211Streering/211-06%20steering%20knock.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-15": {
+   "title": "Jaguar Service Technical Bulletin 303-15: Cooling system bleed lines",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-15.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-30": {
+   "title": "Jaguar Service Technical Bulletin 303-30: Noise during start up, install revised timing chain tensioners",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-30%20Revised%20Timing%20Chain%20Tensioners.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-48a": {
+   "title": "Jaguar Service Technical Bulletin 303-48a: Coolant leakage, heater hoses",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-48am.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-54": {
+   "title": "Jaguar Service Technical Bulletin 303-54: Overheating, thermostat stuck closed",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-54%20Overheating.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-58": {
+   "title": "Jaguar Service Technical Bulletin 303-58: Check engine MIL, DTC P0121, connector material mismatch",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-58.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-60": {
+   "title": "Jaguar Service Technical Bulletin 303-60: Coolant pumps, identifying impeller material",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-60am.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-68": {
+   "title": "Jaguar Service Technical Bulletin 303-68: Start-up and idle rattle, primary or secondary chain tensioner",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-68%20Start-up%20and%20Idle%20Rattle.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-S498": {
+   "title": "Jaguar Service Technical Bulletin 303-S498: Engine Fail Safe displayed, replace throttle body",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-S498am-1.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-S514": {
+   "title": "Jaguar Service Technical Bulletin 303-S514: Operation of throttle while in closed position",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-S514am%20Operation%20Of%20Throttle.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-S846a": {
+   "title": "Jaguar Service Technical Bulletin 303-S846a: Oil cooler feed pipe and hose failure",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-S846am%20Oil%20Hose%20Failure.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-310-06a": {
+   "title": "Jaguar Service Technical Bulletin 310-06a: Carbon deposits on throttle blade",
+   "url": "http://www.jagrepair.com/images/TSB/310-06am3.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-413-S484": {
+   "title": "Jaguar Service Technical Bulletin 413-S484: Instrument pack CAN failure",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/413-S484am2%20INSTPK%20CAN%20failure.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-414-06A": {
+   "title": "Jaguar Service Technical Bulletin 414-06A: Intermittently discharged battery diagnostic procedure",
+   "url": "http://www.jagrepair.com/images/TSB/NewDocuments4-23-13/414-06am.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-501-11": {
+   "title": "Jaguar Service Technical Bulletin 501-11: Convertible top electrical system, component descriptions and diagnosis",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/501-11am.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-600-03a": {
+   "title": "Jaguar Service Technical Bulletin 600-03a: Part-load engine breather, scheduled cleaning",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/600Maintenance/600-03am3%20Part-Load%20Engine%20Breather.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-list": {
+   "title": "Jaguar XK8 Technical Service Bulletins by model year (titles only)",
+   "url": "https://automotix.net/autorepair/diy/2000-jaguar-xk8-tsb.html",
+   "publisher": "Automotix",
+   "kind": "reference"
+  },
+  "youcanic-722": {
+   "title": "Mercedes 722.6 5G transmission valve body conductor plate replacement",
+   "url": "https://www.youcanic.com/mercedes-7226-5g-transmission-valve-body-conductor-plate-replacement/",
+   "publisher": "YOUCANIC",
+   "kind": "specialist"
+  }
+ },
+ "items": [
+  {
+   "id": "tensioners-plastic",
+   "title": "Plastic timing chain tensioners",
+   "system": "engine",
+   "severity": 5,
+   "what": "Original tensioners have plastic bodies that harden and crack. If they let go the chain can jump, and two or more teeth can wreck the engine. Jaguar revised the secondary tensioner with a spring from engine 98102106XX, and later fitted metal-bodied ones.",
+   "symptoms": "Rattle at cold start or idle. Often no warning at all.",
+   "check": "Remove the cam covers and inspect the two upper (secondary) tensioners. Look for cracks, loose pieces and worn slippers. Metal bodies mean an upgrade has been done. Check the bills.",
+   "fix": "Fit the latest metal tensioners. Jaguar says if a primary has failed, change all four; if a secondary has failed, change both secondaries, with the shorter bolts. Book time on an XK is 2.8 hours for secondaries on NA and 4.0 on SC, and 4.6 and 5.5 hours for all four.",
+   "cost": {
+    "gbp": [
+     355,
+     1260
+    ],
+    "note": "Low end is full kit parts only (British Parts, read 1 Nov 2026, inc VAT, see upgrades.json). PistonHeads gave about £1200 for all chains and tensioners at an independent in 2013, parts and labour. A specialist figure of £1260 + VAT from winter 2010/11 is recorded in upgrades.json."
+   },
+   "parts": [
+    "engine.chain-tensioner-secondary",
+    "engine.chain-tensioner-primary",
+    "engine.chain-guide-primary"
+   ],
+   "jobs": [
+    "chain-tensioners",
+    "chain-tensioner-42"
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 2002,
+    "vinTo": "A24195"
+   },
+   "src": [
+    "tsb-303-68",
+    "tsb-303-30",
+    "ph-powertrain",
+    "jl-tens",
+    "jcna-tens",
+    "motorious",
+    "bp-x100"
+   ],
+   "conf": "factory",
+   "note": "PistonHeads says upper tensioners are the most prone even on the revised 4.2 design. Dates for the change to metal disagree in forums. The engine number is the real test: metal tensioners start at engine 0108130000, so late MY2002 cars have them from new."
+  },
+  {
+   "id": "chain-guides",
+   "title": "Primary chain guides crack",
+   "system": "engine",
+   "severity": 5,
+   "what": "The plastic chain guides age with the tensioners. Owners doing tensioners at low miles have found primary rails cracked right through.",
+   "symptoms": "Often silent. Rattle if chain slack grows.",
+   "check": "You need the timing covers off to see the primaries. Plan it with the tensioners.",
+   "fix": "Replace guides with the tensioners as a kit. Inspect the chain and replace it if damaged.",
+   "cost": {
+    "gbp": [
+     355,
+     657
+    ],
+    "note": "Parts only, British Parts prices inc VAT, read 1 Nov 2026. Full timing kits."
+   },
+   "parts": [
+    "engine.chain-guide-primary",
+    "engine.chain-primary"
+   ],
+   "jobs": [
+    "chain-tensioners"
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 2002
+   },
+   "src": [
+    "jcna-tens",
+    "jl-tens",
+    "tsb-303-68",
+    "bp-x100"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "nikasil",
+   "title": "Nikasil bore wear",
+   "system": "engine",
+   "severity": 5,
+   "what": "Bores on engines built before 18 August 2000 are Nikasil plated. High sulphur fuel attacked the plating. UK low sulphur petrol arrived on 1 January 2000, and many engines were replaced under warranty, so a car that has survived is usually fine.",
+   "symptoms": "Hard cold start, then lots of smoke, low compression, blow-by.",
+   "check": "Read the engine number under the plastic cover on top of the block, at the front right. It begins with the build date. Steel liners came in on 18 August 2000, and any engine numbered 000818xxxx is unconfirmed either way. Do a compression and blow-by test. Typical blow-by is 9 to 13 litres per minute, and many read over 20 with no other problem. Check for crud in the air inlet tube.",
+   "fix": "Exchange engine. Look for a Genuine Jaguar Exchange plate, or history in the file.",
+   "cost": null,
+   "parts": [],
+   "jobs": [],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 2001
+   },
+   "src": [
+    "jr-nik",
+    "moss-vin",
+    "ph-powertrain",
+    "jl-seminar",
+    "jl-buy",
+    "motorious-nik",
+    "octane",
+    "jr-nikstart"
+   ],
+   "conf": "corroborated",
+   "note": "Sources disagree: Octane says the change came by October 1999, others August 2000. The engine number rule is the best supported. The six digit VIN rule in Motorious conflicts with this and is not reliable, because the engine number decides and engines were swapped. The commonly quoted 0008181043 traces to JagRepair and PistonHeads, not to Jaguar, and SNG breaks the piston rings earlier the same day.",
+   "confirm": {
+    "myFrom": 2000,
+    "tag": "check engine number",
+    "text": "Bores changed to steel liners on 18 August 2000, inside this model year. Read the engine number and the build date."
+   }
+  },
+  {
+   "id": "sill-corrosion",
+   "title": "Sill rot",
+   "system": "body",
+   "severity": 5,
+   "what": "Rust at the sill joint directly under the door handle, which cracks with body flex. Worse on convertibles.",
+   "symptoms": "Bubbles at the joint, MOT failure.",
+   "check": "Check along the sills under the door handles. Lift the plastic splash guards.",
+   "fix": "Cut out and weld. Budget for welding by a specialist.",
+   "cost": null,
+   "parts": [
+    "body.shell"
+   ],
+   "jobs": [],
+   "appliesTo": {},
+   "src": [
+    "ph-body",
+    "octane"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "water-pump-impeller",
+   "title": "Water pump plastic impeller",
+   "system": "cooling",
+   "severity": 4,
+   "what": "Early pumps had a Nylon 66 impeller that can break up. Jaguar changed to black PPS at VIN 028001 and white PPS at 040101.",
+   "symptoms": "Overheating, coolant leak at the pump.",
+   "check": "Remove the pulley and read the part number on the body. Replace if 96JV-8501-CA to CD. VIN 001036-028000 only. Do not assume a black impeller is nylon. Staining around the pump may come from joints above it.",
+   "fix": "Fit a current pump. Jaguar says later pumps do not need replacing as routine.",
+   "cost": {
+    "gbp": [
+     130,
+     130
+    ],
+    "note": "Pump only, PistonHeads 2013."
+   },
+   "parts": [
+    "cooling.water-pump"
+   ],
+   "jobs": [
+    "water-pump"
+   ],
+   "appliesTo": {
+    "myTo": 1998
+   },
+   "src": [
+    "tsb-303-60",
+    "ph-powertrain",
+    "motorious",
+    "jr-crossover"
+   ],
+   "conf": "factory",
+   "note": "PistonHeads says budget for this on early cars with no evidence. Jaguar says many were replaced needlessly."
+  },
+  {
+   "id": "thermostat-housing",
+   "title": "Plastic thermostat housing",
+   "system": "cooling",
+   "severity": 4,
+   "what": "The composite housing, outlet pipe and header tank can blister, soften and crack with age.",
+   "symptoms": "Coolant loss, hose failure, sudden overheating if it lets go at the cap thread.",
+   "check": "Look for a gap, staining or swelling at the black housing. Squeeze hoses for softness.",
+   "fix": "Fit the aluminium housing with new seals. The rear two 8 mm bolts are the whole job: use a crowfoot or bent spanner, or lift the manifold slightly. Check the casting and threads before fitting. It took one owner 2.5 hours.",
+   "cost": {
+    "gbp": [
+     37,
+     80
+    ],
+    "note": "Parts only, inc VAT, British Parts AJ82217K read 1 Nov 2026 and marketplace kits. See upgrades.json."
+   },
+   "parts": [
+    "cooling.thermostat-housing"
+   ],
+   "jobs": [
+    "thermostat-housing"
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "na"
+    ]
+   },
+   "src": [
+    "jcna-cool",
+    "jr-thermo",
+    "jl-thermo",
+    "bcf-thermo",
+    "bp-x100"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "thermostat",
+   "title": "Thermostat sticks shut",
+   "system": "cooling",
+   "severity": 4,
+   "what": "The early wax bulb was not robust. Jaguar issued a revised thermostat for engines before number 0203230140.",
+   "symptoms": "Overheating.",
+   "check": "Note the temperature gauge in traffic. Ask when it was last changed. A JEC contributor says change it after about 80,000 miles.",
+   "fix": "Fit AJ8 5874 with seal NCA 2246BA. Bolts are 8 to 10 Nm. Book time 0.7 hours, or 1.0 on XKR.",
+   "cost": null,
+   "parts": [
+    "cooling.thermostat"
+   ],
+   "jobs": [
+    "thermostat-housing"
+   ],
+   "appliesTo": {
+    "myTo": 2002
+   },
+   "src": [
+    "tsb-303-54",
+    "jec-valley",
+    "jl-seminar"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "valley-hose",
+   "title": "Heater hoses in the valley, naturally aspirated cars",
+   "system": "cooling",
+   "severity": 4,
+   "what": "NA cars have heater hoses under the intake manifold that leak on 1997-99 MY cars, VIN 010343-042635.",
+   "symptoms": "Coolant loss with no obvious leak. A sudden burst.",
+   "check": "Check the front of the engine for leaks. Have a pressure test.",
+   "fix": "Replace both hoses and flush.",
+   "cost": {
+    "gbp": [
+     54,
+     408
+    ],
+    "note": "Parts only, British Parts prices inc VAT, read 1 Nov 2026. Parts kits only. Labour not sourced."
+   },
+   "parts": [
+    "cooling.valley-hose-feed",
+    "cooling.valley-hose-return"
+   ],
+   "jobs": [
+    "valley-hoses"
+   ],
+   "appliesTo": {
+    "induction": [
+     "na"
+    ],
+    "vinFrom": "010343",
+    "vinTo": "042635"
+   },
+   "src": [
+    "tsb-303-48a",
+    "bp-x100"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "valley-pipe-xkr",
+   "title": "Coolant pipe in the valley, XKR",
+   "system": "cooling",
+   "severity": 4,
+   "what": "On XKRs a coolant pipe runs through the V from the rear of a head to the thermostat, and rots at the front end.",
+   "symptoms": "Coolant loss with no obvious leak. A sudden burst.",
+   "check": "Have a pressure test. The front of the pipe cannot be seen until the supercharger comes off.",
+   "fix": "Replace the pipe and flush. Removing the supercharger is a big job.",
+   "cost": {
+    "gbp": [
+     54,
+     408
+    ],
+    "note": "Parts only, British Parts prices inc VAT, read 1 Nov 2026. Parts kits only. Labour not sourced."
+   },
+   "parts": [
+    "cooling.heater-hoses"
+   ],
+   "jobs": [
+    "valley-hoses"
+   ],
+   "appliesTo": {
+    "induction": [
+     "sc"
+    ]
+   },
+   "src": [
+    "jec-valley",
+    "bp-x100"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "rear-subframe-corrosion",
+   "title": "Rear subframe and mounts corrosion",
+   "system": "rear-suspension",
+   "severity": 4,
+   "what": "Rust in the rear subframe and its mounting points. Also the chassis legs where they kick up ahead of the rear axle.",
+   "symptoms": "Knocks, MOT failure.",
+   "check": "Get under it on a lift with a torch and scraper.",
+   "fix": "Repair or replace. Pricey, says PistonHeads.",
+   "cost": null,
+   "parts": [
+    "rear-suspension.subframe",
+    "body.longitudinal"
+   ],
+   "jobs": [],
+   "appliesTo": {},
+   "src": [
+    "ph-body",
+    "octane"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "arch-floor-corrosion",
+   "title": "Wheelarch and floorpan corrosion",
+   "system": "body",
+   "severity": 4,
+   "what": "Rust around the arches, under the splash guards and in the front footwells.",
+   "symptoms": "Damp carpets, bubbling at arch lips.",
+   "check": "Lift the carpets in the footwells. Check under the plastic guards. Front chassis legs too.",
+   "fix": "Weld. Any rust in the footwells or chassis legs is pricey.",
+   "cost": null,
+   "parts": [
+    "body.wing",
+    "body.shell",
+    "body.longitudinal"
+   ],
+   "jobs": [],
+   "appliesTo": {},
+   "src": [
+    "ph-body",
+    "octane"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "ball-joints",
+   "title": "Front lower and upper ball joints",
+   "system": "front-suspension",
+   "severity": 4,
+   "what": "Lower joints last about 30,000 to 35,000 miles according to David Marks. Upper joints can lose their boot.",
+   "symptoms": "Clunks, and inner edge front tyre wear.",
+   "check": "Support under the lower spring seat, wheels off, check free play.",
+   "fix": "Replace. Special tool 204-293 is the Jaguar splitter for lower joints.",
+   "cost": {
+    "gbp": [
+     48,
+     48
+    ],
+    "note": "Parts only: BPK211 ball joint kit, 4 joints, £39.99 + VAT, British Parts read 1 Nov 2026."
+   },
+   "parts": [
+    "front-suspension.lower-ball-joint",
+    "front-suspension.upper-ball-joint"
+   ],
+   "jobs": [
+    "lower-ball-joint"
+   ],
+   "appliesTo": {},
+   "src": [
+    "jl-seminar",
+    "tsb-204-01",
+    "tsb-list",
+    "bp-x100"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "hood-hydraulics",
+   "title": "Convertible roof hydraulics",
+   "system": "roof",
+   "severity": 4,
+   "what": "The pump makes about 1600 psi. Hoses work out of their crimps, usually at the header, and spray fluid on the interior. Ram seals dislodge. Early fluid may gel.",
+   "symptoms": "Roof slow, stuck, or dripping fluid onto the seats.",
+   "check": "Run the roof. It should take about 20 seconds. Check for stains on the headlining and seats.",
+   "fix": "Replace hoses a set at a time, as they are directional. One owner took 8 hours. Rebuild rams. Use the correct fluid.",
+   "cost": {
+    "gbp": [
+     160,
+     600
+    ],
+    "note": "Ram rebuild against new, forum figures, undated. See upgrades.json."
+   },
+   "parts": [
+    "roof.hoses",
+    "roof.lift-cylinder",
+    "roof.latch-cylinder",
+    "roof.pump"
+   ],
+   "jobs": [
+    "hood-hydraulics"
+   ],
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "src": [
+    "jr-hyd",
+    "jr-roof",
+    "tsb-501-11",
+    "tsb-list",
+    "jl-roof",
+    "jec-hood",
+    "ph-body"
+   ],
+   "conf": "corroborated",
+   "note": "Fluid gel is disputed: JagRepair says hose pressure is the real cause."
+  },
+  {
+   "id": "ecm-connectors",
+   "title": "Throttle and ECM connector faults",
+   "system": "electrical",
+   "severity": 4,
+   "what": "1999-2001 AJ27 cars mix gold and tin terminals at the throttle position sensor. Stays break. Water in the big connector behind the throttle has also been blamed for false codes.",
+   "symptoms": "Engine Fail Safe, P0121, code storms.",
+   "check": "Inspect the plug. Move the wires with the engine idling. Check the stay is intact.",
+   "fix": "Gold terminals per TSB 303-58.",
+   "cost": null,
+   "parts": [
+    "induction.throttle-body",
+    "electrical.harness"
+   ],
+   "jobs": [
+    "throttle-body-clean"
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myFrom": 1999,
+    "myTo": 2001
+   },
+   "src": [
+    "tsb-303-58",
+    "jr-tbplug",
+    "jl-limp"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "throttle-body-early",
+   "title": "Early throttle bodies",
+   "system": "induction",
+   "severity": 4,
+   "what": "Several factory actions cover 4.0 throttles. Recall R466, Service Actions S514 and S498, and carbon cleaning. Blocked breather makes it worse.",
+   "symptoms": "Stalling, limp mode, hesitation.",
+   "check": "Check the VIN against each action. Check for a stamped service record.",
+   "fix": "Follow the action. Clean the part-load breather every 10,000 miles on 1997-2001 cars.",
+   "cost": null,
+   "parts": [
+    "induction.throttle-body",
+    "engine.breather"
+   ],
+   "jobs": [
+    "throttle-body-clean"
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 1999
+   },
+   "src": [
+    "tsb-303-S514",
+    "tsb-303-S498",
+    "tsb-310-06a",
+    "tsb-600-03a",
+    "jl-hes"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "gearbox-5hp24",
+   "title": "ZF 5HP24 B clutch hub",
+   "system": "transmission",
+   "severity": 4,
+   "what": "The B clutch hub and drum can fail. A later hub has dimples. David Marks said problems start around 60,000 to 70,000 miles on the same family of cars. Sealed for life or not, change the fluid.",
+   "symptoms": "Roaring at 45 to 50 mph, P1722, lack of drive.",
+   "check": "Test drive cold and hot. Check the fluid, and shavings in the pan.",
+   "fix": "Overhaul with the later hub.",
+   "cost": {
+    "gbp": [
+     73,
+     145
+    ],
+    "note": "Fluid service only, parts only. British Parts read 1 Nov 2026. See upgrades.json. Rebuild cost not sourced in pounds."
+   },
+   "parts": [
+    "transmission.gearbox"
+   ],
+   "jobs": [
+    "gearbox-service"
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "na"
+    ]
+   },
+   "src": [
+    "jr-bclutch",
+    "jl-seminar",
+    "ph-powertrain",
+    "octane",
+    "bp-x100"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "mercedes-conductor-plate",
+   "title": "Mercedes gearbox conductor plate",
+   "system": "transmission",
+   "severity": 4,
+   "what": "The 4.0 XKR uses the Mercedes W5A-580 five speed. On that box the internal conductor plate carries speed sensors and solenoids.",
+   "symptoms": "Stuck in 2nd and reverse after restart, P0715, P0753 to P0763.",
+   "check": "Read the TCM. Note the limp pattern. One published fault list names 1998-2002 supercharged cars for this part.",
+   "fix": "Replace or repair the plate. PistonHeads also warns output shaft and planetary gears can fail. A used box was about £600 in 2013.",
+   "cost": {
+    "gbp": [
+     600,
+     600
+    ],
+    "note": "Secondhand gearbox, part only, PistonHeads 2013. Plate price not sourced."
+   },
+   "parts": [
+    "transmission.valve-body",
+    "transmission.gearbox"
+   ],
+   "jobs": [],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "sc"
+    ]
+   },
+   "src": [
+    "jag-dtc-9702",
+    "youcanic-722",
+    "ph-powertrain"
+   ],
+   "conf": "single",
+   "note": "Only applies to the supercharged 4.0. No Jaguar document uses the term conductor plate."
+  },
+  {
+   "id": "brake-pipes",
+   "title": "Rusting brake pipes",
+   "system": "brakes",
+   "severity": 4,
+   "what": "PistonHeads says pipes rust readily.",
+   "symptoms": "MOT advisory, leaks.",
+   "check": "Trace them underneath.",
+   "fix": "Replace.",
+   "cost": null,
+   "parts": [],
+   "jobs": [],
+   "appliesTo": {},
+   "src": [
+    "ph-chassis"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "oil-cooler-hose",
+   "title": "Oil cooler hose crimps, 2004-05",
+   "system": "engine",
+   "severity": 4,
+   "what": "Crimp can fail on the feed or return hose.",
+   "symptoms": "Oil loss, power loss.",
+   "check": "Date code 43 03, or illegible, means replace. VIN A39699-A41740.",
+   "fix": "Replace both.",
+   "cost": null,
+   "parts": [
+    "engine.oil-cooler"
+   ],
+   "jobs": [],
+   "appliesTo": {
+    "myFrom": 2004,
+    "myTo": 2005
+   },
+   "src": [
+    "tsb-303-S846a"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "crossover-pipe",
+   "title": "Plastic crossover pipe",
+   "system": "cooling",
+   "severity": 3,
+   "what": "The plastic outlet pipe across the front of a 4.0 NA engine cracks. One owner found a 4 inch crack only by squeezing the top hose.",
+   "symptoms": "Slow coolant loss and a coolant smell.",
+   "check": "Squeeze the top hose with the system warm and watch the pipe.",
+   "fix": "Replace it with the pump or thermostat. Four bolts, three hoses and a sensor plug. Take care with the plug stay.",
+   "cost": {
+    "gbp": [
+     54,
+     408
+    ],
+    "note": "Parts only, British Parts prices inc VAT, read 1 Nov 2026. Low end is a single valley kit, high end a full bay hose kit. See upgrades.json."
+   },
+   "parts": [
+    "cooling.crossover-pipe"
+   ],
+   "jobs": [
+    "crossover-pipe"
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "na"
+    ]
+   },
+   "src": [
+    "jr-crossover",
+    "bp-x100"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "header-tank",
+   "title": "Coolant header tank cracks",
+   "system": "cooling",
+   "severity": 3,
+   "what": "The plastic tank near the bulkhead cracks at the seams, and leaks only under pressure.",
+   "symptoms": "Antifreeze smell after parking.",
+   "check": "Run a finger along the bottom. Pressure test. On a 1997 car the bleed hoses connect differently.",
+   "fix": "Replace the tank. On 1997 cars a 1998 tank needs the bleed hoses swapped over.",
+   "cost": null,
+   "parts": [
+    "cooling.header-tank"
+   ],
+   "jobs": [],
+   "appliesTo": {},
+   "src": [
+    "jcna-cool",
+    "jl-thermo",
+    "tsb-303-15"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "a-frame",
+   "title": "Rear A-frame bushes",
+   "system": "rear-suspension",
+   "severity": 3,
+   "what": "The A-frame helps locate the rear suspension, and its rubber bushes wear out.",
+   "symptoms": "Knocks and clonks from the rear.",
+   "check": "Lever the bushes. Watch for two shims above the main mounts on removal.",
+   "fix": "Replace bushes with the rear kit.",
+   "cost": {
+    "gbp": [
+     368,
+     428
+    ],
+    "note": "Parts only, British Parts prices inc VAT, read 1 Nov 2026. Rear rebuild kits. See upgrades.json."
+   },
+   "parts": [
+    "rear-suspension.subframe"
+   ],
+   "jobs": [],
+   "appliesTo": {},
+   "src": [
+    "ph-chassis",
+    "jl-clunk",
+    "bp-x100"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "wheel-bearings",
+   "title": "Front wheel bearings",
+   "system": "front-suspension",
+   "severity": 3,
+   "what": "Fronts last 30,000 to 35,000 miles according to a 2005 talk by David Marks, and rears last far longer. Another owner suggests replacing fronts at about 60,000.",
+   "symptoms": "Rumble rising with speed. Tyre wear.",
+   "check": "Rock the wheel and check end float.",
+   "fix": "Replace promptly. PistonHeads says delay ruins tyres.",
+   "cost": null,
+   "parts": [
+    "front-suspension.wheel-bearing"
+   ],
+   "jobs": [
+    "wheel-bearing-front"
+   ],
+   "appliesTo": {},
+   "src": [
+    "jl-seminar",
+    "jl-buy",
+    "ph-chassis",
+    "tsb-204-01"
+   ],
+   "conf": "corroborated",
+   "note": "Mileage figures differ between sources."
+  },
+  {
+   "id": "vee-mounts",
+   "title": "Front subframe vee mounts",
+   "system": "front-suspension",
+   "severity": 3,
+   "what": "The bushes at the rear of the front beam wear, and the handling goes vague.",
+   "symptoms": "Floats, lacks confidence.",
+   "check": "Inspect the rear bushes of the beam closely.",
+   "fix": "Replace the mounts.",
+   "cost": null,
+   "parts": [
+    "front-suspension.vee-mount"
+   ],
+   "jobs": [
+    "vee-mounts"
+   ],
+   "appliesTo": {},
+   "src": [
+    "ph-chassis",
+    "jl-rough"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "front-top-mounts",
+   "title": "Front damper top mounts",
+   "system": "front-suspension",
+   "severity": 3,
+   "what": "Factory mounts use foam rubber that crumbles.",
+   "symptoms": "Chatter and a loose feel from the front.",
+   "check": "Look at the towers. Spring assister cup can also come loose on cars before VIN 010565.",
+   "fix": "Fit new mounts or a poly repair kit.",
+   "cost": {
+    "gbp": [
+     141,
+     141
+    ],
+    "note": "Parts only, British Parts prices inc VAT, read 1 Nov 2026. Pair of MJA2170BD."
+   },
+   "parts": [
+    "front-suspension.spring-damper"
+   ],
+   "jobs": [
+    "front-dampers-springs"
+   ],
+   "appliesTo": {},
+   "src": [
+    "moss-mount",
+    "tsb-204-01",
+    "jl-absback",
+    "bp-x100"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "rear-shock-mounts",
+   "title": "Rear damper top mounts and dampers",
+   "system": "rear-suspension",
+   "severity": 3,
+   "what": "PistonHeads says rear dampers wear quickly. On older Jaguars the upper bushes are the usual cause of a solid clunk, and it does not show when you push on the car.",
+   "symptoms": "Solid clunk over bumps.",
+   "check": "Remove the damper to inspect it.",
+   "fix": "Replace parts together.",
+   "cost": {
+    "gbp": [
+     504,
+     504
+    ],
+    "note": "Parts only, British Parts prices inc VAT, read 1 Nov 2026. Pair of MNC3470AAG. See upgrades.json."
+   },
+   "parts": [
+    "rear-suspension.spring-damper",
+    "rear-suspension.damper"
+   ],
+   "jobs": [
+    "rear-dampers-springs"
+   ],
+   "appliesTo": {},
+   "src": [
+    "ph-chassis",
+    "jl-clunk",
+    "bp-x100"
+   ],
+   "conf": "single",
+   "note": "Mount evidence comes from older Jaguars."
+  },
+  {
+   "id": "parasitic-drain",
+   "title": "Parasitic battery drain",
+   "system": "electrical",
+   "severity": 3,
+   "what": "Allowed drain is under 30 mA after 60 minutes. On 1999-2000 cars an upstream oxygen sensor relay can stay in and flatten the battery.",
+   "symptoms": "Flat after standing, especially in the cold.",
+   "check": "Clamp meter on the lead. Test the relay at Fuse 10.",
+   "fix": "Fit the revised relay, or trace the circuit.",
+   "cost": null,
+   "parts": [
+    "electrical.relay",
+    "electrical.battery"
+   ],
+   "jobs": [
+    "battery-drain-test"
+   ],
+   "appliesTo": {
+    "myFrom": 1999
+   },
+   "src": [
+    "jag-battery",
+    "tsb-414-06A",
+    "jr-parasitic"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "abs-module",
+   "title": "ABS module and sensor harness",
+   "system": "brakes",
+   "severity": 3,
+   "what": "Solder joints fracture at the pump connection, and wheel sensor leads break.",
+   "symptoms": "ABS and TRAC failure, C1095.",
+   "check": "Read with a Jaguar-capable tool.",
+   "fix": "Resolder or send away. Replace harness.",
+   "cost": null,
+   "parts": [
+    "electrical.abs-module",
+    "electrical.harness"
+   ],
+   "jobs": [],
+   "appliesTo": {
+    "myTo": 2002
+   },
+   "src": [
+    "jcna-abs",
+    "jl-abspump",
+    "jl-absback"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "instrument-can",
+   "title": "Instrument pack CAN failure",
+   "system": "electrical",
+   "severity": 3,
+   "what": "On 2000 MY cars the pack back plate could short the CAN bus.",
+   "symptoms": "Warnings, blank gauges, stuck in Park.",
+   "check": "VIN A00116-A05322. Check S484 was done.",
+   "fix": "New back plate.",
+   "cost": null,
+   "parts": [
+    "electrical.instrument-pack"
+   ],
+   "jobs": [],
+   "appliesTo": {
+    "myFrom": 2000,
+    "myTo": 2000
+   },
+   "src": [
+    "tsb-413-S484"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "cats-dampers",
+   "title": "CATS dampers and wires",
+   "system": "front-suspension",
+   "severity": 3,
+   "what": "Cars with adaptive dampers wear the wires to the dampers. Replacement dampers are costly.",
+   "symptoms": "Warning light, firm ride.",
+   "check": "Check the warning light goes out at start.",
+   "fix": "Replace the loom section first.",
+   "cost": {
+    "gbp": [
+     1148,
+     1580
+    ],
+    "note": "Parts only, British Parts prices inc VAT, read 1 Nov 2026. Four dampers. See upgrades.json."
+   },
+   "parts": [
+    "front-suspension.damper"
+   ],
+   "jobs": [
+    "front-dampers-springs"
+   ],
+   "appliesTo": {},
+   "src": [
+    "ph-chassis",
+    "octane",
+    "bp-x100"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "steering-column",
+   "title": "Steering column knock",
+   "system": "steering",
+   "severity": 2,
+   "what": "Cars up to about 2000 can knock through the wheel. Jaguar fitted a column with a rubber coupling from VIN A11051.",
+   "symptoms": "Knock felt through the wheel.",
+   "check": "Look for the rubber coupling.",
+   "fix": "Fit the later column and return line.",
+   "cost": null,
+   "parts": [
+    "steering.column-lower",
+    "steering.pas-hose"
+   ],
+   "jobs": [],
+   "appliesTo": {
+    "myTo": 2000,
+    "vinTo": "A11050"
+   },
+   "src": [
+    "tsb-211-06",
+    "ph-chassis"
+   ],
+   "conf": "factory",
+   "note": "Later cars with a knock: see the rack return line in the steering-knock fault. A11051 is where the modified column entered production; the Vehicle Specifications book starts MY2001 at A11140."
+  },
+  {
+   "id": "lacquer-peel",
+   "title": "Peeling lacquer",
+   "system": "body",
+   "severity": 2,
+   "what": "Metallic paints especially.",
+   "symptoms": "Clouding, then peeling.",
+   "check": "Inspect each panel.",
+   "fix": "Respray.",
+   "cost": null,
+   "parts": [],
+   "jobs": [],
+   "appliesTo": {},
+   "src": [
+    "ph-body"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "rear-bumper-bolts",
+   "title": "Rear bumper mounts",
+   "system": "body",
+   "severity": 2,
+   "what": "Aluminium bolts into steel corrode and let the bumper sag.",
+   "symptoms": "Bumper moves when shaken.",
+   "check": "Shake it.",
+   "fix": "Replace the fixings.",
+   "cost": null,
+   "parts": [
+    "body.rear-bumper"
+   ],
+   "jobs": [],
+   "appliesTo": {},
+   "src": [
+    "ph-body"
+   ],
+   "conf": "single"
+  }
+ ],
+ "gaps": [
+  "UK labour and welding prices were not found. Rust repair costs are blank. The web search budget ran out, and JOC forum and Classic & Sports Car pages refused automated fetches.",
+  "XKR valley pipe failure evidence is a JEC forum post about the XJR and XKR. A search result mentioned £500 to £1000 from owner posts, but that page could not be opened, so it is not used.",
+  "Dates and engine numbers for metal tensioners vary between sources. See upgrades.json for the forum figures.",
+  "Costs from before 2026 have not been adjusted. Prices read on 1 Nov 2026 are from the upgrades file, which recorded them.",
+  "Part links were normalised against parts.json. Brake light switch still points to brakes.pedal, conductor plate to transmission.valve-body and rotary switch to transmission.gearbox, because those have no record of their own.",
+  "Valley hoses: the failure evidence covers 1997-99 NA cars by bulletin and XKRs by one JEC post. Nothing was found on MY2000-on NA or 4.2 cars, so they are left out, not cleared.",
+  "Door hinge pillar rust: no X100 source found. The saved PistonHeads body page has no mention of hinges, so the record and its inspection check were removed."
+ ]
+}

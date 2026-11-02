@@ -1,0 +1,18 @@
+/* The stage's own overlay. Everything else lives in src/ui/style.css. */
+:root { --stage-bg: #eceef0; --ink: #1b2024; --accent: #f2570b; }
+html, body { margin: 0; height: 100%; background: var(--stage-bg); overflow: hidden; overscroll-behavior: none; }
+#app { position: fixed; inset: 0; }
+#stage { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; }
+#stage:focus-visible { outline: 2px solid rgba(27, 32, 36, .4); outline-offset: -2px; } /* not the accent: that means the part in work */
+#ui { position: absolute; inset: 0; pointer-events: none; }
+#ui > * { pointer-events: auto; }
+#boot { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; font: 500 15px/1.4 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #5a6168; background: var(--stage-bg); transition: opacity .4s; }
+#boot.gone { opacity: 0; pointer-events: none; }
+.labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; font: 600 13px/1.25 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+.labels svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.labels line { stroke: #4a5159; stroke-width: 1; }
+.labels circle { fill: #4a5159; stroke: #fff; stroke-width: 1.5; }
+.labels .accent { stroke: var(--accent); }
+.labels circle.accent { fill: var(--accent); stroke: #fff; }
+.label { position: absolute; left: 0; top: 0; max-width: 240px; padding: 5px 9px; color: var(--ink); background: rgba(255, 255, 255, .92); border-radius: 6px; box-shadow: 0 1px 4px rgba(20, 30, 40, .16); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; will-change: transform; }
+.label.accent { color: #fff; background: var(--accent); }

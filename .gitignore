@@ -1,0 +1,15 @@
+*.log
+.DS_Store
+.statamcp/
+.wrangler/
+dist-shots/
+dist/
+node_modules/
+ref/downloads/
+ref/teardown/
+
+# Local only: reference images belong to their owners, the rest is scratch work
+ref/
+proto/
+docs/review-round*.json
+tools/_*.mjs

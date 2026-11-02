@@ -1,0 +1,19 @@
+{
+  "name": "xk8-workshop",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Interactive 3D workshop for the Jaguar XK8/XKR (X100).",
+  "license": "MIT",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "validate": "node tools/validate-data.mjs"
+  },
+  "dependencies": {
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.1",
+    "playwright": "1.58.2"
+  }
+}

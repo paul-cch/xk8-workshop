@@ -1,0 +1,2611 @@
+{
+ "sources": {
+  "wm0306": {
+   "title": "Jaguar XK8 Workshop Manual 2003 to 2006, 4.2L and 4.2L S/C, VIN A30645 to A48684 (published 11 May 2011)",
+   "url": "",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "vsb2003": {
+   "title": "Jaguar Vehicle Specifications booklet, 09/2003",
+   "url": "",
+   "publisher": "Jaguar Cars Technical Support and Communications",
+   "kind": "factory"
+  },
+  "vsb2004": {
+   "title": "Jaguar Vehicle Specifications booklet, 2004 edition",
+   "url": "",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "sngcat": {
+   "title": "SNG Barratt Jaguar XK8 parts catalogue",
+   "url": "https://cdn.sngbarratt.com/catalogues/new/sng_cat_xk8_en.pdf",
+   "publisher": "SNG Barratt",
+   "kind": "vendor"
+  },
+  "bp-x100": {
+   "title": "British Parts: Jaguar X100 XK & XKR 1996-2006 catalogue, live prices read 1 Nov 2026",
+   "url": "https://www.britishparts.co.uk/classic-jaguar/jaguar-x100-xk-xkr-1996-2006",
+   "publisher": "British Parts UK",
+   "kind": "vendor"
+  },
+  "bp-kits": {
+   "title": "British Parts: suspension kits for Jaguar, live prices read 1 Nov 2026",
+   "url": "https://www.britishparts.co.uk/kits-oil-accessories/suspension-kits-for-jaguar",
+   "publisher": "British Parts UK",
+   "kind": "vendor"
+  },
+  "bp-bpc129": {
+   "title": "British Parts timing chain kit upgrade BPC129",
+   "url": "https://www.britishparts.co.uk/classic-jaguar/jaguar-s-type/engine-v8/timing-chain-kit-upgrade-bpc129",
+   "publisher": "British Parts UK",
+   "kind": "vendor"
+  },
+  "bp-bpk204": {
+   "title": "British Parts timing chain kit BPK204",
+   "url": "https://www.britishparts.co.uk/classic-jaguar/jaguar-x100-xk-xkr-1996-2006/engine/timing-chain-kit-bpk204",
+   "publisher": "British Parts UK",
+   "kind": "vendor"
+  },
+  "polybush": {
+   "title": "Polybush: Jaguar XK8 / XK8R bushes, prices read 1 Nov 2026",
+   "url": "https://www.polybush.co.uk/product-category/jaguar/xk8-xk8r/",
+   "publisher": "Polybush",
+   "kind": "vendor"
+  },
+  "powerflex": {
+   "title": "Powerflex: XK8, XKR X100 (1996-2006) bushes, prices read 1 Nov 2026",
+   "url": "https://www.powerflex.co.uk/products/XK8+XK8R-2611/1.html",
+   "publisher": "Powerflex",
+   "kind": "vendor"
+  },
+  "blackcircles-245": {
+   "title": "Blackcircles 245/45R18 tyre listing, read 1 Nov 2026",
+   "url": "https://www.blackcircles.com/tyres/245-45-18",
+   "publisher": "Blackcircles",
+   "kind": "vendor"
+  },
+  "blackcircles-255": {
+   "title": "Blackcircles 255/45R18 tyre listing, read 1 Nov 2026",
+   "url": "https://www.blackcircles.com/tyres/255-45-18",
+   "publisher": "Blackcircles",
+   "kind": "vendor"
+  },
+  "michelin-xk8": {
+   "title": "Michelin UK tyre fitment for Jaguar XK8",
+   "url": "https://www.michelin.co.uk/auto/browse-tyres/by-vehicle/jaguar/xk/xk8/1996/4.2-v8-298/245---45-R-18-96Y_255---45-R-18-99Y",
+   "publisher": "Michelin",
+   "kind": "vendor"
+  },
+  "powerhouse-guide": {
+   "title": "Jaguar Supercharger 4.0 and 4.2 V8 Upper Pulleys",
+   "url": "https://powerhouse.uk/jaguar-supercharger-4-0-and-4-2-v8-upper-pulleys/",
+   "publisher": "Powerhouse Automotive",
+   "kind": "specialist"
+  },
+  "powerhouse-42": {
+   "title": "Jaguar XJR XKR S-Type R XF 4.2 V8 Upper Pulleys",
+   "url": "https://powerhouse.uk/supercharger-performance-upgrade-pulleys/jaguar-xjr-xkr-s-type-r-xf-4-2-v8-upper-pulleys/",
+   "publisher": "Powerhouse Automotive",
+   "kind": "specialist"
+  },
+  "paramount-upgrades": {
+   "title": "Must Have Jaguar XK Upgrades (seen through search results; the site refuses direct fetches)",
+   "url": "https://paramount-performance.com/must-have-jaguar-xk-upgrades/",
+   "publisher": "Paramount Performance",
+   "kind": "specialist"
+  },
+  "paramount-pulley-40": {
+   "title": "Jaguar XKR 4.0 crank supercharger pulley (seen through search results)",
+   "url": "https://paramount-performance.com/jaguar-xkr-4-0-crank-supercharger-pulley-upgraded-supercharger-pulley.html",
+   "publisher": "Paramount Performance",
+   "kind": "specialist"
+  },
+  "paramount-pulley-42": {
+   "title": "Jaguar XKR 4.2 Supercharger Pulley (seen through search results)",
+   "url": "https://paramount-performance.com/jaguar-4-2-xkr-upgraded-supercharger-pulley/",
+   "publisher": "Paramount Performance",
+   "kind": "specialist"
+  },
+  "paramount-remap": {
+   "title": "Jaguar XK/XKR Performance Engine Tuning (seen through search results)",
+   "url": "https://paramount-performance.com/jaguar-4-2-xk-and-xkr-performance-engine-tuning-ecu-remapping-sku1755411/",
+   "publisher": "Paramount Performance",
+   "kind": "specialist"
+  },
+  "paramount-cats": {
+   "title": "Jaguar XKR And XJR 4.2 Catalytic Converters 200 Cell (seen through search results)",
+   "url": "https://paramount-performance.com/jaguar-xkr-4-2-catalytic-converters-200-cell/",
+   "publisher": "Paramount Performance",
+   "kind": "specialist"
+  },
+  "paramount-springs": {
+   "title": "Jaguar XK Lowering Springs 30 mm (seen through search results)",
+   "url": "https://paramount-performance.com/jaguar-xk-and-xj-lowering-springs-sports-suspension-pack/",
+   "publisher": "Paramount Performance",
+   "kind": "specialist"
+  },
+  "viezu": {
+   "title": "Jaguar XK XKR Suspension, Handling and Tuning Upgrades",
+   "url": "https://viezu.com/blog/jaguar-xk-xkr-suspension-handling-and-tuning-upgrades/",
+   "publisher": "Viezu",
+   "kind": "specialist"
+  },
+  "elite-nitron": {
+   "title": "Nitron NTR R1 System Jaguar XK8",
+   "url": "https://www.elite-performance.com/products/nitron-ntr-r1-system-jaguar-xk8",
+   "publisher": "Elite Performance",
+   "kind": "vendor"
+  },
+  "dcs-jag": {
+   "title": "Discount Car Stereo: Jaguar CD changer, aux and Bluetooth adapters",
+   "url": "https://www.discountcarstereo.com/JAG-CDR.html",
+   "publisher": "Discount Car Stereo",
+   "kind": "vendor"
+  },
+  "incartec-swc": {
+   "title": "InCarTec Jaguar XJ/XK8/XKR 1996-1999 steering wheel control interface, Premium Audio, 29-615-ALP",
+   "url": "https://www.incartec.co.uk/product/Jaguar-XK8-XKR-1996-1999-steering-wheel-control-interface-PREMIUM-AUDIO-29-615-ALP",
+   "publisher": "InCarTec",
+   "kind": "vendor"
+  },
+  "incartec-amp": {
+   "title": "InCarTec Jaguar XJ8/XK8 Premium Sound amplifier interface",
+   "url": "https://incartec.co.uk/product/JAGUAR-XJ8-XK8-Premium-Sound-Amplifier-interface",
+   "publisher": "InCarTec",
+   "kind": "vendor"
+  },
+  "eurotoys": {
+   "title": "Eurotoys Ltd Jaguar performance parts",
+   "url": "https://www.eurotoysltd.com/",
+   "publisher": "Eurotoys Ltd",
+   "kind": "vendor"
+  },
+  "xk8parts-growler": {
+   "title": "Timing chains, tensioners and peace of mind, by Dave Roche, GROWLER, Winter 2010/2011",
+   "url": "https://www.xk8-parts.com/wp-content/uploads/2013/02/Jaguar-XK8-XKR-V8-Engine-Timing-Chain-and-Tensioners-Article.pdf",
+   "publisher": "XKEC GROWLER magazine, hosted by XK8 Parts",
+   "kind": "enthusiast"
+  },
+  "ph-guide": {
+   "title": "PH Buying Guide: Jaguar XK8 / XKR (X100), 28 Feb 2013",
+   "url": "https://www.pistonheads.com/features/ph-buying-guides/ph-buying-guide-jaguar-xk8-xkr-x100/27197",
+   "publisher": "PistonHeads",
+   "kind": "reference"
+  },
+  "gov-mot-lamps": {
+   "title": "MOT inspection manual, section 4: lamps, reflectors and electrical equipment",
+   "url": "https://www.gov.uk/guidance/mot-inspection-manual-for-private-passenger-and-light-commercial-vehicles/4-lamps-reflectors-and-electrical-equipment",
+   "publisher": "DVSA",
+   "kind": "reference"
+  },
+  "gov-mot-nuisance": {
+   "title": "MOT inspection manual, section 8: nuisance",
+   "url": "https://www.gov.uk/guidance/mot-inspection-manual-for-private-passenger-and-light-commercial-vehicles/8-nuisance",
+   "publisher": "DVSA",
+   "kind": "reference"
+  },
+  "jr-pulley": {
+   "title": "Installing an XKR supercharger 3 PSI pulley upgrade",
+   "url": "http://www.jagrepair.com/images/NonStandardMods/Installing%20an%20XKR%20%20superrcharger%203%20PSI%20pulley%20upgrade.pdf",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-nameless": {
+   "title": "Installing Nameless Performance high flow cats on a 2000-2002 XKR",
+   "url": "http://www.jagrepair.com/images/NonStandardMods/Installing%20Nameless%20Performance%20high%20flow%20rev%203.pdf",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-gauges": {
+   "title": "Adding HKS CAMP 2 electronic OBDII gauges to an XK8/R",
+   "url": "http://www.jagrepair.com/images/NonStandardMods/Adding%20HKS%20CAMP-2%20Gauges%20to%20XK8-R%20how%20to.pdf",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-remote": {
+   "title": "Remote key fob control for top lowering in 1997-2006 XK8/XKR convertibles, v1.0, 6 May 2011",
+   "url": "http://www.jagrepair.com/images/NonStandardMods/Remote%20Key%20Fob%20Control%20Top%20Lower%20function.pdf",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-mods": {
+   "title": "Non-Standard Modifications index",
+   "url": "http://www.jagrepair.com/NonStandardMods.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-thermostat": {
+   "title": "Thermostat housing replacement on a 1999 XK8",
+   "url": "http://www.jagrepair.com/ThermostatHousing4XK8.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-crossover": {
+   "title": "Water pump and crossover pipe on an XK8",
+   "url": "http://www.jagrepair.com/WaterPumpCrossoverPipexk8.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-solar": {
+   "title": "Solar battery charger",
+   "url": "http://www.jagrepair.com/SolarBatteryCharger.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-relief": {
+   "title": "Roof hydraulic pressure relief valve system and install information",
+   "url": "http://www.jagrepair.com/HydPressureReliefValve.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-voltage": {
+   "title": "Jaguar voltage reduction system for XK8/R roof operation",
+   "url": "http://www.jagrepair.com/VoltageReductionSysXK8R.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-wind": {
+   "title": "Wind deflector on a 1999 XK8",
+   "url": "http://www.jagrepair.com/WindDeflector1999XK8.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-speakers": {
+   "title": "XK8 speaker replacement",
+   "url": "http://www.jagrepair.com/XK8SpeakerReplacement.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "torquecars": {
+   "title": "Jaguar XK8 Tuning",
+   "url": "https://www.torquecars.co.uk/jaguar/xk8-tuning",
+   "publisher": "TorqueCars",
+   "kind": "enthusiast"
+  },
+  "jl-tensioners": {
+   "title": "[XK8] Tensioners thread, Sep 2016 to Jan 2017",
+   "url": "https://forums.jag-lovers.com/t/xk8-tensioners/249550",
+   "publisher": "Jag-lovers Forums",
+   "kind": "forum"
+  },
+  "jl-weakpoints": {
+   "title": "[xk8] XKR Weak Points & Metal Body Timing Chain Tensioners, Nov-Dec 2006",
+   "url": "https://forums.jag-lovers.com/t/xk8-xkr-weak-points-metal-body-timing-chain-tensioners/247092",
+   "publisher": "Jag-lovers Forums",
+   "kind": "forum"
+  },
+  "jf-metal-tensioners": {
+   "title": "Metal tensioners what Model year? When? 2020-2022",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/metal-tensioners-what-model-year-when-234474/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-tensioner-replace": {
+   "title": "Replacing the timing chain tensioner, Mar 2016",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/replacing-timing-chain-tensioner-159174/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jl-thermostat": {
+   "title": "XK8 replacing the thermostat housing, am I missing a trick? June-July 2011",
+   "url": "https://forums.jag-lovers.com/t/xk8-replacing-the-thermostat-housing-am-i-missing-a-trick/248814",
+   "publisher": "Jag-lovers Forums",
+   "kind": "forum"
+  },
+  "jl-thermostat-x350": {
+   "title": "Thermostat Housing Upgrade, Feb-Mar 2019 (XJ8 and X350)",
+   "url": "https://forums.jag-lovers.com/t/thermostat-housing-upgrade/372701",
+   "publisher": "Jag-lovers Forums",
+   "kind": "forum"
+  },
+  "jf-cats-shocks": {
+   "title": "Replace CATS with standard shocks, Jul-Aug 2016",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/replace-cats-standard-shocks-166819/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-bilstein-front": {
+   "title": "Correct Bilstein replacement shock for front?",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/correct-bilstein-replacement-shock-front-98699/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-coilover": {
+   "title": "Full Coilover kit, 2019-2022",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/full-coilover-kit-223323/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-camber-lowered": {
+   "title": "Camber, Caster, toe diagrams, just lowered my 2005, Jan-Feb 2024",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/camber-caster-toe-diagrams-what-adjust-calc-just-lowered-my-2005-a-277075/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-rear-camber": {
+   "title": "Rear Camber out of alignment, Mar 2014",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/rear-camber-out-alignment-112980/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-front-caster": {
+   "title": "Front Caster, Mar 2017",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/front-caster-178896/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jl-camber-bolt": {
+   "title": "[xk8] Front camber eccentric bolt, Mar 2010",
+   "url": "https://forums.jag-lovers.com/t/xk8-front-camber-eccentric-bolt/248389",
+   "publisher": "Jag-lovers Forums",
+   "kind": "forum"
+  },
+  "jf-battery-isolator": {
+   "title": "Battery Isolator Advice, Nov 2024",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/battery-isolator-advice-285686/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-drain": {
+   "title": "Parasitic battery drain, what is allowable?",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/parasitic-battery-drain-what-allowable-239534/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-tender": {
+   "title": "Using a battery tender for my xk8",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/using-battery-tender-my-xk8-111761/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-pulley-adventures": {
+   "title": "Supercharger pulley adventures, 2010-2012",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/supercharger-pulley-adventures-46329/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-belt-problems": {
+   "title": "Supercharger Belt Problems!",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/supercharger-belt-problems-75173/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-intercooler": {
+   "title": "XKR Intercooler Radiator Upgrade, 2011-2014",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/xkr-intercooler-radiator-upgrade-64803/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jl-remap-2006": {
+   "title": "[xk8] ECU remap, 2006-2007",
+   "url": "https://forums.jag-lovers.com/t/xk8-ecu-remap/246781",
+   "publisher": "Jag-lovers Forums",
+   "kind": "forum"
+  },
+  "jl-remap-2021": {
+   "title": "ECU Remap by Dyno shop, Sep 2021",
+   "url": "https://forums.jag-lovers.com/t/ecu-remap-by-dyno-shop/412303",
+   "publisher": "Jag-lovers Forums",
+   "kind": "forum"
+  },
+  "jf-aj26-tune": {
+   "title": "AJ26 custom ECU tuning?",
+   "url": "https://www.jaguarforums.com/forum/xj-xj8-xjr-x308-27/aj26-custom-ecu-tuning-79817/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-na-tuning": {
+   "title": "Engine tuning for the N/A? Mar 2018",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/engine-tuning-n-198218/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-cold-air": {
+   "title": "Cold air intake add much???",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/cold-air-intake-add-much-256371/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-knn-sc": {
+   "title": "K&N air filter on supercharged engine, May 2019",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/k-n-air-filter-supercharged-engine-217940/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-exhaust-regrets": {
+   "title": "Any 4.0 XK8 exhaust Regrets? Oct 2012",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/any-4-0-xk8-exhaust-regrets-83314/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-exhaust-best": {
+   "title": "Best Exhaust for XK8? Apr 2016",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/best-exhaust-xk8-aftermarket-company-jags-general-161370/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-exhaust-delete": {
+   "title": "A tale of two exhaust deletes, Aug 2020",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/tale-two-exhaust-deletes-how-give-your-xkr-exhaust-note-without-drone-236969/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-ice-upgrade": {
+   "title": "1999 Aftermarket ICE Upgrade with iPod, bluetooth, facia and steering wheel controls, 2011 onward",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/1999-aftermarket-ice-upgrade-ipod-bluetooth-facia-steering-wheel-controls-56937/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-radio-upgrade": {
+   "title": "aftermarket radio upgrade, Aug 2016",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/aftermarket-radio-upgrade-167304/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-ainet-dab": {
+   "title": "Alpine AI Net Aux In Solution for DAB+, Nov 2023",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/alpine-ai-net-aux-solution-dab-275304/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-mbus-aux": {
+   "title": "[DIY] Jaguar XK8 Alpine M-Bus AUX in/switch",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/%5Bdiy%5D-jaguar-xk8-alpine-m-bus-aux-switch-208145/page2/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-uj-2026": {
+   "title": "rear universal joints, Mar 2026",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/rear-universal-joints-295268/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-grease": {
+   "title": "grease nipples how many and where?",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/grease-nipples-how-many-where-60431/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-wheel-offset": {
+   "title": "1999 XK8 wheel offset?! Sep 2012",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/1999-xk8-wheel-offset-81458/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-wheel-size": {
+   "title": "XKR Wheel Size, Dec 2019",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/xkr-wheel-size-226333/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-wheels-setup": {
+   "title": "Wheels and Tires Setup, Jun 2019",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/wheels-tires-setup-218912/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-18x9": {
+   "title": "2000 XK8 with 18x9 double five wheels on all four, Mar 2014",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/2000-xk8-18x9-double-five-wheels-all-four-paws-sorry-feline-humor-113139/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-bbs-20": {
+   "title": "BBS Montreal 20 inch wheels on 1999 XK8",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/bbs-montreal-20-wheels-1999-xk8-287905/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jf-hood-ram": {
+   "title": "Hydraulic Hood Latch Ram Repair (convertible)",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/hydraulic-hood-latch-ram-repair-convertible-217386/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "ph-softtop": {
+   "title": "XKR soft top replacement / repair, 2021-2023",
+   "url": "https://www.pistonheads.com/gassing/topic.asp?h=0&f=85&t=1939514",
+   "publisher": "PistonHeads",
+   "kind": "forum"
+  },
+  "ph-roof-slashed": {
+   "title": "XKR convertible roof slashed to pieces",
+   "url": "https://www.pistonheads.com/gassing/topic.asp?t=1240802",
+   "publisher": "PistonHeads",
+   "kind": "forum"
+  },
+  "joc-headlining": {
+   "title": "XK8 Coupe - Sagging Roof Liner",
+   "url": "https://www.jaguarownersclub.com/forums/topic/14584-xk8-coupe-sagging-roof-liner/",
+   "publisher": "Jaguar Owners Club",
+   "kind": "forum"
+  },
+  "jl-brembo-xjr": {
+   "title": "X300 2001 XJR Brembo R brakes upgrade (X308 chassis report)",
+   "url": "https://forums.jag-lovers.com/t/x300-2001-xjr-brembo-r-brakes-upgrade/235127",
+   "publisher": "Jag-lovers Forums",
+   "kind": "forum"
+  },
+  "bp-bpk152": {
+   "title": "British Parts timing chain kit BPK152",
+   "url": "https://www.britishparts.co.uk/classic-jaguar/jaguar-x308-xj-xjr/engine/timing-chain-kit-bpk152",
+   "publisher": "British Parts UK",
+   "kind": "vendor"
+  },
+  "autopartspro": {
+   "title": "Autopartspro water pumps for Jaguar XK 8 coupe",
+   "url": "https://www.autopartspro.co.uk/carparts-online/water-pump/jaguar-xk/xk-8-coupe-qev",
+   "publisher": "Autopartspro",
+   "kind": "vendor"
+  },
+  "paramount-bush": {
+   "title": "Jaguar XK XKR front lower track control arm inner bush, polyurethane (seen through search results)",
+   "url": "https://paramount-performance.com/?p=17780",
+   "publisher": "Paramount Performance",
+   "kind": "specialist"
+  },
+  "jf-xk8-shocks": {
+   "title": "XK8 Shock Absorbers",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/xk8-shock-absorbers-167404/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "pp-cats": {
+   "title": "We revisit the workings of Jaguar’s adaptive damping system marketed as CATS",
+   "url": "https://prestigeandperformancecar.com/?p=7459",
+   "publisher": "Prestige & Performance Car",
+   "kind": "reference"
+  }
+ },
+ "items": [
+  {
+   "id": "upgrade.timing-full-metal-kit",
+   "title": "Full timing chain overhaul with metal tensioners",
+   "category": "reliability",
+   "why": "This is the one job that protects the whole engine. Early plastic tensioners and guides crack, the chain can jump, and two teeth or more can wreck the engine. Owners report little warning.",
+   "what": "Replace both primary and both secondary chains, all tensioners and all guides with the latest metal-bodied tensioners and alloy-backed guides. Do the lot while the covers are off. Check the engine serial number first: forum evidence puts the factory change at engine 0108130000, and British Parts uses 0108122359 as the last number for its early kit BPC129.",
+   "difficulty": 5,
+   "reversible": false,
+   "costGbp": [
+    355,
+    415
+   ],
+   "partsNeeded": [
+    "BPC129 timing chain upgrade kit (metal tensioners, forged roller primary chains, metal-backed guides), to engine 0108122359",
+    "BPK203 timing cover seal kit",
+    "BPK248 or BPK250 cam cover gasket kit",
+    "Camshaft setting tool, sprocket retaining tool, short Allen key socket"
+   ],
+   "jobs": [],
+   "caution": "A previous 'tensioners done' receipt does not prove metal parts. Dealers also fitted second generation plastic ones, so confirm the part number or look under the cam covers. C2A1511 (RH) and C2A1512 (LH) are the current secondaries. The latest metal guides fit early engines only if metal-bodied tensioners go in with them.",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ]
+   },
+   "note": "Parts only, inc 20% VAT, British Parts read 1 Nov 2026. BPC129 £263.82 + VAT and BPK203 £31.89 + VAT at the low end, adding a cam cover kit (£41.28 to £50.32 + VAT) at the high end. A search snippet showed BPC129 at £440.74 + VAT; the live product page showed £263.82, which is used here. A specialist all-in figure from Winter 2010/11 was £1,260 + VAT (kit £335, gaskets £125, labour £800), so labour dominates.",
+   "src": [
+    "bp-bpc129",
+    "bp-x100",
+    "xk8parts-growler",
+    "jl-tensioners",
+    "jf-metal-tensioners",
+    "jf-tensioner-replace",
+    "sngcat"
+   ],
+   "conf": "corroborated",
+   "worth": 1,
+   "verdict": "Worth it on any 4.0 with plastic parts, unless invoices prove it was done. Skip it only on a car with metal tensioners."
+  },
+  {
+   "id": "upgrade.timing-secondaries-only",
+   "title": "Top chains and tensioners only",
+   "category": "reliability",
+   "why": "The upper tensioners crack first and can be reached under the cam covers. It is a cheaper stage for a 2000 to 2002 car that has clean history.",
+   "what": "Fit secondary chains and metal secondary tensioners under the cam covers, leaving the primaries alone. The GROWLER article recommends this as the minimum on 2000 to 2002 cars. Inspect primary guides at the same time if you can.",
+   "difficulty": 4,
+   "reversible": false,
+   "costGbp": [
+    167,
+    167
+   ],
+   "partsNeeded": [
+    "BPK430 secondary timing chain kit",
+    "C2A1511 RH and C2A1512 LH tensioners if not in the kit",
+    "Cam cover gasket kit BPK248 or BPK250"
+   ],
+   "jobs": [],
+   "caution": "Forum advice is not to stop here on an engine with original parts, because primary guides can be cracked too. One DIY owner took most of a day on the uppers alone. British Parts lists BPK430 up to engine 0108122359; check whether tensioners are included before ordering.",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ]
+   },
+   "note": "Parts only, inc VAT, BPK430 £139.03 + VAT, read 1 Nov 2026. Cam cover gaskets are extra (£41.28 to £50.32 + VAT). A UK owner paid about £800 in 2004 for both primary and secondary tensioners, parts about half of that.",
+   "src": [
+    "bp-x100",
+    "xk8parts-growler",
+    "jl-tensioners",
+    "jf-tensioner-replace",
+    "jf-metal-tensioners"
+   ],
+   "conf": "corroborated",
+   "worth": 3,
+   "verdict": "Worth it as a stopgap if the budget will not stretch to the full kit. Skip it if you can do the full job."
+  },
+  {
+   "id": "upgrade.timing-service-later-engines",
+   "title": "Timing service on later 4.0 and 4.2 engines",
+   "category": "reliability",
+   "why": "Later engines already have the better parts, so this is planned maintenance at high mileage, not a rescue. The GROWLER article suggests considering it at about 100k miles on a 4.2.",
+   "what": "Use a complete kit with chains, tensioners, guide rails, gaskets and seals. BPK152 covers 4.0 engines from 0108130000; BPK204 covers the 4.2. Forum reports say metal parts arrived on engines from August 2001, so a 2002 car is not a guarantee: read the engine number.",
+   "difficulty": 5,
+   "reversible": false,
+   "costGbp": [
+    383,
+    619
+   ],
+   "partsNeeded": [
+    "BPK152 kit for 4.0 from engine 0108130000",
+    "BPK204 kit for 4.2, includes gaskets, seals, tensioner and crankshaft bolts, VVT and cam cover seals",
+    "Timing tools for your engine"
+   ],
+   "jobs": [],
+   "caution": "British Parts' BPK204 page says both 'Jaguar XK8 4.2 V8' and '4.2 supercharged engines only', so confirm fit by VIN before ordering. Some reman engines may have plastic-bodied tensioners, per one forum post. SNG lists a separate 4.2 supercharged tensioner.",
+   "appliesTo": {
+    "engine": [
+     "4.0",
+     "4.2"
+    ]
+   },
+   "note": "Parts only, inc VAT. BPK204 £515.51 + VAT read 1 Nov 2026. BPK152 £319.21 + VAT from a search snippet; confirm on the page. Labour not sourced for this version of the job.",
+   "src": [
+    "bp-bpk204",
+    "bp-bpk152",
+    "xk8parts-growler",
+    "jf-metal-tensioners",
+    "sngcat"
+   ],
+   "conf": "single",
+   "worth": 3,
+   "verdict": "Worth it at high mileage on later engines. Skip it as preventive work on a low-mileage car."
+  },
+  {
+   "id": "upgrade.thermostat-housing-aluminium",
+   "title": "Aluminium thermostat housing on the 4.0 naturally aspirated",
+   "category": "reliability",
+   "why": "The plastic housing can crack, often when you disturb it during a top hose change. It is a cheap part guarding a motor that hates overheating.",
+   "what": "Swap the plastic housing for the aluminium kit with new seals, and change the outlet pipe and small bypass hose at the same time. SNG describes it as a direct replacement.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": [
+    37,
+    80
+   ],
+   "partsNeeded": [
+    "AJ82217K aluminium housing and seal kit",
+    "AJ85885 water outlet crossover pipe if it is old",
+    "AJ85875 housing cover if needed",
+    "8 mm crowfoot, ratchet ring spanner or bent open-ended spanner for the rear bolts"
+   ],
+   "jobs": [],
+   "caution": "The two rear 8 mm bolts are the whole job. Owners used a bent spanner, an 8 mm crowfoot, or lifted the manifold slightly. Inspect the casting before fitting: one first unit was rough with only about one and a half turns of thread. Do not carry this across to the X350, where forum reports say plastic is correct.",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "na"
+    ],
+    "vinTo": "A30644"
+   },
+   "note": "Parts only, inc VAT. AJ82217K £30.57 + VAT read 1 Nov 2026; marketplace kits seen at about £40 to £80. No aluminium option was sourced for the 4.2, which lists water outlet and thermostat assembly AJ89486 at £74.12 + VAT.",
+   "src": [
+    "sngcat",
+    "bp-x100",
+    "jl-thermostat",
+    "jr-thermostat",
+    "jl-thermostat-x350"
+   ],
+   "conf": "corroborated",
+   "worth": 1,
+   "verdict": "Worth it on a 4.0 NA the next time the housing or top hose is disturbed. Cheap. Skip it if already done."
+  },
+  {
+   "id": "upgrade.coolant-hoses-crossover",
+   "title": "Refresh crossover pipe and engine bay hoses",
+   "category": "reliability",
+   "why": "These parts are now old rubber and plastic. JagRepair found a 4 inch crack in the crossover pipe straight after doing a water pump.",
+   "what": "Replace the crossover pipe when you do the pump or thermostat, and work through the bay with a hose kit. Valley hose kits replace the heater feed and return hoses that live in the V of the engine.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": [
+    54,
+    408
+   ],
+   "partsNeeded": [
+    "AJ85885 crossover pipe (4.0 NA to VIN A30644)",
+    "BPK588 XK8 4.0 valley hose kit (VIN A00083 to A30644) or BPK528 XKR 4.2 kit",
+    "HK040 / BPK530 10-piece bay kit XK8 4.0, HK041 or HK044 for XKR 4.0"
+   ],
+   "jobs": [],
+   "caution": "Coolant type changes by VIN: Jaguar lists D542 up to 042634 and WSS M97B44-D from 042635 on 1998.75 to 2000 cars, and warns the OAT type must not be mixed. Be careful with the temperature sensor plug stay, which JagRepair broke.",
+   "appliesTo": {
+    "engine": [
+     "4.0",
+     "4.2"
+    ]
+   },
+   "note": "Parts only, inc VAT, British Parts read 1 Nov 2026. Low end is a single valley kit, high end the HK040 10-piece kit at £340.32 + VAT. XKR 4.0 kits are £217.02 and £221.78 + VAT.",
+   "src": [
+    "bp-x100",
+    "jr-crossover",
+    "vsb2004"
+   ],
+   "conf": "corroborated",
+   "worth": 2,
+   "verdict": "Worth it on any car still on its original rubber and plastic. Skip what invoices show is new."
+  },
+  {
+   "id": "upgrade.water-pump-metal-impeller",
+   "title": "Replace the plastic-impeller water pump",
+   "category": "reliability",
+   "why": "The early pump is one of the plastic cooling parts named as a weak point, and one owner's overheating destroyed the impeller. Overheating is what you are trying to avoid on these engines.",
+   "what": "Fit a later-specification pump with a metal impeller when you are in there. JagRepair took about 15 to 20 minutes for the swap itself, with the belt off.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Metal-impeller V8 water pump for your engine",
+    "New coolant",
+    "AJ85885 crossover pipe if original"
+   ],
+   "jobs": [],
+   "caution": "Confirm impeller material with the seller. Retail listings cover both plastic and metal versions. Slacken the three pulley bolts before taking belt tension off.",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ]
+   },
+   "note": "No current UK price sourced. A US Beck Arnley pump, 131-2245, is listed with a metal impeller. Autopartspro UK lists XK8 pumps in plastic and metal versions.",
+   "src": [
+    "xk8parts-growler",
+    "jl-weakpoints",
+    "jl-tensioners",
+    "jr-crossover",
+    "autopartspro"
+   ],
+   "conf": "community",
+   "worth": 2,
+   "verdict": "Worth it on an early car with no record. Skip it if the pump has been changed."
+  },
+  {
+   "id": "upgrade.drive-belt-tensioner-kit",
+   "title": "Latest drive belt tensioner and idler kit",
+   "category": "reliability",
+   "why": "The kit brings the belt drive up to the latest specification parts for one price, and the bare tensioner costs nearly as much alone.",
+   "what": "Fit the upgraded tensioner, idler and belt kit as a set.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": [
+    224,
+    224
+   ],
+   "partsNeeded": [
+    "BPK457 for XK8 4.0",
+    "BPK456 for XKR 4.0"
+   ],
+   "jobs": [],
+   "caution": "Check the kit against your VIN. Related X308 listings split on plastic or metal idler, so confirm what your car has.",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ]
+   },
+   "note": "Parts only, inc VAT. £186.78 + VAT, read 1 Nov 2026. The bare tensioner NCA7739AEG alone was £154.04 + VAT and out of stock, so the kit is the better buy.",
+   "src": [
+    "bp-x100"
+   ],
+   "conf": "single",
+   "worth": 2,
+   "verdict": "Worth it if the tensioner is noisy or the mileage is unknown. Skip it if the belt drive is quiet and recent."
+  },
+  {
+   "id": "upgrade.stainless-rear-sections",
+   "title": "Stainless exhaust sections",
+   "category": "reliability",
+   "why": "Worth it only when the steel system has rotted. Then the sum compares a stainless section with a pair of new original silencers.",
+   "what": "When rear silencers fail, price stainless straight-through or link-pipe sections against original silencers. Adamesh sections were about £400 plus fitting in 2012. SNG lists a Bell sports kit, BSSJR039, where link pipes replace the intermediate silencers and the rear boxes are modified.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": [
+    400,
+    400
+   ],
+   "partsNeeded": [
+    "Adamesh stainless sections, or Bell kit BSSJR039 from SNG",
+    "NNC6764ABG cat-to-silencer gasket",
+    "NJB6744GAG 52.4 mm clamps",
+    "NJA6790AC mounts up to VIN A30644"
+   ],
+   "jobs": [],
+   "caution": "Expect a change in sound. The Adamesh owner reported slight cabin drone at 70 to 90 mph under throttle. An exhaust too loud for its type is a Major MOT defect.",
+   "appliesTo": {},
+   "note": "Parts only, 2012 forum price, not current. For comparison, OE-type rear silencers NJC6784AA and NJC6785AA were £162.06 + VAT each on 1 Nov 2026 (XK8 only, excludes XKR). No current UK price for a whole stainless X100 system was found.",
+   "src": [
+    "jf-exhaust-regrets",
+    "sngcat",
+    "bp-x100",
+    "gov-mot-nuisance"
+   ],
+   "conf": "single",
+   "worth": 4,
+   "verdict": "Worth it only when the steel system has rotted. Skip it on a sound exhaust."
+  },
+  {
+   "id": "upgrade.exhaust-resonator-work",
+   "title": "Cheap sound: resonator delete with X-pipe, keeping rear boxes",
+   "category": "power",
+   "why": "This is for sound, not power. Owners report the note you want can come from deleting the small boxes while keeping the rearmost ones, and rear box deletes bring drone.",
+   "what": "Keep the rear resonators. A 2006 XKR owner replaced the large resonator joining the cat outlets with an X-pipe and removed the two small cans in front of the rear axle. That gave a good note with no drone. The straight-through rears a previous owner fitted had droned at 1500 to 2500 rpm.",
+   "difficulty": 3,
+   "reversible": false,
+   "costGbp": null,
+   "partsNeeded": [
+    "Local exhaust fabricator",
+    "X-pipe or H-pipe section",
+    "Stainless pipe"
+   ],
+   "jobs": [],
+   "caution": "Results vary by engine and owner. A separate XK8 owner who removed the rear resonators got drone near 2000 rpm and vibration at 55 to 60 mph, and fuel consumption got worse for one owner. Noise is an MOT item. No dyno data exists to show a power gain.",
+   "appliesTo": {},
+   "note": "No UK price. US shop jobs were quoted at $350 to under $500. One 1997 XK8 owner found a cat-back change sounded better but changed little in real driving.",
+   "src": [
+    "jf-exhaust-delete",
+    "jf-exhaust-regrets",
+    "jf-exhaust-best",
+    "jl-remap-2021",
+    "gov-mot-nuisance"
+   ],
+   "conf": "community",
+   "worth": 4,
+   "verdict": "Worth it if you want more sound. Skip it for power: there is none here."
+  },
+  {
+   "id": "upgrade.front-rubber-rebuild",
+   "title": "Front suspension rebuild in rubber",
+   "category": "reliability",
+   "why": "This is what most road cars actually want: the car returns to how it left the factory, without the extra noise poly can bring. A seller of these parts names the front arm bush as a common cause of test failures and vague handling.",
+   "what": "Fit a complete front rebuild kit. Choose by car because XK8 and XKR kits differ and R Performance cars are excluded.",
+   "difficulty": 4,
+   "reversible": true,
+   "costGbp": [
+    224,
+    290
+   ],
+   "partsNeeded": [
+    "BPK125 XK8 std suspension, or BPK126 XKR non R Performance",
+    "BPK214 wishbone bush kit if buying bushes alone",
+    "BPK211 ball joint kit (4 joints)"
+   ],
+   "jobs": [],
+   "caution": "Removing lower mounts means taking the arm off and using specialist tools to press bushes. Align the car after any arm work. The workshop manual notes thread-locking fasteners have a limited reuse count.",
+   "appliesTo": {},
+   "note": "Parts only, inc VAT, read 1 Nov 2026. BPK126 £186.35 + VAT, BPK125 £241.84 + VAT. BPK214 £103.46 + VAT and BPK211 £39.99 + VAT are the piecemeal route. Calling rubber the better default for road use is this file's judgement, not a measured result.",
+   "src": [
+    "bp-kits",
+    "bp-x100",
+    "ph-guide",
+    "wm0306",
+    "paramount-bush"
+   ],
+   "conf": "single",
+   "worth": 1,
+   "verdict": "Worth it on a road car with worn bushes. This is the right choice for most owners. Skip it if the bushes are sound."
+  },
+  {
+   "id": "upgrade.poly-front-bushes",
+   "title": "Polyurethane front bushes",
+   "category": "reliability",
+   "why": "Poly does not perish, resists oil and road salt, and holds geometry tighter in corners. Good for a car driven hard. Not needed if you want the original quiet ride.",
+   "what": "Fit a full front bush kit, or just the positions that matter to you. British Parts lists a complete kit and a top wishbone kit. Polybush sells a 12-bush kit and Powerflex sells each position.",
+   "difficulty": 4,
+   "reversible": true,
+   "costGbp": [
+    303,
+    408
+   ],
+   "partsNeeded": [
+    "BPK162 front poly kit, or Polybush XK8/XK8R front kit (12 bushes)",
+    "BPK259 top wishbone poly kit",
+    "Powerflex PFF27-201, 202, 203 and 205-25 by position"
+   ],
+   "jobs": [],
+   "caution": "Viezu claims poly isolates vibration, but firmer bushes generally pass on more noise. Treat that claim with care. Bush work means removing arms and specialist tools. Polybush lists OE references such as MJA1462AB and MNE1360CA, so match by position.",
+   "appliesTo": {},
+   "note": "Parts only, inc VAT, read 1 Nov 2026. BPK162 £252.72 + VAT; Polybush kit £408.41 inc VAT; Powerflex per-car sets £51.91 to £180.82 inc VAT per position; BPK259 £66.50 + VAT.",
+   "src": [
+    "bp-x100",
+    "polybush",
+    "powerflex",
+    "viezu",
+    "ph-guide"
+   ],
+   "conf": "corroborated",
+   "worth": 3,
+   "verdict": "Worth it if you drive hard or track the car and accept more road noise. Skip it on a road car: rubber costs less and rides better. Compare the rubber rebuild first."
+  },
+  {
+   "id": "upgrade.rear-suspension-rebuild",
+   "title": "Rear suspension bush rebuild",
+   "category": "reliability",
+   "why": "PistonHeads warns that rear A-frame bushes wear, and to listen for knocks and clonks. Do them together rather than chasing noises one bush at a time.",
+   "what": "Fit the full rear kit. There is a separate kit for R Performance cars.",
+   "difficulty": 4,
+   "reversible": true,
+   "costGbp": [
+    368,
+    428
+   ],
+   "partsNeeded": [
+    "BPK158 rear rebuild kit",
+    "BPK594 for R Performance cars",
+    "CCC6782 rear damper lower bush",
+    "Powerflex PFR27-207 if going poly in that position"
+   ],
+   "jobs": [],
+   "caution": "Rear camber shims sit behind the hub on the driveshaft. The manual tells you to keep them safe: note which side each came from.",
+   "appliesTo": {},
+   "note": "Parts only, inc VAT, read 1 Nov 2026. BPK594 £306.99 + VAT, BPK158 £356.25 + VAT. Powerflex PFR27-207 per-car set £112.80 inc VAT.",
+   "src": [
+    "bp-x100",
+    "bp-kits",
+    "ph-guide",
+    "powerflex",
+    "wm0306"
+   ],
+   "conf": "corroborated",
+   "worth": 2,
+   "verdict": "Worth it if there are clonks or perished bushes. Do it with the front. Skip it if nothing is worn."
+  },
+  {
+   "id": "upgrade.rear-hub-carrier-kit",
+   "title": "Rear hub carrier pivot kit",
+   "category": "reliability",
+   "why": "Worn wheel bearings should be dealt with promptly as they also wear tyres, and the hub carrier pivot lives in the same corner.",
+   "what": "Renew the pivot bearings, sleeve, pin and nut with a kit while the hub carrier is apart. A press is needed.",
+   "difficulty": 4,
+   "reversible": true,
+   "costGbp": [
+    44,
+    142
+   ],
+   "partsNeeded": [
+    "BPK399 kit with pivot bearings, sleeve, pin and nut",
+    "BPK468 kit with pivot sleeve and bearings"
+   ],
+   "jobs": [],
+   "caution": "The workshop manual uses hub puller 204-011 and a press. Never let press load go through the hub studs.",
+   "appliesTo": {},
+   "note": "Parts only per kit, inc VAT, read 1 Nov 2026. BPK468 £37.03 + VAT (out of stock that day), BPK399 £117.96 + VAT. Kit quantity per car not stated, so check.",
+   "src": [
+    "bp-x100",
+    "ph-guide",
+    "wm0306"
+   ],
+   "conf": "single",
+   "worth": 3,
+   "verdict": "Worth it when bearings are being done anyway. Skip it as a stand-alone job."
+  },
+  {
+   "id": "upgrade.damper-top-mounts",
+   "title": "New damper top mounts and isolators",
+   "category": "reliability",
+   "why": "One 2004 XKR measured an inch low at the front and the owner was told a collapsed mount was likely. Fresh dampers on a dead mount waste the dampers.",
+   "what": "Measure ride height from wheel centre to arch apex, through the wheel centre. Jaguar's showroom figures are 401 mm front and 416 mm rear for XK8, 415 mm rear for XKR, plus or minus 15 mm. If low at the front, suspect mounts or springs.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": [
+    141,
+    645
+   ],
+   "partsNeeded": [
+    "MJA2170BD front top mount, 2",
+    "MNC3470AAG rear top mount, 2",
+    "CAC949350 and CAC949465 rear isolators if the mount is fine"
+   ],
+   "jobs": [],
+   "caution": "Spring compressors can injure you. Showroom height means all fluids full and 9 litres of fuel.",
+   "appliesTo": {},
+   "note": "Parts only, inc VAT, read 1 Nov 2026. Low end is a pair of MJA2170BD at £58.59 + VAT each, high end adds a pair of MNC3470AAG at £209.72 + VAT each. Rear isolators are £20.40 + VAT each.",
+   "src": [
+    "bp-x100",
+    "vsb2004",
+    "wm0306",
+    "jf-cats-shocks",
+    "sngcat"
+   ],
+   "conf": "corroborated",
+   "worth": 2,
+   "verdict": "Worth it if the front sits low or the mounts have collapsed. Skip it if ride height is right."
+  },
+  {
+   "id": "upgrade.halfshaft-uj-greasing",
+   "title": "Grease the half-shaft UJs, and replace them with greasable ones",
+   "category": "reliability",
+   "why": "It costs almost nothing. Half-shaft joints are a known wear item and owners report grease nipples are there to be used.",
+   "what": "Grease half-shaft joints at every service, around 10k miles by owner advice. Replacement joint is JLM1388. Treat the propshaft separately: Jaguar lists it as a sealed unit, so a driveshaft specialist needs to rebuild and balance it.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Grease gun",
+    "JLM1388 half-shaft UJ",
+    "Driveshaft specialist for the propshaft"
+   ],
+   "jobs": [],
+   "caution": "Forum sizing (1350 series half-shaft, 1300 series XKR propshaft) was measured by eye and is unconfirmed. Measure your own joint. A shop may wrongly call these CV joints.",
+   "appliesTo": {},
+   "note": "No UK price sourced. Jagbits listed new joints at $43 in March 2026.",
+   "src": [
+    "jf-uj-2026",
+    "jf-grease"
+   ],
+   "conf": "community",
+   "worth": 1,
+   "verdict": "Worth it on every car. It costs almost nothing. Skip nothing here."
+  },
+  {
+   "id": "upgrade.gearbox-fluid-service",
+   "title": "Gearbox fluid and filter service",
+   "category": "reliability",
+   "why": "A cheap service on a gearbox that costs far more to replace. Parts are freely available for the ZF 5HP24.",
+   "what": "Drop the pan, fit a new filter and gasket, refill with the correct fluid. Use a new set of pan Torx bolts if the old ones are chewed. XKR 4.0 cars use a different filter kit.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": [
+    73,
+    146
+   ],
+   "partsNeeded": [
+    "HX278D.1 Mahle filter kit (XK8 4.0 to VIN A30644)",
+    "BPC248 filter kit (XKR to VIN A30644)",
+    "JLM20237 ATF, 5 litre tin",
+    "JLM20204 pan gasket if not in kit",
+    "BPK304 22-piece pan Torx kit"
+   ],
+   "jobs": [],
+   "caution": "Use the fluid specified for your gearbox, which depends on car and year. See the fluids data. British Parts lists this ATF for the ZF 5HP24 on XK8 1997 to 2002, not the XKR Mercedes box.",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ]
+   },
+   "note": "Parts only, inc VAT, read 1 Nov 2026. Low end is HX278D.1 (£22.52 + VAT) plus one 5 litre ATF (£38.59 + VAT), high end adds BPK304 (£60.21 + VAT). Check fill quantity against the fluids data. No listing was found for 4.2 six-speed parts.",
+   "src": [
+    "bp-x100"
+   ],
+   "conf": "single",
+   "worth": 1,
+   "verdict": "Worth it on any 5HP24 or 6HP26 with no record of a change. Skip it if it was done recently."
+  },
+  {
+   "id": "upgrade.roof-relief-valve",
+   "title": "Roof hydraulic pressure relief valve",
+   "category": "reliability",
+   "why": "The roof hose runs in a hard place. JagRepair put hose replacement at about $290, 6 hours DIY, or $1,500 to $2,000 paid. Reducing peak pressure lowers the risk of hose, latch and lift failures.",
+   "what": "Fit the relief valve developed by Walt Nuschke at the pump. JagRepair's install took 40 minutes. It reduces operating pressure across the whole roof system.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "LSI pressure relief valve",
+    "T30 bit for the outboard pump plug"
+   ],
+   "jobs": [],
+   "caution": "Current availability was not confirmed. Loosen the T30 plug before you dismount the pump. JagRepair's tested peak with no modification was about 1650 psi.",
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "note": "No current price. Figures on hose cost are US dollars and undated. The site claims a reduction in failures but does not give failure data.",
+   "src": [
+    "jr-relief",
+    "jr-voltage"
+   ],
+   "conf": "single",
+   "worth": 3,
+   "verdict": "Worth it if your roof hose has burst or you want to protect it. Skip it if the system is healthy and you rarely use the roof."
+  },
+  {
+   "id": "upgrade.roof-resistor-not-worth-it",
+   "title": "Roof voltage-drop resistor: not worth it",
+   "category": "reliability",
+   "why": "Listed so you can skip it. It looks like a cheap way to protect the hose but the measured pressure barely changes.",
+   "what": "A resistor in the pump feed was tested by three people. With the engine running the reduction was only 18 to 80 psi from about 1650 psi. The tester's verdict was that it fell short, and his roof stalled a few times.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [],
+   "jobs": [],
+   "caution": "Do not fit. Use the relief valve route if you want protection.",
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "note": "Waste of effort on JagRepair's numbers. With the engine off the average reduction was about 150 psi, but JagRepair operates the roof with the engine running. No cost shown because the advice is not to buy it.",
+   "src": [
+    "jr-voltage"
+   ],
+   "conf": "single",
+   "worth": 5,
+   "verdict": "Skip it. Listed so you do not buy one."
+  },
+  {
+   "id": "upgrade.hood-ram-rebuild",
+   "title": "Rebuild roof rams instead of buying new",
+   "category": "reliability",
+   "why": "A local hydraulics specialist can save you most of the price of a new Jaguar ram.",
+   "what": "Take the leaking ram to a hydraulics firm for new seals. One UK owner paid about £160. A new one from Jaguar was quoted above £600.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": [
+    160,
+    600
+   ],
+   "partsNeeded": [
+    "Local hydraulics specialist",
+    "Correct roof hydraulic fluid"
+   ],
+   "jobs": [],
+   "caution": "Protect the interior and bodywork from fluid. Find the leak before ordering anything.",
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "note": "Rebuild versus new part, forum prices, undated in the source summary, so treat as old.",
+   "src": [
+    "jf-hood-ram"
+   ],
+   "conf": "single",
+   "worth": 2,
+   "verdict": "Worth it if a ram leaks. Skip new rams until you have priced this."
+  },
+  {
+   "id": "upgrade.bilstein-b4-standard",
+   "title": "Bilstein B4 dampers on standard suspension cars",
+   "category": "handling",
+   "why": "Dampers this old are probably tired. B4 is the straightforward like-for-like: one owner called the result very comfortable while still holding corners well.",
+   "what": "Fit four B4 units. Fronts and rears are different and not interchangeable. Renew lower bushes while there: a rear clunk can be a worn lower bush.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": [
+    529,
+    529
+   ],
+   "partsNeeded": [
+    "Bilstein 24-067263 front, 2",
+    "Bilstein 24-067270 rear, 2",
+    "MJA2153AB front lower bush",
+    "CCC6782 rear lower bush"
+   ],
+   "jobs": [],
+   "caution": "These are for cars without adaptive damping. Non-adaptive upper stud nuts torque to 30-40 Nm, adaptive ones to 16-18 Nm: use the right number. Spring compressors are the dangerous bit. Koni: no X100 application could be found, so it is not listed as an option.",
+   "appliesTo": {},
+   "note": "Parts only, inc VAT. £112.61 and £107.84 + VAT each, read 1 Nov 2026. Forum thread gives Bilstein BE5 6726-H0 front and BE5 6727-H0 rear as XK8 references. B4 is a replacement damper, not a sports one.",
+   "src": [
+    "bp-x100",
+    "jf-bilstein-front",
+    "jf-xk8-shocks",
+    "jf-cats-shocks",
+    "wm0306",
+    "sngcat"
+   ],
+   "conf": "corroborated",
+   "worth": 2,
+   "verdict": "Worth it if the dampers are tired on a non-adaptive car. Skip it on cars with CATS."
+  },
+  {
+   "id": "upgrade.cats-like-for-like",
+   "title": "Adaptive CATS dampers, like for like",
+   "category": "handling",
+   "why": "Keeps the factory firm-or-soft system on cars that have it. The cost is the question: these are about double the price of the passive B4s.",
+   "what": "Buy for your exact car by VIN range and by whether it has R Performance. The damper lists split at VIN A30645, and R Performance rears need a link lead.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": [
+    1148,
+    1580
+   ],
+   "partsNeeded": [
+    "Bilstein 20-070830 front and 20-070847 rear (2003 on, adaptive, not R Performance)",
+    "Bilstein 20-070816 front and 20-070823 rear (2003 on, R Performance)",
+    "Bilstein 20-250256 front (VIN A00083 to A30645, adaptive)",
+    "LJG3075AB link lead with R Performance rears"
+   ],
+   "jobs": [],
+   "caution": "Adaptive upper stud nut torque is 16-18 Nm. Before buying, test the wiring first: PistonHeads reports worn wiring between the suspension and main loom can cause the dash warning, and the fix is a section of loom.",
+   "appliesTo": {},
+   "note": "Parts only, inc VAT, read 1 Nov 2026. Low end: 20-070830 at £234.30 and 20-070847 at £244.20 + VAT, four dampers. High end: 20-070816 at £267.30 and 20-070823 at about £288 + VAT plus two link leads at £102.56 + VAT. Rear 20-070847 was out of stock that day.",
+   "src": [
+    "bp-x100",
+    "sngcat",
+    "wm0306",
+    "ph-guide",
+    "pp-cats"
+   ],
+   "conf": "single",
+   "worth": 3,
+   "verdict": "Worth it if you want to keep CATS and can pay for it. Skip it if a conversion to passive dampers suits you."
+  },
+  {
+   "id": "upgrade.cats-to-passive",
+   "title": "Convert CATS cars to passive Bilsteins",
+   "category": "handling",
+   "why": "It saves about half the cost when CATS dampers die. Most forum opinion thinks the premium is hard to justify for ordinary driving.",
+   "what": "Fit the standard suspension B4 dampers and unplug the adaptive damping module in the boot. Owners report no conversion kit is needed.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": [
+    529,
+    529
+   ],
+   "partsNeeded": [
+    "Bilstein 24-067263 front, 2",
+    "Bilstein 24-067270 rear, 2"
+   ],
+   "jobs": [],
+   "caution": "Forum evidence only: nobody confirmed whether a fuse also needs pulling, and whether a warning stays off on your car is not documented. Do not leave CATS dampers in place with the system disconnected: one poster says they default to stiff and another reported a terrible ride after unplugging them. R Performance cars use special springs, so expect a different result to standard ones.",
+   "appliesTo": {},
+   "note": "Parts only, inc VAT, read 1 Nov 2026. British Parts lists these for standard suspension cars, so fitment on adaptive mounts is forum-reported rather than vendor-confirmed.",
+   "src": [
+    "jf-cats-shocks",
+    "bp-x100",
+    "jf-coilover"
+   ],
+   "conf": "community",
+   "worth": 2,
+   "verdict": "Worth it when CATS dampers die and you want to save money. Skip it while they still work."
+  },
+  {
+   "id": "upgrade.coilovers",
+   "title": "Coilovers: overkill for a road XK8",
+   "category": "handling",
+   "why": "Only if you have sorted everything else and want a track-focused car. A Nitron NTR R1 kit is a lot of money on a car this soft and heavy.",
+   "what": "Nitron lists an NTR R1 kit for the 1996 to 2006 XK8, fast road rates 550 lb/in front and 450 lb/in rear (96 and 79 N/mm). Cheaper imports exist but usually lack rear springs: one owner made up rears with 2 inch ID springs and went from 350 to 450 lb.",
+   "difficulty": 4,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Nitron NTR R1 kit, special order",
+    "Full alignment afterwards"
+   ],
+   "jobs": [],
+   "caution": "Setting ride height means the factory alignment table no longer applies directly, because it is quoted at showroom height. Confirm XKR fit, as only the XK8 listing was found. Some import rear setups are not adjustable.",
+   "appliesTo": {},
+   "note": "No GBP price. A US retailer listed Nitron at $3,846 as a non-returnable special order. Import kits were $850 to $1,200 in a 2019 thread.",
+   "src": [
+    "elite-nitron",
+    "jf-coilover",
+    "vsb2004"
+   ],
+   "conf": "single",
+   "worth": 5,
+   "verdict": "Skip it on a road car. Worth it only for a track-focused car with everything else sorted."
+  },
+  {
+   "id": "upgrade.lowering-springs",
+   "title": "Lowering springs",
+   "category": "handling",
+   "why": "Reduces body roll and improves stance. It also creates the alignment problems below, so budget for that. Get the suspension healthy first.",
+   "what": "Sellers describe drops of 25 to 30 mm. Fit with fresh dampers and top mounts, then correct rear camber with shims and align.",
+   "difficulty": 4,
+   "reversible": true,
+   "costGbp": [
+    681,
+    681
+   ],
+   "partsNeeded": [
+    "Lowering spring set",
+    "Thicker rear camber shims",
+    "Alignment"
+   ],
+   "jobs": [],
+   "caution": "A 2005 car on Mina springs read -3.0 and -1.9 degrees rear camber at the alignment shop (the owner measured the left at -2.2) against a factory limit of -0.9. One owner fitted 7.5 mm shims with lowering springs. Paramount's page lists the 30 mm set for 2006-on 4.0/4.2 XK, so confirm it fits X100 before ordering.",
+   "appliesTo": {},
+   "note": "Parts only, inc VAT from £567.14 + VAT, seen through search results in Nov 2026, currency shown inconsistently on the site. Viezu quotes about 25 mm. Generic guides quote 30 to 40 mm and warn larger drops need arch work.",
+   "src": [
+    "paramount-springs",
+    "viezu",
+    "torquecars",
+    "jf-camber-lowered",
+    "jf-rear-camber",
+    "wm0306"
+   ],
+   "conf": "single",
+   "worth": 4,
+   "verdict": "Worth it only for looks, with budget for alignment and shims. Skip it if you value ride and tyre life."
+  },
+  {
+   "id": "upgrade.r-performance-arb",
+   "title": "Factory R Performance anti-roll bars",
+   "category": "handling",
+   "why": "No aftermarket uprated bar was found for the X100, so the factory parts are the realistic route. Jaguar's own handling pack went stiffer at the front and softer at the rear, so it is a balance change, not simply more of everything.",
+   "what": "Standard bars are MJA2100DH front and MJA3500DF rear. R Performance bars are MXD2100AA front and MNA3500DA rear, with matching bushes MXD2102AA and CBC4901. Jaguar's enhanced handling pack also included special springs, dampers, adaptive module, steering rack and power steering module.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "MXD2100AA front bar",
+    "MNA3500DA rear bar",
+    "MXD2102AA front bushes, 2",
+    "CBC4901 rear bushes, 2"
+   ],
+   "jobs": [],
+   "caution": "Jaguar offered the pack only on coupes with adaptive damping, and with Brembo brakes and special wheels. Bars alone on a standard car is your own experiment. Do not use the crossbeam as a jacking point.",
+   "appliesTo": {},
+   "note": "No price: expect to source used. MXD2102AAG bushes were £23.46 + VAT each on 1 Nov 2026. SNG calls these 'R performance' parts and the manual says 'enhanced handling pack'; this file assumes they are the same bars.",
+   "src": [
+    "wm0306",
+    "sngcat",
+    "bp-x100"
+   ],
+   "conf": "factory",
+   "worth": 4,
+   "verdict": "Worth it on a coupe with adaptive damping if you can find the parts. Skip it otherwise."
+  },
+  {
+   "id": "upgrade.arb-bushes-links",
+   "title": "Fresh anti-roll bar bushes and links",
+   "category": "handling",
+   "why": "The cheapest handling job on the car. Worn links and bushes make clonks and slack response.",
+   "what": "Renew front mount bushes and front and rear link bushes. Rubber is pennies. Polybush versions exist for each position.",
+   "difficulty": 1,
+   "reversible": true,
+   "costGbp": [
+    37,
+    84
+   ],
+   "partsNeeded": [
+    "MJA2102CE front bar bush, 2 (not R Performance)",
+    "MNA3505AE rear link with bushes, 2",
+    "Polybush front mount, front link lower bush and rear link bush 31BH"
+   ],
+   "jobs": [],
+   "caution": "R Performance cars use MXD2102AA, not MJA2102CE. SNG notes a poly version as MJA2102CEU.",
+   "appliesTo": {},
+   "note": "Parts only, inc VAT, read 1 Nov 2026. Low end: MJA2102CE at £5.99 + VAT and MNA3505AE at £9.30 + VAT, two of each. High end: Polybush £25.93 + £36.16 + £22.22 inc VAT.",
+   "src": [
+    "bp-x100",
+    "polybush",
+    "sngcat"
+   ],
+   "conf": "corroborated",
+   "worth": 1,
+   "verdict": "Worth it if anything clonks. Cheapest handling job on the car."
+  },
+  {
+   "id": "upgrade.geometry-factory-rhd",
+   "title": "Alignment to the factory table (UK RHD numbers)",
+   "category": "handling",
+   "why": "The numbers are not symmetrical on UK cars, which is why a shop using the wrong market data will fight the car. Give them this table.",
+   "what": "All RHD and Japan, all at showroom height. Front camber: LH -1.28 to -0.28 deg, RH -0.76 to +0.24 deg, balance (RH minus LH) -0.19 to +1.21 deg. Castor: LH +6.47 to +7.87 deg, RH +6.33 to +7.73 deg, balance -0.84 to +0.57 deg. Front total toe: +0.08 to +0.42 deg. All markets rear: camber -0.90 to -0.10 deg each side, balance -1.00 to +1.00 deg; toe +0.08 to +0.25 deg each side, total +0.17 to +0.50 deg, thrust -0.08 to +0.08 deg.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Four-wheel alignment"
+   ],
+   "jobs": [],
+   "caution": "Check tyres and pressures to Jaguar specification first. Never align on a space saver. Look for kerb damage first. The manual's alignment notes mention curb weight with a full tank in one place and the tables say showroom height: use the same condition throughout. LHD cars use different front numbers. No alignment price was sourced.",
+   "appliesTo": {
+    "market": [
+     "uk"
+    ]
+   },
+   "note": "Numbers are identical in the 2003 and 2004 Vehicle Specifications booklets and the workshop manual. One copy of the manual misprints a US castor value; RHD values are unaffected. Forum posts cite other figures: the rear -0.9 to -0.1 matches, but the shop range in one thread for front castor was a different market.",
+   "src": [
+    "wm0306",
+    "vsb2003",
+    "vsb2004",
+    "jf-front-caster"
+   ],
+   "conf": "factory",
+   "worth": 1,
+   "verdict": "Worth it after any suspension work or on uneven tyre wear. Skip it only if the tyres wear evenly."
+  },
+  {
+   "id": "upgrade.geometry-fast-road",
+   "title": "Road setup inside the factory window",
+   "category": "handling",
+   "why": "Owners chasing tyre wear stay in the factory range but move within it. It costs nothing extra on top of an alignment.",
+   "what": "Stay inside the factory table. One owner tip puts front total toe at about 0.16 deg, another at 0.18 to 0.21 deg, both to cut inner edge wear. Rear camber near the middle is -0.5 deg. Set rear toe equal on both sides.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Four-wheel alignment"
+   ],
+   "jobs": [],
+   "caution": "These targets come from forum posts, not Jaguar. Rear nominal was given as -0.7 by another owner. Sagging springs move everything, so check ride height first.",
+   "appliesTo": {},
+   "note": "Factory limits: front toe +0.08 to +0.42 deg total, rear camber -0.90 to -0.10 deg. -0.5 deg is the arithmetic midpoint.",
+   "src": [
+    "jf-rear-camber",
+    "jf-front-caster",
+    "wm0306"
+   ],
+   "conf": "community",
+   "worth": 3,
+   "verdict": "Worth it if you are chasing tyre wear and already at the factory table. Skip it otherwise: these targets are forum figures."
+  },
+  {
+   "id": "upgrade.rear-camber-shims",
+   "title": "Rear camber shims",
+   "category": "handling",
+   "why": "Sagged or lowered cars run too much negative rear camber and chew the inner tyre edge. Shims put it right without new arms.",
+   "what": "Camber is set by a shim between hub and driveshaft. SNG lists half-shaft spacers from 3.5 to 7.5 mm in 0.5 mm steps, part numbers CBC480635 to CBC480675. A thicker shim brings camber towards zero. Owners measure roughly 0.19 to 0.22 deg per 0.5 mm.",
+   "difficulty": 4,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Shim from CBC480635 to CBC480675 range",
+    "New nuts for the axle shaft to differential joint and the hub, as the manual says not to reuse originals"
+   ],
+   "jobs": [],
+   "caution": "The hub and axle shaft come apart to change it, so plan one measurement carefully. With the wheel off the axle is in tension and the flanges separate as the nuts come off. Sensitivity figures are owner numbers. One owner removed a 4.0 mm factory shim; a dealer stocked 7.0 mm and said it set camber within spec 99% of the time.",
+   "appliesTo": {},
+   "note": "No price sourced. The part numbers came from an SNG catalogue quote in the forum thread.",
+   "src": [
+    "jf-rear-camber",
+    "jf-camber-lowered",
+    "jf-front-caster",
+    "wm0306"
+   ],
+   "conf": "corroborated",
+   "worth": 3,
+   "verdict": "Worth it on a sagged or lowered car that eats inner rear tyres. Skip it on a car in spec."
+  },
+  {
+   "id": "upgrade.front-camber-eccentric",
+   "title": "Front eccentric camber bolts on early cars",
+   "category": "handling",
+   "why": "Up to VIN 031302 the front has no camber adjuster at all. If your front camber is outside the table, this is the fix.",
+   "what": "Replace the lower wishbone rear fulcrum bolts with eccentric ones. Fit to both sides. Rotating the bolt moves the arm in or out.",
+   "difficulty": 5,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Eccentric fulcrum bolt, 2 (one per side)"
+   ],
+   "jobs": [],
+   "caution": "Jaguar says to fit them only when directed by Technical Support. Some later markets did not get them either. Forum reports say the steering rack has to be dropped, with hoses left connected and the shaft disconnected. Thread-locked fasteners have a limited reuse count. Keep steering wheel and road wheels centred when the rack goes back.",
+   "appliesTo": {
+    "vinTo": "031302"
+   },
+   "note": "No part number or price for the eccentric bolt was sourced. Roadfly reportedly claimed a limit of 0 deg 30 min positive camber, unconfirmed.",
+   "src": [
+    "wm0306",
+    "jl-camber-bolt"
+   ],
+   "conf": "factory",
+   "worth": 4,
+   "verdict": "Worth it only if front camber is outside the table on a car up to VIN 031302. Skip it otherwise."
+  },
+  {
+   "id": "upgrade.castor-shim-swap",
+   "title": "Move castor shims",
+   "category": "handling",
+   "why": "Free. Castor drives straight line feel, and you can often reach spec by moving what is already there.",
+   "what": "Each upper fulcrum bolt carries 2 thick and 2 thin shims. Thick is 1.6 mm, blue paint, worth 0.4 deg. Thin is 0.9 mm, red paint, worth 0.2 deg. Move shims between front and rear positions. Owners say moving a shim from front to back doubles its effect.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": [
+    0,
+    0
+   ],
+   "partsNeeded": [
+    "No parts. Alignment needed afterwards"
+   ],
+   "jobs": [],
+   "caution": "Castor changes alter camber and toe, so recheck both. Note the shim position before you remove the bolt. Specification varies by market.",
+   "appliesTo": {},
+   "note": "Parts cost is zero. Labour and alignment are extra and not priced.",
+   "src": [
+    "wm0306",
+    "jf-front-caster"
+   ],
+   "conf": "factory",
+   "worth": 3,
+   "verdict": "Worth it if castor is out of spec. Free. Skip it if alignment is already right."
+  },
+  {
+   "id": "upgrade.tyres-premium-staggered",
+   "title": "Good tyres in the original sizes",
+   "category": "handling",
+   "why": "Biggest single change to how the car drives, and the easiest. Use the factory sizes so speedo and ABS stay happy.",
+   "what": "18 inch: 245/45 R18 front, 255/45 R18 rear. Michelin lists its current performance fitment for the XK8 in these sizes. Set 2.2 bar front and 2.3 bar rear for sustained speeds, or 1.8 and 1.9 bar for comfort below 100 mph on 17 and 18 inch.",
+   "difficulty": 1,
+   "reversible": true,
+   "costGbp": [
+    294,
+    865
+   ],
+   "partsNeeded": [
+    "245/45 R18, 2",
+    "255/45 R18, 2"
+   ],
+   "jobs": [],
+   "caution": "Check load and speed rating: factory was 96 and 99 with W or Y. Check your door or armrest label. Stay near stock rolling diameter. Nut torque is 102 Nm and Jaguar says retighten after 500 miles.",
+   "appliesTo": {},
+   "note": "Set of four on 1 Nov 2026 Blackcircles listings: 245/45R18 £66.99 to £209.99 each, 255/45R18 £79.99 to £222.41 each. The site sells with local fitting: confirm the price includes it.",
+   "src": [
+    "vsb2004",
+    "wm0306",
+    "blackcircles-245",
+    "blackcircles-255",
+    "michelin-xk8",
+    "jf-wheel-size"
+   ],
+   "conf": "factory",
+   "worth": 1,
+   "verdict": "Worth it on any car on old or budget tyres. Biggest change for the money."
+  },
+  {
+   "id": "upgrade.brembo-r-conversion",
+   "title": "R Performance Brembo conversion",
+   "category": "brakes",
+   "why": "The big factory brake is 355 mm front and 330 mm rear, and was an R Performance option. It is the proper answer if the car sees fast driving, but only after the standard brakes have been done properly.",
+   "what": "Fit Brembo calipers, discs, pads, carriers and shields on all four corners. SNG: 4.2 SC grey C2N2144/5 front and C2N2146/7 rear, red C2N3247/8 front and C2N3249/50 rear, 4.2 NA grey MXD1512CA/MXD1513CA front. Discs C2N3427 drilled or C2N3428 plain front, JLM21748 drilled or C2N2360 plain rear. Pads MXD1550AB front, MXD2750AA rear.",
+   "difficulty": 5,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Brembo calipers front and rear",
+    "Discs",
+    "Pads MXD1550AB and MXD2750AA",
+    "Dust shields JLM21403 and JLM21404",
+    "Rear backplates MXD2788AA and MXD2789AA",
+    "Braided hose kit",
+    "Wheels that clear the calipers"
+   ],
+   "jobs": [],
+   "caution": "Wheels decide this. A single X308 report says Brembos would not clear Penta or Asteroid 18s and needed Milan wheels; Forum advice says 19 inch Apollo is the main exception and Hydra 18s fit. Jaguar says Brembo cars need special wheels with the handling pack. The claim that no special hub is needed is one owner's account. No fitment matrix was found, so check parts against a catalogue before spending.",
+   "appliesTo": {},
+   "note": "No overall price. Discs and pads alone on 1 Nov 2026 were about £421 inc VAT (C2N3427 £130.64, rear pair £152.76, MDB2413 £34.11, rear Brembo pads £33.20, all + VAT). Calipers are extra, used from a breaker. One US owner paid $3,100 in total, mostly on wheels.",
+   "src": [
+    "sngcat",
+    "bp-x100",
+    "wm0306",
+    "jl-brembo-xjr",
+    "jf-wheel-size"
+   ],
+   "conf": "single",
+   "worth": 4,
+   "verdict": "Worth it for regular hard use if you can find the parts and your wheels clear. Skip it for road use: better pads come first."
+  },
+  {
+   "id": "upgrade.ebc-pads-discs",
+   "title": "Better pads and discs on the standard calipers",
+   "category": "brakes",
+   "why": "SNG says Greenstuff pads can give a noticeable improvement on the original calipers. This is the sensible first step.",
+   "what": "Fit a known fast-road pad, or a matched disc and pad kit. Check disc size first: SNG lists 305 mm and 325 mm standard fronts. British Parts splits some kits at VIN 037347.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": [
+    95,
+    446
+   ],
+   "partsNeeded": [
+    "EBC front pads",
+    "EBC DP31110C Redstuff front pads",
+    "Disc and pad kit for your size"
+   ],
+   "jobs": [],
+   "caution": "Yellowstuff DP41110R is listed for Brembo cars only. Bleed and bed in after fitting. Check pad part by VIN: standard pads change at A24195.",
+   "appliesTo": {},
+   "note": "Parts only, inc VAT, read 1 Nov 2026. Low end: pad kit £79.53 + VAT. High end: 325 mm Nitrotherm disc and Greenstuff kit £371.91 + VAT. DP31110C £131.04 + VAT.",
+   "src": [
+    "sngcat",
+    "bp-x100"
+   ],
+   "conf": "corroborated",
+   "worth": 1,
+   "verdict": "Worth it at the next pad change on standard calipers. The sensible brake upgrade."
+  },
+  {
+   "id": "upgrade.braided-hoses",
+   "title": "Braided brake hoses",
+   "category": "brakes",
+   "why": "Old rubber hoses are worth replacing anyway. A braided set at about £104 is not far off four rubber hoses at £11.79 + VAT each.",
+   "what": "Fit a four-hose kit with banjo bolts and washers, then bleed all four corners. British Parts lists versions for standard and Brembo cars.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": [
+    104,
+    104
+   ],
+   "partsNeeded": [
+    "BLA1516-4L or the Brembo equivalent",
+    "Brake fluid"
+   ],
+   "jobs": [],
+   "caution": "British Parts labels this for 4.0 V8; confirm for 4.2. Plated rather than stainless fittings exist on some kits, so ask. Goodridge kit 38101 is a known X100 kit but only US prices were found.",
+   "appliesTo": {},
+   "note": "Parts only, inc VAT, £86.30 + VAT, read 1 Nov 2026. A rubber front hose MJB5670AA was £11.79 + VAT each.",
+   "src": [
+    "bp-x100"
+   ],
+   "conf": "single",
+   "worth": 2,
+   "verdict": "Worth it when the rubber hoses are due anyway. Skip it on recent hoses."
+  },
+  {
+   "id": "upgrade.drilled-discs-not-worth-it",
+   "title": "Drilled or slotted discs: mostly a looks and cost choice",
+   "category": "brakes",
+   "why": "PistonHeads says brake parts are cheap except for later XKR drilled discs and red Brembos. Nothing found shows that drilled discs stop a road car better.",
+   "what": "If you have Brembos, price the plain disc C2N3428 before buying drilled. EBC slotted kits are an alternative.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": [
+    403,
+    403
+   ],
+   "partsNeeded": [
+    "USR1600 slotted front pair, if you still want them"
+   ],
+   "jobs": [],
+   "caution": "That verdict is this file's judgement from a lack of evidence, not a test result.",
+   "appliesTo": {},
+   "note": "Parts only, inc VAT, USR1600 £335.74 + VAT, read 1 Nov 2026. An OE-style drilled pair, C2N3427, was £130.64 + VAT.",
+   "src": [
+    "ph-guide",
+    "sngcat",
+    "bp-x100"
+   ],
+   "conf": "single",
+   "worth": 5,
+   "verdict": "Skip it unless you want the look."
+  },
+  {
+   "id": "upgrade.sc-pulley-6pct",
+   "title": "Supercharger pulley, 6% (about 1.5 psi)",
+   "category": "power",
+   "why": "The cheapest real power on an XKR. Sellers claim 25 bhp midrange, but one owner's figure is about 15 bhp and he doubted it was worth the trouble.",
+   "what": "A smaller upper pulley spins the Eaton M112 faster. On 4.0 and 4.2 the 6% pulley usually needs no snout machining. It needs a proper puller. The coolant pipes and thermostat housing over the snout must come off on an XKR.",
+   "difficulty": 4,
+   "reversible": true,
+   "costGbp": [
+    185,
+    351
+   ],
+   "partsNeeded": [
+    "6% stainless upper pulley",
+    "Puller and installer tool",
+    "Fresh belt",
+    "New seals C2C11477, 2",
+    "Idler bearing if worn"
+   ],
+   "jobs": [],
+   "caution": "A 3-jaw puller can damage the supercharger. Aluminium pulleys have had hot belt slip. Extra boost means extra heat. Do it only on a healthy engine and tell your insurer. Nothing here measures long-term reliability.",
+   "appliesTo": {
+    "induction": [
+     "sc"
+    ]
+   },
+   "note": "Low end is the pulley, high end adds fitting from £166 at Powerhouse in Chesterfield. Guide-page pounds prices were about three years old in Nov 2026; product pages show $210.74. Paramount claims up to 28 bhp. All power figures are seller claims.",
+   "src": [
+    "powerhouse-guide",
+    "powerhouse-42",
+    "paramount-pulley-40",
+    "paramount-pulley-42",
+    "jr-pulley"
+   ],
+   "conf": "corroborated",
+   "worth": 3,
+   "verdict": "Worth it on an XKR once the rest of the car is sound. XKR only: skip it on an XK8.",
+   "alt": "upgrade.buy-the-xkr-instead"
+  },
+  {
+   "id": "upgrade.sc-pulley-10pct",
+   "title": "Supercharger pulley, 10% (about 2.5 to 3 psi)",
+   "category": "power",
+   "why": "A bigger step at about 30 to 40 bhp claimed. The catch is that the smaller pulley will not pass over the snout without cutting the casting.",
+   "what": "Remove about 4 to 5 mm from the snout diameter, then press on the 2.6 inch pulley. Powerhouse recommends a lathe finish and offers machining by mail. One owner spent five evenings grinding by hand and made a puller adapter to get the pulley back off.",
+   "difficulty": 5,
+   "reversible": false,
+   "costGbp": [
+    185,
+    470
+   ],
+   "partsNeeded": [
+    "10% stainless upper pulley",
+    "Puller and installer",
+    "Goodyear Gatorback 4080515 or Gates K080510 belt",
+    "New seals C2C11477, 2"
+   ],
+   "jobs": [],
+   "caution": "Cutting the snout cannot be undone. Small pulleys slip belts: owners with Mina pulleys reported screeching and belts stripping, and one reported heavy slip with the supplied belt. Keep grit out of the engine. Heat limits repeated use. No dyno numbers were ever posted in the main thread.",
+   "appliesTo": {
+    "induction": [
+     "sc"
+    ]
+   },
+   "note": "Low end is the pulley, high end adds fitting from £285. Prices about three years old in Nov 2026.",
+   "src": [
+    "powerhouse-guide",
+    "powerhouse-42",
+    "jr-pulley",
+    "jf-pulley-adventures",
+    "jf-belt-problems"
+   ],
+   "conf": "corroborated",
+   "worth": 4,
+   "verdict": "Worth it only on a sorted XKR with cooling to match. XKR only.",
+   "alt": "upgrade.buy-the-xkr-instead"
+  },
+  {
+   "id": "upgrade.sc-crank-pulley",
+   "title": "Larger crank pulley",
+   "category": "power",
+   "why": "Leaves the supercharger untouched and has the biggest claimed gain, up to about 45 bhp, but it costs the most and needs a larger belt.",
+   "what": "Remove the crank pulley and damper with a puller. A machine shop adds a larger outer ring. Refit with a longer belt. JagRepair reports +3 to 4.5 psi.",
+   "difficulty": 5,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Reworked crank pulley and damper",
+    "Longer supercharger belt"
+   ],
+   "jobs": [],
+   "caution": "The M112 is already near its best efficiency at stock, so returns fall away and heat rises. Better charge cooling becomes essential. Combining this with an upper pulley makes it worse.",
+   "appliesTo": {
+    "induction": [
+     "sc"
+    ]
+   },
+   "note": "No price sourced. Source is one owner's write-up plus Paramount's product existence.",
+   "src": [
+    "jr-pulley",
+    "paramount-pulley-40"
+   ],
+   "conf": "single",
+   "worth": 4,
+   "verdict": "Worth it only on a heavily modified XKR. XKR only.",
+   "alt": "upgrade.buy-the-xkr-instead"
+  },
+  {
+   "id": "upgrade.charge-cooling",
+   "title": "Charge cooling",
+   "category": "power",
+   "why": "Heat is the real limit on a pulleyed XKR: the car feels strong once and fades on the next pull. Cooling does not add power, it reduces the loss.",
+   "what": "Forum advice favours improving the front heat exchanger and airflow and a chiller-type setup with extra fans and a pump upgrade over a thicker intercooler. One tuner opened up the bumper beam, helping at speed.",
+   "difficulty": 4,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Better heat exchanger or chiller setup",
+    "Fans and relay",
+    "Bosch pump upgrade if taking this route"
+   ],
+   "jobs": [],
+   "caution": "No measured intake temperatures were posted. A low-temp thermostat at 170 F is sold by Eurotoys and one owner saw no issues, but that is one report in a car also running a pulley. Do not treat it as general advice for a stock engine.",
+   "appliesTo": {
+    "induction": [
+     "sc"
+    ]
+   },
+   "note": "No price: thread only says 'big $$$$' for advanced work. Thicker intercooler was called counterproductive by one experienced tuner.",
+   "src": [
+    "jf-intercooler",
+    "jf-pulley-adventures",
+    "jr-pulley",
+    "eurotoys"
+   ],
+   "conf": "community",
+   "worth": 4,
+   "verdict": "Worth it on a pulleyed XKR that fades on repeated pulls. Skip it on a standard car."
+  },
+  {
+   "id": "upgrade.xkr-42-remap",
+   "title": "Remap on the 4.2 XKR",
+   "category": "power",
+   "why": "Worth asking about on a 4.2 XKR only. Claimed gain is about 36 to 42 bhp, and the seller's own pages disagree on the number.",
+   "what": "Paramount offers workshop mapping and a remote file service over the OBD port for 4.2 XKR. Its packages pair the remap with a pulley.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Tuner with a proven file for your ECU"
+   ],
+   "jobs": [],
+   "caution": "Ask for a dyno before and after. Tell your insurer: one forum poster said some European insurers may void policies. 4.0 cars are different: one seller says the 4.0 cannot be mapped, while others claim it can.",
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ],
+    "induction": [
+     "sc"
+    ]
+   },
+   "note": "No current price found. Paramount quotes 416 bhp as its baseline.",
+   "src": [
+    "paramount-upgrades",
+    "paramount-remap",
+    "paramount-pulley-40",
+    "jl-remap-2006"
+   ],
+   "conf": "single",
+   "worth": 4,
+   "verdict": "Worth it only with a dyno before and after. Skip it if the tuner will not show one."
+  },
+  {
+   "id": "upgrade.na-40-remap-not-worth-it",
+   "title": "Remapping a 4.0 XK8: waste of money",
+   "category": "power",
+   "why": "The evidence is poor. One owner was told the 4.0 files were unstable and the job could not be done, and Roger Bywater of AJ6 Engineering argued there is usually little room for improvement.",
+   "what": "Skip it. The cheap gains in this file are tyres, alignment and a healthy MAF. If you want more speed, buy a better XKR.",
+   "difficulty": 1,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [],
+   "jobs": [],
+   "caution": "Any seller offering a 35 bhp remap on a 4.0 needs to show a dyno and a working file for your ECU. AJ26 and AJ27 use Denso units, which owners say are not torque based, making them harder to tune.",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "na"
+    ]
+   },
+   "note": "Roger Bywater of AJ6 Engineering, in 2006, said there is usually little room. Forum evidence is old, and no current vendor proof was found.",
+   "src": [
+    "jl-remap-2006",
+    "jl-remap-2021",
+    "jf-aj26-tune",
+    "jf-na-tuning"
+   ],
+   "conf": "community",
+   "worth": 5,
+   "verdict": "Skip it. There is no good evidence it works on a 4.0 XK8."
+  },
+  {
+   "id": "upgrade.panel-filter",
+   "title": "Panel filter in the stock airbox",
+   "category": "power",
+   "why": "Low risk but also low gain. Most owners saw no change. Replacing a dirty filter and cleaning the MAF is usually worth more.",
+   "what": "If you want one, keep the factory box and fit a panel filter. Do not over-oil it. One XKR owner felt a large change just by cleaning and then replacing his MAF sensor.",
+   "difficulty": 1,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Panel filter",
+    "MAF cleaner"
+   ],
+   "jobs": [],
+   "caution": "Over-oiled filters can foul the MAF. Estimates are from 1 hp to about 2%, with nothing measured. Paper is fine.",
+   "appliesTo": {},
+   "note": "No price sourced. If the filter is simply due, service kit BPK260 for the 4.2 was £49.10 + VAT with oil, air and fuel filters on 1 Nov 2026.",
+   "src": [
+    "jf-knn-sc",
+    "jf-cold-air"
+   ],
+   "conf": "community",
+   "worth": 4,
+   "verdict": "Worth it only when the filter is due, and do not expect a gain. Skip it for power."
+  },
+  {
+   "id": "upgrade.cone-filter-not-worth-it",
+   "title": "Cone filter or cold air box: skip it",
+   "category": "power",
+   "why": "The stock box already draws cool air from the wheel well. A cone in the bay breathes hot air, and owners report power loss.",
+   "what": "Keep the factory airbox. Generic tuning guides agree an induction kit only helps when the intake is the restriction.",
+   "difficulty": 1,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [],
+   "jobs": [],
+   "caution": "One highly modified XKR owner likes a cone plus intake changes on a heavily tuned car, so it is not universal. Generic staged tuning pages list clutch, flywheel and manual gearbox items that do not apply to these automatics, so ignore them.",
+   "appliesTo": {},
+   "note": "No cost because the advice is not to buy it.",
+   "src": [
+    "jf-cold-air",
+    "jf-knn-sc",
+    "torquecars"
+   ],
+   "conf": "community",
+   "worth": 5,
+   "verdict": "Skip it. It breathes hot air."
+  },
+  {
+   "id": "upgrade.high-flow-cats",
+   "title": "High-flow catalytic converters",
+   "category": "power",
+   "why": "Sellers claim real gains on tuned XKRs, but it is an expensive job with emissions risk. Not for a stock car.",
+   "what": "Sports cats replace the original pair. A 2000 to 2002 XKR install needs the coolant tank and heat shields moved and all four O2 sensor plugs disconnected, then new nuts and anti-seize. Paramount claims about 22 to 25 bhp midrange on its 200-cell 4.2 cats.",
+   "difficulty": 5,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Pair of high-flow cats for your exact car",
+    "New gaskets NNC6764ABG and EAZ2050 on 4.0",
+    "New nuts",
+    "Anti-seize"
+   ],
+   "jobs": [],
+   "caution": "Do not remove cats. For cars first used before 1 Sept 2002 the MOT rejects on emissions only where a full catalyst test could apply; from that date, missing or obviously modified emissions equipment is a Major defect. The car must still pass CO, HC and lambda limits. Sports cats do not simply bolt on to a non-R car, says one owner.",
+   "appliesTo": {
+    "induction": [
+     "sc"
+    ]
+   },
+   "note": "No price sourced. Figures are a seller's claim and its pages disagree on combined totals.",
+   "src": [
+    "jr-nameless",
+    "paramount-cats",
+    "paramount-upgrades",
+    "gov-mot-nuisance",
+    "jf-exhaust-regrets"
+   ],
+   "conf": "single",
+   "worth": 5,
+   "verdict": "Skip it on a road car. Worth it only on a tuned XKR."
+  },
+  {
+   "id": "upgrade.buy-the-xkr-instead",
+   "title": "Do not build a fast XK8: buy an XKR",
+   "category": "power",
+   "why": "Forum advice is consistent: bolt-ons on a naturally aspirated car give little, and an engine swap costs more than the price gap between cars.",
+   "what": "If speed is the goal, sell and buy an XKR. Posters call that more cost-effective than modifying an XK8. An XKR engine swap is said to have been done, and an Aston engine would be harder still.",
+   "difficulty": 5,
+   "reversible": false,
+   "costGbp": null,
+   "partsNeeded": [],
+   "jobs": [],
+   "caution": "Forum opinion, not a costed comparison.",
+   "appliesTo": {
+    "induction": [
+     "na"
+    ]
+   },
+   "note": "No cost comparison sourced.",
+   "src": [
+    "jf-na-tuning",
+    "jl-remap-2006"
+   ],
+   "conf": "community",
+   "worth": 1,
+   "verdict": "Worth reading before you spend on an XK8. If you want a fast one, buy an XKR."
+  },
+  {
+   "id": "upgrade.battery-conditioner",
+   "title": "Battery conditioner",
+   "category": "electrics",
+   "why": "The best electrical upgrade for a car that sits. These cars have a constant draw, weak batteries cause strange faults, and owners recommend this over everything else.",
+   "what": "Fit a smart charger lead and plug in whenever the car sits more than a few days. Convertible owners close the boot on the leads so the boot light stays off. JagRepair runs a solar panel through a battery adapter, with a regulator to prevent overcharging.",
+   "difficulty": 1,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Smart battery conditioner",
+    "Fused battery lead"
+   ],
+   "jobs": [],
+   "caution": "Use a regulator with any solar panel. The cigarette lighter is switched, so it will not charge with the key out. One owner reports Optima-type AGM batteries did poorly with the constant drain.",
+   "appliesTo": {},
+   "note": "No UK price captured.",
+   "src": [
+    "jf-tender",
+    "jf-battery-isolator",
+    "jr-solar"
+   ],
+   "conf": "community",
+   "worth": 1,
+   "verdict": "Worth it on any car that sits for more than a week or two."
+  },
+  {
+   "id": "upgrade.parasitic-drain-hunt",
+   "title": "Measure the parasitic drain",
+   "category": "electrics",
+   "why": "Before spending on isolators, find out why it goes flat. One 1999 XK8 owner measured 330 mA.",
+   "what": "With the car asleep, put a meter in series and pull fuses one at a time until the draw drops. Wait for the car to sleep first: owners quote 20 to 45 minutes. Suspects are boot and glovebox lights, the alarm module and the ignition barrel flap.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": [
+    0,
+    0
+   ],
+   "partsNeeded": [
+    "Multimeter with a 10 A range"
+   ],
+   "jobs": [],
+   "caution": "There is no agreed normal value. Owners quote about 30 mA, others up to 150 mA, and some say over 40 to 50 mA flattens it in days. No factory figure was found.",
+   "appliesTo": {},
+   "note": "Free if you own a meter.",
+   "src": [
+    "jf-drain",
+    "jf-tender"
+   ],
+   "conf": "community",
+   "worth": 1,
+   "verdict": "Worth it if the battery goes flat, and free. Do this before any isolator."
+  },
+  {
+   "id": "upgrade.battery-isolator",
+   "title": "Battery isolator: usually not the answer",
+   "category": "electrics",
+   "why": "It stops a slow drain killing the battery on a laid-up car, but brings annoyances each time. A conditioner is better for most people.",
+   "what": "If you still want one, use a good manual marine-type switch, not a cheap remote relay. Open both doors and the boot before you isolate, because the windows need to drop when doors open. One owner suggests wiring into the smaller fuse at the high power protection module so starting and charging stay intact, after checking the wiring diagram.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Manual marine-type battery switch"
+   ],
+   "jobs": [],
+   "caution": "Radio resets. Emissions monitors clear and need several drive cycles, which can matter at MOT. A remote relay at the battery could fail open or melt. It stops loads, not self-discharge, so the battery can still go flat.",
+   "appliesTo": {},
+   "note": "No UK price captured. Jaguar's own transit relay is now hard to find.",
+   "src": [
+    "jf-battery-isolator",
+    "jf-tender"
+   ],
+   "conf": "community",
+   "worth": 4,
+   "verdict": "Worth it only on a laid-up car with no mains. Skip it otherwise: a conditioner is better."
+  },
+  {
+   "id": "upgrade.interior-led-bulbs",
+   "title": "LED cabin and instrument bulbs",
+   "category": "electrics",
+   "why": "Dim old bulbs are cheap to replace. Do this carefully: nothing X100-specific was found on LEDs and these cars have sensitive electrics.",
+   "what": "Try one bulb first. The car uses 5 W festoons for interior and plate lamps and bulb-and-holder units in the cluster.",
+   "difficulty": 1,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Festoon LEDs to match LNA5180AA",
+    "Cluster bulbs to match LJA4390BAG"
+   ],
+   "jobs": [],
+   "caution": "No X100 evidence on bulb monitoring or dimming behaviour. Watch for warnings and flicker. A white LED behind coloured dash lighting may not look right.",
+   "appliesTo": {},
+   "note": "Original 5 W festoon was £0.30 + VAT and cluster bulb and holder £5.43 + VAT on 1 Nov 2026. No LED price or fitment test was sourced.",
+   "src": [
+    "bp-x100"
+   ],
+   "conf": "single",
+   "worth": 4,
+   "verdict": "Worth it if the bulbs are dim. Test one first: no X100 evidence on monitoring."
+  },
+  {
+   "id": "upgrade.headlamp-led-hid-legal",
+   "title": "Headlamps: do not fit HID kits, be careful with LED bulbs",
+   "category": "electrics",
+   "why": "A cheap HID kit in a halogen lamp is an MOT fail. This is a place where a small saving causes real trouble.",
+   "what": "Keep halogen units on halogen unless you use an LED replacement bulb that is ECE approved for that exact lamp, with the approval sticker fixed where the tester can see it. Cars that left the factory with xenon keep D1S burners.",
+   "difficulty": 1,
+   "reversible": true,
+   "costGbp": [
+    69,
+    69
+   ],
+   "partsNeeded": [
+    "C2N1716 35W D1S burner on factory HID cars",
+    "DBC11314 H3 and XR812420 HB3 halogen on non-HID cars, as listed by British Parts"
+   ],
+   "jobs": [],
+   "caution": "Halogen units on vehicles first used on or after 1 April 1986 must not be converted to HID. A mismatched, missing or damaged sticker is a Major defect. Self-levelling on HID or LED dipped beams must work. Tell your insurer about changes.",
+   "appliesTo": {
+    "market": [
+     "uk"
+    ]
+   },
+   "note": "Cost shown is the factory D1S burner, £57.83 + VAT, read 1 Nov 2026. British Parts lists HID lens units for 2003 to 2006 from VIN A30645, except North America. No ECE-approved LED replacement for X100 lamps was found.",
+   "src": [
+    "gov-mot-lamps",
+    "bp-x100"
+   ],
+   "conf": "corroborated",
+   "worth": 5,
+   "verdict": "Skip HID kits in halogen lamps: an MOT fail."
+  },
+  {
+   "id": "upgrade.bluetooth-cd-changer-adapter",
+   "title": "Bluetooth streaming through the CD changer port",
+   "category": "electrics",
+   "why": "Keeps the original radio and the Alpine sound. For most owners this is the right answer, with no cut wires.",
+   "what": "Discount Car Stereo sells plug-in modules for 1997 to 2006 X100 cars: BTA-JAG98 for cars with a changer, BT2-JAG98 without one, BT6-JAG98 with Bluetooth, USB and aux. A forum owner reports a Discount Car Stereo A2D-JAG98 module plugs in at the amp rack in the boot, which tilts out for access.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "BTA-JAG98, BT2-JAG98, BTH-JAG98 or BT6-JAG98 by car"
+   ],
+   "jobs": [],
+   "caution": "Only late 1997 cars with the Ai-NET CD plug: early 1997 cars with the 8-pin DIN plug are not covered. Some auto-switching modules drop back to the radio during quiet passages. Cheap M-Bus cables are for aftermarket Alpine units with an aux setting, which the Jaguar units lack.",
+   "appliesTo": {
+    "myFrom": 1998
+   },
+   "note": "No GBP price: page lists $75.98 to $145.98. US seller, so factor in shipping and duty. The model year in appliesTo is conservative; late 1997 cars with the Ai-NET plug qualify.",
+   "src": [
+    "dcs-jag",
+    "jf-ainet-dab",
+    "jf-mbus-aux"
+   ],
+   "conf": "corroborated",
+   "worth": 2,
+   "verdict": "Worth it if you want streaming and to keep the original radio. Check you have the Ai-NET plug."
+  },
+  {
+   "id": "upgrade.dab-bluetooth-changer-tap",
+   "title": "DIY DAB and Bluetooth feed at the CD changer",
+   "category": "electrics",
+   "why": "Adds DAB and Bluetooth cheaply if you can solder, and the changer can come out.",
+   "what": "Open the CD changer, find the small PCB marked L, R and ground, cut the Ai-NET audio wires and solder on RCA leads run to a Pure Highway 600 DAB and Bluetooth adapter. Another owner got audio by adding a mini-jack to the changer's left and right wires, with no CD loaded and CD selected on the head unit.",
+   "difficulty": 3,
+   "reversible": false,
+   "costGbp": null,
+   "partsNeeded": [
+    "Pure Highway 600 or similar",
+    "5 m RCA lead",
+    "Fused accessory feed with relay from the boot fuse box"
+   ],
+   "jobs": [],
+   "caution": "You sacrifice the changer. Wire colours are the poster's belief, so test first. Static at idle was reported on one M-Bus build. No current price was captured.",
+   "appliesTo": {},
+   "note": "Forum method from 2023.",
+   "src": [
+    "jf-ainet-dab",
+    "jf-mbus-aux"
+   ],
+   "conf": "community",
+   "worth": 4,
+   "verdict": "Worth it if you can solder and can lose the changer."
+  },
+  {
+   "id": "upgrade.head-unit-swap",
+   "title": "Aftermarket head unit",
+   "category": "electrics",
+   "why": "Gets you USB and Bluetooth in one box, but the dash aperture and premium amp make it harder than it looks. Many owners advise keeping the Alpine.",
+   "what": "One 1999 XK8 used an Alpine CDE-103BT with Nexxia FP-14-00 facia adapter, earlier XK8 switch cover LJA6318AB and a steering control harness. Non-premium cars are simple. On premium Alpine cars use an interface: InCarTec 29-615-ALP keeps the wheel buttons and converts DIN to ISO with four line-in channels.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": [
+    77,
+    245
+   ],
+   "partsNeeded": [
+    "Single-DIN head unit",
+    "Facia adapter and switch cover",
+    "InCarTec 29-615-ALP plus the patch lead for your radio brand on Premium cars",
+    "Aerial adapter"
+   ],
+   "jobs": [],
+   "caution": "In 2011 no ready plug existed for the premium loom and about four different looms were reported, so check current interfaces. Check the back of your radio: a white 20-pin plus 6-pin DIN means Premium. One 2016 poster says a radio fascia from an early 1997 XK8 is also needed with the Nexxia adapter. Nexxia's harness PC99-X10 was discontinued by 2014.",
+   "appliesTo": {},
+   "note": "Low end: InCarTec £76.99 inc VAT read 1 Nov 2026. High end: 2011 forum total of about £244.50 including head unit, added up by this file. InCarTec's amp interface was seen at £47.50.",
+   "src": [
+    "jf-ice-upgrade",
+    "jf-radio-upgrade",
+    "incartec-swc",
+    "incartec-amp"
+   ],
+   "conf": "corroborated",
+   "worth": 4,
+   "verdict": "Worth it only if you must have USB in the dash. Skip it if the Bluetooth adapter does the job."
+  },
+  {
+   "id": "upgrade.speakers-boot-amp",
+   "title": "Speaker refresh with a boot amp",
+   "category": "comfort",
+   "why": "Reports say sound quality improves a lot and the original head unit can stay.",
+   "what": "One owner kept the head unit, built a cable from its low-level outputs to an amp in the boot, and replaced the speakers. JagRepair has a speaker replacement page for access.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Replacement speakers",
+    "Boot amplifier",
+    "Low-level signal cable"
+   ],
+   "jobs": [],
+   "caution": "A single owner report. Confirm which sound system you have before buying.",
+   "appliesTo": {},
+   "note": "No price sourced.",
+   "src": [
+    "jf-radio-upgrade",
+    "jr-speakers"
+   ],
+   "conf": "single",
+   "worth": 4,
+   "verdict": "Worth it if the sound is tired. One owner report only."
+  },
+  {
+   "id": "upgrade.obd-gauges",
+   "title": "OBD gauges",
+   "category": "electrics",
+   "why": "Coolant temperature is a number worth watching on these engines, and it also shows intake air temperature on a supercharged car.",
+   "what": "An HKS CAMP 2 on a 2001 XKR reads water temperature, intake air temperature, manifold vacuum, battery voltage, throttle percentage, rpm and speed over OBD.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "HKS CAMP 2 or similar OBD display"
+   ],
+   "jobs": [],
+   "caution": "Boost is not readable: manifold pressure reads vacuum only. It does not read or clear codes.",
+   "appliesTo": {},
+   "note": "No price sourced. JagRepair also links triple-gauge cluster and navigation retrofit guides.",
+   "src": [
+    "jr-gauges",
+    "jr-mods"
+   ],
+   "conf": "single",
+   "worth": 3,
+   "verdict": "Worth it to watch coolant temperature. It does not read or clear codes."
+  },
+  {
+   "id": "upgrade.new-hood",
+   "title": "New hood",
+   "category": "comfort",
+   "why": "A tired hood is the biggest comfort and value item on a convertible.",
+   "what": "Get quotes from a hood specialist with X100 experience. Check first whether the fault is the fabric, the rear window, or the hydraulics. A window that has come away can sometimes be bonded.",
+   "difficulty": 5,
+   "reversible": false,
+   "costGbp": [
+    800,
+    3600
+   ],
+   "partsNeeded": [
+    "Hood",
+    "Lining",
+    "Fitting"
+   ],
+   "jobs": [],
+   "caution": "Quotes vary widely and most are old. Allow for lead times: about two months quoted in 2021.",
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "note": "Low end: hood alone about £800 (2021). Mid: BAS roof about £1,500 to £2,000 (2021). Another owner's breakdown: £400 roof, £400 lining, £500 fitting. High end: a new Jaguar roof about £3,000 + VAT.",
+   "src": [
+    "ph-softtop",
+    "ph-roof-slashed"
+   ],
+   "conf": "corroborated",
+   "worth": 2,
+   "verdict": "Worth it if the hood is ripped or the car is for keeping. Skip it while it is still weathertight."
+  },
+  {
+   "id": "upgrade.hood-window-rebond",
+   "title": "Re-bond the rear hood window",
+   "category": "comfort",
+   "why": "One owner's £40 repair was still holding two years later, against a new hood.",
+   "what": "Where the fabric has separated from the glue, clean and bond it with JB-Weld and clamps along each side.",
+   "difficulty": 3,
+   "reversible": false,
+   "costGbp": [
+    40,
+    43
+   ],
+   "partsNeeded": [
+    "JB-Weld repair kit",
+    "Clamps",
+    "Cleaning supplies"
+   ],
+   "jobs": [],
+   "caution": "A second member reported about 80% success with one corner to redo. The Jaguar-recommended adhesive was not easy to buy in the UK.",
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "note": "Parts only, 2021 prices.",
+   "src": [
+    "ph-softtop"
+   ],
+   "conf": "single",
+   "worth": 1,
+   "verdict": "Worth trying first if only the rear window has come away."
+  },
+  {
+   "id": "upgrade.wind-deflector",
+   "title": "Wind deflector",
+   "category": "comfort",
+   "why": "Stops the back-draught, which makes top-down driving far nicer in the UK.",
+   "what": "JagRepair's unit bolts to a bracket on each side behind the seats. The rear wing covers and seat belt fixings come off for access. One side had existing holes and the other needed drilling.",
+   "difficulty": 2,
+   "reversible": false,
+   "costGbp": null,
+   "partsNeeded": [
+    "X100 convertible wind deflector with brackets"
+   ],
+   "jobs": [],
+   "caution": "Measure both sides before drilling, and refit the seat belt fixing properly. Drilling leaves holes.",
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "note": "No UK price sourced. The product the page uses may not be sold now.",
+   "src": [
+    "jr-wind"
+   ],
+   "conf": "single",
+   "worth": 2,
+   "verdict": "Worth it if you drive with the roof down in the UK."
+  },
+  {
+   "id": "upgrade.remote-roof-module",
+   "title": "Lower the roof from the key fob",
+   "category": "comfort",
+   "why": "A party trick more than an improvement, but JagRepair has a documented circuit for it.",
+   "what": "A small add-on circuit fools the system into thinking you are lowering the roof with the door lock key switch, triggered by the remote. A guide is published from May 2011.",
+   "difficulty": 4,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Circuit parts per the guide"
+   ],
+   "jobs": [],
+   "caution": "The author warns a wiring error can do expensive damage to the car's electronics. The roof involves BPM, SLM and DDM modules. Check for clearance before you press it.",
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "note": "No current kit availability confirmed.",
+   "src": [
+    "jr-remote",
+    "jr-mods"
+   ],
+   "conf": "single",
+   "worth": 5,
+   "verdict": "Skip it unless you enjoy wiring. It is a party trick."
+  },
+  {
+   "id": "upgrade.coupe-headlining",
+   "title": "Replace a sagging coupe headlining",
+   "category": "comfort",
+   "why": "A cheap fix for something you stare at every drive.",
+   "what": "Replace the headliner with a supplied unit. An XK8 owner paid about £120 from a Kent supplier.",
+   "difficulty": 3,
+   "reversible": true,
+   "costGbp": [
+    120,
+    120
+   ],
+   "partsNeeded": [
+    "Replacement headliner"
+   ],
+   "jobs": [],
+   "caution": "Single owner price, date not confirmed. Name of supplier not captured.",
+   "appliesTo": {
+    "body": [
+     "coupe"
+    ]
+   },
+   "note": "Parts only, undated forum price.",
+   "src": [
+    "joc-headlining"
+   ],
+   "conf": "single",
+   "worth": 2,
+   "verdict": "Worth it if it sags."
+  },
+  {
+   "id": "upgrade.leather-care",
+   "title": "Feed the leather",
+   "category": "comfort",
+   "why": "A cheap way to look after the hide before it needs a retrim.",
+   "what": "Clean and feed the hide with a leather care kit. Connolly Hide Care is listed for this.",
+   "difficulty": 1,
+   "reversible": true,
+   "costGbp": [
+    38,
+    38
+   ],
+   "partsNeeded": [
+    "BPC140 Connolly leather care kit, or BPC139 hide care"
+   ],
+   "jobs": [],
+   "caution": "Test on a hidden patch first.",
+   "appliesTo": {},
+   "note": "Inc VAT, £32.05 + VAT, read 1 Nov 2026.",
+   "src": [
+    "bp-x100"
+   ],
+   "conf": "single",
+   "worth": 1,
+   "verdict": "Worth doing on any car. Cheap."
+  },
+  {
+   "id": "upgrade.factory-wheels",
+   "title": "Factory wheels: sizes and offsets",
+   "category": "looks",
+   "why": "Factory wheels are the safe upgrade: they clear the brakes, keep rolling diameter and hold value.",
+   "what": "All 5 x 120.65 with roughly 73.8 to 74 mm bore. 8 x 17 Gemini, Lamina. 8 x 18 Aris, Hydra, Impeller, Centaur front. 9 x 18 rear for those. Milan 8.5 and 9 x 18. Atlas and Apollo 8 and 9 x 19. Detroit, Sepang, Montreal, Paris 9 and 10 x 20. Reported offsets: 8 inch ET33 to 35, 9 inch ET35, 20 x 9 ET30, 20 x 10 ET25. One 9 x 18 is stamped 9.0JX18CHX35.0. Factory tyres: 245/50 R17, 245/45 and 255/45 R18, 245/40 and 255/40 R19, 255/35 and 285/30 R20.",
+   "difficulty": 1,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Wheels with your car's matching size",
+    "Jaguar wheel nuts, torque 102 Nm"
+   ],
+   "jobs": [],
+   "caution": "Brembo cars: 19 inch Apollo is the known non-fitter. Later big-brake cars may not fit earlier wheels. 20 inch cars run 2.1 bar rear. Offsets come from one member's post and wheel stamps, not a Jaguar table, so check your stamp.",
+   "appliesTo": {},
+   "note": "No wheel prices sourced. Part numbers are in SNG's catalogue, for example Hydra C2N3314 and C2N3315. Sizes are factory, offsets are forum recollection.",
+   "src": [
+    "wm0306",
+    "sngcat",
+    "vsb2004",
+    "jf-wheel-offset",
+    "jf-wheel-size",
+    "jf-wheels-setup"
+   ],
+   "conf": "corroborated",
+   "worth": 2,
+   "verdict": "Worth it if you want different wheels. The safe route."
+  },
+  {
+   "id": "upgrade.aftermarket-wheel-fitment",
+   "title": "Aftermarket wheels: fitment numbers",
+   "category": "looks",
+   "why": "It can be done, but Jaguar warned against it and the numbers below are owner reports.",
+   "what": "Need 5 x 120.65, hub-centric or with rings to about 73.8 mm, and an offset near factory. Owners report ET20 to ET40 as a working range depending on width. Coventry Whitley 18 inch is sold at ET20 in a non-staggered set. One 2000 XK8 ran 18 x 9 on all corners with 255/45 front and 285/40 rear with no rubbing. Another ran 20s with 255/35 front and 285/30 rear with no rubbing.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Wheels",
+    "Hub-centric rings",
+    "Correct nuts for the seat type"
+   ],
+   "jobs": [],
+   "caution": "Jaguar says use only Jaguar wheels and nuts. Test fit one wheel with the tyre on, on your car, at full lock. Bigger wheels ride harsher. Keep rolling diameter close: speedometer and ABS depend on it. Forum advice puts the limit well under 10%. Wheel-sizes.com lists stock offsets of 15 to 25 mm, which conflicts with the stamped ET33 to 35, so do not use that as your reference.",
+   "appliesTo": {},
+   "note": "No price sourced. 20-inch Sport wheel owner figures come from search results for an X100 thread.",
+   "src": [
+    "wm0306",
+    "jf-wheels-setup",
+    "jf-18x9",
+    "jf-bbs-20",
+    "jf-wheel-offset",
+    "jf-wheel-size"
+   ],
+   "conf": "community",
+   "worth": 4,
+   "verdict": "Worth it only if you will test fit first. Jaguar warns against it."
+  },
+  {
+   "id": "upgrade.wheel-spacers",
+   "title": "Wheel spacers: leave off the front",
+   "category": "looks",
+   "why": "Mostly a looks item, and it is an easy way to add strain and rubbing.",
+   "what": "One owner ran 20 mm rear spacers to fill the arches and refused to run fronts, because they move the steering pivot.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "Hub-centric spacers with longer studs or bolts if you ignore this advice"
+   ],
+   "jobs": [],
+   "caution": "Not recommended. Jaguar says to use only Jaguar wheels and nuts. Spacers need proper thread engagement.",
+   "appliesTo": {},
+   "note": "No price sourced. Treat as not worth it.",
+   "src": [
+    "jf-18x9",
+    "wm0306"
+   ],
+   "conf": "single",
+   "worth": 5,
+   "verdict": "Skip them."
+  },
+  {
+   "id": "upgrade.xkr-arch-mouldings",
+   "title": "XKR rear arch mouldings on an XK8",
+   "category": "looks",
+   "why": "A small factory-looking change. British Parts sells the kit as an XK8 upgrade.",
+   "what": "Fit LH and RH rear wheel arch finishers with clips.",
+   "difficulty": 1,
+   "reversible": true,
+   "costGbp": [
+    190,
+    190
+   ],
+   "partsNeeded": [
+    "BPK317 rear wing moulding kit"
+   ],
+   "jobs": [],
+   "caution": "Check for clip holes before you drill anything.",
+   "appliesTo": {
+    "induction": [
+     "na"
+    ]
+   },
+   "note": "Parts only, inc VAT, £158.51 + VAT, read 1 Nov 2026.",
+   "src": [
+    "bp-x100"
+   ],
+   "conf": "single",
+   "worth": 3,
+   "verdict": "Worth it for the look on an XK8. Cheap."
+  },
+  {
+   "id": "upgrade.mesh-grille",
+   "title": "Stainless mesh grille",
+   "category": "looks",
+   "why": "Made for Jaguars by Adamesh and stocked by SNG.",
+   "what": "Fit a flat or convex stainless mesh grille.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "MESH007 flat",
+    "MESH007/1 convex"
+   ],
+   "jobs": [],
+   "caution": "Confirm the mesh fits X100 grille shape before ordering. Airflow effect was not measured.",
+   "appliesTo": {},
+   "note": "No price in the catalogue.",
+   "src": [
+    "sngcat"
+   ],
+   "conf": "single",
+   "worth": 3,
+   "verdict": "Worth it for the look. Confirm the fit first."
+  },
+  {
+   "id": "upgrade.aluminium-interior-trim",
+   "title": "Aluminium interior trim and chrome rims",
+   "category": "looks",
+   "why": "An option if the walnut has gone off.",
+   "what": "SNG lists an aluminium interior trim set, XK801, and chrome rim sets for headlamps, side lamps, fog lamps, rear lamps and repeaters.",
+   "difficulty": 2,
+   "reversible": true,
+   "costGbp": null,
+   "partsNeeded": [
+    "XK801",
+    "XK8/HLR/P",
+    "XK8/FLR/P",
+    "XK8/RLR/P"
+   ],
+   "jobs": [],
+   "caution": "Keep the original wood trim. It is expensive and adds value when the car is sold.",
+   "appliesTo": {},
+   "note": "No price in the catalogue.",
+   "src": [
+    "sngcat"
+   ],
+   "conf": "single",
+   "worth": 4,
+   "verdict": "Worth it only if the walnut has gone. Keep the original trim."
+  }
+ ],
+ "gaps": [
+  "Web search budget for the run ran out partway. No further searches were possible on uprated anti-roll bars, XK8 lowering results, Brembo retrofit fitment, or LED bulbs. Those entries stand on pages already read.",
+  "Koni: no Koni damper listing for the X100 was found in searches or the UK catalogues read. Left out rather than guessed. Searched Bilstein/Koni terms and Jaguar forum domains.",
+  "Aftermarket uprated anti-roll bars: none found. Only factory R Performance bars are documented.",
+  "Factory wheel offsets: no Jaguar table found in the workshop manual or Vehicle Specifications. Offsets are forum recollection and wheel stamps. Wheel-size.com refused the fetch, and wheel-sizes.com disagrees with the stamped numbers.",
+  "Wheel nut thread size was not confirmed in a document; checked the manual's Section 204-04 for torque (102 Nm) only.",
+  "Costs missing: water pump, conditioner, isolator, alignment, rear camber shims, wheel prices, UK Bluetooth modules, remaps, charge cooling, cats. Paramount and wheel-size refused automated fetches; Paramount figures came through search snippets only.",
+  "Current UK price for a full stainless X100 exhaust: not found. Bell kit BSSJR039 has no listed price in SNG's catalogue and SNG's site price lookup returned nothing usable. Quicksilver and Milltek pages for the X100 could not be confirmed.",
+  "Brembo conversion matrix: which hubs, carriers and wheels fit a non-Brembo car. Only one X308 owner report found. Used caliper prices not sourced.",
+  "Water pump: no authoritative statement on which pump part numbers have metal impellers on each engine.",
+  "Long-term reliability of pulley upgrades: no data, only seller claims and forum anecdotes. No dyno results found.",
+  "X150 versus X100 confusion on Paramount spring and tuning pages: 'XK 4.0/4.2 2006 onward' may mean X150. Confirm before buying.",
+  "CATS unplug method: forum only. Whether it sets a fault on each model year was not established.",
+  "Workshop manual and Vehicle Specifications PDFs are local copies collected by another run agent. Their source URLs were not recorded, so the url field is blank and the local path is in the title.",
+  "data/jobs.json did not exist when this file was written, so jobs arrays are empty and need cross-linking once job ids exist."
+ ]
+}

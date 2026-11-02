@@ -1,0 +1,1789 @@
+{
+ "sources": {
+  "wm": {
+   "title": "XK8 2003 to 2006 Workshop Manual, special tools lists",
+   "url": "http://jagrepair.com/images/AutoRepairPhotos/CarPDFFiles/XK8%20'03%20-%20'06%20Workshop%20Manual.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "laser": {
+   "title": "Laser Tools 5147 Timing Tool Set instructions",
+   "url": "https://www.lasertools.co.uk/items/PDF/Products/5147_Instructions.pdf",
+   "publisher": "The Tool Connection",
+   "kind": "vendor"
+  },
+  "jensen": {
+   "title": "Replacement of V8 Secondary Timing Chain Tensioners, D. Jensen",
+   "url": "http://jagrepair.com/images/AutoRepairPhotos/V8%20Secondary%20Timing%20Chain%20Tensioner%20Replacement.pdf",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "ez": {
+   "title": "Tensioner replacement without Jaguar tools, EZDriver",
+   "url": "http://jagrepair.com/images/AutoRepairPhotos/Tentioners%20By%20EZDriver%20of%20Holly%20Lake%20Ranch.pdf",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "stat": {
+   "title": "Thermostat Housing 4.0 XK8",
+   "url": "http://jagrepair.com/ThermostatHousing4XK8.htm",
+   "publisher": "JagRepair.com",
+   "kind": "specialist"
+  },
+  "atf": {
+   "title": "03 XK8 Transmission Fluid change, my Tips",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/03-xk8-transmission-fluid-change-my-tips-149505/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "start": {
+   "title": "Quick Starter Removal Question, quoting JTIS",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/quick-starter-removal-question-102693/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "diff": {
+   "title": "Rear Differential Drain/Fill Plug Location",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/rear-differential-drain-fill-plug-location-223596/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "oil": {
+   "title": "My First XK8 Oil and Filter Change",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/my-first-xk8-oil-filter-change-70828/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "obd": {
+   "title": "OBDII code reader, 1995/1996 AJ16",
+   "url": "https://forums.jag-lovers.com/t/obdii-code-reader-1995-1996-aj16/363526",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "joc1": {
+   "title": "How much to connect a diagnostic meter",
+   "url": "https://jaguarownersclub.com/forums/topic/18040-how-much-to-connect-a-diagnostic-meter",
+   "publisher": "Jaguar Owners Club",
+   "kind": "forum"
+  },
+  "joc2": {
+   "title": "Diagnostic scan tool",
+   "url": "https://www.jaguarownersclub.com/forums/topic/16183-diagnostic-scan-tool",
+   "publisher": "Jaguar Owners Club",
+   "kind": "forum"
+  },
+  "joc3": {
+   "title": "Heated oxygen sensor control module",
+   "url": "https://www.jaguarownersclub.com/forums/topic/14688-heated-oyxgen-senson-control-module",
+   "publisher": "Jaguar Owners Club",
+   "kind": "forum"
+  },
+  "nhtsa": {
+   "title": "JLR bulletin on PCM communication with legacy models",
+   "url": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10212866-9999.pdf",
+   "publisher": "Jaguar Land Rover, via NHTSA",
+   "kind": "factory"
+  },
+  "scx150": {
+   "title": "Did the supercharger coupler today",
+   "url": "https://www.jaguarforums.com/forum/xk-xkr-x150-33/did-supercharger-coupler-today-189632/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jfmanifold": {
+   "title": "Removing the intake manifold",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/removing-intake-manifold-68858/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "fuel99": {
+   "title": "99 xk8 fuel filter",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/99-xk8-fuel-filter-63864/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jftb": {
+   "title": "Cleaning Throttle Body Bore and Butterfly",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/cleaning-throttle-body-bore-butterfly-50506/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "devcom": {
+   "title": "Jaguar diagnostic software coverage",
+   "url": "https://www.devcom.cz/?p=3384",
+   "publisher": "Devcom",
+   "kind": "vendor"
+  },
+  "jag": {
+   "title": "Hydraulic Pump Fill and Refill",
+   "url": "http://jagrepair.com/HydraulicPumpRefill.htm",
+   "publisher": "JagRepair.com",
+   "kind": "specialist"
+  },
+  "pid": {
+   "title": "OBDII, PID and O2 Sensor Information Sheet",
+   "url": "http://jagrepair.com/02SensorInformationSheet.htm",
+   "publisher": "JagRepair.com",
+   "kind": "specialist"
+  },
+  "jtis-my1997": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY1997 (dataset jvk1997en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my2000": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY2000 (dataset jyk2000en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "battery-care": {
+   "title": "Jaguar Battery Care Manual, Vehicle Quiescent Current Testing, page 15",
+   "url": "http://www.jagrepair.com/images/AutoRepairPhotos/Current%20Testing.pdf",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "tsb-303-51": {
+   "title": "Jaguar Service Technical Bulletin 303-51: Oil leaks from oil filter, revised tightening method",
+   "url": "http://jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-51%20Leaks%20From%20Oil%20Filter.pdf",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "hb-my2004": {
+   "title": "XK8/XKR Driver's Handbook, 2004.5 Model Year (UK), JJM 10 02 14/45",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  }
+ },
+ "items": [
+  {
+   "id": "trolley-jack",
+   "name": "Trolley jack",
+   "kind": "lift",
+   "size": null,
+   "why": "Lifts at the body crossmember at the front and the rear subframe, on a wood block.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "axle-stands",
+   "name": "Axle stands, pair or two pairs",
+   "kind": "lift",
+   "size": null,
+   "why": "Carry the car at the four sill jacking points.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "wheel-chocks",
+   "name": "Wheel chocks",
+   "kind": "lift",
+   "size": null,
+   "why": "Jaguar says not to trust the handbrake alone.",
+   "jdNumber": null,
+   "altDiy": "Timber wedges",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "wood-blocks",
+   "name": "Hardwood blocks",
+   "kind": "lift",
+   "size": null,
+   "why": "Between jack and subframe or crossbeam, and under a hub carrier.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "hydraulic-press",
+   "name": "Hydraulic workshop press",
+   "kind": "lift",
+   "size": "3 ton seating load at least",
+   "why": "Front and rear bearings are press work. Jaguar seats front bearings with a 3 ton load.",
+   "jdNumber": null,
+   "altDiy": "Take the vertical link or hub carrier to a machine shop with the new parts.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "socket-set-metric",
+   "name": "Metric socket set, 1/4 and 3/8 inch drive",
+   "kind": "hand",
+   "size": "8 mm upward",
+   "why": "Most fasteners on the car are metric.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "jensen",
+    "stat"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "socket-13mm",
+   "name": "13 mm six-point socket",
+   "kind": "hand",
+   "size": "13 mm",
+   "why": "Sump drain plug.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "oil"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "socket-8mm",
+   "name": "8 mm socket with extension",
+   "kind": "hand",
+   "size": "8 mm",
+   "why": "Thermostat housing front bolts and small trim fixings.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "stat"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "socket-8mm-hex",
+   "name": "8 mm hex bit socket",
+   "kind": "hand",
+   "size": "8 mm hex, 3/8 inch drive",
+   "why": "ZF plugs. On the X100 the 6HP26 fill plug sits in a tight spot.",
+   "jdNumber": null,
+   "altDiy": "Hex socket with two adapters and a ratchet, or a ratcheting spanner on the hex. Jaguar uses adaptor 307-452.",
+   "costGbp": null,
+   "src": [
+    "atf"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "socket-universal-joint",
+   "name": "Universal joint and short socket",
+   "kind": "hand",
+   "size": "3/8 inch and 1/4 inch",
+   "why": "Starter top bolt and the rear cam cover bolt.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "ez",
+    "start"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "extension-long",
+   "name": "Long socket extensions",
+   "kind": "hand",
+   "size": null,
+   "why": "Plugs, starter and cam cover work.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "ez"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "ratchet-long-extensions",
+   "name": "Ratchet with a stack of extensions",
+   "kind": "hand",
+   "size": null,
+   "why": "Reaches the diff fill plug from below.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "diff"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "breaker-bar-3-8",
+   "name": "3/8 inch square drive bar",
+   "kind": "hand",
+   "size": "3/8 inch",
+   "why": "Fits the tensioner to swing it counter-clockwise.",
+   "jdNumber": null,
+   "altDiy": "A torque wrench handle worked for JagRepair, though it is not ideal.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "wheel-nut-socket",
+   "name": "Wheel nut socket",
+   "kind": "hand",
+   "size": null,
+   "why": "Wheel nuts at 88-102 Nm. Socket size is not sourced, so measure yours first.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "torque-wrench-low",
+   "name": "Low range torque wrench",
+   "kind": "hand",
+   "size": "about 2 to 25 Nm",
+   "why": "Coils 5 Nm, MAF 2 Nm, bleed nipples, tensioner bolts.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "jensen",
+    "wm"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "torque-wrench-10-60",
+   "name": "Torque wrench, mid range",
+   "kind": "hand",
+   "size": "about 10 to 60 Nm",
+   "why": "Plugs, drain plug, guide pins.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "torque-wrench-40-200",
+   "name": "Torque wrench, large",
+   "kind": "hand",
+   "size": "to 200 Nm at least, and more for hub nuts",
+   "why": "Wheel nuts, carrier bolts. Hub nuts need over 300 Nm.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "angle-gauge",
+   "name": "Torque angle gauge",
+   "kind": "hand",
+   "size": "degrees",
+   "why": "Water pump bolts and sprocket bolts are torque plus angle.",
+   "jdNumber": null,
+   "altDiy": "Mark the socket and bolt with paint and judge 90 degrees by eye. Less accurate.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "open-spanner-set",
+   "name": "Thin open-ended spanners",
+   "kind": "hand",
+   "size": null,
+   "why": "Hold ball pin flats on anti-roll links so the boot does not twist.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "spanner-set",
+   "name": "Metric combination spanners",
+   "kind": "hand",
+   "size": null,
+   "why": "General use on exhaust and driveline.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "spanner-13mm",
+   "name": "Short 13 mm spanner",
+   "kind": "hand",
+   "size": "13 mm",
+   "why": "Starter top bolt.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "start"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "half-moon-spanner-13",
+   "name": "Half-moon ring spanner",
+   "kind": "hand",
+   "size": "13 mm, Snap-on CMX1113",
+   "why": "JTIS names this for cracking the top starter bolt.",
+   "jdNumber": null,
+   "altDiy": "A short 13 mm spanner.",
+   "costGbp": null,
+   "src": [
+    "start"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "spanner-8mm-bent",
+   "name": "Bent 8 mm open spanner",
+   "kind": "hand",
+   "size": "8 mm",
+   "why": "The rear bolts of the 4.0 thermostat housing.",
+   "jdNumber": null,
+   "altDiy": "Heat and bend a cheap 8 mm spanner close to the head. Make the bent section a little longer than you think.",
+   "costGbp": null,
+   "src": [
+    "stat"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "spanner-5-8",
+   "name": "5/8 inch spanner",
+   "kind": "hand",
+   "size": "5/8 inch",
+   "why": "One owner used this on the fuel filter lines.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "fuel99"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "spanner-3-4",
+   "name": "3/4 inch spanner",
+   "kind": "hand",
+   "size": "3/4 inch",
+   "why": "One owner used this on the fuel filter.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "fuel99"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "spanner-bleed-nipple",
+   "name": "Small ring spanner for bleed nipples",
+   "kind": "hand",
+   "size": null,
+   "why": "Nipples are low torque and round off easily.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "spanner-line-set",
+   "name": "Line spanners",
+   "kind": "hand",
+   "size": null,
+   "why": "Gearbox cooler pipes.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "torx-t27",
+   "name": "Torx T27",
+   "kind": "hand",
+   "size": "T27",
+   "why": "ZF pan bolts. Pan and filter screws on the 5HP24 are T27.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "atf"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "torx-t40",
+   "name": "Torx T40",
+   "kind": "hand",
+   "size": "T40",
+   "why": "Forum reports of later pan bolts using this head.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "atf"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "ball-end-hex-10mm",
+   "name": "Ball-end 10 mm hex",
+   "kind": "hand",
+   "size": "10 mm",
+   "why": "Cam sprocket bolt on the 4.0 at an angle past the front cover.",
+   "jdNumber": null,
+   "altDiy": "Cut the L off a Craftsman ball-end hex key and drive it with a 10 mm socket, as Jensen did. A flat hex will not work here.",
+   "costGbp": null,
+   "src": [
+    "jensen"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "screwdriver-flat",
+   "name": "Flat screwdriver",
+   "kind": "hand",
+   "size": null,
+   "why": "Handbrake adjuster and general use.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "screwdriver-cross",
+   "name": "Cross-head screwdriver",
+   "kind": "hand",
+   "size": null,
+   "why": "Radiator drain plug.",
+   "jdNumber": null,
+   "altDiy": "A large washer turned the plug for one owner.",
+   "costGbp": null,
+   "src": [
+    "ez"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "screwdriver-long",
+   "name": "Long screwdriver",
+   "kind": "hand",
+   "size": null,
+   "why": "Inboard air box clips. Helps start the 4.0 thermostat rear bolts when the heads are slotted.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "jensen",
+    "stat"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "screwdriver-set",
+   "name": "Screwdriver set",
+   "kind": "hand",
+   "size": null,
+   "why": "Door and trim screws.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "long-nose-pliers",
+   "name": "Long-nose pliers",
+   "kind": "hand",
+   "size": null,
+   "why": "Wiggle a stuck coil boot off a plug.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "ez"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "hose-clamp-pliers",
+   "name": "Hose clip pliers",
+   "kind": "hand",
+   "size": null,
+   "why": "Coolant hose spring clips.",
+   "jdNumber": null,
+   "altDiy": "Ordinary pliers, with patience.",
+   "costGbp": null,
+   "src": [
+    "stat"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "oil-filter-strap-wrench",
+   "name": "Strap oil filter wrench",
+   "kind": "hand",
+   "size": "Small diameter",
+   "why": "The filter is small, so the strap must close down far enough.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "oil"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "spark-plug-socket",
+   "name": "Spark plug socket",
+   "kind": "hand",
+   "size": null,
+   "why": "Reaches down the plug wells.",
+   "jdNumber": null,
+   "altDiy": "A length of hose on the plug helps start the thread.",
+   "costGbp": null,
+   "src": [
+    "ez"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "piston-retract-tool",
+   "name": "Piston retract tool",
+   "kind": "hand",
+   "size": null,
+   "why": "Pushes pistons back slowly.",
+   "jdNumber": null,
+   "altDiy": "A G-clamp and an old pad.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "dial-gauge",
+   "name": "Dial gauge with magnetic base",
+   "kind": "hand",
+   "size": "0.01 mm",
+   "why": "Disc run-out and rear hub end float. Jaguar lists JD 13A.",
+   "jdNumber": "JD 13A",
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "vernier-calipers",
+   "name": "Vernier calipers",
+   "kind": "hand",
+   "size": null,
+   "why": "Measure the regulator stud before moving it.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "multimeter",
+   "name": "Multimeter with a 10 A range",
+   "kind": "hand",
+   "size": null,
+   "why": "Parasitic drain and charging checks.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "battery-charger",
+   "name": "Smart battery charger",
+   "kind": "hand",
+   "size": null,
+   "why": "Forum users warn diagnostics need a strong charger. Start every electrical fault with a full battery.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "joc2"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "ir-thermometer",
+   "name": "Infrared thermometer",
+   "kind": "hand",
+   "size": null,
+   "why": "Reads gearbox pan temperature. One owner stopped at 47 C.",
+   "jdNumber": null,
+   "altDiy": "A hand on the pan, but this is rough.",
+   "costGbp": null,
+   "src": [
+    "atf"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "fluid-pump",
+   "name": "Hand fluid pump",
+   "kind": "hand",
+   "size": null,
+   "why": "ATF fill and diff oil. Cable-tie it to the car so you have both hands.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "atf",
+    "diff"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "fluid-syringe",
+   "name": "Large syringe",
+   "kind": "hand",
+   "size": null,
+   "why": "Fills the roof pump tank.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "jag"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "funnel",
+   "name": "Funnel",
+   "kind": "hand",
+   "size": null,
+   "why": "Oil and coolant fill.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "measuring-jug",
+   "name": "Measuring jug",
+   "kind": "hand",
+   "size": null,
+   "why": "Measure out what came out of the diff, then replace it.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "diff"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "drain-pan",
+   "name": "Drain pan",
+   "kind": "hand",
+   "size": null,
+   "why": "Oil, coolant and ATF.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "bleed-kit",
+   "name": "Brake bleed hose and bottle",
+   "kind": "hand",
+   "size": null,
+   "why": "Two per caliper on Brembo cars.",
+   "jdNumber": null,
+   "altDiy": "Clear tube and a jam jar with fluid in the bottom.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "vacuum-brush",
+   "name": "Vacuum brush",
+   "kind": "hand",
+   "size": null,
+   "why": "Jaguar says to remove brake dust this way, never with an air line.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "wing-covers",
+   "name": "Wing covers",
+   "kind": "hand",
+   "size": null,
+   "why": "Jaguar uses paint protection covers on most jobs.",
+   "jdNumber": null,
+   "altDiy": "Old blankets.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "trim-tools",
+   "name": "Plastic trim tools",
+   "kind": "hand",
+   "size": null,
+   "why": "Door casing studs and interior trim.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "plastic-hook",
+   "name": "Plastic hook",
+   "kind": "hand",
+   "size": null,
+   "why": "Releases the stud on the door pocket trim.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "plastic-mallet",
+   "name": "Soft mallet",
+   "kind": "hand",
+   "size": null,
+   "why": "Release a stuck supercharger nose joint. Reported on a later engine.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "scx150"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "bench-vice-soft-jaws",
+   "name": "Bench vice with soft jaws",
+   "kind": "hand",
+   "size": null,
+   "why": "Holds suspension parts. Jaguar fits jaw protectors.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "coil-spring-compressor",
+   "name": "Coil spring compressor",
+   "kind": "hand",
+   "size": null,
+   "why": "For stripping a front spring from its damper off the car.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "allen-key-roof",
+   "name": "Roof latch Allen key",
+   "kind": "hand",
+   "size": "Stowed beside the pump",
+   "why": "Manual latch release in the header.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "blanking-plugs",
+   "name": "Blanking plugs",
+   "kind": "hand",
+   "size": null,
+   "why": "Close off hydraulic and cooler ports the moment they open.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "dremel-cutoff",
+   "name": "Rotary tool with cut-off wheel",
+   "kind": "hand",
+   "size": null,
+   "why": "One owner cut the dipstick stud above the nut.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "ez"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "guide-pins-m8",
+   "name": "Threaded guide pins",
+   "kind": "hand",
+   "size": "M8 x 1.25 x 50 mm",
+   "why": "Hold gaskets in place on refit. Reported on a later engine.",
+   "jdNumber": null,
+   "altDiy": "Short lengths of threaded rod.",
+   "costGbp": null,
+   "src": [
+    "scx150"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "square-stock-1-2",
+   "name": "1/2 inch square stock",
+   "kind": "hand",
+   "size": "About 1 inch long",
+   "why": "Fits the diff fill plug so a ratchet can turn it from the side.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "diff"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "thread-protector",
+   "name": "Axle thread protector",
+   "kind": "hand",
+   "size": null,
+   "why": "Saves the axle thread when pulling a rear hub.",
+   "jdNumber": null,
+   "altDiy": "Fit the old nut flush on the shaft end.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fuel-line-disconnect",
+   "name": "Fuel line disconnect tool",
+   "kind": "hand",
+   "size": null,
+   "why": "Spring couplings. One owner reports buying one for about $5.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "jfmanifold"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "pencil-marker",
+   "name": "Paint marker",
+   "kind": "consumable",
+   "size": null,
+   "why": "Marks pivot pins, propshaft flanges and hoses.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "wire-tie",
+   "name": "Stiff wire or ties",
+   "kind": "consumable",
+   "size": null,
+   "why": "Hangs calipers. Jaguar forbids hanging them on the hose.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "strong-wire",
+   "name": "Strong wire",
+   "kind": "consumable",
+   "size": null,
+   "why": "Ties the vertical link to the spring.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "linen-tape",
+   "name": "Linen tape",
+   "kind": "consumable",
+   "size": null,
+   "why": "Holds the door glass up.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "soft-toothbrush",
+   "name": "Soft toothbrush",
+   "kind": "consumable",
+   "size": null,
+   "why": "Cleaning throttle body edges.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "jftb"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "rags-lint-free",
+   "name": "Clean lint-free rags",
+   "kind": "consumable",
+   "size": null,
+   "why": "Block the openings at the front of the engine.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "jensen",
+    "ez"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "absorbent-cloth",
+   "name": "Absorbent cloths",
+   "kind": "consumable",
+   "size": null,
+   "why": "Protect boot trim from hydraulic fluid.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "ac-recovery-service",
+   "name": "A/C recovery and recharge service",
+   "kind": "consumable",
+   "size": null,
+   "why": "Refrigerant must be recovered before A/C pipes open.",
+   "jdNumber": null,
+   "altDiy": "Pay a mobile A/C service.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "spring-compressor-204-179",
+   "name": "Rear spring compressors",
+   "kind": "special",
+   "size": "Pair",
+   "why": "Compress the rear spring on the car.",
+   "jdNumber": "204-179 (JD 199)",
+   "altDiy": "A good pair of external coil clamps that seat fully on this spring. Inspect them before every use. A hire set is worth considering.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "spring-straps-204-179-1",
+   "name": "Spring retaining straps",
+   "kind": "special",
+   "size": null,
+   "why": "Hold the upper mount to the spring.",
+   "jdNumber": "204-179-1 (JD 199-1)",
+   "altDiy": "No sourced alternative. Do not improvise with tie straps.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "taper-separator-211-098",
+   "name": "Tie rod end taper separator",
+   "kind": "special",
+   "size": null,
+   "why": "Tie rod ends only. It wrecks ball joint gaiters.",
+   "jdNumber": "211-098 (JD 100)",
+   "altDiy": "A generic screw-type tie rod splitter of the same shape.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "ball-joint-separator-204-192",
+   "name": "Ball joint taper separator",
+   "kind": "special",
+   "size": null,
+   "why": "Upper ball joint.",
+   "jdNumber": "204-192 (JD 219)",
+   "altDiy": "A generic ball joint splitter that avoids the gaiter.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "ball-joint-splitter-204-293",
+   "name": "Ball joint splitter",
+   "kind": "special",
+   "size": null,
+   "why": "Lower ball joint.",
+   "jdNumber": "204-293",
+   "altDiy": "A generic splitter sized to avoid the gaiter.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "hub-remover-204-193",
+   "name": "Hub remover",
+   "kind": "special",
+   "size": null,
+   "why": "Presses the front hub out.",
+   "jdNumber": "204-193 (JD 224)",
+   "altDiy": "Machine shop.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "hub-collets-204-194",
+   "name": "Hub removal collets",
+   "kind": "special",
+   "size": null,
+   "why": "Support the vertical link on the press.",
+   "jdNumber": "204-194 (JD 225)",
+   "altDiy": "Machine shop.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "hub-holding-204-195",
+   "name": "Hub holding tool",
+   "kind": "special",
+   "size": null,
+   "why": "Holds the hub by its studs for the very tight nuts.",
+   "jdNumber": "204-195 (JD 227)",
+   "altDiy": "A steel bar drilled to the stud pattern.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "hub-replacer-204-196",
+   "name": "Hub replacer",
+   "kind": "special",
+   "size": null,
+   "why": "Fits the front hub.",
+   "jdNumber": "204-196 (JD 236)",
+   "altDiy": "Machine shop.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "bearing-remover-204-197",
+   "name": "Wheel bearing remover",
+   "kind": "special",
+   "size": null,
+   "why": "Presses out the front bearing.",
+   "jdNumber": "204-197 (JD 237)",
+   "altDiy": "A press mandrel of the right size.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "bearing-replacer-204-198",
+   "name": "Wheel bearing replacer",
+   "kind": "special",
+   "size": null,
+   "why": "Fits the front bearing by its outer race.",
+   "jdNumber": "204-198 (JD 238)",
+   "altDiy": "A press mandrel that bears only on the outer race.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "abs-rotor-socket-206-066a",
+   "name": "ABS rotor nut socket",
+   "kind": "special",
+   "size": null,
+   "why": "Fits the castellated front rotor nut.",
+   "jdNumber": "206-066A",
+   "altDiy": "No sourced alternative. Machine shops may have one.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "circlip-pliers-18g1004",
+   "name": "Circlip pliers",
+   "kind": "special",
+   "size": null,
+   "why": "Tips must not protrude past the ears, or the seal is hurt.",
+   "jdNumber": "18G 1004",
+   "altDiy": "Good internal circlip pliers with short tips.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "hub-puller-204-011",
+   "name": "Rear hub puller",
+   "kind": "special",
+   "size": null,
+   "why": "Pulls the hub off the axle shaft splines.",
+   "jdNumber": "204-011 (JD 1D)",
+   "altDiy": "A heavy stud-mounted hub puller.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "rear-hub-remover-204-113",
+   "name": "Rear hub remover",
+   "kind": "special",
+   "size": null,
+   "why": "Two-piece press tool with a recess for the handbrake cable housing.",
+   "jdNumber": "204-113 (JD 132)",
+   "altDiy": "Machine shop.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "bearing-cup-adaptor-204-118",
+   "name": "Bearing cup replacer adaptors",
+   "kind": "special",
+   "size": null,
+   "why": "Fit the inner and outer rear cups.",
+   "jdNumber": "204-118 (JD 550-4/1 and JD 550-4/2)",
+   "altDiy": "A bearing race driver set.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "driver-handle-100-013",
+   "name": "Driver handle",
+   "kind": "special",
+   "size": null,
+   "why": "Used with the cup adaptors.",
+   "jdNumber": "100-013 (18G-134)",
+   "altDiy": "Handle from a race driver set.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "hub-spacer-204-003",
+   "name": "Rear hub spacer replacer",
+   "kind": "special",
+   "size": null,
+   "why": "Used when measuring rear end float.",
+   "jdNumber": "204-003 (JD 15)",
+   "altDiy": "Machine shop.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "seal-tool-205-234",
+   "name": "Oil seal remover and replacer",
+   "kind": "special",
+   "size": null,
+   "why": "Seats the rear hub seals.",
+   "jdNumber": "205-234 (JD 550-1)",
+   "altDiy": "A flat driver of the right diameter.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "engine-support-beam-303-021",
+   "name": "Engine support beam",
+   "kind": "special",
+   "size": null,
+   "why": "Holds the engine from the wing channels while the crossbeam is lowered.",
+   "jdNumber": "303-021 (MS 53D)",
+   "altDiy": "A hired engine support bar, protected at the wing channels.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "cam-locking-303-530",
+   "name": "Camshaft setting tool",
+   "kind": "special",
+   "size": "One per bank",
+   "why": "Locks the cams during sprocket bolt work.",
+   "jdNumber": "303-530",
+   "altDiy": "Laser 5147 includes a pair of bridges. Jensen bought one and did one bank at a time. Method B avoids it altogether.",
+   "costGbp": null,
+   "src": [
+    "wm",
+    "laser",
+    "jensen"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "chain-tension-tool-303-532",
+   "name": "Timing chain tensioning tool",
+   "kind": "special",
+   "size": null,
+   "why": "Counters the sprocket and tensions the chain. Square hole takes a 1/2 inch bar.",
+   "jdNumber": "303-532",
+   "altDiy": "Laser 5147 kit, or the home-made versions Jensen read about. Laser says not to load its version against sprocket bolts.",
+   "costGbp": null,
+   "src": [
+    "wm",
+    "laser",
+    "jensen"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "crank-setting-peg-303-645",
+   "name": "Crankshaft setting peg",
+   "kind": "special",
+   "size": null,
+   "why": "Fits the crank sensor hole to set the crank on 2003-on 4.2 cars. Never use it to hold the pulley bolt.",
+   "jdNumber": "303-645",
+   "altDiy": "Laser 5147 pin combines the 303-645 and 303-531 designs.",
+   "costGbp": null,
+   "src": [
+    "wm",
+    "laser"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "crank-pulley-remover-303-588",
+   "name": "Crankshaft pulley remover",
+   "kind": "special",
+   "size": null,
+   "why": "The pulley is very tight.",
+   "jdNumber": "303-588",
+   "altDiy": "Laser 5147 includes a puller.",
+   "costGbp": null,
+   "src": [
+    "wm",
+    "laser"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "crank-pulley-locking-303-191",
+   "name": "Crankshaft pulley locking tool",
+   "kind": "special",
+   "size": null,
+   "why": "Holds the pulley for the 375 Nm bolt.",
+   "jdNumber": "303-191 with adapter 303-191-02",
+   "altDiy": "A strap or pulley holding tool rated for the torque.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "ribe-socket-303-1077a",
+   "name": "12 mm Ribe bit socket",
+   "kind": "special",
+   "size": "12 mm Ribe",
+   "why": "4.2 exhaust sprocket bolt.",
+   "jdNumber": "303-1077A",
+   "altDiy": "A 12 mm Ribe bit from a bit set.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "belt-tensioner-release-303-631",
+   "name": "Belt tensioner release tool",
+   "kind": "special",
+   "size": null,
+   "why": "Unloads the supercharger belt tensioner.",
+   "jdNumber": "303-631",
+   "altDiy": "A slim bar that fits the tensioner.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fuel-pressure-gauge-310-012",
+   "name": "Fuel pressure gauge",
+   "kind": "special",
+   "size": null,
+   "why": "Screws on the rail valve to release pressure.",
+   "jdNumber": "310-012",
+   "altDiy": "Press the Schrader valve into a rag, or pull the pump fuse at idle.",
+   "costGbp": null,
+   "src": [
+    "wm"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "adaptor-307-452",
+   "name": "Fill plug adaptor",
+   "kind": "special",
+   "size": null,
+   "why": "6HP26 fill plug.",
+   "jdNumber": "307-452",
+   "altDiy": "8 mm hex and adapters. See socket-8mm-hex.",
+   "costGbp": null,
+   "src": [
+    "wm",
+    "atf"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "obd-reader-generic",
+   "name": "Generic OBD-II reader or ELM327 adapter",
+   "kind": "diagnostic",
+   "size": "16 pin DLC",
+   "why": "Reads engine P codes, live data and fuel trims. Fine for a misfire or lean code. Owners report it does not reach Jaguar transmission or ABS codes. An ELM327 with the Torque app was reported on a 2005 XK8 and XJ8 for basic reading only. A cheap adapter may also fail outright.",
+   "jdNumber": null,
+   "altDiy": "Good first purchase.",
+   "costGbp": null,
+   "src": [
+    "obd",
+    "pid"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "multi-system-scanner",
+   "name": "Multi-system handheld scanner",
+   "kind": "diagnostic",
+   "size": null,
+   "why": "Coverage is unpredictable. On one XJS an Autel read transmission and ABS but not engine. Check the maker's coverage list for your VIN before buying. This item was not verified on an X100.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "obd"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "jaguar-wds-ids",
+   "name": "Jaguar WDS, IDS or SDD",
+   "kind": "diagnostic",
+   "size": "Laptop plus a vehicle interface",
+   "why": "The dealer route. Jaguar's gearbox level check calls for an approved diagnostic system to read fluid temperature, and owners say ABS and airbag fault finding needs it. Slow to load, and needs a strong battery charger on the car. Some versions want an internet connection. Wrong programming can brick modules. The cost shown is the roughly £100 an owner reported for a clone lead and software bundle, not a genuine system.",
+   "jdNumber": null,
+   "altDiy": "A specialist with the kit charges by the session. Owners also buy a clone lead and software bundle.",
+   "costGbp": [
+    100,
+    100
+   ],
+   "src": [
+    "wm",
+    "joc1",
+    "joc2",
+    "joc3",
+    "nhtsa",
+    "devcom"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "mongoose-lead",
+   "name": "Mongoose-type J2534 lead",
+   "kind": "diagnostic",
+   "size": "Vehicle interface",
+   "why": "Owners commonly use a Mongoose Pro lead with SDD or IDS. The licensing position of clone leads was not confirmed.",
+   "jdNumber": null,
+   "altDiy": "Clone lead, with the risks above.",
+   "costGbp": null,
+   "src": [
+    "joc1",
+    "joc3"
+   ],
+   "conf": "community"
+  },
+  {
+   "size": null,
+   "jdNumber": "303-531",
+   "altDiy": "Laser 5147 pin combines the 303-645 and 303-531 designs.",
+   "costGbp": null,
+   "id": "crank-setting-peg-303-531",
+   "name": "Crankshaft setting peg, 4.0",
+   "kind": "special",
+   "why": "Seats in the timing slot of the drive plate through the crank sensor hole on 4.0 cars.",
+   "src": [
+    "jtis-my2000",
+    "laser"
+   ],
+   "conf": "factory"
+  },
+  {
+   "size": null,
+   "jdNumber": "204-476",
+   "altDiy": null,
+   "costGbp": null,
+   "id": "spring-compressor-204-476",
+   "name": "Front coil spring compressor",
+   "kind": "special",
+   "why": "Holds the front spring and damper assembly so the damper nut can come off. The spring is under extreme tension.",
+   "src": [
+    "jtis-my1997"
+   ],
+   "conf": "factory"
+  },
+  {
+   "size": null,
+   "jdNumber": "JD-230, or Snap-on XDHM 1415",
+   "altDiy": null,
+   "costGbp": null,
+   "id": "spanner-jd-230",
+   "name": "Belt tensioner spanner",
+   "kind": "special",
+   "why": "Turns the 1997-2002 tensioner idler assembly by its left-hand centre bolt to release the belt.",
+   "src": [
+    "jtis-my1997"
+   ],
+   "conf": "factory"
+  },
+  {
+   "size": null,
+   "jdNumber": "310-058",
+   "altDiy": "Jaguar allows another suitable type.",
+   "costGbp": null,
+   "id": "fuel-pressure-tool-310-058",
+   "name": "Fuel injection pressure test equipment",
+   "kind": "special",
+   "why": "Releases fuel pressure at the valve on the cross-over pipe on 1997-2002 cars.",
+   "src": [
+    "jtis-my1997"
+   ],
+   "conf": "factory"
+  },
+  {
+   "size": null,
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "id": "suction-pump-manual",
+   "name": "Hand fuel suction pump",
+   "kind": "hand",
+   "why": "Drains the tank before a 1997-2002 fuel filter change. Jaguar says manually operated only.",
+   "src": [
+    "jtis-my1997"
+   ],
+   "conf": "factory"
+  },
+  {
+   "size": null,
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "id": "clamp-meter",
+   "name": "DC clamp meter",
+   "kind": "diagnostic",
+   "why": "Reads battery drain and individual junction box leads without breaking the circuit, which is what Jaguar prefers.",
+   "src": [
+    "battery-care"
+   ],
+   "conf": "factory"
+  },
+  {
+   "size": null,
+   "jdNumber": "307-379",
+   "altDiy": null,
+   "costGbp": null,
+   "id": "dipstick-307-379",
+   "name": "Service dipstick, W5A580",
+   "kind": "special",
+   "why": "The supercharged 4.0 box has a sealed tube. This dipstick reads the level against 25 C and 80 C marks.",
+   "src": [
+    "jtis-my2000"
+   ],
+   "conf": "factory"
+  },
+  {
+   "size": null,
+   "jdNumber": "303-752",
+   "altDiy": "A strap wrench that closes down far enough, though it cannot be torqued.",
+   "costGbp": null,
+   "id": "oil-filter-wrench-303-752",
+   "name": "Oil filter wrench",
+   "kind": "special",
+   "why": "Lets the oil filter be torqued to 18 Nm, the fix for filters loosening in service.",
+   "src": [
+    "tsb-303-51"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "jump-leads",
+   "name": "Jump leads",
+   "kind": "hand",
+   "size": null,
+   "why": "Heavy enough to carry the starter current. The handbook asks for high quality leads.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "hb-my2004"
+   ],
+   "conf": "factory"
+  }
+ ],
+ "gaps": [
+  "costGbp is null for almost every tool. UK prices could not be sourced because the search budget ran out. Laser Tools' page gave no price. Jensen's 2006 US prices ($125 cam lock, $75 tension tool, $50 crank tool) were not converted. The only GBP figure is about £100 for a clone diagnostic bundle, reported by an owner.",
+  "altDiy text for hub, bearing and press tools is practical advice from this project, not a sourced method. Sourced alternatives are the Laser 5147 kit, Jensen's cut hex key, the bent 8 mm spanner, the cable-tie method, and owner workarounds for the fill plug and diff plug.",
+  "Jaguar tool numbers are from the 2003 to 2006 manual, JTIS and Laser's sheet. Laser lists the kit for X100 1996 to 2006.",
+  "OBD coverage: no head-to-head test of readers on an X100 was found. The clearest reader statement comes from an XJS thread. ELM327 on a 2005 XK8 was reported for basic reading only. Whether early UK 4.0 cars answer generic OBD-II was not confirmed. Coverage of Autel, iCarsoft, Foxwell and similar units was not verified. WDS and IDS use on X100 is confirmed by a JLR bulletin on legacy models and by owners, but licensing of clone software was not confirmed.",
+  "Sizes marked null were not sourced. Torque wrench ranges are this project's practical suggestions."
+ ]
+}

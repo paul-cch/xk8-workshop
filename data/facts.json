@@ -1,0 +1,415 @@
+{
+ "sources": {
+  "vc-my1997": {
+   "title": "XK8 Vehicle Care, 1997 to 1998 Model Years (UK), JJM 10 16 14/80",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "vc-my1999": {
+   "title": "XK8 Vehicle Care, 1998.75 and 1999 Model Years (UK), JJM 10 16 14/87",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "vc-my2000": {
+   "title": "XK8/XKR Vehicle Care, 2000 Model Year (UK), JJM 10 16 14/00",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "vc-my2002": {
+   "title": "XK8/XKR Vehicle Care Handbook, 2002 to 2003 Model Years (UK), JJM 10 16 14/20",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "hb-my2003": {
+   "title": "XK8/XKR Driver's Handbook, 2003 Model Year (UK), JJM 10 02 14/30",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "hb-my2004": {
+   "title": "XK8/XKR Driver's Handbook, 2004.5 Model Year (UK), JJM 10 02 14/45",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my1997": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY1997 (dataset jvk1997en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my2000": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY2000 (dataset jyk2000en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my2002": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY2002 (dataset jfk2002en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my2003": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY2003 and MY2004 (dataset x1032003en and x1042004en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "powerhouse-guide": {
+   "title": "Jaguar Supercharger 4.0 and 4.2 V8 Upper Pulleys",
+   "url": "https://powerhouse.uk/jaguar-supercharger-4-0-and-4-2-v8-upper-pulleys/",
+   "publisher": "Powerhouse Automotive",
+   "kind": "specialist"
+  },
+  "powerhouse-42": {
+   "title": "Jaguar XJR XKR S-Type R XF 4.2 V8 Upper Pulleys",
+   "url": "https://powerhouse.uk/supercharger-performance-upgrade-pulleys/jaguar-xjr-xkr-s-type-r-xf-4-2-v8-upper-pulleys/",
+   "publisher": "Powerhouse Automotive",
+   "kind": "specialist"
+  },
+  "paramount-pulley-40": {
+   "title": "Jaguar XKR 4.0 crank supercharger pulley (seen through search results)",
+   "url": "https://paramount-performance.com/jaguar-xkr-4-0-crank-supercharger-pulley-upgraded-supercharger-pulley.html",
+   "publisher": "Paramount Performance",
+   "kind": "specialist"
+  },
+  "paramount-pulley-42": {
+   "title": "Jaguar XKR 4.2 Supercharger Pulley (seen through search results)",
+   "url": "https://paramount-performance.com/jaguar-4-2-xkr-upgraded-supercharger-pulley/",
+   "publisher": "Paramount Performance",
+   "kind": "specialist"
+  },
+  "jr-pulley": {
+   "title": "Installing an XKR supercharger 3 PSI pulley upgrade",
+   "url": "http://www.jagrepair.com/images/NonStandardMods/Installing%20an%20XKR%20%20superrcharger%203%20PSI%20pulley%20upgrade.pdf",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jf-na-tuning": {
+   "title": "Engine tuning for the N/A? Mar 2018",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/engine-tuning-n-198218/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
+  },
+  "jl-remap-2006": {
+   "title": "[xk8] ECU remap, 2006-2007",
+   "url": "https://forums.jag-lovers.com/t/xk8-ecu-remap/246781",
+   "publisher": "Jag-lovers Forums",
+   "kind": "forum"
+  },
+  "jtis": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual, MY1997 to MY2003",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars Limited",
+   "kind": "factory"
+  },
+  "sng2013": {
+   "title": "XK8 parts catalogue (The Parts Collection, 2013)",
+   "url": "https://cdn.sngbarratt.com/catalogues/new/sng_cat_xk8_en.pdf",
+   "publisher": "SNG Barratt",
+   "kind": "vendor"
+  },
+  "sng2019": {
+   "title": "XK8 parts catalogue, 2019 download edition",
+   "url": "https://cdn.sngbarratt.com/catalogues/new/2019/CATXK8-Download2019.pdf",
+   "publisher": "SNG Barratt",
+   "kind": "vendor"
+  },
+  "threepiece": {
+   "title": "1998 Jaguar XK8 wheel fitment",
+   "url": "https://vehicles.threepiece.us/vehicles/jaguar/xk8/1998/",
+   "publisher": "Three Piece",
+   "kind": "reference"
+  },
+  "wheelSizes": {
+   "title": "Jaguar XK8 hub bore",
+   "url": "https://wheel-sizes.com/hubbore/jaguar/xk8/",
+   "publisher": "wheel-sizes.com",
+   "kind": "reference"
+  }
+ },
+ "items": [
+  {
+   "id": "fact.tyre-pressures-my1999-on",
+   "title": "Tyre pressures",
+   "system": "wheels",
+   "answer": "17 and 18 inch wheels, cold: front 2.2 bar (32 psi), rear 2.3 bar (34 psi). 19 inch: 2.2 bar (32 psi) front, 2.3 bar (34 psi) rear. 20 inch: 2.2 bar (32 psi) front, 2.0 bar (30 psi) rear.",
+   "detail": [
+    "Comfort setting for speeds up to 100 mph, 17 and 18 inch only: front 1.8 bar (26 psi), rear 1.9 bar (28 psi). Keep to the normal pressures above that speed.",
+    "Temporary spare: 4.1 bar (60 psi).",
+    "Tyres without Jaguar approval, and non-approved winter tyres: add 0.14 bar (2 psi) to the figure for that size.",
+    "The label for your car is under the centre console storage lid. Trust that label over this page."
+   ],
+   "keywords": "tyre tire pressure pressures psi bar inflate inflation spare air wheel 17 18 19 20",
+   "appliesTo": {
+    "myFrom": 1999
+   },
+   "note": "Table from the 2002 to 2003 Vehicle Care book. The MY2000 book agrees on 17 and 18 inch, and its third row is not legible in the copy read. The 2003 and 2004.5 handbooks print no table and point to the label, so MY2004 on assumes the same figures.",
+   "src": [
+    "vc-my2002",
+    "vc-my2000",
+    "hb-my2003",
+    "hb-my2004"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fact.tyre-pressures-my1997-98",
+   "title": "Tyre pressures",
+   "system": "wheels",
+   "answer": "17 inch, cold: front 2.2 bar (32 psi), rear 2.3 bar (34 psi). 18 inch: front 2.2 bar (32 psi), rear 2.0 bar (30 psi).",
+   "detail": [
+    "Comfort setting for speeds up to 100 mph: 17 inch front 1.7 bar (26 psi), rear 1.9 bar (28 psi). 18 inch front 1.7 bar (26 psi), rear 1.6 bar (24 psi).",
+    "Temporary spare: 4.1 bar (60 psi).",
+    "Tyres without Jaguar approval: 3.0 bar (44 psi) front and rear, within the tyre speed rating.",
+    "The label for your car is under the centre console storage lid. Trust that label over this page."
+   ],
+   "keywords": "tyre tire pressure pressures psi bar inflate inflation spare air wheel 17 18",
+   "appliesTo": {
+    "myTo": 1998
+   },
+   "note": "The scanned table is rough. The bar and psi columns are the readable ones. Check them against the label.",
+   "src": [
+    "vc-my1997"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fact.wheel-nut-socket",
+   "title": "Wheel nut socket",
+   "system": "wheels",
+   "answer": "Not sourced. No Jaguar document read here gives the socket size.",
+   "detail": [
+    "The toolkit in the boot has a wheel nut wrench with an extension, and a coded key socket for the locking nut on each wheel.",
+    "Use the extension to undo nuts, never to tighten them. Torque is in Plan, Torques."
+   ],
+   "keywords": "wheel nut lug socket size spanner wrench 19mm 19 mm 21mm 22mm locking key",
+   "appliesTo": {},
+   "note": "Measure yours before buying a socket.",
+   "src": [
+    "hb-my2004",
+    "jtis-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fact.obd-port",
+   "title": "Where the diagnostic port is",
+   "system": "electrical",
+   "answer": "On the fascia, next to the A pillar on the driver's side. It is the J1962 socket, also called the OBD port or DLC.",
+   "detail": [
+    "It is powered by a 5 A fuse in the fascia fuse box (battery feed) and a 5 A fuse in the boot fuse box (ignition feed). If a reader will not power up, check those."
+   ],
+   "keywords": "obd obd2 obdii diagnostic port socket connector j1962 dlc plug scanner reader code location where",
+   "appliesTo": {},
+   "note": "JTIS states the location in its MY2004 data, and the same fuse rows appear from MY2002. The earlier datasets read here do not state the location in words.",
+   "src": [
+    "jtis-my2003",
+    "vc-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fact.clear-codes",
+   "title": "How to clear fault codes",
+   "system": "electrical",
+   "answer": "Fix the fault, then clear the code with a scan tool at the diagnostic port. Engine codes can be read with a generic OBD scan tool. Jaguar used its own PDU or WDS system.",
+   "detail": [
+    "JTIS ends its repairs with \"clear the DTC, test the system\", and says its code summaries also work with a suitable generic scan tool.",
+    "Other modules, such as ABS, may need a tool that reaches them. The fact that a cheap reader shows nothing does not mean the car has no codes.",
+    "Disconnecting the battery is not a clean way to clear codes: it wipes the trip memories and the radio needs its code."
+   ],
+   "keywords": "clear reset erase delete code codes dtc fault check engine light scan reader",
+   "appliesTo": {},
+   "note": "No Jaguar document read here gives a clearing procedure for a generic tool, so check your reader's instructions.",
+   "src": [
+    "jtis-my2002",
+    "vc-my2002"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fact.service-light",
+   "title": "Service light reset",
+   "system": "electrical",
+   "answer": "No reset to do, as far as the sources show. The 2003 and 2004.5 handbooks list no service reminder or service light.",
+   "detail": [
+    "If your dash shows a service message, it is not one these books describe. Tell us what it says."
+   ],
+   "keywords": "service light reset reminder indicator interval oil message spanner dash",
+   "appliesTo": {},
+   "note": "Absence from two handbooks is weak evidence. The earlier handbook text was not available to read.",
+   "src": [
+    "hb-my2003",
+    "hb-my2004"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fact.cylinder-numbering",
+   "title": "Which bank is A, and how cylinders are numbered",
+   "system": "engine",
+   "answer": "A bank is the right-hand bank, the driver's side on a UK car. B bank is the left. Cylinders run 1 to 4 from the front, so 1A is front right and 4B is rear left.",
+   "detail": [
+    "Firing order is 1A, 1B, 4A, 2A, 2B, 3A, 3B, 4B.",
+    "Fault codes P0301 to P0308 count cylinders 1 to 8, not 1A to 4B. Look the code up here to see the cylinder."
+   ],
+   "keywords": "bank a b cylinder number numbering right left firing order which side 1a 4b",
+   "appliesTo": {},
+   "note": "Bank side from the Jaguar code tables, front cylinders and firing order from the handbook data pages.",
+   "src": [
+    "vc-my2002",
+    "jtis-my2003"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fact.pulley-xk8",
+   "title": "Supercharger pulleys fit the XKR only",
+   "system": "induction",
+   "answer": "A pulley upgrade needs a supercharger, so it does not apply to your XK8. If you want a fast one, buy an XKR. Plan, Upgrades has what does suit an XK8.",
+   "detail": [],
+   "keywords": "pulley pulleys smaller upgrade power boost tune faster supercharger",
+   "appliesTo": {
+    "induction": [
+     "na"
+    ]
+   },
+   "note": null,
+   "src": [
+    "jf-na-tuning",
+    "jl-remap-2006",
+    "jr-pulley",
+    "paramount-pulley-40",
+    "paramount-pulley-42",
+    "powerhouse-42",
+    "powerhouse-guide"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "fact.towing",
+   "title": "How to tow or recover the car",
+   "system": "transmission",
+   "answer": "Use a flat-bed if you can. Selector in Neutral, not Park: rocking on the transporter can damage the parking lock. Handbrake on, wheels chocked, and tie the car down by something other than the towing eyes. Tow on its own wheels only as an emergency: at most 0.5 mile (0.8 km) at no more than 30 mph (48 km/h).",
+   "detail": [
+    "Flat-bed or trailer: the towing eye may be used to winch the car on, but not to tie it down.",
+    "Rear suspended tow: take the key out to lock the steering, and tie the rear wheels into the cradle. A car with a faulty gearbox must go this way.",
+    "On its own wheels: selector in Neutral, ignition at position II so the steering lock is off and the indicators, horn and stop lamps work. With the engine off the steering is heavy and the brakes need far more force. Follow local rules on towing signs.",
+    "The front towing eye is in the toolkit in the boot. It screws into the front lower body crossmember, left or right side, once the blanking plug is out. Attach the rope there.",
+    "The rear eye is a welded double loop on the right of the boot floor. Never use it to tow another vehicle.",
+    "Have the keys with you and the alarm disarmed. With no power the selector stays locked in Park until its manual release is used: the handbook says one exists, and the release procedure itself was not found in the documents read here."
+   ],
+   "keywords": "tow towing towed recovery recover breakdown flatbed flat bed transporter trailer winch eye rope suspended moving neutral automatic push",
+   "appliesTo": {},
+   "src": [
+    "jtis-my1997",
+    "jtis-my2000",
+    "jtis-my2003",
+    "hb-my2003"
+   ],
+   "conf": "factory",
+   "note": "Same text in the MY1997, MY1998, MY2000 and MY2004 JTIS data. The JTIS general procedure for the selector release is referred to but was not located."
+  },
+  {
+   "id": "fact.wheel-fitment",
+   "title": "Wheel size and bolt pattern",
+   "system": "wheels",
+   "answer": "Bolt pattern (PCD) 5 x 120.65 mm, centre bore 73.9 mm. Sizes fitted: 8Jx17, 8Jx18, 9Jx18, 8.5Jx18, 8Jx19, 9Jx19, 9Jx20, 10Jx20.",
+   "detail": [
+    "Wheel offset and which size came on which car are not in the data here. Check the wheel itself before buying."
+   ],
+   "keywords": "pcd bolt pattern stud fitment wheel size sizes width offset centre center bore hub rim 5x120 5x120.65 120.65",
+   "appliesTo": {},
+   "src": [
+    "jtis",
+    "sng2013",
+    "threepiece",
+    "wheelSizes"
+   ],
+   "conf": "corroborated"
+  },
+  {
+   "id": "fact.bulbs",
+   "title": "Bulb types",
+   "system": "electrical",
+   "answer": "Dipped beam H1 55W. Main beam HB3 60W. Front indicator 21W amber. Side lamp 5W capless. Stop lamp 21W. Tail lamp P5W 5W. Reverse P21W 21W.",
+   "keywords": "bulb bulbs lamp light headlight headlamp dip dipped main beam h1 hb3 p5w p21w 21w 55w 60w indicator side tail stop brake reverse capless",
+   "appliesTo": {},
+   "src": [
+    "jtis",
+    "sng2013",
+    "sng2019"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fact.window-relearn",
+   "title": "Relearn the door windows",
+   "system": "electrical",
+   "answer": "Doors shut, ignition at position I or II. Hold the switch down until the glass is fully lowered and keep holding for 5 seconds, then hold it up until the glass is fully raised and keep holding for 5 seconds. Do it for each door window.",
+   "detail": [
+    "Needed whenever the battery has been off. Until it is done the glass may not drop or seal properly when a door opens."
+   ],
+   "keywords": "window windows relearn re-learn reset program reprogram limits one touch auto glass door drop",
+   "appliesTo": {},
+   "src": [
+    "hb-my2003",
+    "vc-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fact.bonnet-release",
+   "title": "Bonnet release",
+   "system": "body",
+   "answer": "The release lever is below the fascia on the passenger's side. Pull it, reach across to the centre of the bonnet and lift the rear edge. The gas struts raise it and hold it open.",
+   "detail": [
+    "To close: lower it to 250 to 300 mm from shut, then press down firmly to slam both latches. If one side does not catch, press down firmly above that side."
+   ],
+   "keywords": "bonnet hood release latch open lever catch pull popping",
+   "appliesTo": {},
+   "src": [
+    "vc-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fact.radio-code",
+   "title": "Radio security code",
+   "system": "electrical",
+   "answer": "After the battery has been off the radio shows CODE and will not play until its security code is entered. The method is in the Sound System Handbook.",
+   "detail": [
+    "Where your own code is written down is not in any document read here. Look with the car’s handbooks before you disconnect the battery."
+   ],
+   "keywords": "radio code security stereo audio head unit cassette cd locked battery",
+   "appliesTo": {},
+   "src": [
+    "vc-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fact.alarm-stop",
+   "title": "Stopping the alarm",
+   "system": "electrical",
+   "answer": "Put the key in the ignition and turn it to position I or II. The key-ring transmitter will not cancel the panic alarm.",
+   "keywords": "alarm siren horn sounding going off stop silence cancel panic security",
+   "appliesTo": {},
+   "src": [
+    "hb-my2003"
+   ],
+   "conf": "factory"
+  }
+ ],
+ "gaps": [
+  "Wheel nut socket size: not in any Jaguar document read. Measure it.",
+  "Tyre pressure table for MY2004 on: the handbooks point to the label on the car and print no table.",
+  "Earlier handbooks were not available as text, so \"no service light\" rests on the 2003 and 2004.5 books."
+ ]
+}

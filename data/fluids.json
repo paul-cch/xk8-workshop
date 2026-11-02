@@ -1,0 +1,900 @@
+{
+ "sources": {
+  "jtis-my1997": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY1997 (dataset jvk1997en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my1998": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY1998 (dataset jwk1998en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my1999": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY1999 (dataset jxk1999en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my2000": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY2000 (dataset jyk2000en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my2001": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY2001 (dataset x1002001en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my2002": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY2002 (dataset jfk2002en)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtis-my2003": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XK Range service manual data, MY2003 and MY2004 (dataset x1032003en and x1042004en, identical data)",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "vc-my1997": {
+   "title": "XK8 Vehicle Care, 1997 to 1998 Model Years (UK), JJM 10 16 14/80",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "vc-my1999": {
+   "title": "XK8 Vehicle Care, 1998.75 and 1999 Model Years (UK), JJM 10 16 14/87",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "vc-my2000": {
+   "title": "XK8/XKR Vehicle Care, 2000 Model Year (UK), JJM 10 16 14/00",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "vc-my2002": {
+   "title": "XK8/XKR Vehicle Care Handbook, 2002 to 2003 Model Years (UK), JJM 10 16 14/20",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "hb-my2003": {
+   "title": "XK8/XKR Driver's Handbook, 2003 Model Year (UK), JJM 10 02 14/30",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "hb-my2004": {
+   "title": "XK8/XKR Driver's Handbook, 2004.5 Model Year (UK), JJM 10 02 14/45",
+   "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jtp923": {
+   "title": "XK range 4.0 Litre V8 Vehicle Maintenance Sheet, JTP 923",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "jec-hood-oil": {
+   "title": "Convertible Hood Oil (forum thread)",
+   "url": "https://forums.jec.org.uk/viewtopic.php?p=64376",
+   "publisher": "Jaguar Enthusiasts Club forum",
+   "kind": "forum"
+  },
+  "justanswer-top": {
+   "title": "Top fluid level, 97 XK8 (expert answer)",
+   "url": "https://www.justanswer.com/jaguar/lr8vb-top-fluid-leval-low-just-checking-97-xk8-have.html",
+   "publisher": "JustAnswer",
+   "kind": "forum"
+  },
+  "ebay-chf11s": {
+   "title": "Pentosin CHF 11S convertible top hydraulic fluid listing for 1997-2006 XK8",
+   "url": "https://www.ebay.com/itm/293499436992",
+   "publisher": "eBay seller listing",
+   "kind": "vendor"
+  },
+  "jl-diff-howto": {
+   "title": "2001 XKR Differential Fluid Change - How To (applies to XK8, XJ8, and XJR)",
+   "url": "https://forums.jag-lovers.com/t/2001-xkr-differential-fluid-change-how-to-applies-to-xk8-xj8-and-xjr/383320",
+   "publisher": "Jag-lovers forum",
+   "kind": "forum"
+  },
+  "amsoil-xk8": {
+   "title": "AMSOIL lookup, 1997 Jaguar XK8",
+   "url": "https://www.amsoil.com/lookup/auto-and-light-truck/1997/jaguar/xk8/4-0l-8-cyl-engine-code-7-ajv8-c/",
+   "publisher": "AMSOIL",
+   "kind": "vendor"
+  },
+  "harrys-lg5": {
+   "title": "ZF Lifeguard Fluid 5 listing (LT71141)",
+   "url": "https://www.harryseuro.co.nz/products/zf-lifeguard-fluid-5-automatic-transmission-fluid-1-litre-bmw-audi-vw-5hp-4hp-lt71141",
+   "publisher": "Harry's Euro",
+   "kind": "vendor"
+  },
+  "fullfat-lt": {
+   "title": "Thread on ZF 5HP24 and 6HP26 fluids",
+   "url": "https://www.fullfatrr.com/forum/post287945.html",
+   "publisher": "FullFatRR forum",
+   "kind": "forum"
+  },
+  "vsb": {
+   "title": "Jaguar Vehicle Specifications book, editions 09/2003 and 07/2004",
+   "url": "http://jagrepair.com/images/AutoRepairPhotos/vsb_09_2003.pdf",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "tsb-100-17": {
+   "title": "Jaguar Service Technical Bulletin 100-17: Engine oil capacity increased level, new dipstick",
+   "url": "http://jagrepair.com/images/TSB/TSB2/XJ_XK/100General%20Info/100-17%20oil%20level.pdf",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "tsb-303-09": {
+   "title": "Jaguar Service Technical Bulletin 303-09: Coolant specification change, D542 yellow",
+   "url": "http://jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-09%20yellow%20coolant.pdf",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  },
+  "tsb-100-16": {
+   "title": "Jaguar Service Technical Bulletin 100-16: Introduction of Extended Life Coolant (XLC)",
+   "url": "http://jagrepair.com/images/TSB/TSB2/XJ_XK/100General%20Info/100-16%20XL%20coolant.pdf",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
+  }
+ },
+ "items": [
+  {
+   "id": "fluid.engine-oil-my1997",
+   "name": "Engine oil, 4.0",
+   "system": "engine",
+   "spec": "UK and rest of world: ACEA A2 (API SH), SAE 10W-40 listed. USA/Canada: ILSAC GF-2, SAE 5W-30.",
+   "capacityL": 6,
+   "capacityNote": "6.0 L service fill with new filter per the Vehicle Specifications book, with or without oil cooler. JTIS lists 6.5 L without cooler and 7.3 L with cooler: treat those as system figures and finish on the dipstick.",
+   "changeInterval": "Every 10,000 miles or 12 months, whichever comes first. 6-monthly in severe conditions. New filter and drain plug washer each time.",
+   "brands": [],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 1997
+   },
+   "note": "No oil additives. Vehicle Care MY1997-98 also shows a 6.5 L capacity. JTIS 303-00.",
+   "src": [
+    "jtis-my1997",
+    "vc-my1997",
+    "vsb"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fluid.engine-oil-my1998-99-na",
+   "name": "Engine oil, 4.0 naturally aspirated",
+   "system": "engine",
+   "spec": "API SH or SJ / ACEA A2. USA/Canada: API SH or SJ / ILSAC GF-2. SAE grade: read the chart in your Vehicle Care book. It is not legible in the copy read here.",
+   "capacityL": 6,
+   "capacityNote": "6.0 L service fill with new filter per the Vehicle Specifications book, with or without oil cooler. JTIS lists 6.5 L without cooler and 7.3 L with cooler: treat those as system figures and finish on the dipstick.",
+   "changeInterval": "Every 10,000 miles or 12 months, whichever comes first. 6-monthly in severe conditions. New filter and drain plug washer each time.",
+   "brands": [],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "na"
+    ],
+    "myFrom": 1998,
+    "myTo": 1999
+   },
+   "note": "MY1999 UK table in 303-00 tightens this to API SJ/EC and ACEA A1-98 or A3-98. JTIS 303-00 and 303-01.",
+   "src": [
+    "jtis-my1998",
+    "jtis-my1999",
+    "vc-my1999",
+    "vsb"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fluid.engine-oil-my1998-99-sc",
+   "name": "Engine oil, 4.0 supercharged",
+   "system": "engine",
+   "spec": "API SH or SJ / ACEA A3. SAE grade: read the chart in your Vehicle Care book. It is not legible in the copy read here.",
+   "capacityL": 6,
+   "capacityNote": "6.0 L service fill with new filter per the Vehicle Specifications book, with or without oil cooler. JTIS lists 6.5 L without cooler and 7.3 L with cooler: treat those as system figures and finish on the dipstick.",
+   "changeInterval": "Every 10,000 miles or 12 months, whichever comes first. 6-monthly in severe conditions. New filter and drain plug washer each time.",
+   "brands": [],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "sc"
+    ],
+    "myFrom": 1998,
+    "myTo": 1999
+   },
+   "note": "JTIS 303-00 and 303-01.",
+   "src": [
+    "jtis-my1998",
+    "jtis-my1999",
+    "vc-my1999",
+    "vsb"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fluid.engine-oil-my2000-early",
+   "name": "Engine oil, 4.0, early MY2000",
+   "system": "engine",
+   "spec": "Buy SAE 5W-30. 0W-30, 0W-40 and 5W-40 are also on Jaguar's chart. On the bottle: API SJ/EC with ACEA A1-98 or A3-98. USA and Canada: API SJ/EC and ILSAC GF2.",
+   "capacityL": 6,
+   "capacityNote": "With a new filter, on dipstick NNE 1723NA. Read the number by the dipstick handle: the 7.0 L fill starts at VIN A00367.",
+   "changeInterval": "Every 10,000 miles or 12 months, whichever comes first. 6-monthly in severe conditions. New filter and drain plug washer each time.",
+   "brands": [],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myFrom": 2000,
+    "myTo": 2000,
+    "vinFrom": "A00116",
+    "vinTo": "A00366"
+   },
+   "note": "Overfilling one of these early cars by 1 L is the risk if you use the later 7.0 L figure, so read the part number stamped near the dipstick handle. No oil additives.",
+   "src": [
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002",
+    "vc-my2002",
+    "vsb",
+    "tsb-100-17",
+    "vc-my2000"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fluid.engine-oil-my2000-02",
+   "name": "Engine oil, 4.0",
+   "system": "engine",
+   "spec": "Buy SAE 5W-30. 0W-30, 0W-40 and 5W-40 are also on Jaguar's chart. On the bottle: API SJ/EC with ACEA A1-98 or A3-98. USA and Canada: API SJ/EC and ILSAC GF2.",
+   "capacityL": 7,
+   "capacityNote": "With a new filter. Stop at 7.0 L, then finish on the dipstick.",
+   "changeInterval": "Every 10,000 miles or 12 months, whichever comes first. 6-monthly in severe conditions. New filter and drain plug washer each time.",
+   "brands": [],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myFrom": 2000,
+    "myTo": 2002,
+    "vinFrom": "A00367",
+    "vinTo": "A30644"
+   },
+   "note": "The grades are the four on the MY2000 Vehicle Care temperature chart. The temperature limits on that chart are not legible in the copy read: the 2003 handbook gives the same four grades for -30 to +50 C, with 5W-30 preferred. JTIS says ACEA A2-98 where the Vehicle Care book says A1-98. Fill read on dipstick XR8 2806 (production mark XR83-6752-AC), from VIN A00367. JTIS 7.5 L and 8.3 L are the older 6.5 and 7.3 L figures plus this extra 1.0 L, not a dry fill. Add 1 L when the level is at the lower dipstick mark. No oil additives.",
+   "src": [
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002",
+    "vc-my2002",
+    "vsb",
+    "tsb-100-17",
+    "vc-my2000"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fluid.engine-oil-4-2",
+   "name": "Engine oil, 4.2",
+   "system": "engine",
+   "spec": "SAE 5W-30 meeting Jaguar WSS M2C913-A or B preferred. Otherwise API SJ/EC and ACEA A1-98 or A3-98. 0W-30 and 0W-40 also allowed by the MY2003 handbook.",
+   "capacityL": 7,
+   "capacityNote": "Three factory figures. Vehicle Specifications book: 7.0 L service fill for both 4.2 engines. Handbook MY2004.5: 7.8 L. JTIS: 6.8 L NA and 7.6 L SC. Fill to 7.0 L, then use the dipstick.",
+   "changeInterval": "Every 10,000 miles or 12 months, whichever comes first. 6-monthly in severe conditions. New filter and drain plug washer each time.",
+   "brands": [],
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ],
+    "myFrom": 2003
+   },
+   "note": "JTIS 303-01 quotes spec WSS-M2C-912A where the handbooks quote WSS M2C913. Handbooks are the owner-facing document and later. No oil additives. Top up with the same viscosity.",
+   "src": [
+    "jtis-my2003",
+    "hb-my2003",
+    "hb-my2004",
+    "vsb"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fluid.coolant-early",
+   "name": "Coolant, early D985 (blue-green)",
+   "system": "cooling",
+   "spec": "Jaguar D985, blue-green, 50 percent with water. JTIS calls the pre-XLC coolant ESD-M97B49-A without saying which of D985 or D542 it means.",
+   "capacityL": 9.5,
+   "capacityNote": "9.5 L. JTIS gives 10 L for the complete system and 3.7 L engine only.",
+   "changeInterval": "Every 4 years or 60,000 miles: drain, flush and refill.",
+   "brands": [],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "vinFrom": "001001",
+    "vinTo": "010342"
+   },
+   "note": "Factory fill to VIN 010342. Cars from VIN 001036 to 010342 were converted to D542 under Service Action S813: those have yellow coolant and label MNA 7698AA on the reservoir, so use D542 on them. Never mix D985, D542 or XLC.",
+   "src": [
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "vc-my1997",
+    "vc-my1999",
+    "jtp923",
+    "tsb-303-09",
+    "tsb-100-16",
+    "vsb"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.coolant-d542",
+   "name": "Coolant, D542 (yellow)",
+   "system": "cooling",
+   "spec": "Jaguar D542, yellow, JLM 20404, 50 percent with water. JTIS calls the pre-XLC coolant ESD-M97B49-A without saying which of D985 or D542 it means.",
+   "capacityL": 9.5,
+   "capacityNote": "9.5 L naturally aspirated, 11.5 L supercharged, per the Vehicle Specifications book. JTIS gives 10 L and 12 L, and 3.7 L engine only.",
+   "changeInterval": "Every 4 years or 60,000 miles: drain, flush and refill.",
+   "brands": [],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "vinFrom": "010343",
+    "vinTo": "042634"
+   },
+   "note": "Factory fill from VIN 010343 to 042634, plus cars converted under S813 and labelled MNA 7698AA. Check the VIN and what is in the tank before topping up. Never mix D985, D542 or XLC. The change to orange XLC at VIN 042635 is in sheet JTP 923 and TSB 100-16. Gives frost protection to -36 C.",
+   "src": [
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "vc-my1997",
+    "vc-my1999",
+    "jtp923",
+    "tsb-303-09",
+    "tsb-100-16",
+    "vsb"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.coolant-oat",
+   "name": "Coolant, orange Extended Life",
+   "system": "cooling",
+   "spec": "50 percent water, 50 percent Jaguar Anti-freeze, Coolant and Corrosion Inhibitor to WSS M97B44-D, coloured orange. Jaguar Premium Cooling System Fluid. Part JLM 20972.",
+   "capacityL": 9.5,
+   "capacityNote": "9.5 L naturally aspirated, 11.5 L supercharged (JTIS and handbooks, 4.0 from MY2000 and 4.2). Engine only 3.7 L.",
+   "changeInterval": "Every 5 years or 150,000 miles: drain, flush and refill.",
+   "brands": [],
+   "appliesTo": {
+    "myFrom": 1999,
+    "vinFrom": "042635"
+   },
+   "note": "Do not mix with anti-freeze of a different specification: the handbook warns this damages the cooling system. Check coolant only when the engine is cold. Frost protection to -40 C. Fill and flush spec Jaguar Premium Cooling System Flush EGR-M14P7-A / 164-R3670. A leftover MY2002 refill step in JTIS 303-03 still quotes the old ESD spec; the same dataset's table and the handbooks say WSS M97B44-D. Sheet JTP 923 and TSB 100-16 set the change at VIN 042635 in MY1999. The TSB says MY2000 cars use XLC from VIN A00083, so the first A-series serials are unconfirmed: check the coolant colour and the header tank label. Never mix with D985 or D542.",
+   "src": [
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002",
+    "jtis-my2003",
+    "vc-my2000",
+    "vc-my2002",
+    "hb-my2004",
+    "jtp923",
+    "tsb-100-16"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fluid.atf-zf-5hp24",
+   "name": "Automatic transmission fluid, ZF 5HP24",
+   "system": "transmission",
+   "spec": "Esso ATF LT 71141",
+   "capacityL": 10,
+   "capacityNote": "10.0 L with torque converter. A pan drain does not remove the fluid in the converter.",
+   "changeInterval": "Filled for life. Jaguar: no changes except extreme driving conditions.",
+   "brands": [
+    "Esso LT 71141",
+    "Mobil LT 71141",
+    "ZF Lifeguard Fluid 5 (vendor states equivalent)"
+   ],
+   "appliesTo": {
+    "induction": [
+     "na"
+    ],
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 2002
+   },
+   "note": "No dipstick. Level check needs a diagnostic tool: fluid below 30 C at start, cycle P-D-R-P with engine running, then set the level at the plug hole, fluid never above 50 C, wait for a trickle for at least a minute. Use a syringe kept for ATF only. JTIS 307-01A. Note 44.24.02.",
+   "src": [
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002",
+    "harrys-lg5",
+    "fullfat-lt"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.atf-sc-5-speed",
+   "name": "Automatic transmission fluid, 5-speed supercharged",
+   "system": "transmission",
+   "spec": "Shell ATF 3403-M115",
+   "capacityL": 9.5,
+   "capacityNote": "9.5 L including converter. Refill procedure: about 4.0 L in, start in P, about 3.0 L more, then set the level.",
+   "changeInterval": "Filled for life per handbook.",
+   "brands": [
+    "Shell ATF 3403-M115"
+   ],
+   "appliesTo": {
+    "induction": [
+     "sc"
+    ],
+    "engine": [
+     "4.0"
+    ],
+    "myFrom": 1998,
+    "myTo": 2002
+   },
+   "note": "Fill and level through the dipstick tube using factory dipstick 307-379, which has MAX and MIN marks for 25 C and 80 C fluid. Temperature only displays in D or R. Excess fluid must be removed. JTIS 307-01B calls this the transmission for vehicles with supercharger and does not name the maker.",
+   "src": [
+    "jtis-my1998",
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.atf-zf-6hp26",
+   "name": "Automatic transmission fluid, ZF 6HP26, 4.2 naturally aspirated",
+   "system": "transmission",
+   "spec": "Shell M1375.4, part C2C 8432",
+   "capacityL": 9.5,
+   "capacityNote": "9.5 L maximum fill per the Vehicle Specifications book. JTIS gives a single 10.0 L approximate dry capacity including cooler and tubes. Refill after a drain: start with 8 L.",
+   "changeInterval": "Normal use: filled for life. Severe duty: every 30,000 miles.",
+   "brands": [
+    "Shell M1375.4",
+    "ZF Lifeguard Fluid 6 (forum says same fluid)"
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ],
+    "induction": [
+     "na"
+    ],
+    "myFrom": 2003
+   },
+   "note": "Jaguar warns any other fluid may cause malfunction or failure. Level check with diagnostic tool: horizontal ramp, parking brake on, engine run 2 minutes in P, fluid below 30 C, then cycle the selector. Add in 0.5 L steps. Do not overfill. JTIS 307-01.",
+   "src": [
+    "jtis-my2003",
+    "fullfat-lt",
+    "vsb"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fluid.atf-zf-6hp26-sc",
+   "name": "Automatic transmission fluid, ZF 6HP26, 4.2 supercharged",
+   "system": "transmission",
+   "spec": "Shell M1375.4, part C2C 8432",
+   "capacityL": 10.05,
+   "capacityNote": "10.05 L maximum fill per the Vehicle Specifications book. JTIS gives a single 10.0 L approximate dry capacity including cooler and tubes. Refill after a drain: start with 8 L.",
+   "changeInterval": "Normal use: filled for life. Severe duty: every 30,000 miles.",
+   "brands": [
+    "Shell M1375.4",
+    "ZF Lifeguard Fluid 6 (forum says same fluid)"
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ],
+    "induction": [
+     "sc"
+    ],
+    "myFrom": 2003
+   },
+   "note": "Jaguar warns any other fluid may cause malfunction or failure. Level check with diagnostic tool: horizontal ramp, parking brake on, engine run 2 minutes in P, fluid below 30 C, then cycle the selector. Add in 0.5 L steps. Do not overfill. JTIS 307-01.",
+   "src": [
+    "jtis-my2003",
+    "fullfat-lt",
+    "vsb"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fluid.final-drive-oil",
+   "name": "Final drive oil",
+   "system": "driveline",
+   "spec": "Shell Spirax Super TS 90 (MY1997: Shell Spirax Thermally Stable Super TS 90). Part JLM 20255.",
+   "capacityL": 1.9,
+   "capacityNote": "1.9 L maximum fill per the Vehicle Specifications book, 1.80 L per JTIS 205-02. Filling to the lower edge of the fill hole governs.",
+   "changeInterval": "Filled for life per handbooks. No factory change interval.",
+   "brands": [
+    "Shell Spirax Super TS 90"
+   ],
+   "appliesTo": {},
+   "note": "Non-factory sources vary and do not agree: one owner used Valvoline synthetic 75W-140, AMSOIL's lookup shows GL-5 80W-90, one lubricant table shows 75W-140 on the XKR. The final drive has no drain plug per the owner write-up; he pumped the oil out through the fill port. JTIS names only the Shell product, and does not say whether a limited-slip additive is needed. JTIS 205-02.",
+   "src": [
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002",
+    "jtis-my2003",
+    "vc-my2002",
+    "jl-diff-howto",
+    "amsoil-xk8",
+    "vsb"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.power-steering",
+   "name": "Power steering fluid",
+   "system": "steering",
+   "spec": "Dexron III",
+   "capacityL": 1,
+   "capacityNote": "1.0 L system, 0.4 L reservoir.",
+   "changeInterval": "No change interval. Check at each service.",
+   "brands": [],
+   "appliesTo": {},
+   "note": "Do not overfill. JTIS 211-00 and 211-02.",
+   "src": [
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002",
+    "jtis-my2003",
+    "vc-my1997",
+    "vc-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.brake-fluid",
+   "name": "Brake fluid",
+   "system": "brakes",
+   "spec": "Jaguar ITT Super DOT 4, non-mineral polyglycol. Handbook minimum standard Jaguar Super DOT 4, from a sealed container.",
+   "capacityL": null,
+   "capacityNote": null,
+   "changeInterval": "Every 2 years regardless of mileage.",
+   "brands": [
+    "ITT Super DOT 4"
+   ],
+   "appliesTo": {},
+   "note": "Change it completely. Only use fluid from a sealed container. Factory total system capacity not found. JTIS 206-00.",
+   "src": [
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002",
+    "jtis-my2003",
+    "vc-my1997",
+    "vc-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.ac-refrigerant",
+   "name": "A/C refrigerant",
+   "system": "hvac",
+   "spec": "HFC 134a",
+   "capacityL": null,
+   "capacityNote": "650 g +/- 50 g charge weight, 1997-2002. 650 g +/- 25 g from MY2003. Charge by weight, not litres.",
+   "changeInterval": "No interval. Recover and recharge only with proper equipment.",
+   "brands": [],
+   "appliesTo": {},
+   "note": "Never mix with CFC 12. Do not vent to air. Under-bonnet label warns of pressurised HFC 134a. JTIS 412-00.",
+   "src": [
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002",
+    "jtis-my2003",
+    "vc-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.ac-compressor-oil",
+   "name": "A/C compressor oil",
+   "system": "hvac",
+   "spec": "Polyalkylene glycol (PAG)",
+   "capacityL": null,
+   "capacityNote": "160-200 ml, 1997-2002 table.",
+   "changeInterval": "Replace what is lost with parts removed. Use fresh oil from a sealed container.",
+   "brands": [],
+   "appliesTo": {},
+   "note": "JTIS 412-00 lists a PAG spec only, not a viscosity grade.",
+   "src": [
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.convertible-top-hydraulic",
+   "name": "Convertible top hydraulic fluid",
+   "system": "roof",
+   "spec": "Not stated in JTIS. Forum: Jaguar JLM 21112. Vendor listing and expert answer: Pentosin CHF 11S.",
+   "capacityL": null,
+   "capacityNote": "Capacity not published. Reservoir is small. A forum poster says buy more than you think, since flushing a gelled system uses plenty.",
+   "changeInterval": "No factory interval. Owners report gelling with age.",
+   "brands": [
+    "Jaguar JLM 21112",
+    "Pentosin CHF 11S"
+   ],
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "note": "Level marks are on the pump reservoir: upper mark with top fully down, lower mark with top fully up (JTIS 501-18). Fit a new filler plug O-ring. Forum posts and magazine advice suggest repeated flushing if gelled. Confirm the part number with a Jaguar parts source before ordering.",
+   "src": [
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002",
+    "jtis-my2003",
+    "jec-hood-oil",
+    "justanswer-top",
+    "ebay-chf11s"
+   ],
+   "conf": "community"
+  },
+  {
+   "id": "fluid.supercharger-oil",
+   "name": "Supercharger internal oil",
+   "system": "induction",
+   "spec": null,
+   "capacityL": null,
+   "capacityNote": null,
+   "changeInterval": "Filled for life. Handbooks say no routine topping up.",
+   "brands": [],
+   "appliesTo": {
+    "induction": [
+     "sc"
+    ]
+   },
+   "note": "Sealed unit. No oil spec published in JTIS or the handbooks.",
+   "src": [
+    "jtis-my2003",
+    "vc-my2002",
+    "hb-my2004"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.washer",
+   "name": "Windscreen washer fluid",
+   "system": "body",
+   "spec": null,
+   "capacityL": 7,
+   "capacityNote": "7.0 L reservoir.",
+   "changeInterval": "Check at each service.",
+   "brands": [],
+   "appliesTo": {},
+   "note": "Handbook warns never to put cooling system anti-freeze in the washer reservoir.",
+   "src": [
+    "vc-my2002",
+    "hb-my2004"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.fuel",
+   "name": "Fuel tank",
+   "system": "fuel",
+   "spec": "Unleaded petrol. Spec octane not captured here.",
+   "capacityL": 75,
+   "capacityNote": "75.0 L total: 70.0 L indicated E to F, 5.0 L below E.",
+   "changeInterval": "Not applicable.",
+   "brands": [],
+   "appliesTo": {},
+   "note": "Handbook MY2002-03.",
+   "src": [
+    "vc-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.hub-bearing-grease",
+   "name": "Hub and suspension grease",
+   "system": "front-suspension",
+   "spec": "Shell Retinax 'A' or Castrol 'NTR'",
+   "capacityL": null,
+   "capacityNote": null,
+   "changeInterval": "On assembly.",
+   "brands": [
+    "Shell Retinax A",
+    "Castrol NTR"
+   ],
+   "appliesTo": {},
+   "note": "JTIS 204-00 lists these greases without saying which joint each is for. The UK schedule also greases axle shaft universal joints at every service, but 205 names no UJ grease.",
+   "src": [
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002",
+    "jtis-my2003"
+   ],
+   "conf": "single"
+  },
+  {
+   "id": "fluid.threadlock-270",
+   "name": "Hub spline and suspension thread lock",
+   "system": "rear-suspension",
+   "spec": "Loctite 270 Studlock or equivalent",
+   "capacityL": null,
+   "capacityNote": null,
+   "changeInterval": "Whenever the rear hub comes off the axle shaft.",
+   "brands": [
+    "Loctite 270"
+   ],
+   "appliesTo": {},
+   "note": "JTIS 204-00 and 205-02.",
+   "src": [
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002",
+    "jtis-my2003"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.brembo-grease",
+   "name": "Brembo caliper grease",
+   "system": "brakes",
+   "spec": "Molikote Cu 7439",
+   "capacityL": null,
+   "capacityNote": null,
+   "changeInterval": "On pad change.",
+   "brands": [
+    "Molykote Cu 7439"
+   ],
+   "appliesTo": {
+    "myFrom": 2000
+   },
+   "note": "Brembo-equipped cars. JTIS 206-00 and 206-04.",
+   "src": [
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002",
+    "jtis-my2003"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.spark-plug-antiseize",
+   "name": "Spark plug anti-seize",
+   "system": "ignition",
+   "spec": "Nickel anti-seize, 'Neverseez' ESE-M12A4-A",
+   "capacityL": null,
+   "capacityNote": null,
+   "changeInterval": "On plug change.",
+   "brands": [
+    "Neverseez"
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 2002
+   },
+   "note": "JTIS 303-07.",
+   "src": [
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.sealant-rtv-4-0",
+   "name": "Bedplate and sump sealant, 4.0",
+   "system": "engine",
+   "spec": "Loctite 5699 Ultra Grey RTV silicone. Core plugs and block stub pipe: Loctite 648.",
+   "capacityL": null,
+   "capacityNote": null,
+   "changeInterval": "Assembly only.",
+   "brands": [
+    "Loctite 5699",
+    "Loctite 648"
+   ],
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 2002
+   },
+   "note": "Close the joint within twenty minutes of laying the bead. JTIS 303-00 and 303-01.",
+   "src": [
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "fluid.sealant-rtv-4-2",
+   "name": "Bedplate and front cover sealant, 4.2",
+   "system": "engine",
+   "spec": "WSS M4G 320-A3 RTV",
+   "capacityL": null,
+   "capacityNote": null,
+   "changeInterval": "Assembly only.",
+   "brands": [],
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ],
+    "myFrom": 2003
+   },
+   "note": "Bolts must be tightened within twenty minutes. JTIS 303-01.",
+   "src": [
+    "jtis-my2003"
+   ],
+   "conf": "factory"
+  }
+ ],
+ "gaps": [
+  "JTIS 2.1 ends at MY2004. MY2005-06 specs are assumed the same as MY2003-04.",
+  "Convertible top fluid: no factory spec or capacity found in JTIS or handbooks. Only forum and vendor sources.",
+  "Final drive: JTIS gives one Shell product for all cars. No factory limited-slip additive or viscosity grade found. The brief says diff oil varies; the variation found is in non-factory sources only.",
+  "Current-market equivalents for Shell ATF 3403-M115: not sourced.",
+  "Brake fluid total capacity, supercharger oil grade and volume, fuel octane: not sourced.",
+  "Engine oil capacities conflict between JTIS, handbooks and the Vehicle Specifications book. All three are in capacityNote, and the service fill from the book is used. The MY2000 fill is split at VIN A00367.",
+  "Engine oil capacities for MY1999 UK handbook lost in OCR; JTIS figures used.",
+  "Whether any MY2000 XK8 between A00001 and A00082 left the factory on D542 rather than XLC: TSB 100-16 starts MY2000 XLC at A00083. Check the colour and label.",
+  "Engine oil SAE grade for MY1998-99: the Vehicle Care chart is not legible in the copy read. MY2000 to 2002 uses the four grades that can be read on the chart."
+ ]
+}

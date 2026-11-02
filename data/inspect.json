@@ -1,0 +1,1379 @@
+{
+ "sources": {
+  "bp-x100": {
+   "title": "British Parts: Jaguar X100 XK and XKR 1996-2006 catalogue, prices read 1 Nov 2026",
+   "url": "https://www.britishparts.co.uk/classic-jaguar/jaguar-x100-xk-xkr-1996-2006",
+   "publisher": "British Parts UK",
+   "kind": "vendor"
+  },
+  "jag-battery": {
+   "title": "Battery Care Manual: vehicle quiescent current testing",
+   "url": "http://www.jagrepair.com/images/AutoRepairPhotos/Current%20Testing.pdf",
+   "publisher": "Jaguar Land Rover (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "jag-dtc-9702": {
+   "title": "DTC Summaries: XJ Sedan Range, XK8 Range through 2002 MY and XJS Range",
+   "url": "https://host.jcna.com/sites/default/files/NONSTYPE.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JCNA)",
+   "kind": "factory"
+  },
+  "jcna-6hp": {
+   "title": "XK8 2003 gearbox fault and hard shifting",
+   "url": "https://host.jcna.com/comment/3184",
+   "publisher": "JCNA forum",
+   "kind": "forum"
+  },
+  "jcna-abs": {
+   "title": "XK8 ABS light",
+   "url": "https://jcna.com/comment/1914",
+   "publisher": "JCNA forum",
+   "kind": "forum"
+  },
+  "jcna-cool": {
+   "title": "XK8 99 and 2000 engine coolant leaks",
+   "url": "https://jcna.com/comment/5098",
+   "publisher": "JCNA forum",
+   "kind": "forum"
+  },
+  "jcna-tens": {
+   "title": "R: Timing chain tensioner",
+   "url": "https://jcna.com/comment/9751",
+   "publisher": "JCNA forum",
+   "kind": "forum"
+  },
+  "jl-absback": {
+   "title": "2001 XK8 back home again",
+   "url": "https://forums.jag-lovers.com/t/2001-xk8-back-home-again-yes-they-can-be-brought-back-to-life-for-a-price/393795",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-buy": {
+   "title": "[xk8] Need advice on purchasing a used XK8",
+   "url": "https://forums.jag-lovers.com/t/xk8-need-advice-on-purchasing-a-used-xk8/247662",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-gearbox": {
+   "title": "[xk8] Gearbox symptoms and diagnosis help",
+   "url": "https://forums.jag-lovers.com/t/xk8-gearbox-symptoms-and-diagnosis-help/249041",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-hes": {
+   "title": "[xk8] Hesitation and engine warning light",
+   "url": "https://forums.jag-lovers.com/t/xk8-hesitation-and-engine-warning-light/246969",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-roof": {
+   "title": "Help with a problem (XK8 top latch)",
+   "url": "https://forums.jag-lovers.com/t/help-with-a-problem/367755",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jl-seminar": {
+   "title": "News from the JEC X308/XK8 seminar: notes on a talk by David Marks, independent Jaguar specialist, 2005",
+   "url": "https://forums.jag-lovers.com/t/x300-news-from-x308-seminar/225029",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jr-bclutch": {
+   "title": "Transmission ZF 5HP24 repair",
+   "url": "http://www.jagrepair.com/TransmissionZF5HP24.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-hyd": {
+   "title": "XK8 and XKR hydraulic system evaluation",
+   "url": "http://www.jagrepair.com/HydSystemEvaluationXK8XKR.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-misfire": {
+   "title": "P0300 to P0308 code notes",
+   "url": "http://www.jagrepair.com/images/AutoRepairPhotos/P0300%20to%20P0308.pdf",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-nik": {
+   "title": "Nikasil engine blocks",
+   "url": "http://www.jagrepair.com/NikasilEngineBlocks.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-tens": {
+   "title": "Valve cover gasket and tensioner inspection",
+   "url": "http://www.jagrepair.com/JaguarXK8ValveCoverGasketTensionerInsp.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-thermo": {
+   "title": "Thermostat housing, 4.0 XK8",
+   "url": "http://www.jagrepair.com/ThermostatHousing4XK8.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "jr-window": {
+   "title": "XK8 window reset",
+   "url": "http://www.jagrepair.com/XK8windowReset.htm",
+   "publisher": "JagRepair.com",
+   "kind": "enthusiast"
+  },
+  "moss-mount": {
+   "title": "XK8 and XKR spring/damper mount repair and upgrade kit",
+   "url": "https://mossmotors.com/mja2170bd-1-xk8-and-xkr-spring-damper-mount-repair-and-upgrade-kit",
+   "publisher": "Moss Motors",
+   "kind": "vendor"
+  },
+  "moss-vin": {
+   "title": "VIN information, XK8 and XKR 1997-2006",
+   "url": "https://mossmotors.com/media/PDFs/vin-information-xk8-and-xkr-1997-2006.pdf",
+   "publisher": "Moss Motors",
+   "kind": "vendor"
+  },
+  "motorious": {
+   "title": "Jaguar XK8/XKR buying guide",
+   "url": "https://www.motorious.com/articles/highlights/jaguar-xk8-xkr-buying-guide/",
+   "publisher": "Motorious",
+   "kind": "reference"
+  },
+  "motorious-nik": {
+   "title": "The dangers of Nikasil cylinder linings in your Jaguar XK8",
+   "url": "https://www.motorious.com/articles/highlights/nikasil-cylinder-linings-jaguar-xk8-xkr",
+   "publisher": "Motorious",
+   "kind": "reference"
+  },
+  "octane": {
+   "title": "Jaguar XK8 and XKR (X100) buying guide",
+   "url": "https://www.octane-magazine.com/articles/jaguar-xk8-xkr-x100-buying-guide-history-and-review/",
+   "publisher": "Octane",
+   "kind": "reference"
+  },
+  "ph-body": {
+   "title": "Jaguar X100 buying guide: body",
+   "url": "https://www.pistonheads.com/news/ph-buying-guide-contents/jaguar-x100-buying-guide-body/27198",
+   "publisher": "PistonHeads",
+   "kind": "reference"
+  },
+  "ph-chassis": {
+   "title": "Jaguar X100 buying guide: rolling chassis",
+   "url": "https://www.pistonheads.com/features/ph-buying-guides/ph-buying-guide-jaguar-xk8-xkr-x100/27197",
+   "publisher": "PistonHeads",
+   "kind": "reference"
+  },
+  "ph-interior": {
+   "title": "Jaguar X100 buying guide: interior",
+   "url": "https://www.pistonheads.com/features/ph-buying-guides/ph-buying-guide-jaguar-xk8-xkr-x100/27199",
+   "publisher": "PistonHeads",
+   "kind": "reference"
+  },
+  "ph-powertrain": {
+   "title": "Jaguar X100 buying guide: powertrain",
+   "url": "https://www.pistonheads.com/features/ph-buying-guides/ph-buying-guide-jaguar-xk8-xkr-x100/27196",
+   "publisher": "PistonHeads",
+   "kind": "reference"
+  },
+  "tsb-204-01": {
+   "title": "Jaguar Service Technical Bulletin 204-01: Front suspension noise diagnosis",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/204-01%20XK%20susp%20noise.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-206-04": {
+   "title": "Jaguar Service Technical Bulletin 206-04: Brake disc vibration diagnosis",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/206Brakes/206-04%20brake%20vibration.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-211-01": {
+   "title": "Jaguar Service Technical Bulletin 211-01: Steering rack leak at transfer pipe union nut",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/211Streering/211-01%20steering%20rack%20leak.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-211-06": {
+   "title": "Jaguar Service Technical Bulletin 211-06: Steering rack knocking or rattling",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/211Streering/211-06%20steering%20knock.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-30": {
+   "title": "Jaguar Service Technical Bulletin 303-30: Noise during start up, install revised timing chain tensioners",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-30%20Revised%20Timing%20Chain%20Tensioners.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-54": {
+   "title": "Jaguar Service Technical Bulletin 303-54: Overheating, thermostat stuck closed",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-54%20Overheating.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-59": {
+   "title": "Jaguar Service Technical Bulletin 303-59: Chirping noise from accessory drive belt",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-59%20Misaligned%20Belt.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-60": {
+   "title": "Jaguar Service Technical Bulletin 303-60: Coolant pumps, identifying impeller material",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-60am.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-68": {
+   "title": "Jaguar Service Technical Bulletin 303-68: Start-up and idle rattle, primary or secondary chain tensioner",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-68%20Start-up%20and%20Idle%20Rattle.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-S498": {
+   "title": "Jaguar Service Technical Bulletin 303-S498: Engine Fail Safe displayed, replace throttle body",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-S498am-1.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-303-S514": {
+   "title": "Jaguar Service Technical Bulletin 303-S514: Operation of throttle while in closed position",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/303-S514am%20Operation%20Of%20Throttle.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-307-01": {
+   "title": "Jaguar Service Technical Bulletin 307-01: Selector lever cable adjustment",
+   "url": "http://www.jagrepair.com/images/TSB/307-01-1.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-307-11": {
+   "title": "Jaguar Service Technical Bulletin 307-11: ZF 5HP24 replace transmission, recall R478",
+   "url": "http://www.jagrepair.com/images/TSB/307-11.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-307-R513": {
+   "title": "Jaguar Service Technical Bulletin 307-R513: Incorrect gear selection, ZF 6 speed, recall R513",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/X150/307Gearbox/307-R513.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-413-S484": {
+   "title": "Jaguar Service Technical Bulletin 413-S484: Instrument pack CAN failure",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/413-S484am2%20INSTPK%20CAN%20failure.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-414-06A": {
+   "title": "Jaguar Service Technical Bulletin 414-06A: Intermittently discharged battery diagnostic procedure",
+   "url": "http://www.jagrepair.com/images/TSB/NewDocuments4-23-13/414-06am.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-501-11": {
+   "title": "Jaguar Service Technical Bulletin 501-11: Convertible top electrical system, component descriptions and diagnosis",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/501-11am.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-501-49": {
+   "title": "Jaguar Service Technical Bulletin 501-49: Rear quarter window regulator failure",
+   "url": "http://www.jagrepair.com/images/TSB/XK8/501-49.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-501-53": {
+   "title": "Jaguar Service Technical Bulletin 501-53: Water entry into vehicle",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/501Body/501-53%20Water%20Entry%20Into%20Vehicle.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-600-02": {
+   "title": "Jaguar Service Technical Bulletin 600-02: Pressure washing vehicles",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/600Maintenance/600-02%20Pressure%20Washing.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-600-03a": {
+   "title": "Jaguar Service Technical Bulletin 600-03a: Part-load engine breather, scheduled cleaning",
+   "url": "http://www.jagrepair.com/images/TSB/TSB2/XJ_XK/600Maintenance/600-03am3%20Part-Load%20Engine%20Breather.pdf",
+   "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
+   "kind": "factory"
+  },
+  "tsb-list": {
+   "title": "Jaguar XK8 Technical Service Bulletins by model year (titles only)",
+   "url": "https://automotix.net/autorepair/diy/2000-jaguar-xk8-tsb.html",
+   "publisher": "Automotix",
+   "kind": "reference"
+  }
+ },
+ "items": [
+  {
+   "id": "papers-history",
+   "area": "Paperwork",
+   "check": "Service invoices",
+   "how": "Ask for bills, not just stamps. Look for tensioners, pump, thermostat and gearbox fluid.",
+   "bad": "Gaps, or stamps with no invoices. An owner quoted by PistonHeads says walk away.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "ph-body"
+   ],
+   "conf": "single",
+   "decider": "walk",
+   "viewing": true
+  },
+  {
+   "id": "papers-recalls",
+   "area": "Paperwork",
+   "check": "Recalls and service actions",
+   "how": "Ask for invoices or a dealer printout showing these were done: S514, S498, R466, R478, S474 and S484, as they apply. The car cannot show this and neither can this app. A Jaguar dealer or specialist can check by VIN.",
+   "bad": "No record on a car in range.",
+   "cost": null,
+   "weakspot": "throttle-body-early",
+   "appliesTo": {
+    "myTo": 2002
+   },
+   "src": [
+    "tsb-303-S514",
+    "tsb-303-S498",
+    "tsb-307-11",
+    "tsb-600-03a",
+    "tsb-413-S484",
+    "jl-hes"
+   ],
+   "conf": "factory",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "papers-keys",
+   "area": "Paperwork",
+   "check": "Two working fobs",
+   "how": "Try both, lock and unlock.",
+   "bad": "One fob. New ones need programming.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "ph-interior"
+   ],
+   "conf": "single",
+   "decider": "minor",
+   "viewing": true
+  },
+  {
+   "id": "eng-number",
+   "area": "Engine",
+   "check": "Engine number",
+   "how": "Lift the plastic cover. Read the number on top of the block at the front right. Later than 18 August 2000 is steel lined; 000818xxxx is unconfirmed. Look for an exchange plate.",
+   "bad": "Earlier number with no replacement record.",
+   "cost": null,
+   "weakspot": "nikasil",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ]
+   },
+   "src": [
+    "jr-nik",
+    "moss-vin",
+    "motorious-nik",
+    "ph-powertrain"
+   ],
+   "conf": "corroborated",
+   "decider": "walk",
+   "viewing": true
+  },
+  {
+   "id": "eng-cold-start",
+   "area": "Engine",
+   "check": "Cold start",
+   "how": "Start stone cold with the bonnet open. Listen from the front.",
+   "bad": "Rattle that lasts, blue smoke, or a mechanical clatter.",
+   "cost": {
+    "gbp": [
+     355,
+     1260
+    ],
+    "note": "Full timing kit parts to specialist parts and labour. See weak spot."
+   },
+   "weakspot": "tensioners-plastic",
+   "appliesTo": {},
+   "src": [
+    "motorious",
+    "tsb-303-68",
+    "tsb-303-30",
+    "ph-powertrain"
+   ],
+   "conf": "corroborated",
+   "decider": "walk",
+   "viewing": true
+  },
+  {
+   "id": "eng-tensioners",
+   "area": "Engine",
+   "check": "Upper tensioners",
+   "how": "Not on a viewing: no seller lets you take the cam covers off. Ask for invoices that name the parts, and listen on a cold start instead. If you buy the car, look under the covers when you next do the plugs or gaskets.",
+   "bad": "Plastic body, cracks, loose bits.",
+   "cost": {
+    "gbp": [
+     167,
+     167
+    ],
+    "note": "Parts only, British Parts read 1 Nov 2026, see upgrades.json. Secondary kit."
+   },
+   "weakspot": "tensioners-plastic",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 2002
+   },
+   "src": [
+    "jr-tens",
+    "jl-buy",
+    "jcna-tens",
+    "bp-x100"
+   ],
+   "conf": "corroborated",
+   "decider": "haggle",
+   "viewing": false
+  },
+  {
+   "id": "eng-blowby",
+   "area": "Engine",
+   "check": "Blow-by and compression",
+   "how": "Blow-by tester between the breather and hose. Typical 9 to 13 litres per minute, many over 20 and fine. Motorious suggests about 200 psi compression.",
+   "bad": "Very low or uneven compression, oily crud in the air inlet tube.",
+   "cost": null,
+   "weakspot": "nikasil",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "myTo": 2001
+   },
+   "src": [
+    "jl-seminar",
+    "jl-buy",
+    "jr-nik",
+    "motorious"
+   ],
+   "conf": "corroborated",
+   "decider": "walk",
+   "viewing": false
+  },
+  {
+   "id": "eng-scan",
+   "area": "Engine",
+   "check": "Scan for codes and P1000",
+   "how": "Plug in a scanner. P1000 means readiness incomplete, which can mean codes were just cleared. Check fuel trims and oxygen sensors.",
+   "bad": "P1000 on a car said to be fault free. Long term trim outside about 10%, or short term at idle.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "jl-buy",
+    "jag-dtc-9702"
+   ],
+   "conf": "single",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "eng-oil-cap",
+   "area": "Engine",
+   "check": "Oil filler and coolant",
+   "how": "Look under the cap for mayonnaise and in the coolant tank for oil.",
+   "bad": "Mayonnaise or oil in coolant. Possible head gasket trouble.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "motorious"
+   ],
+   "conf": "single",
+   "decider": "walk",
+   "viewing": true
+  },
+  {
+   "id": "eng-plug-wells",
+   "area": "Engine",
+   "check": "Plug wells",
+   "how": "With coil covers off, look for oil in the wells.",
+   "bad": "Oil, from cam cover seals or loose plugs.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "motorious",
+    "jr-misfire"
+   ],
+   "conf": "corroborated",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "eng-belt",
+   "area": "Engine",
+   "check": "Drive belt",
+   "how": "Look for cracks and splits. It also drives pump and steering.",
+   "bad": "Cracks. Chirp at idle.",
+   "cost": {
+    "gbp": [
+     224,
+     224
+    ],
+    "note": "Parts only, British Parts read 1 Nov 2026, see upgrades.json. Tensioner and belt kit."
+   },
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "tsb-303-59",
+    "bp-x100"
+   ],
+   "conf": "single",
+   "decider": "minor",
+   "viewing": true
+  },
+  {
+   "id": "eng-breather",
+   "area": "Engine",
+   "check": "Part-load breather",
+   "how": "Pull the tube at the front of the left cam cover and probe the restrictor.",
+   "bad": "Blocked with gunk.",
+   "cost": null,
+   "weakspot": "throttle-body-early",
+   "appliesTo": {
+    "myTo": 2001
+   },
+   "src": [
+    "tsb-600-03a",
+    "jl-hes"
+   ],
+   "conf": "factory",
+   "decider": "minor",
+   "viewing": true
+  },
+  {
+   "id": "eng-sc-noise",
+   "area": "Engine",
+   "check": "Supercharger rumble",
+   "how": "Listen at the blower.",
+   "bad": "Rumble with revs.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {
+    "induction": [
+     "sc"
+    ]
+   },
+   "src": [
+    "ph-powertrain"
+   ],
+   "conf": "single",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "cool-level",
+   "area": "Cooling",
+   "check": "Coolant level and colour",
+   "how": "Engine cold. Check the tank.",
+   "bad": "Under a quarter, staining around the tank.",
+   "cost": null,
+   "weakspot": "header-tank",
+   "appliesTo": {},
+   "src": [
+    "motorious",
+    "jcna-cool"
+   ],
+   "conf": "single",
+   "decider": "minor",
+   "viewing": true
+  },
+  {
+   "id": "cool-hoses",
+   "area": "Cooling",
+   "check": "Hoses and housing",
+   "how": "Look at the housing and crossover. Squeeze hoses warm.",
+   "bad": "Blisters, gap at housing, crack on pipe, swollen hoses.",
+   "cost": {
+    "gbp": [
+     37,
+     80
+    ],
+    "note": "Parts only, British Parts read 1 Nov 2026, see upgrades.json. Aluminium housing."
+   },
+   "weakspot": "thermostat-housing",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "na"
+    ]
+   },
+   "src": [
+    "jr-thermo",
+    "jcna-cool",
+    "bp-x100"
+   ],
+   "conf": "corroborated",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "cool-gauge",
+   "area": "Cooling",
+   "check": "Temperature gauge on test drive",
+   "how": "The gauge should stay centred. Check in traffic.",
+   "bad": "Climbing or wandering.",
+   "cost": null,
+   "weakspot": "thermostat",
+   "appliesTo": {},
+   "src": [
+    "ph-powertrain",
+    "tsb-303-54"
+   ],
+   "conf": "corroborated",
+   "decider": "walk",
+   "viewing": true
+  },
+  {
+   "id": "cool-radiator",
+   "area": "Cooling",
+   "check": "Radiator",
+   "how": "Look at the fins and for debris between radiators.",
+   "bad": "Leaves, rot.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "ph-powertrain"
+   ],
+   "conf": "single",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "cool-pump",
+   "area": "Cooling",
+   "check": "Water pump",
+   "how": "Check bills. Staining may come from above.",
+   "bad": "Early car with no record.",
+   "cost": {
+    "gbp": [
+     130,
+     130
+    ],
+    "note": "Pump only, PistonHeads 2013."
+   },
+   "weakspot": "water-pump-impeller",
+   "appliesTo": {
+    "myTo": 1998
+   },
+   "src": [
+    "tsb-303-60",
+    "ph-powertrain"
+   ],
+   "conf": "factory",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "box-drive",
+   "area": "Gearbox",
+   "check": "Road test the gearbox",
+   "how": "Cold and hot. Pull away gently, and do N to D and N to R. Try the sport switch.",
+   "bad": "Delay, thump, slipping, roaring at 45 to 50 mph, or warning messages.",
+   "cost": {
+    "gbp": [
+     73,
+     145
+    ],
+    "note": "Parts only, British Parts read 1 Nov 2026, see upgrades.json. Fluid service."
+   },
+   "weakspot": "gearbox-5hp24",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "na"
+    ]
+   },
+   "src": [
+    "octane",
+    "ph-powertrain",
+    "jr-bclutch"
+   ],
+   "conf": "corroborated",
+   "decider": "walk",
+   "viewing": true
+  },
+  {
+   "id": "box-limp-xkr",
+   "area": "Gearbox",
+   "check": "XKR Mercedes box",
+   "how": "Read the TCM.",
+   "bad": "Limp to 2nd, or to 3rd, or codes for speed sensors.",
+   "cost": {
+    "gbp": [
+     600,
+     600
+    ],
+    "note": "Used box, PistonHeads 2013."
+   },
+   "weakspot": "mercedes-conductor-plate",
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ],
+    "induction": [
+     "sc"
+    ]
+   },
+   "src": [
+    "jag-dtc-9702",
+    "ph-powertrain"
+   ],
+   "conf": "single",
+   "decider": "walk",
+   "viewing": true
+  },
+  {
+   "id": "box-selector",
+   "area": "Gearbox",
+   "check": "J-gate and selector",
+   "how": "Move through all positions with the engine off and on.",
+   "bad": "Binding, gearbox fault after shifting.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {
+    "engine": [
+     "4.0"
+    ]
+   },
+   "src": [
+    "jl-gearbox",
+    "tsb-307-01"
+   ],
+   "conf": "corroborated",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "box-4-2",
+   "area": "Gearbox",
+   "check": "6HP26 on 4.2",
+   "how": "Try it cold. Read for P0780 to P0785. Check recall R513 and for leaks.",
+   "bad": "Harsh shifts, wrong gear on engaging.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ]
+   },
+   "src": [
+    "tsb-307-R513",
+    "jcna-6hp",
+    "tsb-list"
+   ],
+   "conf": "factory",
+   "decider": "walk",
+   "viewing": true
+  },
+  {
+   "id": "body-sills",
+   "area": "Body",
+   "check": "Sills",
+   "how": "Look under each door handle at the joint. Convertibles flex more.",
+   "bad": "Bubbles, cracks.",
+   "cost": null,
+   "weakspot": "sill-corrosion",
+   "appliesTo": {},
+   "src": [
+    "ph-body"
+   ],
+   "conf": "single",
+   "decider": "walk",
+   "viewing": true
+  },
+  {
+   "id": "body-arches",
+   "area": "Body",
+   "check": "Wheelarches",
+   "how": "Feel the lips. Lift the plastic splash guards.",
+   "bad": "Rust.",
+   "cost": null,
+   "weakspot": "arch-floor-corrosion",
+   "appliesTo": {},
+   "src": [
+    "ph-body",
+    "octane"
+   ],
+   "conf": "corroborated",
+   "decider": "walk",
+   "viewing": true
+  },
+  {
+   "id": "body-footwells",
+   "area": "Body",
+   "check": "Front footwells",
+   "how": "Lift the carpets. Feel for damp.",
+   "bad": "Rust, wet carpets.",
+   "cost": null,
+   "weakspot": "arch-floor-corrosion",
+   "appliesTo": {},
+   "src": [
+    "ph-body",
+    "tsb-501-53"
+   ],
+   "conf": "corroborated",
+   "decider": "walk",
+   "viewing": true
+  },
+  {
+   "id": "body-legs",
+   "area": "Body",
+   "check": "Chassis legs",
+   "how": "On a lift, inspect the rails where they rise ahead of the rear axle, then the front legs.",
+   "bad": "Flaky rust, patches.",
+   "cost": null,
+   "weakspot": "rear-subframe-corrosion",
+   "appliesTo": {},
+   "src": [
+    "ph-body",
+    "octane"
+   ],
+   "conf": "corroborated",
+   "decider": "walk",
+   "viewing": true
+  },
+  {
+   "id": "body-paint",
+   "area": "Body",
+   "check": "Paint and lacquer",
+   "how": "Walk round in good light.",
+   "bad": "Peeling lacquer, mismatch beyond the slight colour difference on the bumpers.",
+   "cost": null,
+   "weakspot": "lacquer-peel",
+   "appliesTo": {},
+   "src": [
+    "ph-body"
+   ],
+   "conf": "single",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "body-bumper",
+   "area": "Body",
+   "check": "Rear bumper",
+   "how": "Shake it firmly.",
+   "bad": "Moves or sags.",
+   "cost": null,
+   "weakspot": "rear-bumper-bolts",
+   "appliesTo": {},
+   "src": [
+    "ph-body"
+   ],
+   "conf": "single",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "body-glass",
+   "area": "Body",
+   "check": "Headlamps and windscreen surround",
+   "how": "Look for cracks and misting. Check the surround.",
+   "bad": "Cracked lamps, damaged surround, water in the cabin.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "ph-body",
+    "tsb-list"
+   ],
+   "conf": "corroborated",
+   "decider": "minor",
+   "viewing": true
+  },
+  {
+   "id": "roof-cycle",
+   "area": "Roof",
+   "check": "Cycle the roof",
+   "how": "Engine running. Time it: about 20 seconds. Listen.",
+   "bad": "Slow, stalling, Top Latch Fail.",
+   "cost": {
+    "gbp": [
+     160,
+     600
+    ],
+    "note": "Ram rebuild against new, forum figures, undated."
+   },
+   "weakspot": "hood-hydraulics",
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "src": [
+    "jl-roof",
+    "tsb-501-11"
+   ],
+   "conf": "single",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "roof-stains",
+   "area": "Roof",
+   "check": "Fluid stains",
+   "how": "Check headlining, mirror, seats.",
+   "bad": "Spray pattern from the header.",
+   "cost": null,
+   "weakspot": "hood-hydraulics",
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "src": [
+    "jl-buy",
+    "jr-hyd"
+   ],
+   "conf": "corroborated",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "roof-fabric",
+   "area": "Roof",
+   "check": "Fabric and rear window",
+   "how": "Check for tears. Test the heated rear glass.",
+   "bad": "Rips, element dead.",
+   "cost": {
+    "gbp": [
+     800,
+     3600
+    ],
+    "note": "Hood and fitting, forum quotes 2021. See upgrades.json."
+   },
+   "weakspot": null,
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "src": [
+    "ph-body"
+   ],
+   "conf": "single",
+   "decider": "minor",
+   "viewing": true
+  },
+  {
+   "id": "susp-front",
+   "area": "Front suspension",
+   "check": "Ball joints and bushes",
+   "how": "Support the suspension, wheels off. Check play and pry bushes.",
+   "bad": "Play, split rubber, inner tyre wear.",
+   "cost": {
+    "gbp": [
+     224,
+     290
+    ],
+    "note": "Parts only, British Parts read 1 Nov 2026, see upgrades.json. Front rebuild kit."
+   },
+   "weakspot": "ball-joints",
+   "appliesTo": {},
+   "src": [
+    "tsb-204-01",
+    "jl-seminar",
+    "bp-x100"
+   ],
+   "conf": "factory",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "susp-beam",
+   "area": "Front suspension",
+   "check": "Front beam rear bushes",
+   "how": "Inspect closely.",
+   "bad": "Perished rubber, floaty handling.",
+   "cost": null,
+   "weakspot": "vee-mounts",
+   "appliesTo": {},
+   "src": [
+    "ph-chassis"
+   ],
+   "conf": "single",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "susp-towers",
+   "area": "Front suspension",
+   "check": "Damper top mounts",
+   "how": "Look at the mount in the tower.",
+   "bad": "Crumbled foam.",
+   "cost": {
+    "gbp": [
+     141,
+     141
+    ],
+    "note": "Parts only, British Parts read 1 Nov 2026, see upgrades.json. Pair."
+   },
+   "weakspot": "front-top-mounts",
+   "appliesTo": {},
+   "src": [
+    "moss-mount",
+    "jl-absback"
+   ],
+   "conf": "corroborated",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "susp-rear",
+   "area": "Rear suspension",
+   "check": "Rear dampers, A-frame, bushes",
+   "how": "Bounce test, then lever on a lift.",
+   "bad": "Leaks, clonks.",
+   "cost": {
+    "gbp": [
+     368,
+     428
+    ],
+    "note": "Parts only, British Parts read 1 Nov 2026, see upgrades.json. Rear rebuild kit."
+   },
+   "weakspot": "a-frame",
+   "appliesTo": {},
+   "src": [
+    "ph-chassis",
+    "bp-x100"
+   ],
+   "conf": "single",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "susp-ujs",
+   "area": "Rear suspension",
+   "check": "Driveshaft universal joints",
+   "how": "Check for play. Rear driveshafts form the upper links.",
+   "bad": "Play, dry joints.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "ph-chassis"
+   ],
+   "conf": "single",
+   "decider": "haggle",
+   "viewing": false
+  },
+  {
+   "id": "susp-cats",
+   "area": "Suspension",
+   "check": "CATS warning",
+   "how": "Check the warning goes out and ride feels right.",
+   "bad": "Warning on, hard ride.",
+   "cost": {
+    "gbp": [
+     1148,
+     1580
+    ],
+    "note": "Parts only, British Parts read 1 Nov 2026, see upgrades.json. Four dampers. Test wiring first."
+   },
+   "weakspot": "cats-dampers",
+   "appliesTo": {},
+   "src": [
+    "ph-chassis",
+    "octane",
+    "bp-x100"
+   ],
+   "conf": "corroborated",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "wheel-bearings-check",
+   "area": "Wheels and tyres",
+   "check": "Wheel bearings",
+   "how": "Listen on the road, rock each wheel.",
+   "bad": "Rumble, end float.",
+   "cost": null,
+   "weakspot": "wheel-bearings",
+   "appliesTo": {},
+   "src": [
+    "ph-chassis",
+    "tsb-204-01"
+   ],
+   "conf": "corroborated",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "tyres",
+   "area": "Wheels and tyres",
+   "check": "Tyre wear",
+   "how": "Look at inner edges.",
+   "bad": "Uneven wear.",
+   "cost": null,
+   "weakspot": "ball-joints",
+   "appliesTo": {},
+   "src": [
+    "ph-chassis",
+    "jl-seminar"
+   ],
+   "conf": "corroborated",
+   "decider": "minor",
+   "viewing": true
+  },
+  {
+   "id": "steer-knock",
+   "area": "Steering",
+   "check": "Steering feel",
+   "how": "Turn lock to lock. Drive slowly over bumps.",
+   "bad": "Knock through the wheel, on cars up to about 2000.",
+   "cost": null,
+   "weakspot": "steering-column",
+   "appliesTo": {
+    "myTo": 2001
+   },
+   "src": [
+    "ph-chassis",
+    "tsb-211-06"
+   ],
+   "conf": "factory",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "steer-leak",
+   "area": "Steering",
+   "check": "Rack leaks",
+   "how": "Look for fluid at the rack.",
+   "bad": "Wet union nuts or gaiters.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "tsb-211-01"
+   ],
+   "conf": "factory",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "brakes-pipes",
+   "area": "Brakes",
+   "check": "Pipes",
+   "how": "Trace all pipes underneath.",
+   "bad": "Heavy rust.",
+   "cost": null,
+   "weakspot": "brake-pipes",
+   "appliesTo": {},
+   "src": [
+    "ph-chassis"
+   ],
+   "conf": "single",
+   "decider": "walk",
+   "viewing": true
+  },
+  {
+   "id": "brakes-discs",
+   "area": "Brakes",
+   "check": "Discs and calipers",
+   "how": "Look for blue discs and feel for judder.",
+   "bad": "Blue discs mean a sticking piston.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "jl-seminar",
+    "tsb-206-04"
+   ],
+   "conf": "corroborated",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "brakes-handbrake",
+   "area": "Brakes",
+   "check": "Handbrake",
+   "how": "Try it on a slope.",
+   "bad": "Limited travel, poor hold.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "ph-chassis",
+    "jl-seminar"
+   ],
+   "conf": "corroborated",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "elec-warnings",
+   "area": "Electrics",
+   "check": "Warning lights",
+   "how": "Key on, all lamps show. Start, all go out.",
+   "bad": "Lamp missing, ABS or airbag on.",
+   "cost": null,
+   "weakspot": "abs-module",
+   "appliesTo": {},
+   "src": [
+    "jcna-abs",
+    "jag-dtc-9702"
+   ],
+   "conf": "corroborated",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "elec-battery",
+   "area": "Electrics",
+   "check": "Battery and charging",
+   "how": "Check voltage and date. Open circuit about 12.45 V suggests a drain test.",
+   "bad": "Low voltage, flat after a short time.",
+   "cost": null,
+   "weakspot": "parasitic-drain",
+   "appliesTo": {},
+   "src": [
+    "jag-battery",
+    "tsb-414-06A"
+   ],
+   "conf": "factory",
+   "decider": "haggle",
+   "viewing": true
+  },
+  {
+   "id": "elec-windows",
+   "area": "Electrics",
+   "check": "Windows and mirrors",
+   "how": "Open and shut the doors. Glass should drop and reseal. Test mirrors, aerial and seats.",
+   "bad": "Glass stays down. Reset first.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "ph-interior",
+    "jr-window"
+   ],
+   "conf": "corroborated",
+   "decider": "minor",
+   "viewing": true
+  },
+  {
+   "id": "elec-roof-quarter",
+   "area": "Electrics",
+   "check": "Rear quarter glass",
+   "how": "Operate them.",
+   "bad": "Regulator failed.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {
+    "body": [
+     "convertible"
+    ]
+   },
+   "src": [
+    "tsb-501-49"
+   ],
+   "conf": "factory",
+   "decider": "minor",
+   "viewing": true
+  },
+  {
+   "id": "int-trim",
+   "area": "Interior",
+   "check": "Wear",
+   "how": "Driver seat bolster, wheel, console, veneer. Check around the gear selector for signs it has been removed.",
+   "bad": "Worn bolster suggests poor care. Chipped veneer.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "ph-interior"
+   ],
+   "conf": "single",
+   "decider": "minor",
+   "viewing": true
+  },
+  {
+   "id": "annual-breather",
+   "area": "Annual",
+   "check": "Clean part-load breather",
+   "how": "Every 10,000 miles on 1997-2001 cars.",
+   "bad": "Skipped, leading to sticky throttle.",
+   "cost": null,
+   "weakspot": "throttle-body-early",
+   "appliesTo": {
+    "myTo": 2001
+   },
+   "src": [
+    "tsb-600-03a"
+   ],
+   "conf": "factory",
+   "decider": "minor",
+   "viewing": false
+  },
+  {
+   "id": "annual-fluid",
+   "area": "Annual",
+   "check": "Gearbox and roof fluid",
+   "how": "Gearbox fluid every couple of years per PistonHeads. ZF advice reported at 60,000 miles. Jaguar TSB 501-33 is reported as a 2 year roof fluid change.",
+   "bad": "Never changed.",
+   "cost": {
+    "gbp": [
+     73,
+     145
+    ],
+    "note": "Parts only, British Parts read 1 Nov 2026, see upgrades.json."
+   },
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "ph-powertrain",
+    "octane",
+    "jcna-6hp",
+    "jr-hyd"
+   ],
+   "conf": "corroborated",
+   "decider": "minor",
+   "viewing": false
+  },
+  {
+   "id": "annual-wash",
+   "area": "Annual",
+   "check": "Underside rinse",
+   "how": "Avoid hot high pressure on seals and electrics.",
+   "bad": "Salt left on.",
+   "cost": null,
+   "weakspot": null,
+   "appliesTo": {},
+   "src": [
+    "tsb-600-02"
+   ],
+   "conf": "single",
+   "decider": "minor",
+   "viewing": false
+  }
+ ],
+ "gaps": [
+  "UK labour rates and rust repair prices were not found. Costs are blank where no source gave one.",
+  "Compression of about 200 psi is one source figure. No Jaguar specification was found for compression or blow-by.",
+  "Door hinge pillar check is included on request. No source calls it a known fault.",
+  "Annual wash item is only a caution from TSB 600-02 about hot high pressure washing.",
+  "Door hinge pillar check removed: its only source, the PistonHeads body page, does not mention hinges, and no X100 source names this as a known fault."
+ ]
+}
