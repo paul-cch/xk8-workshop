@@ -1,0 +1,30 @@
+{
+ "ui": {
+  "strings": 950,
+  "chars": 23050
+ },
+ "jobs": {
+  "strings": 1334,
+  "chars": 116076
+ },
+ "parts": {
+  "strings": 2946,
+  "chars": 111496
+ },
+ "dtc": {
+  "strings": 1246,
+  "chars": 62338
+ },
+ "reference": {
+  "strings": 1234,
+  "chars": 71483
+ },
+ "advice": {
+  "strings": 1597,
+  "chars": 109663
+ },
+ "total": {
+  "strings": 9307,
+  "chars": 494106
+ }
+}

@@ -1,7 +1,56 @@
 // Access to data/*.json: decoding, variant filtering, torque formatting, cross-references, VIN reading and search.
 // No three.js and no DOM except loadData(), so node can test it. Every list a panel shows should pass through here.
+import {N, dec, fold, isFrench, plural, t, tr} from './i18n.js';
 
 const FILES = ['variants', 'parts', 'torques', 'fluids', 'service', 'jobs', 'tools', 'faults', 'dtc', 'weakspots', 'inspect', 'upgrades', 'vendors', 'facts'];
+
+/**
+ * The fields that hold reading text, one list per data file. docs/i18n.md says what stays out: ids, part numbers, codes,
+ * sources, vendor names, engine codes, gearbox names, tyre sizes, variant labels. * walks an array. A field may hold a
+ * string or a list of strings. tools/i18n-extract.mjs reads this same table, so a field added here reaches the translators.
+ */
+export const TRANSLATABLE = {
+  variants: ['firing.note', 'vin.plateLocations.text', 'vin.examples.*.car'],
+  parts: ['items.*.name', 'items.*.what', 'items.*.why', 'items.*.location', 'items.*.accessNotes', 'items.*.note', 'items.*.partNumbers.*.desc'],
+  torques: ['items.*.label', 'items.*.note', 'items.*.stages', 'items.*.sequence', 'items.*.reuse', 'items.*.threadlock', 'gaps'],
+  fluids: ['items.*.name', 'items.*.spec', 'items.*.capacityNote', 'items.*.changeInterval', 'items.*.note', 'items.*.brands', 'gaps'],
+  service: ['items.*.title', 'items.*.tasks.*.text'],
+  jobs: ['items.*.title', 'items.*.summary', 'items.*.parts.*.note', 'items.*.consumables', 'items.*.safety', 'items.*.verify', 'items.*.steps.*.title', 'items.*.steps.*.text', 'items.*.steps.*.warn', 'items.*.steps.*.tip', 'items.*.steps.*.check', 'items.*.steps.*.warnOn.*.text'],
+  tools: ['items.*.name', 'items.*.why', 'items.*.altDiy', 'items.*.size'],
+  faults: ['items.*.symptom', 'items.*.when', 'items.*.risk', 'items.*.drive', 'items.*.first', 'items.*.urgencyOn.*.drive', 'items.*.causes.*.label', 'items.*.causes.*.test', 'items.*.causes.*.fix'],
+  dtc: ['items.*.title', 'items.*.meaning', 'items.*.causes', 'items.*.note', 'items.*.first', 'items.*.band.title', 'items.*.band.text'],
+  weakspots: ['items.*.title', 'items.*.what', 'items.*.symptoms', 'items.*.check', 'items.*.fix', 'items.*.note', 'items.*.cost.note', 'items.*.confirm.tag', 'items.*.confirm.text'],
+  inspect: ['items.*.area', 'items.*.check', 'items.*.how', 'items.*.bad', 'items.*.cost.note'],
+  upgrades: ['items.*.title', 'items.*.why', 'items.*.what', 'items.*.verdict', 'items.*.caution', 'items.*.note', 'items.*.partsNeeded'],
+  vendors: ['items.*.region', 'items.*.sells', 'items.*.note'],
+  facts: ['items.*.title', 'items.*.answer', 'items.*.detail', 'items.*.keywords', 'items.*.note'],
+};
+
+/** Calls fn(owner, key) for every translatable field of one file's data. */
+export function eachText(file, root, fn) {
+  const walk = (node, path, i) => {
+    if (node == null) return;
+    if (path[i] === '*') { for (const x of [node].flat()) walk(x, path, i + 1); return; }
+    if (i === path.length - 1) { if (node[path[i]] != null) fn(node, path[i]); return; }
+    walk(node[path[i]], path, i + 1);
+  };
+  for (const p of TRANSLATABLE[file] ?? []) walk(root, p.split('.'), 0);
+}
+
+const english = new WeakMap(); // record -> {field: its English}, kept from the first swap on
+
+/** A translatable field in English, whatever is on screen. Anything that reads meaning out of the text must read this. */
+export const en = (rec, key) => english.get(rec)?.[key] ?? rec?.[key];
+
+/** Puts every data string into the active language, in place, and drops the search index. */
+export function translateData(active = tr) {
+  for (const f of FILES) eachText(f, data[f], (rec, key) => {
+    const kept = english.get(rec) ?? english.set(rec, {}).get(rec);
+    kept[key] ??= rec[key];
+    rec[key] = Array.isArray(kept[key]) ? kept[key].map(active) : active(kept[key]);
+  });
+  searchIndex = null;
+}
 
 /** Filled by initData. data.parts = {items, byId, sources}; data.dtc also has byCode (one code, several records). */
 export const data = {};
@@ -138,8 +187,8 @@ export function provenance(rec, v = provCar) {
   const sources = (rec.src ?? []).map((k) => file?.sources?.[k]).filter(Boolean);
   let scope = null;
   if (v && rec.conf === 'factory') {
-    if (v.my >= 2005 && (name === 'torques' || name === 'fluids' || name === 'jobs')) scope = {word: 'factory to MY2004', says: 'The Jaguar data read here stops at MY2004. This value is assumed to carry over to your car.'};
-    else if (name === 'jobs' && v.engine === '4.0') scope = {word: 'factory, 4.2 manual', says: 'The main procedure is from the 4.2 workshop manual. Steps marked as checked were read against JTIS for the 4.0. The rest may differ on your car.'};
+    if (v.my >= 2005 && (name === 'torques' || name === 'fluids' || name === 'jobs')) scope = {word: t('factory to MY2004'), says: t('The Jaguar data read here stops at MY2004. This value is assumed to carry over to your car.')};
+    else if (name === 'jobs' && v.engine === '4.0') scope = {word: t('factory, 4.2 manual'), says: t('The main procedure is from the 4.2 workshop manual. Steps marked as checked were read against JTIS for the 4.0. The rest may differ on your car.')};
   }
   return {conf: rec.conf ?? null, sources, weak: rec.conf != null && CONF_RANK[rec.conf] < CONF_RANK.corroborated, scope};
 }
@@ -152,17 +201,23 @@ const dash = (s) => String(s).replace('-', '–');
 const roundLbft = (n) => (n < 7 ? Math.round(n * 10) / 10 : Math.round(n));
 const convertRange = (text) => String(text).split('-').map((x) => roundLbft(parseFloat(x) * LBFT_PER_NM)).join('-');
 
-const COUNTED = /(?:\d\s+(?:to|and)|\bbolts?)\s+$/i; // "bolts 1 to 10 to 20 Nm": the 10 counts bolts, it is not the low end of a range
+// "bolts 1 to 10 to 20 Nm": the 10 counts bolts, it is not the low end of a range. "M8 to 23-27 Nm" counts nothing: M8 is a size.
+const COUNTED = /(?:(?:^|[^A-Za-z\d])\d+\s+(?:to|and)|\bbolt)\s+$/i;
+const NM = /(\d+(?:\.\d+)?)(?:(\s*(?:-|to)\s*)(\d+(?:\.\d+)?))?\s*Nm/g;
+// The same two rules for French text: decimal commas, "à" and "et", "vis" for bolts.
+const COUNTED_FR = /(?:(?:^|[^A-Za-z\d])\d+\s+(?:à|et)|\bvis)\s+$/i;
+const NM_FR = /(\d+(?:[.,]\d+)?)(?:(\s*(?:-|–|à)\s*)(\d+(?:[.,]\d+)?))?\s*Nm/g;
+const point = (s) => s.replace(',', '.');
 
 /**
  * Rewrites "20 Nm" and "57-63 Nm" inside a stage string for the chosen units. Angles pass through. A left number is the low
  * end of a range only if it is lower than the right one and does not itself follow "bolts" or a count like "1 to" or "11 and".
  */
 export const convertTorqueText = (text, units) => (units === 'lbft'
-  ? text.replace(/(\d+(?:\.\d+)?)(?:(\s*(?:-|to)\s*)(\d+(?:\.\d+)?))?\s*Nm/g, (_, a, sep, b, at, whole) => {
-    if (b == null) return `${convertRange(a)} lb ft`;
-    const range = +a < +b && !COUNTED.test(whole.slice(Math.max(0, at - 8), at));
-    return range ? `${convertRange(`${a}-${b}`)} lb ft` : `${a}${sep}${convertRange(b)} lb ft`;
+  ? text.replace(isFrench() ? NM_FR : NM, (_, a, sep, b, at, whole) => {
+    if (b == null) return `${dec(convertRange(point(a)))} lb ft`;
+    const range = +point(a) < +point(b) && (sep.trim() === '-' || !(isFrench() ? COUNTED_FR : COUNTED).test(whole.slice(Math.max(0, at - 8), at))); // a hyphen is always a range
+    return range ? `${dec(convertRange(`${point(a)}-${point(b)}`))} lb ft` : `${a}${sep}${dec(convertRange(point(b)))} lb ft`;
   })
   : text);
 
@@ -171,16 +226,16 @@ export const convertTorqueText = (text, units) => (units === 'lbft'
  * when it has them. Staged fasteners may have no headline: then value is null and stages carry the numbers.
  * {value, unit, alt, stages, sequence, text}, where text is a one-line version of it all.
  */
-export function formatTorque(t, units = 'nm') {
+export function formatTorque(rec, units = 'nm') {
   const lb = units === 'lbft';
-  const nm = t.nm == null ? null : dash(t.nm);
-  const lbft = t.lbft != null ? dash(t.lbft) : t.nm != null ? dash(convertRange(t.nm)) : null;
+  const nm = rec.nm == null ? null : dec(dash(rec.nm));
+  const lbft = rec.lbft != null ? dec(dash(rec.lbft)) : rec.nm != null ? dec(dash(convertRange(rec.nm))) : null;
   const value = lb ? lbft : nm;
   const unit = value == null ? null : lb ? 'lb ft' : 'Nm';
   const alt = value == null ? null : lb ? (nm && `${nm} Nm`) : (lbft && `${lbft} lb ft`);
-  const stages = (t.stages ?? []).map((s) => convertTorqueText(s, units));
-  const text = stages.length ? stages.map((s, i) => (i ? s.replace(/^then\s+/i, '') : s)).join(', then ') : value != null ? `${value} ${unit}` : 'Not sourced';
-  return {value, unit, alt, stages, sequence: t.sequence ?? null, text};
+  const stages = (rec.stages ?? []).map((s) => convertTorqueText(s, units));
+  const text = stages.length ? stages.map((s, i) => (i ? s.replace(/^(?:then|puis)\s+/i, '') : s)).reduce((first, next) => t('{first}, then {next}', {first, next})) : value != null ? `${value} ${unit}` : t('Not sourced');
+  return {value, unit, alt, stages, sequence: rec.sequence ?? null, text};
 }
 
 // ---- Cross-references -----------------------------------------------------------------------
@@ -239,18 +294,21 @@ export const faultFor = (f, v) => [f.urgencyOn ?? []].flat().find((r) => applies
 export const stepWarn = (st, v) => [...(st.warnOn ?? []).filter((r) => applies(r.appliesTo, v)).map((r) => r.text), st.warn].filter(Boolean).join(' ') || null;
 
 // A part's dimensions block in words. Keys carry their unit at the end, so one reader does for all 219 of them.
-const DIM_WORD = {qty: 'Quantity', boltPattern: 'Bolt pattern (PCD)', centreBoreMm: 'Centre bore', hubBoreMm: 'Hub bore', dipBeam: 'Dipped beam', sizes: 'Sizes', minThickMm: 'Minimum thickness', maxRunoutMm: 'Maximum runout', capacityAh: 'Capacity', group: 'Battery group', din: 'DIN group'};
-const DIM_UNIT = [[/Mm(?=\d|Low|High|Min|Max|$)/, 'mm'], [/In$/, 'in'], [/CuIn$/, 'cu in'], [/Litres$|L$/, 'L'], [/Deg$/, 'degrees'], [/Kg$/, 'kg'], [/Lb$/, 'lb'], [/Cc(?=\d|$)/, 'cc'], [/Psi$/, 'psi'], [/Bar(?:Min|Max)?$/, 'bar'], [/G$/, 'g'], [/Ml(?:Min|Max)$/, 'ml'], [/TempC$/, 'C'], [/Ah$/, 'Ah'], [/Kw$/, 'kW'], [/W$/, 'W'], [/Rpm$/, 'rpm'], [/Nmm$/, 'N/mm'], [/Micron$/, 'micron']];
+const DIM_WORD = {qty: N('Quantity'), boltPattern: N('Bolt pattern (PCD)'), centreBoreMm: N('Centre bore'), hubBoreMm: N('Hub bore'), dipBeam: N('Dipped beam'), sizes: N('Sizes'), minThickMm: N('Minimum thickness'), maxRunoutMm: N('Maximum runout'), capacityAh: N('Capacity'), group: N('Battery group'), din: N('DIN group')};
+const DIM_UNIT = [[/Mm(?=\d|Low|High|Min|Max|$)/, 'mm'], [/In$/, 'in'], [/CuIn$/, 'cu in'], [/Litres$|L$/, 'L'], [/Deg$/, N('degrees')], [/Kg$/, 'kg'], [/Lb$/, 'lb'], [/Cc(?=\d|$)/, 'cc'], [/Psi$/, 'psi'], [/Bar(?:Min|Max)?$/, 'bar'], [/G$/, 'g'], [/Ml(?:Min|Max)$/, 'ml'], [/TempC$/, 'C'], [/Ah$/, 'Ah'], [/Kw$/, 'kW'], [/W$/, 'W'], [/Rpm$/, N('rpm')], [/Nmm$/, 'N/mm'], [/Micron$/, N('micron')]];
 const dimLabel = (k) => { const w = k.replace(/(Mm|CuIn|In|Litres|Deg|Kg|Lb|Cc|Psi|Bar|Ml|Kw|Rpm|Nmm|Micron|Ah)(?=\d|Low|High|Min|Max|$)/, ' ').replace(/40(?=\s*(?:na|sc)?$)/, ' 4.0 ').replace(/42(?=\s*(?:na|sc)?$|Dia|Pistons|Equivalent)/, ' 4.2 ').replace(/(na|sc)$/, ' $1').replace(/([a-z])(\d)/g, '$1 $2').replace(/(\d)([A-Za-z])/g, '$1 $2').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\s+/g, ' ').trim().toLowerCase(); return (w[0].toUpperCase() + w.slice(1)).replace(/ (na|sc)$/, (m) => m.toUpperCase()); };
 const dimValue = (k, v) => {
   if (Array.isArray(v)) return v.join(', ');
-  if (v && typeof v === 'object') return Object.values(v).join(' x ') + (Object.keys(v).some((x) => /Mm$/.test(x)) ? ' mm' : '');
-  if (k === 'boltPattern') return `${String(v).replace('x', ' x ')} mm`;
+  if (v && typeof v === 'object') return dec(Object.values(v).join(' x ')) + (Object.keys(v).some((x) => /Mm$/.test(x)) ? ' mm' : '');
+  if (k === 'boltPattern') return `${dec(String(v).replace('x', ' x '))} mm`;
   const unit = DIM_UNIT.find(([re]) => re.test(k))?.[1];
-  return unit && !String(v).endsWith(unit) ? `${v} ${unit}` : String(v);
+  return unit && !String(v).endsWith(unit) ? `${dec(tr(String(v)))} ${t(unit)}` : dec(tr(String(v)));
 };
+const dimensionPairs = (p) => Object.entries(p?.dimensions ?? {}).filter(([, v]) => v != null && v !== '');
 /** [{key, label, value}] for a part's dimensions, unknown values left out. */
-export const dimensionRows = (p) => Object.entries(p?.dimensions ?? {}).filter(([, v]) => v != null && v !== '').map(([k, v]) => ({key: k, label: DIM_WORD[k] ?? dimLabel(k), value: dimValue(k, v)}));
+export const dimensionRows = (p) => dimensionPairs(p).map(([k, v]) => ({key: k, label: t(DIM_WORD[k] ?? dimLabel(k)), value: dimValue(k, v)}));
+/** The English behind dimensionRows that needs translating: every label, and every value with words in it. */
+export const dimensionWords = (p) => dimensionPairs(p).flatMap(([k, v]) => [DIM_WORD[k] ?? dimLabel(k), ...(typeof v === 'string' && /[a-z]{2}/i.test(v) ? [v] : [])]);
 
 // ---- VIN ------------------------------------------------------------------------------------
 
@@ -270,12 +328,12 @@ function serialWarnings(serial) {
   const first = serialKey(vin.modelYearBySerial[0].startSerial);
   const lastNumeric = serialKey(vin.modelYearBySerial.find((r) => r.endSerial)?.endSerial);
   const top = Math.max(...(vin.examples ?? []).map((e) => serialKey(e.vin.slice(11))));
-  if (k < first) out.push(`Serial ${serial} is before the first car on record. Check it against the plate.`);
-  else if (serial[0] !== 'A' && k > lastNumeric) out.push(`Serial ${serial} is past the end of the numeric series, ${vin.modelYearBySerial.find((r) => r.endSerial).endSerial}. Check it against the plate.`);
-  else if (k > top) out.push(`Serial ${serial} is later than any serial on record here. Check it against the plate.`);
+  if (k < first) out.push(t('Serial {serial} is before the first car on record. Check it against the plate.', {serial}));
+  else if (serial[0] !== 'A' && k > lastNumeric) out.push(t('Serial {serial} is past the end of the numeric series, {end}. Check it against the plate.', {serial, end: vin.modelYearBySerial.find((r) => r.endSerial).endSerial}));
+  else if (k > top) out.push(t('Serial {serial} is later than any serial on record here. Check it against the plate.', {serial}));
   for (const r of vin.modelYearBySerial) {
     const m = /Treat (A?\d+) to (A?\d+) as ambiguous/.exec(r.note ?? '');
-    if (m && k >= serialKey(m[1]) && k <= serialKey(m[2])) out.push(`Serial ${serial} sits where Jaguar's own documents disagree: MY${Math.floor(r.my) - 1} or MY${Math.floor(r.my)}. When ordering parts, quote the serial.`);
+    if (m && k >= serialKey(m[1]) && k <= serialKey(m[2])) out.push(t('Serial {serial} sits where Jaguar\'s own documents disagree: MY{before} or MY{after}. When ordering parts, quote the serial.', {serial, before: Math.floor(r.my) - 1, after: Math.floor(r.my)}));
   }
   return out;
 }
@@ -292,11 +350,11 @@ export function decodeVin(input) {
   if (/^(\d{6}|A\d{5})$/.test(raw)) {
     out.serial = raw;
   } else {
-    if (raw.length !== 17) return {...out, error: 'A VIN has 17 characters.'};
-    if (!raw.startsWith('SAJ')) return {...out, error: 'An X100 VIN starts SAJ.'};
-    if (/[IOQ]/.test(raw)) return {...out, error: 'A VIN never uses the letters I, O or Q. Read them as 1 or 0.'};
+    if (raw.length !== 17) return {...out, error: t('A VIN has 17 characters.')};
+    if (!raw.startsWith('SAJ')) return {...out, error: t('An X100 VIN starts SAJ.')};
+    if (/[IOQ]/.test(raw)) return {...out, error: t('A VIN never uses the letters I, O or Q. Read them as 1 or 0.')};
     out.serial = raw.slice(11);
-    if (!SERIAL.test(out.serial)) return {warnings: [], error: 'The last six characters should be a serial: six digits, or A and five digits.'};
+    if (!SERIAL.test(out.serial)) return {warnings: [], error: t('The last six characters should be a serial: six digits, or A and five digits.')};
     const newSeries = raw[11] === 'A';
     const us = newSeries ? raw[3] === 'D' : raw[3] === 'G';
     f = data.variants.vin.formats.find((x) => x.id === `${us ? 'us' : 'uk'}-${newSeries ? '2000on' : 'pre2000'}`);
@@ -319,11 +377,11 @@ export function decodeVin(input) {
   if (out.my != null && !out.engine) out.engine = out.my >= 2003 ? '4.2' : '4.0';
   out.warnings.push(...serialWarnings(out.serial));
   const at = (n) => f?.positions.find((p) => p.pos === String(n))?.meaning ?? '';
-  if (/^Check digit/.test(at(9)) && vinCheckDigit(raw) !== raw[8]) out.warnings.push('The check digit does not add up, so a character is probably misread. Compare this with the plate.');
+  if (/^Check digit/.test(at(9)) && vinCheckDigit(raw) !== raw[8]) out.warnings.push(t('The check digit does not add up, so a character is probably misread. Compare this with the plate.'));
   if (/^Model year code/.test(at(10))) {
     const coded = data.variants.vin.yearCodes[raw[9]];
-    if (coded == null) out.warnings.push(`Character 10, ${raw[9]}, is not a model year code. Compare this with the plate.`);
-    else if (out.my != null && coded !== out.my) out.warnings.push(`Character 10 says MY${coded}, but the serial says MY${out.my}. One of them is misread.`);
+    if (coded == null) out.warnings.push(t('Character 10, {c}, is not a model year code. Compare this with the plate.', {c: raw[9]}));
+    else if (out.my != null && coded !== out.my) out.warnings.push(t('Character 10 says MY{coded}, but the serial says MY{my}. One of them is misread.', {coded, my: out.my}));
   }
   return out;
 }
@@ -331,23 +389,43 @@ export function decodeVin(input) {
 // ---- Search ---------------------------------------------------------------------------------
 
 const STOP = new Set(['a', 'an', 'and', 'at', 'for', 'from', 'i', 'in', 'is', 'it', 'its', 'my', 'of', 'on', 'or', 'the', 'to', 'when', 'with', 'car', 'jaguar', 'what', 'why', 'does', 'do', 'how', 'much', 'many', 'will', 'not', 'wont', 'dont', 'cant', 'there', 'this', 'off', 'open', 'going', 'goes', 'keeps', 'get', 'where', 'which']);
+const STOP_FR = new Set([...STOP, 'au', 'aux', 'avec', 'ca', 'ce', 'ces', 'cette', 'c', 'comment', 'combien', 'd', 'dans', 'de', 'des', 'du', 'elle', 'en', 'est', 'et', 'il', 'j', 'je', 'l', 'la', 'le', 'les', 'ma', 'mes', 'mon', 'n', 'ne', 'ou', 'par', 'pas', 'plus', 'pour', 'pourquoi', 'quand', 'que', 'quel', 'quelle', 'quelles', 'quels', 'qui', 'quoi', 's', 'sa', 'se', 'ses', 'son', 'sont', 'sur', 'un', 'une', 'voiture', 'y']);
 // Both Englishes, and how owners say it. Each word finds what the data calls it. Search aid only, not a fact.
 const SYNONYMS = {
   trunk: ['boot'], fender: ['wing'], windshield: ['windscreen'], tire: ['tyre'], tires: ['tyre'], muffler: ['silencer'], rotor: ['disc'], rotors: ['disc'], wrench: ['spanner'], gas: ['fuel', 'petrol'], petrol: ['fuel'], transmission: ['gearbox'], gearbox: ['transmission'], antifreeze: ['coolant'], tensioners: ['tensioner'], overheating: ['overheat', 'temperature'], soft: ['hood', 'roof'], hood: ['bonnet', 'roof'], headlight: ['headlamp'], headlights: ['headlamp'], taillight: ['tail'],
   rattle: ['noise', 'ticking'], rattling: ['rattle', 'ticking'], knocking: ['knock', 'clunk', 'pinging'], knock: ['clunk', 'pinging'], clunking: ['clunk'], clonk: ['clunk'], tapping: ['ticking'], whine: ['rumble', 'squeal', 'hum', 'noise'], whining: ['rumble', 'squeal', 'hum', 'noise'], squealing: ['squeal'], screech: ['squeal'], howl: ['rumble', 'hum'], humming: ['hum'], noisy: ['noise', 'rattle'],
   asc: ['stability', 'traction'], flat: ['battery'], dead: ['battery'], jump: ['battery'], smoking: ['smoke'], leaking: ['leak'], dripping: ['leak'], stuck: ['stuck', 'seized'], overheat: ['overheating', 'temperature'], shaking: ['vibration'], shudder: ['vibration'], wobble: ['vibration'],
 };
+/** The owners' words as lines a translator can rewrite: "word: what, it, finds". French lines add to the table above. */
+export const SYNONYM_LINES = Object.entries(SYNONYMS).map(([word, finds]) => `${word}: ${finds.join(', ')}`);
+let frenchSynonyms = null;
+function synonymsOf(word) {
+  if (!isFrench()) return SYNONYMS[word];
+  frenchSynonyms ??= Object.assign({}, SYNONYMS, ...SYNONYM_LINES.map((line) => {
+    const [typed, finds = ''] = fold(t(line)).split(':');
+    return {[typed.trim()]: finds.split(',').map((w) => w.trim()).filter(Boolean)};
+  }));
+  return frenchSynonyms[word];
+}
 // Words that say which kind of answer is wanted. They steer the ranking and are not searched for themselves.
 const INTENT = [
   [/\b(?:how much|capacity|capacities|litres?|liters?|quarts?|grade|viscosity|what oil|which oil|type of (?:oil|fluid))\b/g, 'fluid'],
   [/\b(?:torque|tighten(?:ing)?|nm|lb ?ft|ft ?lb)\b/g, 'torque'],
   [/\b(?:part (?:number|no)|number|part no)\b/g, 'part'],
 ];
+// The same for a French query, after accents are folded. English stays searchable in French, so these can land on English words.
+const INTENT_FR = [
+  [/\b(?:combien|contenance|capacites?|quantite|litres?|viscosite|quelle huile|type d huile)\b/g, 'fluid'],
+  [/\b(?:couples?(?: de serrage)?|serrage|serrer|nm|lb ?ft)\b/g, 'torque'],
+  [/\b(?:references?|numeros? de piece|numeros?)\b/g, 'part'],
+];
+const PHRASES_FR = [[/\bpoint mort\b/g, 'neutral'], [/\bdemarrage (?:assiste|aux cables|avec des cables)\b/g, 'battery flat'], [/\bne s? ?ouvre (?:pas|plus)\b/g, 'release latch'], [/\bne demarre (?:pas|plus)\b/g, 'cranks start'], [/\btrou a l acceleration\b/g, 'hesitation'], [/\bhuile de boite\b/g, 'transmission fluid'], [/\bfeux? (?:de )?stop\b/g, 'stop lamp']];
+const SYMPTOM_FR = /\b(?:bruit|claqu|cliquet|siffl|grinc|fuit|fuite|odeur|vibr|trembl|fum|grond|cogn|ronfl)/;
 // Whole phrases that mean something other than their words.
 const PHRASES = [[/\bjump[- ]?start(?:ing)?\b/g, 'battery flat'], [/\bwon?'?t open\b/g, 'release latch'], [/\bwon?'?t start\b/g, 'cranks start'], [/\bflat spot\b/g, 'hesitation'], [/\b(?:gearbox|transmission|auto(?:matic)?(?: box)?) oil\b/g, 'transmission fluid'], [/\bsat ?nav\b/g, 'navigation'], [/\bre-?gas\b/g, 'refrigerant'], [/\bbrake lights?\b/g, 'stop lamp'], [/\bcigar(?:ette)? lighter\b/g, 'lighter']];
 const WEIGHT = {title: 8, code: 12, body: 2, deep: 1};
-const FLUID_WORDS = /\b(?:oil|fluid|coolant|antifreeze|atf|spec|\d+w-?\d+)\b/i; // these want the bottle, not the filler cap
-const tokens = (s) => String(s ?? '').toLowerCase().replace(/(\d)\s*mm\b/g, '$1mm').replace(/[^a-z0-9.]+/g, ' ').split(' ').map((t) => t.replace(/^\.+|\.+$/g, '')).filter((t) => t && !STOP.has(t));
+const FLUID_WORDS = /\b(?:oil|fluid|coolant|antifreeze|atf|spec|huile|liquide|antigel|\d+w-?\d+)\b/i; // these want the bottle, not the filler cap
+const tokens = (s) => { const stop = isFrench() ? STOP_FR : STOP; return fold(s).replace(/(\d)\s*mm\b/g, '$1mm').replace(/[^a-z0-9.]+/g, ' ').split(' ').map((w) => w.replace(/^\.+|\.+$/g, '')).filter((w) => w && !stop.has(w)); };
 const SYMPTOM = /\b(?:knock|rattl|whin|squeal|clunk|tick|smell|leak|noise|vibrat|judder|rumbl|hum|shudder|smok)/;
 const CODE_WORD = /^[pbcu]\d{3,4}$/;
 /** The fault code in a query, upper case, when the query is a code and nothing else. */
@@ -355,17 +433,10 @@ export const codeIn = (q) => { const t = String(q ?? '').trim().toUpperCase().re
 
 let searchIndex = null;
 
-function buildIndex() {
+/** Every record as a search document, in the active language. */
+function allDocs() {
   const docs = [];
-  const post = new Map();
-  const add = (doc) => {
-    const i = docs.push(doc) - 1;
-    for (const [field, text] of doc.fields) for (const t of tokens(text)) {
-      const a = post.get(t) ?? post.set(t, new Map()).get(t);
-      a.set(i, Math.max(a.get(i) ?? 0, WEIGHT[field]));
-    }
-    delete doc.fields;
-  };
+  const add = (doc) => docs.push(doc);
   for (const p of data.parts.items) add({kind: 'part', id: p.id, title: p.name, sub: p.what, ref: p, fields: [['title', p.name], ['body', p.what], ['deep', `${p.why} ${p.location} ${p.system} ${dimensionRows(p).map((r) => `${r.label} ${r.value}`).join(' ')}`], ['code', p.partNumbers.map((n) => n.no).join(' ')]]});
   for (const j of data.jobs.items) add({kind: 'job', id: j.id, title: j.title, sub: j.summary, ref: j, fields: [['title', j.title], ['body', j.summary], ['deep', j.steps.map((s) => s.title).join(' ')]]});
   for (const f of data.faults.items) add({kind: 'fault', id: f.id, title: f.symptom, sub: f.when, ref: f, fields: [['title', f.symptom], ['body', f.when], ['deep', f.causes.map((c) => c.label).join(' ')]]});
@@ -378,8 +449,28 @@ function buildIndex() {
   for (const u of data.upgrades.items) add({kind: 'upgrade', id: u.id, title: u.title, sub: u.why, ref: u, fields: [['title', u.title], ['body', u.why]]});
   for (const i of data.inspect.items) add({kind: 'inspect', id: i.id, title: i.check, sub: i.how, ref: i, fields: [['title', `${i.area} ${i.check}`], ['body', i.how]]});
   for (const t of data.tools.items) add({kind: 'tool', id: t.id, title: t.name, sub: t.size ?? t.why, ref: t, fields: [['title', t.name], ['title', t.size], ['code', t.jdNumber], ['body', t.why]]});
-  for (const s of data.service.items) add({kind: 'service', id: s.id, title: s.title, sub: `${s.tasks.length} tasks`, ref: s, fields: [['title', s.title], ['deep', s.tasks.map((t) => t.text).join(' ')]]});
+  for (const s of data.service.items) add({kind: 'service', id: s.id, title: s.title, sub: plural(s.tasks.length, '{n} tasks|one', '{n} tasks'), ref: s, fields: [['title', s.title], ['deep', s.tasks.map((x) => x.text).join(' ')]]});
   for (const n of data.vendors.items) add({kind: 'vendor', id: n.id, title: n.name, sub: n.sells, ref: n, fields: [['title', n.name], ['body', n.sells]]});
+  return docs;
+}
+
+/** Indexes the active language, and English as well when that is French: an English word still finds the record, shown in French. */
+function buildIndex() {
+  const docs = allDocs();
+  let inEnglish = null;
+  if (isFrench()) {
+    translateData((x) => x);
+    inEnglish = allDocs();
+    translateData();
+  }
+  const post = new Map();
+  docs.forEach((doc, i) => {
+    for (const [field, text] of [...doc.fields, ...(inEnglish?.[i].fields ?? [])]) for (const w of tokens(text)) {
+      const a = post.get(w) ?? post.set(w, new Map()).get(w);
+      a.set(i, Math.max(a.get(i) ?? 0, WEIGHT[field]));
+    }
+    delete doc.fields;
+  });
   return {docs, post, sorted: [...post.keys()].sort()};
 }
 
@@ -403,12 +494,13 @@ function closeTo(a, b) { // one edit at most
 function lookup(ix, word) {
   const hits = new Map();
   const merge = (token, k, min = 0) => { for (const [d, w] of ix.post.get(token)) if (w >= min) hits.set(d, Math.max(hits.get(d) ?? 0, w * k)); };
-  for (const w of [word, ...(SYNONYMS[word] ?? [])]) {
+  const suffix = isFrench() ? /^(?:s|es|ed|ing|d|x|e|ee|ees)$/ : /^(?:s|es|ed|ing|d)$/;
+  for (const w of [word, ...(synonymsOf(word) ?? [])]) {
     const syn = w === word ? 1 : 0.7;
     const known = ix.post.has(w); // a whole word finds its own forms, not longer words that start with it: tow is not tower
     for (let i = lowerBound(ix.sorted, w), n = 0; i < ix.sorted.length && ix.sorted[i].startsWith(w) && n < 60; i++, n++) {
       const t = ix.sorted[i];
-      if (known && t !== w && !/^(?:s|es|ed|ing|d)$/.test(t.slice(w.length))) continue;
+      if (known && t !== w && !suffix.test(t.slice(w.length))) continue;
       merge(t, (t === w ? 1 : 0.6) * syn);
     }
   }
@@ -429,11 +521,13 @@ export function nearCodes(code, limit = 6) {
  */
 export function search(query, {variant = null, limit = 30, kinds = null} = {}) {
   searchIndex ??= buildIndex();
-  let text = String(query ?? '').toLowerCase().replace(/['’]/g, '');
-  for (const [re, to] of PHRASES) text = text.replace(re, to);
+  const fr = isFrench();
+  // A French apostrophe joins two words (l'étrier). An English one sits inside a word (won't).
+  let text = fr ? fold(query).replace(/(\w)['’]t\b/g, '$1t').replace(/['’]/g, ' ') : String(query ?? '').toLowerCase().replace(/['’]/g, '');
+  for (const [re, to] of fr ? [...PHRASES_FR, ...PHRASES] : PHRASES) text = text.replace(re, to);
   const want = new Set();
-  for (const [re, kind] of INTENT) text = text.replace(re, () => { want.add(kind); return ' '; });
-  if (SYMPTOM.test(text)) want.add('fault');
+  for (const [re, kind] of fr ? [...INTENT_FR, ...INTENT] : INTENT) text = text.replace(re, () => { want.add(kind); return ' '; });
+  if (SYMPTOM.test(text) || (fr && SYMPTOM_FR.test(text))) want.add('fault');
   let words = tokens(text);
   if (!words.length) words = tokens(query); // "torque" alone still looks for the word
   if (!words.length) return [];

@@ -1,21 +1,22 @@
 // Diagnose mode: plain words, a code, or browsing by system or weak spot. Urgency comes first, then causes by likelihood,
 // then the test, then a path to the fix. Every list here is cut down to the chosen car, and what was cut is counted.
-import {applies, appliesStatus, codeIn, convertTorqueText, data, faultFor, forVariant, nearCodes, partName, search, urgencyOf} from '../data.js';
+import {applies, appliesStatus, codeIn, convertTorqueText, data, en, faultFor, forVariant, nearCodes, partName, search, urgencyOf} from '../data.js';
+import {N, isFrench, plural, t} from '../i18n.js';
 import {cylinderLabels} from './engine-labels.js';
 import {badge, h, toast} from './widgets.js';
 import {addParts, appliesText, callout, carLabel, clearCar, gbp, hoursText, icon, modeRoot, nav, openJob, paintView, pips, showButton, showNumbers, sysName, vinTag} from './jobs.js';
 
 const URGENCY = {
-  stop: {word: 'Stop', title: 'Stop. Do not drive it.', rank: 0},
-  soon: {word: 'Soon', title: 'Fix it soon.', rank: 1},
-  safe: {word: 'Safe', title: 'Safe to drive.', rank: 2},
+  stop: {word: N('Stop|urgency'), title: N('Stop. Do not drive it.'), rank: 0},
+  soon: {word: N('Soon'), title: N('Fix it soon.'), rank: 1},
+  safe: {word: N('Safe'), title: N('Safe to drive.'), rank: 2},
 };
-const LIKELIHOOD = {high: {word: 'Likely', rank: 0}, med: {word: 'Possible', rank: 1}, low: {word: 'Less likely', rank: 2}};
+const LIKELIHOOD = {high: {word: N('Likely'), rank: 0}, med: {word: N('Possible'), rank: 1}, low: {word: N('Less likely'), rank: 2}};
 const CODE = /^[pbcu][\s-]*[0-9a-f]{1,4}$/i;
 const JUST_DIGITS = /^\d{3,4}$/;
 
-const urgencyTag = (u) => h(`span.ws-urg.ws-urg--${u}`, URGENCY[u].word);
-const urgencyBand = (u, ...rest) => h(`div.ws-band.ws-band--${u}`, {role: u === 'stop' ? 'alert' : null}, [h('span.ws-band-word', URGENCY[u].word), h('div', [h('strong', URGENCY[u].title), rest])]);
+const urgencyTag = (u) => h(`span.ws-urg.ws-urg--${u}`, t(URGENCY[u].word));
+const urgencyBand = (u, ...rest) => h(`div.ws-band.ws-band--${u}`, {role: u === 'stop' ? 'alert' : null}, [h('span.ws-band-word', t(URGENCY[u].word)), h('div', [h('strong', t(URGENCY[u].title)), rest])]);
 
 // Where a person is in Diagnose. Kept here so it survives a trip to a job and back.
 const route = {stack: [{page: 'home'}], q: '', browse: 'system'};
@@ -32,7 +33,7 @@ function faultsForCode(code) {
     byCodeFault = new Map();
     const link = (c, f) => { const a = byCodeFault.get(c) ?? []; if (!a.includes(f)) a.push(f); byCodeFault.set(c, a); };
     for (const f of data.faults.items) for (const c of f.causes) {
-      for (const m of `${c.label} ${c.test} ${c.fix}`.matchAll(/\b([PBCU])(\d{4})\b(?:\s+to\s+[PBCU]?(\d{4})\b)?/g)) {
+      for (const m of `${en(c, 'label')} ${en(c, 'test')} ${en(c, 'fix')}`.matchAll(/\b([PBCU])(\d{4})\b(?:\s+to\s+[PBCU]?(\d{4})\b)?/g)) {
         const from = +m[2], to = m[3] ? +m[3] : from;
         if (to - from > 200) continue;
         for (let n = from; n <= to; n++) link(`${m[1]}${String(n).padStart(4, '0')}`, f);
@@ -54,6 +55,7 @@ function codeMatches(q) {
 }
 
 function plainQuery(q) {
+  if (isFrench()) return q.replace(/['’]/g, ' ').trim(); // l'étrier is two words
   return q.replace(/\b(\w+)n['’]t\b/gi, '$1').replace(/['’]\w*/g, '').split(/\s+/).filter((w) => w.length > 1 || /\d/.test(w)).join(' ');
 }
 
@@ -71,7 +73,7 @@ function results(q, v) {
   return out;
 }
 
-const causeWord = (n) => `${n} cause${n === 1 ? '' : 's'}`;
+const causeWord = (n) => plural(n, '{n} cause', '{n} causes');
 /** A fault with causes only on other cars has nothing to offer here: a roof fault on a coupe. Those drop out, and are counted. */
 const fits = (f, v) => forVariant(f.causes, v).length > 0;
 const faultsFor = (v) => data.faults.items.filter((f) => fits(f, v));
@@ -92,8 +94,8 @@ function codeRow(app, code, v) {
   const first = fit[0] ?? data.dtc.byCode.get(code)[0];
   const linked = faultsForCode(code).filter((f) => URGENCY[f.urgency]).sort((a, b) => URGENCY[a.urgency].rank - URGENCY[b.urgency].rank)[0];
   return h('button.ws-row', {type: 'button', 'data-fk': `c-${code}`, onclick: () => open(app, {page: 'code', id: code})}, [
-    linked ? urgencyTag(linked.urgency) : h('span.ws-urg', 'Code'),
-    h('span.ws-row-main', [h('strong', [h('code', code), ` ${first.title}`]), h('span', fit.length ? sysName(first.system) : 'Listed for other cars')]),
+    linked ? urgencyTag(linked.urgency) : h('span.ws-urg', t('Code')),
+    h('span.ws-row-main', [h('strong', [h('code', code), ` ${first.title}`]), h('span', fit.length ? sysName(first.system) : t('Listed for other cars'))]),
   ]);
 }
 
@@ -112,21 +114,21 @@ function renderResults(app, box, v) {
   const looksLikeCode = (CODE.test(q.trim()) && q.trim().length >= 5);
   const near = looksLikeCode && !count && codeIn(q) ? nearCodes(codeIn(q)) : [];
   box.replaceChildren(...[
-    r.faults.length > 0 && h('section', [h('h3.ws-head', 'Symptoms'), h('div.ws-list', r.faults.map((f) => faultRow(app, f, v)))]),
-    r.codes.length > 0 && h('section', [h('h3.ws-head', 'Fault codes'), h('div.ws-list', r.codes.slice(0, 24).map((c) => codeRow(app, c, v))), r.codes.length > 24 && h('p.ws-foot-note', `${r.codes.length - 24} more codes match. Keep typing.`)]),
-    r.weak.length > 0 && h('section', [h('h3.ws-head', 'Weak spots'), h('div.ws-list', r.weak.map((w) => weakRow(app, w)))]),
-    r.other > 0 && h('p.ws-foot-note', `${r.other} more symptom${r.other === 1 ? ' matches' : 's match'} on other cars only.`),
+    r.faults.length > 0 && h('section', [h('h3.ws-head', t('Symptoms')), h('div.ws-list', r.faults.map((f) => faultRow(app, f, v)))]),
+    r.codes.length > 0 && h('section', [h('h3.ws-head', t('Fault codes')), h('div.ws-list', r.codes.slice(0, 24).map((c) => codeRow(app, c, v))), r.codes.length > 24 && h('p.ws-foot-note', plural(r.codes.length - 24, '{n} more codes match. Keep typing.|one', '{n} more codes match. Keep typing.'))]),
+    r.weak.length > 0 && h('section', [h('h3.ws-head', t('Weak spots')), h('div.ws-list', r.weak.map((w) => weakRow(app, w)))]),
+    r.other > 0 && h('p.ws-foot-note', plural(r.other, '{n} more symptom matches on other cars only.', '{n} more symptoms match on other cars only.')),
     !count && h('div.ws-empty', looksLikeCode
-      ? [h('p', [h('strong', `${typed} is not in the data.`), ` This app holds ${data.dtc.byCode.size} codes from Jaguar's tables and the generic list.`]), h('p.ws-mute', 'Check the code on the reader. An unlisted code tells you nothing about urgency, so go by how the car behaves.'),
-        near.length > 0 && h('section', [h('h3.ws-head', 'Close to it, in case of a misread digit'), h('div.ws-list', near.map((c) => codeRow(app, c, v)))])]
-      : [h('p', `Nothing matches "${q.trim()}".`), h('p.ws-mute', 'Try one plain word: rattle, smell, leak, stuck, warning.')]),
+      ? [h('p', [h('strong', t('{code} is not in the data.', {code: typed})), ` ${t('This app holds {n} codes from Jaguar\'s tables and the generic list.', {n: data.dtc.byCode.size})}`]), h('p.ws-mute', t('Check the code on the reader. An unlisted code tells you nothing about urgency, so go by how the car behaves.')),
+        near.length > 0 && h('section', [h('h3.ws-head', t('Close to it, in case of a misread digit')), h('div.ws-list', near.map((c) => codeRow(app, c, v)))])]
+      : [h('p', t('Nothing matches "{q}".', {q: q.trim()})), h('p.ws-mute', t('Try one plain word: rattle, smell, leak, stuck, warning.'))]),
   ].filter(Boolean));
 }
 
 const firstResult = (box) => box.querySelector('.ws-row');
 
 function homeSearch(app, results_, v, redraw) {
-  const input = h('input.ws-search', {type: 'search', placeholder: 'What is it doing? Or a code: P0340', 'aria-label': 'Describe the fault or type a code', enterkeyhint: 'search', autocomplete: 'off', spellcheck: 'false', 'data-fk': 'diagq'});
+  const input = h('input.ws-search', {type: 'search', placeholder: t('What is it doing? Or a code: P0340'), 'aria-label': t('Describe the fault or type a code'), enterkeyhint: 'search', autocomplete: 'off', spellcheck: 'false', 'data-fk': 'diagq'});
   input.value = route.q;
   input.addEventListener('input', () => { route.q = input.value; redraw(); });
   input.addEventListener('keydown', (e) => {
@@ -154,7 +156,7 @@ function browseSystems(app, v) {
   const count = (sys) => faults.filter((f) => f.system === sys).length;
   const codeCount = (sys) => codes.filter((c) => data.dtc.byCode.get(c).some((d) => d.system === sys)).length;
   const systems = Object.keys(sysNamesInOrder()).filter((x) => count(x) || codeCount(x)).sort((a, b) => count(b) - count(a));
-  return h('div.ws-tiles', systems.map((x) => h('button.ws-tile', {type: 'button', onclick: () => open(app, {page: 'system', id: x})}, [h('strong', sysName(x)), h('span', [`${count(x)} fault${count(x) === 1 ? '' : 's'}`, codeCount(x) ? `, ${codeCount(x)} codes` : ''])])));
+  return h('div.ws-tiles', systems.map((x) => h('button.ws-tile', {type: 'button', onclick: () => open(app, {page: 'system', id: x})}, [h('strong', sysName(x)), h('span', [plural(count(x), '{n} fault', '{n} faults'), codeCount(x) ? `, ${plural(codeCount(x), '{n} codes|one', '{n} codes')}` : ''])])));
 }
 const sysNamesInOrder = () => Object.fromEntries([...data.faults.items, ...data.dtc.items].map((f) => [f.system, 1]));
 
@@ -167,7 +169,7 @@ function browseStop(app, v) {
   return h('div.ws-list', faultsFor(v).filter((f) => urgencyOf(f, v) === 'stop').map((f) => faultRow(app, f, v)));
 }
 
-const BROWSE = [['system', 'By system'], ['weak', 'Weak spots'], ['stop', 'Stop now']];
+const BROWSE = [['system', N('By system')], ['weak', N('Weak spots')], ['stop', N('Stop now')]];
 
 function renderHome(app, s, root) {
   const v = s.variant;
@@ -183,13 +185,13 @@ function renderHome(app, s, root) {
   arrowThrough(box, input);
   const paintBrowse = () => {
     browse.replaceChildren(
-      h('div.ws-tabs', {role: 'tablist'}, BROWSE.map(([k, word]) => h('button', {type: 'button', role: 'tab', 'aria-selected': String(route.browse === k), onclick: () => { route.browse = k; paintBrowse(); }}, word))),
+      h('div.ws-tabs', {role: 'tablist'}, BROWSE.map(([k, word]) => h('button', {type: 'button', role: 'tab', 'aria-selected': String(route.browse === k), onclick: () => { route.browse = k; paintBrowse(); }}, t(word)))),
       route.browse === 'system' ? browseSystems(app, v) : route.browse === 'weak' ? browseWeak(app, v) : browseStop(app, v));
   };
   paintBrowse();
   redraw();
   paintView(root, 'home', [
-    h('header.ws-top', [h('h2', 'Diagnose'), h('p.ws-mute', `What is the car doing? For a ${carLabel(v)}.`)]),
+    h('header.ws-top', [h('h2', t('Diagnose')), h('p.ws-mute', t('What is the car doing? For a {car}.', {car: carLabel(v)}))]),
     input, box, browse,
   ]);
 }
@@ -201,7 +203,7 @@ function jobButton(app, id, v) {
   if (!job) return null;
   const fits = appliesStatus(job.appliesTo, v) !== 'no';
   return h('button.ws-row.ws-row--ink', {type: 'button', disabled: !fits, onclick: () => openJob(app, id)}, [
-    h('span.ws-row-main', [h('strong', fits ? `Job: ${job.title}` : `${job.title} is not written for this car`), h('span', `${hoursText(job.hoursDiy)} estimated, difficulty ${job.difficulty} of 5`)]),
+    h('span.ws-row-main', [h('strong', fits ? t('Job: {title}', {title: job.title}) : t('{title} is not written for this car', {title: job.title})), h('span', t('{time} estimated, difficulty {n} of 5', {time: hoursText(job.hoursDiy), n: job.difficulty}))]),
     fits && icon('right'),
   ]);
 }
@@ -212,7 +214,7 @@ const CODES_SHOWN = 10;
 /** The codes a cause names, ranges opened out, that this app has a page for. */
 function causeCodes(c, v) {
   const out = new Set();
-  for (const m of `${c.label} ${c.test} ${c.fix}`.matchAll(/\b([PBCU])(\d{4})\b(?:\s+to\s+[PBCU]?(\d{4})\b)?/g)) {
+  for (const m of `${en(c, 'label')} ${en(c, 'test')} ${en(c, 'fix')}`.matchAll(/\b([PBCU])(\d{4})\b(?:\s+to\s+[PBCU]?(\d{4})\b)?/g)) {
     const from = +m[2], to = m[3] && +m[3] - from < 200 ? +m[3] : from;
     for (let n = from; n <= to; n++) { const code = `${m[1]}${String(n).padStart(4, '0')}`; if (forVariant(data.dtc.byCode.get(code) ?? [], v).length) out.add(code); }
   }
@@ -226,15 +228,15 @@ function stakes(app, f, v) {
   return [
     f.risk && h('p', f.risk),
     drive && h('p', drive),
-    v.serial && row !== f && h('p', h('strong', `Your serial: ${v.serial}.`)),
-    cost?.cost?.gbp && h('p', [h('strong', 'Cost if it needs doing: '), gbp(cost.cost.gbp)]),
-    urgencyOf(f, v) === 'stop' && h('button.ws-btn.ws-band-btn', {type: 'button', onclick: () => app.ui.open('fact', 'fact.towing')}, 'How to get it moved: flat-bed, towing, the towing eye'),
+    v.serial && row !== f && h('p', h('strong', t('Your serial: {serial}.', {serial: v.serial}))),
+    cost?.cost?.gbp && h('p', [h('strong', t('Cost if it needs doing: ')), gbp(cost.cost.gbp)]),
+    urgencyOf(f, v) === 'stop' && h('button.ws-btn.ws-band-btn', {type: 'button', onclick: () => app.ui.open('fact', 'fact.towing')}, t('How to get it moved: flat-bed, towing, the towing eye')),
     weak.map((w) => {
       const to = w.appliesTo?.vinTo;
       return [
-        w.cost?.gbp && h('p', [h('strong', 'Cost to fix: '), gbp(w.cost.gbp)]),
-        to && v.serial && h('p', h('strong', `Your serial ${v.serial} is in the affected range, up to ${to}.`)),
-        to && !v.serial && h('p', `Cars up to VIN ${to} are affected. Add your VIN to the car to check yours.`),
+        w.cost?.gbp && h('p', [h('strong', t('Cost to fix: ')), gbp(w.cost.gbp)]),
+        to && v.serial && h('p', h('strong', t('Your serial {serial} is in the affected range, up to {to}.', {serial: v.serial, to}))),
+        to && !v.serial && h('p', t('Cars up to VIN {to} are affected. Add your VIN to the car to check yours.', {to})),
       ];
     }),
   ];
@@ -246,21 +248,21 @@ function causeCard(app, f, c, i, v, rerender) {
   const was = solved.get(f.id) === i;
   const parts = c.parts ?? [];
   return h(`article.ws-cause${out ? '.is-out' : ''}${was ? '.is-it' : ''}`, [
-    h('header', [h(`span.ws-lik.ws-lik--${c.likelihood}`, LIKELIHOOD[c.likelihood]?.word ?? c.likelihood), h('h4', c.label)]),
+    h('header', [h(`span.ws-lik.ws-lik--${c.likelihood}`, t(LIKELIHOOD[c.likelihood]?.word ?? c.likelihood)), h('h4', c.label)]),
     vinTag(c, v),
-    !out && h('div.ws-test', [h('span.ws-label', 'Test, and what the result means'), h('p', c.test)]),
+    !out && h('div.ws-test', [h('span.ws-label', t('Test, and what the result means')), h('p', c.test)]),
     !out && causeCodes(c, v).length > 0 && h('div.codes', causeCodes(c, v).slice(0, CODES_SHOWN).map((code) => h('button.code', {type: 'button', title: data.dtc.byCode.get(code)[0].title, onclick: () => open(app, {page: 'code', id: code})}, code))),
     !out && !was && jobsHere(c, v).length > 0 && h('div.ws-list', jobsHere(c, v).map((id) => jobButton(app, id, v))),
     was && h('div.ws-fix', [
-      h('span.ws-label', 'The fix'), h('p', convertTorqueText(c.fix, app.store.get().units)),
-      (c.jobs ?? []).length ? h('div.ws-list', c.jobs.map((id) => jobButton(app, id, v))) : h('p.ws-none', 'No job is written up for this fix yet.'),
-      parts.length > 0 && h('button.ws-btn', {type: 'button', onclick: () => { addParts(app.store, parts); toast(`${parts.length} part${parts.length === 1 ? '' : 's'} added to the shopping list`); }}, [icon('cart'), `Add ${parts.length === 1 ? partName(parts[0]) : `${parts.length} parts`} to the list`]),
+      h('span.ws-label', t('The fix')), h('p', convertTorqueText(c.fix, app.store.get().units)),
+      (c.jobs ?? []).length ? h('div.ws-list', c.jobs.map((id) => jobButton(app, id, v))) : h('p.ws-none', t('No job is written up for this fix yet.')),
+      parts.length > 0 && h('button.ws-btn', {type: 'button', onclick: () => { addParts(app.store, parts); toast(plural(parts.length, '{n} part added to the shopping list', '{n} parts added to the shopping list')); }}, [icon('cart'), t('Add {what} to the list', {what: parts.length === 1 ? partName(parts[0]) : t('{n} parts', {n: parts.length})})]),
     ]),
-    !out && parts.length > 0 && h('p.ws-small', [h('strong', 'Parts: '), parts.map(partName).join(', ')]),
+    !out && parts.length > 0 && h('p.ws-small', [h('strong', t('Parts: ')), parts.map(partName).join(', ')]),
     h('div.ws-cause-actions', [
       parts.length > 0 && !out && showButton(app, parts),
-      !out && h('button.ws-btn', {type: 'button', 'aria-pressed': String(was), onclick: () => { if (was) solved.delete(f.id); else solved.set(f.id, i); rerender(); }}, was ? 'Not it after all' : 'That was it'),
-      !was && h('button.ws-btn.ws-btn--quiet', {type: 'button', 'aria-pressed': String(out), onclick: () => { if (out) ruledOut.delete(key); else ruledOut.add(key); rerender(); }}, out ? 'Bring it back' : 'Ruled out'),
+      !out && h('button.ws-btn', {type: 'button', 'aria-pressed': String(was), onclick: () => { if (was) solved.delete(f.id); else solved.set(f.id, i); rerender(); }}, was ? t('Not it after all') : t('That was it')),
+      !was && h('button.ws-btn.ws-btn--quiet', {type: 'button', 'aria-pressed': String(out), onclick: () => { if (out) ruledOut.delete(key); else ruledOut.add(key); rerender(); }}, out ? t('Bring it back') : t('Ruled out')),
     ]),
   ]);
 }
@@ -278,15 +280,15 @@ function renderFault(app, s, root, id) {
     backButton(app),
     urgencyBand(urgencyOf(f, v), stakes(app, f, v)),
     h('header.ws-top', [h('h2', f.symptom), h('p.ws-mute', f.when), h('p', badge(f, {title: f.symptom}))]),
-    (f.weakspots ?? []).filter((id) => appliesStatus(data.weakspots.byId.get(id)?.appliesTo, v) !== 'no').map((id) => [h('h3.ws-head', 'Known weak spot'), h('div.ws-list', weakRow(app, data.weakspots.byId.get(id)))]),
-    f.first?.length > 0 && [h('h3.ws-head', 'Do this first'), h('ol.ws-plain', f.first.map((x) => h('li', x)))],
-    h('h3.ws-head', 'Causes, most likely first'),
-    order.length ? order.map(({c, i}) => causeCard(app, f, c, i, v, rerender)) : h('p.ws-none', 'No cause in the data applies to this car.'),
-    fit.length < f.causes.length && h('p.ws-foot-note', `${f.causes.length - fit.length} more cause${f.causes.length - fit.length === 1 ? ' applies' : 's apply'} to other cars and ${f.causes.length - fit.length === 1 ? 'is' : 'are'} left out.`),
+    (f.weakspots ?? []).filter((id) => appliesStatus(data.weakspots.byId.get(id)?.appliesTo, v) !== 'no').map((id) => [h('h3.ws-head', t('Known weak spot')), h('div.ws-list', weakRow(app, data.weakspots.byId.get(id)))]),
+    f.first?.length > 0 && [h('h3.ws-head', t('Do this first')), h('ol.ws-plain', f.first.map((x) => h('li', x)))],
+    h('h3.ws-head', t('Causes, most likely first')),
+    order.length ? order.map(({c, i}) => causeCard(app, f, c, i, v, rerender)) : h('p.ws-none', t('No cause in the data applies to this car.')),
+    fit.length < f.causes.length && h('p.ws-foot-note', plural(f.causes.length - fit.length, '{n} more cause applies to other cars and is left out.', '{n} more causes apply to other cars and are left out.')),
   ]);
 }
 
-const backButton = (app) => h('button.ws-back', {type: 'button', onclick: () => back(app)}, [icon('left'), route.stack.length > 2 ? 'Back' : 'Diagnose']);
+const backButton = (app) => h('button.ws-back', {type: 'button', onclick: () => back(app)}, [icon('left'), route.stack.length > 2 ? t('Back') : t('Diagnose')]);
 
 // ---- code page -----------------------------------------------------------------------------------------------------
 
@@ -303,28 +305,28 @@ function renderCode(app, s, root, code) {
   const jobs = [...new Set(records.flatMap((r) => r.jobs ?? []))];
   paintView(root, `code-${code}`, [
     backButton(app),
-    records.find((r) => r.band) ? (({urgency, title, text}) => h(`div.ws-band.ws-band--${urgency}`, {role: 'alert'}, [h('span.ws-band-word', URGENCY[urgency].word), h('div', [h('strong', title), h('p', text)])]))(records.find((r) => r.band).band)
-      : worst ? urgencyBand(urgencyOf(worst, v), h('p', `From the linked fault: ${worst.symptom}`))
-      : h('div.ws-band.ws-band--none', [h('span.ws-band-word', '?'), h('div', [h('strong', 'Urgency not recorded for this code.'), h('p', 'No fault in the data mentions it. Go by how the car behaves, and look the symptom up by name.')])]),
+    records.find((r) => r.band) ? (({urgency, title, text}) => h(`div.ws-band.ws-band--${urgency}`, {role: 'alert'}, [h('span.ws-band-word', t(URGENCY[urgency].word)), h('div', [h('strong', title), h('p', text)])]))(records.find((r) => r.band).band)
+      : worst ? urgencyBand(urgencyOf(worst, v), h('p', t('From the linked fault: {what}', {what: worst.symptom})))
+      : h('div.ws-band.ws-band--none', [h('span.ws-band-word', '?'), h('div', [h('strong', t('Urgency not recorded for this code.')), h('p', t('No fault in the data mentions it. Go by how the car behaves, and look the symptom up by name.'))])]),
     h('header.ws-top', [h('p.ws-code', code), h('h2', records[0]?.title ?? code)]),
-    !fit.length && all.length > 0 && callout('warn', 'Not listed for your car', h('p', `This code is listed for: ${[...new Set(all.map((r) => appliesText(r.appliesTo)).filter(Boolean))].join('; ') || 'other cars'}. Your car is a ${carLabel(v)}. What follows is for those cars.`)),
+    !fit.length && all.length > 0 && callout('warn', t('Not listed for your car'), h('p', t('This code is listed for: {who}. Your car is a {car}. What follows is for those cars.', {who: [...new Set(all.map((r) => appliesText(r.appliesTo)).filter(Boolean))].join('; ') || t('other cars'), car: carLabel(v)}))),
     records.map((r) => h('article.ws-card-flat', [
       h('div.ws-row-head', [badge(r, {title: `${r.code} ${r.title}`}), vinTag(r, v)]),
       h('p', r.meaning),
-      r.note && callout('tip', 'Note', h('p', r.note)),
-      r.first?.length > 0 && [h('h3.ws-head', 'Do this first'), h('ol.ws-plain', r.first.map((x) => h('li', x)))],
+      r.note && callout('tip', t('Note'), h('p', r.note)),
+      r.first?.length > 0 && [h('h3.ws-head', t('Do this first')), h('ol.ws-plain', r.first.map((x) => h('li', x)))],
       r.causes.length > 0 && (r.causeOrder === 'quick'
-        ? [h('h3.ws-head', 'Causes, quickest to check first'), h('ul.ws-plain', r.causes.map((c) => h('li', c)))]
-        : [h('h3.ws-head', 'Causes, in the source\'s order'), h('ul.ws-plain', r.causes.map((c) => h('li', c))), h('p.ws-small.ws-mute', 'The source ranks these no further, so no likelihood is shown.')]),
+        ? [h('h3.ws-head', t('Causes, quickest to check first')), h('ul.ws-plain', r.causes.map((c) => h('li', c)))]
+        : [h('h3.ws-head', t('Causes, in the source\'s order')), h('ul.ws-plain', r.causes.map((c) => h('li', c))), h('p.ws-small.ws-mute', t('The source ranks these no further, so no likelihood is shown.'))]),
     ])),
-    parts.length > 0 && [h('h3.ws-head', 'Parts involved'), h('p', parts.map(partName).join(', ')), showButton(app, parts)],
+    parts.length > 0 && [h('h3.ws-head', t('Parts involved')), h('p', parts.map(partName).join(', ')), showButton(app, parts)],
     h('div.ws-list', [
-      /^P(03|13)/.test(code) && h('button.ws-row', {type: 'button', onclick: () => showNumbers(app, ['engine.cam-cover'], cylinderLabels())}, [h('span.ws-row-main', [h('strong', 'Show the banks and cylinders on the car'), h('span', '1A to 4A on the right, 1B to 4B on the left')]), icon('right')]),
-      h('button.ws-row', {type: 'button', onclick: () => app.ui.open('fact', 'fact.clear-codes')}, [h('span.ws-row-main', h('strong', 'How to clear this code')), icon('right')]),
+      /^P(03|13)/.test(code) && h('button.ws-row', {type: 'button', onclick: () => showNumbers(app, ['engine.cam-cover'], cylinderLabels())}, [h('span.ws-row-main', [h('strong', t('Show the banks and cylinders on the car')), h('span', t('1A to 4A on the right, 1B to 4B on the left'))]), icon('right')]),
+      h('button.ws-row', {type: 'button', onclick: () => app.ui.open('fact', 'fact.clear-codes')}, [h('span.ws-row-main', h('strong', t('How to clear this code'))), icon('right')]),
     ]),
-    jobs.length > 0 && [h('h3.ws-head', 'Jobs'), h('div.ws-list', jobs.map((id) => jobButton(app, id, v)))],
-    !jobs.length && h('p.ws-none', 'No job is linked to this code.'),
-    faults.length > 0 && [h('h3.ws-head', 'Faults that mention this code'), h('div.ws-list', faults.map((f) => faultRow(app, f, v)))],
+    jobs.length > 0 && [h('h3.ws-head', t('Jobs')), h('div.ws-list', jobs.map((id) => jobButton(app, id, v)))],
+    !jobs.length && h('p.ws-none', t('No job is linked to this code.')),
+    faults.length > 0 && [h('h3.ws-head', t('Faults that mention this code')), h('div.ws-list', faults.map((f) => faultRow(app, f, v)))],
   ]);
 }
 
@@ -338,17 +340,17 @@ function renderWeak(app, s, root, id) {
   const T = (x) => convertTorqueText(x, s.units);
   paintView(root, `weak-${id}`, [
     backButton(app),
-    h('header.ws-top', [h('p.ws-kicker', `Weak spot, ${sysName(w.system)}`), h('h2', w.title), h('div.ws-row-head', [pips(w.severity), h('span.ws-small', `Severity ${w.severity} of 5`), badge(w, {title: w.title})]), vinTag(w, v)]),
-    h('div.ws-test', [h('span.ws-label', 'What goes wrong'), h('p', T(w.what))]),
-    h('div.ws-test', [h('span.ws-label', 'What you notice'), h('p', T(w.symptoms))]),
-    h('div.ws-test', [h('span.ws-label', 'How to check'), h('p', T(w.check))]),
-    h('div.ws-test', [h('span.ws-label', 'The fix'), h('p', T(w.fix))]),
-    h('div.ws-test', [h('span.ws-label', 'Cost'), w.cost ? [h('p.ws-price', gbp(w.cost.gbp)), w.cost.note && h('p.ws-small.ws-mute', w.cost.note)] : h('p.ws-none', 'No sourced price')]),
-    w.note && callout('tip', 'Note', h('p', T(w.note))),
+    h('header.ws-top', [h('p.ws-kicker', t('Weak spot, {system}', {system: sysName(w.system)})), h('h2', w.title), h('div.ws-row-head', [pips(w.severity), h('span.ws-small', t('Severity {n} of 5', {n: w.severity})), badge(w, {title: w.title})]), vinTag(w, v)]),
+    h('div.ws-test', [h('span.ws-label', t('What goes wrong')), h('p', T(w.what))]),
+    h('div.ws-test', [h('span.ws-label', t('What you notice')), h('p', T(w.symptoms))]),
+    h('div.ws-test', [h('span.ws-label', t('How to check')), h('p', T(w.check))]),
+    h('div.ws-test', [h('span.ws-label', t('The fix')), h('p', T(w.fix))]),
+    h('div.ws-test', [h('span.ws-label', t('Cost')), w.cost ? [h('p.ws-price', gbp(w.cost.gbp)), w.cost.note && h('p.ws-small.ws-mute', w.cost.note)] : h('p.ws-none', t('No sourced price'))]),
+    w.note && callout('tip', t('Note'), h('p', T(w.note))),
     showButton(app, parts),
-    parts.length > 0 && h('p.ws-small', [h('strong', 'Parts: '), parts.map(partName).join(', ')]),
-    (w.jobs ?? []).length ? [h('h3.ws-head', 'Jobs'), h('div.ws-list', w.jobs.map((j) => jobButton(app, j, v)))] : h('p.ws-none', 'No job is linked to this weak spot.'),
-    checks.length > 0 && [h('h3.ws-head', 'On the inspection list'), h('div.ws-list', checks.map((c) => h('button.ws-row', {type: 'button', onclick: () => { nav.planTab = 'inspect'; app.store.set({mode: 'plan'}); }}, h('span.ws-row-main', [h('strong', c.check), h('span', c.area)]))))],
+    parts.length > 0 && h('p.ws-small', [h('strong', t('Parts: ')), parts.map(partName).join(', ')]),
+    (w.jobs ?? []).length ? [h('h3.ws-head', t('Jobs')), h('div.ws-list', w.jobs.map((j) => jobButton(app, j, v)))] : h('p.ws-none', t('No job is linked to this weak spot.')),
+    checks.length > 0 && [h('h3.ws-head', t('On the inspection list')), h('div.ws-list', checks.map((c) => h('button.ws-row', {type: 'button', onclick: () => { nav.planTab = 'inspect'; app.store.set({mode: 'plan'}); }}, h('span.ws-row-main', [h('strong', c.check), h('span', c.area)]))))],
   ]);
 }
 
@@ -360,14 +362,14 @@ function renderSystem(app, s, root, id) {
   const faults = all.filter((f) => fits(f, v)).sort((a, b) => URGENCY[a.urgency].rank - URGENCY[b.urgency].rank);
   const codes = codesFor(v).filter((c) => data.dtc.byCode.get(c).some((d) => d.system === id));
   const list = h('div.ws-list');
-  const moreCodes = codes.length ? h('details.ws-sec', {ontoggle: (e) => { if (e.target.open && !list.childElementCount) list.append(...codes.map((c) => codeRow(app, c, v))); }}, [h('summary', [h('span', 'Fault codes'), h('span.ws-count', codes.length)]), list]) : null;
+  const moreCodes = codes.length ? h('details.ws-sec', {ontoggle: (e) => { if (e.target.open && !list.childElementCount) list.append(...codes.map((c) => codeRow(app, c, v))); }}, [h('summary', [h('span', t('Fault codes')), h('span.ws-count', codes.length)]), list]) : null;
   const weak = forVariant(data.weakspots.items, v).filter((w) => w.system === id).sort((a, b) => b.severity - a.severity);
   paintView(root, `system-${id}`, [
     backButton(app),
     h('header.ws-top', h('h2', sysName(id))),
-    faults.length ? h('div.ws-list', faults.map((f) => faultRow(app, f, v))) : h('p.ws-none', 'No symptoms are recorded for this system on this car.'),
-    all.length > faults.length && h('p.ws-foot-note', `${all.length - faults.length} more apply to other cars only.`),
-    weak.length > 0 && [h('h3.ws-head', 'Weak spots'), h('div.ws-list', weak.map((w) => weakRow(app, w)))],
+    faults.length ? h('div.ws-list', faults.map((f) => faultRow(app, f, v))) : h('p.ws-none', t('No symptoms are recorded for this system on this car.')),
+    all.length > faults.length && h('p.ws-foot-note', plural(all.length - faults.length, '{n} more apply to other cars only.|one', '{n} more apply to other cars only.')),
+    weak.length > 0 && [h('h3.ws-head', t('Weak spots')), h('div.ws-list', weak.map((w) => weakRow(app, w)))],
     moreCodes,
   ]);
 }
@@ -384,7 +386,7 @@ export function mount(el, app) {
     else if (p.page === 'system') renderSystem(app, s, root, p.id);
     else renderHome(app, s, root);
   };
-  const stop = modeRoot(el, app, 'diagnose', ['variant', 'units', 'garage'], render, () => { const {store} = app; if (store.get().isolate) store.set({isolate: null}); });
+  const stop = modeRoot(el, app, 'diagnose', ['variant', 'units', 'garage', 'lang'], render, () => { const {store} = app; if (store.get().isolate) store.set({isolate: null}); });
   repaint = (a) => render(a.store.get(), el.querySelector('.ws'));
   return stop;
 }

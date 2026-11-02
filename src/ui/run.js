@@ -1,6 +1,7 @@
 // Run: the machine working. Controls write to state.sim, kin.js turns that into the frame the parts move by, and every
 // gauge here reads that same frame (app.sim), so a readout cannot disagree with the motion.
-import {data, forVariant, specFor} from '../data.js';
+import {data, en, forVariant, specFor} from '../data.js';
+import {dec, fixed, pct, t} from '../i18n.js';
 import {chassisReadout, displacementCc, firingTable, gearCount, gearRatio, IDLE_RPM, roadSpeedMph, rpmAtSpeed, rpmLimit, STEER_MAX_DEG, TRAVEL_MM} from '../sim/kin.js';
 import {badge, block, h, range, seg, specBadge, toggle} from './widgets.js';
 import {createEngineSound} from './sound.js';
@@ -10,10 +11,8 @@ const SHORT_SCREEN = 520; // as SHORT_H in shell.js
 const REV_UP_RPM_S = 5200, REV_DOWN_RPM_S = 3400, ROOF_CYCLE_S = 14;
 const CHAIN_PARTS = ['engine.chain-primary', 'engine.chain-secondary', 'engine.chain-tensioner-primary', 'engine.chain-tensioner-secondary', 'engine.tensioner-blade', 'engine.chain-guide-primary', 'engine.crank-sprocket', 'engine.exhaust-cam-sprocket', 'engine.inlet-cam-sprocket', 'engine.vvt-unit', 'engine.crank-damper', 'engine.crankshaft', 'engine.camshaft-inlet', 'engine.camshaft-exhaust', 'engine.camshaft'];
 const BENCH = Object.fromEntries(['body', 'roof', 'interior', 'hvac', 'electrical', 'cooling', 'exhaust', 'front-suspension', 'rear-suspension', 'steering', 'brakes', 'wheels', 'driveline'].map((k) => [k, 'hide']));
-const ordinal = (n) => ['Neutral', '1st', '2nd', '3rd', '4th', '5th', '6th'][n] ?? `${n}th`;
-const gearWord = (g) => (g < 0 ? 'Reverse' : ordinal(g));
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
-const estimate = (text) => badge({conf: 'estimated'}, {title: 'Estimated', extra: h('p.prov-note', text)});
+const estimate = (text) => badge({conf: 'estimated'}, {title: t('Estimated'), extra: h('p.prov-note', text)});
 
 const svg = (tag, attrs, ...kids) => {
   const n = document.createElementNS('http://www.w3.org/2000/svg', tag);
@@ -35,7 +34,7 @@ function crankDial(order) {
     return [tick, t];
   });
   const hand = svg('line', {x1: C, y1: C, x2: C, y2: C - (R - 4), class: 'dial-hand'});
-  const root = svg('svg', {viewBox: '0 0 120 120', class: 'dial', role: 'img', 'aria-label': 'Crank angle over one 720 degree cycle, with each firing marked'}, svg('circle', {cx: C, cy: C, r: R - 4, class: 'dial-ring'}), marks.flat(), hand, svg('circle', {cx: C, cy: C, r: 3, class: 'dial-pin'}));
+  const root = svg('svg', {viewBox: '0 0 120 120', class: 'dial', role: 'img', 'aria-label': t('Crank angle over one 720 degree cycle, with each firing marked')}, svg('circle', {cx: C, cy: C, r: R - 4, class: 'dial-ring'}), marks.flat(), hand, svg('circle', {cx: C, cy: C, r: 3, class: 'dial-pin'}));
   root.set = (deg) => hand.setAttribute('transform', `rotate(${(deg / 2).toFixed(1)} ${C} ${C})`);
   return root;
 }
@@ -44,7 +43,7 @@ function crankDial(order) {
 function steerGauge() {
   const wheel = (x) => svg('rect', {x: x - 5, y: 26, width: 10, height: 28, rx: 1.5, class: 'gauge-wheel'});
   const l = wheel(22), r = wheel(98);
-  const root = svg('svg', {viewBox: '0 0 120 80', class: 'gauge', role: 'img', 'aria-label': 'Front wheel steer angles, seen from above'}, svg('line', {x1: 22, y1: 40, x2: 98, y2: 40, class: 'gauge-axle'}), l, r);
+  const root = svg('svg', {viewBox: '0 0 120 80', class: 'gauge', role: 'img', 'aria-label': t('Front wheel steer angles, seen from above')}, svg('line', {x1: 22, y1: 40, x2: 98, y2: 40, class: 'gauge-axle'}), l, r);
   root.set = (left, right) => {
     l.setAttribute('transform', `rotate(${left.toFixed(1)} 22 40)`);
     r.setAttribute('transform', `rotate(${right.toFixed(1)} 98 40)`);
@@ -57,7 +56,7 @@ function travelGauge() {
   const track = (x) => [svg('line', {x1: x, y1: 8, x2: x, y2: 72, class: 'gauge-axle'}), svg('line', {x1: x - 9, y1: 40, x2: x + 9, y2: 40, class: 'gauge-tick'})];
   const mark = (x) => svg('rect', {x: x - 12, y: 37.5, width: 24, height: 5, class: 'gauge-mark'});
   const f = mark(36), r = mark(84);
-  const root = svg('svg', {viewBox: '0 0 120 80', class: 'gauge', role: 'img', 'aria-label': 'Wheel travel, front and rear'}, track(36), track(84), f, r);
+  const root = svg('svg', {viewBox: '0 0 120 80', class: 'gauge', role: 'img', 'aria-label': t('Wheel travel, front and rear')}, track(36), track(84), f, r);
   const y = (mm) => -(mm / Math.max(TRAVEL_MM.bump, TRAVEL_MM.rebound)) * 30;
   root.set = (fm, rm) => {
     f.setAttribute('transform', `translate(0 ${y(fm).toFixed(1)})`);
@@ -80,51 +79,117 @@ export function mount(el, app) {
   let section = null; // null, 'bank', or 'cyl1' to 'cyl4': see applySection in engine-common.js
   let lamps = [];
 
-  // ---- the dash: stays on top while the controls scroll ---------------------------------------
-  const chainsBtn = h('button.btn', {type: 'button', 'aria-pressed': 'false', onclick: () => setChains(chainsBtn.getAttribute('aria-pressed') !== 'true')}, 'Timing chains only');
-  const sectionBtn = h('button.btn', {type: 'button', 'aria-pressed': 'false', onclick: () => setSection(section == null ? 'cyl1' : null)}, 'Section view');
-  const stateWord = h('span.dash-state', 'Engine off');
-  const startBtn = h('button.btn.btn-start', {type: 'button', onclick: () => (sim().running ? stop() : start())}, 'Start');
-  const rpmNum = h('span.dash-rpm', '0');
-  const rpmBarFill = h('i.bar-fill');
-  const rpmRed = h('i.bar-red');
-  const rpmBarEnd = h('span.bar-end');
-  const mphNum = h('span.dash-val', '0');
-  const kphNum = h('span.dash-sub', '0 km/h');
-  const pistonNum = h('span.dash-val', '0.0');
-  const gearNum = h('span.dash-val', 'N');
-  const gearSub = h('span.dash-sub', '');
-  const redBadge = h('span.dash-badge');
-  const fireStrip = h('ol.fire', {'aria-label': 'Firing order'});
+  // Everything with words on it. Built once here and once more on each change of language: what a control shows comes from
+  // the state, so nothing is lost. The functions below reach these through the lets.
+  let chainsBtn, sectionBtn, stateWord, startBtn, rpmNum, rpmBarFill, rpmRed, rpmBarEnd, mphNum, kphNum, pistonNum, gearNum, gearSub, redBadge, fireStrip, dash;
+  let rpm, throttle, speed, gearSeg, steer, bumpF, bumpR, roof, roofBtn, roofRow, coupeNote, opens, steerCentre;
+  let sectionRows, timeSeg, soundBtn, soundNote, crankNum, camNum, steerG, steerL, steerR, travelG, travelF, travelR, instBlock, solvedRows, solved;
+  const rpmText = (v) => t('{n} rpm', {n: Math.round(v)});
 
-  const dash = h('div.dash', {dataset: {peek: ''}}, [
-    h('div.dash-top', [
-      h('div.dash-rev', [rpmNum, h('span.dash-unit', 'rpm'), stateWord]),
-      startBtn,
-    ]),
-    h('div.bar', {'aria-hidden': 'true'}, [rpmBarFill, rpmRed]),
-    h('div.bar-scale', [h('span', '0'), redBadge, rpmBarEnd]),
-    h('div.dash-row', [
-      h('div.dash-cell', [h('span.dash-label', 'Road speed'), h('span.dash-line', [mphNum, h('span.dash-unit', 'mph')]), kphNum]),
-      h('div.dash-cell', [h('span.dash-label', 'Gear'), gearNum, gearSub]),
-      h('div.dash-cell', [h('span.dash-label', 'Piston speed, mean'), h('span.dash-line', [pistonNum, h('span.dash-unit', 'm/s')])]),
-    ]),
-    fireStrip,
-    h('div.run-btns.dash-watch', [chainsBtn, sectionBtn]),
-  ]);
+  function buildPanel() {
+    // ---- the dash: stays on top while the controls scroll ---------------------------------------
+    chainsBtn = h('button.btn', {type: 'button', 'aria-pressed': 'false', onclick: () => setChains(chainsBtn.getAttribute('aria-pressed') !== 'true')}, t('Timing chains only'));
+    sectionBtn = h('button.btn', {type: 'button', 'aria-pressed': 'false', onclick: () => setSection(section == null ? 'cyl1' : null)}, t('Section view'));
+    stateWord = h('span.dash-state', t('Engine off'));
+    startBtn = h('button.btn.btn-start', {type: 'button', onclick: () => (sim().running ? stop() : start())}, t('Start'));
+    rpmNum = h('span.dash-rpm', '0');
+    rpmBarFill = h('i.bar-fill');
+    rpmRed = h('i.bar-red');
+    rpmBarEnd = h('span.bar-end');
+    mphNum = h('span.dash-val', '0');
+    kphNum = h('span.dash-sub', '0 km/h');
+    pistonNum = h('span.dash-val', fixed(0, 1));
+    gearNum = h('span.dash-val', 'N');
+    gearSub = h('span.dash-sub', '');
+    redBadge = h('span.dash-badge');
+    fireStrip = h('ol.fire', {'aria-label': t('Firing order')});
 
-  // ---- controls -------------------------------------------------------------------------------
-  const rpm = range({label: 'Engine speed', name: 'rpm', min: IDLE_RPM, max: 7000, step: 50, value: IDLE_RPM, format: (v) => (sim().running ? `${Math.round(v)} rpm` : 'Engine off'), onInput: (v) => {
-    base = v;
-    if (!sim().running) start();
-    write({rpm: v});
-  }});
-  const throttle = range({label: 'Throttle', name: 'throttle', min: 0, max: 1, step: 0.01, value: 0, format: (v) => `${Math.round(v * 100)}%`, onInput: (v) => {
-    if (!sim().running) start();
-    store.merge('sim', {throttle: v});
-    stage.invalidate();
-  }});
-  throttle.input.addEventListener('pointerdown', () => { pedalHeld = true; });
+    dash = h('div.dash', {dataset: {peek: ''}}, [
+      h('div.dash-top', [
+        h('div.dash-rev', [rpmNum, h('span.dash-unit', t('rpm')), stateWord]),
+        startBtn,
+      ]),
+      h('div.bar', {'aria-hidden': 'true'}, [rpmBarFill, rpmRed]),
+      h('div.bar-scale', [h('span', '0'), redBadge, rpmBarEnd]),
+      h('div.dash-row', [
+        h('div.dash-cell', [h('span.dash-label', t('Road speed')), h('span.dash-line', [mphNum, h('span.dash-unit', 'mph')]), kphNum]),
+        h('div.dash-cell', [h('span.dash-label', t('Gear')), gearNum, gearSub]),
+        h('div.dash-cell', [h('span.dash-label', t('Piston speed, mean')), h('span.dash-line', [pistonNum, h('span.dash-unit', 'm/s')])]),
+      ]),
+      fireStrip,
+      h('div.run-btns.dash-watch', [chainsBtn, sectionBtn]),
+    ]);
+
+    // ---- controls -------------------------------------------------------------------------------
+    rpm = range({label: t('Engine speed'), name: 'rpm', min: IDLE_RPM, max: 7000, step: 50, value: IDLE_RPM, format: (v) => (sim().running ? rpmText(v) : t('Engine off')), onInput: (v) => {
+      base = v;
+      if (!sim().running) start();
+      write({rpm: v});
+    }});
+    throttle = range({label: t('Throttle'), name: 'throttle', min: 0, max: 1, step: 0.01, value: 0, format: (v) => pct(Math.round(v * 100)), onInput: (v) => {
+      if (!sim().running) start();
+      store.merge('sim', {throttle: v});
+      stage.invalidate();
+    }});
+    throttle.input.addEventListener('pointerdown', () => { pedalHeld = true; });
+    speed = range({label: t('Road speed in gear'), name: 'speed', min: 0, max: 100, step: 1, value: 0, format: (v) => (!sim().gear ? t('In neutral') : !sim().running ? t('Engine off') : t('{n} mph', {n: Math.round(v)})), onInput: (v) => {
+      const g = sim().gear;
+      if (!g) return;
+      if (!sim().running) start();
+      base = clamp(rpmAtSpeed(spec(), v, g), IDLE_RPM, rpmLimit(spec()));
+      write({rpm: base});
+    }});
+
+    gearSeg = h('div');
+    steer = range({label: t('Steering'), name: 'steer', min: -1, max: 1, step: 0.01, value: 0, format: (v) => (Math.abs(v) < 0.005 ? t('Straight') : t(v < 0 ? '{n} of lock left' : '{n} of lock right', {n: pct(Math.round(Math.abs(v) * 100))})), onInput: (v) => merge({steer: v})});
+    bumpF = range({label: t('Front wheels'), name: 'bumpF', min: -1, max: 1, step: 0.01, value: 0, format: (v) => mmText(v), onInput: (v) => merge({bumpF: v})});
+    bumpR = range({label: t('Rear wheels'), name: 'bumpR', min: -1, max: 1, step: 0.01, value: 0, format: (v) => mmText(v), onInput: (v) => merge({bumpR: v})});
+    roof = range({label: t('Hood'), name: 'roof', min: 0, max: 1, step: 0.01, value: 0, format: (v) => (v <= 0 ? t('Up') : v >= 1 ? t('Stowed') : pct(Math.round(v * 100))), onInput: (v) => { roofDir = 0; merge({roof: v}); }});
+    roofBtn = h('button.btn', {type: 'button', onclick: () => { roofDir = sim().roof > 0.5 ? -1 : 1; roofBtn.textContent = roofDir < 0 ? t('Raising') : t('Lowering'); stage.invalidate(); }}, t('Lower the hood'));
+    roofRow = h('div.ctl-roof', [roof, roofBtn]);
+    coupeNote = h('p.empty', t('This car is a coupe. Pick a convertible to run the hood.'));
+    opens = ['bonnet', 'boot', 'doorL', 'doorR'].map((k) => toggle({label: t({bonnet: 'Bonnet', boot: 'Boot', doorL: 'Left door', doorR: 'Right door'}[k]), onChange: (on) => { store.merge('sim', {open: {...sim().open, [k]: on ? 1 : 0}}); stage.invalidate(); }}));
+    steerCentre = h('button.link', {type: 'button', onclick: () => { steer.set(0); merge({steer: 0}); }}, t('Centre'));
+
+    // ---- watching things ------------------------------------------------------------------------
+    sectionRows = seg({label: t('Where to cut'), value: 'cyl1', className: 'seg-rows', options: [{value: 'bank', label: t('Bank'), aria: t('Along the A bank')}, ...[1, 2, 3, 4].map((r) => ({value: `cyl${r}`, label: t('Row {n}', {n: r}), aria: t('Across cylinder row {n}', {n: r})}))], onChange: (r) => setSection(r)});
+    sectionRows.hidden = true;
+    timeSeg = seg({label: t('Time'), value: 1, options: [{value: 1, label: t('Full speed')}, {value: 0.25, label: t('A quarter')}, {value: 0.05, label: t('A twentieth')}], onChange: (v) => merge({timeScale: v})});
+
+    // ---- sound ----------------------------------------------------------------------------------
+    soundBtn = toggle({label: t('Engine sound'), on: false, onChange: (on) => setSound(on)});
+    soundNote = h('p.hint', t('Synthesised from the firing order. Each bank fires unevenly into its own exhaust, which is the V8 burble.'));
+
+    // ---- instruments below the controls ---------------------------------------------------------
+    crankNum = h('span.inst-val', '0');
+    camNum = h('span.inst-sub', '');
+    steerG = steerGauge();
+    steerL = h('span.inst-val', fixed(0, 1));
+    steerR = h('span.inst-val', fixed(0, 1));
+    travelG = travelGauge();
+    travelF = h('span.inst-val', '0');
+    travelR = h('span.inst-val', '0');
+    instBlock = block(t('Instruments'));
+    // The suspension and steering solve, row by row: the numbers that pose the parts. The rows exist only while open.
+    solvedRows = h('dl.facts');
+    solved = h('details.run-solved', {ontoggle: () => { if (solved.open) readChassis(app.sim); }}, [
+      h('summary', [`${t('Geometry solve')} `, estimate(t('Solved from hard points estimated off the reference drawings. It shows how the linkage moves. These are not Jaguar settings.'))]),
+      solvedRows,
+    ]);
+    hud.setAttribute('aria-label', t('Instruments'));
+
+    el.replaceChildren(
+      dash,
+      h('div.run-watch', [sectionRows, h('span.rng-label', t('Time')), timeSeg]),
+      block(t('Drive'), [gearSeg, rpm, throttle, h('p.hint', t('Throttle is a pedal: hold it to rev, let go and it returns.')), speed]),
+      block(t('Chassis'), [steer, steerCentre, bumpF, bumpR, solved]),
+      block(t('Roof and panels'), [roofRow, coupeNote, h('div.run-btns', opens)]),
+      instBlock,
+      block(t('Sound'), soundBtn, soundNote),
+      block(t('Figures behind the gauges'), facts),
+    );
+  }
+
   const release = () => {
     if (!pedalHeld) return;
     pedalHeld = false;
@@ -135,30 +200,11 @@ export function mount(el, app) {
   window.addEventListener('pointerup', release);
   window.addEventListener('pointercancel', release);
 
-  const speed = range({label: 'Road speed in gear', name: 'speed', min: 0, max: 100, step: 1, value: 0, format: (v) => (!sim().gear ? 'In neutral' : !sim().running ? 'Engine off' : `${Math.round(v)} mph`), onInput: (v) => {
-    const g = sim().gear;
-    if (!g) return;
-    if (!sim().running) start();
-    base = clamp(rpmAtSpeed(spec(), v, g), IDLE_RPM, rpmLimit(spec()));
-    write({rpm: base});
-  }});
-
   const mmText = (v) => {
-    if (Math.abs(v) < 0.005) return 'Ride height';
+    if (Math.abs(v) < 0.005) return t('Ride height');
     const mm = (v >= 0 ? v * TRAVEL_MM.bump : -v * TRAVEL_MM.rebound);
-    return `${mm.toFixed(0)} mm ${v > 0 ? 'bump' : 'droop'}`;
+    return t(v > 0 ? '{n} mm bump' : '{n} mm droop', {n: mm.toFixed(0)});
   };
-
-  const gearSeg = h('div');
-  const steer = range({label: 'Steering', name: 'steer', min: -1, max: 1, step: 0.01, value: 0, format: (v) => (Math.abs(v) < 0.005 ? 'Straight' : `${Math.round(Math.abs(v) * 100)}% of lock ${v < 0 ? 'left' : 'right'}`), onInput: (v) => merge({steer: v})});
-  const bumpF = range({label: 'Front wheels', name: 'bumpF', min: -1, max: 1, step: 0.01, value: 0, format: (v) => mmText(v), onInput: (v) => merge({bumpF: v})});
-  const bumpR = range({label: 'Rear wheels', name: 'bumpR', min: -1, max: 1, step: 0.01, value: 0, format: (v) => mmText(v), onInput: (v) => merge({bumpR: v})});
-  const roof = range({label: 'Hood', name: 'roof', min: 0, max: 1, step: 0.01, value: 0, format: (v) => (v <= 0 ? 'Up' : v >= 1 ? 'Stowed' : `${Math.round(v * 100)}%`), onInput: (v) => { roofDir = 0; merge({roof: v}); }});
-  const roofBtn = h('button.btn', {type: 'button', onclick: () => { roofDir = sim().roof > 0.5 ? -1 : 1; roofBtn.textContent = roofDir < 0 ? 'Raising' : 'Lowering'; stage.invalidate(); }}, 'Lower the hood');
-  const roofRow = h('div.ctl-roof', [roof, roofBtn]);
-  const coupeNote = h('p.empty', 'This car is a coupe. Pick a convertible to run the hood.');
-  const opens = ['bonnet', 'boot', 'doorL', 'doorR'].map((k) => toggle({label: {bonnet: 'Bonnet', boot: 'Boot', doorL: 'Left door', doorR: 'Right door'}[k], onChange: (on) => { store.merge('sim', {open: {...sim().open, [k]: on ? 1 : 0}}); stage.invalidate(); }}));
-  const steerCentre = h('button.link', {type: 'button', onclick: () => { steer.set(0); merge({steer: 0}); }}, 'Centre');
 
   function merge(patch) { store.merge('sim', patch); stage.invalidate(); }
   function write(patch) {
@@ -182,11 +228,11 @@ export function mount(el, app) {
     const sp = spec();
     const n = gearCount(sp);
     const options = [
-      {value: -1, label: 'R', aria: 'Reverse', disabled: gearRatio(sp, -1) == null, title: gearRatio(sp, -1) == null ? 'No reverse ratio on record' : undefined},
-      {value: 0, label: 'N', aria: 'Neutral'},
-      ...Array.from({length: n}, (_, i) => ({value: i + 1, label: String(i + 1), aria: `Gear ${i + 1}`})),
+      {value: -1, label: 'R', aria: t('Reverse'), disabled: gearRatio(sp, -1) == null, title: gearRatio(sp, -1) == null ? t('No reverse ratio on record') : undefined},
+      {value: 0, label: 'N', aria: t('Neutral')},
+      ...Array.from({length: n}, (_, i) => ({value: i + 1, label: String(i + 1), aria: t('Gear {n}', {n: i + 1})})),
     ];
-    gearSeg.replaceChildren(h('span.rng-label', 'Gear'), seg({label: 'Gear', options, value: sim().gear, onChange: setGear, className: 'seg-gear'}));
+    gearSeg.replaceChildren(h('span.rng-label', t('Gear')), seg({label: t('Gear'), options, value: sim().gear, onChange: setGear, className: 'seg-gear'}));
   }
 
   function syncRanges() {
@@ -197,10 +243,10 @@ export function mount(el, app) {
     speed.setRange(0, Math.round(top) || 1);
     speed.input.disabled = !s.gear;
     speed.classList.toggle('off', !s.gear);
-    rpmBarEnd.textContent = sp.redlineRpm != null ? '' : `${limit} slider end`;
+    rpmBarEnd.textContent = sp.redlineRpm != null ? '' : t('{n} slider end', {n: limit});
     rpmRed.style.left = `${(sp.redlineRpm ?? limit) / limit * 100}%`;
     rpmRed.hidden = sp.redlineRpm == null;
-    redBadge.replaceChildren(...(sp.redlineRpm != null ? [h('span', `${sp.redlineRpm} redline `), specBadge(sp, 'redlineRpm', 'Redline')] : [h('span', 'No sourced redline')]));
+    redBadge.replaceChildren(...(sp.redlineRpm != null ? [h('span', `${t('{n} redline', {n: sp.redlineRpm})} `), specBadge(sp, 'redlineRpm', t('Redline'))] : [h('span', t('No sourced redline'))]));
     roofRow.hidden = get().variant.body !== 'convertible';
     coupeNote.hidden = !roofRow.hidden;
   }
@@ -216,11 +262,6 @@ export function mount(el, app) {
     placeInstruments();
   }
 
-  // ---- watching things ------------------------------------------------------------------------
-  const sectionRows = seg({label: 'Where to cut', value: 'cyl1', className: 'seg-rows', options: [{value: 'bank', label: 'Bank', aria: 'Along the A bank'}, ...[1, 2, 3, 4].map((r) => ({value: `cyl${r}`, label: `Row ${r}`, aria: `Across cylinder row ${r}`}))], onChange: (r) => setSection(r)});
-  sectionRows.hidden = true;
-  const timeSeg = seg({label: 'Time', value: 1, options: [{value: 1, label: 'Full speed'}, {value: 0.25, label: 'A quarter'}, {value: 0.05, label: 'A twentieth'}], onChange: (v) => merge({timeScale: v})});
-
   // While the chains or a section are up, only the engine stays: the part doing the work opens up, with nothing in front.
   let savedSystems = null;
   function clearTheBench(on) {
@@ -231,19 +272,19 @@ export function mount(el, app) {
   // On the picture while the chains run: how slow this is, and what to look at.
   const chainTag = h('div.chain-tag', {hidden: true});
   document.getElementById('ui').append(chainTag);
-  const chainWeak = () => forVariant(data.weakspots.items, get().variant).find((w) => /tensioner/i.test(w.title));
+  const chainWeak = () => forVariant(data.weakspots.items, get().variant).find((w) => /tensioner/i.test(en(w, 'title')));
   function labelChains(on) {
     chainTag.hidden = !on;
     if (!on) { app.pick.setLabels([]); app.pick.setAutoLabels(true); app.ui.sheetChanged?.(); return; }
     const weak = chainWeak();
-    chainTag.replaceChildren(...[h('span', 'Slowed 20x'), weak && h('button.link', {type: 'button', onclick: () => app.ui.open('weakspot', weak.id)}, 'This tensioner is the known weak point')].filter(Boolean));
+    chainTag.replaceChildren(...[h('span', t('Slowed 20x')), weak && h('button.link', {type: 'button', onclick: () => app.ui.open('weakspot', weak.id)}, t('This tensioner is the known weak point'))].filter(Boolean));
     app.ui.sheetChanged?.();
     const has = (id) => registry.has(id);
     app.pick.setAutoLabels(false);
     app.pick.setLabels([
-      has('engine.chain-primary') && {id: 'engine.chain-primary', text: 'Primary chain'},
-      has('engine.chain-secondary') && {id: 'engine.chain-secondary', text: 'Secondary chain'},
-      has('engine.chain-tensioner-secondary') && {id: 'engine.chain-tensioner-secondary', text: 'Tensioner', accent: true},
+      has('engine.chain-primary') && {id: 'engine.chain-primary', text: t('Primary chain')},
+      has('engine.chain-secondary') && {id: 'engine.chain-secondary', text: t('Secondary chain')},
+      has('engine.chain-tensioner-secondary') && {id: 'engine.chain-tensioner-secondary', text: t('Tensioner'), accent: true},
     ].filter(Boolean));
   }
   app.ui.showChains = (on) => setChains(on);
@@ -282,10 +323,6 @@ export function mount(el, app) {
     store.set({view: mode == null ? 'side' : mode === 'bank' ? 'section-bank' : 'section-cylinder'});
   }
 
-  // ---- sound ----------------------------------------------------------------------------------
-  const soundBtn = toggle({label: 'Engine sound', on: false, onChange: (on) => setSound(on)});
-  const soundNote = h('p.hint', 'Synthesised from the firing order. Each bank fires unevenly into its own exhaust, which is the V8 burble.');
-
   function ensureSound() {
     if (!audio) audio = new (window.AudioContext ?? window.webkitAudioContext)();
     const key = `${spec().firingOrder}-${spec().induction}`;
@@ -310,30 +347,16 @@ export function mount(el, app) {
     stage.invalidate();
   }
 
-  // ---- instruments below the controls ---------------------------------------------------------
   let dial = null;
-  const crankNum = h('span.inst-val', '0');
-  const camNum = h('span.inst-sub', '');
-  const steerG = steerGauge();
-  const steerL = h('span.inst-val', '0.0'), steerR = h('span.inst-val', '0.0');
-  const travelG = travelGauge();
-  const travelF = h('span.inst-val', '0'), travelR = h('span.inst-val', '0');
   const instruments = h('div.insts');
   const facts = h('div');
   // On a wide screen the gauges sit on the stage, in the empty studio above the car. On a phone they stay in the sheet.
-  const hud = h('div.run-hud', {hidden: true, 'aria-label': 'Instruments'});
-  const instBlock = block('Instruments');
-  // The suspension and steering solve, row by row: the numbers that pose the parts. The rows exist only while open.
-  const solvedRows = h('dl.facts');
-  const solved = h('details.run-solved', {ontoggle: () => { if (solved.open) readChassis(app.sim); }}, [
-    h('summary', ['Geometry solve ', estimate('Solved from hard points estimated off the reference drawings. It shows how the linkage moves. These are not Jaguar settings.')]),
-    solvedRows,
-  ]);
-  const readChassis = (sim) => {
-    if (!solved.open || !sim?.chassis) return;
-    const rows = chassisReadout(sim.chassis);
-    if (solvedRows.childElementCount !== rows.length) solvedRows.replaceChildren(...rows.map((r) => h('div.fact', [h('dt', r.label), h('dd', h('span.num'))])));
-    rows.forEach((r, i) => { solvedRows.children[i].querySelector('.num').textContent = `${r.value} ${r.unit}`; });
+  const hud = h('div.run-hud', {hidden: true});
+  const readChassis = (frame) => {
+    if (!solved.open || !frame?.chassis) return;
+    const rows = chassisReadout(frame.chassis);
+    if (solvedRows.childElementCount !== rows.length) solvedRows.replaceChildren(...rows.map((r) => h('div.fact', [h('dt', t(r.label)), h('dd', h('span.num'))])));
+    rows.forEach((r, i) => { solvedRows.children[i].querySelector('.num').textContent = `${dec(r.value)} ${t(r.unit)}`; });
   };
   document.getElementById('ui').append(hud);
   function placeInstruments() {
@@ -348,38 +371,54 @@ export function mount(el, app) {
     const sp = spec();
     dial = crankDial(sp.firingOrder);
     instruments.replaceChildren(
-      h('div.inst', [h('h4.inst-title', 'Crank angle'), dial, h('p.inst-read', [crankNum, h('span.dash-unit', 'deg')]), camNum]),
-      h('div.inst', [h('h4.inst-title', ['Wheel steer ', estimate(`Lock is the estimated constant STEER_MAX_DEG, ${STEER_MAX_DEG} degrees, on the inner wheel. The outer wheel follows from the geometry solve. No figure in the data. It sets the motion only.`)]), steerG, h('p.inst-pair', [h('span', ['L ', steerL]), h('span', ['R ', steerR])]), h('span.inst-sub', 'deg at the road wheel')]),
-      h('div.inst', [h('h4.inst-title', ['Wheel travel ', estimate(`Travel is the estimated constant TRAVEL_MM: ${TRAVEL_MM.bump} mm bump and ${TRAVEL_MM.rebound} mm droop. No figure in the data. It sets the motion only.`)]), travelG, h('p.inst-pair', [h('span', ['F ', travelF]), h('span', ['R ', travelR])]), h('span.inst-sub', 'mm from ride height')]),
+      h('div.inst', [h('h4.inst-title', t('Crank angle')), dial, h('p.inst-read', [crankNum, h('span.dash-unit', t('deg'))]), camNum]),
+      h('div.inst', [h('h4.inst-title', [`${t('Wheel steer')} `, estimate(t('Lock is the estimated constant STEER_MAX_DEG, {n} degrees, on the inner wheel. The outer wheel follows from the geometry solve. No figure in the data. It sets the motion only.', {n: STEER_MAX_DEG}))]), steerG, h('p.inst-pair', [h('span', [`${t('L|left')} `, steerL]), h('span', [`${t('R|right')} `, steerR])]), h('span.inst-sub', t('deg at the road wheel'))]),
+      h('div.inst', [h('h4.inst-title', [`${t('Wheel travel')} `, estimate(t('Travel is the estimated constant TRAVEL_MM: {bump} mm bump and {droop} mm droop. No figure in the data. It sets the motion only.', {bump: TRAVEL_MM.bump, droop: TRAVEL_MM.rebound}))]), travelG, h('p.inst-pair', [h('span', [`${t('F|front')} `, travelF]), h('span', [`${t('R|rear')} `, travelR])]), h('span.inst-sub', t('mm from ride height'))]),
     );
     const cc = Math.round(displacementCc(sp.boreMm, sp.strokeMm));
     facts.replaceChildren(h('dl.facts', [
-      h('div.fact', [h('dt', 'Bore and stroke'), h('dd', [h('span.num', `${sp.boreMm} x ${sp.strokeMm} mm`), specBadge(sp, 'strokeMm', 'Bore and stroke')])]),
-      h('div.fact', [h('dt', 'Capacity from those'), h('dd', [h('span.num', `${cc} cc`), specBadge(sp, 'displacementCc', 'Capacity')])]),
-      h('div.fact', [h('dt', 'Final drive'), h('dd', [h('span.num', `${sp.finalDrive}:1`), specBadge(sp, 'finalDrive', 'Final drive')])]),
-      h('div.fact', [h('dt', 'Gears'), h('dd', [h('span.num', sp.gearRatios.join(', ')), specBadge(sp, 'gearRatios', 'Gear ratios')])]),
-      h('div.fact', [h('dt', 'Tyres, rear'), h('dd', [h('span.num', sp.tyresRear), specBadge(sp, 'tyresRear', 'Rear tyres')])]),
-      sp.topSpeedMph != null && h('div.fact', [h('dt', 'Top speed on record'), h('dd', [h('span.num', `${sp.topSpeedMph} mph`), specBadge(sp, 'topSpeedMph', 'Top speed')])]),
-      h('div.fact', [h('dt', 'Firing order'), h('dd', [h('span.num', sp.firingOrder), badge({conf: data.variants.firing?.conf ?? sp.conf, src: data.variants.firing?.src ?? sp.src, note: data.variants.firing?.note}, {file: 'variants', title: 'Firing order'})])]),
+      h('div.fact', [h('dt', t('Bore and stroke')), h('dd', [h('span.num', `${dec(sp.boreMm)} x ${dec(sp.strokeMm)} mm`), specBadge(sp, 'strokeMm', t('Bore and stroke'))])]),
+      h('div.fact', [h('dt', t('Capacity from those')), h('dd', [h('span.num', `${cc} cc`), specBadge(sp, 'displacementCc', t('Capacity'))])]),
+      h('div.fact', [h('dt', t('Final drive')), h('dd', [h('span.num', `${dec(sp.finalDrive)}:1`), specBadge(sp, 'finalDrive', t('Final drive'))])]),
+      h('div.fact', [h('dt', t('Gears')), h('dd', [h('span.num', sp.gearRatios.map(dec).join(', ')), specBadge(sp, 'gearRatios', t('Gear ratios'))])]),
+      h('div.fact', [h('dt', t('Tyres, rear')), h('dd', [h('span.num', sp.tyresRear), specBadge(sp, 'tyresRear', t('Rear tyres'))])]),
+      sp.topSpeedMph != null && h('div.fact', [h('dt', t('Top speed on record')), h('dd', [h('span.num', `${sp.topSpeedMph} mph`), specBadge(sp, 'topSpeedMph', t('Top speed'))])]),
+      h('div.fact', [h('dt', t('Firing order')), h('dd', [h('span.num', sp.firingOrder), badge({conf: data.variants.firing?.conf ?? sp.conf, src: data.variants.firing?.src ?? sp.src, note: data.variants.firing?.note}, {file: 'variants', title: t('Firing order')})])]),
     ]));
   }
 
-  el.append(
-    dash,
-    h('div.run-watch', [sectionRows, h('span.rng-label', 'Time'), timeSeg]),
-    block('Drive', [gearSeg, rpm, throttle, h('p.hint', 'Throttle is a pedal: hold it to rev, let go and it returns.'), speed]),
-    block('Chassis', [steer, steerCentre, bumpF, bumpR, solved]),
-    block('Roof and panels', [roofRow, coupeNote, h('div.run-btns', opens)]),
-    instBlock,
-    block('Sound', soundBtn, soundNote),
-    block('Figures behind the gauges', facts),
-  );
+  buildPanel();
+
+  /** The same panel in the new language, showing what the state says, with the engine still running if it was. */
+  function changeWords() {
+    const s = sim(), chains = chainsBtn.getAttribute('aria-pressed') === 'true', opened = solved.open;
+    const raising = roofDir < 0, lowering = roofDir > 0;
+    buildPanel();
+    throttle.set(s.throttle);
+    steer.set(s.steer);
+    bumpF.set(s.bumpF);
+    bumpR.set(s.bumpR);
+    roof.set(s.roof);
+    opens.forEach((b, i) => b.set(!!s.open[['bonnet', 'boot', 'doorL', 'doorR'][i]]));
+    timeSeg.set(s.timeScale);
+    soundBtn.set(soundOn);
+    solved.open = opened;
+    startBtn.textContent = s.running ? t('Stop|engine') : t('Start');
+    startBtn.setAttribute('aria-pressed', String(!!s.running));
+    roofBtn.textContent = raising ? t('Raising') : lowering ? t('Lowering') : s.roof > 0.5 ? t('Raise the hood') : t('Lower the hood');
+    chainsBtn.setAttribute('aria-pressed', chains);
+    sectionBtn.setAttribute('aria-pressed', section != null);
+    sectionRows.hidden = section == null;
+    if (section != null) sectionRows.set(section);
+    if (chains) labelChains(true);
+    if (active) { lastRpm = lastMph = lastCrank = -1; syncSpec(); readouts(app.sim); }
+  }
 
   // ---- running ---------------------------------------------------------------------------------
   function start() {
     base = Math.max(base, IDLE_RPM);
     merge({running: true, rpm: base});
-    startBtn.textContent = 'Stop';
+    startBtn.textContent = t('Stop|engine');
     startBtn.setAttribute('aria-pressed', 'true');
   }
   function stop() {
@@ -387,7 +426,7 @@ export function mount(el, app) {
     throttle.set(0);
     speed.set(0);
     rpm.set(IDLE_RPM);
-    startBtn.textContent = 'Start';
+    startBtn.textContent = t('Start');
     startBtn.setAttribute('aria-pressed', 'false');
     for (const l of lamps) { l.v = 0; l.dot.style.opacity = '0.08'; } // frames stop with the engine: nothing else would dim them
   }
@@ -400,7 +439,7 @@ export function mount(el, app) {
       lastRpm = r;
       rpmNum.textContent = r;
       rpmBarFill.style.transform = `scaleX(${(r / rpmLimit(spec())).toFixed(4)})`;
-      pistonNum.textContent = (f.running ? f.meanPistonSpeed : 0).toFixed(1);
+      pistonNum.textContent = fixed(f.running ? f.meanPistonSpeed : 0, 1);
     }
     const mph = Math.abs(f.speedMph);
     if (Math.round(mph * 10) !== lastMph) {
@@ -409,19 +448,19 @@ export function mount(el, app) {
       kphNum.textContent = `${(mph * 1.609344).toFixed(0)} km/h`;
     }
     const idling = f.running && !f.throttle && r <= IDLE_RPM + 30;
-    const word = !f.running ? 'Engine off' : idling ? 'Idling' : 'Running';
+    const word = !f.running ? t('Engine off') : idling ? t('Idling') : t('Running');
     if (stateWord.textContent !== word) stateWord.textContent = word;
     dash.classList.toggle('is-off', !f.running);
     gearNum.textContent = f.gear < 0 ? 'R' : f.gear === 0 ? 'N' : f.gear;
-    gearSub.textContent = f.ratio != null ? `${f.ratio}:1` : '';
+    gearSub.textContent = f.ratio != null ? `${dec(f.ratio)}:1` : '';
     if (f.crank !== lastCrank) {
       lastCrank = f.crank;
       crankNum.textContent = Math.round(f.crank);
-      camNum.textContent = `cam ${Math.round(f.camDeg)} deg`;
+      camNum.textContent = t('cam {n} deg', {n: Math.round(f.camDeg)});
       dial.set(f.crank);
     }
-    steerL.textContent = Math.abs(f.steerDeg.left).toFixed(1);
-    steerR.textContent = Math.abs(f.steerDeg.right).toFixed(1);
+    steerL.textContent = fixed(Math.abs(f.steerDeg.left), 1);
+    steerR.textContent = fixed(Math.abs(f.steerDeg.right), 1);
     steerG.set(f.steerDeg.left, f.steerDeg.right);
     const fm = f.bumpF * 1000, rm = f.bumpR * 1000;
     travelF.textContent = fm.toFixed(0);
@@ -459,7 +498,7 @@ export function mount(el, app) {
       merge({roof: next});
       if (next === 0 || next === 1) {
         roofDir = 0;
-        roofBtn.textContent = next ? 'Raise the hood' : 'Lower the hood';
+        roofBtn.textContent = next ? t('Raise the hood') : t('Lower the hood');
       } else more = true;
     }
     if (s.gear !== shownGear) { shownGear = s.gear; syncRanges(); gearSeg.querySelector('.seg').set(s.gear); }
@@ -468,7 +507,7 @@ export function mount(el, app) {
     if (document.activeElement !== speed.input) speed.set(s.running ? Math.abs(live?.speedMph ?? s.speedMph) : 0);
     if (document.activeElement !== rpm.input) {
       rpm.set(s.running ? s.rpm : IDLE_RPM);
-      if (s.running) rpm.querySelector('.rng-value').textContent = `${Math.round(live?.rpm ?? s.rpm)} rpm`;
+      if (s.running) rpm.querySelector('.rng-value').textContent = rpmText(live?.rpm ?? s.rpm);
     }
     readouts(app.sim);
     readChassis(app.sim);
@@ -502,6 +541,7 @@ export function mount(el, app) {
   document.addEventListener('visibilitychange', () => { if (audio) { if (document.hidden) audio.suspend(); else if (soundOn) audio.resume(); } });
 
   store.subscribe((s, ch) => {
+    if (ch.has('lang')) changeWords();
     if (ch.has('mode')) {
       if (s.mode === 'run' && !active) enter();
       else if (s.mode !== 'run' && active) leave(ch.has('xray'));
@@ -512,6 +552,6 @@ export function mount(el, app) {
       if (s.sim.rpm > rpmLimit(spec())) write({rpm: rpmLimit(spec())});
       if (s.sim.gear > gearCount(spec())) setGear(gearCount(spec()));
     }
-  }, ['mode', 'variant']);
+  }, ['mode', 'variant', 'lang']);
   if (get().mode === 'run') enter();
 }

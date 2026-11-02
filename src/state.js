@@ -1,4 +1,5 @@
 // The one store, and its sync with the URL hash and localStorage. Pure logic: no three.js, safe in node.
+import {LANGS, t} from './i18n.js';
 
 export const SYSTEMS = ['body', 'roof', 'interior', 'engine', 'induction', 'fuel', 'ignition', 'cooling', 'exhaust', 'transmission', 'driveline', 'front-suspension', 'rear-suspension', 'steering', 'brakes', 'wheels', 'electrical', 'hvac'];
 export const MODES = ['explore', 'run', 'jobs', 'diagnose', 'plan'];
@@ -24,6 +25,7 @@ export const initialState = () => ({
   chosen: false, // the owner has told us their car. Until then the app says "Choose your car"
   linked: null, // {own: variant | null} while looking at a car from a shared link. Never saved over the owner's car
   units: 'nm',
+  lang: 'en', // follows the language that is active: main.js loads the dictionary first, then sets this
   mode: 'explore',
   systems: {}, // a missing system means 'show'
   explode: 0,
@@ -92,6 +94,7 @@ export function formatHash(s) {
   if (s.xray) q.push('xray=1');
   const sys = Object.entries(s.systems).filter(([, m]) => m !== 'show').map(([k, m]) => `${k}.${m[0]}`);
   if (sys.length) q.push(`sys=${sys.join(',')}`);
+  if (s.lang === 'fr') q.push('l=fr');
   return `#${path}?${q.join('&')}`;
 }
 
@@ -112,8 +115,9 @@ export function parseHash(hash) {
   const v = parseVariantCode(q.get('v'));
   if (v) {
     patch.variant = fitVariant(v);
-    if (variantCode(patch.variant) !== variantCode({...v, market: v.market === 'us' ? 'us' : 'uk'})) patch.notice = `No such car was built. Showing the nearest, MY${patch.variant.my}.`;
+    if (variantCode(patch.variant) !== variantCode({...v, market: v.market === 'us' ? 'us' : 'uk'})) patch.notice = t('No such car was built. Showing the nearest, MY{my}.', {my: patch.variant.my});
   }
+  if (LANGS.includes(q.get('l'))) patch.lang = q.get('l'); // no l says nothing: the language is a setting, and links stay short
   if (q.has('p') || seg.length) patch.selected = q.get('p') || null;
   if (q.has('view')) patch.view = q.get('view');
   else if (seg.length && seg[0] !== 'job') patch.view = 'hero'; // the hash leaves out the defaults: going back has to restore them
@@ -135,14 +139,19 @@ export function parseHash(hash) {
 
 const sameVariant = (a, b) => variantCode(a) === variantCode(b);
 
-/** Keeps the hash and the store in step. Mode, job and car changes add a history entry; the rest replace it. */
-export function connectHash(st, win = window) {
+/**
+ * Keeps the hash and the store in step. Mode, job and car changes add a history entry; the rest replace it.
+ * A language in the hash goes to onLang, not the store: French has to load before anything renders in it.
+ */
+export function connectHash(st, win = window, onLang = null) {
   let last = '', applying = false;
   const apply = () => {
     if (win.location.hash === last) return;
     // Back to the bare first URL: the hash leaves out every default, so they are all stated here.
     const patch = win.location.hash ? parseHash(win.location.hash) : {mode: 'explore', job: null, selected: null, view: 'hero', explode: 0, xray: false, systems: {}, isolate: null};
     const now = st.get();
+    if (patch.lang && patch.lang !== now.lang) onLang?.(patch.lang);
+    delete patch.lang;
     if (patch.variant) {
       if (sameVariant(patch.variant, now.variant)) delete patch.variant; // keeps a known serial
       else if (now.linked?.own && sameVariant(patch.variant, now.linked.own)) { patch.variant = now.linked.own; patch.linked = null; }
@@ -164,7 +173,7 @@ export function connectHash(st, win = window) {
   };
   win.addEventListener('hashchange', apply);
   win.addEventListener('popstate', apply);
-  return st.subscribe(write, ['mode', 'job', 'variant', 'selected', 'view', 'explode', 'xray', 'systems']);
+  return st.subscribe(write, ['mode', 'job', 'variant', 'selected', 'view', 'explode', 'xray', 'systems', 'lang']);
 }
 
 // ---- localStorage -----------------------------------------------------------------------------
@@ -181,6 +190,7 @@ const SHAPE = {
   variant: (v) => (isObj(v) && ['4.0', '4.2'].includes(v.engine) && ['na', 'sc'].includes(v.induction) && ['coupe', 'convertible'].includes(v.body) && Number.isInteger(v.my) ? fitVariant(v) : undefined),
   chosen: (v) => (typeof v === 'boolean' ? v : undefined),
   units: (v) => (v === 'nm' || v === 'lbft' ? v : undefined),
+  lang: (v) => (LANGS.includes(v) ? v : undefined),
   doneSteps: eachValue((a) => (Array.isArray(a) ? a.filter((n) => toInt(n) !== undefined) : undefined)),
   lastStep: eachValue(toInt),
   lastJob: (v) => (typeof v === 'string' ? v : undefined),

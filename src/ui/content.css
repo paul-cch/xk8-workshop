@@ -109,6 +109,10 @@ html.layout-sheet .ws-foot { padding-bottom: 10px; }
 .ws-filters { display: flex; flex-wrap: wrap; gap: 6px; }
 .ws-filters--jobs { display: grid; grid-template-columns: 1fr 1.2fr .85fr auto; }
 html.garage .ws-filters--jobs { grid-template-columns: 1fr 1fr; }
+html:lang(fr):not(.garage) .ws-filters--jobs { grid-template-columns: 1fr 1.15fr .9fr; }
+html:lang(fr):not(.garage) .ws-filters--jobs .ws-toggle { grid-column: 1 / -1; }
+html:lang(fr) .ws-pick { flex-basis: 150px; }
+html:lang(fr) #ui .ws-nextprev .ws-big:not(.ws-big--go) { flex: 0 1 36%; padding-inline: 6px; gap: 4px; }
 .ws-pick { position: relative; flex: 1 1 92px; min-width: 0; }
 #ui .ws-pick select { width: 100%; height: var(--tap); padding: 0 20px 0 8px; border: 1px solid var(--line); border-radius: 0; background: var(--sheet); font-size: .9em; font-weight: 600; appearance: none; -webkit-appearance: none; text-overflow: ellipsis; }
 .ws-pick::after { content: ''; position: absolute; right: 8px; top: 50%; width: 6px; height: 6px; margin-top: -5px; border-right: 1.5px solid var(--ink-2); border-bottom: 1.5px solid var(--ink-2); transform: rotate(45deg); pointer-events: none; }

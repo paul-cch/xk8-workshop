@@ -18,6 +18,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import zlib from 'node:zlib';
+import {BOOT_TEXT, DOC_DESC, DOC_TITLE, STAGE_LABEL} from '../src/i18n.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = process.env.DIST_DIR ? path.resolve(process.env.DIST_DIR) : path.join(ROOT, 'dist');
@@ -26,8 +27,8 @@ const PACK = !args.has('--no-pack');
 const KB = (n) => `${(n / 1024).toFixed(1)} KB`;
 const gz = (b) => zlib.gzipSync(b, {level: 9});
 
-const TITLE = 'XK8 Workshop';
-const DESC = 'An interactive 3D workshop manual for the Jaguar XK8 and XKR (X100): take the car apart, follow step-by-step jobs, look up torques, chase faults and plan the service.';
+const TITLE = DOC_TITLE;
+const DESC = DOC_DESC;
 const BG = '#eceef0';
 const INK = '#14342b';
 const ACCENT = '#f2570b';
@@ -76,6 +77,23 @@ function packData() {
   return {json, raw, gzip: gz(json)};
 }
 
+// ---- french --------------------------------------------------------------------------------
+// i18n/fr/*.json merged into one {english: french} table, loaded by the page only when French is chosen.
+// I18N_PSEUDO=1 marks every source string instead: tools/i18n-sweep.mjs --pseudo uses that to find what never went through t().
+
+const PSEUDO = (s) => `‹${s.slice(0, s.includes('|') ? s.indexOf('|') : undefined).replace(/\{\w+\}|[^{]+?(?=\{|$)/g, (x) => (x[0] === '{' ? x : x.replace(/\b[a-z]{4,}\b/g, (w) => `${w}${w.slice(0, Math.ceil(w.length / 3))}`)))}›`;
+function french() {
+  const dir = path.join(ROOT, process.env.I18N_PSEUDO ? 'i18n/source' : 'i18n/fr');
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith('.json') && f !== 'manifest.json').sort() : [];
+  const all = {};
+  for (const f of files) {
+    const d = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+    if (Array.isArray(d)) for (const s of d) all[s] = PSEUDO(s);
+    else Object.assign(all, d);
+  }
+  return all;
+}
+
 // ---- bundle --------------------------------------------------------------------------------
 
 const minGlsl = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').split('\n').map((l) => l.replace(/\/\/.*$/, '').trim()).filter(Boolean).join('\n');
@@ -91,7 +109,7 @@ const threePlugin = {
   },
 };
 
-async function bundle(version) {
+async function bundle(version, frVersion) {
   const res = await build({
     entryPoints: [path.join(ROOT, 'src/main.js')],
     bundle: true,
@@ -102,7 +120,7 @@ async function bundle(version) {
     target: 'es2022',
     legalComments: 'none',
     drop: ['debugger'],
-    define: {__VERSION__: JSON.stringify(version)},
+    define: {__VERSION__: JSON.stringify(version), __FR_VERSION__: JSON.stringify(frVersion)},
     plugins: [threePlugin],
     logLevel: 'warning',
   });
@@ -187,18 +205,23 @@ const FAVICON = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><re
 // ---- page ----------------------------------------------------------------------------------
 
 // Runs before anything else. Decodes both payloads, starts the bundle, and shows a plain message if it cannot.
-const LOADER = `(()=>{
+// The few words it can show before fr.js exists travel in the page, so a French reader sees French from the first frame.
+const LOADER = (fr) => `(()=>{
 const el=document.getElementById.bind(document);
+const fr=(()=>{const h=location.hash;if(/[?&]l=en\\b/.test(h))return false;if(/[?&]l=fr\\b/.test(h))return true;try{return JSON.parse(localStorage.getItem('xk8-workshop')).lang==='fr'}catch(e){return false}})();
+const T=${JSON.stringify(Object.fromEntries(Object.entries(BOOT_TEXT).map(([k, en]) => [k, [en, fr[en] ?? en]]))).replace(/</g, '\\u003c')};
+const say=(k)=>T[k][fr?1:0];
+if(fr){document.documentElement.lang='fr';document.querySelector('#boot .boot-text').textContent=say('open')}
 const fail=(m)=>{const b=el('boot');if(b)b.textContent=m};
-if(!window.DecompressionStream){fail('XK8 Workshop needs a current browser: Chrome, Edge or Firefox from 2023, or Safari 16.4 or later.');return}
+if(!window.DecompressionStream){fail(say('browser'));return}
 const bytes=(id)=>{const n=el(id),s=atob(n.textContent);n.remove();const u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u};
 const text=(u)=>new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
 window.__xk8boot={data:text(bytes('xk8-data'))};
-${PACK ? `text(bytes('xk8-js')).then((c)=>{const s=document.createElement('script');s.type='module';s.textContent=c;document.body.append(s)}).catch((e)=>{console.error(e);fail('The page could not unpack itself. Try reloading.')});` : ''}
+${PACK ? `text(bytes('xk8-js')).then((c)=>{const s=document.createElement('script');s.type='module';s.textContent=c;document.body.append(s)}).catch((e)=>{console.error(e);fail(say('unpack'))});` : ''}
 if(/^https?:$/.test(location.protocol)){const l=document.createElement('link');l.rel='manifest';l.href='manifest.webmanifest';document.head.append(l);if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 })()`;
 
-const page = ({css, js, data}) => `<!doctype html>
+const page = ({css, js, data, fr}) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -221,11 +244,11 @@ ${SITE ? `<meta property="og:url" content="${SITE}">\n<link rel="canonical" href
 <style>${css}</style>
 </head>
 <body>
-<div id="app"><canvas id="stage" tabindex="0" aria-label="3D model of the car. Arrow keys orbit, plus and minus zoom, Escape clears the selection. The same parts are listed in the panels."></canvas><div id="ui"></div><div id="boot" role="status"><div><span class="boot-text">Opening the workshop</span><span class="boot-bar"></span></div></div></div>
+<div id="app"><canvas id="stage" tabindex="0" aria-label="${STAGE_LABEL}"></canvas><div id="ui"></div><div id="boot" role="status"><div><span class="boot-text">${BOOT_TEXT.open}</span><span class="boot-bar"></span></div></div></div>
 <noscript><p>XK8 Workshop is an interactive 3D page and needs JavaScript.</p></noscript>
 <script type="text/plain" id="xk8-data">${data}</script>
 ${PACK ? `<script type="text/plain" id="xk8-js">${js}</script>` : ''}
-<script>${LOADER}</script>
+<script>${LOADER(fr)}</script>
 ${PACK ? '' : `<script type="module">${js.replace(/<\/script/g, '<\\/script')}</script>`}
 </body>
 </html>
@@ -241,7 +264,7 @@ const manifest = () => JSON.stringify({
   ],
 }, null, 1);
 
-const serviceWorker = (version) => `const V='xk8-${version}';const F=['./','manifest.webmanifest','icon-192.png','icon-512.png','icon-maskable-512.png'];
+const serviceWorker = (version) => `const V='xk8-${version}';const F=['./','fr.js','manifest.webmanifest','icon-192.png','icon-512.png','icon-maskable-512.png'];
 self.addEventListener('install',(e)=>e.waitUntil(caches.open(V).then((c)=>c.addAll(F)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',(e)=>e.waitUntil(caches.keys().then((k)=>Promise.all(k.filter((x)=>x!==V).map((x)=>caches.delete(x)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',(e)=>{if(e.request.method!=='GET'||new URL(e.request.url).origin!==location.origin)return;e.respondWith(caches.match(e.request,{ignoreSearch:true}).then((r)=>r||fetch(e.request).catch(()=>caches.match('./'))))});
@@ -252,14 +275,18 @@ self.addEventListener('fetch',(e)=>{if(e.request.method!=='GET'||new URL(e.reque
 const t0 = performance.now();
 const data = packData();
 const provisional = createHash('sha1').update(data.gzip).digest('hex').slice(0, 8);
-const js = await bundle(provisional);
+const fr = french();
+const frJs = `window.__xk8fr=${JSON.stringify(fr)};\n`;
+const frVersion = createHash('sha1').update(frJs).digest('hex').slice(0, 10); // a new dictionary is a new URL, past any HTTP cache
+const js = await bundle(provisional, frVersion);
 const css = readCss();
-const version = createHash('sha1').update(js).update(data.gzip).update(css).digest('hex').slice(0, 10);
+const version = createHash('sha1').update(js).update(data.gzip).update(css).update(frJs).digest('hex').slice(0, 10);
 const jsGz = gz(js);
-const html = page({css, js: PACK ? jsGz.toString('base64') : js, data: data.gzip.toString('base64')});
+const html = page({css, js: PACK ? jsGz.toString('base64') : js, data: data.gzip.toString('base64'), fr});
 
 fs.mkdirSync(DIST, {recursive: true});
 fs.writeFileSync(path.join(DIST, 'index.html'), html);
+fs.writeFileSync(path.join(DIST, 'fr.js'), frJs);
 fs.writeFileSync(path.join(DIST, 'manifest.webmanifest'), manifest());
 fs.writeFileSync(path.join(DIST, 'sw.js'), serviceWorker(version));
 fs.writeFileSync(path.join(DIST, 'icon-192.png'), icon(192, false));
@@ -278,5 +305,6 @@ console.log(`dist/index.html  ${KB(size)} raw, ${KB(gz(html).length)} gzipped, $
 console.log(`  js    ${KB(js.length)} minified, ${KB(jsGz.length)} gzipped${PACK ? '' : ' (not packed)'}`);
 console.log(`  css   ${KB(css.length)}`);
 console.log(`  data  ${KB(data.raw)} source, ${KB(data.json.length)} compacted, ${KB(data.gzip.length)} gzipped`);
+console.log(`dist/fr.js  ${KB(Buffer.byteLength(frJs))} raw, ${KB(gz(frJs).length)} gzipped, ${Object.keys(fr).length} strings`);
 if (size > 1024 * 1024) console.log(`  OVER the 1 MB target by ${KB(size - 1024 * 1024)}`);
 if (!SITE) console.log('  SITE_URL not set: share tags are relative. Use --release to publish.');

@@ -3,6 +3,7 @@
 //
 // Engine frame: millimetres. Crank axis along the car, row 0 at the front. A bank is the car's right (+z), B bank its
 // left. `crank` is degrees of crank rotation, clockwise seen from the front, and crank 0 is 1A at firing TDC.
+import {N} from '../i18n.js';
 
 // ---- Estimates. None of these is in data/: they are read off the reference images and are for motion only. ----
 /** Con-rod centres. parts.json records rodLengthMm as a gap. Estimated from jaguar-2003-guide-p07-aj34-engine-views.png. */
@@ -424,25 +425,25 @@ export function chassisFrame(steer, bumpF, bumpR) {
 export function chassisReadout(c) {
   const f = c.front.right, r = c.rear.right, n = (x, d = 1) => +x.toFixed(d);
   return [
-    {label: 'Rack travel', value: n(c.rackMm), unit: 'mm'},
-    {label: 'Road wheel angle, left', value: n(c.steerDeg.left), unit: 'deg'},
-    {label: 'Road wheel angle, right', value: n(c.steerDeg.right), unit: 'deg'},
-    {label: 'Steering wheel', value: n(c.steeringWheelDeg, 0), unit: 'deg'},
-    {label: 'Front camber', value: n(f.camberDeg, 2), unit: 'deg'},
-    {label: 'Front castor', value: n(f.casterDeg, 2), unit: 'deg'},
-    {label: 'Front toe', value: n(f.toeDeg, 2), unit: 'deg'},
-    {label: 'Front lower arm', value: n(f.lowerDeg), unit: 'deg'},
-    {label: 'Front upper arm', value: n(f.upperDeg), unit: 'deg'},
-    {label: 'Front damper length', value: n(f.damperM * 1000, 0), unit: 'mm'},
-    {label: 'Front spring length', value: n(f.springM * 1000, 0), unit: 'mm'},
-    {label: 'Front track change', value: n(f.trackMm), unit: 'mm'},
-    {label: 'Front anti-roll bar', value: n(deg(f.barRad)), unit: 'deg'},
-    {label: 'Rear camber', value: n(r.camberDeg, 2), unit: 'deg'},
-    {label: 'Rear wishbone', value: n(r.wishboneDeg), unit: 'deg'},
-    {label: 'Axle shaft angle', value: n(r.shaftDeg), unit: 'deg'},
-    {label: 'Rear damper length', value: n(r.damperM * 1000, 0), unit: 'mm'},
-    {label: 'Rear spring length', value: n(r.springM * 1000, 0), unit: 'mm'},
-    {label: 'Rear track change', value: n(r.trackMm), unit: 'mm'},
+    {label: N('Rack travel'), value: n(c.rackMm), unit: 'mm'},
+    {label: N('Road wheel angle, left'), value: n(c.steerDeg.left), unit: N('deg')},
+    {label: N('Road wheel angle, right'), value: n(c.steerDeg.right), unit: N('deg')},
+    {label: N('Steering wheel'), value: n(c.steeringWheelDeg, 0), unit: N('deg')},
+    {label: N('Front camber'), value: n(f.camberDeg, 2), unit: N('deg')},
+    {label: N('Front castor'), value: n(f.casterDeg, 2), unit: N('deg')},
+    {label: N('Front toe'), value: n(f.toeDeg, 2), unit: N('deg')},
+    {label: N('Front lower arm'), value: n(f.lowerDeg), unit: N('deg')},
+    {label: N('Front upper arm'), value: n(f.upperDeg), unit: N('deg')},
+    {label: N('Front damper length'), value: n(f.damperM * 1000, 0), unit: 'mm'},
+    {label: N('Front spring length'), value: n(f.springM * 1000, 0), unit: 'mm'},
+    {label: N('Front track change'), value: n(f.trackMm), unit: 'mm'},
+    {label: N('Front anti-roll bar'), value: n(deg(f.barRad)), unit: N('deg')},
+    {label: N('Rear camber'), value: n(r.camberDeg, 2), unit: N('deg')},
+    {label: N('Rear wishbone'), value: n(r.wishboneDeg), unit: N('deg')},
+    {label: N('Axle shaft angle'), value: n(r.shaftDeg), unit: N('deg')},
+    {label: N('Rear damper length'), value: n(r.damperM * 1000, 0), unit: 'mm'},
+    {label: N('Rear spring length'), value: n(r.springM * 1000, 0), unit: 'mm'},
+    {label: N('Rear track change'), value: n(r.trackMm), unit: 'mm'},
   ];
 }
 

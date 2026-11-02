@@ -16,6 +16,8 @@ Take the car apart in 3D, watch the engine run, and follow repair jobs step by s
 
 Choose your car by VIN or by hand. It covers coupe and convertible, 4.0 and 4.2, naturally aspirated and supercharged.
 
+The whole page also reads in French: switch with EN/FR at the top, or add `l=fr` to a shared link.
+
 ## How far to trust it
 
 This is an unofficial owner resource, not connected with or endorsed by Jaguar. Check safety-critical values against a factory source before relying on them. You work on your car at your own risk.

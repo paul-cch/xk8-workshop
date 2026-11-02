@@ -180,7 +180,7 @@ export function createPicker({stage, registry, store, rig}) {
     if (s.hover && s.hover !== s.selected) list.push({id: s.hover});
     setLabels(list);
   };
-  store.subscribe(syncAuto, ['selected', 'hover']);
+  store.subscribe(syncAuto, ['selected', 'hover', 'lang']);
 
   return {
     index, pickAt, setLabels,

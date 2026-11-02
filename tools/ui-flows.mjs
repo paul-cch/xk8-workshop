@@ -2,6 +2,8 @@
 // Real events on the real page: keyboard, mouse, touch. Each check prints PASS or FAIL. Exits 1 on any failure or console
 // error. Screenshots live in tools/ui-check.mjs; this one proves behaviour.
 import {chromium, devices, webkit} from 'playwright';
+import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
@@ -409,6 +411,55 @@ await wk.close();
   const after = await paint();
   check('a lost GPU context comes back with its environment', env && after >= before * 0.5, `${before} -> ${after}`);
   await p.context().close();
+}
+
+// ---- language ---------------------------------------------------------------------------------------------------------
+{
+  const phone = {viewport: {width: 390, height: 844}, deviceScaleFactor: 2, isMobile: true, hasTouch: true};
+  const lang = (p) => p.evaluate(() => ({html: document.documentElement.lang, store: window.__xk8.store.get().lang, hash: location.hash, saved: JSON.parse(localStorage.getItem('xk8-workshop') ?? '{}').lang}));
+  const reach = (p) => p.evaluate(() => { const b = document.querySelector('.seg-lang button:last-child'), r = b.getBoundingClientRect(); return r.width > 0 && r.left >= 0 && r.right <= innerWidth && r.top >= 0 && r.height; });
+  const p = await open(phone);
+  check('EN/FR is on the top bar on a phone, at thumb size', await reach(p) >= 44, await reach(p));
+  await p.evaluate(() => { const {store, data} = window.__xk8; store.set({mode: 'jobs', job: {id: data.jobs.items[0].id, step: 1}, selected: null}); });
+  await p.waitForTimeout(250);
+  const before = await p.evaluate(() => { const s = window.__xk8.store.get(); return `${s.mode} ${s.job.id} ${s.job.step}`; });
+  await p.click('.seg-lang button:last-child');
+  await p.waitForFunction(() => document.documentElement.lang === 'fr');
+  let l = await lang(p);
+  check('French changes the page without a reload, with the job step kept', before === await p.evaluate(() => { const s = window.__xk8.store.get(); return `${s.mode} ${s.job.id} ${s.job.step}`; }), before);
+  check('French is in the store, the hash and localStorage', l.store === 'fr' && /[?&]l=fr\b/.test(l.hash) && l.saved === 'fr', JSON.stringify(l));
+  await p.reload();
+  await p.waitForFunction(() => window.__xk8);
+  l = await lang(p);
+  check('French survives a reload', l.html === 'fr' && l.store === 'fr', JSON.stringify(l));
+  check('the button shows French on', await p.getAttribute('.seg-lang button:last-child', 'aria-pressed') === 'true');
+  await p.evaluate(() => window.__xk8.ui.select('brakes.caliper-front'));
+  await p.waitForTimeout(200);
+  await p.click('.seg-lang button:first-child');
+  await p.waitForFunction(() => document.documentElement.lang === 'en');
+  l = await lang(p);
+  check('English comes back, with the selection kept', !/l=/.test(l.hash) && l.saved === 'en' && await p.evaluate(() => window.__xk8.store.get().selected) === 'brakes.caliper-front', JSON.stringify(l));
+  check('no console errors, language', !p.errors.length, p.errors[0] ?? '');
+  await p.context().close();
+
+  const side = await open({viewport: {width: 844, height: 390}, deviceScaleFactor: 2, isMobile: true, hasTouch: true});
+  check('EN/FR is on the top bar on its side', await reach(side) >= 30, await reach(side));
+  await side.context().close();
+
+  // No fr.js at all: a copy of the page on its own.
+  const alone = fs.mkdtempSync(path.join(os.tmpdir(), 'xk8-no-fr-'));
+  fs.copyFileSync(path.join(process.env.DIST_DIR ? path.resolve(process.env.DIST_DIR) : path.join(ROOT, 'dist'), 'index.html'), path.join(alone, 'index.html'));
+  const ctx = await browser.newContext({viewport: {width: 1280, height: 800}});
+  const q = await ctx.newPage();
+  await q.goto(`file://${path.join(alone, 'index.html')}`);
+  await q.waitForFunction(() => window.__xk8, null, {timeout: 120000});
+  await q.click('.seg-lang button:last-child');
+  await q.waitForTimeout(400);
+  l = await lang(q);
+  check('French that cannot load stays in English and says so', l.html === 'en' && l.store === 'en' && /could not be loaded/.test(await q.locator('.toast').textContent()), await q.locator('.toast').textContent());
+  check('the button goes back to EN', await q.getAttribute('.seg-lang button:first-child', 'aria-pressed') === 'true');
+  await ctx.close();
+  fs.rmSync(alone, {recursive: true});
 }
 
 await browser.close();

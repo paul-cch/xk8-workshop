@@ -1,6 +1,7 @@
 // Small shared UI parts: an element builder, the provenance badge and its dialog, torque blocks with the loud warning,
 // copy buttons, segmented controls and sliders. Any panel can import these. The shell also puts them on app.ui.
-import {appliesStatus, convertTorqueText, data, formatTorque, forVariant, provenance} from '../data.js';
+import {appliesStatus, convertTorqueText, data, en, formatTorque, forVariant, provenance} from '../data.js';
+import {N, t} from '../i18n.js';
 
 /** h('button.row.on', {onclick, 'aria-label': 'x'}, 'text', node, [more]). Text goes in as text, never as HTML. */
 export function h(spec, attrs, ...kids) {
@@ -31,14 +32,20 @@ export function fill(el, ...kids) {
   return el;
 }
 
-export const SYSTEM_NAMES = {body: 'Body', roof: 'Roof', interior: 'Interior', engine: 'Engine', induction: 'Induction', fuel: 'Fuel', ignition: 'Ignition', cooling: 'Cooling', exhaust: 'Exhaust', transmission: 'Gearbox', driveline: 'Driveline', 'front-suspension': 'Front suspension', 'rear-suspension': 'Rear suspension', steering: 'Steering', brakes: 'Brakes', wheels: 'Wheels and tyres', electrical: 'Electrical', hvac: 'Heating and air con'};
+/** A sentence with elements in it: rich('Fits the {part}.', {part: h('b', name)}) gives the pieces for h(). The order is the language's. */
+export const rich = (english, vars) => t(english).split(/(\{\w+\})/).map((x) => vars[x.slice(1, -1)] ?? x).filter((x) => x !== '');
 
-/** The name a car goes by on screen, and the one on its record. */
-export const carName = (v) => `${v.induction === 'sc' ? 'XKR' : 'XK8'} ${v.engine} ${v.body}`;
-export const DISCLAIMER = 'Unofficial owner resource, not connected with or endorsed by Jaguar. Check safety-critical values against a factory source before relying on them. You work on your car at your own risk.';
-export const carLine = (v) => `${v.my} model year, ${v.market === 'us' ? 'US' : 'UK'}${v.serial ? `, serial ${v.serial}` : ''}`;
+const SYSTEM_NAMES = {body: N('Body'), roof: N('Roof'), interior: N('Interior'), engine: N('Engine'), induction: N('Induction'), fuel: N('Fuel'), ignition: N('Ignition'), cooling: N('Cooling'), exhaust: N('Exhaust'), transmission: N('Gearbox'), driveline: N('Driveline'), 'front-suspension': N('Front suspension'), 'rear-suspension': N('Rear suspension'), steering: N('Steering'), brakes: N('Brakes'), wheels: N('Wheels and tyres'), electrical: N('Electrical'), hvac: N('Heating and air con')};
+export const systemName = (s) => t(SYSTEM_NAMES[s] ?? s);
+const BODY_NAMES = {coupe: N('coupe'), convertible: N('convertible')};
+export const bodyName = (b) => t(BODY_NAMES[b] ?? b);
+
+/** The name a car goes by on screen, and the one on its record. The body word is the only part that translates. */
+export const carName = (v) => `${v.induction === 'sc' ? 'XKR' : 'XK8'} ${v.engine} ${bodyName(v.body)}`;
+export const DISCLAIMER = N('Unofficial owner resource, not connected with or endorsed by Jaguar. Check safety-critical values against a factory source before relying on them. You work on your car at your own risk.');
+export const carLine = (v) => t(v.serial ? '{my} model year, {market}, serial {serial}' : '{my} model year, {market}', {my: v.my, market: t(v.market === 'us' ? 'US' : 'UK'), serial: v.serial});
 /** The short form, for the top bar. */
-export const carTag = (v) => `${v.my}${v.market === 'us' ? ' US' : ''}${v.serial ? ` ${v.serial}` : ''}`;
+export const carTag = (v) => `${v.my}${v.market === 'us' ? ` ${t('US')}` : ''}${v.serial ? ` ${v.serial}` : ''}`;
 
 /** What this car is prone to, worst first. Each record is the weakspots.json one; status() says 'yes' or 'maybe'. */
 export const proneTo = (v) => forVariant(data.weakspots.items, v).sort((a, b) => b.severity - a.severity);
@@ -49,7 +56,7 @@ const uiRoot = () => document.getElementById('ui') ?? document.body;
 
 /** A modal in the top layer: focus trapped, Escape closes, focus returns. On a phone it comes up from the bottom. */
 export function dialog({title, className = '', body, onClose}) {
-  const close = h('button.dlg-close', {type: 'button'}, 'Close');
+  const close = h('button.dlg-close', {type: 'button'}, t('Close'));
   const panel = h('div.dlg-in', [h('header.dlg-head', [h('h2.dlg-title', title), close]), h('div.dlg-body', body)]);
   const d = h('dialog.dlg', {class: className, 'aria-label': title}, panel);
   close.addEventListener('click', () => d.close());
@@ -71,13 +78,15 @@ export function toast(text) {
 
 // ---- provenance ------------------------------------------------------------------------------
 
+const conf = (word, says) => ({get word() { return t(word); }, get says() { return t(says); }});
 export const CONF = {
-  factory: {word: 'factory', says: 'From a Jaguar document: a handbook, a bulletin, or JTIS, the dealer workshop manual.'},
-  corroborated: {word: 'corroborated', says: 'Two or more independent non-factory sources agree.'},
-  single: {word: 'single', says: 'One credible source, not cross-checked.'},
-  community: {word: 'community', says: 'Forum consensus. Not confirmed by a document.'},
-  estimated: {word: 'estimated', says: 'Read off a reference image to make the model move. Not a specification.'},
+  factory: conf(N('factory'), N('From a Jaguar document: a handbook, a bulletin, or JTIS, the dealer workshop manual.')),
+  corroborated: conf(N('corroborated'), N('Two or more independent non-factory sources agree.')),
+  single: conf(N('single'), N('One credible source, not cross-checked.')),
+  community: conf(N('community'), N('Forum consensus. Not confirmed by a document.')),
+  estimated: conf(N('estimated'), N('Read off a reference image to make the model move. Not a specification.')),
 };
+const SOURCE_KIND = {factory: N('factory'), vendor: N('vendor'), specialist: N('specialist'), enthusiast: N('enthusiast'), forum: N('forum'), reference: N('reference')};
 
 /** Resolves src keys when the record is not a top-level item, like a part number or a spec field. */
 function sourcesOf(rec, file) {
@@ -86,19 +95,19 @@ function sourcesOf(rec, file) {
   return (rec.src ?? []).map((k) => data[file]?.sources?.[k]).filter(Boolean);
 }
 
-export function showProvenance(rec, {title = 'Where this comes from', file = null, value = null, extra = null} = {}) {
-  const conf = rec.conf ?? 'estimated';
+export function showProvenance(rec, {title = t('Where this comes from'), file = null, value = null, extra = null} = {}) {
+  const level = rec.conf ?? 'estimated';
   const sources = sourcesOf(rec, file);
   dialog({
     title,
     className: 'dlg-prov',
     body: [
       value && h('p.prov-value', value),
-      h('p.prov-conf', [h('span', {class: `prov prov-${conf} still`}, (provenance(rec).scope ?? CONF[conf]).word), ' ', (provenance(rec).scope ?? CONF[conf]).says]),
+      h('p.prov-conf', [h('span', {class: `prov prov-${level} still`}, (provenance(rec).scope ?? CONF[level]).word), ' ', (provenance(rec).scope ?? CONF[level]).says]),
       extra,
-      sources.length ? h('ul.prov-src', sources.map((s) => h('li', [h('b', s.title), h('span', [s.publisher, s.kind].filter(Boolean).join(', ')), s.url && h('a', {href: s.url, target: '_blank', rel: 'noopener noreferrer'}, s.url.replace(/^https?:\/\//, ''))])))
-        : conf !== 'estimated' && h('p.prov-note', 'No source recorded for this value.'),
-      rec.note && h('details.ws-more.prov-research', [h('summary', 'Research notes'), h('p.prov-note', rec.note)]),
+      sources.length ? h('ul.prov-src', sources.map((s) => h('li', [h('b', s.title), h('span', [s.publisher, s.kind && t(SOURCE_KIND[s.kind] ?? s.kind)].filter(Boolean).join(', ')), s.url && h('a', {href: s.url, target: '_blank', rel: 'noopener noreferrer'}, s.url.replace(/^https?:\/\//, ''))])))
+        : level !== 'estimated' && h('p.prov-note', t('No source recorded for this value.')),
+      rec.note && h('details.ws-more.prov-research', [h('summary', t('Research notes')), h('p.prov-note', rec.note)]),
     ],
   });
 }
@@ -106,9 +115,9 @@ export function showProvenance(rec, {title = 'Where this comes from', file = nul
 /** The badge on a number. Opens its source and note. Pass file when rec is not a top-level item. */
 export function badge(rec, opts = {}) {
   if (!rec) return null;
-  const conf = rec.conf ?? 'estimated';
-  const {word, says} = provenance(rec).scope ?? CONF[conf]; // what a factory source is worth for this car
-  return h('button', {type: 'button', class: `prov prov-${conf}`, title: `${word}: ${says} Open the source.`, 'aria-label': `Source: ${word}. Open`, onclick: (e) => { e.stopPropagation(); showProvenance(rec, opts); }}, word);
+  const level = rec.conf ?? 'estimated';
+  const {word, says} = provenance(rec).scope ?? CONF[level]; // what a factory source is worth for this car
+  return h('button', {type: 'button', class: `prov prov-${level}`, title: t('{word}: {says} Open the source.', {word, says}), 'aria-label': t('Source: {word}. Open', {word}), onclick: (e) => { e.stopPropagation(); showProvenance(rec, opts); }}, word);
 }
 
 /** A variants.json spec field with its own provenance, falling back to the whole record's. */
@@ -126,34 +135,34 @@ const SAFETY_IDS = /camshaft-sprocket|crank-pulley|crank-damper|crankshaft-pulle
 const DISAGREE = /disagree|conflict|figures exist|\b(?:lists|tabulates|gives|says|prints|printed)\b[^.]*\d+\s*(?:(?:-|to)\s*\d+\s*)?Nm/i;
 
 export const isSafetyCritical = (t) => SAFETY_SYSTEMS.has(t.system) || SAFETY_IDS.test(t.id);
-export const sourcesDisagree = (t) => !!t.note && DISAGREE.test(t.note);
+export const sourcesDisagree = (rec) => !!rec.note && DISAGREE.test(en(rec, 'note'));
 
 /** The loud text for a torque, or null. Below corroborated, or sources in dispute, on a safety-critical fastener. */
-export function torqueWarning(t) {
-  if (!isSafetyCritical(t)) return null;
-  const weak = provenance(t).weak, split = sourcesDisagree(t);
+export function torqueWarning(rec) {
+  if (!isSafetyCritical(rec)) return null;
+  const weak = provenance(rec).weak, split = sourcesDisagree(rec), one = rec.conf === 'single';
   if (!weak && !split) return null;
-  if (weak && split) return `Sources disagree and this value rests on ${t.conf === 'single' ? 'one source' : 'forum consensus'}. Check the manual before you tighten this.`;
-  if (split) return 'Sources disagree on this value. Read the note and check the manual before you tighten this.';
-  return `This value rests on ${t.conf === 'single' ? 'one source' : 'forum consensus'}. Check the manual before you tighten this.`;
+  if (weak && split) return t(one ? 'Sources disagree and this value rests on one source. Check the manual before you tighten this.' : 'Sources disagree and this value rests on forum consensus. Check the manual before you tighten this.');
+  if (split) return t('Sources disagree on this value. Read the note and check the manual before you tighten this.');
+  return t(one ? 'This value rests on one source. Check the manual before you tighten this.' : 'This value rests on forum consensus. Check the manual before you tighten this.');
 }
 
 /** One torque, with stages, sequence, reuse, threadlock, note, badge and any loud warning. */
-export function torqueBlock(t, units, {variant = null, hideLabel = false} = {}) {
-  const f = formatTorque(t, units);
-  const warn = torqueWarning(t);
-  const status = variant ? appliesStatus(t.appliesTo, variant) : 'yes';
-  return h('div.tq', {class: warn ? 'tq-loud' : '', dataset: {torque: t.id}}, [
-    warn && h('p.loud', {role: 'note'}, [h('b', 'Verify first'), warn]),
-    h('div.tq-head', [!hideLabel && h('span.tq-label', t.label), status === 'maybe' && h('span.vin-tag', 'check your VIN'), badge(t, {title: t.label, value: f.text})]),
+export function torqueBlock(rec, units, {variant = null, hideLabel = false} = {}) {
+  const f = formatTorque(rec, units);
+  const warn = torqueWarning(rec);
+  const status = variant ? appliesStatus(rec.appliesTo, variant) : 'yes';
+  return h('div.tq', {class: warn ? 'tq-loud' : '', dataset: {torque: rec.id}}, [
+    warn && h('p.loud', {role: 'note'}, [h('b', t('Verify first')), warn]),
+    h('div.tq-head', [!hideLabel && h('span.tq-label', rec.label), status === 'maybe' && h('span.vin-tag', t('check your VIN')), badge(rec, {title: rec.label, value: f.text})]),
     f.value != null && h('p.tq-value', [h('b', f.value), h('span.tq-unit', f.unit), f.alt && h('span.tq-alt', f.alt)]),
     f.stages.length > 0 && h('ol.tq-stages', f.stages.map((s) => h('li', s))),
-    f.value == null && !f.stages.length && h('p.tq-none', 'Not sourced. Do not guess this one.'),
+    f.value == null && !f.stages.length && h('p.tq-none', t('Not sourced. Do not guess this one.')),
     f.sequence && h('p.tq-meta', f.sequence),
-    t.reuse && h('p.tq-meta', [h('b', 'Reuse '), t.reuse]),
-    t.threadlock && h('p.tq-meta', [h('b', 'Threadlock '), t.threadlock]),
-    sourcesDisagree(t) && !warn && h('p.tq-meta', [h('b', 'Sources differ'), ' Read the note.']),
-    t.note && h('p.tq-note', convertTorqueText(t.note, units)),
+    rec.reuse && h('p.tq-meta', [h('b', t('Reuse')), ' ', rec.reuse]),
+    rec.threadlock && h('p.tq-meta', [h('b', t('Threadlock')), ' ', rec.threadlock]),
+    sourcesDisagree(rec) && !warn && h('p.tq-meta', [h('b', t('Sources differ')), ' ', t('Read the note.')]),
+    rec.note && h('p.tq-note', convertTorqueText(rec.note, units)),
   ]);
 }
 
@@ -175,14 +184,14 @@ export function copyText(text) {
 }
 
 export function copyButton(text, name = text) {
-  const b = h('button.copy', {type: 'button', 'aria-label': `Copy ${name}`}, 'Copy');
+  const b = h('button.copy', {type: 'button', 'aria-label': t('Copy {name}', {name})}, t('Copy'));
   b.addEventListener('click', async (e) => {
     e.stopPropagation();
     const ok = await copyText(text);
-    b.textContent = ok ? 'Copied' : 'Failed';
+    b.textContent = ok ? t('Copied') : t('Failed');
     b.classList.toggle('done', ok);
-    toast(ok ? `Copied ${name}` : 'This browser blocked the copy');
-    setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('done'); }, 1400);
+    toast(ok ? t('Copied {name}', {name}) : t('This browser blocked the copy'));
+    setTimeout(() => { b.textContent = t('Copy'); b.classList.remove('done'); }, 1400);
   });
   return b;
 }

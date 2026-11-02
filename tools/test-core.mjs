@@ -5,8 +5,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import * as K from '../src/sim/kin.js';
-import {appliesStatus, carDims, convertTorqueText, data, decodeVin, forVariant, formatTorque, initData, jobSteps, modelYearFromSerial, refsFor, search, serialKey, specFor, stepTorques} from '../src/data.js';
+import {appliesStatus, carDims, convertTorqueText, data, decodeVin, en, formatTorque, forVariant, initData, jobSteps, modelYearFromSerial, partName, refsFor, search, serialKey, specFor, stepTorques, translateData} from '../src/data.js';
 import {createStore, formatHash, initialState, parseHash} from '../src/state.js';
+import {andList, collate, dec, fmtDate, fold, num, pct, plural, pounds, t, useLanguage} from '../src/i18n.js';
 
 const near = (a, b, tol, what) => assert.ok(Math.abs(a - b) <= tol, `${what}: ${a} is not ${b} +/- ${tol}`);
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -276,6 +277,10 @@ assert.equal(convertTorqueText('Stage 1: bolts 1 to 10 to 20 Nm', 'lbft'), 'Stag
 assert.equal(convertTorqueText('Bolts 11 to 20 to 20 Nm plus 150 degrees', 'lbft'), 'Bolts 11 to 20 to 15 lb ft plus 150 degrees');
 assert.equal(convertTorqueText('Final stage: bolts 11 and 12 to 25 Nm', 'lbft'), 'Final stage: bolts 11 and 12 to 18 lb ft');
 assert.equal(convertTorqueText('tighten to 57-63 Nm', 'lbft'), 'tighten to 42-46 lb ft');
+assert.equal(convertTorqueText('tensioner bolt 38-47 Nm', 'lbft'), 'tensioner bolt 28-35 lb ft', 'a hyphen after bolt is a range');
+assert.equal(convertTorqueText('Bolts 8 to 10 Nm.', 'lbft'), 'Bolts 5.9-7 lb ft.', 'plural bolts with one number is a range');
+assert.equal(convertTorqueText('bolt 5 to 20 Nm', 'lbft'), 'bolt 5 to 15 lb ft', 'one bolt by number');
+assert.equal(convertTorqueText('the two M8 to 23-27 Nm', 'lbft'), 'the two M8 to 17-20 lb ft', 'M8 is a size, not a count');
 assert.equal(convertTorqueText('tighten to 23 to 27 Nm', 'lbft'), 'tighten to 17-20 lb ft');
 assert.equal(convertTorqueText('at 5 Nm and then 10 Nm', 'lbft'), 'at 3.7 lb ft and then 7 lb ft');
 for (const t of data.torques.items) {
@@ -315,5 +320,71 @@ assert.ok(!discs({engine: '4.0', induction: 'na', body: 'coupe', my: 1999, marke
 assert.ok(discs({engine: '4.0', induction: 'sc', body: 'coupe', my: 1998, market: 'uk', serial: '028000'}).includes('C2C41250'));
 assert.ok(!discs({engine: '4.0', induction: 'sc', body: 'coupe', my: 1998, market: 'uk', serial: '028000'}).includes('C2C41249'));
 assert.ok(!discs({engine: '4.2', induction: 'sc', body: 'coupe', my: 2004, market: 'uk'}).includes('C2C41250'));
+
+// ---- language ------------------------------------------------------------------------------
+{
+  const wheelNut = data.torques.items.find((x) => /wheel nut/i.test(x.label));
+  const part = data.parts.items[0];
+  const english = {label: wheelNut.label, part: part.name, stages: data.torques.items.find((x) => x.stages?.length)};
+  assert.equal(t('Stop|engine'), 'Stop', 'a sense note never shows in English');
+  assert.equal(t('Step {n} of {total}', {n: 2, total: 5}), 'Step 2 of 5');
+  assert.equal(plural(1, '{n} job', '{n} jobs'), '1 job');
+  assert.equal(plural(0, '{n} job', '{n} jobs'), '0 jobs');
+  assert.equal(plural(1, '{n} tasks|one', '{n} tasks'), '1 tasks', 'old English stays as it was');
+  assert.equal(num(60000), '60,000');
+  assert.equal(dec(3.57), '3.57');
+  assert.equal(pounds(1200), '£1,200');
+  assert.equal(pct(50), '50%');
+
+  useLanguage('fr', {'Stop|engine': 'Arrêter', 'Stop|urgency': 'Arrêt', '{n} job': '{n} intervention', '{n} jobs': '{n} interventions', '{a} and {b}': '{a} et {b}', [wheelNut.label]: 'Écrou de roue, jante alliage', [part.name]: 'Pièce traduite', 'Not sourced': 'Non renseigné'});
+  translateData();
+  assert.equal(t('Stop|engine'), 'Arrêter');
+  assert.equal(t('Stop|urgency'), 'Arrêt', 'two senses of one English word');
+  assert.equal(t('Not in the table'), 'Not in the table', 'English is the fallback');
+  assert.equal(plural(0, '{n} job', '{n} jobs'), '0 intervention', 'French counts 0 as singular');
+  assert.equal(plural(1, '{n} job', '{n} jobs'), '1 intervention');
+  assert.equal(plural(2, '{n} job', '{n} jobs'), '2 interventions');
+  assert.equal(andList(['4.0', '4.2']), '4.0 et 4.2');
+  assert.equal(num(60000), '60\u202f000', 'thin space for thousands');
+  assert.equal(dec(3.57), '3,57');
+  assert.equal(dec('88-102'), '88-102');
+  assert.equal(pounds(1200), '1\u202f200\u202f£');
+  assert.match(fmtDate(new Date('2026-11-02')), /^2 nov\.? 2026$/);
+  assert.ok(collate('Écrou', 'Vis') < 0, 'é sorts with e');
+  assert.equal(fold('Écrou de ROUE'), 'ecrou de roue');
+
+  // the data swaps in place, and English stays on hand for anything that reads meaning out of the text
+  assert.equal(wheelNut.label, 'Écrou de roue, jante alliage');
+  assert.equal(en(wheelNut, 'label'), english.label);
+  assert.equal(partName(part.id), 'Pièce traduite');
+  assert.equal(data.parts.byId.get(part.id), part, 'the same record: nothing holds a stale copy');
+
+  // numbers in French text still convert, and the rules that protect them still hold
+  assert.equal(convertTorqueText('Serrez à 20 Nm', 'lbft'), 'Serrez à 15 lb ft');
+  assert.equal(convertTorqueText('57-63 Nm', 'lbft'), '42-46 lb ft');
+  assert.equal(convertTorqueText('57 à 63 Nm', 'lbft'), '42-46 lb ft');
+  assert.equal(convertTorqueText('5,5 Nm', 'lbft'), '4,1 lb ft', 'decimal comma in, decimal comma out');
+  assert.equal(convertTorqueText('vis 1 à 10 à 20 Nm', 'lbft'), 'vis 1 à 10 à 15 lb ft', 'a count of bolts is not a range');
+  assert.equal(formatTorque({nm: '4.5-5.5'}, 'nm').value, '4,5–5,5');
+
+  // search finds French with or without accents, and English too, and shows the record in French
+  const hit = (q) => search(q, {kinds: ['torque'], limit: 5}).find((r) => r.id === wheelNut.id);
+  assert.ok(hit('écrou de roue'), 'French with accents');
+  assert.ok(hit('ecrou de roue'), 'French without accents');
+  assert.ok(hit('ECROU roue'), 'any case');
+  assert.equal(hit('wheel nut').title, 'Écrou de roue, jante alliage', 'English finds it, French shows it');
+
+  useLanguage('en', null);
+  translateData();
+  assert.equal(wheelNut.label, english.label, 'English comes back exactly');
+  assert.equal(part.name, english.part);
+  assert.ok(search('wheel nut', {kinds: ['torque']}).length);
+
+  const s = {...initialState(), lang: 'fr'};
+  assert.match(formatHash(s), /[?&]l=fr$/);
+  assert.ok(!formatHash(initialState()).includes('l='), 'English keeps its links as they were');
+  assert.equal(parseHash(formatHash(s)).lang, 'fr');
+  assert.equal(parseHash('#/explore?v=4.0-na-coupe-1999').lang, undefined, 'no l says nothing');
+}
 
 console.log('core tests passed');

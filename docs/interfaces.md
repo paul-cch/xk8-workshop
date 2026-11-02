@@ -77,6 +77,8 @@ A job keeps the car solid. `pose` thins only `CLEARS` for the part leaving, `src
 
 `SITE_URL=https://your.site/path/ node tools/build.mjs --release` is the build to publish: absolute share tags, `og:url`, canonical, a fresh `og.png`. It stops without `SITE_URL`. Other builds carry `dist/og.png` over. `app.noGL` is true when no WebGL context can be made: stage, rig and pick are stand-ins from `main.js`, Run is hidden, and the car is still built so "modelled" stays true. `src/ui/engine-labels.js` holds `headBoltLabels` and `cylinderLabels` for `showNumbers`, which now leaves `selected` alone. A record's `research` field is for the data files and is dropped from the page.
 
+`src/i18n.js`, `tools/i18n-extract.mjs`, `tools/i18n-check.mjs` and `tools/i18n-sweep.mjs` are the language system: see `docs/i18n.md`. `node tools/fr-flows.mjs` tests the French behaviour and compares every torque in both languages. `node tools/fr-shots.mjs [--out name] [--only phone|landscape|desktop]` screenshots the French page on all three shapes and reports clipped text. Every word on screen goes through `t()`, and every panel that holds text subscribes to `lang`.
+
 ## Traps
 
 - `window.__xk8` is `app` plus `settle(timeout) bench(n) report()`. `settle` waits for stillness, capped at 4 s, because a running engine never stops.

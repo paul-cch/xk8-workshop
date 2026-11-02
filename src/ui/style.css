@@ -51,7 +51,7 @@ html.garage { --paper: #fff; --sheet: #fff; --ink: #000; --ink-2: #111; --ink-3:
 .seg button + button { border-left: 1px solid var(--line); }
 .seg button[aria-pressed='true'] { background: var(--ink); color: var(--paper); font-weight: 600; }
 .seg button:disabled { color: var(--line); }
-.seg-units button { font-family: var(--mono); font-size: .86rem; }
+.seg-units button, .seg-lang button { font-family: var(--mono); font-size: .86rem; }
 .seg-wide { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; width: 100%; }
 .seg-wide button { padding: 0 4px; min-height: var(--row); font-size: .87rem; }
 .seg-tri button { min-height: 30px; padding: 0 7px; font-size: .78rem; }
@@ -246,7 +246,7 @@ button.prov::after { content: ''; position: absolute; inset: -12px -4px; }
 .inst-sub { font: .68rem/1.2 var(--mono); color: var(--ink-2); }
 
 #ui > .run-hud { pointer-events: none; }
-.run-hud { position: absolute; z-index: 5; left: 18px; top: calc(52px + var(--safe-t) + 14px); width: min(460px, calc(100vw - var(--rail) - 40px)); padding: 10px 12px 8px; background: rgba(247, 248, 249, .86); border: 1px solid var(--line-soft); animation: rise .5s var(--enter) both; }
+.run-hud { position: absolute; z-index: 5; left: 18px; top: calc(52px + var(--safe-t) + 14px + var(--banner-h, 0px)); width: min(460px, calc(100vw - var(--rail) - 40px)); padding: 10px 12px 8px; background: rgba(247, 248, 249, .86); border: 1px solid var(--line-soft); animation: rise .5s var(--enter) both; }
 .run-hud .prov { pointer-events: auto; }
 .run-hud .inst-title { min-height: 2.5em; }
 
@@ -395,9 +395,11 @@ html.layout-sheet .mode[aria-current='page']::after { left: 18%; right: 18%; top
 html.layout-sheet .mode-search { display: block; }
 html.layout-sheet .brand, html.layout-sheet .search-btn, html.layout-sheet .top-space { display: none; }
 html.layout-sheet .top { padding: var(--safe-t) 8px 0 4px; justify-content: space-between; }
-html.layout-sheet .car-btn { flex: 1; min-width: 0; }
+html.layout-sheet .car-btn { flex: 1; min-width: 0; height: auto; min-height: 44px; }
+html.layout-sheet .car-btn { padding: 0 2px 0 8px; font-size: .9rem; }
 html.layout-sheet .car-btn b, html.layout-sheet .car-btn span { overflow: hidden; text-overflow: ellipsis; }
-html.layout-sheet .seg-units button { min-height: 44px; min-width: 44px; padding: 0 6px; }
+html.layout-sheet .car-btn b { white-space: normal; line-height: 1.22; max-height: 2.5em; font-size: .86rem; } /* the language control takes its width: two lines, not one cut short */
+html.layout-sheet .seg-units button, html.layout-sheet .seg-lang button { min-height: 44px; min-width: 44px; padding: 0 6px; }
 html.layout-sheet .top .toggle { min-height: 44px; }
 html.layout-sheet .views { left: 0; right: 0; bottom: calc(58px + var(--safe-b) + min(var(--sheet-h), 52vh) + 6px); flex-wrap: nowrap; overflow-x: auto; padding: 0 8px; scrollbar-width: none; pointer-events: auto; -webkit-overflow-scrolling: touch; }
 html.layout-sheet .views::-webkit-scrollbar { display: none; }
@@ -463,7 +465,7 @@ html.layout-sheet .dash-rpm { font-size: 2.8rem; }
   .search-btn kbd { display: none; }
   .search-btn { width: 44px; min-width: 44px; padding: 0 6px; font-size: .78rem; overflow: hidden; }
   .layout-rail .search-btn span { font-size: 0; }
-  .layout-rail .search-btn span::before { content: 'Find'; font-size: .85rem; }
+  .layout-rail .search-btn span::before { content: attr(data-short); font-size: .85rem; }
   .brand { padding-right: 6px; }
   .mode { padding: 0 9px; }
   .mode[aria-current='page']::after { left: 9px; right: 9px; }
@@ -513,3 +515,31 @@ html.garage .mode { color: #000; }
   .hot:hover .hot-text { text-decoration: underline; }
   .sr:hover:not([aria-selected='true']) { background: var(--line-soft); }
 }
+
+/* ---- French runs longer than English. All of this waits for lang=fr, so the English layout stays as drawn. ---- */
+html:lang(fr) .seg button, html:lang(fr) .btn, html:lang(fr) .tree-head { white-space: normal; line-height: 1.12; }
+html:lang(fr) .seg-units button, html:lang(fr) .seg-lang button { white-space: nowrap; }
+html:lang(fr) .seg-wide button, html:lang(fr) .pick-field .seg button { padding: 2px 3px; font-size: .8rem; overflow-wrap: anywhere; }
+html:lang(fr) .seg-tri button { padding: 0 4px; font-size: .72rem; }
+html:lang(fr) .seg:not(.seg-units, .seg-lang, .seg-tri) { max-width: 100%; }
+html:lang(fr) .run-watch .seg { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); width: 100%; }
+html:lang(fr) .run-watch .seg button { padding: 2px 3px; font-size: .8rem; }
+html:lang(fr) .ex-cta { flex-wrap: wrap; }
+html:lang(fr) .ex-cta .btn { flex: 1 1 auto; }
+html:lang(fr) .ex-carline { flex-wrap: wrap; }
+html:lang(fr) .prov { flex: 0 1 auto; height: auto; min-height: 20px; white-space: normal; text-align: left; }
+html:lang(fr) .ws-check header { flex-wrap: wrap; }
+html:lang(fr) .tree-head { overflow-wrap: anywhere; }
+html:lang(fr) .ws-urg { width: auto; min-width: 52px; padding: 0 4px; }
+html:lang(fr) .ws-band-word { min-width: 76px; padding: 10px 6px; font-size: .86rem; overflow-wrap: anywhere; text-align: center; }
+html:lang(fr) .ws-facts dd { flex-wrap: wrap; min-width: 0; }
+html:lang(fr) .inst-title { font-size: .6rem; letter-spacing: 0; overflow-wrap: anywhere; }
+html:lang(fr) .search-btn span { overflow: hidden; text-overflow: ellipsis; }
+html:lang(fr).layout-sheet .modes { grid-auto-columns: minmax(0, 1fr); }
+html:lang(fr).layout-sheet .mode { padding: 0; font-size: .74rem; letter-spacing: -.01em; overflow: hidden; text-overflow: ellipsis; }
+html:lang(fr).layout-sheet.garage .mode { font-size: .6rem; }
+html:lang(fr) .tree-count { flex: none; }
+html:lang(fr) .dash-top { min-width: 0; }
+html:lang(fr) .dash-label { letter-spacing: 0; }
+html:lang(fr) .dash-rev { flex-wrap: wrap; min-width: 0; }
+html:lang(fr) .dash-top .btn-start { flex: none; }

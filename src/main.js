@@ -1,7 +1,8 @@
 // Boot only: load the data, build the stage and the car, wire the frame loop, hand over to the UI.
 import * as THREE from 'three';
-import {applies, carDims, data, jobSteps, loadData, setProvenanceCar, specFor} from './data.js';
-import {clearSaved, connectHash, connectStorage, store} from './state.js';
+import {applies, carDims, data, jobSteps, loadData, setProvenanceCar, specFor, translateData} from './data.js';
+import {getLang, loadFrench, t, useLanguage} from './i18n.js';
+import {clearSaved, connectHash, connectStorage, parseHash, store} from './state.js';
 import {buildCar, updateCar} from './car/index.js';
 import {setDetail} from './car/kit.js';
 import {lookMaterials, materials} from './car/materials.js';
@@ -16,6 +17,20 @@ import {mount} from './ui/shell.js';
 
 /** The loader's cover says what it is doing, so a slow phone never looks stuck. */
 const say = (text) => { const n = document.querySelector('#boot .boot-text'); if (n) n.textContent = text; };
+
+/**
+ * The one way the language changes. French loads first, so nothing renders half translated, then the data swaps in place and
+ * store.lang tells everything else to repaint. If French cannot load, the page stays in English and says so.
+ */
+let langTurn = 0;
+async function setLang(next) {
+  const turn = ++langTurn;
+  const ok = next !== 'fr' || await loadFrench();
+  if (turn !== langTurn) return; // a later press won
+  const lang = ok ? next : 'en';
+  if (lang !== getLang()) { useLanguage(lang); translateData(); }
+  store.set({lang, ...(ok ? null : {notice: t('French could not be loaded, so the page stays in English.')})});
+}
 
 /** A real context, not just the constructor: the constructor exists on machines that cannot create one. */
 function canDraw() {
@@ -42,7 +57,9 @@ async function boot() {
   mark('data');
   registry.setData(data.parts);
   connectStorage(store);
-  connectHash(store);
+  const wanted = parseHash(location.hash).lang ?? store.get().lang;
+  connectHash(store, window, setLang);
+  await setLang(wanted);
   setDetail(matchMedia('(pointer: coarse)').matches ? 0.6 : 1);
 
   const v = store.get().variant;
@@ -55,9 +72,9 @@ async function boot() {
   if (gl) stage.scene.add(registry.root);
   mark('stage');
   // The car is built with or without a GPU: the parts list reads what is modelled from it.
-  await buildCar(ctx, (done) => say(`Building the car, ${Math.round(done * 100)} percent`), mark);
+  await buildCar(ctx, (done) => say(t('Building the car, {n} percent', {n: Math.round(done * 100)})), mark);
   mark('car');
-  say('Starting up');
+  say(t('Starting up'));
   preparePose(registry);
 
   const stand = gl ? null : withoutGpu(ctx);
@@ -70,7 +87,7 @@ async function boot() {
   const tunnel = gl ? createTunnel(registry) : null;
   const clock = newClock();
   const calm = matchMedia('(prefers-reduced-motion: reduce)');
-  const app = {store, data, stage, rig, pick, registry, ctx, clock, tunnel, sim: null, pose: null, noGL: !gl};
+  const app = {store, data, stage, rig, pick, registry, ctx, clock, tunnel, sim: null, pose: null, noGL: !gl, setLang};
 
   if (gl) stage.onFrame((dt) => {
     const s = store.get();
@@ -156,9 +173,9 @@ boot().catch((e) => {
   const reset = document.createElement('button');
   reset.type = 'button';
   reset.className = 'boot-reset';
-  reset.textContent = 'Reset saved data and reload';
+  reset.textContent = t('Reset saved data and reload');
   reset.addEventListener('click', () => { clearSaved(); location.hash = ''; location.reload(); });
   const words = document.createElement('p');
-  words.textContent = `The workshop did not start: ${e.message}`;
+  words.textContent = t('The workshop did not start: {why}', {why: e.message});
   cover.replaceChildren(words, reset);
 });

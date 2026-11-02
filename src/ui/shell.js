@@ -3,6 +3,7 @@
 // to move between records. Panels own what is inside the dock. What the dock covers is reported to the stage.
 import * as THREE from 'three';
 import {data, forVariant, partName} from '../data.js';
+import {N, STAGE_LABEL, t} from '../i18n.js';
 import {MODES} from '../state.js';
 import * as explore from './explore.js';
 import * as run from './run.js';
@@ -16,8 +17,9 @@ import {badge, carName, carTag, dialog, fill, h, proneTo, seg, toast} from './wi
 
 const PANELS = {explore, run, jobs, diagnose, plan};
 const KEEP = new Set(['explore', 'run']); // these hold their own state across visits; the others mount on each visit
-const TITLES = {explore: 'Explore', run: 'Run', jobs: 'Jobs', diagnose: 'Diagnose', plan: 'Plan'};
-const VIEWS = [['hero', 'Whole car'], ['side', 'Side'], ['front', 'Front'], ['rear', 'Rear'], ['top', 'Top'], ['underside', 'Under'], ['engine-bay', 'Engine bay'], ['boot', 'Boot'], ['wheel-fr', 'Wheel']];
+const TITLES = {explore: N('Explore'), run: N('Run'), jobs: N('Jobs|mode'), diagnose: N('Diagnose'), plan: N('Plan')};
+const VIEWS = [['hero', N('Whole car')], ['side', N('Side')], ['front', N('Front')], ['rear', N('Rear')], ['top', N('Top')], ['underside', N('Under')], ['engine-bay', N('Engine bay')], ['boot', N('Boot')], ['wheel-fr', N('Wheel')]];
+const SNAP_WORD = {peek: N('peek'), half: N('half'), full: N('full')};
 const SKINS = new Set(['body', 'roof', 'interior']);
 const RAIL = '(min-width: 1000px), (orientation: landscape) and (min-width: 640px)';
 const IDLE_S = 25; // quiet time before the car starts turning again: the teardown handback
@@ -48,6 +50,7 @@ function createSheet(dock, grip, body, {onSnap}) {
   };
   const fitBody = () => { body.style.height = `${Math.max(60, sheet.h - grip.offsetHeight)}px`; };
 
+  sheet.say = () => grip.setAttribute('aria-label', sheet.moved ? t('Panel height: {name}. Press to change.', {name: t(SNAP_WORD[sheet.snap])}) : t('Panel height'));
   sheet.measure = (bar, top, peek, strip = null) => {
     const avail = window.innerHeight - bar;
     sheet.full = Math.round(avail - top - 4);
@@ -59,7 +62,8 @@ function createSheet(dock, grip, body, {onSnap}) {
   };
   sheet.to = (name) => {
     sheet.snap = name;
-    grip.setAttribute('aria-label', `Panel height: ${name}. Press to change.`);
+    sheet.moved = true;
+    sheet.say();
     const next = sheet[name];
     place(next, true);
     if (next > sheet.h) fitBody();
@@ -133,21 +137,20 @@ function createSheet(dock, grip, body, {onSnap}) {
 function firstScreen(app) {
   const years = data.variants.items;
   const from = Math.min(...years.map((r) => r.myFrom)), to = Math.max(...years.map((r) => r.myTo));
-  const lead = h('p.intro-lead');
-  const el = h('div.intro', [
-    h('p.intro-kick', `Jaguar XK8 and XKR, X100, ${from} to ${to}`),
-    h('p.intro-title', 'XK8 Workshop'),
-    lead,
-    h('p.intro-go', 'Drag to turn it. Tap any part.'),
-    h('div.intro-btns', [
-      h('button.btn.intro-watch', {type: 'button', onclick: () => app.ui.watch()}, 'Watch the engine run'),
-      h('button.btn.intro-car', {type: 'button', onclick: () => app.ui.openCar()}, 'Set up your car'),
-    ]),
-  ]);
-  /** The counts follow the car on show. */
+  const el = h('div.intro');
+  /** The counts follow the car on show, and all of it follows the language. */
   el.paint = (v) => {
     const n = (d) => forVariant(d.items, v).length;
-    lead.replaceChildren(h('span.intro-short', 'A working 3D car to take apart, with the real torques, part numbers and jobs.'), h('span.intro-count', ` For your exact car: ${n(data.parts)} parts, ${n(data.torques)} torques, ${n(data.jobs)} jobs.`));
+    el.replaceChildren(
+      h('p.intro-kick', t('Jaguar XK8 and XKR, X100, {from} to {to}', {from, to})),
+      h('p.intro-title', t('XK8 Workshop')),
+      h('p.intro-lead', [h('span.intro-short', t('A working 3D car to take apart, with the real torques, part numbers and jobs.')), h('span.intro-count', ` ${t('For your exact car: {parts} parts, {torques} torques, {jobs} jobs.', {parts: n(data.parts), torques: n(data.torques), jobs: n(data.jobs)})}`)]),
+      h('p.intro-go', t('Drag to turn it. Tap any part.')),
+      h('div.intro-btns', [
+        h('button.btn.intro-watch', {type: 'button', onclick: () => app.ui.watch()}, t('Watch the engine run')),
+        h('button.btn.intro-car', {type: 'button', onclick: () => app.ui.openCar()}, t('Set up your car')),
+      ]),
+    );
   };
   return el;
 }
@@ -229,7 +232,7 @@ export function mount(el, app) {
   app.ui = ui;
 
   // ---- frame ----------------------------------------------------------------------------------
-  const modes = h('nav.modes', {'aria-label': 'Modes'});
+  const modes = h('nav.modes');
   const modeBtn = {};
   for (const m of MODES) {
     modeBtn[m] = h('button.mode', {type: 'button', dataset: {mode: m}, onclick: () => {
@@ -237,56 +240,61 @@ export function mount(el, app) {
       if (now.mode === m && m === 'jobs' && now.job) store.set({job: null});
       else if (m === 'jobs' && ui.lookupFrom) backToJob();
       else store.set({mode: m});
-    }}, TITLES[m]);
+    }});
     modes.append(modeBtn[m]);
   }
-  const searchMode = h('button.mode.mode-search', {type: 'button', onclick: () => ui.openSearch()}, 'Search');
+  const searchMode = h('button.mode.mode-search', {type: 'button', onclick: () => ui.openSearch()});
   modes.append(searchMode);
 
-  const brand = h('button.brand', {type: 'button', title: 'Back to the whole car', onclick: () => { store.set({mode: 'explore', selected: null, view: 'hero'}); }}, h('span.brand-name', 'XK8 Workshop'));
-  const searchBtn = h('button.search-btn', {type: 'button', onclick: () => ui.openSearch()}, [h('span', 'Search everything'), h('kbd', /Mac|iP/.test(navigator.platform) ? 'Cmd K' : 'Ctrl K')]);
-  const carBtn = h('button.car-btn', {type: 'button', onclick: () => ui.openCar(), 'aria-label': 'Your car. Change it'});
-  const units = seg({label: 'Torque units', options: [{value: 'nm', label: 'Nm'}, {value: 'lbft', label: 'lb ft'}], value: store.get().units, onChange: (v) => store.set({units: v}), className: 'seg-units'});
-  const garage = h('button.toggle.garage-btn', {type: 'button', 'aria-pressed': 'false', title: 'Large high-contrast type, and the screen stays on', onclick: () => store.set({garage: !store.get().garage})}, 'Garage');
+  const brandName = h('span.brand-name');
+  const brand = h('button.brand', {type: 'button', onclick: () => { store.set({mode: 'explore', selected: null, view: 'hero'}); }}, brandName);
+  const searchWords = h('span');
+  const searchBtn = h('button.search-btn', {type: 'button', onclick: () => ui.openSearch()}, [searchWords, h('kbd', /Mac|iP/.test(navigator.platform) ? 'Cmd K' : 'Ctrl K')]);
+  const carBtn = h('button.car-btn', {type: 'button', onclick: () => ui.openCar()});
+  const units = seg({options: [{value: 'nm', label: 'Nm'}, {value: 'lbft', label: 'lb ft'}], value: store.get().units, onChange: (v) => store.set({units: v}), className: 'seg-units'});
+  // Each language names itself, so a reader who cannot read the page can still find their own.
+  const langs = seg({options: [{value: 'en', label: 'EN', aria: 'English'}, {value: 'fr', label: 'FR', aria: 'Français'}], value: store.get().lang, onChange: async (v) => { await app.setLang(v); langs.set(store.get().lang); }, className: 'seg-lang'});
+  const garage = h('button.toggle.garage-btn', {type: 'button', 'aria-pressed': 'false', onclick: () => store.set({garage: !store.get().garage})});
   const spacer = h('div.top-space');
   // Under about 900 px wide the rail's top bar has no room for these: one button holds them.
   const menuBtn = h('button.toggle.top-menu', {type: 'button', onclick: () => {
-    const d = dialog({title: 'Settings', body: [
-      h('h3.lab', 'Torque units'),
-      seg({label: 'Torque units', options: [{value: 'nm', label: 'Nm'}, {value: 'lbft', label: 'lb ft'}], value: store.get().units, onChange: (v) => store.set({units: v}), className: 'seg-wide'}),
-      h('h3.lab', 'Garage mode'),
-      h('button.btn.menu-garage', {type: 'button', onclick: () => { store.set({garage: !store.get().garage}); d.close(); }}, store.get().garage ? 'Turn garage mode off' : 'Turn garage mode on'),
+    const d = dialog({title: t('Settings'), body: [
+      h('h3.lab', t('Torque units')),
+      seg({label: t('Torque units'), options: [{value: 'nm', label: 'Nm'}, {value: 'lbft', label: 'lb ft'}], value: store.get().units, onChange: (v) => store.set({units: v}), className: 'seg-wide'}),
+      h('h3.lab', t('Garage mode')),
+      h('button.btn.menu-garage', {type: 'button', onclick: () => { store.set({garage: !store.get().garage}); d.close(); }}, store.get().garage ? t('Turn garage mode off') : t('Turn garage mode on')),
     ]});
-  }}, 'Menu');
-  const top = h('header.top', [h('h1.vh', 'XK8 Workshop'), brand, spacer, searchBtn, carBtn, units, garage, menuBtn]);
+  }});
+  const heading = h('h1.vh');
+  const top = h('header.top', [heading, brand, spacer, searchBtn, carBtn, units, langs, garage, menuBtn]);
 
   const dockTitle = h('span.dock-title');
-  const grip = h('button.dock-grip', {type: 'button', 'aria-label': 'Panel height'}, [h('i.grip-bar'), dockTitle]);
+  const grip = h('button.dock-grip', {type: 'button'}, [h('i.grip-bar'), dockTitle]);
   const dockBody = h('div.dock-body', {role: 'main'});
-  const dock = h('aside.dock', {'aria-label': 'Panel'}, [grip, dockBody]);
+  const dock = h('aside.dock', [grip, dockBody]);
 
-  const viewBar = h('div.views', {role: 'group', 'aria-label': 'Camera views'});
+  const viewBar = h('div.views', {role: 'group'});
   const viewBtn = {};
-  for (const [name, label] of VIEWS) {
-    viewBtn[name] = h('button.view', {type: 'button', onclick: () => { dismiss(); store.set({view: null}); store.set({view: name}); }}, label);
+  for (const [name] of VIEWS) {
+    viewBtn[name] = h('button.view', {type: 'button', onclick: () => { dismiss(); store.set({view: null}); store.set({view: name}); }});
     viewBar.append(viewBtn[name]);
   }
   const orbitBtn = h('button.view.view-orbit', {type: 'button', 'aria-pressed': 'false', onclick: () => {
     if (orbiting) { userOff = true; setOrbit(false); } else { userOff = false; asleep = false; setOrbit(true); }
-  }}, 'Orbit');
+  }});
   viewBar.append(orbitBtn);
 
-  const skip = h('button.skip', {type: 'button', onclick: () => { store.set({mode: 'explore', selected: null}); requestAnimationFrame(() => { document.getElementById('part-list')?.querySelector('button')?.focus(); }); }}, 'Skip to the parts list');
+  const skip = h('button.skip', {type: 'button', onclick: () => { store.set({mode: 'explore', selected: null}); requestAnimationFrame(() => { document.getElementById('part-list')?.querySelector('button')?.focus(); }); }});
   const live = h('div.vh', {'aria-live': 'polite'});
   const picked = h('div.picked', {hidden: true});
   const banner = h('div.banner', {hidden: true, role: 'status'});
   const partBar = h('div.part-bar', {hidden: true});
   // In a step the car is a strip above the text. This hands it the screen and takes it back.
   const stripBtn = h('button.strip-btn', {type: 'button', hidden: true, onclick: () => { sheet.to(sheet.snap === 'peek' ? (store.get().garage ? 'full' : 'half') : 'peek'); paintStrip(); }});
-  const paintStrip = () => { stripBtn.textContent = sheet.snap === 'peek' ? 'Back to the text' : 'See the car'; };
+  const paintStrip = () => { stripBtn.textContent = sheet.snap === 'peek' ? t('Back to the text') : t('See the car'); };
   let introOn = !store.get().chosen && !app.noGL;
   let introEl = firstScreen(app);
-  const hots = h('div.hots', {'aria-label': 'Start with what this car is known for'});
+  const hots = h('div.hots');
   viewBar.prepend(partBar);
   el.replaceChildren(skip, top, dock, viewBar, introEl, hots, picked, banner, stripBtn, live);
   introEl.paint(store.get().variant);
@@ -296,8 +304,32 @@ export function mount(el, app) {
   const stops = {};
   let current = null;
   for (const m of MODES) {
-    panelEl[m] = h('section.panel', {hidden: true, 'aria-label': TITLES[m], dataset: {mode: m}});
+    panelEl[m] = h('section.panel', {hidden: true, dataset: {mode: m}});
     dockBody.append(panelEl[m]);
+  }
+  /** Every fixed word in the frame. Runs once at the start and again on a change of language. */
+  function paintWords() {
+    modes.setAttribute('aria-label', t('Modes'));
+    for (const m of MODES) { modeBtn[m].textContent = t(TITLES[m]); panelEl[m].setAttribute('aria-label', t(TITLES[m])); }
+    searchMode.textContent = t('Search');
+    heading.textContent = brandName.textContent = t('XK8 Workshop');
+    brand.title = t('Back to the whole car');
+    searchWords.textContent = t('Search everything');
+    searchWords.dataset.short = t('Find'); // the narrow top bar shows this one
+    carBtn.setAttribute('aria-label', t('Your car. Change it'));
+    units.setAttribute('aria-label', t('Torque units'));
+    langs.setAttribute('aria-label', t('Language'));
+    garage.textContent = t('Garage');
+    garage.title = t('Large high-contrast type, and the screen stays on');
+    menuBtn.textContent = t('Menu');
+    dock.setAttribute('aria-label', t('Panel'));
+    viewBar.setAttribute('aria-label', t('Camera views'));
+    for (const [name, label] of VIEWS) viewBtn[name].textContent = t(label);
+    orbitBtn.textContent = t('Orbit');
+    skip.textContent = t('Skip to the parts list');
+    hots.setAttribute('aria-label', t('Start with what this car is known for'));
+    stage.renderer.domElement.setAttribute('aria-label', t(STAGE_LABEL));
+    sheet?.say();
   }
   function show(m) {
     if (current && !KEEP.has(current)) { stops[current]?.(); stops[current] = null; panelEl[current].replaceChildren(); }
@@ -322,16 +354,17 @@ export function mount(el, app) {
   const overlay = () => el.querySelector('.chain-tag:not([hidden])')?.offsetHeight ?? 0; // the chain caption sits above the car, not on it
   const report = () => {
     const isRail = rail;
-    const t = top.offsetHeight + (banner.hidden ? 0 : banner.offsetHeight);
+    const above = top.offsetHeight + (banner.hidden ? 0 : banner.offsetHeight);
+    document.documentElement.style.setProperty('--banner-h', `${banner.hidden ? 0 : banner.offsetHeight}px`);
     if (isRail) {
       const low = introOn && introEl && window.innerHeight < SHORT_H ? introEl.offsetHeight + 8 : 0; // no room beside the car: the heading goes above it
-      stage.setInsets({top: t + overlay() + low, right: dock.offsetWidth, bottom: 0, left: 0});
+      stage.setInsets({top: above + overlay() + low, right: dock.offsetWidth, bottom: 0, left: 0});
       return;
     }
     // On a phone the heading sits above the car, not on it, and the camera buttons sit below it.
-    const heading = introOn && introEl ? introEl.offsetHeight + 12 : 0;
+    const intro = introOn && introEl ? introEl.offsetHeight + 12 : 0;
     const row = introOn ? CAPTION_ROW : stepOn || store.get().garage ? 0 : VIEW_ROW;
-    stage.setInsets({top: t + heading + overlay(), right: 0, bottom: Math.min(sheet.h, sheet.half) + modes.offsetHeight + row, left: 0});
+    stage.setInsets({top: above + intro + overlay(), right: 0, bottom: Math.min(sheet.h, sheet.half) + modes.offsetHeight + row, left: 0});
   };
   const sheetFor = () => {
     const panel = panelEl[store.get().mode];
@@ -345,7 +378,7 @@ export function mount(el, app) {
     const open = s.mode === 'jobs' && s.job?.step != null;
     root.classList.toggle('job-step', open);
     const on = rail === false && open;
-    dockTitle.textContent = on && s.garage ? 'See the car' : TITLES[s.mode]; // a full sheet in garage mode leaves no room for the strip's button
+    dockTitle.textContent = on && s.garage ? t('See the car') : t(TITLES[s.mode]); // a full sheet in garage mode leaves no room for the strip's button
     if (on === stepOn) return;
     stepOn = on;
     root.classList.toggle('in-step', on);
@@ -372,6 +405,7 @@ export function mount(el, app) {
     if (name !== 'peek') dismiss();
     if (stepOn) { paintStrip(); setTimeout(() => ui.reframe?.(), SHEET_MS); }
   }});
+  paintWords();
   new ResizeObserver(() => layout()).observe(el);
   wide.addEventListener('change', layout);
   layout();
@@ -401,8 +435,8 @@ export function mount(el, app) {
         if (zoomed) rig.flyToPart(id, {minDist: rail ? 1.4 : SEE_IT_M}); else showWhere(id);
         store.set({view: null});
         paintPartBar(store.get());
-      }}, zoomed ? 'Whole car' : 'Zoom in'),
-      h('button.view', {type: 'button', 'aria-pressed': String(iso), onclick: () => store.set({isolate: iso ? null : [id], locate: iso})}, 'Isolate'),
+      }}, zoomed ? t('Whole car') : t('Zoom in')),
+      h('button.view', {type: 'button', 'aria-pressed': String(iso), onclick: () => store.set({isolate: iso ? null : [id], locate: iso})}, t('Isolate')),
     );
   }
 
@@ -414,18 +448,18 @@ export function mount(el, app) {
   /** What sits under the top bar: a car from someone else's link, and the way back to a job in hand. */
   function paintBanner(s) {
     const rows = [];
-    if (app.noGL) rows.push(h('div.banner-row', h('span.banner-text', 'The 3D view is not available in this browser. Every torque, job, fault and part number still works.')));
+    if (app.noGL) rows.push(h('div.banner-row', h('span.banner-text', t('The 3D view is not available in this browser. Every torque, job, fault and part number still works.'))));
     if (s.linked) {
       const own = s.linked.own;
       rows.push(h('div.banner-row', [
-        h('span.banner-text', `Viewing a ${s.variant.my} ${carName(s.variant)}${own ? `, not your car` : ' from a shared link'}.`),
-        own && h('button.link', {type: 'button', onclick: () => store.set({variant: own, linked: null})}, 'Back to my car'),
-        h('button.link', {type: 'button', onclick: () => store.set({linked: null, chosen: true})}, 'Make this my car'),
+        h('span.banner-text', t(own ? 'Viewing a {car}, not your car.' : 'Viewing a {car} from a shared link.', {car: `${s.variant.my} ${carName(s.variant)}`})),
+        own && h('button.link', {type: 'button', onclick: () => store.set({variant: own, linked: null})}, t('Back to my car')),
+        h('button.link', {type: 'button', onclick: () => store.set({linked: null, chosen: true})}, t('Make this my car')),
       ]));
     }
     const job = s.mode === 'jobs' ? null : ui.lookupFrom ?? s.job;
     const rec = job && data.jobs.byId.get(job.id);
-    if (rec) rows.push(h('div.banner-row', [h('span.banner-text', rec.title), h('button.link', {type: 'button', onclick: backToJob}, job.step == null ? 'Back to the job' : `Back to step ${job.step + 1}`)]));
+    if (rec) rows.push(h('div.banner-row', [h('span.banner-text', rec.title), h('button.link', {type: 'button', onclick: backToJob}, job.step == null ? t('Back to the job') : t('Back to step {n}', {n: job.step + 1}))]));
     banner.replaceChildren(...rows);
     banner.hidden = !rows.length;
     if (rail === false) sheetFor();
@@ -455,17 +489,17 @@ export function mount(el, app) {
       if (spots.some((o) => { const q = stage.project(o.at); return Math.abs(q.x - p.x) < 280 && Math.abs(q.y - p.y) < 44; })) continue;
       spots.push({
         at,
-        node: h('button.hot', {type: 'button', 'aria-label': `${w.title}: open it`, onclick: () => ui.open('weakspot', w.id)}, [h('i.hot-ring'), h('span.hot-text', w.title)]),
+        node: h('button.hot', {type: 'button', 'aria-label': t('{what}: open it', {what: w.title}), onclick: () => ui.open('weakspot', w.id)}, [h('i.hot-ring'), h('span.hot-text', w.title)]),
       });
       hots.append(spots[spots.length - 1].node);
       first ??= w;
       if (spots.length >= HOT_SPOTS) break;
     }
     // A phone has no room for a label beside the dot: it would lie across the car. The words sit under the car instead.
-    if (first) hots.append(h('button.hot-cap', {type: 'button', onclick: () => ui.open('weakspot', first.id)}, [h('i.hot-cap-dot'), h('span', `Known weak spot: ${first.title}`)]));
+    if (first) hots.append(h('button.hot-cap', {type: 'button', onclick: () => ui.open('weakspot', first.id)}, [h('i.hot-cap-dot'), h('span', t('Known weak spot: {what}', {what: first.title}))]));
   }
   function placeHots() {
-    const {w, h: H} = stage.size, {top: t, right: r, bottom: b} = stage.insets;
+    const {w, h: H} = stage.size, {top: above, right: r, bottom: b} = stage.insets;
     const blocked = introEl?.getBoundingClientRect();
     const taken = [];
     for (const s of spots) {
@@ -481,7 +515,7 @@ export function mount(el, app) {
       const dot = onIntro || onLabel || x0 < 4 || x1 > w - r - 4;
       s.node.classList.toggle('dot-only', dot);
       if (!dot) taken.push({x0, x1, y: p.y});
-      s.node.hidden = p.y < t || p.y > H - b;
+      s.node.hidden = p.y < above || p.y > H - b;
     }
   }
   function dismiss() {
@@ -545,17 +579,36 @@ export function mount(el, app) {
   // ---- state to screen --------------------------------------------------------------------------
   const paintCar = (s) => {
     const known = s.chosen || s.linked;
-    fill(carBtn, h('b', known ? carName(s.variant) : 'Choose your car'), known && h('span', carTag(s.variant)));
+    fill(carBtn, h('b', known ? carName(s.variant) : t('Choose your car')), known && h('span', carTag(s.variant)));
   };
   const paintViews = (s) => {
     const inStep = s.mode === 'jobs' && s.job?.step != null; // the camera is on the work: no named view is showing, whatever the last one was
     for (const [name, b] of Object.entries(viewBtn)) b.setAttribute('aria-pressed', !inStep && s.view === name);
   };
 
+  const paintPicked = (s) => {
+    const inOther = s.selected && s.mode !== 'explore' && s.mode !== 'jobs' && data.parts.byId.has(s.selected);
+    picked.hidden = !inOther;
+    if (inOther) picked.replaceChildren(h('span', partName(s.selected)), h('button.link', {type: 'button', onclick: () => ui.select(s.selected, {fly: false})}, t('Open in Explore')));
+  };
+
   store.subscribe((s, ch) => {
+    if (ch.has('lang')) { // what the panels hold follows from their own subscriptions: this is the frame
+      paintWords();
+      paintCar(s);
+      paintStep(s);
+      paintStrip();
+      paintBanner(s);
+      paintPartBar(s);
+      paintPicked(s);
+      langs.set(s.lang);
+      live.textContent = s.selected ? t('Selected {part}', {part: partName(s.selected)}) : '';
+      if (introOn && introEl) { introEl.paint(s.variant); buildHots(); placeHots(); }
+      requestAnimationFrame(layout); // longer words can change what the bars need
+    }
     if (ch.has('mode')) {
       for (const m of MODES) modeBtn[m].setAttribute('aria-current', m === s.mode ? 'page' : 'false');
-      dockTitle.textContent = TITLES[s.mode];
+      dockTitle.textContent = t(TITLES[s.mode]);
       show(s.mode);
       if (!rail) { sheetFor(); lift(); }
       if (s.mode !== 'explore') dismiss();
@@ -574,7 +627,7 @@ export function mount(el, app) {
     if (ch.has('selected') || ch.has('mode')) {
       if (s.selected) {
         dismiss();
-        live.textContent = `Selected ${partName(s.selected)}`;
+        live.textContent = t('Selected {part}', {part: partName(s.selected)});
         if (s.mode === 'explore') lift(s.garage ? 'full' : 'half');
       } else if (ui.autoXray) {
         ui.autoXray = false;
@@ -582,19 +635,17 @@ export function mount(el, app) {
       }
       if (!s.selected && s.locate) store.set({locate: false});
       if (ch.has('selected') && !s.selected && s.isolate && s.mode === 'explore') store.set({isolate: null});
-      const inOther = s.selected && s.mode !== 'explore' && s.mode !== 'jobs' && data.parts.byId.has(s.selected);
-      picked.hidden = !inOther;
-      if (inOther) picked.replaceChildren(h('span', partName(s.selected)), h('button.link', {type: 'button', onclick: () => ui.select(s.selected, {fly: false})}, 'Open in Explore'));
+      paintPicked(s);
     }
     if (ch.has('selected') || ch.has('mode') || ch.has('isolate')) paintPartBar(s);
-  }, ['mode', 'job', 'variant', 'chosen', 'linked', 'notice', 'units', 'view', 'garage', 'selected', 'isolate']);
+  }, ['mode', 'job', 'variant', 'chosen', 'linked', 'notice', 'units', 'view', 'garage', 'selected', 'isolate', 'lang']);
 
   async function applyGarage(on, say) {
     root.classList.toggle('garage', on);
     garage.setAttribute('aria-pressed', on);
     if (say) {
       const awake = await keepAwake(on);
-      if (on) toast(awake ? 'Garage mode. The screen stays on.' : 'Garage mode. This browser cannot keep the screen on: turn off auto-lock.');
+      if (on) toast(awake ? t('Garage mode. The screen stays on.') : t('Garage mode. This browser cannot keep the screen on: turn off auto-lock.'));
     } else if (on) keepAwake(true);
     requestAnimationFrame(layout);
   }
@@ -611,7 +662,7 @@ export function mount(el, app) {
   if (app.noGL && store.get().mode === 'run') store.set({mode: 'explore'}); // the running engine is the one thing here that needs the GPU
   const s = store.get();
   for (const m of MODES) modeBtn[m].setAttribute('aria-current', m === s.mode ? 'page' : 'false');
-  dockTitle.textContent = TITLES[s.mode];
+  dockTitle.textContent = t(TITLES[s.mode]);
   paintCar(s);
   paintViews(s);
   applyGarage(s.garage, false);
