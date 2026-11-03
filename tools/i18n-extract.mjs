@@ -6,6 +6,8 @@
 //
 //   node tools/i18n-extract.mjs              write the files
 //   node tools/i18n-extract.mjs --leftovers  print what the scan thinks was missed, and what it found dynamic
+//   node tools/i18n-extract.mjs --check      write nothing: fail if i18n/source/ is not what an extract would write. npm test
+//                                            runs this, so French is never checked against stale sources
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -206,6 +208,16 @@ if (process.argv.includes('--leftovers')) {
 if (concatenated.length) { console.error(`t() called with a template, so the sentence is not extractable:\n${concatenated.join('\n')}`); process.exit(1); }
 if (loose.length) { console.error(`English outside t(). Wrap it, or add it to IGNORED:\n${loose.join('\n')}`); process.exit(1); }
 
+if (process.argv.includes('--check')) {
+  const stale = GROUPS.filter((g) => {
+    const file = path.join(OUT, `${g}.json`);
+    const want = `${JSON.stringify([...groups[g]].sort((a, b) => a.localeCompare(b)), null, 1)}\n`;
+    return !fs.existsSync(file) || fs.readFileSync(file, 'utf8') !== want;
+  });
+  if (stale.length) { console.error(`i18n/source/ is out of date for: ${stale.join(', ')}. Run node tools/i18n-extract.mjs`); process.exit(1); }
+  console.log('i18n/source/ is up to date');
+  process.exit(0);
+}
 fs.mkdirSync(OUT, {recursive: true});
 const manifest = {};
 for (const g of GROUPS) {

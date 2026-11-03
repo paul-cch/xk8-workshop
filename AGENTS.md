@@ -28,7 +28,7 @@ Node 20 or later, then `npm install`. Playwright's Chromium and WebKit are neede
 | Command | What it does | Time on an M3 |
 |---|---|---|
 | `npm run build` | writes `dist/` | 2 s |
-| `npm test` | data validator, core, powertrain, chassis and feedback tests, French check. Stops at the first failure | 1 s |
+| `npm test` | data validator, core, powertrain, chassis and feedback tests, a check that `i18n/source/` is freshly extracted, French check. Stops at the first failure | 2 s |
 | `npm run test:ui` | builds, then real clicks in Chromium and WebKit: UI flows, French flows, sweep, French sweep, iPhone flows, phone check, clipped text | 8 min |
 | `npm run test:jobs` | builds, then steps through every job and sweeps each lifted part. Exits 1 today on 5 known lift crossings, see `docs/status.md` | 12 min |
 | `npm run shots` | builds, then screenshots the default states to `dist-shots/`. Pass options after `--` | 20 s |

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Runs tools in order and stops at the first failure. Prints one line per tool, and a failing tool's full output.
 //   node tools/check.mjs validate-data test-core     each name is tools/<name>.mjs
+//   node tools/check.mjs i18n-extract:--check        a colon passes the flag after it to that tool
 // npm test and npm run test:ui call this with their lists: see package.json.
 import {spawnSync} from 'node:child_process';
 import path from 'node:path';
@@ -13,7 +14,8 @@ if (!names.length) { console.error('usage: node tools/check.mjs <tool> [<tool> .
 const start = performance.now();
 for (const name of names) {
   const t0 = performance.now();
-  const run = spawnSync(process.execPath, [path.join(ROOT, 'tools', `${name}.mjs`)], {cwd: ROOT, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024});
+  const [tool, ...flags] = name.split(':');
+  const run = spawnSync(process.execPath, [path.join(ROOT, 'tools', `${tool}.mjs`), ...flags], {cwd: ROOT, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024});
   const secs = ((performance.now() - t0) / 1000).toFixed(1);
   if (run.status === 0) { console.log(`ok    ${name}  ${secs}s`); continue; }
   process.stdout.write(run.stdout ?? '');

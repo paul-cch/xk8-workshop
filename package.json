@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "node tools/build.mjs",
-    "test": "node tools/check.mjs validate-data test-core test-powertrain test-chassis test-feedback i18n-check",
+    "test": "node tools/check.mjs validate-data test-core test-powertrain test-chassis test-feedback i18n-extract:--check i18n-check",
     "test:ui": "node tools/check.mjs build ui-flows fr-flows sweep i18n-sweep iphone-flows ui-phone clip-check",
     "test:jobs": "node tools/build.mjs && node tools/job-walk.mjs",
     "shots": "node tools/build.mjs && node tools/shots.mjs",
