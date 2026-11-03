@@ -1,6 +1,6 @@
 # XK8 Workshop status
 
-Live at https://xk8-workshop.pages.dev. Measured 2 November 2026 on an Apple M3.
+Live at https://xk8.paulcouach.com. The older address, https://xk8-workshop.pages.dev, still works. Measured 2 November 2026 on an Apple M3.
 
 ## Final checks
 
@@ -94,7 +94,7 @@ Round one: 86 findings, 11 of them blockers. Round two retested on the live page
 
 The speech-bubble button in the top bar sends messages to a private inbox. A job step or part panel also has a small "Something wrong here?" link, which fills in what the message is about.
 
-1. Open https://xk8-workshop.pages.dev/inbox on any device.
+1. Open https://xk8.paulcouach.com/inbox on any device.
 2. Enter the password. It is the `INBOX_KEY` secret set on the Cloudflare Pages project. It is not written down anywhere in this repository.
 3. Messages show newest first: what kind, when, which car, the step or part, a reply address if one was given, and a link to the page the person was on. Fifty fit on a page, and "Older messages" goes further back.
 4. Delete removes a message for good. Sign out when you finish. A session lasts eight hours.
@@ -108,7 +108,7 @@ What is kept: the message, the optional email, the page, the car and the step or
 ## Publishing
 
 ```
-SITE_URL=https://xk8-workshop.pages.dev DIST_DIR=/tmp/xk8-rel node tools/build.mjs --release
+SITE_URL=https://xk8.paulcouach.com DIST_DIR=/tmp/xk8-rel node tools/build.mjs --release
 PAGES_JWT=<upload token> node tools/deploy-pages.mjs /tmp/xk8-rel
 ```
 

@@ -2,7 +2,7 @@
 
 An interactive 3D workshop for the Jaguar XK8 and XKR (X100, 1996 to 2006), for owners standing beside the real car, including those who have never held a torque wrench.
 
-**Live: https://xk8-workshop.pages.dev**
+**Live: https://xk8.paulcouach.com**
 
 Take the car apart in 3D, watch the engine run, and follow repair jobs step by step with the torques, parts and tools for your exact car. It is one page that works on a phone beside the car.
 

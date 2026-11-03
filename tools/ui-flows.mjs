@@ -798,7 +798,7 @@ await wk.close();
 
 // ---- feedback, with the network mocked. tools/test-feedback.mjs tests the server ------------------------------------------
 {
-  const API = 'https://xk8-workshop.pages.dev/api/feedback';
+  const API = 'https://xk8.paulcouach.com/api/feedback';
   const SEED = {variant: {engine: '4.0', induction: 'na', body: 'coupe', my: 1999, market: 'uk'}, chosen: true};
   const answer = (status, body = {ok: status < 300}) => ({status, headers: {'access-control-allow-origin': 'null', 'content-type': 'application/json'}, body: JSON.stringify(body)});
   /** A page behind a mock. net.reply is what the next post gets; net.posts is what has arrived. */

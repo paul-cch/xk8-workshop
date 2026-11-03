@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import worker from '../worker/_worker.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const SITE = 'https://xk8-workshop.pages.dev';
+const SITE = 'https://xk8.paulcouach.com';
 const KEY = 'test-only-inbox-key';
 const IP = '203.0.113.7';
 let fails = 0;
@@ -70,7 +70,7 @@ const signIn = async (env, ip = IP) => (await postForm(env, '/inbox', {password:
 }
 {
   const env = fresh();
-  for (const [name, origin, want] of [['live origin', SITE, 204], ['file:// origin', 'null', 204]]) {
+  for (const [name, origin, want] of [['live origin', SITE, 204], ['the older Pages address', 'https://xk8-workshop.pages.dev', 204], ['file:// origin', 'null', 204]]) {
     const r = await call(env, '/api/feedback', {method: 'OPTIONS', headers: {origin, 'access-control-request-method': 'POST', 'access-control-request-headers': 'content-type'}});
     check(`preflight from the ${name}`, r.status === want && r.headers.get('access-control-allow-origin') === origin && /content-type/.test(r.headers.get('access-control-allow-headers')) && /POST/.test(r.headers.get('access-control-allow-methods')), r.status);
   }
@@ -120,7 +120,7 @@ const signIn = async (env, ip = IP) => (await postForm(env, '/inbox', {password:
   check('a declared length over the limit is refused unread', big.status === 413, big.status);
 
   const clean = fresh();
-  for (const [name, origin] of [['another site', 'https://evil.example'], ['a lookalike', 'https://xk8-workshop.pages.dev.evil.example'], ['plain http', 'http://xk8-workshop.pages.dev'], ['a preview URL', 'https://abc123.xk8-workshop.pages.dev'], ['no Origin at all', null]]) {
+  for (const [name, origin] of [['another site', 'https://evil.example'], ['a lookalike', 'https://xk8-workshop.pages.dev.evil.example'], ['a lookalike of the new address', 'https://xk8.paulcouach.com.evil.example'], ['plain http', 'http://xk8-workshop.pages.dev'], ['plain http on the new address', 'http://xk8.paulcouach.com'], ['a preview URL', 'https://abc123.xk8-workshop.pages.dev'], ['no Origin at all', null]]) {
     const x = await send(clean, GOOD, {origin});
     check(`bad origin refused: ${name}`, x.status === 403 && !x.headers.get('access-control-allow-origin'), x.status);
   }

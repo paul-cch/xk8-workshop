@@ -10,7 +10,7 @@ import {formatHash, variantCode} from '../state.js';
 import {dialog, h, toast} from './widgets.js';
 
 // Absolute, because a file:// copy of the page has no site of its own to post to.
-const API = 'https://xk8-workshop.pages.dev/api/feedback';
+const API = 'https://xk8.paulcouach.com/api/feedback';
 const QUEUE_KEY = 'xk8-feedback-queue';
 const QUEUE_MAX = 20;
 const MAX_MESSAGE = 2000, MAX_CONTACT = 200, MAX_PAGE = 500, MAX_ABOUT = 300; // as in worker/_worker.js

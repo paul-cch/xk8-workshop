@@ -16,8 +16,8 @@
 // The hash is HMAC(INBOX_KEY, scope + hour + address). It changes every hour, so it cannot follow anyone from one hour to the
 // next, and without INBOX_KEY it cannot be checked against a guessed address. It never goes in a message.
 
-const LIVE_ORIGIN = 'https://xk8-workshop.pages.dev';
-const ORIGINS = new Set([LIVE_ORIGIN, 'null']);
+// The address people use, the Pages address it grew from, whose old pages may still be open, and a file:// copy.
+const ORIGINS = new Set(['https://xk8.paulcouach.com', 'https://xk8-workshop.pages.dev', 'null']);
 const KINDS = new Map([['wrong', 'Something is wrong'], ['idea', 'An idea'], ['thanks', 'Thank you']]);
 const ABOUT = new Map([['step', 'Job step'], ['part', 'Part']]);
 const MAX = {message: 2000, contact: 200, page: 500, car: 60, about: 300};
