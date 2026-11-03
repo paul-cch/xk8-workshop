@@ -95,11 +95,11 @@ Round one: 86 findings, 11 of them blockers. Round two retested on the live page
 The speech-bubble button in the top bar sends messages to a private inbox. A job step or part panel also has a small "Something wrong here?" link, which fills in what the message is about.
 
 1. Open https://xk8.paulcouach.com/inbox on any device.
-2. Enter the password. It is the `INBOX_KEY` secret set on the Cloudflare Pages project. It is not written down anywhere in this repository.
+2. Enter the password. It is not written down anywhere in this repository, and Cloudflare holds only its SHA-256, as the `INBOX_HASH` secret on the Pages project.
 3. Messages show newest first: what kind, when, which car, the step or part, a reply address if one was given, and a link to the page the person was on. Fifty fit on a page, and "Older messages" goes further back.
 4. Delete removes a message for good. Sign out when you finish. A session lasts eight hours.
 
-A new message can take up to a minute to appear, because Cloudflare KV settles slowly. Five wrong passwords lock that connection out for up to an hour. To change the password, change `INBOX_KEY` on the project and redeploy: that also signs everyone out.
+A new message can take up to a minute to appear, because Cloudflare KV settles slowly. Five wrong passwords lock that connection out for up to an hour. To change the password, make a long random one (`python3 -c 'import secrets; print(secrets.token_urlsafe(24))'`), set `INBOX_HASH` to the hex SHA-256 of it and redeploy: that also signs everyone out. Only the hash goes to Cloudflare, so the password never has to pass through a tool or an API call. A short or guessable password is not safe here, because a plain hash of one can be guessed offline.
 
 What is kept: the message, the optional email, the page, the car and the step or part. No IP address is kept. To limit each sender to 10 messages an hour, the worker holds a hash of the address that changes every hour and expires within the hour. The page says so in the form. Messages stay until you delete them.
 
@@ -116,5 +116,5 @@ Get the token from the project's Cloudflare upload-token endpoint, then create t
 
 The feedback server needs three things on top of that:
 
-- The Pages project needs a KV namespace bound as `FEEDBACK` and a secret `INBOX_KEY`. Use a long random value for the secret. Without them the page keeps messages on the person's device and retries, and `/inbox` says it is not set up.
+- The Pages project needs a KV namespace bound as `FEEDBACK` and a secret `INBOX_HASH`, the hex SHA-256 of a long random password. Without them the page keeps messages on the person's device and retries, and `/inbox` says it is not set up.
 - A release build puts `_worker.js` and `_routes.json` in the output folder. They are not static files. `tools/deploy-pages.mjs` leaves them out of the upload and the manifest. Attach them to the deployment request as multipart fields named `_worker.js` and `_routes.json`.

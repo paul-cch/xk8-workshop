@@ -7,14 +7,18 @@
 //   POST /inbox/delete    delete one message
 //   POST /inbox/logout    sign out
 //
-// Bindings: FEEDBACK, a KV namespace, and INBOX_KEY, a secret. Nothing else is needed and nothing is kept in memory.
+// Bindings: FEEDBACK, a KV namespace, and INBOX_HASH, a secret holding the SHA-256 of the inbox password in hex. The password
+// itself is stored nowhere on Cloudflare, so setting or reading the secret never handles it. It must be long and random: a
+// plain hash is only safe for a password nobody could guess. Nothing else is needed and nothing is kept in memory.
 //
-// KV holds three kinds of key:
+// KV holds four kinds of key:
 //   msg:<reversed time>:<random>   a message. KV lists keys in byte order, so reversing the time gives newest first.
 //   rl:<hash>                      messages from one client this hour. Expires in an hour.
 //   fail:<hash>                    failed logins from one client this hour. Expires in an hour.
-// The hash is HMAC(INBOX_KEY, scope + hour + address). It changes every hour, so it cannot follow anyone from one hour to the
-// next, and without INBOX_KEY it cannot be checked against a guessed address. It never goes in a message.
+//   sess:<password>:<token hash>   a signed-in browser. Expires with its cookie. <password> is the start of INBOX_HASH, so a
+//                                  new password signs everyone out.
+// The client hash is HMAC(INBOX_HASH, scope + hour + address). It changes every hour, so it cannot follow anyone from one hour
+// to the next, and without INBOX_HASH it cannot be checked against a guessed address. It never goes in a message.
 
 // The address people use, the Pages address it grew from, whose old pages may still be open, and a file:// copy.
 const ORIGINS = new Set(['https://xk8.paulcouach.com', 'https://xk8-workshop.pages.dev', 'null']);
@@ -38,6 +42,8 @@ const hex = (buf) => [...new Uint8Array(buf)].map((b) => b.toString(16).padStart
 const randomHex = (bytes) => hex(crypto.getRandomValues(new Uint8Array(bytes)));
 const hmacKey = (secret) => crypto.subtle.importKey('raw', encode(secret), {name: 'HMAC', hash: 'SHA-256'}, false, ['sign', 'verify']);
 const hmac = async (secret, text) => hex(await crypto.subtle.sign('HMAC', await hmacKey(secret), encode(text)));
+const sha256 = async (text) => hex(await crypto.subtle.digest('SHA-256', encode(text)));
+const ready = (env) => Boolean(env.FEEDBACK && /^[0-9a-f]{64}$/i.test(env.INBOX_HASH ?? ''));
 
 /** Constant time whatever the lengths. A one-off key means nobody can steer the comparison, and verify() does not stop early. */
 async function sameSecret(a, b) {
@@ -68,7 +74,7 @@ async function readBody(request, limit) {
 /** The KV key that counts this client for this hour. The address is used here and goes no further. */
 async function counterKey(request, env, scope, now) {
   const address = request.headers.get('cf-connecting-ip') ?? 'unknown';
-  return `${scope}:${await hmac(env.INBOX_KEY, `${scope}:${Math.floor(now / (HOUR_S * 1000))}:${address}`)}`;
+  return `${scope}:${await hmac(env.INBOX_HASH, `${scope}:${Math.floor(now / (HOUR_S * 1000))}:${address}`)}`;
 }
 const countOf = async (env, key) => Number(await env.FEEDBACK.get(key)) || 0;
 const setCount = (env, key, n) => env.FEEDBACK.put(key, String(n), {expirationTtl: HOUR_S});
@@ -103,7 +109,7 @@ async function apiFeedback(request, env, now) {
   const cors = corsFor(origin);
   if (request.method === 'OPTIONS') return new Response(null, {status: 204, headers: {...cors, vary: 'Origin'}});
   if (request.method !== 'POST') return reply(405, {ok: false, error: 'method'}, {...cors, allow: 'POST, OPTIONS'});
-  if (!env.FEEDBACK || !env.INBOX_KEY) return reply(503, {ok: false, error: 'unavailable'}, cors);
+  if (!ready(env)) return reply(503, {ok: false, error: 'unavailable'}, cors);
 
   const text = await readBody(request, MAX_BODY);
   if (text === null) return reply(413, {ok: false, error: 'too_long'}, cors);
@@ -132,8 +138,10 @@ async function apiFeedback(request, env, now) {
 
 // ---- the session ---------------------------------------------------------------------------------------------------------
 
-const sessionSignature = (env, expires) => hmac(env.INBOX_KEY, `session:${expires}`);
-const csrfToken = (env, session) => hmac(env.INBOX_KEY, `csrf:${session}`);
+// The cookie is a random token and KV keeps only its hash, so reading KV does not give anyone a way in. No signing key is
+// needed, which is what lets the worker hold nothing but the password's hash.
+const sessionKey = async (env, token) => `sess:${env.INBOX_HASH.slice(0, 16).toLowerCase()}:${await sha256(token)}`;
+const csrfToken = (env, token) => hmac(token, `csrf:${env.INBOX_HASH}`);
 
 function cookieValue(request) {
   for (const part of (request.headers.get('cookie') ?? '').split(';')) {
@@ -143,18 +151,19 @@ function cookieValue(request) {
   return null;
 }
 
-/** The cookie's value when it is one of ours and in date, or null. */
-async function session(request, env, now) {
-  const value = cookieValue(request);
-  const m = /^(\d{1,16})\.([0-9a-f]{64})$/.exec(value ?? '');
-  if (!m || Number(m[1]) <= now || !env.INBOX_KEY) return null;
-  return await sameSecret(m[2], await sessionSignature(env, m[1])) ? value : null;
+/** The cookie's token when KV still holds its session, or null. */
+async function session(request, env) {
+  const token = cookieValue(request);
+  if (!/^[0-9a-f]{64}$/.test(token ?? '') || !ready(env)) return null;
+  return await env.FEEDBACK.get(await sessionKey(env, token)) === null ? null : token;
 }
 
 const setSession = async (env, now) => {
-  const expires = String(now + SESSION_S * 1000);
-  return `${COOKIE}=${expires}.${await sessionSignature(env, expires)}; Path=/; Max-Age=${SESSION_S}; HttpOnly; Secure; SameSite=Strict`;
+  const token = randomHex(32);
+  await env.FEEDBACK.put(await sessionKey(env, token), new Date(now).toISOString(), {expirationTtl: SESSION_S});
+  return `${COOKIE}=${token}; Path=/; Max-Age=${SESSION_S}; HttpOnly; Secure; SameSite=Strict`;
 };
+const endSession = async (env, token) => env.FEEDBACK.delete(await sessionKey(env, token));
 const clearSession = `${COOKIE}=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Strict`;
 
 /** A browser posting a form from one of these pages sends this site's Origin. Another site's page cannot. */
@@ -297,7 +306,7 @@ async function login(request, env, now) {
   const fails = await countOf(env, counter);
   // Checked before the password, so a right guess past the limit tells an attacker nothing.
   if (fails >= LOGINS_PER_HOUR) return loginPage(429, 'Too many tries. Wait an hour and try again.', {'retry-after': String(secondsLeftInHour(now))});
-  if (!await sameSecret(form.get('password') ?? '', env.INBOX_KEY)) {
+  if (!await sameSecret(await sha256(form.get('password') ?? ''), env.INBOX_HASH.toLowerCase())) {
     await setCount(env, counter, fails + 1);
     return loginPage(401, 'That password is not right.');
   }
@@ -307,22 +316,22 @@ async function login(request, env, now) {
 
 /** Both of the signed-in form posts. SameSite=Strict keeps the cookie off cross-site posts, and the token stands behind that. */
 async function signedInPost(request, env, now, act) {
-  const cookie = await session(request, env, now);
+  const cookie = await session(request, env);
   if (!cookie) return see('/inbox');
   const form = new URLSearchParams(await readBody(request, MAX_FORM) ?? '');
   if (!await sameSecret(form.get('csrf') ?? '', await csrfToken(env, cookie))) return loginPage(403, 'That request was refused.');
-  return act(form);
+  return act(form, cookie);
 }
 
 async function inbox(request, env, url, now) {
-  if (!env.FEEDBACK || !env.INBOX_KEY) return loginPage(503, 'The inbox is not set up yet.');
+  if (!ready(env)) return loginPage(503, 'The inbox is not set up yet.');
   const path = url.pathname.replace(/\/+$/, '');
   if (request.method === 'POST' && !sameOrigin(request)) return loginPage(403, 'That request was refused.');
 
   if (path === '/inbox') {
     if (request.method === 'POST') return login(request, env, now);
     if (request.method !== 'GET' && request.method !== 'HEAD') return loginPage(405, 'That is not something this page does.', {allow: 'GET, HEAD, POST'});
-    const cookie = await session(request, env, now);
+    const cookie = await session(request, env);
     return cookie ? inboxPage(env, cookie, url) : loginPage(200);
   }
   if (path === '/inbox/delete' && request.method === 'POST') {
@@ -332,7 +341,10 @@ async function inbox(request, env, url, now) {
       return see('/inbox');
     });
   }
-  if (path === '/inbox/logout' && request.method === 'POST') return signedInPost(request, env, now, async () => see('/inbox', {'set-cookie': clearSession}));
+  if (path === '/inbox/logout' && request.method === 'POST') return signedInPost(request, env, now, async (form, cookie) => {
+    await endSession(env, cookie);
+    return see('/inbox', {'set-cookie': clearSession});
+  });
   return loginPage(404, 'There is nothing here.');
 }
 
