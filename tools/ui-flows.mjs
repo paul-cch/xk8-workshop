@@ -1166,6 +1166,17 @@ await wk.close();
   check('and it opens the service tab', (await S(home)).mode === 'plan' && /Service/.test(await home.textContent('.ws-tabs--plan [aria-selected=true]')));
   await home.context().close();
 
+  const dg = await open({viewport: {width: 1440, height: 900}}, '#/diagnose?v=4.0-na-coupe-1999');
+  for (const [q, lang] of [['squeal when braking', 'en'], ['les freins grincent', 'fr']]) {
+    if (lang === 'fr') await dg.evaluate(() => window.__xk8.setLang('fr'));
+    await dg.waitForTimeout(400);
+    await dg.fill('.ws-search', q);
+    await dg.waitForTimeout(500);
+    const first = await dg.evaluate(() => document.querySelector('.ws-list .ws-row strong, .ws-list strong')?.textContent);
+    check(`"${q}" finds brake squeal first`, /Squeal or squeak when braking|Grincement ou couinement au freinage/.test(first ?? ''), first);
+  }
+  await dg.context().close();
+
   const hf = await open({viewport: {width: 390, height: 844}, hasTouch: true, isMobile: true, deviceScaleFactor: 2}, '#/explore?v=4.0-na-coupe-1999');
   await hf.evaluate(() => {
     window.__said = [];

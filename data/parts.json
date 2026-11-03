@@ -16394,7 +16394,8 @@
     "wheel-bearing-front"
    ],
    "faults": [
-    "brake-judder"
+    "brake-judder",
+    "brake-squeal"
    ],
    "appliesTo": {},
    "src": [
@@ -16497,7 +16498,9 @@
     "brake-discs-rear",
     "wheel-bearing-rear"
    ],
-   "faults": [],
+   "faults": [
+    "brake-squeal"
+   ],
    "appliesTo": {},
    "src": [
     "jtis",
@@ -16973,7 +16976,9 @@
     "brake-pads-front",
     "brake-discs-front"
    ],
-   "faults": [],
+   "faults": [
+    "brake-squeal"
+   ],
    "appliesTo": {},
    "src": [
     "jtis",
@@ -17083,7 +17088,9 @@
     "brake-pads-rear",
     "brake-discs-rear"
    ],
-   "faults": [],
+   "faults": [
+    "brake-squeal"
+   ],
    "appliesTo": {},
    "src": [
     "jtis",
@@ -25812,7 +25819,9 @@
     "brake-discs-front",
     "brake-discs-rear"
    ],
-   "faults": [],
+   "faults": [
+    "brake-squeal"
+   ],
    "appliesTo": {},
    "src": [
     "wm"

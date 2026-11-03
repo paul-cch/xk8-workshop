@@ -88,7 +88,7 @@ async function boot() {
     const small = (id) => { const b = registry.partBox(id); return !b || b.isEmpty() || Math.max(...b.getSize(size).toArray()) < 1.2; };
     registry.fill(Infinity, new Set(forVariant(data.weakspots.items, v).flatMap((w) => w.parts ?? []).filter(small)));
   }
-  mark('hot spots');
+  mark('hot-spots');
   say(t('Starting up'));
   preparePose(registry);
 

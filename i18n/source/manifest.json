@@ -20,8 +20,8 @@
   "chars": 73022
  },
  "advice": {
-  "strings": 1599,
-  "chars": 110392
+  "strings": 1610,
+  "chars": 111138
  },
  "tutorials": {
   "strings": 523,
@@ -32,7 +32,7 @@
   "chars": 6696
  },
  "total": {
-  "strings": 10223,
-  "chars": 574052
+  "strings": 10234,
+  "chars": 574798
  }
 }

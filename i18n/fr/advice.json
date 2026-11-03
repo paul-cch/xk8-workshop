@@ -1597,5 +1597,16 @@
  "You sacrifice the changer. Wire colours are the poster's belief, so test first. Static at idle was reported on one M-Bus build. No current price was captured.": "Vous sacrifiez le changeur. Les couleurs de fils sont ce que croit l'auteur du message : testez donc d'abord. Des parasites au ralenti ont été signalés sur un montage M-Bus. Aucun prix actuel n'a été relevé.",
  "Your serial is past A24195, the last car Jaguar’s bulletin covers for this rattle, so for this car it is a job for soon. A plastic tensioner fitted earlier is not ruled out: check what is on the engine before any long run, and stop driving if the noise grows.": "Votre numéro de série dépasse A24195, la dernière voiture couverte par le bulletin Jaguar pour ce claquement : pour cette voiture, c'est donc une intervention à faire bientôt. Un tendeur en plastique monté plus tôt n'est pas exclu : vérifiez ce qui se trouve sur le moteur avant tout long trajet, et cessez de rouler si le bruit s'amplifie.",
  "ZF 5HP24 B clutch hub": "Moyeu d'embrayage B ZF 5HP24",
- "ZF box in limp home (XK8 4.0)": "Boîte ZF en mode dégradé (XK8 4.0)"
+ "ZF box in limp home (XK8 4.0)": "Boîte ZF en mode dégradé (XK8 4.0)",
+ "Squeal or squeak when braking": "Grincement ou couinement au freinage",
+ "Braking, often at low speed": "Au freinage, souvent à basse vitesse",
+ "Pads fitted without their shim, grease or spring": "Plaquettes posées sans leur cale, leur graisse ou leur ressort",
+ "Take the pads out and look. The factory pad procedure fits an adhesive shim on the back of each pad, an even layer of brake grease on the backplate shoulders, the anti-rattle spring, and each pad with its arrow following forward wheel rotation.": "Déposez les plaquettes et regardez. La procédure d'usine pose une cale adhésive au dos de chaque plaquette, une couche régulière de graisse pour freins sur les épaulements de la plaque d'appui, le ressort anti-bruit, et chaque plaquette avec sa flèche dans le sens de rotation de la roue en marche avant.",
+ "Refit the pads as the job says, with new shims if the old ones are gone.": "Reposez les plaquettes comme l'indique l'intervention, avec des cales neuves si les anciennes ont disparu.",
+ "Glazed or worn pads and discs": "Plaquettes et disques glacés ou usés",
+ "Shiny, glassy pad faces or discs, often after rain followed by hard braking. Check how much pad is left.": "Faces de plaquettes ou disques brillants et vitrifiés, souvent après la pluie suivie de freinages appuyés. Vérifiez l'épaisseur de garniture restante.",
+ "Skim or renew the discs, and always fit new pads with them.": "Rectifiez ou remplacez les disques, et posez toujours des plaquettes neuves avec.",
+ "Wrong or non-genuine pads": "Plaquettes inadaptées ou non d'origine",
+ "The noise started after pads that are not the ones Jaguar lists for the car.": "Le bruit est apparu après la pose de plaquettes autres que celles que Jaguar indique pour la voiture.",
+ "Fit the pads listed for your car.": "Posez les plaquettes indiquées pour votre voiture."
 }

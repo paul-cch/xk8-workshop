@@ -797,6 +797,12 @@
    "url": "http://jagrepair.com/images/AutoRepairPhotos/CarPDFFiles/XK8%20'03%20-%20'06%20Workshop%20Manual.pdf",
    "publisher": "Jaguar Cars (copy hosted by JagRepair.com)",
    "kind": "factory"
+  },
+  "jcna-xjr-squeak": {
+   "title": "Squeaky brakes, XJR: owner question and reply, 2007",
+   "url": "https://jcna.com/comment/15184",
+   "publisher": "JCNA forums",
+   "kind": "forum"
   }
  },
  "items": [
@@ -3723,6 +3729,69 @@
    "conf": "factory"
   },
   {
+   "id": "brake-squeal",
+   "symptom": "Squeal or squeak when braking",
+   "system": "brakes",
+   "when": "Braking, often at low speed",
+   "urgency": "soon",
+   "causes": [
+    {
+     "label": "Pads fitted without their shim, grease or spring",
+     "likelihood": "med",
+     "test": "Take the pads out and look. The factory pad procedure fits an adhesive shim on the back of each pad, an even layer of brake grease on the backplate shoulders, the anti-rattle spring, and each pad with its arrow following forward wheel rotation.",
+     "fix": "Refit the pads as the job says, with new shims if the old ones are gone.",
+     "parts": [
+      "brakes.pad-front",
+      "brakes.pad-rear",
+      "brakes.anti-rattle-spring"
+     ],
+     "jobs": [
+      "brake-pads-front",
+      "brake-pads-rear"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Glazed or worn pads and discs",
+     "likelihood": "med",
+     "test": "Shiny, glassy pad faces or discs, often after rain followed by hard braking. Check how much pad is left.",
+     "fix": "Skim or renew the discs, and always fit new pads with them.",
+     "parts": [
+      "brakes.pad-front",
+      "brakes.disc-front",
+      "brakes.pad-rear",
+      "brakes.disc-rear"
+     ],
+     "jobs": [
+      "brake-discs-front",
+      "brake-pads-front",
+      "brake-pads-rear"
+     ],
+     "appliesTo": {}
+    },
+    {
+     "label": "Wrong or non-genuine pads",
+     "likelihood": "med",
+     "test": "The noise started after pads that are not the ones Jaguar lists for the car.",
+     "fix": "Fit the pads listed for your car.",
+     "parts": [
+      "brakes.pad-front",
+      "brakes.pad-rear"
+     ],
+     "jobs": [
+      "brake-pads-front",
+      "brake-pads-rear"
+     ],
+     "appliesTo": {}
+    }
+   ],
+   "src": [
+    "wm",
+    "jcna-xjr-squeak"
+   ],
+   "conf": "community"
+  },
+  {
    "id": "handbrake-weak",
    "symptom": "Handbrake weak or warning stays on",
    "system": "brakes",
@@ -4497,6 +4566,7 @@
   "Text of the Automotix-listed bulletins on wiper drain S843, hissing IMT O-ring, harsh 6-speed shifts, and P0780-P0785 was not read. Only titles were seen. The jagrepair.com copy of 501-33 (fluid flush) is a scan with no text layer and was not read.",
   "Rear damper top mount evidence for clunks comes from older Jaguars on Jag-lovers, not the X100.",
   "Web search budget for this run ran out, so no further searches were possible for 2004-06 specifics.",
-  "Part links were normalised against parts.json. Brake light switch still points to brakes.pedal, conductor plate to transmission.valve-body and rotary switch to transmission.gearbox, because those have no record of their own."
+  "Part links were normalised against parts.json. Brake light switch still points to brakes.pedal, conductor plate to transmission.valve-body and rotary switch to transmission.gearbox, because those have no record of their own.",
+  "No Jaguar document on the causes of brake squeal on the X100 was found. The causes in brake-squeal come from one owner thread about the XJR, of the same years. The fitting checks come from the factory pad procedure."
  ]
 }
