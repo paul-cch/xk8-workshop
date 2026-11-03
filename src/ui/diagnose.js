@@ -241,7 +241,7 @@ function renderHome(app, s, root) {
   paintBrowse();
   redraw();
   paintView(root, 'home', [
-    h('header.ws-top', [h('h2', t('What\'s wrong?')), h('p.ws-mute', t('What is the car doing? For a {car}.', {car: carLabel(v)}))]),
+    h('header.ws-top', [h('h2', t('What\'s wrong?'))]),
     input, chips, box, h('div.ws-pin-row', {hidden: route.q.trim().length > 0}, flatBattery(app)), browse,
   ]);
 }

@@ -1,16 +1,17 @@
 # XK8 Workshop research summary
 
-All 13 data files pass `node tools/validate-data.mjs`. The audit's 93 correction entries were
+All 16 data files pass `node tools/validate-data.mjs`. Counts below were rechecked on 3 November 2026. The audit's 93 correction entries were
 applied, and every part, torque, fluid, tool and job reference now resolves. 4.0 procedures
 improved most, because JTIS MY1997-2004 was read for the audited steps.
 
 ## Counts
 
-12 variants plus a VIN guide and 31 running changes. 392 parts with 1,322 part numbers, and 62
-parts with none. 362 torques, 334 factory and 28 single. 28 fluids, split by VIN where Jaguar
-changed the fill. 35 service records, with UK sheets stopping at 60,000 miles. 41 jobs with 427
-steps, 30 factory and 11 lower. 113 tools with few prices. 66 faults, 564 DTC records covering
+12 variants plus a VIN guide and 31 running changes. 399 parts with 1,325 part numbers, and 69
+parts with none. 363 torques, 336 factory and 27 single. 28 fluids, split by VIN where Jaguar
+changed the fill. 35 service records, with UK sheets stopping at 60,000 miles. 43 jobs with 445
+steps, 32 factory and 11 lower. 115 tools with few prices. 66 faults, 564 DTC records covering
 411 codes, 33 weak spots, 53 inspection checks, 68 upgrades, 49 vendors.
+313 tutorials, 75 explained words and 15 facts.
 
 ## Strongest areas
 
@@ -20,7 +21,7 @@ steps, 30 factory and 11 lower. 113 tools with few prices. 66 faults, 564 DTC re
 
 ## Weakest areas
 
-- Part numbers: 265 of 392 parts are conf single, from one SNG catalogue.
+- Part numbers: 269 of 399 parts are conf single, 251 of them citing one SNG catalogue.
 - MY2005-06: JTIS ends at MY2004, so later cars are assumed unchanged.
 - Costs, tool prices and book hours: `hoursBook` is null on every job.
 - 4.0 jobs not in the audit still follow the 4.2 manual: see the job gaps.

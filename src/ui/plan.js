@@ -552,7 +552,6 @@ function listTab(app, s) {
     list.skipped.length > 0 && callout('warn', t('Not for this car'), h('p', t('Left out because they do not fit a {car}: {jobs}.', {car: carLabel(v), jobs: list.skipped.map((j) => j.title).join(', ')}))),
     list.jobs.length > 0 && section('listjobs', t('Chosen jobs'), list.jobs.length, h('ul.ws-picked', list.jobs.map((j) => h('li', [h('button.ws-link', {type: 'button', onclick: () => openJob(app, j.id)}, j.title), h('span.ws-mute', hoursText(j.hoursDiy)), h('button.ws-x', {type: 'button', 'aria-label': t('Take {what} off the list', {what: j.title}), onclick: () => refsOff('job', j.id)}, icon('x'))])))),
     list.parts.length > 0 && section('listparts', t('Parts'), list.parts.length,
-      h('p.ws-small.ws-mute', t('Each part once, with the number to quote for this car. Quantity is the most any one job needs.')),
       missing > 0 && h('p.ws-none', plural(missing, 'We have no part number for {n} of these.|one', 'We have no part number for {n} of these.')),
       h('ul.ws-parts', list.parts.map((p) => {
         const rec = data.parts.byId.get(p.id);
@@ -580,11 +579,9 @@ function toolsTab(app, s) {
   const useAll = ui.toolsAll || !list.jobs.length;
   const rows = useAll ? data.tools.items.map((tool) => ({tool, for: []})) : list.tools;
   const redraw = () => renderPlan(app);
-  const have = rows.filter((r) => saved.have[`t:${r.tool.id}`]).length;
   return [
     !list.jobs.length && callout('tip', t('No jobs chosen'), h('p', t('Add a job to the shopping list and this tab narrows to what it needs. For now, every tool in the data is listed.'))),
     list.jobs.length > 0 && h('div.ws-tabs.ws-tabs--small', {role: 'tablist'}, [[false, plural(list.jobs.length, 'For {n} chosen job', 'For {n} chosen jobs')], [true, t('All tools')]].map(([k, word]) => h('button', {type: 'button', role: 'tab', 'aria-selected': String(ui.toolsAll === k), onclick: () => { ui.toolsAll = k; renderPlan(app); }}, word))),
-    h('p.ws-foot-note', t('{n} tools, {have} ticked as owned. Almost no tool prices were found.', {n: rows.length, have})),
     KIND_ORDER.map(([kind, word]) => {
       const inKind = rows.filter((r) => r.tool.kind === kind);
       if (!inKind.length) return null;
@@ -612,7 +609,6 @@ function fluidsTab(app, s) {
   const scope = (flag, on, off) => h('div.ws-tabs.ws-tabs--small', {role: 'tablist'}, [[false, on], [true, off]].map(([k, word]) => h('button', {type: 'button', role: 'tab', 'aria-selected': String(ui[flag] === k), onclick: () => { ui[flag] = k; renderPlan(app); }}, word)));
   return [
     scope('flAll', t('This car'), t('All cars')),
-    h('p.ws-foot-note', ui.flAll ? t('{n} fluids.', {n: list.length}) : t('{n} fluids for a {car}.', {n: list.length, car: carLabel(v)})),
     list.map((f) => [fluidBlock(f, v), ui.flAll && appliesText(f.appliesTo) && h('p.ws-small.ws-mute', t('For {who}', {who: appliesText(f.appliesTo)}))]),
     gapList('flgaps', data.fluids),
   ];

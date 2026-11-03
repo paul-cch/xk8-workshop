@@ -162,7 +162,11 @@ export function stepWatch(app, s, job, st) {
   const face = [icon('play'), h('span.tut-go-text', [h('strong', t('Watch this step')), h('span', embeds(r) ? t('{source}, from {time}', {source: r.source, time: clock(atSec)}) : t('Opens on YouTube'))])];
   return h('div.tut-step', [
     embeds(r) ? h('button.tut-go', {type: 'button', 'data-fk': 'watch-step', onclick: (e) => play(app, r, atSec, e.currentTarget)}, face) : h('a.tut-go', away(watchUrl(r, atSec)), face),
-    tags(r),
+    // In a step only what differs from what you would assume is said: a film for another car, or in another language.
+    (r.fit !== 'exact' || r.lang !== getLang()) && h('div.tut-tags', [
+      r.fit !== 'exact' && h('span.ws-tag.tut-fit', fitWord(r)),
+      r.lang !== getLang() && h('span.ws-tag.tut-fit.ws-tag--ink', t(LANGUAGE[r.lang])),
+    ]),
     warned && (first ? warned : h('details.ws-more', [h('summary', t('Be careful with this film')), warned])),
   ]);
 }

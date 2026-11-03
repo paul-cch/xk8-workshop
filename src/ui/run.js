@@ -87,7 +87,7 @@ export function mount(el, app) {
   // the state, so nothing is lost. The functions below reach these through the lets.
   let chainsBtn, sectionBtn, stateWord, startBtn, rpmNum, rpmBarFill, rpmRed, rpmBarEnd, mphNum, kphNum, pistonNum, gearNum, gearSub, redBadge, fireStrip, dash;
   let rpm, throttle, speed, gearSeg, steer, bumpF, bumpR, roof, roofBtn, roofRow, coupeNote, opens, steerCentre;
-  let sectionRows, timeSeg, soundBtn, soundNote, crankNum, camNum, steerG, steerL, steerR, travelG, travelF, travelR, instBlock, solvedRows, solved;
+  let sectionRows, timeSeg, soundBtn, crankNum, camNum, steerG, steerL, steerR, travelG, travelF, travelR, instBlock, solvedRows, solved;
   const rpmText = (v) => t('{n} rpm', {n: Math.round(v)});
 
   function buildPanel() {
@@ -159,7 +159,6 @@ export function mount(el, app) {
 
     // ---- sound ----------------------------------------------------------------------------------
     soundBtn = toggle({label: t('Engine sound'), on: false, onChange: (on) => setSound(on)});
-    soundNote = h('p.hint', t('Made from the order the cylinders fire in. Each side of the engine fires unevenly into its own exhaust, which is the V8 burble.'));
 
     // ---- instruments below the controls ---------------------------------------------------------
     crankNum = h('span.inst-val', '0');
@@ -188,7 +187,7 @@ export function mount(el, app) {
       instBlock,
       block(t('The numbers'), [
         h('dl.facts', h('div.fact', [h('dt', t('Average piston speed')), h('dd', h('span.dash-line', [pistonNum, h('span.dash-unit', 'm/s')]))])),
-        h('h4.lab.run-fire', t('Firing order')), fireStrip, soundNote, facts,
+        h('h4.lab.run-fire', t('Firing order')), fireStrip, facts,
       ]),
     );
   }

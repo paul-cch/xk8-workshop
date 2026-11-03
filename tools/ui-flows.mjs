@@ -12,6 +12,9 @@ const url = (q = '') => `file://${path.join(process.env.DIST_DIR ? path.resolve(
 let fails = 0;
 const PHONE_H = 664;
 const check = (name, ok, detail = '') => { if (!ok) fails++; console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail !== '' ? `  [${detail}]` : ''}`); };
+/** Units and large text live in Settings. These open it, use it and leave it closed. */
+const setUnits = async (p, which) => { await p.click('.top-menu'); await p.click(`dialog[open] .seg-wide button:text-is("${which}")`); await p.keyboard.press('Escape'); await p.waitForTimeout(80); };
+const toggleLarge = async (p) => { await p.click('.top-menu'); await p.click('dialog[open] .menu-garage'); };
 const browser = await chromium.launch({args: ['--use-angle=metal', '--ignore-gpu-blocklist', '--enable-gpu']});
 
 async function open(device, q) {
@@ -49,11 +52,11 @@ const S = (p) => p.evaluate(() => { const s = window.__xk8.store.get(); return {
   check('Enter on a torque opens its part', !!s.selected, s.selected);
   check('torque block is flashed', await p.locator('.tq.flash').count() === 1);
   const nm = await p.locator('.tq-value').first().textContent();
-  await p.click('.seg-units button:nth-child(2)');
+  await setUnits(p, 'lb ft');
   await p.waitForTimeout(80);
   const lb = await p.locator('.tq-value').first().textContent();
   check('units toggle changes the torque', nm !== lb && /lb ft/.test(lb.split(/\d\s/)[0] + lb), `${nm} -> ${lb}`);
-  await p.click('.seg-units button:nth-child(1)');
+  await setUnits(p, 'Nm');
 
   await p.evaluate(() => window.__xk8.ui.select('brakes.caliper-rear'));
   await p.waitForTimeout(300);
@@ -155,11 +158,11 @@ const S = (p) => p.evaluate(() => { const s = window.__xk8.store.get(); return {
   s = await S(p);
   check('leaving Run stops it all', !s.sim.running && s.sim.section == null, s.sim.rpm);
 
-  await p.click('.garage-btn');
+  await toggleLarge(p);
   await p.waitForTimeout(200);
   check('garage mode sets the class', await p.evaluate(() => document.documentElement.classList.contains('garage')));
   check('garage asks for a wake lock and says what it got', /stays on|cannot keep/.test(await p.textContent('.toast')), await p.textContent('.toast'));
-  await p.click('.garage-btn');
+  await toggleLarge(p);
 
   await p.keyboard.press('Tab');
   const fv = await p.evaluate(() => { const a = document.activeElement; return {tag: a.tagName, outline: getComputedStyle(a).outlineStyle}; });
@@ -422,10 +425,10 @@ const OIL = 'yt-Gr2aMnVEZGQ';
   check('a caution is on the card', /Be careful/.test(await p.locator('.tut').first().textContent()) && await p.locator('.tut .ws-call--warn').first().isVisible());
   check('thumbnails come from i.ytimg.com, lazily', /^https:\/\/i\.ytimg\.com\/vi\/Gr2aMnVEZGQ\//.test(sec.img) && sec.lazy === 'lazy' && asked.thumbs > 0, sec.img);
   check('no film loads before a tap', asked.frames === 0 && await p.locator('iframe').count() === 0, asked.frames);
-  await p.click('.seg-units button:nth-child(2)');
+  await setUnits(p, 'lb ft');
   await p.waitForTimeout(80);
   check('a caution follows the units', /lb ft/.test(await p.locator('.tut .ws-call--warn').first().textContent()), await p.locator('.tut .ws-call--warn').first().textContent());
-  await p.click('.seg-units button:nth-child(1)');
+  await setUnits(p, 'Nm');
   await p.waitForTimeout(80);
   await p.locator('.tut-thumb').first().click();
   await p.waitForSelector('.tut-dock iframe');
@@ -587,7 +590,7 @@ for (const [name, device, opener] of [['iPhone', PHONE, (d) => openWk('', CAR, d
     check(`${name}: and every choice is in view`, await first.evaluate(() => [...document.querySelectorAll('.choice')].every((b) => { const r = b.getBoundingClientRect(); return r.top >= 0 && r.bottom <= innerHeight && r.height >= 44; })));
     const room = await carRoom(first);
     check(`${name}: the car stays visible beside them`, room.h > 200 && room.w > 340, JSON.stringify(room));
-    check(`${name}: the running engine and the taking-apart are one tap away`, await first.locator('.ex-watch').isVisible() && await first.locator('.ex-apart').isVisible());
+    check(`${name}: no second set of buttons repeats the modes`, await first.locator('.ex-watch, .ex-apart').count() === 0);
     await first.context().close();
     const press = async (what) => { const p = await opener(device); await p.locator(`.choice[data-what=${what}]`).click(); await p.waitForTimeout(700); return p; };
     const panelHas = (p, sel) => p.locator(sel).first().isVisible();
@@ -615,18 +618,18 @@ for (const [name, device, opener] of [['iPhone', PHONE, (d) => openWk('', CAR, d
   check('Explode is Take it apart, X-ray is See through it', /Take it apart/.test(await p.textContent('[data-name=explode]')) && await p.locator('.tool-xray', {hasText: 'See through it'}).count() === 1);
   const page = await p.textContent('#ui');
   check('the jargon is gone from the home screen', !/\b(?:Explode|X-ray|Ghost|Isolate|Skin off|Chassis|Drivetrain|Prone to)\b/.test(page), page.match(/\b(?:Explode|X-ray|Ghost|Isolate|Skin off|Chassis|Drivetrain|Prone to)\b/)?.[0]);
-  await p.locator('.ex-apart').click();
+  await p.evaluate(() => window.__xk8.ui.takeApart(true)); // what search's "Take it apart" page does
   await p.waitForFunction(() => window.__xk8.store.get().explode === 1, null, {timeout: 4000});
-  check('Take it apart runs the car apart, and the slider follows', await p.locator('[data-name=explode] input').inputValue() === '1' && /back together/.test(await p.textContent('.ex-apart')));
-  await p.locator('.ex-apart').click();
+  check('Take it apart runs the car apart, and the slider follows', await p.locator('[data-name=explode] input').inputValue() === '1');
+  await p.evaluate(() => window.__xk8.ui.takeApart(false));
   await p.waitForFunction(() => window.__xk8.store.get().explode === 0, null, {timeout: 4000});
-  check('and the same button puts it back', /Take it apart/.test(await p.textContent('.ex-apart')));
+  check('and it goes back together', await p.locator('[data-name=explode] input').inputValue() === '0');
 
   await p.evaluate(() => window.__xk8.ui.select('brakes.caliper-rear'));
   await p.waitForTimeout(300);
   check('badges say where a number comes from in plain words', (await p.locator('.ex-part .prov').allTextContents()).every((x) => /^(?:From Jaguar|Several sources agree|One source|Owners say|Estimated|From Jaguar, to 2004|From Jaguar, 4\.2 manual)$/.test(x)), (await p.locator('.ex-part .prov').allTextContents()).slice(0, 4).join('|'));
-  const order = await p.evaluate(() => [...document.querySelectorAll('.ex-part .lab')].map((x) => x.textContent));
-  check('a part starts with what it does, and the numbers follow', order[0] === 'What it does' && order.indexOf('Part numbers for this car (') !== 0 && order.findIndex((x) => x.startsWith('Part numbers')) > order.indexOf('Why it matters'), order.slice(0, 5).join(', '));
+  const order = await p.evaluate(() => [...document.querySelectorAll('.ex-part .part-lead, .ex-part .lab')].map((x) => (x.matches('.part-lead') ? 'What it does' : x.textContent)));
+  check('a part starts with what it does, and the numbers follow', order[0] === 'What it does' && order.findIndex((x) => x.startsWith('Part numbers')) > order.indexOf('Why it matters'), order.slice(0, 5).join(', '));
   await p.evaluate(() => window.__xk8.store.set({selected: null}));
 
   const jobs = await p.evaluate(() => window.__xk8.data.jobs.items.map((j) => j.id));

@@ -332,7 +332,7 @@ function jobRow(app, job, s, u) {
   const done = doneCount(s, job, steps);
   const note = variantNote(job, v, {list: true});
   return h('button.ws-row.ws-job', {type: 'button', 'data-fk': `job-${job.id}`, onclick: () => openJob(app, job.id)},
-    h('span.ws-row-main', h('strong', job.title), h('span.ws-job-why', t('Can I do it? {answer}', {answer: t(ANSWER[job.diy.answer])})), note && h('span.ws-job-note', note)),
+    h('span.ws-row-main', h('strong', job.title), job.diy.answer !== 'yes' && job.diy.answer !== 'care' && h('span.ws-job-why', t(ANSWER[job.diy.answer])), note && h('span.ws-job-note', note)),
     h('span.ws-job-meta',
       h('span.ws-job-stat', pips(job.difficulty), h('span', hoursText(job.hoursDiy))),
       h('span.ws-job-tags', !job.liftNeeded && h('span.ws-tag.ws-tag--good', t('No jacking up')), job.specialTools && h('span.ws-tag', t('Special tools')), job.conf === 'community' && h('span.ws-tag.ws-tag--community', CONF.community.word),
@@ -349,12 +349,11 @@ function renderList(app, s, root) {
   const rank = (a, b) => u.get(b.id).score - u.get(a.id).score || a.difficulty - b.difficulty;
   const shown = all.filter((j) => (!filters.system || j.system === filters.system) && (!filters.diff || j.difficulty <= filters.diff) && (!filters.time || j.hoursDiy <= filters.time) && (!filters.noLift || !j.liftNeeded)).sort(rank);
   const going = all.filter((j) => { const st = jobSteps(j, v); const d = doneCount(s, j, st); return j.id === s.lastJob || (d > 0 && d < st.length); }).sort((a, b) => (b.id === s.lastJob) - (a.id === s.lastJob));
-  const other = data.jobs.items.filter((j) => !all.includes(j));
   const systems = [...new Set(all.map((j) => j.system))].sort();
   const set = (patch) => { Object.assign(filters, patch); renderList(app, app.store.get(), root); };
   const active = filters.system || filters.diff || filters.time || filters.noLift;
   paintView(root, 'list', [
-    h('header.ws-top', h('h2', t('Fix or service something')), h('p.ws-mute', t('For a {car}, most needed first.', {car: carLabel(v)}))),
+    h('header.ws-top', h('h2', t('Fix or service something'))),
     going.length > 0 && h('div.ws-resume', going.map((j) => {
       const st = jobSteps(j, v);
       const i = resumeIndex(s, j, st);
@@ -368,8 +367,6 @@ function renderList(app, s, root) {
       h('button.ws-toggle', {type: 'button', 'aria-pressed': String(filters.noLift), 'data-fk': 'nolift', onclick: () => set({noLift: !filters.noLift})}, t('No jacking up')))),
     shown.length ? h('div.ws-list', shown.map((j) => jobRow(app, j, s, u.get(j.id))))
       : h('div.ws-empty', h('p', t('No job fits those filters on this car.')), active && h('button.ws-btn', {type: 'button', onclick: () => set({system: '', diff: 0, time: 0, noLift: false})}, t('Clear filters'))),
-    h('p.ws-foot-note', t('{n} of {total} jobs. The ones owners need most come first. Times are estimates: no Jaguar times were found.', {n: shown.length, total: all.length})),
-    other.length > 0 && h('p.ws-foot-note', t('Not for this car: {jobs}.', {jobs: other.map((j) => j.title).join(', ')})),
   ]);
 }
 
@@ -463,7 +460,7 @@ function diyAnswer(job, kit, seen) {
     h('p.ws-diy-answer', t(ANSWER[job.diy.answer])),
     h('dl',
       h('dt', t('Who it suits')), h('dd', gloss(job.diy.suits, seen)),
-      list.length > 0 && [h('dt', t('What you need')), h('dd', h('ul.ws-plain', list.map((x) => h('li', x))))],
+      list.length > 0 && [h('dt', t('What you need')), h('dd', h('ul.ws-need', list.map((x) => h('li', x))))],
       time != null && [h('dt', t('How long it really takes')), h('dd', t('About {time} if you have done it before. Allow twice that the first time.', {time: hoursText(time)}), time >= WEEKEND_H && ` ${t('Keep a whole weekend free.')}`, ' ', h('span.ws-mute', t('This is an estimate, not a Jaguar figure.')))],
       h('dt', t('When to stop and call a garage')), h('dd', gloss(job.diy.stop, seen))));
 }
@@ -580,10 +577,11 @@ function renderStep(app, job, s, i, root) {
     (st.fluid?.length ?? 0) > 0 && !fluids.length && h('p.ws-none', t('This step lists fluids for other cars only.')),
     st.check && callout('ok', t('Check'), h('p', check)),
     st.tip && callout('tip', t('Tip'), h('p', tip)),
-    st.focus.length > 0 && h('div.ws-focus', h('span.ws-label', t('Working on')), st.focus.map((id) => partChip(app, id, {accent: true}))),
+    st.focus.length > 0 && h('div.ws-focus', {role: 'group', 'aria-label': t('Working on')}, st.focus.map((id) => partChip(app, id, {accent: true}))),
     missing.length > 0 && h('p.ws-small.ws-mute', standIn(missing)),
-    st.remove.length > 0 && h('p.ws-small', h('strong', t('Comes off: ')), st.remove.map(partName).join(', ')),
-    st.install.length > 0 && h('p.ws-small', h('strong', t('Goes back: ')), st.install.map(partName).join(', ')),
+    // What comes off or goes back, unless it is the part already shown above as the one being worked on.
+    st.remove.some((id) => !st.focus.includes(id)) && h('p.ws-small', h('strong', t('Comes off: ')), st.remove.map(partName).join(', ')),
+    st.install.some((id) => !st.focus.includes(id)) && h('p.ws-small', h('strong', t('Goes back: ')), st.install.map(partName).join(', ')),
     h('div.ws-actions', h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: () => app.ui.openSearch()}, t('Look something up')), h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: printNow}, icon('print'), t('Print job card'))),
   ];
   const last = i === steps.length - 1;

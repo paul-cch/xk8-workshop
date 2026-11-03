@@ -132,10 +132,14 @@ async function bundle(version, frVersion) {
   return res.outputFiles[0].text;
 }
 
-const readCss = () => {
-  const parts = ['src/stage/stage.css', 'src/ui/style.css', 'src/ui/content.css', 'src/ui/feedback.css', 'src/ui/tutorials.css'].map((f) => path.join(ROOT, f)).filter((f) => fs.existsSync(f));
+// stage.css styles the page before the bundle runs: the studio and the loading screen. The rest of the look travels packed inside
+// the bundle, gzipped with the code, and goes into the page as the bundle starts: as plain text it would cost the page 80 KB.
+const BOOT_CSS = ['src/stage/stage.css'];
+const UI_CSS = ['src/ui/style.css', 'src/ui/content.css', 'src/ui/feedback.css', 'src/ui/tutorials.css', 'src/ui/system.css'];
+const readCss = (files) => {
+  const parts = files.map((f) => path.join(ROOT, f)).filter((f) => fs.existsSync(f));
   return parts.map((f) => fs.readFileSync(f, 'utf8')).join('\n')
-    .replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s*\n\s*/g, '').replace(/\s*([{};,>])\s*/g, '$1').replace(/:\s+/g, ':');
+    .replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s*\n\s*/g, '').replace(/\s*([{};,>])\s*/g, '$1').replace(/:\s+/g, ':').replace(/;}/g, '}').replace(/([:\s,(-])0\.(\d)/g, '$1.$2');
 };
 
 // ---- icons ---------------------------------------------------------------------------------
@@ -278,8 +282,10 @@ const provisional = createHash('sha1').update(data.gzip).digest('hex').slice(0, 
 const fr = french();
 const frJs = `window.__xk8fr=${JSON.stringify(fr)};\n`;
 const frVersion = createHash('sha1').update(frJs).digest('hex').slice(0, 10); // a new dictionary is a new URL, past any HTTP cache
-const js = await bundle(provisional, frVersion);
-const css = readCss();
+const uiCss = readCss(UI_CSS);
+const code = await bundle(provisional, frVersion);
+const js = PACK ? `document.head.append(Object.assign(document.createElement('style'),{textContent:${JSON.stringify(uiCss)}}));\n${code}` : code;
+const css = PACK ? readCss(BOOT_CSS) : readCss([...BOOT_CSS, ...UI_CSS]);
 const version = createHash('sha1').update(js).update(data.gzip).update(css).update(frJs).digest('hex').slice(0, 10);
 const jsGz = gz(js);
 const html = page({css, js: PACK ? jsGz.toString('base64') : js, data: data.gzip.toString('base64'), fr});
@@ -309,7 +315,7 @@ if (RELEASE) {
 const size = Buffer.byteLength(html);
 console.log(`dist/index.html  ${KB(size)} raw, ${KB(gz(html).length)} gzipped, ${Math.round(performance.now() - t0)} ms`);
 console.log(`  js    ${KB(js.length)} minified, ${KB(jsGz.length)} gzipped${PACK ? '' : ' (not packed)'}`);
-console.log(`  css   ${KB(css.length)}`);
+console.log(`  css   ${KB(css.length)} in the page${PACK ? `, ${KB(uiCss.length)} packed with the code` : ""}`);
 console.log(`  data  ${KB(data.raw)} source, ${KB(data.json.length)} compacted, ${KB(data.gzip.length)} gzipped`);
 console.log(`dist/fr.js  ${KB(Buffer.byteLength(frJs))} raw, ${KB(gz(frJs).length)} gzipped, ${Object.keys(fr).length} strings`);
 if (size > 1024 * 1024) console.log(`  OVER the 1 MB target by ${KB(size - 1024 * 1024)}`);

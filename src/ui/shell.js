@@ -39,6 +39,7 @@ const VIEW_ROW = 50; // the camera buttons above the sheet: the car is framed cl
 const SHORT_H = 520; // a phone on its side, as in the max-height rule in style.css
 const CAPTION_ROW = 40; // the first screen's weak spot line, in the same place
 const HERO_FILL = {rail: 0.98, sheet: 1}; // a phone is narrow: the car takes the width, not 84 percent of it
+const GEAR = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>';
 const TYPED = '.ws-search, .filter, .ws-field input'; // the keyboard covers the half sheet, so typing raises it
 
 // ---- the bottom sheet ----------------------------------------------------------------------------
@@ -317,12 +318,10 @@ export function mount(el, app) {
   const searchWords = h('span');
   const searchBtn = h('button.search-btn', {type: 'button', onclick: () => ui.openSearch()}, [searchWords, h('kbd', /Mac|iP/.test(navigator.platform) ? 'Cmd K' : 'Ctrl K')]);
   const carBtn = h('button.car-btn', {type: 'button', onclick: () => ui.openCar()});
-  const units = seg({options: [{value: 'nm', label: 'Nm'}, {value: 'lbft', label: 'lb ft'}], value: store.get().units, onChange: (v) => store.set({units: v}), className: 'seg-units'});
   // Each language names itself, so a reader who cannot read the page can still find their own.
   const langs = seg({options: [{value: 'en', label: 'EN', aria: 'English'}, {value: 'fr', label: 'FR', aria: 'Français'}], value: store.get().lang, onChange: async (v) => { await app.setLang(v); langs.set(store.get().lang); }, className: 'seg-lang'});
-  const garage = h('button.toggle.garage-btn', {type: 'button', 'aria-pressed': 'false', onclick: () => store.set({garage: !store.get().garage})});
   const spacer = h('div.top-space');
-  // Under about 900 px wide the rail's top bar has no room for these: one button holds them.
+  // Units and large text are set once and left: one quiet button holds them, on every screen.
   const menuBtn = h('button.toggle.top-menu', {type: 'button', onclick: () => {
     const d = dialog({title: t('Settings'), body: [
       h('h3.lab', t('Tightening units')),
@@ -332,7 +331,8 @@ export function mount(el, app) {
     ]});
   }});
   const heading = h('h1.vh');
-  const top = h('header.top', [heading, brand, spacer, searchBtn, carBtn, units, langs, garage, menuBtn]);
+  menuBtn.innerHTML = GEAR;
+  const top = h('header.top', [heading, brand, spacer, searchBtn, carBtn, langs, menuBtn]);
 
   const dockTitle = h('span.dock-title');
   const grip = h('button.dock-grip', {type: 'button'}, [h('i.grip-bar'), dockTitle]);
@@ -385,11 +385,9 @@ export function mount(el, app) {
     searchWords.textContent = t('Search everything');
     searchWords.dataset.short = t('Find'); // the narrow top bar shows this one
     carBtn.setAttribute('aria-label', t('Your car. Change it'));
-    units.setAttribute('aria-label', t('Tightening units'));
     langs.setAttribute('aria-label', t('Language'));
-    garage.textContent = t('Large text');
-    garage.title = t('Large, high-contrast text, and the screen stays on');
-    menuBtn.textContent = t('Menu');
+    menuBtn.setAttribute('aria-label', t('Settings'));
+    menuBtn.title = t('Settings');
     dock.setAttribute('aria-label', t('Panel'));
     viewBar.setAttribute('aria-label', t('Camera views'));
     for (const [name, label] of VIEWS) viewBtn[name].textContent = t(label);
@@ -714,7 +712,6 @@ export function mount(el, app) {
     if (ch.has('chosen') && s.chosen) dismiss();
     if (ch.has('mode') || ch.has('job') || ch.has('linked') || ch.has('variant')) paintBanner(s);
     if (ch.has('notice') && s.notice) { say(s.notice); store.set({notice: null}); }
-    if (ch.has('units')) units.set(s.units);
     if (ch.has('view') || ch.has('job') || ch.has('mode')) paintViews(s);
     if (ch.has('view') && s.view && s.view !== 'hero') dismiss();
     if (ch.has('garage')) applyGarage(s.garage, true);
@@ -736,7 +733,6 @@ export function mount(el, app) {
 
   async function applyGarage(on, say) {
     root.classList.toggle('garage', on);
-    garage.setAttribute('aria-pressed', on);
     if (say) {
       const awake = await keepAwake(on);
       if (on) toast(awake ? t('Large text on. The screen stays on.') : t('Large text on. This browser cannot keep the screen on: turn off auto-lock.'));

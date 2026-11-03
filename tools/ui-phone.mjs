@@ -37,7 +37,7 @@ if (want('first')) {
   const p = await open();
   await shot(p, 'first');
   console.log('first', await p.evaluate(() => ({intro: document.querySelector('.intro')?.getBoundingClientRect().bottom, insets: window.__xk8.stage.insets, peek: document.querySelector('.ex-peek')?.getBoundingClientRect().top})));
-  await p.tap('.ex-watch');
+  await p.tap('.mode[data-mode=run]');
   await p.waitForTimeout(2200);
   await shot(p, 'first-watch');
   await done(p);

@@ -1,7 +1,7 @@
 // The car: the first screen and the parts book. Four plain choices come first, then taking it apart and seeing through it, then
 // the systems tree, one tap behind, which is also the text alternative to the 3D view. A part's panel starts with what it does
 // and why it matters, and the numbers for this car follow.
-import {appliesStatus, data, dimensionRows, forVariant, formatTorque, jobsFor, partName, refsFor, search, urgencyOf} from '../data.js';
+import {appliesStatus, data, dimensionRows, forVariant, formatTorque, partName, refsFor, search, urgencyOf} from '../data.js';
 import {N, dec, pct, plural, t} from '../i18n.js';
 import {headBoltLabels} from './engine-labels.js';
 import {DISCLAIMER, badge, block, carLine, carName, copyButton, fill, h, proneTo, range, rich, seg, systemName, toggle, torqueBlock} from './widgets.js';
@@ -50,19 +50,12 @@ export function mount(el, app) {
 
   // ---- what shows at the sheet's lowest height: the four ways in, the two things to play with, and a job in hand ----
   const peek = h('div.ex-peek', {dataset: {peek: ''}});
-  const apartBtn = h('button.btn.ex-apart', {type: 'button', onclick: () => app.ui.takeApart(!(get().explode > 0))});
-  const paintApart = (s) => { apartBtn.textContent = s.explode > 0 ? t('Put it back together') : t('Take it apart'); };
   function renderPeek() {
     const s = get();
     const job = carryOn(s);
-    paintApart(s);
     fill(peek,
       job && h('button.ws-row.ws-row--ink.ex-carry', {type: 'button', onclick: () => store.set({mode: 'jobs', job: {id: job.id, step: job.step}, selected: null, isolate: null})}, [h('span.ws-row-main', [h('strong', t('Carry on: {job}', {job: job.title})), h('span', job.stepTitle ? t('Step {n} of {total}, {title}', {n: job.step + 1, total: job.of, title: job.stepTitle}) : t('Step {n} of {total}', {n: job.step + 1, total: job.of}))])]),
       h('div.choices', {role: 'group', 'aria-label': t('What do you want to do?')}, CHOICES.map(([what, word]) => h('button.choice', {type: 'button', dataset: {what}, onclick: () => app.ui.begin(what)}, t(word)))),
-      h('div.ex-cta', [
-        h('button.btn.ex-watch', {type: 'button', onclick: () => app.ui.startEngine()}, t('Start the engine')),
-        apartBtn,
-      ]),
     );
   }
 
@@ -85,9 +78,10 @@ export function mount(el, app) {
     filter.addEventListener('input', runFilter);
     const parts = h('details.ws-sec.ex-parts', {open: partsOpen, ontoggle: (e) => { partsOpen = e.target.open; }}, [h('summary', h('span', t('All the parts'))), filter, flat, tree]);
     home = h('div.ex-home', [
-      h('div.ex-show', block(t('Look inside the car'), presets, tools)),
+      h('div.ex-show.blk', {'aria-label': t('Look inside the car'), role: 'group'}, [presets, tools]),
       carBlock,
       h('div.blk', parts),
+      h('p.ws-disclaimer.ex-legal', t(DISCLAIMER)),
     ]);
     home.prepend(peek);
   }
@@ -158,12 +152,10 @@ export function mount(el, app) {
     const v = get().variant;
     const all = proneTo(v);
     const more = h('div.weak-list', {hidden: true}, all.slice(3).map((w) => weakRow(w, v, (x) => open('weakspot', x.id))));
-    const count = jobsFor(v).length;
     fill(carBlock,
       h('section.blk.ex-car', [
         h('div.ex-carline', [h('h2.ex-carname', carName(v)), h('button.link', {type: 'button', onclick: () => app.ui.openCar()}, t('Change'))]),
-        h('p.ex-carsub', t('{line}. {parts} parts and {jobs} jobs fit this car.', {line: carLine(v), parts: forVariant(data.parts.items, v).length, jobs: count})),
-        h('p.ws-disclaimer', t(DISCLAIMER)),
+        h('p.ex-carsub', carLine(v)),
         h('h3.lab', t('Known weak spots')),
         h('div.weak-list', all.slice(0, 3).map((w) => weakRow(w, v, (x) => open('weakspot', x.id)))),
         more,
@@ -226,7 +218,7 @@ export function mount(el, app) {
       !r.exact && (r.id
         ? h('p.callout', rich('Not in the 3D car yet. It shows the nearest part, {part}.', {part: h('b', partName(r.id))}))
         : h('p.callout', t('Not in the 3D car yet.'))),
-      block(t('What it does'), h('p.prose', gloss(p.what, seen))),
+      h('p.part-lead.prose', {'aria-label': t('What it does')}, gloss(p.what, seen)),
       p.why && block(t('Why it matters'), h('p.prose', gloss(p.why, seen))),
       p.location && block(t('Where it is'), h('p.prose', gloss(p.location, seen))),
       refs.weakspots.length > 0 && block(t('Known weak spot'), refs.weakspots.map((w) => weakDetail(w, v))),
@@ -284,7 +276,7 @@ export function mount(el, app) {
     if (!id) shown = null;
     if (changed?.has('selected') || !changed) app.ui.sheetChanged?.(); // the peek differs between home and a part
     if (!changed || changed.has('xray')) xray.set(s.xray);
-    if (!changed || changed.has('explode')) { explode.set(s.explode); paintApart(s); }
+    if (!changed || changed.has('explode')) { explode.set(s.explode); }
     reset.hidden = !(s.explode > 0 || s.xray || s.isolate || Object.keys(s.systems).length);
     if (changed?.has('systems') || !changed) for (const [sys, row] of rows) row.state.set(s.systems[sys] ?? 'show');
     if (changed?.has('systems')) presets.set(PRESETS.findIndex((p) => cleanSystems(p.systems, s.systems)));

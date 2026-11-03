@@ -7,7 +7,12 @@
   "license": "MIT",
   "scripts": {
     "build": "node tools/build.mjs",
-    "validate": "node tools/validate-data.mjs"
+    "test": "node tools/check.mjs validate-data test-core test-powertrain test-chassis test-feedback i18n-check",
+    "test:ui": "node tools/check.mjs build ui-flows fr-flows sweep i18n-sweep iphone-flows ui-phone",
+    "test:jobs": "node tools/build.mjs && node tools/job-walk.mjs",
+    "shots": "node tools/build.mjs && node tools/shots.mjs",
+    "validate": "node tools/validate-data.mjs",
+    "release": "SITE_URL=https://xk8.paulcouach.com DIST_DIR=/tmp/xk8-rel node tools/build.mjs --release"
   },
   "dependencies": {
     "three": "0.186.1"

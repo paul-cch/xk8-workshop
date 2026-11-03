@@ -1,7 +1,6 @@
 /* The feedback button and form. The button lives in the top bar so that it is on every screen and over no control. */
 .fb-btn { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 44px; padding: 0 8px !important; }
 .fb-btn svg { flex: none; display: block; }
-.fb-word { display: none; }
 @media (min-width: 1300px) { .layout-rail .fb-word { display: inline; } }
 html.layout-sheet .fb-btn { min-width: 44px; padding: 0 !important; }
 /* The bar had no room to spare for one more button. On a phone everything but the car's name gives a little, in px so garage mode
@@ -9,14 +8,12 @@ html.layout-sheet .fb-btn { min-width: 44px; padding: 0 !important; }
 @media (max-width: 430px) {
   html.layout-sheet .top { gap: 2px; padding-right: 4px; }
   html.layout-sheet .car-btn { padding: 0 2px 0 6px; }
-  html.layout-sheet .seg-units button, html.layout-sheet .seg-lang button { min-width: 38px; padding: 0 3px; font-size: 13px; }
-  html.layout-sheet .top .garage-btn { margin-left: 2px; padding: 0 5px; font-size: 13px; }
+  html.layout-sheet .seg-lang button { min-width: 38px; padding: 0 3px; font-size: 13px; }
   html.layout-sheet .fb-btn { min-width: 44px; }
 }
 /* Narrow landscape: the mode words stay whole, on less padding. */
 @media (max-width: 720px) {
   html.layout-rail .mode { padding: 0 5px; }
-  html.layout-rail .mode[aria-current='page']::after { left: 5px; right: 5px; }
   html.layout-rail .top-menu { padding: 0 6px; }
   html.layout-rail .fb-btn { min-width: 36px; padding: 0 4px !important; }
   html.layout-rail.garage .mode { padding: 0 3px; font-size: 14px; }
@@ -28,7 +25,6 @@ html.layout-sheet .fb-btn { min-width: 44px; padding: 0 !important; }
   html.layout-rail .car-btn b { display: block; overflow: hidden; text-overflow: ellipsis; }
 }
 @media (max-width: 1100px) {
-  html.layout-rail.garage .top .seg-units, html.layout-rail.garage .garage-btn { display: none; }
   html.layout-rail.garage .top-menu { display: block; flex: none; }
 }
 
@@ -42,12 +38,12 @@ html.garage .fb-kinds { grid-template-columns: 1fr; }
 .fb-choice { position: relative; display: grid; min-width: 0; min-height: 68px; }
 /* The real radio button is stretched over the tile, so the whole tile takes the tap and the keyboard works as usual. */
 .fb-choice input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
-.fb-choice span { display: flex; align-items: center; justify-content: center; padding: 8px 6px; border: 1.5px solid var(--ink); background: var(--sheet); font-weight: 600; line-height: 1.2; text-align: center; overflow-wrap: anywhere; }
+.fb-choice span { display: flex; align-items: center; justify-content: center; padding: 8px 6px; border: 0; background: var(--fill); font-weight: 600; line-height: 1.2; text-align: center; overflow-wrap: anywhere; border-radius: var(--r); }
 .fb-choice input:checked + span { background: var(--ink); color: var(--paper); }
 .fb-choice input:focus-visible + span { outline: 2.5px solid var(--ink); outline-offset: 2px; }
 .fb-label { margin-top: 8px; font-weight: 600; font-size: .93rem; }
 /* 16 px and up: an iPhone zooms the page when a smaller field takes focus */
-.fb-input { display: block; width: 100%; box-sizing: border-box; padding: 10px; border: 1px solid var(--ink); border-radius: 0; background: var(--sheet); color: var(--ink); font: 400 max(16px, 1rem)/1.4 var(--sans); }
+.fb-input { display: block; width: 100%; box-sizing: border-box; padding: 10px; border: 1px solid var(--ink); border-radius: var(--r); background: var(--sheet); color: var(--ink); font: 400 max(16px, 1rem)/1.4 var(--sans); }
 input.fb-input { height: 48px; }
 .fb-text { min-height: 96px; resize: vertical; }
 .fb-left:empty { display: none; }
@@ -61,6 +57,6 @@ input.fb-input { height: 48px; }
 .fb-done-title { font-size: 1.3rem; font-weight: 700; letter-spacing: -.015em; }
 
 /* Large text on a wide screen: the top bar keeps every control by dropping the words it can spare. */
-html.garage.layout-rail .fb-word, html.garage.layout-rail .brand { display: none; }
+html.garage.layout-rail .brand { display: none; }
 html.garage.layout-rail .search-btn { flex: 0 1 110px; width: auto; min-width: 44px; padding: 0 6px; }
 html.garage.layout-rail .mode { padding: 0 7px; font-size: .9rem; }

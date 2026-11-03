@@ -93,12 +93,12 @@ check('the step itself turned French', enStep !== frStep && enTitle !== frTitle,
 check('the address gains l=fr', (await p.url()).includes('l=fr'));
 
 // lb ft, staged torque, on screen.
-await p.click('.seg-units button:text-is("lb ft")');
+await p.click('.top-menu'); await p.click('dialog[open] .seg-wide button:text-is("lb ft")'); await p.keyboard.press('Escape');
 await p.waitForTimeout(300);
 const stageText = await p.evaluate(() => [...document.querySelectorAll('.tq')].filter((e) => e.checkVisibility()).map((e) => e.innerText).join('\n'));
 const stored = await st(p);
 check('lb ft shows on a French step, in French', stored.units === 'lbft' && /lb ft/.test(stageText) && /Passe|puis|Vis/.test(stageText), stageText.replace(/\s+/g, ' ').slice(0, 170));
-await p.click('.seg-units button:text-is("Nm")');
+await p.click('.top-menu'); await p.click('dialog[open] .seg-wide button:text-is("Nm")'); await p.keyboard.press('Escape');
 
 // The setting survives a reload, and a plain link in the same browser.
 await p.reload();

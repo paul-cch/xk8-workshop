@@ -16,3 +16,9 @@ html, body { margin: 0; height: 100%; background: var(--stage-bg); overflow: hid
 .labels circle.accent { fill: var(--accent); stroke: #fff; }
 .label { position: absolute; left: 0; top: 0; max-width: 240px; padding: 5px 9px; color: var(--ink); background: rgba(255, 255, 255, .92); border-radius: 6px; box-shadow: 0 1px 4px rgba(20, 30, 40, .16); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; will-change: transform; }
 .label.accent { color: #fff; background: var(--accent); }
+/* The loading screen's messages. Everything else is styled once the bundle runs. */
+#boot .boot-text { display: block; }
+#boot .boot-bar { display: block; width: 160px; height: 3px; margin: 12px auto 0; background: linear-gradient(90deg, transparent, #5a6168, transparent) 0 0 / 60% 100% no-repeat, #d6d9dd; animation: bootbar 1.3s linear infinite; }
+@keyframes bootbar { from { background-position: -160% 0, 0 0; } to { background-position: 260% 0, 0 0; } }
+#boot p { margin: 0; max-width: 34em; }
+#boot .boot-reset { display: block; margin: 14px auto 0; min-height: 44px; padding: 0 14px; border: 1px solid currentColor; background: none; font: inherit; color: inherit; cursor: pointer; }

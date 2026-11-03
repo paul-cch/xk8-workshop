@@ -1,16 +1,14 @@
 # XK8 Workshop interfaces
 
-Read with `docs/architecture.md` and `docs/data-contract.md`. Everything here exists and runs today.
+Read with `docs/architecture.md` and `docs/data-contract.md`. Commands are in `AGENTS.md`, and each tool's header says how
+to run it.
 
-```
-node tools/build.mjs [--analyze]   node tools/test-core.mjs   node tools/validate-data.mjs
-node tools/shots.mjs [--states hero,engine-bay | --all] [--viewport desktop|laptop|tablet|phone|1280x800] [--tier high|med|low|min]
-```
-`shots.mjs` exits 1 on any console error, and writes `dist-shots/<viewport>-<state>.png` and `report.json` (triangles, coverage, unknown ids, frame timing). States: hero side front rear top underside engine-bay boot wheel-fr/fl/rr/rl selected ghost xray explode job run. Add yours to `STATES`. Page limit 1 MB raw, and the JS is gzipped into the page, so all modules together have about 1 MB of minified code. Triangle budget for the whole car about 900k: engine 300, body 200, chassis 150, interior 100, driveline 60, roof 40, electrical 30.
+`tools/shots.mjs [--states hero,engine-bay | --all] [--viewport desktop|laptop|tablet|phone|1280x800] [--tier high|med|low|min]`
+exits 1 on any console error, and writes `dist-shots/<viewport>-<state>.png` and `report.json` (triangles, coverage, unknown ids, frame timing). States: hero side front rear top underside engine-bay boot wheel-fr/fl/rr/rl selected ghost xray explode job run. Add yours to `STATES`. Page limit 1 MB raw, and the JS is gzipped into the page, so all modules together have about 1 MB of minified code. Triangle budget for the whole car about 900k: engine 300, body 200, chassis 150, interior 100, driveline 60, roof 40, electrical 30.
 
 ## Car modules: `src/car/{body,roof,interior,engine,chassis,driveline,electrical}.js`
 
-Export `build(ctx)` and, if anything moves, `update(sim)`. Replace the stub whole. `ctx = {registry, data, materials, variant, spec, dims}`.
+Export `build(ctx)` and, if anything moves, `update(sim)`. `ctx = {registry, data, materials, variant, spec, dims}`.
 - `spec`: the `variants.json` record. `dims`: metres, `{length, width, height, wheelbase, trackF, trackR, clearance, overhangF, overhangR}`, overhangs null (estimate them in a named constant).
 - Build once, for every variant. Never branch on `ctx.variant`: it is only the car at boot. Register each form with a `variant` predicate.
 - Metres, car space. +x front, +y up, +z the car's right, ground y = 0, origin mid-wheelbase on the centreline.
@@ -57,7 +55,7 @@ Body: `surface.js` normals have a visible seam on the top centreline (see `engin
 **Store**, `src/state.js`: `store.get() .set(patch) .merge(key, patch) .subscribe(fn(state, changedKeys), ['key'])` returning unsubscribe. Replace objects, never mutate: `store.merge('sim', {rpm: 3000})`. Keys are as in architecture.md, plus: `xray: bool`, `hover: id`, `isolate: [ids] | null` (solid, the rest ghost), `garage: bool`, `sim.timeScale`, `sim.open {bonnet, boot, doorL, doorR}`, `variant.serial` when a VIN is known, `hinted: bool`, `notice`: a string or a function that gives one, for the shell's toast. `job = {id, step}`: step is 0-based into `jobSteps(job, variant)`, null for the overview, and shows 1-based in the URL. Hash and localStorage sync themselves. Exports `SYSTEMS MODES DEFAULT_VARIANT variantCode parseVariantCode formatHash parseHash`.
 Commands are state: `store.set({view: 'side'})` moves the camera, `{selected: id}` highlights and labels, `{systems: {body: 'ghost'}}`, `{explode: .5}`, `{mode: 'jobs', job: {id, step: 3}}` lifts, ghosts and highlights. Set `view: null` when you take over the camera, as dragging does.
 
-**Data**, `src/data.js`: `data.parts .torques .fluids .service .jobs .tools .faults .dtc .weakspots .inspect .upgrades .vendors .variants`, each `{items, byId, sources}`; `data.dtc.byCode` maps a code to several records; `data.variants` keeps `vin dimensions changes firing`. Null fields are gone from the built data: test with `== null`. Empty arrays stay. Only variants, torques, fluids and jobs keep `gaps`.
+**Data**, `src/data.js`: `data.parts .torques .fluids .service .jobs .tools .faults .dtc .weakspots .inspect .upgrades .vendors .facts .variants`, each `{items, byId, sources}`; `data.dtc.byCode` maps a code to several records; `data.variants` keeps `vin dimensions changes firing`. Null fields are gone from the built data: test with `== null`. Empty arrays stay. Only variants, torques, fluids and jobs keep `gaps`.
 - Variant: `applies(appliesTo, v)` `appliesStatus(...)` gives 'yes'|'no'|'maybe', and maybe means a VIN break inside that model year, so say "check your VIN". `forVariant(list, v)` `specFor(v)` `carDims(v)` `dimension(key, v)` `jobsFor(v)` `jobSteps(job, v)` `stepTorques(step, v)` `stepFluids(step, v)`.
 - Cross-refs: `refsFor(partId, v)` gives `{part, partNumbers, torques, jobs, faults, dtc, weakspots, service, upgrades}`. `partName(id)`.
 - Numbers: `formatTorque(t, units)` gives `{value, unit, alt, stages, sequence, text}`. Value is null when only stages have numbers, so always render stages. `convertTorqueText(s, units)`.
@@ -71,9 +69,7 @@ Commands are state: `store.set({view: 'side'})` moves the camera, `{selected: id
 
 Unmodelled part: `registry.resolve(id)` gives `{id, exact}`, the nearest modelled neighbour by `connectsTo`. Focus and labels use it; lifts never do. Say so in the UI when `exact` is false.
 
-## Tools added in integration
-
-`node tools/coverage.mjs [--list]` modelled parts and job-step coverage. `node tools/job-walk.mjs [--job a,b] [--all-variants] [--shots] [--phone]` steps every job. `node tools/lift-solve.mjs` rewrites `src/car/lifts.js`. `node tools/assemble.mjs [--variants 2|4] [--no-shots] [--no-numbers]` numbers and contact sheets. `node tools/perf.mjs [desktop|laptop|phone]`. `node tools/sweep.mjs` every mode on every kind of car. `node tools/og.mjs` writes `dist/og.png`, after a build.
+## Jobs, release and the newer UI
 
 A job keeps the car solid. `pose` thins only `CLEARS` for the part leaving, `src/stage/tunnel.js` thins what is on the sightline to the work, and `applyPose(result, registry, state, dt, sight)` applies it. Rerun `lift-solve` after moving parts that jobs remove. `pose(state, clock, ctx, raw)`: raw skips CLEARS, for the solver. `flyToPart` also takes `context`, metres of car kept in frame.
 

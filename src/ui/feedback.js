@@ -173,15 +173,12 @@ function openForm(app, here) {
 
 export function mount(app, {top, before, dock}) {
   const {store} = app;
-  const word = h('span.fb-word');
   const button = h('button.toggle.fb-btn', {type: 'button', onclick: () => app.ui.feedback()});
   button.innerHTML = BUBBLE;
-  button.append(word);
   top.insertBefore(button, before);
 
   const link = h('button.link.fb-here', {type: 'button', onclick: () => app.ui.feedback(hereNow(store.get()))});
   const paintWords = () => {
-    word.textContent = t('Feedback');
     button.setAttribute('aria-label', t('Send feedback'));
     button.title = t('Send feedback');
     link.textContent = t('Something wrong here?');

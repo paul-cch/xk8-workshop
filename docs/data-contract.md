@@ -129,6 +129,10 @@ size, why, jdNumber, altDiy, costGbp: [low, high], src, conf}`.
 
 `data/vendors.json` items: `{id, name, url, region, sells, note}`.
 
+`data/facts.json` items: `{id, title, system, answer, detail: [string], keywords, appliesTo, note, src, conf}`. Short answers
+to common questions such as tyre pressures, found through search. `answer` is the one-line reply, `detail` the rest, and
+`keywords` the words a person might search with.
+
 `data/tutorials.json` adds top-level `order` and has no `src` or `conf`: a tutorial is a link to someone else's work and how
 far it fits, not a fact. `sources` stays empty, and `gaps` says what was searched for and not found. It is built from the
 checked research, one record per line. Items: `{id, kind (video|guide|forum), title, url, source, lang (en|fr), seconds,
@@ -156,6 +160,6 @@ parts only or parts and labour.
 
 ## Reference images
 
-`ref/images/` holds photos and drawings used only as modelling references, each with a
-line in `ref/images/SOURCES.md` giving URL, licence and what it shows. They do not ship
-in the page unless the licence allows it.
+`ref/images/` holds photos and drawings used only as modelling references. It stays local
+and is not in the repository. `docs/reference-images.md` gives each file's URL, licence and
+what it shows. They do not ship in the page unless the licence allows it.

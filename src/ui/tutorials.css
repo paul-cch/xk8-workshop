@@ -29,13 +29,13 @@
 #ui .tut-out:focus-visible, #ui .tut-close:focus-visible { outline-offset: -3px; }
 
 .tut-step { display: flex; flex-direction: column; gap: 7px; }
-#ui .tut-go { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 60px; padding: 8px 14px; border: 1.5px solid var(--ink); background: var(--sheet); color: var(--ink); text-align: left; text-decoration: none; line-height: 1.25; }
+#ui .tut-go { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 60px; padding: 8px 14px; border: 1px solid var(--line); background: var(--sheet); color: var(--ink); text-align: left; text-decoration: none; line-height: 1.25; }
 .tut-go > .ws-i { flex: none; font-size: 26px; }
 .tut-go-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 .tut-go-text strong { font-size: 1.08em; font-weight: 700; }
 .tut-go-text span { font-size: .85em; color: var(--ink-2); }
 /* One row that runs off the edge, like the camera views: a long grid here would push the jobs themselves off a phone. */
-.tut-topics { display: flex; margin-bottom: 4px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; }
+.tut-topics { display: flex; gap: 6px; padding: 2px; margin-bottom: 4px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; }
 #ui .tut-topics .ws-tile { flex: 0 0 158px; }
 #ui .tut-topics .ws-tile[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
 #ui .tut-topics .ws-tile[aria-pressed='true'] span { color: inherit; }

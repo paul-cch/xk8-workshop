@@ -1,6 +1,6 @@
 # Data conflicts
 
-This records where the tutorial research disagreed with our data, what the primary evidence says, and what was decided. The tutorial cautions came from `research/tutorials.json`, and every one of the 216 was read. Evidence is the JTIS text for each model year in `ref/downloads/torques-fluids-service/jtis-txt/`, the 2003-06 workshop manual in `ref/downloads/jobs-tools/pdf/wm0306.txt`, and the videos' own captions.
+This records where the tutorial research disagreed with our data, what the primary evidence says, and what was decided. The tutorial cautions came from `research/tutorials.json`, and every one of the 216 was read. Evidence is the JTIS text for each model year in `ref/downloads/torques-fluids-service/jtis-txt/`, the 2003-06 workshop manual in `ref/downloads/jobs-tools/pdf/wm0306.txt`, and the videos' own captions. `research/` and `ref/` stay local and are not in the repository.
 
 Section numbers are JTIS and manual sections: 303-01 engine, 303-03 cooling, 309-00 exhaust, 204-01 front suspension, 204-02 rear suspension, 205-02 rear drive. MY means model year.
 
