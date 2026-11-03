@@ -36,14 +36,14 @@ A native French mechanic has not read it. Some rare terms were best guesses and 
 
 - **Nobody watched the films.** They were judged from titles, descriptions and captions. Captions were read for 85 of them. 64 rest on title and description only, mostly general French videos and fault or weak-spot links. See `research/tutorials-summary.md`.
 - Step start times come from published chapters or captions and were never estimated, but nobody confirmed by eye that the picture matches.
-- A real YouTube film played from `Watch this step` in Chromium over http. Every automated check since uses a fake player. From `file://` YouTube gives error 153, and Open on YouTube still works.
+- A real YouTube film played on the live site in Chromium, on 3 November 2026 and earlier from `Watch this step` over http. Every automated check uses a fake player. From `file://` YouTube gives error 153, and Open on YouTube still works.
 - On iPhone a film needs a second tap on YouTube's own button. Moving to the next step reloads the film at the new moment, so it probably needs another tap there too. Neither has been tried on a real iPhone.
 - YouTube's own words follow `hl=fr` only as far as YouTube honours it. That was not checked with a real player.
 - In French, French films come first, so a general video on another car can sit above an English film of an X100.
 
 ## Feedback
 
-The form, the queue and the worker pass in node and in a browser against a local worker. Real Cloudflare KV, Pages advanced mode and the iPhone keyboard are not proven. The car name clips at 320 px.
+The form, the queue and the worker pass in node and in a browser against a local worker. On the live site, 3 November 2026: a message sent through the form in French on the iPhone profile reached the inbox, stored text came back escaped, a wrong password got 401, a delete with a bad token got 403, and a real delete worked. The iPhone keyboard is not proven. The car name clips at 320 px.
 
 ## Plain words
 
