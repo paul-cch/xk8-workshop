@@ -4,9 +4,22 @@ An interactive 3D workshop for the Jaguar XK8 and XKR (X100, 1996 to 2006), for 
 
 **https://xk8.paulcouach.com**
 
+[![The car turning, coming apart and showing a part](docs/media/tour.gif)](docs/media/tour.mp4)
+
+*The full 26-second tour, with the engine cut open and a repair step: [docs/media/tour.mp4](docs/media/tour.mp4)*
+
 Take the car apart in 3D, watch the engine run, and follow 43 repair jobs step by step with the torques, parts and tools for
 your exact car. It also covers fault finding, servicing and buying checks. It is one page, made for a phone beside the car,
 in English or French.
+
+| | |
+|---|---|
+| ![The car taken apart](docs/media/takeapart.jpg) | ![The engine cut open, with the four strokes named](docs/media/engine.jpg) |
+| **Take it apart.** Every part, with its numbers and torques for your car | **Run it.** The engine cut open and slowed down |
+| ![A brake pad job step](docs/media/job.jpg) | ![What's wrong, searching for a misfire](docs/media/diagnose.jpg) |
+| **Fix it.** Step by step, with a film at the right moment | **What's wrong.** Plain words or a fault code |
+
+<p align="center"><img src="docs/media/phone-dark.jpg" width="300" alt="A job step on a phone in dark mode, with hands-free on"><br><b>On a phone</b>, in dark mode, with hands-free reading each step out</p>
 
 ## How far to trust it
 
