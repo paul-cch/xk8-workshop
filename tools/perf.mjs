@@ -30,9 +30,12 @@ async function measure(name, p) {
   if (p.throttle > 1) await cdp.send('Emulation.setCPUThrottlingRate', {rate: p.throttle});
   const t0 = Date.now();
   await page.goto(`file://${FILE}${p.query}`);
-  await page.waitForFunction(() => document.querySelector('#stage') && window.__xk8 && !document.querySelector('#boot.gone') !== undefined, null, {timeout: 120000});
-  await page.waitForFunction(() => window.__xk8, null, {timeout: 120000});
+  // Interactive: the interface is up and the loading cover is going. Whole: every form of every part is built, the moment
+  // window.__xk8 appears. The other cars' forms finish after the first frame, so the two differ by that.
+  await page.waitForFunction(() => document.querySelector('#boot.gone') || (!document.querySelector('#boot') && window.__xk8), null, {timeout: 120000, polling: 16});
   const interactive = Date.now() - t0;
+  await page.waitForFunction(() => window.__xk8, null, {timeout: 120000});
+  const whole = Date.now() - t0;
   const bench = await page.evaluate(async () => {
     const x = window.__xk8;
     const raf = () => new Promise(requestAnimationFrame);
@@ -75,14 +78,14 @@ async function measure(name, p) {
     return e ? gl.getParameter(e.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER);
   });
   await ctx.close();
-  return {interactive, gpu, ...bench, errors};
+  return {interactive, whole, gpu, ...bench, errors};
 }
 
 for (const [name, p] of Object.entries(PROFILES)) {
   if (only && only !== name) continue;
   out[name] = await measure(name, p);
   const r = out[name];
-  console.log(`${name.padEnd(8)} interactive ${r.interactive} ms; tier ${r.tier} (orbit ${r.tierOrbit}), ${r.canvas.join('x')}; orbit ${r.orbit.mean}/${r.orbit.p95} ms, running ${r.running.mean}/${r.running.p95} ms, job ${r.job.mean}/${r.job.p95} ms; ${r.calls} calls, ${r.triangles} tris drawn, ${r.registered} registered; heap ${Math.round((r.memory ?? 0) / 1e6)} MB; errors ${r.errors.length}`);
+  console.log(`${name.padEnd(8)} interactive ${r.interactive} ms, whole car ${r.whole} ms; tier ${r.tier} (orbit ${r.tierOrbit}), ${r.canvas.join('x')}; orbit ${r.orbit.mean}/${r.orbit.p95} ms, running ${r.running.mean}/${r.running.p95} ms, job ${r.job.mean}/${r.job.p95} ms; ${r.calls} calls, ${r.triangles} tris drawn, ${r.registered} registered; heap ${Math.round((r.memory ?? 0) / 1e6)} MB; errors ${r.errors.length}`);
   console.log(`         boot: ${r.bootMarks.map(([n, t]) => `${n} ${t}`).join(', ')}`);
 }
 await browser.close();

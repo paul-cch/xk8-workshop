@@ -8,7 +8,7 @@
 // mover, and restBox needs no update() to be right.
 import * as THREE from 'three';
 import {applies, specFor} from '../data.js';
-import {box, cylinder, extrude, hexHead, lathe, loft, merge, part, repeat, roundedBlock, seg, tube, xf} from './kit.js';
+import {box, cylinder, extrude, hexHead, lathe, loft, merge, once, part, repeat, roundedBlock, seg, tube, xf} from './kit.js';
 import {addMaterial, growlerMaterial} from './materials.js';
 import {bodyAttitude, chassisFrame, FRONT as F, frontCorner, parseTyre, REAR as R, rearCorner} from '../sim/kin.js';
 
@@ -169,12 +169,20 @@ function kit(ctx) {
   /** Registers meshes. move names the rigid group that drives this part, in the chassis frame. */
   function put(id, byMat, {axle = 'F', move = null, frame = false, spin = false, mirror = true, ...opts} = {}) {
     const rest = axle === 'F' ? REST.F : REST.R;
-    const {holder, inner} = stack(axle, rest.q, frame ? rest.at : null, spin);
-    inner.add(part(mats, byMat));
-    const got = registry.add(id, holder, {mirror, ...opts});
-    track(got.object, 'right', axle, move, spin);
-    if (got.mirror) track(got.mirror, 'left', axle, move, spin);
-    return got;
+    // byMat may be a function that returns it: then a form the car on show does not have waits for registry.fill()
+    const late = typeof byMat === 'function';
+    const lib = late ? {...mats} : mats; // as the library stands now: engine.js later gives the name capRed to another red
+    const make = (mat) => {
+      const {holder, inner} = stack(axle, rest.q, frame ? rest.at : null, spin);
+      inner.add(part(lib, mat));
+      return holder;
+    };
+    return registry.add(id, late ? () => make(byMat()) : make(byMat), {mirror, ...opts}, (got) => {
+      const from = movers.length;
+      track(got.object, 'right', axle, move, spin);
+      if (got.mirror) track(got.mirror, 'left', axle, move, spin);
+      if (late && placed) for (const f of movers.slice(from)) f(lastFrame ?? placed); // built after apply(): put it where the rest already are
+    });
   }
   return {put, stack, registry, mats, axleX, A};
 }
@@ -798,7 +806,7 @@ function buildBrakes(K, ctx) {
     }
     return {discIron: [cheeks, hat], iron: vanes};
   };
-  const putDisc = (id, axle, move, mm, thick, hat) => put(id, disc(mm / 1000, thick, hat), {axle, frame: true, move, spin: true, variant: (v) => (id.endsWith('front') ? frontMm(v) : rearMm(v)) === mm, lift: [0, 0, 0.46]});
+  const putDisc = (id, axle, move, mm, thick, hat) => put(id, () => disc(mm / 1000, thick, hat), {axle, frame: true, move, spin: true, variant: (v) => (id.endsWith('front') ? frontMm(v) : rearMm(v)) === mm, lift: [0, 0, 0.46]});
   const thF = dF.thickNewMaxMm / 1000, thR = dR.thickNewMaxMm / 1000;
   const hatF = dF.hatHeightMm / 1000, hatR = dR.hatHeightMm / 1000;
   for (const mm of [dF.dia305Mm, dF.dia325Mm, dF.brembo42DiaMm]) putDisc('brakes.disc-front', 'F', 'upright', mm, thF, hatF);
@@ -807,8 +815,8 @@ function buildBrakes(K, ctx) {
   // Shields sit behind the disc, a notched steel dish, sng-p059 item 2
   const shield = (dia, z, phase) => lathe([[0.046, z], [0.070, z], [0.080, z - 0.012], [dia * 0.5 + 0.004, z - 0.016], [dia * 0.5 + 0.006, z - 0.002], [dia * 0.5 + 0.0085, z - 0.002], [dia * 0.5 + 0.0065, z - 0.018], [0.080, z - 0.015], [0.070, z - 0.003], [0.046, z - 0.003], [0.046, z]], {seg: 20, axis: 'z', arc: TAU * 0.78}).rotateZ(rad(phase));
   const zShF = hubFace - hatF - 0.008, zShR = hubFace - hatR - 0.010;
-  for (const mm of [dF.dia305Mm, dF.dia325Mm, dF.brembo42DiaMm]) put('brakes.disc-shield', {zinc: [shield(mm / 1000, zShF, CALIPER_DEG.front + 40)]}, {axle: 'F', frame: true, move: 'upright', variant: (v) => frontMm(v) === mm});
-  for (const mm of [dR.diaMm, dR.brembo42DiaMm]) put('brakes.disc-shield', {zinc: [shield(mm / 1000, zShR, CALIPER_DEG.rear + 40)]}, {axle: 'R', frame: true, move: 'carrier', variant: (v) => rearMm(v) === mm});
+  for (const mm of [dF.dia305Mm, dF.dia325Mm, dF.brembo42DiaMm]) put('brakes.disc-shield', () => ({zinc: [shield(mm / 1000, zShF, CALIPER_DEG.front + 40)]}), {axle: 'F', frame: true, move: 'upright', variant: (v) => frontMm(v) === mm});
+  for (const mm of [dR.diaMm, dR.brembo42DiaMm]) put('brakes.disc-shield', () => ({zinc: [shield(mm / 1000, zShR, CALIPER_DEG.rear + 40)]}), {axle: 'R', frame: true, move: 'carrier', variant: (v) => rearMm(v) === mm});
 
   /** Local caliper frame: X radially out, Y round the disc, Z along the axle. place() swings it to its clock position. */
   const clock = (g, deg, z) => xf(g, {rot: [0, 0, rad(deg)], at: [0, 0, z]});
@@ -879,37 +887,37 @@ function buildBrakes(K, ctx) {
   for (const mm of [dF.dia305Mm, dF.dia325Mm]) {
     const v = (x) => frontMm(x) === mm, dia = mm / 1000, deg = CALIPER_DEG.front;
     const tang = padF.widthMm / 1000 * 0.72;
-    put('brakes.caliper-front', {paintBlack: teves(dia, zF, thF, deg, pistonR, tang, padF.heightMm / 1000)}, {axle: 'F', frame: true, move: 'upright', variant: v, lift: [-0.18, 0.05, 0.34]});
-    put('brakes.caliper-carrier-front', {steelDark: carrierF(dia, zF, thF, deg, tang, padF.heightMm / 1000)}, {axle: 'F', frame: true, move: 'upright', variant: v, lift: [-0.20, 0.06, 0.46]});
+    put('brakes.caliper-front', () => ({paintBlack: teves(dia, zF, thF, deg, pistonR, tang, padF.heightMm / 1000)}), {axle: 'F', frame: true, move: 'upright', variant: v, lift: [-0.18, 0.05, 0.34]});
+    put('brakes.caliper-carrier-front', () => ({steelDark: carrierF(dia, zF, thF, deg, tang, padF.heightMm / 1000)}), {axle: 'F', frame: true, move: 'upright', variant: v, lift: [-0.20, 0.06, 0.46]});
     const p = padPair(dia / 2 - padF.heightMm / 2000 - 0.004, padF.heightMm / 1000, padF.widthMm / 1000, padF.thickMm / 1000, zF, thF, deg);
-    put('brakes.pad-front', {padLining: p.friction, zinc: p.plate}, {axle: 'F', frame: true, move: 'upright', variant: v, lift: [0, 0.16, 0.30]});
+    put('brakes.pad-front', () => ({padLining: p.friction, zinc: p.plate}), {axle: 'F', frame: true, move: 'upright', variant: v, lift: [0, 0.16, 0.30]});
   }
   {
     const mm = dF.brembo42DiaMm, v = (x) => frontMm(x) === mm, dia = mm / 1000, deg = CALIPER_DEG.front;
     const tang = padB.widthMm / 1000;
-    put('brakes.caliper-front', brembo(dia, zF, thF, deg, bBig, bSmall, tang, padB.heightMm / 1000), {axle: 'F', frame: true, move: 'upright', variant: v, lift: [-0.18, 0.05, 0.34]});
+    put('brakes.caliper-front', () => (brembo(dia, zF, thF, deg, bBig, bSmall, tang, padB.heightMm / 1000)), {axle: 'F', frame: true, move: 'upright', variant: v, lift: [-0.18, 0.05, 0.34]});
     const p = padPair(dia / 2 - padB.heightMm / 2000 - 0.002, padB.heightMm / 1000, padB.widthMm / 1000, padB.thickMm / 1000, zF, thF, deg);
-    put('brakes.pad-front', {padLining: p.friction, zinc: p.plate}, {axle: 'F', frame: true, move: 'upright', variant: v, lift: [0, 0.16, 0.30]});
+    put('brakes.pad-front', () => ({padLining: p.friction, zinc: p.plate}), {axle: 'F', frame: true, move: 'upright', variant: v, lift: [0, 0.16, 0.30]});
     // the Brembo bolts straight to the link, so the carrier form here is its mounting spacer
-    put('brakes.caliper-carrier-front', {steelDark: [clock(box(0.016, 0.13, 0.03, {at: [dia / 2 - 0.095, 0, -thF / 2 - 0.04]}), deg, zF)]}, {axle: 'F', frame: true, move: 'upright', variant: v, lift: [-0.20, 0.06, 0.46]});
+    put('brakes.caliper-carrier-front', () => ({steelDark: [clock(box(0.016, 0.13, 0.03, {at: [dia / 2 - 0.095, 0, -thF / 2 - 0.04]}), deg, zF)]}), {axle: 'F', frame: true, move: 'upright', variant: v, lift: [-0.20, 0.06, 0.46]});
   }
 
   const padRw = padRs.widthMm / 1000, padRt = padRs.thickMm / 1000;
   {
     const mm = dR.diaMm, v = (x) => rearMm(x) === mm, dia = mm / 1000, deg = CALIPER_DEG.rear;
     const h = padRH / 1000, tang = padRw * 0.68;
-    put('brakes.caliper-rear', {paintBlack: teves(dia, zR, thR, deg, cR.pistonMm / 2000, tang, h)}, {axle: 'R', frame: true, move: 'carrier', variant: v, lift: [0.18, 0.05, 0.34]});
-    put('brakes.caliper-carrier-rear', {steelDark: carrierF(dia, zR, thR, deg, tang, h)}, {axle: 'R', frame: true, move: 'carrier', variant: v, lift: [0.20, 0.06, 0.46]});
+    put('brakes.caliper-rear', () => ({paintBlack: teves(dia, zR, thR, deg, cR.pistonMm / 2000, tang, h)}), {axle: 'R', frame: true, move: 'carrier', variant: v, lift: [0.18, 0.05, 0.34]});
+    put('brakes.caliper-carrier-rear', () => ({steelDark: carrierF(dia, zR, thR, deg, tang, h)}), {axle: 'R', frame: true, move: 'carrier', variant: v, lift: [0.20, 0.06, 0.46]});
     const p = padPair(dia / 2 - h / 2 - 0.004, h, padRw, padRt, zR, thR, deg);
-    put('brakes.pad-rear', {padLining: p.friction, zinc: p.plate}, {axle: 'R', frame: true, move: 'carrier', variant: v, lift: [0, 0.16, 0.30]});
+    put('brakes.pad-rear', () => ({padLining: p.friction, zinc: p.plate}), {axle: 'R', frame: true, move: 'carrier', variant: v, lift: [0, 0.16, 0.30]});
   }
   {
     const mm = dR.brembo42DiaMm, v = (x) => rearMm(x) === mm, dia = mm / 1000, deg = CALIPER_DEG.rear;
     const h = padRb.heightMm / 1000, tang = padRb.widthMm / 1000;
-    put('brakes.caliper-rear', brembo(dia, zR, thR, deg, brBig, brSmall, tang, h), {axle: 'R', frame: true, move: 'carrier', variant: v, lift: [0.18, 0.05, 0.34]});
+    put('brakes.caliper-rear', () => (brembo(dia, zR, thR, deg, brBig, brSmall, tang, h)), {axle: 'R', frame: true, move: 'carrier', variant: v, lift: [0.18, 0.05, 0.34]});
     const p = padPair(dia / 2 - h / 2 - 0.002, h, tang, padRb.thickMm / 1000, zR, thR, deg);
-    put('brakes.pad-rear', {padLining: p.friction, zinc: p.plate}, {axle: 'R', frame: true, move: 'carrier', variant: v, lift: [0, 0.16, 0.30]});
-    put('brakes.caliper-carrier-rear', {steelDark: [clock(box(0.016, 0.10, 0.03, {at: [dia / 2 - 0.08, 0, -thR / 2 - 0.04]}), deg, zR)]}, {axle: 'R', frame: true, move: 'carrier', variant: v, lift: [0.20, 0.06, 0.46]});
+    put('brakes.pad-rear', () => ({padLining: p.friction, zinc: p.plate}), {axle: 'R', frame: true, move: 'carrier', variant: v, lift: [0, 0.16, 0.30]});
+    put('brakes.caliper-carrier-rear', () => ({steelDark: [clock(box(0.016, 0.10, 0.03, {at: [dia / 2 - 0.08, 0, -thR / 2 - 0.04]}), deg, zR)]}), {axle: 'R', frame: true, move: 'carrier', variant: v, lift: [0.20, 0.06, 0.46]});
   }
 
   // Small parts, placed for the standard calipers. They ride with their carriers, one set per axle.
@@ -1170,9 +1178,8 @@ function buildWheels(K, ctx) {
     for (const [axle, wJ, tyreText] of [['F', wf, tf], ['R', wr, tr]]) {
       const R0 = (inch * 25.4) / 2000, W = (wJ * 25.4) / 1000;
       const common = {axle, frame: true, move: move[axle], spin: true, lift: LIFT[axle]};
-      put(lead[axle], {wheelAlloy: wheelBarrel(R0, W, key === '20' ? 'sepang' : '')}, {...common, variant: sizeIs, explode: [0, 0, 0.78], view: {az: axle === 'F' ? 66 : 114, el: 6, fill: 0.62}});
-      const tyreForm = tyreGeometry(parseTyre(tyreText));
-      put('wheels.tyre', {tyre: [tyreForm.tread], tyreWall: [tyreForm.wall]}, {...common, variant: sizeIs, follows: lead[axle], explode: [0, 0, 0.98]});
+      put(lead[axle], () => ({wheelAlloy: wheelBarrel(R0, W, key === '20' ? 'sepang' : '')}), {...common, variant: sizeIs, explode: [0, 0, 0.78], view: {az: axle === 'F' ? 66 : 114, el: 6, fill: 0.62}});
+      put('wheels.tyre', () => { const tyreForm = tyreGeometry(parseTyre(tyreText)); return {tyre: [tyreForm.tread], tyreWall: [tyreForm.wall]}; }, {...common, variant: sizeIs, follows: lead[axle], explode: [0, 0, 0.98]});
     }
   }
   for (const [style, key] of STYLES) {
@@ -1180,9 +1187,9 @@ function buildWheels(K, ctx) {
     const styleIs = (v) => wheelStyle(v) === style;
     for (const [axle, wJ] of [['F', wf], ['R', wr]]) {
       const R0 = (inch * 25.4) / 2000, W = (wJ * 25.4) / 1000;
-      const f = wheelFace(style, R0, W, hubZ);
+      const face = once(() => wheelFace(style, R0, W, hubZ));
       const common = {axle, frame: true, move: move[axle], spin: true, lift: LIFT[axle], follows: lead[axle]};
-      put('wheels.road-wheel', {wheelAlloy: f.spokes, wheelRecess: f.dark}, {...common, variant: styleIs, explode: [0, 0, 0.84]});
+      put('wheels.road-wheel', () => ({wheelAlloy: face().spokes, wheelRecess: face().dark}), {...common, variant: styleIs, explode: [0, 0, 0.84]});
       const z = hubZ + LUG_FLOOR + 0.001;
       const nut = lathe([[1e-5, 0], [0.0108, 0], [0.0105, 0.004], [0.0092, 0.0095], [0.0062, 0.0115], [1e-5, 0.0115]], {seg: 6, axis: 'z', creaseDeg: 5});
       const nuts = (n, skip) => {
@@ -1190,13 +1197,13 @@ function buildWheels(K, ctx) {
         for (let i = 0; i < n; i++) { if (i === skip) continue; const a = 90 + i * 72 + 36; out.push(nut.clone().translate(...polar(0.12065 / 2, a, z))); }
         return out;
       };
-      put('wheels.wheel-nut', {zinc: nuts(5, 0)}, {...common, variant: styleIs, explode: [0, 0, 0.92]});
+      put('wheels.wheel-nut', () => ({zinc: nuts(5, 0)}), {...common, variant: styleIs, explode: [0, 0, 0.92]});
       // one nut on each wheel is the locking nut, sng-p063 item 24 is the same idea
-      put('wheels.locking-nut', {zinc: [nut.clone().translate(...polar(0.12065 / 2, 90 + 36, z))], steelDark: [cylinder(0.0055, 0.0015, {seg: 10, axis: 'z', at: polar(0.12065 / 2, 90 + 36, z + 0.0118)})]}, {...common, variant: styleIs, explode: [0, 0, 0.92]});
+      put('wheels.locking-nut', () => ({zinc: [nut.clone().translate(...polar(0.12065 / 2, 90 + 36, z))], steelDark: [cylinder(0.0055, 0.0015, {seg: 10, axis: 'z', at: polar(0.12065 / 2, 90 + 36, z + 0.0118)})]}), {...common, variant: styleIs, explode: [0, 0, 0.92]});
       const capRing = lathe([[1e-5, 0], [0.0305, 0], [0.0305, 0.006], [0.027, 0.0085], [1e-5, 0.0085]], {seg: 28, axis: 'z'}).translate(0, 0, hubZ + LUG_FLOOR + LUG_DEPTH - 0.004);
       const capFace = new THREE.CircleGeometry(0.026, 28).translate(0, 0, hubZ + LUG_FLOOR + LUG_DEPTH + 0.0048);
-      put('wheels.centre-cap', {chrome: [capRing], capRed: [capFace]}, {...common, variant: (v) => styleIs(v) && v.engine === '4.0', explode: [0, 0, 1.0]});
-      put('wheels.centre-cap', {chrome: [capRing.clone()], capGreen: [capFace.clone()]}, {...common, variant: (v) => styleIs(v) && v.engine === '4.2', explode: [0, 0, 1.0]});
+      put('wheels.centre-cap', () => ({chrome: [capRing], capRed: [capFace]}), {...common, variant: (v) => styleIs(v) && v.engine === '4.0', explode: [0, 0, 1.0]});
+      put('wheels.centre-cap', () => ({chrome: [capRing.clone()], capGreen: [capFace.clone()]}), {...common, variant: (v) => styleIs(v) && v.engine === '4.2', explode: [0, 0, 1.0]});
     }
   }
 
@@ -1390,11 +1397,14 @@ export function build(ctx) {
   buildLines(K, ctx);
   buildCarLines(ctx);
   buildLiftPoints(ctx);
+  placed = null;
   apply(chassisFrame(0, 0, 0));
 }
 
+let placed = null; // the frame build() put everything in, once it has
 function apply(c) {
   for (const f of movers) f(c);
+  placed ??= c;
 }
 
 let lastFrame = null, lastHeave = 0, lastPitch = 0;

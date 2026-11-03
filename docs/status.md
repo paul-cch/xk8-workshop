@@ -17,7 +17,7 @@ Run on 2 and 3 November 2026 on an Apple M3. The commands are in `AGENTS.md`.
 | Job walk, phone | 10 runs of 5 jobs, 103 steps, 0 issues |
 | Assembly, all variants | 0 console errors |
 | Page size | 974 KB raw, 696 KB gzipped, inside the 1 MB budget. `dist/fr.js` 1.36 MB raw, 431 KB gzipped |
-| Phone tier, emulated | interactive 3.8 s, 60 fps |
+| Phone tier, emulated | interactive 1.9 s, whole car 2.4 s, 60 fps |
 
 `tools/job-walk.mjs` still exits 1 because of the lift crossings below.
 
@@ -26,7 +26,7 @@ Run on 2 and 3 November 2026 on an Apple M3. The commands are in `AGENTS.md`.
 - Never tried on a real phone. WebKit with the iPhone profile is the closest test.
 - iPhone offline is unproven. Offline reload works in Chromium. In WebKit the service worker takes control, but the offline
   reload hit a harness error.
-- Phone interactive time misses the 3 s target, mostly the body build (2.3 s in emulation).
+- Phone boot, emulated: the interface is up at 1.9 s and the first frame drawn at about 2.05 s. The body build is the largest part left, 0.5 s.
 - Lift paths cross a solid part: coil and intake pipe through the cam cover, drive belt through the tensioner, vertical link
   through the ball joint, radiator top panel through the bonnet. 366 more pairs pass through ghosted parts.
 - Tail lamps come to too much of a point. Hood mid-travel shows bars and teeth, and a faint ripple remains on the boot lid.

@@ -24,7 +24,9 @@ const {object, mirror} = registry.add('front-suspension.damper', obj, {
   noPick: true,           // visible but not tappable
 });
 ```
-`add` wraps `obj` in a rig, and only pose.js moves rigs, so `update(sim)` is free to move `obj` and its children. Adding an id twice adds a second form of that part. Ids come from `data/parts.json`; others work but show in `report.unknown`. Registering after boot is not supported. `registry`: `get has all ids group resolve nearest restBox currentBox partBox report`.
+`add` wraps `obj` in a rig, and only pose.js moves rigs, so `update(sim)` is free to move `obj` and its children. Adding an id twice adds a second form of that part. Ids come from `data/parts.json`; others work but show in `report.unknown`. Registering after boot is not supported. `registry`: `get has all ids group resolve nearest restBox currentBox partBox report fill deferWhen waiting`.
+
+`obj` may instead be a function that builds it, with `done({object, mirror})` as a fourth argument in place of the return value. Then a form the car on show does not have waits: main.js builds this car's forms, shows the page, and `registry.fill()` builds the rest in short turns after the first frame, or all at once on the first change of state that could need them. The rig is made at the `add` call, so part, instance and scene order are as if it had been built at once. A builder must only read what is fixed by then: copy anything a later module may change, as `put()` in chassis.js does with the material library. `window.__xk8` appears once nothing waits.
 
 `update(sim)` runs every frame while anything moves. Reuse nodes, allocate nothing, set only local transforms. `sim` is from `simFrame`:
 ```

@@ -5,7 +5,7 @@
 import * as THREE from 'three';
 import {applies} from '../data.js';
 import {ARCH_R, ARCH_Y, AXLE_F, AXLE_R, bodySurface, fair, fieldNormals, inset, makeField, panelGeometry, smoothLine, sweep, trace} from './surface.js';
-import {box, cylinder, extrude, lathe, loft, merge, mesh, part, seg, tube, xf} from './kit.js';
+import {box, cylinder, extrude, lathe, loft, merge, mesh, once, part, seg, tube, xf} from './kit.js';
 import {addMaterial, growlerMaterial} from './materials.js';
 
 const rad = (d) => (d * Math.PI) / 180;
@@ -146,7 +146,8 @@ export function build(ctx) {
 
   const line = (S, view, pts, spacing = .03, seed = null) => trace(S, view, smoothLine(pts, spacing), {seed});
   const panel = (S, poly, opts = {}) => panelGeometry(S, opts.gap === 0 ? poly : inset(S, poly, opts.gap ?? .0025), {cells, ...opts});
-  const addP = (id, byMat, opts) => registry.add(id, part(M, byMat), opts);
+  // byMat may be a function that returns it: then a form the car on show does not have waits for registry.fill()
+  const addP = (id, byMat, opts) => registry.add(id, typeof byMat === 'function' ? () => part(M, byMat()) : part(M, byMat), opts);
   const pivoted = (byMat, px, py, pz = 0) => { // a part that turns about a hinge: geometry moved so the hinge is its origin
     const o = part(M, byMat);
     for (const c of o.children) { c.geometry = c.geometry.clone(); c.geometry.translate(-px, -py, -pz); }
@@ -154,10 +155,12 @@ export function build(ctx) {
     return o;
   };
   const movers = {bonnet: [], boot: [], doorR: [], doorL: [], glassDrop: [], struts: []};
-  const onDoor = (id, byMat, opts = {}) => {
-    const r = registry.add(id, pivoted(byMat, HINGE.x, 0, HINGE.z), {mirror: true, ...opts});
-    movers.doorR.push(r.object); movers.doorL.push(r.mirror);
-    return r;
+  const onDoor = (id, byMat, opts = {}, then = null) => {
+    const turn = () => pivoted(typeof byMat === 'function' ? byMat() : byMat, HINGE.x, 0, HINGE.z);
+    return registry.add(id, typeof byMat === 'function' ? turn : turn(), {mirror: true, ...opts}, (r) => {
+      movers.doorR.push(r.object); movers.doorL.push(r.mirror);
+      then?.(r);
+    });
   };
 
   // ---- front end ---------------------------------------------------------------------------------
@@ -188,7 +191,7 @@ export function build(ctx) {
     const j = line(S, 'side', jointPts);
     return {poly: [...bf, ...rev(li), ...rev(lt), ...j, ...a, ...line(S, 'side', [[1.655, .225], [1.66, .212]]), ...rearEdge, ...rev(mb), ...rev(mt)], mt, mb};
   };
-  const FB = frontBumper(C), FBL = frontBumper(CL);
+  const FB = frontBumper(C), FBL = once(() => frontBumper(CL));
   const solidC = makeField({body: 'coupe'}), solidCL = makeField({body: 'coupe', facelift: true}), smoothed = (g, field = solidC) => fieldNormals(g, field, .008); // lattice normals streak in a dark mirror finish
 
   // the mouth: a lip turning in, black behind, a chrome bar or the R's mesh in it
@@ -202,30 +205,32 @@ export function build(ctx) {
   const slats = [merge(bar, flipZ(bar))];
   slats.push(box(.03, .012, .86, {at: [2.03, .335, 0], bevel: .003}));
 
-  addP('body.front-bumper', {paint: [smoothed(panel(C, FB.poly, {both: true}))], shadowBlack: [cavity(C, mouthTop, mouthBottom)]}, {explode: [1.15, -.02, 0], lift: [.75, .05, 0], variant: (v) => !facelift(v)});
-  addP('body.front-bumper', {paint: [smoothed(panel(CL, FBL.poly, {both: true}), solidCL)], shadowBlack: [cavity(CL, FBL.mt, FBL.mb)]}, {explode: [1.15, -.02, 0], lift: [.75, .05, 0], variant: facelift});
-  addP('body.front-bumper', {chrome: slats.slice(0, 1), plasticBlack: slats.slice(1)}, {explode: [1.15, -.02, 0], lift: [.75, .05, 0], variant: (v) => !xkr(v)});
-  addP('body.grille', {meshGrille: [grilleSheet()], meshBlack: [grilleSheet(.012, .5)]}, {explode: [1.5, -.02, 0], lift: [.9, .05, 0], variant: xkr}); // a dark sheet just behind, half a diamond out, gives the wire depth
-  addP('body.grille', {meshBlack: [grilleSheet()]}, {explode: [1.5, -.02, 0], lift: [.9, .05, 0], variant: (v) => !xkr(v)});
+  addP('body.front-bumper', () => ({paint: [smoothed(panel(C, FB.poly, {both: true}))], shadowBlack: [cavity(C, mouthTop, mouthBottom)]}), {explode: [1.15, -.02, 0], lift: [.75, .05, 0], variant: (v) => !facelift(v)});
+  addP('body.front-bumper', () => ({paint: [smoothed(panel(CL, FBL().poly, {both: true}), solidCL)], shadowBlack: [cavity(CL, FBL().mt, FBL().mb)]}), {explode: [1.15, -.02, 0], lift: [.75, .05, 0], variant: facelift});
+  addP('body.front-bumper', () => ({chrome: slats.slice(0, 1), plasticBlack: slats.slice(1)}), {explode: [1.15, -.02, 0], lift: [.75, .05, 0], variant: (v) => !xkr(v)});
+  addP('body.grille', () => ({meshGrille: [grilleSheet()], meshBlack: [grilleSheet(.012, .5)]}), {explode: [1.5, -.02, 0], lift: [.9, .05, 0], variant: xkr}); // a dark sheet just behind, half a diamond out, gives the wire depth
+  addP('body.grille', () => ({meshBlack: [grilleSheet()]}), {explode: [1.5, -.02, 0], lift: [.9, .05, 0], variant: (v) => !xkr(v)});
 
   // Front plate on its plinth: across the mouth on an XK8 as in the head-on photo, under the mesh on an R as in the low photo.
   const frontPlate = (y, x) => ({
     plateWhite: [new THREE.PlaneGeometry(.52, .111).rotateY(Math.PI / 2).translate(x + .0062, y, 0)],
     plasticBlack: [box(.012, .116, .526, {bevel: .003, at: [x - .001, y, 0]}), box(.09, .05, .28, {bevel: .006, at: [x - .05, y, 0]})],
   });
-  addP('body.front-bumper', frontPlate(.40, 2.156), {explode: [1.15, -.02, 0], lift: [.75, .05, 0], variant: (v) => !xkr(v)});
-  addP('body.front-bumper', frontPlate(.305, 2.102), {explode: [1.15, -.02, 0], lift: [.75, .05, 0], variant: xkr});
+  addP('body.front-bumper', () => (frontPlate(.40, 2.156)), {explode: [1.15, -.02, 0], lift: [.75, .05, 0], variant: (v) => !xkr(v)});
+  addP('body.front-bumper', () => (frontPlate(.305, 2.102)), {explode: [1.15, -.02, 0], lift: [.75, .05, 0], variant: xkr});
 
-  const louvres = [];
-  for (const sign of [1, -1]) for (let i = 0; i < 9; i++) { // XKR: a set each side of the raised centre, estimated from the side crop and the 3/4 photo
-    const x = 1.515 + i * .034, t = line(C, 'top', [[x, .33 + i * .004], [x + .006, .60 - i * .006]], .04);
-    const g = sweep(C, t, [[-.0105, -.001], [-.006, .0065], [.0075, .007], [.0105, -.001]], {step: .04});
-    louvres.push(sign > 0 ? g : flipZ(g));
-  }
-  const louvreFrame = panelGeometry(C, trace(C, 'top', smoothLine([[1.49, .318], [1.66, .325], [1.83, .36], [1.835, .445], [1.825, .548], [1.66, .585], [1.49, .615], [1.478, .47]], .02, true)), {flange: 0, roll: 0, push: .0012, cells: 420}); // the dark recess they stand in
   const atB = [BONNET_HINGE.x, BONNET_HINGE.y];
   movers.bonnet.push(registry.add('body.bonnet', pivoted({paint: [smoothed(panel(C, bonnetPoly, {both: true}))]}, ...atB), {explode: [.5, 1.05, 0], lift: [.1, 1.05, 0]}).object);
-  movers.bonnet.push(registry.add('body.bonnet', pivoted({paint: [merge(louvres)], shadowBlack: [louvreFrame, flipZ(louvreFrame)]}, ...atB), {explode: [.5, 1.05, 0], lift: [.1, 1.05, 0], variant: xkr}).object);
+  registry.add('body.bonnet', () => {
+    const louvres = [];
+    for (const sign of [1, -1]) for (let i = 0; i < 9; i++) { // XKR: a set each side of the raised centre, estimated from the side crop and the 3/4 photo
+      const x = 1.515 + i * .034, t = line(C, 'top', [[x, .33 + i * .004], [x + .006, .60 - i * .006]], .04);
+      const g = sweep(C, t, [[-.0105, -.001], [-.006, .0065], [.0075, .007], [.0105, -.001]], {step: .04});
+      louvres.push(sign > 0 ? g : flipZ(g));
+    }
+    const louvreFrame = panelGeometry(C, trace(C, 'top', smoothLine([[1.49, .318], [1.66, .325], [1.83, .36], [1.835, .445], [1.825, .548], [1.66, .585], [1.49, .615], [1.478, .47]], .02, true)), {flange: 0, roll: 0, push: .0012, cells: 420}); // the dark recess they stand in
+    return pivoted({paint: [merge(louvres)], shadowBlack: [louvreFrame, flipZ(louvreFrame)]}, ...atB);
+  }, {explode: [.5, 1.05, 0], lift: [.1, 1.05, 0], variant: xkr}, (r) => movers.bonnet.push(r.object));
   movers.bonnet.push(registry.add('body.bonnet-liner', pivoted({bonnetFelt: [turnOver(panel(C, inset(C, bonnetPoly, .05), {both: true, push: -.02, flange: 0, roll: 0, gap: 0, cells: 110}))]}, ...atB), {explode: [.5, .8, 0], lift: [.1, 1.0, 0]}).object);
   // The felt's pressed lines and its push clips. Heights are the liner's underside, measured closed.
   const LINER_Y = [[.9, .862], [1, .848], [1.1, .833], [1.3, .803], [1.5, .773], [1.6, .754], [1.7, .73], [1.8, .698], [1.9, .648]];
@@ -243,7 +248,7 @@ export function build(ctx) {
   movers.bonnet.push(registry.add('body.bonnet-liner', pivoted({bonnetFelt: pressed, plasticBlack: clips}, ...atB), {explode: [.5, .8, 0], lift: [.1, 1.0, 0]}).object);
   // XKR: the dark backs of the louvres, showing through the felt
   const louvreBack = (s) => loft([1.5, 1.6, 1.7, 1.81].map((x) => { const hi = .6 - (x - 1.5) * .22, lo = .33 + (x - 1.5) * .12; const y = linerY(x, .4) - .014; return s > 0 ? [[x, y - .001, lo], [x, y - .001, hi], [x, y, hi], [x, y, lo]] : [[x, y, -lo], [x, y, -hi], [x, y - .001, -hi], [x, y - .001, -lo]]; }), {caps: true, smooth: false});
-  movers.bonnet.push(registry.add('body.bonnet-liner', pivoted({paintBlack: [louvreBack(1), louvreBack(-1)]}, ...atB), {explode: [.5, .8, 0], lift: [.1, 1.0, 0], variant: xkr}).object);
+  registry.add('body.bonnet-liner', () => pivoted({paintBlack: [louvreBack(1), louvreBack(-1)]}, ...atB), {explode: [.5, .8, 0], lift: [.1, 1.0, 0], variant: xkr}, (r) => movers.bonnet.push(r.object));
 
   // Two gas struts hold the open bonnet: the handbook says so, and there is no prop rod. Each runs from the inner wing to the bonnet and stretches as it opens.
   const struts = new THREE.Group();
@@ -276,8 +281,8 @@ export function build(ctx) {
     shadowBlack: [panelGeometry(C, wedge, {flange: 0, roll: 0, push: -.006, cells: 500})],
     chrome: [sweep(C, inset(C, lamp, .007), [[-.0045, -.002], [-.0032, .0006], [.0032, .0006], [.0045, -.002]], {closed: true, step: .014}), sweep(C, wedge, [[-.0018, -.0065], [-.0012, -.0046], [.0012, -.0046], [.0018, -.0065]], {closed: true, step: .012})],
   };
-  addP('electrical.headlamp', {...lampWorks, lensFluted: [lampCover]}, {mirror: true, explode: [.95, .25, .45], lift: [.5, .3, .1], variant: (v) => !clearLens(v), group: 'headlamp'});
-  addP('electrical.headlamp', {...lampWorks, lensClear: [lampCover]}, {mirror: true, explode: [.95, .25, .45], lift: [.5, .3, .1], variant: clearLens, group: 'headlamp'});
+  addP('electrical.headlamp', () => ({...lampWorks, lensFluted: [lampCover]}), {mirror: true, explode: [.95, .25, .45], lift: [.5, .3, .1], variant: (v) => !clearLens(v), group: 'headlamp'});
+  addP('electrical.headlamp', () => ({...lampWorks, lensClear: [lampCover]}), {mirror: true, explode: [.95, .25, .45], lift: [.5, .3, .1], variant: clearLens, group: 'headlamp'});
 
   const fogLamp = (S, variant) => { // a dark lens at the bottom of the body-colour socket that surface.js carves into the bumper corner
     const st = S.locate('front', [FOG.z, FOG.y]), p = S.P(...st), n = S.normal(...st);
@@ -287,7 +292,7 @@ export function build(ctx) {
     const ring = lathe([[.0375, -.003], [.0415, -.003], [.0422, .0005], [.0412, .003], [.039, .003], [.0375, -.003]], {seg: 28, axis: 'x'});
     const face = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(1, 0, 0), new THREE.Vector3(.7, 0, 0).add(n).normalize());
     const put = (g) => g.applyQuaternion(face).translate(p[0] + n.x * .004, p[1] + n.y * .004, p[2] + n.z * .004);
-    addP('electrical.fog-lamp', {fogLens: [put(lens)], steelDark: [put(ring)]}, {mirror: true, explode: [1.25, 0, .35], lift: [.5, 0, .2], variant});
+    addP('electrical.fog-lamp', () => ({fogLens: [put(lens)], steelDark: [put(ring)]}), {mirror: true, explode: [1.25, 0, .35], lift: [.5, 0, .2], variant});
   };
   fogLamp(C, (v) => !facelift(v));
   fogLamp(CL, facelift);
@@ -316,9 +321,9 @@ export function build(ctx) {
 
   const roofSide = line(C, 'top', [[edgeEnd[0], edgeEnd[2]], [-.3, .56], [-.7, .555], [-1.0, .53], [rsCorner[0], rsCorner[2]]]);
   const roofPoly = [...rev(screenHead), ...roofSide, ...rev(rsHead)];
-  addP('body.roof-panel', {paint: [smoothed(panel(C, roofPoly, {both: true}))]}, {explode: [0, 1.5, 0], lift: [0, .8, 0], variant: coupe});
-  addP('body.roof-panel', {headlining: [turnOver(panel(C, inset(C, roofPoly, .03), {both: true, push: -.024, flange: 0, roll: 0, gap: 0, cells: 110}))]}, {explode: [0, 1.25, 0], lift: [0, .72, 0], variant: coupe}); // the pale headlining
-  addP('body.rear-screen', {bodyGlass: [panel(C, rsPoly, {both: true, flange: 0, roll: 0, gap: .008})], chrome: [rsTrim, flipZ(rsTrim)], fritBlack: [rsFrit, flipZ(rsFrit)]}, {explode: [-.5, 1.25, 0], lift: [-.2, .7, 0], variant: coupe});
+  addP('body.roof-panel', () => ({paint: [smoothed(panel(C, roofPoly, {both: true}))]}), {explode: [0, 1.5, 0], lift: [0, .8, 0], variant: coupe});
+  addP('body.roof-panel', () => ({headlining: [turnOver(panel(C, inset(C, roofPoly, .03), {both: true, push: -.024, flange: 0, roll: 0, gap: 0, cells: 110}))]}), {explode: [0, 1.25, 0], lift: [0, .72, 0], variant: coupe}); // the pale headlining
+  addP('body.rear-screen', () => ({bodyGlass: [panel(C, rsPoly, {both: true, flange: 0, roll: 0, gap: .008})], chrome: [rsTrim, flipZ(rsTrim)], fritBlack: [rsFrit, flipZ(rsFrit)]}), {explode: [-.5, 1.25, 0], lift: [-.2, .7, 0], variant: coupe});
 
   const dloTop = line(C, 'side', DLO.top, .025);
   const topTo = (x) => DLO.top.filter((p) => p[0] > x + .01).concat([[x, curveAt(DLO.top, x)]]);
@@ -354,7 +359,7 @@ export function build(ctx) {
     return {lidFront, lidSide, lidTail, lidBottom, lamp, lidPoly: [...lidFront, ...lidSide, ...lidTail, ...lidBottom, [1, 1], [1, 0]], archR, joint: fair([...line(S, 'rear', [Lid.bottom[0], [.45, .57], ...BUMPER_R.tail.slice(4)], .03), ...bumperSide(S)], 10),
       roundLamp: [...line(S, 'rear', Lid.tail.slice(0, 2), .02), ...rev(lamp.top), ...rev(lamp.wrap), ...rev(lamp.low), ...line(S, 'rear', Lid.tail.slice(n), .02)]}; // the body's edge: round the lamp's opening, not the lid's
   };
-  const RC = rear(C, LID_C), RV = rear(V, LID_V);
+  const RC = rear(C, LID_C), RV = once(() => rear(V, LID_V));
 
   // rear bumper: its own skin, standing proud of the tail, with a ledge back to the body
   const rearBumper = (S, field) => {
@@ -366,23 +371,23 @@ export function build(ctx) {
     const ledge = sweep(S, [...top, ...archEnd], [[0, 0], [.0, -.095]], {step: .03, flip: true});
     return merge(fieldNormals(panelGeometry(S, inset(S, poly, .0025), {both: true, cells: fine}), field, TAIL_EPS), ledge, flipZ(ledge));
   };
-  addP('body.rear-bumper', {paint: [rearBumper(B, makeField({bumper: true}))]}, {explode: [-1.15, -.02, 0], lift: [-.75, .05, 0], variant: (v) => !facelift(v)});
-  addP('body.rear-bumper', {paint: [rearBumper(BL, makeField({bumper: true, facelift: true}))]}, {explode: [-1.15, -.02, 0], lift: [-.75, .05, 0], variant: facelift});
+  addP('body.rear-bumper', () => ({paint: [rearBumper(B, makeField({bumper: true}))]}), {explode: [-1.15, -.02, 0], lift: [-.75, .05, 0], variant: (v) => !facelift(v)});
+  addP('body.rear-bumper', () => ({paint: [rearBumper(BL, makeField({bumper: true, facelift: true}))]}), {explode: [-1.15, -.02, 0], lift: [-.75, .05, 0], variant: facelift});
 
   const atL = [LID_HINGE.x, LID_HINGE.y];
   const lid = (S, R, field) => pivoted({paint: [fieldNormals(panel(S, R.lidPoly, {both: true, cells: fine}), field, TAIL_EPS)]}, ...atL);
-  movers.boot.push(registry.add('body.boot-lid', lid(C, RC, solidC), {explode: [-.85, .95, 0], lift: [-.15, .95, 0], variant: coupe}).object);
-  movers.boot.push(registry.add('body.boot-lid', lid(V, RV, makeField({body: 'convertible'})), {explode: [-.85, .95, 0], lift: [-.15, .95, 0], variant: conv}).object);
+  registry.add('body.boot-lid', () => lid(C, RC, solidC), {explode: [-.85, .95, 0], lift: [-.15, .95, 0], variant: coupe}, (r) => movers.boot.push(r.object));
+  registry.add('body.boot-lid', () => lid(V, RV(), makeField({body: 'convertible'})), {explode: [-.85, .95, 0], lift: [-.15, .95, 0], variant: conv}, (r) => movers.boot.push(r.object));
 
   // High stop lamps: a long red lamp in a black housing on the convertible's lid, rear-convertible-xkr-head-on.jpg, and a slim one on the coupe's shelf, seen through the screen in the rear 3/4 photo.
-  const stopY = V.P(...V.locate('top', [-1.63, 0]))[1], stopCoupe = {plasticBlack: [box(.05, .026, .36, {bevel: .009, at: [-1.82, 1.05, 0]})], stopLens: [box(.008, .015, .30, {bevel: .002, at: [-1.848, 1.052, 0]})]};
-  movers.boot.push(registry.add('body.boot-lid', pivoted({plasticBlack: [box(.07, .036, .335, {bevel: .014, at: [-1.63, stopY + .012, 0]})], tailGlow: [box(.012, .022, .275, {bevel: .004, at: [-1.668, stopY + .016, 0]})]}, ...atL), {explode: [-.85, .95, 0], lift: [-.15, .95, 0], variant: conv}).object);
-  addP('body.rear-screen', stopCoupe, {explode: [-.5, 1.1, 0], lift: [-.2, .6, 0], variant: coupe});
+  const stopY = once(() => V.P(...V.locate('top', [-1.63, 0]))[1]), stopCoupe = {plasticBlack: [box(.05, .026, .36, {bevel: .009, at: [-1.82, 1.05, 0]})], stopLens: [box(.008, .015, .30, {bevel: .002, at: [-1.848, 1.052, 0]})]};
+  registry.add('body.boot-lid', () => pivoted({plasticBlack: [box(.07, .036, .335, {bevel: .014, at: [-1.63, stopY() + .012, 0]})], tailGlow: [box(.012, .022, .275, {bevel: .004, at: [-1.668, stopY() + .016, 0]})]}, ...atL), {explode: [-.85, .95, 0], lift: [-.15, .95, 0], variant: conv}, (r) => movers.boot.push(r.object));
+  addP('body.rear-screen', () => (stopCoupe), {explode: [-.5, 1.1, 0], lift: [-.2, .6, 0], variant: coupe});
 
   // Under the lid: a trimmed liner and the gooseneck hinges, so it does not read as bare painted metal when it opens.
   const liner = (S, R) => pivoted({carpet: [turnOver(panel(S, inset(S, R.lidPoly, .06), {both: true, push: -.018, flange: 0, roll: 0, gap: 0, cells: 110}))]}, ...atL);
-  movers.boot.push(registry.add('body.boot-lid', liner(C, RC), {explode: [-.85, .92, 0], lift: [-.15, .92, 0], variant: coupe}).object);
-  movers.boot.push(registry.add('body.boot-lid', liner(V, RV), {explode: [-.85, .92, 0], lift: [-.15, .92, 0], variant: conv}).object);
+  registry.add('body.boot-lid', () => liner(C, RC), {explode: [-.85, .92, 0], lift: [-.15, .92, 0], variant: coupe}, (r) => movers.boot.push(r.object));
+  registry.add('body.boot-lid', () => liner(V, RV()), {explode: [-.85, .92, 0], lift: [-.15, .92, 0], variant: conv}, (r) => movers.boot.push(r.object));
   const goose = (z) => tube([[-2.12, .945, z], [-2.04, .945, z], [-1.98, .915, z], [-1.95, .86, z]], .011, {radial: 8});
   movers.boot.push(registry.add('body.boot-lid', pivoted({steelDark: [goose(.38), goose(-.38)]}, ...atL), {explode: [-.85, .92, 0], lift: [-.15, .92, 0]}).object);
 
@@ -413,9 +418,11 @@ export function build(ctx) {
   const plateBase = new THREE.PlaneGeometry(.52, .111).rotateY(-Math.PI / 2).translate(tailX - .0166, .6875, 0); // the 520 x 111 mm plate that sets the scale of the rear photo
   const plateFrame = box(.012, .117, .526, {bevel: .004, at: [tailX - .010, .6875, 0]}); // a thin holder: the soft recess round it is carved in surface.js
   movers.boot.push(registry.add('body.boot-lid', pivoted({brightTrim: [barHalf, flipZ(barHalf), barCup], shadowBlack: [lettering], plateYellow: [plateBase], plasticBlack: [plateFrame]}, ...atL), {explode: [-.85, .95, 0], lift: [-.15, .95, 0]}).object);
-  const lipLine = line(C, 'rear', [[.56, .878], [.4, .896], [.2, .905], [0, .908]], .03); lipLine[lipLine.length - 1][1] = 0;
-  const lipHalf = sweep(C, lipLine, [[-.032, -.002], [-.016, .014], [.008, .03], [.024, .018], [.03, -.002]], {step: .03}); // XKR: a thin lip nearly the width of the lid, from the 2002 rear photo
-  movers.boot.push(registry.add('body.boot-lid', pivoted({paint: [lipHalf, flipZ(lipHalf)]}, ...atL), {explode: [-.85, .95, 0], lift: [-.15, .95, 0], variant: xkr}).object);
+  registry.add('body.boot-lid', () => {
+    const lipLine = line(C, 'rear', [[.56, .878], [.4, .896], [.2, .905], [0, .908]], .03); lipLine[lipLine.length - 1][1] = 0;
+    const lipHalf = sweep(C, lipLine, [[-.032, -.002], [-.016, .014], [.008, .03], [.024, .018], [.03, -.002]], {step: .03}); // XKR: a thin lip nearly the width of the lid, from the 2002 rear photo
+    return pivoted({paint: [lipHalf, flipZ(lipHalf)]}, ...atL);
+  }, {explode: [-.85, .95, 0], lift: [-.15, .95, 0], variant: xkr}, (r) => movers.boot.push(r.object));
 
   // Tail lamps: chrome ring, deep faceted red dishes behind a red lens, and a clear section with a red border above them.
   const tailOutline = RC.lamp.outline;
@@ -432,8 +439,8 @@ export function build(ctx) {
     [windowMat]: [uvFromFront(panelGeometry(C, windowLine, {flange: .012, roll: .002, push: .0018, cells: 300}), .019, .019)],
     chrome: [sweep(C, tailOutline, [[-.0055, -.0015], [-.0042, .0032], [-.0006, .0038], [.0022, .0015], [.0028, -.002]], {closed: true, step: .012})],
   });
-  addP('electrical.tail-lamp', tailLamp('tailWindow'), {mirror: true, explode: [-.95, .25, .55], lift: [-.45, .25, .1], variant: newTail});
-  addP('electrical.tail-lamp', tailLamp('lampClear'), {mirror: true, explode: [-.95, .25, .55], lift: [-.45, .25, .1], variant: (v) => !newTail(v)});
+  addP('electrical.tail-lamp', () => (tailLamp('tailWindow')), {mirror: true, explode: [-.95, .25, .55], lift: [-.45, .25, .1], variant: newTail});
+  addP('electrical.tail-lamp', () => (tailLamp('lampClear')), {mirror: true, explode: [-.95, .25, .55], lift: [-.45, .25, .1], variant: (v) => !newTail(v)});
 
   // ---- body side ---------------------------------------------------------------------------------
 
@@ -443,13 +450,6 @@ export function build(ctx) {
     ...line(C, 'side', [[POST - .022, .906], [-.911, .92], [-1.071, .934], [-1.147, .953], [-1.224, .977], [-1.247, 1.003]], .025), ...rev(dloTop),
     ...line(C, 'side', [[.44, .872], [.451, .865]]), ...wingTop, ...line(C, 'side', [[.585, .895], corner]), ...postFoot, ...screenEdge, ...roofSide.slice(1), ...rsEdge,
     ...line(C, 'top', [[rsEnd[0], rsEnd[2]], LID_C.front[3]]), ...RC.lidSide, ...RC.roundLamp, ...RC.joint, ...RC.archR(182, 0), ...rev(sillLine(C)),
-  ];
-  const doorRearV = line(V, 'side', DOOR.rear);
-  const wellEdge = line(V, 'top', COCKPIT); wellEdge[wellEdge.length - 1][1] = 0;
-  const tv = (a) => { const p = V.P(a[0], a[1]); return [p[0], p[2]]; };
-  const quarterV = [
-    ...doorRearV, ...line(V, 'top', [tv(doorRearV[doorRearV.length - 1]), COCKPIT[0]]), ...wellEdge,
-    ...RV.lidFront, ...RV.lidSide, ...RV.roundLamp, ...RV.joint, ...RV.archR(182, 0), ...rev(sillLine(V)),
   ];
   const sillPoly = [...line(C, 'side', [[.916, .33], [.611, .325], ...DOOR.bottom.slice(1)]), ...line(C, 'side', [[-.406, .34], [-.90, .34]]), ...line(C, 'side', arc(AXLE_R, ARCH_Y.r, ARCH_R.r, 0, -17, 6)), ...line(C, 'bottom', [[-.93, .735], [.93, .735]], .1), ...line(C, 'side', arc(AXLE_F, ARCH_Y.f, ARCH_R.f, 197, 180, 6))];
   const stripProfile = [[-.012, -.001], [-.009, .006], [.009, .007], [.012, -.001]];
@@ -461,19 +461,29 @@ export function build(ctx) {
   const flapRing = sweep(C, flap, [[-FLAP.gap, .0003], [-FLAP.gap, -.0015], [FLAP.gap, -.0015], [FLAP.gap, .0003]], {closed: true, step: .012});
 
   const rails = sweep(C, dloTop, [[-.03, -.012], [-.03, -.05], [.012, -.05], [.012, -.012], [-.03, -.012]], {step: .05}); // inside the surround, so black, or it reads as a second line through the glass
-  addP('body.shell', {plasticBlack: [rails]}, {mirror: true, explode: [0, .75, .45], lift: [0, .5, .3], variant: coupe});
-  addP('body.shell', strips(STRIP_QUARTER), {mirror: true, explode: [-.2, .55, .85], lift: [0, .7, .5], variant: notFacelift});
+  addP('body.shell', () => ({plasticBlack: [rails]}), {mirror: true, explode: [0, .75, .45], lift: [0, .5, .3], variant: coupe});
+  addP('body.shell', () => (strips(STRIP_QUARTER)), {mirror: true, explode: [-.2, .55, .85], lift: [0, .7, .5], variant: notFacelift});
   const [sf, sr] = SILL_LATE.x, sillLate = [...line(C, 'side', [[sf, SILL_LATE.top], [0, SILL_LATE.top - .004], [sr, SILL_LATE.top]], .05), ...line(C, 'side', [[sr, SILL_LATE.top], [sr, SILL_LATE.low]], .02), ...line(C, 'side', [[sr, SILL_LATE.low], [sf, SILL_LATE.low]], .05), ...line(C, 'side', [[sf, SILL_LATE.low], [sf, SILL_LATE.top]], .02)];
-  addP('body.shell', {paint: [panelGeometry(C, sillLate, {push: .016, flange: .022, roll: .006, cells: 300})]}, {mirror: true, explode: [0, -.1, .7], lift: [0, 0, .5], variant: facelift}); // proud of the door, so its top edge is a real step and catches light
-  addP('body.shell', {paint: [fieldNormals(panel(C, quarterC, {cells: fine}), solidC, TAIL_EPS), archLip(C, RC.archR(182, 0))], bodyGlass: [panel(C, glassQ, {flange: 0, roll: 0, gap: .003})], fritBlack: [postGlass], chrome: [dloChrome, qBeltChrome], rubber: [dloRubber, screenRubber]}, {mirror: true, explode: [-.2, .55, .85], lift: [0, .7, .5], variant: coupe});
+  addP('body.shell', () => ({paint: [panelGeometry(C, sillLate, {push: .016, flange: .022, roll: .006, cells: 300})]}), {mirror: true, explode: [0, -.1, .7], lift: [0, 0, .5], variant: facelift}); // proud of the door, so its top edge is a real step and catches light
+  addP('body.shell', () => ({paint: [fieldNormals(panel(C, quarterC, {cells: fine}), solidC, TAIL_EPS), archLip(C, RC.archR(182, 0))], bodyGlass: [panel(C, glassQ, {flange: 0, roll: 0, gap: .003})], fritBlack: [postGlass], chrome: [dloChrome, qBeltChrome], rubber: [dloRubber, screenRubber]}), {mirror: true, explode: [-.2, .55, .85], lift: [0, .7, .5], variant: coupe});
   addP('body.shell', {shadowBlack: [flipZ(flapRing)]}, {explode: [-.2, .55, -.85], lift: [0, .7, -.5]});
-  addP('body.shell', {paint: [fieldNormals(panel(V, quarterV, {cells: fine}), makeField({body: 'convertible'}), TAIL_EPS), archLip(V, RV.archR(182, 0))], rubber: [screenRubber.clone()]}, {mirror: true, explode: [-.2, .55, .85], lift: [0, .7, .5], variant: conv});
+  addP('body.shell', () => {
+    const rv = RV();
+    const doorRearV = line(V, 'side', DOOR.rear);
+    const wellEdge = line(V, 'top', COCKPIT); wellEdge[wellEdge.length - 1][1] = 0;
+    const tv = (a) => { const p = V.P(a[0], a[1]); return [p[0], p[2]]; };
+    const quarterV = [
+      ...doorRearV, ...line(V, 'top', [tv(doorRearV[doorRearV.length - 1]), COCKPIT[0]]), ...wellEdge,
+      ...rv.lidFront, ...rv.lidSide, ...rv.roundLamp, ...rv.joint, ...rv.archR(182, 0), ...rev(sillLine(V)),
+    ];
+    return {paint: [fieldNormals(panel(V, quarterV, {cells: fine}), makeField({body: 'convertible'}), TAIL_EPS), archLip(V, rv.archR(182, 0))], rubber: [screenRubber.clone()]};
+  }, {mirror: true, explode: [-.2, .55, .85], lift: [0, .7, .5], variant: conv});
   addP('body.shell', {paint: [panel(C, sillPoly)]}, {mirror: true, explode: [0, -.1, .7], lift: [0, 0, .5]});
 
   // Convertible screen frame: the pillars and the header from the coupe surface.
   const frameHead = line(C, 'top', [[edgeEnd[0] - .05, edgeEnd[2] + .02], [-.06, .3], [-.08, 0]]); frameHead[frameHead.length - 1][1] = 0;
   const dloToHeader = line(C, 'side', DLO.top.slice(0, 4), .025);
-  addP('body.shell', {paint: [panel(C, [...dloToHeader, ...frameHead, ...rev(screenHead), ...rev(screenEdge), ...rev(postFoot), ...line(C, 'side', [corner, [.585, .895]]), ...rev(wingTop), ...line(C, 'side', [[.451, .865], [.44, .872]])], {both: true})]}, {explode: [.2, 1.2, 0], lift: [.1, .6, 0], variant: conv});
+  addP('body.shell', () => ({paint: [panel(C, [...dloToHeader, ...frameHead, ...rev(screenHead), ...rev(screenEdge), ...rev(postFoot), ...line(C, 'side', [corner, [.585, .895]]), ...rev(wingTop), ...line(C, 'side', [[.451, .865], [.44, .872]])], {both: true})]}), {explode: [.2, 1.2, 0], lift: [.1, .6, 0], variant: conv});
 
   // Plenum: the black panel between the bonnet and the screen.
   const plenumPoly = [...bonnetRear, ...postFoot, ...rev(screenBase)];
@@ -503,15 +513,16 @@ export function build(ctx) {
   const leverG = loft(leverRings);
 
   onDoor('body.door', {paint: [smoothed(panel(C, doorPoly, {flange: .012})), shutFace, innerSkin]}, {explode: [0, .1, .95], lift: [0, .1, .85]});
-  onDoor('body.door', strips(STRIP), {explode: [0, .1, .95], lift: [0, .1, .85], variant: notFacelift});
+  onDoor('body.door', () => (strips(STRIP)), {explode: [0, .1, .95], lift: [0, .1, .85], variant: notFacelift});
   const glassOpts = {explode: [0, .75, 1.25], lift: [0, .5, .3]};
-  onDoor('body.door-glass', {bodyGlass: [panel(C, glassDoor, {flange: 0, roll: 0, gap: .003})]}, {...glassOpts, variant: coupe});
-  const gl = onDoor('body.door-glass', {bodyGlass: [panel(C, glassDoor, {flange: 0, roll: 0, gap: .003})]}, {...glassOpts, variant: conv});
-  movers.glassDrop.push(gl.object, gl.mirror); // a convertible's glass drops as the hood folds
-  const quarterHood = trace(H, 'side', smoothLine([...QUARTER_HOOD, QUARTER_HOOD[0]], .03));
-  const hoodPost = [...line(H, 'side', [[-.598, 1.17], [-.628, 1.168]], .01), ...line(H, 'side', [[-.628, 1.168], [-.628, .905]], .02), ...line(H, 'side', [[-.628, .905], [-.598, .905]], .01), ...line(H, 'side', [[-.598, .905], [-.598, 1.17]], .02)]; // the black post between door glass and quarter glass
-  const qg = registry.add('body.door-glass', part(M, {bodyGlass: [panel(H, quarterHood, {flange: 0, roll: 0, gap: .003})], fritBlack: [panelGeometry(H, hoodPost, {flange: 0, roll: 0, push: .0016, cells: 500})]}), {...glassOpts, mirror: true, variant: conv});
-  movers.glassDrop.push(qg.object, qg.mirror);
+  onDoor('body.door-glass', () => ({bodyGlass: [panel(C, glassDoor, {flange: 0, roll: 0, gap: .003})]}), {...glassOpts, variant: coupe});
+  const drops = (r) => movers.glassDrop.push(r.object, r.mirror); // a convertible's glass drops as the hood folds
+  onDoor('body.door-glass', () => ({bodyGlass: [panel(C, glassDoor, {flange: 0, roll: 0, gap: .003})]}), {...glassOpts, variant: conv}, drops);
+  registry.add('body.door-glass', () => {
+    const quarterHood = trace(H, 'side', smoothLine([...QUARTER_HOOD, QUARTER_HOOD[0]], .03));
+    const hoodPost = [...line(H, 'side', [[-.598, 1.17], [-.628, 1.168]], .01), ...line(H, 'side', [[-.628, 1.168], [-.628, .905]], .02), ...line(H, 'side', [[-.628, .905], [-.598, .905]], .01), ...line(H, 'side', [[-.598, .905], [-.598, 1.17]], .02)]; // the black post between door glass and quarter glass
+    return part(M, {bodyGlass: [panel(H, quarterHood, {flange: 0, roll: 0, gap: .003})], fritBlack: [panelGeometry(H, hoodPost, {flange: 0, roll: 0, push: .0016, cells: 500})]});
+  }, {...glassOpts, mirror: true, variant: conv}, drops);
   onDoor('body.door-seal', {rubber: [belt], chrome: [beltLip]}, {explode: [0, .35, 1.1], lift: [0, .2, .3]});
   onDoor('body.door-handle-exterior', {paint: [dish], shadowBlack: [dishRing, slot], chrome: [leverG]}, {explode: [0, .05, 1.2], lift: [0, 0, .25]});
   const innerBox = (w, h, d, x, y, z) => box(w, h, d, {at: [x, y, z], bevel: .004});
@@ -570,8 +581,8 @@ export function build(ctx) {
   const WING_MARK = {x: .80, y: .549, a: .053, b: .0185, k: .5, push: .0028}; // the three lengths off the master photo: 105, 165 and 195 mm
   const NOSE_MARK = {x: 1.80, y: .50, a: .083, b: .012, k: .5, push: .0024, e: 1.3};
   const TAIL_MARK = {x: -2.12, y: .418, a: .098, b: .0135, tilt: -.275, k: .5, push: .0024, e: 1.3};
-  addP('body.wing', {lensAmber: [oval(C, WING_MARK)], chrome: [rim(C, WING_MARK)]}, {mirror: true, explode: [.25, .35, .75], lift: [.05, .35, .6], variant: newTail});
-  addP('body.wing', {lampClear: [oval(C, WING_MARK)], chrome: [rim(C, WING_MARK)]}, {mirror: true, explode: [.25, .35, .75], lift: [.05, .35, .6], variant: (v) => !newTail(v)}); // the early repeater is a clear oval: see the master photo
+  addP('body.wing', () => ({lensAmber: [oval(C, WING_MARK)], chrome: [rim(C, WING_MARK)]}), {mirror: true, explode: [.25, .35, .75], lift: [.05, .35, .6], variant: newTail});
+  addP('body.wing', () => ({lampClear: [oval(C, WING_MARK)], chrome: [rim(C, WING_MARK)]}), {mirror: true, explode: [.25, .35, .75], lift: [.05, .35, .6], variant: (v) => !newTail(v)}); // the early repeater is a clear oval: see the master photo
   addP('body.front-bumper', {lensAmber: [oval(C, NOSE_MARK)], plasticBlack: [rim(C, NOSE_MARK)]}, {mirror: true, explode: [1.15, -.02, 0], lift: [.75, .05, 0]});
   addP('body.rear-bumper', {lensAmber: [oval(B, TAIL_MARK)], plasticBlack: [rim(B, TAIL_MARK)]}, {mirror: true, explode: [-1.15, -.02, 0], lift: [-.75, .05, 0]});
   addP('body.door-seal', {rubber: [sweep(C, doorOuter, [[-.004, -.022], [.003, -.024]], {closed: true, step: .05})]}, {mirror: true, explode: [0, .05, .6], lift: [0, 0, .3]});
@@ -857,7 +868,7 @@ function shell(addP) {
   addP('body.boot-trim', {carpet: [sideTrim(1), sideTrim(-1), box(.014, .24, .78, {bevel: .004, at: [-2.40, .60, 0]})]}, {explode: [-.65, .12, .3], lift: [0, 0, 0]});
 
   // The coupe's parcel shelf: without it the rear screen looks straight down into the boot.
-  addP('body.shell', {carpet: [xf(extrude([[-1.30, -.66], [-1.30, .66], [-1.86, .66], [-2.0, .46], [-2.05, .2], [-2.05, -.2], [-2.0, -.46], [-1.86, -.66]], .012, {axis: 'y'}), {at: [0, .955, 0]})]}, {explode: [-.55, .55, 0], lift: [-.2, .3, 0], variant: (v) => v.body === 'coupe'});
+  addP('body.shell', () => ({carpet: [xf(extrude([[-1.30, -.66], [-1.30, .66], [-1.86, .66], [-2.0, .46], [-2.05, .2], [-2.05, -.2], [-2.0, -.46], [-1.86, -.66]], .012, {axis: 'y'}), {at: [0, .955, 0]})]}), {explode: [-.55, .55, 0], lift: [-.2, .3, 0], variant: (v) => v.body === 'coupe'});
 
   // Rear inner arches.
   const archEnd = xf(lathe([[ARCH_R.r - .004, 0], [.20, 0]], {seg: 40, axis: 'z', arc: Math.PI}), {rot: [0, 0, Math.PI], at: [AXLE_R, ARCH_Y.r, .58]});

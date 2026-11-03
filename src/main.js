@@ -1,6 +1,6 @@
 // Boot only: load the data, build the stage and the car, wire the frame loop, hand over to the UI.
 import * as THREE from 'three';
-import {applies, carDims, data, jobSteps, loadData, setProvenanceCar, specFor, translateData} from './data.js';
+import {applies, carDims, data, forVariant, jobSteps, loadData, setProvenanceCar, specFor, translateData} from './data.js';
 import {getLang, loadFrench, t, useLanguage} from './i18n.js';
 import {clearSaved, connectHash, connectStorage, parseHash, store} from './state.js';
 import {buildCar, startSurfaces, updateCar} from './car/index.js';
@@ -65,6 +65,10 @@ async function boot() {
   await setLang(wanted);
 
   const v = store.get().variant;
+  // A plain first screen builds this car's forms of each part, and the other cars' forms wait until it is on screen
+  // (finishCar). A link to a part, a job or a look builds every form first: its bounds and explode vectors span them all.
+  const s0 = store.get();
+  if (s0.mode === 'explore' && !s0.job && !s0.selected && !s0.isolate && !s0.explode && !s0.xray && !s0.locate && !Object.keys(s0.systems ?? {}).length) registry.deferWhen((opts) => !opts.variant(v));
   const ctx = {registry, data, materials, variant: v, spec: specFor(v), dims: carDims(v), views: null};
   let gl = canDraw();
   let stage = null;
@@ -76,6 +80,15 @@ async function boot() {
   // The car is built with or without a GPU: the parts list reads what is modelled from it.
   await buildCar(ctx, (done) => say(t('Building the car, {n} percent', {n: Math.round(done * 100)})), mark, surfaces);
   mark('car');
+  registry.deferWhen(null);
+  // The first screen's hot spots, shown until a car is chosen, sit on the bounds of every form of this car's weak spots'
+  // parts. A part already longer than HOT_MAX_M in src/ui/shell.js never gets one, and more forms only make it longer.
+  if (!s0.chosen) {
+    const size = new THREE.Vector3();
+    const small = (id) => { const b = registry.partBox(id); return !b || b.isEmpty() || Math.max(...b.getSize(size).toArray()) < 1.2; };
+    registry.fill(Infinity, new Set(forVariant(data.weakspots.items, v).flatMap((w) => w.parts ?? []).filter(small)));
+  }
+  mark('hot spots');
   say(t('Starting up'));
   preparePose(registry);
 
@@ -91,7 +104,7 @@ async function boot() {
   const calm = matchMedia('(prefers-reduced-motion: reduce)');
   const app = {store, data, stage, rig, pick, registry, ctx, clock, tunnel, sim: null, pose: null, noGL: !gl, setLang};
 
-  if (gl) stage.onFrame((dt) => {
+  const step = (dt) => {
     const s = store.get();
     const turning = advanceClock(clock, ctx.spec, s.sim, dt);
     const flying = rig.update(dt);
@@ -105,15 +118,19 @@ async function boot() {
     app.pose = result;
     pick.update();
     return turning || moving || flying || again;
-  });
+  };
+  if (gl) stage.onFrame(step);
   store.subscribe(() => stage.invalidate());
   setProvenanceCar(store.get().variant);
   store.subscribe((s) => { ctx.spec = specFor(s.variant); setProvenanceCar(s.variant); }, ['variant']);
 
+  const built = finishCar(app);
   rig.setView(store.get().view ?? 'hero', {instant: true});
   mark('wired');
   await stage.warm(lookMaterials());
   mark('warm');
+  // Frames are held until now, so pose the car and the camera as one would have: the interface measures both as it mounts
+  if (gl) { step(1 / 60); stage.camera.updateMatrixWorld(); }
   mount(document.getElementById('ui'), app);
   mark('ui');
   if (gl) stage.hold(false); else stage.invalidate();
@@ -121,11 +138,42 @@ async function boot() {
   const cover = document.getElementById('boot');
   cover.classList.add('gone');
   setTimeout(() => cover.remove(), 500);
+  requestAnimationFrame(() => requestAnimationFrame(() => mark('frame')));
+  await built;
+  mark('rest');
+  // The tools drive the page through window.__xk8 and read the whole car, so it appears once nothing waits.
   exposeDebug(app);
-  const steps = () => marks.map(([n, t], i) => [n, Math.round(t - (marks[i - 1]?.[1] ?? 0))]);
-  window.__xk8.bootMarks = steps();
-  // and the first frame of the finished car, which tools/perf.mjs reads after it has settled
-  requestAnimationFrame(() => requestAnimationFrame(() => { mark('frame'); window.__xk8.bootMarks = steps(); }));
+  window.__xk8.bootMarks = marks.map(([n, t], i) => [n, Math.round(t - (marks[i - 1]?.[1] ?? 0))]);
+}
+
+// Store keys that only change words or settings: everything else may need another car's forms, or every form's bounds.
+const QUIET = new Set(['hover', 'notice', 'lang', 'langOffered', 'hinted', 'theme', 'garage']);
+
+/**
+ * Builds the forms of each part that registry.deferWhen() held back: in short turns after the first frame, or all at
+ * once on the first change of state that could need them. That subscription comes before the interface's, so the
+ * interface never sees a car with forms missing. Resolves when the car is whole, as the boot would have built it.
+ */
+function finishCar(app) {
+  const {registry, store, stage, pick} = app;
+  if (!registry.waiting) return Promise.resolve();
+  return new Promise((resolve) => {
+    let done = false;
+    const end = () => {
+      if (done) return;
+      done = true;
+      off();
+      registry.fill();
+      preparePose(registry);
+      pick.index();
+      stage.markShadows();
+      stage.invalidate();
+      resolve();
+    };
+    const off = store.subscribe((s, changed) => { if ([...changed].some((k) => !QUIET.has(k))) end(); });
+    const turn = () => { if (!done) { if (registry.fill(12)) setTimeout(turn, 0); else end(); } };
+    requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(turn, 0)));
+  });
 }
 
 /** tools/shots.mjs drives the page through this. Small, and useful in the console too. */

@@ -9,6 +9,8 @@ let detail = 1;
 /** 1 on desktop, about 0.6 on touch devices. Set once, before any build(). */
 export const setDetail = (f) => { detail = f; };
 export const seg = (n, min = 3) => Math.max(min, Math.round(n * detail));
+/** A value worked out the first time it is asked for: what only a form that waits needs costs nothing until then. */
+export const once = (f) => { let v, done = false; return () => { if (!done) { v = f(); done = true; } return v; }; };
 
 const V = (a) => (a instanceof THREE.Vector3 ? a : new THREE.Vector3(a[0], a[1], a[2]));
 const AXES = {x: new THREE.Euler(0, 0, -Math.PI / 2), y: new THREE.Euler(), z: new THREE.Euler(Math.PI / 2, 0, 0)};

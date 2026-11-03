@@ -134,8 +134,9 @@ let centres = null;
 const systemCentres = (registry) => {
   const out = new Map();
   for (const part of registry.all()) {
-    const c = out.get(part.system) ?? {x: 0, y: 0, z: 0, n: 0};
     const b = registry.partBox(part.id);
+    if (b.isEmpty()) continue; // a part whose every form still waits to be built: see registry.deferWhen()
+    const c = out.get(part.system) ?? {x: 0, y: 0, z: 0, n: 0};
     c.x += (b.min.x + b.max.x) / 2; c.y += (b.min.y + b.max.y) / 2; c.z += (b.min.z + b.max.z) / 2; c.n++;
     out.set(part.system, c);
   }
@@ -158,6 +159,7 @@ export function preparePose(registry) {
   for (const part of registry.all()) {
     part.ends = new Set();
     for (const inst of part.instances) {
+      if (!inst.object) continue; // still waiting to be built, and hidden: preparePose runs again once it is
       const box = registry.restBox(inst);
       const solved = LIFTS[part.id];
       inst.explodeVec = inst.explode ?? autoExplode(box, part.system, centres.get(part.system));
