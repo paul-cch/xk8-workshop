@@ -12,7 +12,8 @@
     "test:jobs": "node tools/build.mjs && node tools/job-walk.mjs",
     "shots": "node tools/build.mjs && node tools/shots.mjs",
     "validate": "node tools/validate-data.mjs",
-    "release": "SITE_URL=https://xk8.paulcouach.com DIST_DIR=/tmp/xk8-rel node tools/build.mjs --release"
+    "release": "SITE_URL=https://xk8.paulcouach.com DIST_DIR=/tmp/xk8-rel node tools/build.mjs --release",
+    "deploy": "node tools/deploy.mjs"
   },
   "dependencies": {
     "three": "0.186.1"
