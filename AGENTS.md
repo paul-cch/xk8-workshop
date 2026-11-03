@@ -33,6 +33,7 @@ Node 20 or later, then `npm install`. Playwright's Chromium and WebKit are neede
 | `npm run test:jobs` | builds, then steps through every job and sweeps each lifted part. Exits 1 today on 5 known lift crossings, see `docs/status.md` | 12 min |
 | `npm run shots` | builds, then screenshots the default states to `dist-shots/`. Pass options after `--` | 20 s |
 | `npm run release` | the build to publish, with a fresh share card, in `/tmp/xk8-rel` | 6 s |
+| `npm run deploy` | release, then publish to Cloudflare Pages. Only when Paul asks, see Deploy | release plus upload |
 
 There is no dev server. Open `dist/index.html` in a browser after a build.
 
@@ -87,15 +88,23 @@ shoot the French page and a newcomer's screens on phone and desktop.
 
 ## Deploy
 
-Only when Paul asks. The site goes up by direct upload to a Cloudflare Pages project.
+Only when Paul asks. The site goes up by direct upload to the Cloudflare Pages project `xk8-workshop`.
 
-1. `npm run release`. It needs `SITE_URL`, which the script sets, and writes the page, `og.png`, `_worker.js` and
-   `_routes.json` to `/tmp/xk8-rel`.
-2. `PAGES_JWT=<upload token> node tools/deploy-pages.mjs /tmp/xk8-rel`. The token comes from the project's upload-token
-   endpoint. This uploads the static files and prints the manifest.
-3. Create the deployment with that manifest. Attach `_worker.js` and `_routes.json` to the same request as multipart fields
-   with those names. Without them the feedback server switches off. Uploaded as static files they would be public and the
-   server would still be off.
+```
+CLOUDFLARE_API_TOKEN=<token> CLOUDFLARE_ACCOUNT_ID=<account> npm run deploy
+```
+
+`tools/deploy.mjs` runs `npm run release` into `/tmp/xk8-rel`, gets an upload token, uploads the static files, then creates
+the deployment on branch `main` with `_worker.js` and `_routes.json` attached as multipart fields, and prints its URL. The
+API token needs Account > Cloudflare Pages > Edit. Without the two variables it says what it needs and exits 2. It refuses a
+folder that lacks `_worker.js` or `_routes.json`, because a deployment without them switches the feedback server off.
+
+- `npm run deploy -- --dry-run` builds the release and prints the manifest and the size of each field, and sends nothing.
+- `node tools/deploy.mjs <folder>` deploys a folder already built with `--release` instead of building one.
+
+With no token on the machine, the Executor route still works by hand: Executor's Cloudflare tools give the upload token,
+`PAGES_JWT=<upload token> node tools/deploy-pages.mjs /tmp/xk8-rel` uploads the files and prints the manifest, and the
+deployment call carries the manifest with `_worker.js` and `_routes.json` as multipart fields. See `docs/status.md`.
 
 The Pages project needs a KV namespace bound as `FEEDBACK` and the `INBOX_HASH` secret. Details, and how to read the inbox,
 are in `docs/status.md`.
