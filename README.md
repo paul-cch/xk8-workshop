@@ -23,7 +23,7 @@ in English or French.
 
 ## How far to trust it
 
-This is an unofficial owner resource, not connected with or endorsed by Jaguar. Check safety-critical values against a
+This is an unofficial owner resource, built by Claude, not connected with or endorsed by Jaguar. Check safety-critical values against a
 factory source before relying on them. You work on your car at your own risk.
 
 Every value shows its source and a confidence level. Nearly all torques come from Jaguar's own technical data. Part numbers
