@@ -330,8 +330,9 @@ html.layout-sheet .hot-cap { pointer-events: auto; position: absolute; left: 12p
 .pick-eg .chip { font-family: var(--mono) !important; font-size: .72rem; padding: 0 8px; min-height: var(--tap); }
 .pick-field { display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 8px; padding: 4px 0; }
 .pick-field > span { color: var(--ink-2); font-size: .87rem; }
-.pick-field .seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; }
-.pick-field .seg button { min-height: var(--row); }
+.pick-field .seg { display: flex; flex-wrap: wrap; }
+.pick-field .seg button { flex: 1 1 auto; }
+.pick-field .seg button { min-height: var(--row); white-space: normal; line-height: 1.15; padding: 4px 6px; }
 .pick-year { -webkit-appearance: none; appearance: none; font-family: var(--mono) !important; font-weight: 600; }
 .pick-right { display: flex; flex-direction: column; min-width: 0; }
 .pick-name { font-size: 1.75rem; font-weight: 700; letter-spacing: -.025em; line-height: 1.1; }
