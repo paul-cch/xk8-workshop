@@ -31,7 +31,7 @@ page.on('console', (m) => { if (m.type() === 'error') errors.push(`console: ${m.
 await page.goto(`file://${path.join(process.env.DIST_DIR ? path.resolve(process.env.DIST_DIR) : path.join(ROOT, 'dist'), 'index.html')}?tier=high`);
 await page.waitForFunction(() => window.__xk8, null, {timeout: 120000});
 await page.addScriptTag({path: path.join(ROOT, 'tools/ray-scene.js')});
-await page.addStyleTag({content: '.intro,.hots,.hot{display:none!important}'}); // the first-run card covers the frame
+await page.addStyleTag({content: '.intro,.hots,.hot,.move-hint{display:none!important}'}); // the first-run card covers the frame
 
 async function numbers(variant) {
   return page.evaluate(async ({variant}) => {

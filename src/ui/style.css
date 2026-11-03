@@ -252,7 +252,7 @@ button.prov::after { content: ''; position: absolute; inset: -12px -4px; }
 
 /* ---- stage overlays ---------------------------------------------------------------------------- */
 .views { position: absolute; z-index: 6; left: 10px; bottom: 10px; right: calc(var(--rail) + 10px); display: flex; gap: 2px; flex-wrap: wrap; }
-.view { pointer-events: auto; min-height: 34px; padding: 0 9px; border: 0; background: rgba(247, 248, 249, .82); color: var(--ink-2); font-size: .85rem; font-weight: 500; white-space: nowrap; }
+.view { flex: none; pointer-events: auto; min-height: 34px; padding: 0 9px; border: 0; background: rgba(247, 248, 249, .82); color: var(--ink-2); font-size: .85rem; font-weight: 500; white-space: nowrap; }
 .view[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
 .intro { position: absolute; z-index: 5; left: 28px; top: calc(52px + var(--safe-t) + 26px); max-width: min(560px, calc(100vw - var(--rail) - 60px)); animation: rise .9s var(--enter) both; }
 .intro.gone { opacity: 0; transform: translateY(-8px); transition: opacity .2s var(--leave), transform .2s var(--leave); }
@@ -539,7 +539,94 @@ html:lang(fr).layout-sheet .modes { grid-auto-columns: minmax(0, 1fr); }
 html:lang(fr).layout-sheet .mode { padding: 0; font-size: .74rem; letter-spacing: -.01em; overflow: hidden; text-overflow: ellipsis; }
 html:lang(fr).layout-sheet.garage .mode { font-size: .6rem; }
 html:lang(fr) .tree-count { flex: none; }
+html:lang(fr) .sr { grid-template-columns: 92px 1fr auto; }
 html:lang(fr) .dash-top { min-width: 0; }
 html:lang(fr) .dash-label { letter-spacing: 0; }
 html:lang(fr) .dash-rev { flex-wrap: wrap; min-width: 0; }
 html:lang(fr) .dash-top .btn-start { flex: none; }
+
+/* ---- the first screen: four plain choices, with the car beside them or above them ---- */
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.choice { display: flex; align-items: center; min-height: 68px; padding: 8px 12px; border: 1.5px solid var(--ink); background: var(--sheet); font-weight: 650; line-height: 1.2; text-align: left; overflow-wrap: anywhere; }
+.layout-rail .ex-peek { padding-top: 14px; padding-bottom: 14px; }
+.layout-rail .ex-cta { display: flex; }
+.layout-rail .ex-peek:not(:has(.ex-carry)) { display: grid; }
+html.no-gl .choice[data-what='how'], html.no-gl .ex-cta { display: none; }
+html.no-gl .choices { grid-template-columns: 1fr 1fr 1fr; }
+@media (hover: hover) { .choice:hover { box-shadow: inset 0 0 0 1px var(--ink); } }
+.ex-apart { background: var(--sheet); }
+.ex-parts > summary { font-size: .8rem; }
+.ex-car .lab { margin-top: 14px; }
+.ex-parts[open] { padding-bottom: 8px; }
+.ex-home > .blk:last-child { padding-bottom: 28px; }
+.intro-lead { max-width: 24em; }
+html.layout-sheet .intro-lead { white-space: normal; }
+@media (max-height: 720px) { html.layout-sheet .hot-cap { display: none; } }
+
+/* The first-visit hint: over the studio, under the car on a phone, gone at the first touch. It takes no taps but its own button. */
+.move-hint { position: absolute; z-index: 7; left: 50%; bottom: 62px; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; width: max-content; max-width: min(520px, calc(100vw - var(--rail) - 24px)); padding: 4px 12px; background: var(--ink); color: var(--paper); font-size: .93rem; font-weight: 550; line-height: 1.25; pointer-events: none; animation: rise .6s var(--enter) both; }
+#ui > .move-hint { pointer-events: none; }
+.move-hint .link { flex: none; pointer-events: auto; min-height: 40px; color: inherit; }
+html.layout-rail .move-hint { left: calc((100vw - var(--rail)) / 2); }
+html.layout-sheet .move-hint { bottom: calc(58px + var(--safe-b) + var(--sheet-h) + 42px); max-width: calc(100vw - 24px); }
+
+/* Words that explain themselves. The word stays as it was, in its own colour and weight: only a dotted line shows, so that a warning
+   reads the same with or without one. The hit area runs past the word, above and below, and never paints. */
+.term { position: relative; cursor: pointer; text-decoration: underline dotted 1.5px; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, currentColor 60%, transparent); }
+.term::after { content: ''; position: absolute; left: 0; right: 0; top: -10px; bottom: -10px; }
+.term:focus-visible { outline: 2.5px solid currentColor; outline-offset: 1px; }
+.dlg-term { width: min(460px, calc(100vw - 32px)); }
+.term-def { font-size: 1.12rem; line-height: 1.5; }
+
+/* The shared-link banner. A phone gives it one line. */
+.banner-short { display: none; }
+html.layout-sheet .banner-link { flex-wrap: nowrap; gap: 10px; padding: 0 10px; font-size: .8rem; }
+html.layout-sheet .banner-link .banner-long { display: none; }
+html.layout-sheet .banner-link .banner-short { display: block; flex: 1 1 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+html.layout-sheet .banner-link .link { flex: none; min-height: 44px; font-size: .8rem; }
+
+/* On a phone the top bar keeps the car's name, the language and feedback. Units and large text are in Menu. */
+html.layout-sheet .top .seg-units, html.layout-sheet .top .garage-btn { display: none; }
+html.layout-sheet .top-menu { display: block; flex: none; padding: 0 10px; }
+.mode { white-space: nowrap; }
+html.layout-sheet .mode { white-space: normal; line-height: 1.1; }
+html.garage .search-btn kbd { display: none; }
+
+/* Run. On a phone the sheet opens on one line of revs and the buttons that matter, so the car stays in view while you use them.
+   The dash stops being sticky there: at the sheet's opening height it would fill the panel and leave nothing to scroll to. */
+.run-watch .toggle { width: 100%; min-height: var(--tap); margin-top: 8px; }
+.run-fire { margin-top: 12px; }
+.run-watch .seg button { padding: 0 4px; font-size: .85rem; }
+html.layout-sheet .dash { position: static; padding-bottom: 4px; border-bottom: 0; }
+html.layout-sheet .dash .bar, html.layout-sheet .dash .dash-row { display: none; }
+html.layout-sheet .dash-rpm { font-size: 2rem; min-width: 0; }
+html.layout-sheet .run-watch { padding-top: 4px; padding-bottom: 8px; }
+html.layout-sheet .run-watch .rng-label { display: none; }
+html.layout-sheet .run-watch .seg { margin-top: 6px; }
+html.layout-sheet.run-how .views { display: none; }
+html.layout-sheet .intro { top: calc(60px + var(--safe-t) + var(--banner-h, 0px)); }
+html:lang(fr) .how-steps li { font-size: .72rem; overflow-wrap: normal; }
+html.garage.layout-sheet .dash-rpm { font-size: 2.6rem; }
+/* The four strokes on the picture. Ink, not the accent: the accent is for the part in work. */
+.chain-tag.how { display: grid; gap: 4px; left: 12px; width: min(460px, calc(100vw - var(--rail) - 24px)); padding: 6px 8px; background: rgba(247, 248, 249, .94); font-weight: 550; }
+.how-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; }
+.how-steps li { padding: 3px 2px; background: var(--line-soft); color: var(--ink-2); font-size: .87rem; font-weight: 650; text-align: center; overflow-wrap: anywhere; }
+.how-steps li.on { background: var(--ink); color: var(--paper); }
+.how-line { min-height: 2.5em; font-size: .93rem; line-height: 1.25; }
+html.layout-sheet .chain-tag.how { left: 8px; right: 8px; width: auto; }
+
+/* Search: a meaning is read where it lands. */
+.sr--term .sr-sub { white-space: normal; overflow: visible; }
+
+/* A figure's plain line, under the number. */
+.tq-plain { margin-top: 5px; font-size: .87rem; color: var(--ink-2); }
+.tq-plain .link { display: flex; align-items: center; min-height: var(--tap); color: var(--ink); }
+
+/* Thumbs. A hit area past the word, never paint. */
+.term::after { top: -14px; bottom: -14px; }
+.move-hint .link { min-height: var(--tap); min-width: var(--tap); }
+html.layout-sheet .seg-lang button { flex: none; }
+@media (pointer: coarse) { .view { min-width: var(--tap); } }
+
+/* On a phone a toast at the foot would land on the first screen's choices. */
+html.layout-sheet .toast { top: calc(60px + var(--safe-t)); bottom: auto; }

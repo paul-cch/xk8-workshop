@@ -226,3 +226,15 @@ tensioner body, tensioner housing | corps de tendeur
 tie strap (exhaust, retaining) / tie strap (cable tie) | sangle de maintien / collier plastique
 strip (ruin a thread) | foirer le filetage
 bush (metal or plastic sleeve, tensioner or caliper) | bague
+walk-away check | contrôle décisif
+walk-away fault | défaut qui doit vous faire renoncer
+suck, squeeze, bang, blow | admission, compression, explosion, échappement
+film (on this page) | vidéo
+caliper carrier | support d'étrier
+mating surface | plan de contact
+anti-rattle spring | ressort anti-bruit
+R clip | goupille en R
+booster (jump start) | batterie d'appoint
+badge (boot lid) | monogramme
+space-saver spare | roue de secours galette
+piston retract tool | outil de repousse de piston

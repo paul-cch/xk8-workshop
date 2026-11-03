@@ -31,7 +31,7 @@ if (args.has('--shots')) fs.mkdirSync(SHOTS, {recursive: true});
 const ALLOWED = /\b(?:Nm|lb|ft|mm|cc|mph|km|kg|Ah|in|m|s|h|L|F|R|N|x|EN|FR|XK8|XKR|VIN|OK|Jaguar|Cmd|Ctrl|K|Brembo|Sepang|MY|X100|bhp|deg|rpm|English|janv|févr|mars|avr|mai|juin|juil|août|sept|oct|nov|déc)\b|Français/g;
 const CODE = /\S*\d\S*|\S+\.(?:com|co\.uk|org|net|de|nl|it|fr|ch)\S*/g;
 // French words that are also English, and names that stay: a bottle's label, and dashboard messages (rule 7).
-const ALSO_FRENCH = new Set(['code', 'codes', 'miles', 'car', 'part', 'parts', 'use', 'source', 'sources', 'drive']);
+const ALSO_FRENCH = new Set(['code', 'codes', 'miles', 'car', 'part', 'parts', 'use', 'source', 'sources', 'drive', 'test']);
 const NAMED = /Jaguar Anti-freeze, Coolant and Corrosion Inhibitor|Low Brake Fluid|Incorrect Part Fitted/g;
 /** Why a string reads as untranslated, or null. */
 function verdict(text) {
@@ -56,7 +56,7 @@ const walkPage = () => {
   for (const v of d.vendors.items) addKeep(v.name);
   for (const v of d.variants.items) { addKeep(v.label); addKeep(v.transmission); addKeep(v.tyresFront); addKeep(v.tyresRear); addKeep(v.engineCode); }
   for (const p of d.parts.items) for (const n of p.partNumbers ?? []) addKeep(n.no);
-  const skip = 'script, style, noscript, code, kbd, .prov-src, .ws-vendor, .pn-no, .vin-input, #boot, [hidden]'; // a hidden panel repaints when it next shows
+  const skip = 'script, style, noscript, code, kbd, .prov-src, .ws-vendor, .tut-title, .tut-meta, .pn-no, .vin-input, #boot, [hidden]'; // a hidden panel repaints when it next shows
   const pathOf = (el) => { const bits = []; for (let e = el; e && e !== document.body && bits.length < 3; e = e.parentElement) bits.unshift(e.tagName.toLowerCase() + (e.classList[0] ? `.${e.classList[0]}` : '')); return bits.join(' > '); };
   const out = new Map();
   const add = (text, el, attr) => {
@@ -68,7 +68,7 @@ const walkPage = () => {
   for (let n = walker.nextNode(); n; n = walker.nextNode()) if (!n.parentElement.closest(skip)) add(n.data, n.parentElement);
   for (const el of document.body.querySelectorAll('*')) {
     if (el.closest('.prov-src, script, style, [hidden]')) continue;
-    for (const attr of ['aria-label', 'placeholder', 'title', 'alt', 'aria-valuetext', 'data-short']) if (el.hasAttribute(attr)) add(el.getAttribute(attr), el, attr);
+    for (const attr of ['aria-label', 'placeholder', 'title', 'alt', 'aria-valuetext', 'data-short']) if (el.hasAttribute(attr) && !el.matches('.tut-thumb')) add(el.getAttribute(attr), el, attr); // a film's title stays as published, here as on the card
   }
   add(document.title, document.documentElement, 'title');
   add(document.querySelector('meta[name="description"]')?.content, document.documentElement, 'description');
@@ -138,7 +138,7 @@ async function sweep(name, device) {
   await look('first screen');
 
   // ---- explore ----
-  await p.evaluate(() => document.getElementById('part-list')?.scrollIntoView());
+  await p.evaluate(() => { document.querySelector('.ex-parts').open = true; document.getElementById('part-list')?.scrollIntoView(); });
   await set({chosen: true});
   await p.evaluate(() => { for (const b of document.querySelectorAll('.tree-head')) b.click(); });
   await look('explore, tree open');
@@ -166,13 +166,13 @@ async function sweep(name, device) {
   await p.locator('.btn-start').click();
   await p.waitForTimeout(250);
   await look('run, engine on');
-  await p.locator('.dash-watch button').nth(0).click();
+  await p.locator('.run-watch .run-btns button').nth(0).click();
   await p.waitForTimeout(300);
   await look('run, chains');
-  await p.locator('.dash-watch button').nth(1).click();
+  await p.locator('.run-watch .run-btns button').nth(1).click();
   await p.waitForTimeout(300);
   await look('run, section');
-  await p.locator('.dash-watch button').nth(1).click();
+  await p.locator('.run-watch .run-btns button').nth(1).click();
   await set({variant: {engine: '4.2', induction: 'sc', body: 'convertible', my: 2004, market: 'us'}});
   await p.waitForTimeout(250);
   await look('run, convertible');
@@ -351,7 +351,7 @@ async function sweep(name, device) {
   await flip('a filtered parts list');
   await set({mode: 'run'});
   await p.waitForTimeout(200);
-  await p.locator('.dash-watch button').nth(0).click();
+  await p.locator('.run-watch .run-btns button').nth(0).click();
   await p.waitForTimeout(250);
   await flip('the running engine, chains showing');
   await set({mode: 'jobs', job: {id: jobs[1], step: 2}});

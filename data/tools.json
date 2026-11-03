@@ -155,6 +155,12 @@
    "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
    "publisher": "Jaguar Cars",
    "kind": "factory"
+  },
+  "jlvee": {
+   "title": "[xk8] Front subframe V Mounts",
+   "url": "https://forums.jag-lovers.com/t/xk8-front-subframe-v-mounts/246980",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
   }
  },
  "items": [
@@ -558,7 +564,7 @@
    "name": "Torx T40",
    "kind": "hand",
    "size": "T40",
-   "why": "Forum reports of later pan bolts using this head.",
+   "why": "Forum reports of later pan bolts using this head, and one owner's vee mount write-up.",
    "jdNumber": null,
    "altDiy": null,
    "costGbp": null,
@@ -566,6 +572,20 @@
     "atf"
    ],
    "conf": "community"
+  },
+  {
+   "id": "torx-t55",
+   "name": "Torx T55",
+   "kind": "hand",
+   "size": "T55",
+   "why": "One owner's vee mount write-up used this for the centre bolt.",
+   "jdNumber": null,
+   "altDiy": null,
+   "costGbp": null,
+   "src": [
+    "jlvee"
+   ],
+   "conf": "single"
   },
   {
    "id": "ball-end-hex-10mm",

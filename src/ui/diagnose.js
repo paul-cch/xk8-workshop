@@ -1,8 +1,10 @@
 // Diagnose mode: plain words, a code, or browsing by system or weak spot. Urgency comes first, then causes by likelihood,
 // then the test, then a path to the fix. Every list here is cut down to the chosen car, and what was cut is counted.
 import {applies, appliesStatus, codeIn, convertTorqueText, data, en, faultFor, forVariant, nearCodes, partName, search, urgencyOf} from '../data.js';
-import {N, isFrench, plural, t} from '../i18n.js';
+import {N, fold, isFrench, plural, t} from '../i18n.js';
 import {cylinderLabels} from './engine-labels.js';
+import {gloss} from './terms.js';
+import {closePlayer, tutorialList} from './tutorials.js';
 import {badge, h, toast} from './widgets.js';
 import {addParts, appliesText, callout, carLabel, clearCar, gbp, hoursText, icon, modeRoot, nav, openJob, paintView, pips, showButton, showNumbers, sysName, vinTag} from './jobs.js';
 
@@ -59,17 +61,56 @@ function plainQuery(q) {
   return q.replace(/\b(\w+)n['’]t\b/gi, '$1').replace(/['’]\w*/g, '').split(/\s+/).filter((w) => w.length > 1 || /\d/.test(w)).join(' ');
 }
 
+// What people say, and the faults that usually lie behind it, likeliest first. The first six are the chips on the first screen. The
+// words are matched on folded text, in both languages: a chip's own label has to match its row in the language on screen.
+const SAYS = [
+  {word: N('Warning light'), said: /\b(?:warning|warnings|light|lights|lamp|lit|dash|dashboard|message|voyants?|temoins?|alertes?|tableau de bord)\b/, faults: ['restricted-performance', 'engine-fail-safe', 'flashing-engine-light', 'gearbox-fault', 'charge-warning', 'multiple-warnings', 'abs-trac-failure', 'low-coolant-warning-tank-full', 'airbag-light', 'suspension-fault-cats', 'stability-control-failure']},
+  {word: N('Slow or no power'), said: /\b(?:slow|slower|sluggish|no power|lost power|loss of power|lack of power|less power|down on power|gutless|limp|limping|wont rev|feels flat|lent|lente|mou|molle|manque de puissance|perte de puissance|plus de puissance|sans puissance|mode degrade|ne monte pas)\b/, faults: ['restricted-performance', 'engine-fail-safe', 'stuck-in-one-gear', 'intake-loss-xkr', 'hesitation', 'rough-idle-misfire']},
+  {word: N('Noise'), said: /\b(?:noise|noises|noisy|rattle|rattling|bruits?)\b/, faults: ['cold-start-rattle', 'rattle-rough-after-start', 'clunk-front', 'clunk-rear', 'wheel-bearing-noise', 'belt-chirp', 'supercharger-noise', 'pinging', 'steering-knock']},
+  {word: N('Smell'), said: /\b(?:smell|smells|smelly|stink|odeurs?|sent)\b/, faults: ['fuel-smell', 'coolant-smell', 'overheating', 'oil-use-smoke', 'oil-leak']},
+  {word: N('Leak'), said: /\b(?:leak|leaks|leaking|drip|drips|dripping|puddle|fuite|fuites|fuit|goutte|gouttes|flaque)\b/, faults: ['oil-leak', 'coolant-smell', 'water-leak', 'pinion-leak', 'steering-leak-noise', 'roof-fluid-leak']},
+  {word: N('Won\'t start'), said: /\b(?:wont start|will not start|cant start|doesnt start|does not start|no start|wont turn over|nothing happens|ne demarre|demarre pas|demarre plus|demarrage impossible|en panne)\b/, faults: ['no-crank', 'no-start-cranks', 'cold-start-after-short-trip', 'long-crank-hot', 'wont-leave-park'], jobs: ['flat-battery']},
+  {said: /\b(?:flat battery|battery flat|battery dead|dead battery|boot stuck|boot wont open|cant open the boot|cant open boot|batterie a plat|batterie morte|batterie vide|batterie hs|coffre bloque|coffre coince)\b/, faults: ['no-crank', 'flat-battery-week'], jobs: ['flat-battery']},
+];
+const FLAT_JOB = 'flat-battery';
+
+/** Faults and jobs for what was said. A fault named by two complaints comes first, so "warning light and slow" finds the one that is both. */
+function saidHits(q) {
+  const text = fold(q).replace(/['’]/g, '');
+  const rows = SAYS.filter((x) => x.said.test(text));
+  const score = new Map();
+  rows.forEach((row) => row.faults.forEach((id, i) => score.set(id, (score.get(id) ?? 0) + 1000 - i)));
+  return {faults: [...score].sort((a, b) => b[1] - a[1]).map(([id]) => data.faults.byId.get(id)).filter(Boolean), jobs: [...new Set(rows.flatMap((x) => x.jobs ?? []))]};
+}
+
 function results(q, v) {
-  const out = {codes: [], faults: [], weak: [], other: 0};
-  const t = q.trim();
-  if (!t) return out;
-  if (CODE.test(t) || JUST_DIGITS.test(t)) out.codes = codeMatches(t);
-  const words = plainQuery(t);
+  const out = {codes: [], faults: [], weak: [], jobs: [], other: 0, closest: false};
+  const typed = q.trim();
+  if (!typed) return out;
+  const isCode = CODE.test(typed) || JUST_DIGITS.test(typed);
+  if (isCode) out.codes = codeMatches(typed);
+  const words = plainQuery(typed);
+  const keep = (r) => {
+    if (r.kind === 'weakspot') { if (!out.weak.includes(r.ref)) out.weak.push(r.ref); }
+    else if (r.kind === 'job') { if (!out.jobs.includes(r.ref) && !isCode) out.jobs.push(r.ref); }
+    else if (!fits(r.ref, v)) out.other++;
+    else if (!out.faults.includes(r.ref)) out.faults.push(r.ref);
+  };
   if (words) {
-    for (const r of search(words, {variant: v, kinds: ['fault', 'weakspot'], limit: 16})) { if (r.kind === 'weakspot') out.weak.push(r.ref); else if (fits(r.ref, v)) out.faults.push(r.ref); else out.other++; }
+    const said = saidHits(typed);
+    out.faults.push(...said.faults.filter((f) => fits(f, v)));
+    out.jobs.push(...said.jobs.map((id) => data.jobs.byId.get(id)).filter((j) => j && applies(j.appliesTo, v)));
+    for (const r of search(words, {variant: v, kinds: ['fault', 'weakspot', 'job'], limit: 18})) keep(r);
     if (!out.codes.length) out.codes = search(words, {kinds: ['dtc'], limit: 18}).map((r) => r.id); // search() tests only a code's first record, so fit it below
+    // No record has every word: the best of each word is still a place to start, and better than a dead end.
+    if (!isCode && !out.faults.length && !out.weak.length && !out.jobs.length && words.includes(' ')) {
+      for (const w of words.split(' ')) if (w.length > 2) for (const r of search(w, {variant: v, kinds: ['fault', 'weakspot', 'job'], limit: 3})) keep(r);
+      out.closest = out.faults.length + out.weak.length + out.jobs.length > 0;
+    }
   }
-  out.codes = out.codes.sort((a, b) => (forVariant(data.dtc.byCode.get(b), v).length > 0) - (forVariant(data.dtc.byCode.get(a), v).length > 0));
+  const forThisCar = (c) => forVariant(data.dtc.byCode.get(c), v).length > 0;
+  if (!isCode && (out.faults.length || out.weak.length || out.jobs.length || out.codes.some(forThisCar))) out.codes = out.codes.filter(forThisCar); // a code for another car helps nobody who is describing a symptom
+  out.codes = out.codes.sort((a, b) => forThisCar(b) - forThisCar(a));
   return out;
 }
 
@@ -80,8 +121,10 @@ const faultsFor = (v) => data.faults.items.filter((f) => fits(f, v));
 
 // ---- rows -------------------------------------------------------------------------------------------------
 
-const open = (app, page) => { route.stack.push(page); repaint(app); };
-const back = (app) => { if (route.stack.length > 1) route.stack.pop(); clearCar(app); repaint(app); };
+const open = (app, page) => { closePlayer(); route.stack.push(page); repaint(app); };
+const back = (app) => { closePlayer(); if (route.stack.length > 1) route.stack.pop(); clearCar(app); repaint(app); };
+/** The films and guides for a fault or weak spot, under a heading, or nothing at all. */
+const watchBlock = (app, s, kind, id) => { const list = tutorialList(app, s, kind, id); return list && [h('h3.ws-head', t('Videos and guides')), list]; };
 let repaint = () => {};
 
 const faultRow = (app, f, v) => h('button.ws-row', {type: 'button', 'data-fk': `f-${f.id}`, onclick: () => open(app, {page: 'fault', id: f.id})}, [
@@ -109,17 +152,19 @@ const weakRow = (app, w) => h('button.ws-row', {type: 'button', 'data-fk': `w-${
 function renderResults(app, box, v) {
   const q = route.q;
   const r = results(q, v);
-  const count = r.codes.length + r.faults.length + r.weak.length + r.other;
+  const count = r.codes.length + r.faults.length + r.weak.length + r.jobs.length + r.other;
   const typed = normalCode(q);
   const looksLikeCode = (CODE.test(q.trim()) && q.trim().length >= 5);
   const near = looksLikeCode && !count && codeIn(q) ? nearCodes(codeIn(q)) : [];
   box.replaceChildren(...[
+    r.closest && h('p.ws-foot-note', t('Nothing fits all of that. These are the closest.')),
     r.faults.length > 0 && h('section', [h('h3.ws-head', t('Symptoms')), h('div.ws-list', r.faults.map((f) => faultRow(app, f, v)))]),
+    r.jobs.length > 0 && h('section', [h('h3.ws-head', t('Jobs that may help')), h('div.ws-list', r.jobs.slice(0, 4).map((j) => jobButton(app, j.id, v)))]),
     r.codes.length > 0 && h('section', [h('h3.ws-head', t('Fault codes')), h('div.ws-list', r.codes.slice(0, 24).map((c) => codeRow(app, c, v))), r.codes.length > 24 && h('p.ws-foot-note', plural(r.codes.length - 24, '{n} more codes match. Keep typing.|one', '{n} more codes match. Keep typing.'))]),
     r.weak.length > 0 && h('section', [h('h3.ws-head', t('Weak spots')), h('div.ws-list', r.weak.map((w) => weakRow(app, w)))]),
     r.other > 0 && h('p.ws-foot-note', plural(r.other, '{n} more symptom matches on other cars only.', '{n} more symptoms match on other cars only.')),
     !count && h('div.ws-empty', looksLikeCode
-      ? [h('p', [h('strong', t('{code} is not in the data.', {code: typed})), ` ${t('This app holds {n} codes from Jaguar\'s tables and the generic list.', {n: data.dtc.byCode.size})}`]), h('p.ws-mute', t('Check the code on the reader. An unlisted code tells you nothing about urgency, so go by how the car behaves.')),
+      ? [h('p', [h('strong', t('We have no record of {code}.', {code: typed})), ` ${t('This app holds {n} codes from Jaguar\'s tables and the generic list.', {n: data.dtc.byCode.size})}`]), h('p.ws-mute', t('Check the code on the reader. An unlisted code tells you nothing about urgency, so go by how the car behaves.')),
         near.length > 0 && h('section', [h('h3.ws-head', t('Close to it, in case of a misread digit')), h('div.ws-list', near.map((c) => codeRow(app, c, v)))])]
       : [h('p', t('Nothing matches "{q}".', {q: q.trim()})), h('p.ws-mute', t('Try one plain word: rattle, smell, leak, stuck, warning.'))]),
   ].filter(Boolean));
@@ -169,7 +214,10 @@ function browseStop(app, v) {
   return h('div.ws-list', faultsFor(v).filter((f) => urgencyOf(f, v) === 'stop').map((f) => faultRow(app, f, v)));
 }
 
-const BROWSE = [['system', N('By system')], ['weak', N('Weak spots')], ['stop', N('Stop now')]];
+/** The rescue job, for the person standing at a dead car. */
+const flatBattery = (app) => h('button.ws-row.ws-rescue', {type: 'button', onclick: () => openJob(app, FLAT_JOB)}, [h('span.ws-row-main', [h('strong', t('Flat battery? Can\'t open the boot?')), h('span', t('Open it with the key, then jump start the car.'))]), icon('right')]);
+
+const BROWSE = [['system', N('By part of the car')], ['weak', N('Weak spots')], ['stop', N('Stop now')]];
 
 function renderHome(app, s, root) {
   const v = s.variant;
@@ -179,10 +227,12 @@ function renderHome(app, s, root) {
     const typing = route.q.trim().length > 0;
     box.hidden = !typing;
     browse.hidden = typing;
+    root.querySelector('.ws-pin-row')?.toggleAttribute('hidden', typing);
     if (typing) renderResults(app, box, v);
   };
   const input = homeSearch(app, box, v, redraw);
   arrowThrough(box, input);
+  const chips = h('div.ws-said', {role: 'group', 'aria-label': t('What is the car doing?')}, SAYS.filter((x) => x.word).map((x) => h('button.ws-chip', {type: 'button', onclick: () => { route.q = t(x.word); input.value = route.q; redraw(); app.ui.raise('full'); setTimeout(() => box.scrollIntoView({block: 'start', behavior: 'smooth'}), 380); }}, t(x.word))));
   const paintBrowse = () => {
     browse.replaceChildren(
       h('div.ws-tabs', {role: 'tablist'}, BROWSE.map(([k, word]) => h('button', {type: 'button', role: 'tab', 'aria-selected': String(route.browse === k), onclick: () => { route.browse = k; paintBrowse(); }}, t(word)))),
@@ -191,8 +241,8 @@ function renderHome(app, s, root) {
   paintBrowse();
   redraw();
   paintView(root, 'home', [
-    h('header.ws-top', [h('h2', t('Diagnose')), h('p.ws-mute', t('What is the car doing? For a {car}.', {car: carLabel(v)}))]),
-    input, box, browse,
+    h('header.ws-top', [h('h2', t('What\'s wrong?')), h('p.ws-mute', t('What is the car doing? For a {car}.', {car: carLabel(v)}))]),
+    input, chips, box, h('div.ws-pin-row', {hidden: route.q.trim().length > 0}, flatBattery(app)), browse,
   ]);
 }
 
@@ -221,15 +271,17 @@ function causeCodes(c, v) {
   return [...out];
 }
 
+const SAFETY_SYSTEM = new Set(['brakes', 'steering', 'front-suspension', 'rear-suspension', 'wheels']);
 /** What can happen, whether to drive it, what it costs, and whether this car's serial is in the affected range. */
-function stakes(app, f, v) {
+function stakes(app, f, v, seen) {
   const weak = (f.weakspots ?? []).map((id) => data.weakspots.byId.get(id)).filter((w) => w && appliesStatus(w.appliesTo, v) !== 'no');
   const row = faultFor(f, v), drive = row.drive ?? f.drive, cost = row.costFrom && data.weakspots.byId.get(row.costFrom);
   return [
-    f.risk && h('p', f.risk),
-    drive && h('p', drive),
+    f.risk && h('p', gloss(f.risk, seen)),
+    drive && h('p', gloss(drive, seen)),
     v.serial && row !== f && h('p', h('strong', t('Your serial: {serial}.', {serial: v.serial}))),
     cost?.cost?.gbp && h('p', [h('strong', t('Cost if it needs doing: ')), gbp(cost.cost.gbp)]),
+    urgencyOf(f, v) === 'soon' && !drive && h('p', t(SAFETY_SYSTEM.has(f.system) ? 'Have it looked at before you use the car much. If the brakes or steering feel wrong, do not drive it.' : 'Not an emergency. If it still drives normally, take it gently to a garage, and stop if it gets worse.')),
     urgencyOf(f, v) === 'stop' && h('button.ws-btn.ws-band-btn', {type: 'button', onclick: () => app.ui.open('fact', 'fact.towing')}, t('How to get it moved: flat-bed, towing, the towing eye')),
     weak.map((w) => {
       const to = w.appliesTo?.vinTo;
@@ -242,7 +294,10 @@ function stakes(app, f, v) {
   ];
 }
 
-function causeCard(app, f, c, i, v, rerender) {
+/** "Read the codes" is no help on its own. */
+const readCodes = (app) => h('button.ws-row', {type: 'button', onclick: () => app.ui.lesson('fault-codes')}, [h('span.ws-row-main', [h('strong', t('How to read the codes')), h('span', t('With a code reader, or at any garage'))]), icon('right')]);
+
+function causeCard(app, f, c, i, v, rerender, seen) {
   const key = `${f.id}:${i}`;
   const out = ruledOut.has(key);
   const was = solved.get(f.id) === i;
@@ -250,11 +305,11 @@ function causeCard(app, f, c, i, v, rerender) {
   return h(`article.ws-cause${out ? '.is-out' : ''}${was ? '.is-it' : ''}`, [
     h('header', [h(`span.ws-lik.ws-lik--${c.likelihood}`, t(LIKELIHOOD[c.likelihood]?.word ?? c.likelihood)), h('h4', c.label)]),
     vinTag(c, v),
-    !out && h('div.ws-test', [h('span.ws-label', t('Test, and what the result means')), h('p', c.test)]),
+    !out && h('div.ws-test', [h('span.ws-label', t('How to check, and what it means')), h('p', gloss(c.test, seen))]),
     !out && causeCodes(c, v).length > 0 && h('div.codes', causeCodes(c, v).slice(0, CODES_SHOWN).map((code) => h('button.code', {type: 'button', title: data.dtc.byCode.get(code)[0].title, onclick: () => open(app, {page: 'code', id: code})}, code))),
     !out && !was && jobsHere(c, v).length > 0 && h('div.ws-list', jobsHere(c, v).map((id) => jobButton(app, id, v))),
     was && h('div.ws-fix', [
-      h('span.ws-label', t('The fix')), h('p', convertTorqueText(c.fix, app.store.get().units)),
+      h('span.ws-label', t('The fix')), h('p', gloss(convertTorqueText(c.fix, app.store.get().units), seen)),
       (c.jobs ?? []).length ? h('div.ws-list', c.jobs.map((id) => jobButton(app, id, v))) : h('p.ws-none', t('No job is written up for this fix yet.')),
       parts.length > 0 && h('button.ws-btn', {type: 'button', onclick: () => { addParts(app.store, parts); toast(plural(parts.length, '{n} part added to the shopping list', '{n} parts added to the shopping list')); }}, [icon('cart'), t('Add {what} to the list', {what: parts.length === 1 ? partName(parts[0]) : t('{n} parts', {n: parts.length})})]),
     ]),
@@ -262,7 +317,7 @@ function causeCard(app, f, c, i, v, rerender) {
     h('div.ws-cause-actions', [
       parts.length > 0 && !out && showButton(app, parts),
       !out && h('button.ws-btn', {type: 'button', 'aria-pressed': String(was), onclick: () => { if (was) solved.delete(f.id); else solved.set(f.id, i); rerender(); }}, was ? t('Not it after all') : t('That was it')),
-      !was && h('button.ws-btn.ws-btn--quiet', {type: 'button', 'aria-pressed': String(out), onclick: () => { if (out) ruledOut.delete(key); else ruledOut.add(key); rerender(); }}, out ? t('Bring it back') : t('Ruled out')),
+      !was && h('button.ws-btn.ws-btn--quiet', {type: 'button', 'aria-pressed': String(out), onclick: () => { if (out) ruledOut.delete(key); else ruledOut.add(key); rerender(); }}, out ? t('Bring it back') : t('Not this')),
     ]),
   ]);
 }
@@ -276,19 +331,21 @@ function renderFault(app, s, root, id) {
     const oa = ruledOut.has(`${f.id}:${a.i}`), ob = ruledOut.has(`${f.id}:${b.i}`);
     return oa - ob || (LIKELIHOOD[a.c.likelihood]?.rank ?? 9) - (LIKELIHOOD[b.c.likelihood]?.rank ?? 9);
   });
+  const seen = new Set();
   paintView(root, `fault-${id}`, [
     backButton(app),
-    urgencyBand(urgencyOf(f, v), stakes(app, f, v)),
+    urgencyBand(urgencyOf(f, v), stakes(app, f, v, seen)),
     h('header.ws-top', [h('h2', f.symptom), h('p.ws-mute', f.when), h('p', badge(f, {title: f.symptom}))]),
     (f.weakspots ?? []).filter((id) => appliesStatus(data.weakspots.byId.get(id)?.appliesTo, v) !== 'no').map((id) => [h('h3.ws-head', t('Known weak spot')), h('div.ws-list', weakRow(app, data.weakspots.byId.get(id)))]),
-    f.first?.length > 0 && [h('h3.ws-head', t('Do this first')), h('ol.ws-plain', f.first.map((x) => h('li', x)))],
+    f.first?.length > 0 && [h('h3.ws-head', t('Do this first')), h('ol.ws-plain', f.first.map((x) => h('li', gloss(x, seen)))), en(f, 'first').some((x) => /\bcodes?\b/i.test(x)) && readCodes(app)],
     h('h3.ws-head', t('Causes, most likely first')),
-    order.length ? order.map(({c, i}) => causeCard(app, f, c, i, v, rerender)) : h('p.ws-none', t('No cause in the data applies to this car.')),
+    order.length ? order.map(({c, i}) => causeCard(app, f, c, i, v, rerender, seen)) : h('p.ws-none', t('We have no cause listed for this car.')),
     fit.length < f.causes.length && h('p.ws-foot-note', plural(f.causes.length - fit.length, '{n} more cause applies to other cars and is left out.', '{n} more causes apply to other cars and are left out.')),
+    watchBlock(app, s, 'faults', id),
   ]);
 }
 
-const backButton = (app) => h('button.ws-back', {type: 'button', onclick: () => back(app)}, [icon('left'), route.stack.length > 2 ? t('Back') : t('Diagnose')]);
+const backButton = (app) => h('button.ws-back', {type: 'button', onclick: () => back(app)}, [icon('left'), route.stack.length > 2 ? t('Back') : t('What\'s wrong')]);
 
 // ---- code page -----------------------------------------------------------------------------------------------------
 
@@ -307,17 +364,17 @@ function renderCode(app, s, root, code) {
     backButton(app),
     records.find((r) => r.band) ? (({urgency, title, text}) => h(`div.ws-band.ws-band--${urgency}`, {role: 'alert'}, [h('span.ws-band-word', t(URGENCY[urgency].word)), h('div', [h('strong', title), h('p', text)])]))(records.find((r) => r.band).band)
       : worst ? urgencyBand(urgencyOf(worst, v), h('p', t('From the linked fault: {what}', {what: worst.symptom})))
-      : h('div.ws-band.ws-band--none', [h('span.ws-band-word', '?'), h('div', [h('strong', t('Urgency not recorded for this code.')), h('p', t('No fault in the data mentions it. Go by how the car behaves, and look the symptom up by name.'))])]),
+      : h('div.ws-band.ws-band--none', [h('span.ws-band-word', '?'), h('div', [h('strong', t('Urgency not recorded for this code.')), h('p', t('We have no problem linked to it. Go by how the car behaves, and look the symptom up by name.'))])]),
     h('header.ws-top', [h('p.ws-code', code), h('h2', records[0]?.title ?? code)]),
     !fit.length && all.length > 0 && callout('warn', t('Not listed for your car'), h('p', t('This code is listed for: {who}. Your car is a {car}. What follows is for those cars.', {who: [...new Set(all.map((r) => appliesText(r.appliesTo)).filter(Boolean))].join('; ') || t('other cars'), car: carLabel(v)}))),
     records.map((r) => h('article.ws-card-flat', [
       h('div.ws-row-head', [badge(r, {title: `${r.code} ${r.title}`}), vinTag(r, v)]),
-      h('p', r.meaning),
-      r.note && callout('tip', t('Note'), h('p', r.note)),
-      r.first?.length > 0 && [h('h3.ws-head', t('Do this first')), h('ol.ws-plain', r.first.map((x) => h('li', x)))],
+      h('p', gloss(r.meaning)),
+      r.note && callout('tip', t('Note'), h('p', gloss(r.note))),
+      r.first?.length > 0 && [h('h3.ws-head', t('Do this first')), h('ol.ws-plain', r.first.map((x) => h('li', gloss(x))))],
       r.causes.length > 0 && (r.causeOrder === 'quick'
         ? [h('h3.ws-head', t('Causes, quickest to check first')), h('ul.ws-plain', r.causes.map((c) => h('li', c)))]
-        : [h('h3.ws-head', t('Causes, in the source\'s order')), h('ul.ws-plain', r.causes.map((c) => h('li', c))), h('p.ws-small.ws-mute', t('The source ranks these no further, so no likelihood is shown.'))]),
+        : [h('h3.ws-head', t('Causes, in the order our source gives them')), h('ul.ws-plain', r.causes.map((c) => h('li', c))), h('p.ws-small.ws-mute', t('Our source does not say which is most likely.'))]),
     ])),
     parts.length > 0 && [h('h3.ws-head', t('Parts involved')), h('p', parts.map(partName).join(', ')), showButton(app, parts)],
     h('div.ws-list', [
@@ -337,10 +394,11 @@ function renderWeak(app, s, root, id) {
   const v = s.variant;
   const parts = w.parts ?? [];
   const checks = data.inspect.items.filter((i) => i.weakspot === id);
-  const T = (x) => convertTorqueText(x, s.units);
+  const seen = new Set();
+  const T = (x) => gloss(convertTorqueText(x, s.units), seen);
   paintView(root, `weak-${id}`, [
     backButton(app),
-    h('header.ws-top', [h('p.ws-kicker', t('Weak spot, {system}', {system: sysName(w.system)})), h('h2', w.title), h('div.ws-row-head', [pips(w.severity), h('span.ws-small', t('Severity {n} of 5', {n: w.severity})), badge(w, {title: w.title})]), vinTag(w, v)]),
+    h('header.ws-top', [h('p.ws-kicker', t('Weak spot, {system}', {system: sysName(w.system)})), h('h2', w.title), h('div.ws-row-head', [pips(w.severity), h('span.ws-small', t('How serious: {n} of 5', {n: w.severity})), badge(w, {title: w.title})]), vinTag(w, v)]),
     h('div.ws-test', [h('span.ws-label', t('What goes wrong')), h('p', T(w.what))]),
     h('div.ws-test', [h('span.ws-label', t('What you notice')), h('p', T(w.symptoms))]),
     h('div.ws-test', [h('span.ws-label', t('How to check')), h('p', T(w.check))]),
@@ -350,6 +408,7 @@ function renderWeak(app, s, root, id) {
     showButton(app, parts),
     parts.length > 0 && h('p.ws-small', [h('strong', t('Parts: ')), parts.map(partName).join(', ')]),
     (w.jobs ?? []).length ? [h('h3.ws-head', t('Jobs')), h('div.ws-list', w.jobs.map((j) => jobButton(app, j, v)))] : h('p.ws-none', t('No job is linked to this weak spot.')),
+    watchBlock(app, s, 'weakspots', id),
     checks.length > 0 && [h('h3.ws-head', t('On the inspection list')), h('div.ws-list', checks.map((c) => h('button.ws-row', {type: 'button', onclick: () => { nav.planTab = 'inspect'; app.store.set({mode: 'plan'}); }}, h('span.ws-row-main', [h('strong', c.check), h('span', c.area)]))))],
   ]);
 }
@@ -378,6 +437,7 @@ function renderSystem(app, s, root, id) {
 
 export function mount(el, app) {
   const render = (s, root) => {
+    if (nav.diagnoseHome) { route.stack = [{page: 'home'}]; route.q = ''; nav.diagnoseHome = false; }
     if (nav.diagnose) { route.stack = [{page: 'home'}, nav.diagnose]; nav.diagnose = null; }
     const p = here();
     if (p.page === 'fault' && data.faults.byId.has(p.id)) renderFault(app, s, root, p.id);

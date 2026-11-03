@@ -1,7 +1,8 @@
 // Run: the machine working. Controls write to state.sim, kin.js turns that into the frame the parts move by, and every
 // gauge here reads that same frame (app.sim), so a readout cannot disagree with the motion.
 import {data, en, forVariant, specFor} from '../data.js';
-import {dec, fixed, pct, t} from '../i18n.js';
+import {N, dec, fixed, pct, t} from '../i18n.js';
+import {sectionLabels} from './engine-labels.js';
 import {chassisReadout, displacementCc, firingTable, gearCount, gearRatio, IDLE_RPM, roadSpeedMph, rpmAtSpeed, rpmLimit, STEER_MAX_DEG, TRAVEL_MM} from '../sim/kin.js';
 import {badge, block, h, range, seg, specBadge, toggle} from './widgets.js';
 import {createEngineSound} from './sound.js';
@@ -10,6 +11,9 @@ import {createEngineSound} from './sound.js';
 const SHORT_SCREEN = 520; // as SHORT_H in shell.js
 const REV_UP_RPM_S = 5200, REV_DOWN_RPM_S = 3400, ROOF_CYCLE_S = 14;
 const CHAIN_PARTS = ['engine.chain-primary', 'engine.chain-secondary', 'engine.chain-tensioner-primary', 'engine.chain-tensioner-secondary', 'engine.tensioner-blade', 'engine.chain-guide-primary', 'engine.crank-sprocket', 'engine.exhaust-cam-sprocket', 'engine.inlet-cam-sprocket', 'engine.vvt-unit', 'engine.crank-damper', 'engine.crankshaft', 'engine.camshaft-inlet', 'engine.camshaft-exhaust', 'engine.camshaft'];
+const HOW_SPEED = 0.02; // the cutaway: slow enough to read the stroke's sentence before the next one comes
+// The four strokes, in the order the piston does them. kin.js names them; these are the words on the picture.
+const HOW = [['inlet', N('Suck'), N('The piston goes down and pulls in air and fuel.')], ['compression', N('Squeeze'), N('The piston comes up and squeezes the mix.')], ['power', N('Bang'), N('The spark plug fires, and the burning mix pushes the piston down.')], ['exhaust', N('Blow'), N('The piston comes up and pushes the burnt gas out.')]];
 const BENCH = Object.fromEntries(['body', 'roof', 'interior', 'hvac', 'electrical', 'cooling', 'exhaust', 'front-suspension', 'rear-suspension', 'steering', 'brakes', 'wheels', 'driveline'].map((k) => [k, 'hide']));
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 const estimate = (text) => badge({conf: 'estimated'}, {title: t('Estimated'), extra: h('p.prov-note', text)});
@@ -34,7 +38,7 @@ function crankDial(order) {
     return [tick, t];
   });
   const hand = svg('line', {x1: C, y1: C, x2: C, y2: C - (R - 4), class: 'dial-hand'});
-  const root = svg('svg', {viewBox: '0 0 120 120', class: 'dial', role: 'img', 'aria-label': t('Crank angle over one 720 degree cycle, with each firing marked')}, svg('circle', {cx: C, cy: C, r: R - 4, class: 'dial-ring'}), marks.flat(), hand, svg('circle', {cx: C, cy: C, r: 3, class: 'dial-pin'}));
+  const root = svg('svg', {viewBox: '0 0 120 120', class: 'dial', role: 'img', 'aria-label': t('The engine turning through one 720 degree cycle, with each firing marked')}, svg('circle', {cx: C, cy: C, r: R - 4, class: 'dial-ring'}), marks.flat(), hand, svg('circle', {cx: C, cy: C, r: 3, class: 'dial-pin'}));
   root.set = (deg) => hand.setAttribute('transform', `rotate(${(deg / 2).toFixed(1)} ${C} ${C})`);
   return root;
 }
@@ -56,7 +60,7 @@ function travelGauge() {
   const track = (x) => [svg('line', {x1: x, y1: 8, x2: x, y2: 72, class: 'gauge-axle'}), svg('line', {x1: x - 9, y1: 40, x2: x + 9, y2: 40, class: 'gauge-tick'})];
   const mark = (x) => svg('rect', {x: x - 12, y: 37.5, width: 24, height: 5, class: 'gauge-mark'});
   const f = mark(36), r = mark(84);
-  const root = svg('svg', {viewBox: '0 0 120 80', class: 'gauge', role: 'img', 'aria-label': t('Wheel travel, front and rear')}, track(36), track(84), f, r);
+  const root = svg('svg', {viewBox: '0 0 120 80', class: 'gauge', role: 'img', 'aria-label': t('Wheel movement, front and rear')}, track(36), track(84), f, r);
   const y = (mm) => -(mm / Math.max(TRAVEL_MM.bump, TRAVEL_MM.rebound)) * 30;
   root.set = (fm, rm) => {
     f.setAttribute('transform', `translate(0 ${y(fm).toFixed(1)})`);
@@ -88,8 +92,8 @@ export function mount(el, app) {
 
   function buildPanel() {
     // ---- the dash: stays on top while the controls scroll ---------------------------------------
-    chainsBtn = h('button.btn', {type: 'button', 'aria-pressed': 'false', onclick: () => setChains(chainsBtn.getAttribute('aria-pressed') !== 'true')}, t('Timing chains only'));
-    sectionBtn = h('button.btn', {type: 'button', 'aria-pressed': 'false', onclick: () => setSection(section == null ? 'cyl1' : null)}, t('Section view'));
+    chainsBtn = h('button.btn', {type: 'button', 'aria-pressed': 'false', onclick: () => setChains(chainsBtn.getAttribute('aria-pressed') !== 'true')}, t('Just the timing chains'));
+    sectionBtn = h('button.btn', {type: 'button', 'aria-pressed': 'false', onclick: () => setSection(section == null ? 'cyl1' : null)}, t('Cut the engine open'));
     stateWord = h('span.dash-state', t('Engine off'));
     startBtn = h('button.btn.btn-start', {type: 'button', onclick: () => (sim().running ? stop() : start())}, t('Start'));
     rpmNum = h('span.dash-rpm', '0');
@@ -104,7 +108,7 @@ export function mount(el, app) {
     redBadge = h('span.dash-badge');
     fireStrip = h('ol.fire', {'aria-label': t('Firing order')});
 
-    dash = h('div.dash', {dataset: {peek: ''}}, [
+    dash = h('div.dash', [
       h('div.dash-top', [
         h('div.dash-rev', [rpmNum, h('span.dash-unit', t('rpm')), stateWord]),
         startBtn,
@@ -114,10 +118,7 @@ export function mount(el, app) {
       h('div.dash-row', [
         h('div.dash-cell', [h('span.dash-label', t('Road speed')), h('span.dash-line', [mphNum, h('span.dash-unit', 'mph')]), kphNum]),
         h('div.dash-cell', [h('span.dash-label', t('Gear')), gearNum, gearSub]),
-        h('div.dash-cell', [h('span.dash-label', t('Piston speed, mean')), h('span.dash-line', [pistonNum, h('span.dash-unit', 'm/s')])]),
       ]),
-      fireStrip,
-      h('div.run-btns.dash-watch', [chainsBtn, sectionBtn]),
     ]);
 
     // ---- controls -------------------------------------------------------------------------------
@@ -126,7 +127,7 @@ export function mount(el, app) {
       if (!sim().running) start();
       write({rpm: v});
     }});
-    throttle = range({label: t('Throttle'), name: 'throttle', min: 0, max: 1, step: 0.01, value: 0, format: (v) => pct(Math.round(v * 100)), onInput: (v) => {
+    throttle = range({label: t('Accelerator'), name: 'throttle', min: 0, max: 1, step: 0.01, value: 0, format: (v) => pct(Math.round(v * 100)), onInput: (v) => {
       if (!sim().running) start();
       store.merge('sim', {throttle: v});
       stage.invalidate();
@@ -144,7 +145,7 @@ export function mount(el, app) {
     steer = range({label: t('Steering'), name: 'steer', min: -1, max: 1, step: 0.01, value: 0, format: (v) => (Math.abs(v) < 0.005 ? t('Straight') : t(v < 0 ? '{n} of lock left' : '{n} of lock right', {n: pct(Math.round(Math.abs(v) * 100))})), onInput: (v) => merge({steer: v})});
     bumpF = range({label: t('Front wheels'), name: 'bumpF', min: -1, max: 1, step: 0.01, value: 0, format: (v) => mmText(v), onInput: (v) => merge({bumpF: v})});
     bumpR = range({label: t('Rear wheels'), name: 'bumpR', min: -1, max: 1, step: 0.01, value: 0, format: (v) => mmText(v), onInput: (v) => merge({bumpR: v})});
-    roof = range({label: t('Hood'), name: 'roof', min: 0, max: 1, step: 0.01, value: 0, format: (v) => (v <= 0 ? t('Up') : v >= 1 ? t('Stowed') : pct(Math.round(v * 100))), onInput: (v) => { roofDir = 0; merge({roof: v}); }});
+    roof = range({label: t('Hood'), name: 'roof', min: 0, max: 1, step: 0.01, value: 0, format: (v) => (v <= 0 ? t('Up') : v >= 1 ? t('Down') : pct(Math.round(v * 100))), onInput: (v) => { roofDir = 0; merge({roof: v}); }});
     roofBtn = h('button.btn', {type: 'button', onclick: () => { roofDir = sim().roof > 0.5 ? -1 : 1; roofBtn.textContent = roofDir < 0 ? t('Raising') : t('Lowering'); stage.invalidate(); }}, t('Lower the hood'));
     roofRow = h('div.ctl-roof', [roof, roofBtn]);
     coupeNote = h('p.empty', t('This car is a coupe. Pick a convertible to run the hood.'));
@@ -152,13 +153,13 @@ export function mount(el, app) {
     steerCentre = h('button.link', {type: 'button', onclick: () => { steer.set(0); merge({steer: 0}); }}, t('Centre'));
 
     // ---- watching things ------------------------------------------------------------------------
-    sectionRows = seg({label: t('Where to cut'), value: 'cyl1', className: 'seg-rows', options: [{value: 'bank', label: t('Bank'), aria: t('Along the A bank')}, ...[1, 2, 3, 4].map((r) => ({value: `cyl${r}`, label: t('Row {n}', {n: r}), aria: t('Across cylinder row {n}', {n: r})}))], onChange: (r) => setSection(r)});
+    sectionRows = seg({label: t('Where to cut'), value: 'cyl1', className: 'seg-rows', options: [{value: 'bank', label: t('Along'), aria: t('Along one side of the engine')}, ...[1, 2, 3, 4].map((r) => ({value: `cyl${r}`, label: t('Slice {n}', {n: r}), aria: t('Across cylinder pair {n}', {n: r})}))], onChange: (r) => setSection(r)});
     sectionRows.hidden = true;
-    timeSeg = seg({label: t('Time'), value: 1, options: [{value: 1, label: t('Full speed')}, {value: 0.25, label: t('A quarter')}, {value: 0.05, label: t('A twentieth')}], onChange: (v) => merge({timeScale: v})});
+    timeSeg = seg({label: t('Speed'), value: 1, options: [{value: 1, label: t('Full speed')}, {value: 0.25, label: t('A quarter')}, {value: 0.05, label: t('A twentieth')}, {value: HOW_SPEED, label: t('Slowest')}], onChange: (v) => merge({timeScale: v})});
 
     // ---- sound ----------------------------------------------------------------------------------
     soundBtn = toggle({label: t('Engine sound'), on: false, onChange: (on) => setSound(on)});
-    soundNote = h('p.hint', t('Synthesised from the firing order. Each bank fires unevenly into its own exhaust, which is the V8 burble.'));
+    soundNote = h('p.hint', t('Made from the order the cylinders fire in. Each side of the engine fires unevenly into its own exhaust, which is the V8 burble.'));
 
     // ---- instruments below the controls ---------------------------------------------------------
     crankNum = h('span.inst-val', '0');
@@ -169,24 +170,26 @@ export function mount(el, app) {
     travelG = travelGauge();
     travelF = h('span.inst-val', '0');
     travelR = h('span.inst-val', '0');
-    instBlock = block(t('Instruments'));
+    instBlock = block(t('Dials'));
     // The suspension and steering solve, row by row: the numbers that pose the parts. The rows exist only while open.
     solvedRows = h('dl.facts');
     solved = h('details.run-solved', {ontoggle: () => { if (solved.open) readChassis(app.sim); }}, [
-      h('summary', [`${t('Geometry solve')} `, estimate(t('Solved from hard points estimated off the reference drawings. It shows how the linkage moves. These are not Jaguar settings.'))]),
+      h('summary', [`${t('How the suspension moves')} `, estimate(t('Worked out from points estimated off drawings. It shows how the arms move. These are not Jaguar settings.'))]),
       solvedRows,
     ]);
-    hud.setAttribute('aria-label', t('Instruments'));
+    hud.setAttribute('aria-label', t('Dials'));
 
     el.replaceChildren(
       dash,
-      h('div.run-watch', [sectionRows, h('span.rng-label', t('Time')), timeSeg]),
-      block(t('Drive'), [gearSeg, rpm, throttle, h('p.hint', t('Throttle is a pedal: hold it to rev, let go and it returns.')), speed]),
-      block(t('Chassis'), [steer, steerCentre, bumpF, bumpR, solved]),
-      block(t('Roof and panels'), [roofRow, coupeNote, h('div.run-btns', opens)]),
+      h('div.run-watch', {dataset: {peek: ''}}, [h('div.run-btns', [sectionBtn, chainsBtn]), sectionRows, h('span.rng-label', t('Speed')), timeSeg, soundBtn]),
+      block(t('Drive'), [gearSeg, rpm, throttle, h('p.hint', t('The accelerator works like the pedal: hold it to rev, let go and it returns.')), speed]),
+      block(t('Steering and suspension'), [steer, steerCentre, bumpF, bumpR, solved]),
+      block(t('Roof, doors and bonnet'), [roofRow, coupeNote, h('div.run-btns', opens)]),
       instBlock,
-      block(t('Sound'), soundBtn, soundNote),
-      block(t('Figures behind the gauges'), facts),
+      block(t('The numbers'), [
+        h('dl.facts', h('div.fact', [h('dt', t('Average piston speed')), h('dd', h('span.dash-line', [pistonNum, h('span.dash-unit', 'm/s')]))])),
+        h('h4.lab.run-fire', t('Firing order')), fireStrip, soundNote, facts,
+      ]),
     );
   }
 
@@ -201,9 +204,9 @@ export function mount(el, app) {
   window.addEventListener('pointercancel', release);
 
   const mmText = (v) => {
-    if (Math.abs(v) < 0.005) return t('Ride height');
+    if (Math.abs(v) < 0.005) return t('Normal height');
     const mm = (v >= 0 ? v * TRAVEL_MM.bump : -v * TRAVEL_MM.rebound);
-    return t(v > 0 ? '{n} mm bump' : '{n} mm droop', {n: mm.toFixed(0)});
+    return t(v > 0 ? '{n} mm up' : '{n} mm down', {n: mm.toFixed(0)});
   };
 
   function merge(patch) { store.merge('sim', patch); stage.invalidate(); }
@@ -272,12 +275,38 @@ export function mount(el, app) {
   // On the picture while the chains run: how slow this is, and what to look at.
   const chainTag = h('div.chain-tag', {hidden: true});
   document.getElementById('ui').append(chainTag);
+  // The same strip for the cutaway: the four strokes, the one happening now, and what it does.
+  let howBits = null;
+  function labelHow(on) {
+    chainTag.hidden = !on;
+    chainTag.classList.toggle('how', on);
+    document.documentElement.classList.toggle('run-how', on);
+    howBits = null;
+    if (!on) { app.pick.setLabels([]); app.pick.setAutoLabels(true); app.ui.sheetChanged?.(); return; }
+    const pills = HOW.map(([key, word]) => h('li', {dataset: {stroke: key}}, t(word)));
+    const line = h('p.how-line');
+    howBits = {pills, line, stroke: null};
+    chainTag.replaceChildren(h('ol.how-steps', pills), line);
+    app.ui.sheetChanged?.();
+    app.pick.setAutoLabels(false);
+    app.pick.setLabels(section === 'bank' ? [] : sectionLabels(+section.slice(3), {piston: t('Piston'), valve: t('Valve'), plug: t('Spark plug'), crank: t('Crankshaft')}));
+    if (app.sim) paintHow(app.sim);
+  }
+  function paintHow(f) {
+    const row = section === 'bank' ? 1 : +section.slice(3);
+    const stroke = f.cyl.find((c) => c.name === `${row}A`)?.stroke;
+    if (!stroke || stroke === howBits.stroke) return;
+    howBits.stroke = stroke;
+    for (const li of howBits.pills) li.classList.toggle('on', li.dataset.stroke === stroke);
+    howBits.line.textContent = t(HOW.find(([k]) => k === stroke)[2]);
+  }
   const chainWeak = () => forVariant(data.weakspots.items, get().variant).find((w) => /tensioner/i.test(en(w, 'title')));
   function labelChains(on) {
     chainTag.hidden = !on;
+    chainTag.classList.remove('how');
     if (!on) { app.pick.setLabels([]); app.pick.setAutoLabels(true); app.ui.sheetChanged?.(); return; }
     const weak = chainWeak();
-    chainTag.replaceChildren(...[h('span', t('Slowed 20x')), weak && h('button.link', {type: 'button', onclick: () => app.ui.open('weakspot', weak.id)}, t('This tensioner is the known weak point'))].filter(Boolean));
+    chainTag.replaceChildren(...[h('span', t('20 times slower')), weak && h('button.link', {type: 'button', onclick: () => app.ui.open('weakspot', weak.id)}, t('This tensioner is the known weak point'))].filter(Boolean));
     app.ui.sheetChanged?.();
     const has = (id) => registry.has(id);
     app.pick.setAutoLabels(false);
@@ -288,8 +317,10 @@ export function mount(el, app) {
     ].filter(Boolean));
   }
   app.ui.showChains = (on) => setChains(on);
+  app.ui.showHow = (on) => setSection(on ? 'cyl1' : null);
 
   function setChains(on) {
+    if (on && section != null) setSection(null);
     chainsBtn.setAttribute('aria-pressed', on);
     clearTheBench(on);
     labelChains(on);
@@ -299,8 +330,6 @@ export function mount(el, app) {
       merge({timeScale: 1});
       return;
     }
-    if (section != null) setSection(null);
-    clearTheBench(true);
     const group = registry.group('timing');
     const ids = group.length ? group : [...new Set(CHAIN_PARTS.map((id) => registry.resolve(id).id).filter(Boolean))];
     if (!sim().running) start();
@@ -311,6 +340,7 @@ export function mount(el, app) {
 
   // The cut itself is the engine's: engine-common.js discards past a plane and hatches the cut faces. sim.section picks it.
   function setSection(mode) {
+    const was = section;
     section = mode;
     sectionBtn.setAttribute('aria-pressed', mode != null);
     sectionRows.hidden = mode == null;
@@ -319,8 +349,17 @@ export function mount(el, app) {
       if (chainsBtn.getAttribute('aria-pressed') === 'true') setChains(false);
     }
     clearTheBench(mode != null);
+    // Silent at full speed it is only a blur: it opens slowed down, with the strokes in words. A slider set by hand stays set after that.
+    if (mode != null && was == null) {
+      if (!sim().running) start();
+      timeSeg.set(HOW_SPEED);
+      merge({timeScale: HOW_SPEED});
+    }
+    if (mode == null && was != null) { timeSeg.set(1); merge({timeScale: 1}); }
     merge({section: mode});
     store.set({view: mode == null ? 'side' : mode === 'bank' ? 'section-bank' : 'section-cylinder'});
+    labelHow(mode != null);
+    placeInstruments();
   }
 
   function ensureSound() {
@@ -362,7 +401,7 @@ export function mount(el, app) {
   function placeInstruments() {
     const wide = document.documentElement.classList.contains('layout-rail') && window.innerHeight > SHORT_SCREEN; // a phone on its side has no empty studio: the gauges stay in the rail, off the car
     (wide ? hud : instBlock).append(instruments);
-    hud.hidden = !wide || !active;
+    hud.hidden = !wide || !active || section != null; // the strokes' words sit there
     instBlock.hidden = wide;
   }
   window.addEventListener('resize', () => { if (active) placeInstruments(); });
@@ -371,9 +410,9 @@ export function mount(el, app) {
     const sp = spec();
     dial = crankDial(sp.firingOrder);
     instruments.replaceChildren(
-      h('div.inst', [h('h4.inst-title', t('Crank angle')), dial, h('p.inst-read', [crankNum, h('span.dash-unit', t('deg'))]), camNum]),
-      h('div.inst', [h('h4.inst-title', [`${t('Wheel steer')} `, estimate(t('Lock is the estimated constant STEER_MAX_DEG, {n} degrees, on the inner wheel. The outer wheel follows from the geometry solve. No figure in the data. It sets the motion only.', {n: STEER_MAX_DEG}))]), steerG, h('p.inst-pair', [h('span', [`${t('L|left')} `, steerL]), h('span', [`${t('R|right')} `, steerR])]), h('span.inst-sub', t('deg at the road wheel'))]),
-      h('div.inst', [h('h4.inst-title', [`${t('Wheel travel')} `, estimate(t('Travel is the estimated constant TRAVEL_MM: {bump} mm bump and {droop} mm droop. No figure in the data. It sets the motion only.', {bump: TRAVEL_MM.bump, droop: TRAVEL_MM.rebound}))]), travelG, h('p.inst-pair', [h('span', [`${t('F|front')} `, travelF]), h('span', [`${t('R|rear')} `, travelR])]), h('span.inst-sub', t('mm from ride height'))]),
+      h('div.inst', [h('h4.inst-title', t('Engine turn')), dial, h('p.inst-read', [crankNum, h('span.dash-unit', t('deg'))]), camNum]),
+      h('div.inst', [h('h4.inst-title', [`${t('Steering angle')} `, estimate(t('Full lock is an estimate, {n} degrees, on the inner wheel. The outer wheel follows from the way the steering arms move. We have no Jaguar figure. It sets the motion only.', {n: STEER_MAX_DEG}))]), steerG, h('p.inst-pair', [h('span', [`${t('L|left')} `, steerL]), h('span', [`${t('R|right')} `, steerR])]), h('span.inst-sub', t('deg at the wheel'))]),
+      h('div.inst', [h('h4.inst-title', [`${t('Wheel movement')} `, estimate(t('Movement is an estimate: {bump} mm up and {droop} mm down. We have no Jaguar figure. It sets the motion only.', {bump: TRAVEL_MM.bump, droop: TRAVEL_MM.rebound}))]), travelG, h('p.inst-pair', [h('span', [`${t('F|front')} `, travelF]), h('span', [`${t('R|rear')} `, travelR])]), h('span.inst-sub', t('mm from normal height'))]),
     );
     const cc = Math.round(displacementCc(sp.boreMm, sp.strokeMm));
     facts.replaceChildren(h('dl.facts', [
@@ -411,6 +450,7 @@ export function mount(el, app) {
     sectionRows.hidden = section == null;
     if (section != null) sectionRows.set(section);
     if (chains) labelChains(true);
+    if (section != null) labelHow(true);
     if (active) { lastRpm = lastMph = lastCrank = -1; syncSpec(); readouts(app.sim); }
   }
 
@@ -511,6 +551,7 @@ export function mount(el, app) {
     }
     readouts(app.sim);
     readChassis(app.sim);
+    if (howBits && app.sim) paintHow(app.sim);
     if (soundOn && engineSound) engineSound.update(app.sim ?? {...s}, s.timeScale);
     return more;
   });

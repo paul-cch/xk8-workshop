@@ -11,8 +11,8 @@ import {convertTorqueText, data, formatTorque, initData, translateData} from '..
 import {useLanguage} from '../src/i18n.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const url = (hash) => `file://${path.join(ROOT, 'dist/index.html')}${hash}`;
-const GROUPS = ['ui', 'jobs', 'parts', 'dtc', 'reference', 'advice'];
+const url = (hash) => `file://${path.join(process.env.DIST_DIR ? path.resolve(process.env.DIST_DIR) : path.join(ROOT, 'dist'), 'index.html')}${hash}`;
+const GROUPS = ['ui', 'jobs', 'parts', 'dtc', 'reference', 'advice', 'terms'];
 const dict = Object.assign({}, ...GROUPS.map((g) => JSON.parse(fs.readFileSync(path.join(ROOT, `i18n/fr/${g}.json`)))));
 let fails = 0;
 const check = (name, ok, detail = '') => { if (!ok) fails++; console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail !== '' ? `  [${detail}]` : ''}`); };

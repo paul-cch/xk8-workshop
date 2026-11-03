@@ -50,7 +50,7 @@ await shot('explore-part');
 await p.evaluate(() => window.__xk8.store.set({selected: null, view: 'hero'}));
 
 // A job, from the list.
-await mode('Jobs');
+await mode('Fix it');
 check('jobs: mode', (await S()).mode === 'jobs');
 await shot('jobs');
 await p.evaluate(() => window.__xk8.store.set({job: {id: 'oil-filter', step: null}}));
@@ -63,13 +63,13 @@ check('job: step title shows', await p.locator('.ws-steptitle').first().isVisibl
 await shot('job-step');
 await p.evaluate(() => window.__xk8.store.set({job: null}));
 
-await mode('Diagnose');
+await mode('What');
 check('diagnose: mode', (await S()).mode === 'diagnose');
 await shot('diagnose');
-await mode('Plan');
+await mode('Upkeep');
 check('plan: mode', (await S()).mode === 'plan');
 await shot('plan');
-await mode('Run');
+await mode('Run it');
 check('run: mode', (await S()).mode === 'run');
 await p.evaluate(() => window.__xk8.store.merge('sim', {running: true, rpm: 1200, gear: 1, throttle: 0.2}));
 await p.waitForTimeout(1500);

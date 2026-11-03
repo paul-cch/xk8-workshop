@@ -2,10 +2,12 @@
 // chosen car, and a missing value is said out loud. Mileage and "have it" ticks live in this file's own localStorage key.
 import {appliesStatus, convertTorqueText, data, decodeVin, en, forVariant, formatTorque, partName} from '../data.js';
 import {N, both, collate, colon, dec, fmtDate, fold, num, plural, t} from '../i18n.js';
-import {badge, copyText, h, toast, torqueWarning} from './widgets.js';
+import {badge, copyText, h, toast, torquePlain, torqueWarning} from './widgets.js';
+import {gloss} from './terms.js';
+import {foldedTutorials} from './tutorials.js';
 import {addParts, appliesText, callout, carLabel, fluidBlock, gbp, hoursText, icon, jobKit, listRefs, modeRoot, money, nav, onList, openJob, openSection, paintView, priceSpan, printNow, section, setPrintable, showButton, sysName, toggleList, toolRow, torqueBlock, vinTag} from './jobs.js';
 
-const TABS = [['service', N('Service')], ['inspect', N('Inspect')], ['upgrades', N('Upgrades')], ['list', N('Shopping')], ['tools', N('Tools')], ['fluids', N('Fluids')], ['torques', N('Torques')]];
+const TABS = [['service', N('Service')], ['inspect', N('Check a car')], ['upgrades', N('Upgrades')], ['list', N('Shopping list')], ['tools', N('Tools')], ['fluids', N('Fluids')], ['torques', N('Tightening figures')]];
 
 const KEY = 'xk8-workshop-plan';
 const blank = () => ({tab: 'service', miles: null, lastDate: '', lastMiles: null, done: {}, have: {}, candidates: [], candidate: null});
@@ -23,7 +25,7 @@ const saved = (() => {
 })();
 const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch { /* private mode: lasts the session */ } };
 
-const ui = {upBudget: 0, upCat: '', upCheap: false, tqQ: '', tqSys: '', tqAll: false, flAll: false, toolsAll: false, inspectShow: 'all'};
+const ui = {candOpen: false, upBudget: 0, upCat: '', upCheap: false, tqQ: '', tqSys: '', tqAll: false, flAll: false, toolsAll: false, inspectShow: 'all'};
 
 const miles = (n) => plural(Math.round(n), '{n} miles|one', '{n} miles', {n: num(Math.round(n))});
 const isoToday = () => new Date().toISOString().slice(0, 10);
@@ -118,9 +120,9 @@ function serviceOutput(app, redraw) {
   const v = s.variant;
   const M = saved.miles, D = saved.lastDate || null, L = saved.lastMiles;
   const {sheets, timed, aged, notes} = serviceSets(v);
-  const ref = section('allsheets', t('All service sheets'), sheets.length, sheets.map((r) => h('details.ws-more', [h('summary', r.title), sheetTasks(app, r), h('p', badge(r, {title: r.title}))])));
+  const ref = section('allsheets', t('All service lists'), sheets.length, sheets.map((r) => h('details.ws-more', [h('summary', r.title), sheetTasks(app, r), h('p', badge(r, {title: r.title}))])));
   const ageBlock = section('age', t('By age'), aged.length,
-    h('p.ws-small.ws-mute', t('No factory interval: this is owner and specialist advice. Your car is about {n} years old.', {n: new Date().getFullYear() - v.my})),
+    h('p.ws-small.ws-mute', t('Jaguar gives no interval for these: this is owner and specialist advice. Your car is about {n} years old.', {n: new Date().getFullYear() - v.my})),
     h('ul.ws-tasks', aged.map((r) => h('li', [h('div.ws-row-head', [h('strong', r.title), badge(r, {title: r.title})]), r.tasks.map((x) => h('p.ws-small', x.text)), h('div.ws-chips', [jobLinks(app, r.tasks.flatMap((x) => x.jobs ?? [])), r.tasks.some((x) => /\btow it\b/.test(en(x, 'text'))) && h('button.ws-chip', {type: 'button', onclick: () => app.ui.open('fact', 'fact.towing')}, t('How to tow it'))])]))));
   const noteBlock = notes.length > 0 && section('svcnotes', t('Notes from the schedule'), notes.length, h('ul.ws-tasks', notes.map((r) => h('li', [h('div.ws-row-head', [h('strong', r.title), badge(r, {title: r.title})]), r.tasks.map((x) => h('p.ws-small', x.text))]))));
   if (M == null) return [h('div.ws-empty', h('p', t('Enter your mileage to see what is due.'))), ref, ageBlock, noteBlock];
@@ -142,8 +144,8 @@ function serviceOutput(app, redraw) {
   return [
     problems.map((p) => callout('warn', t('Check your entry'), h('p', p))),
     h(`div.ws-band.ws-band--${band}`, [h('span.ws-band-word', t(STATUS_WORD[n.status])), h('div', [h('strong', t('{miles} mile service', {miles: num(Math.round(n.target))})), h('p', lines.join('. '))])]),
-    n.missed > 0 && callout('warn', plural(n.missed, '{n} service missed since the last one', '{n} services missed since the last one'), h('p', t('This list is only the latest. Check the sheets below for what the missed ones covered.'))),
-    n.assumed && callout('tip', t('Past the last sheet'), h('p', t('The sheets read stop at {miles}, so this is the {sheet}, on the assumption the pattern repeats. No Jaguar document read here confirms that.', {miles: miles(sheets[sheets.length - 1].intervalMiles), sheet: n.sheet.title}))),
+    n.missed > 0 && callout('warn', plural(n.missed, '{n} service missed since the last one', '{n} services missed since the last one'), h('p', t('This list is only the latest. Check the lists below for what the missed ones covered.'))),
+    n.assumed && callout('tip', t('Past the last list'), h('p', t('The lists we read stop at {miles}, so this is the {sheet}, assuming the pattern repeats. No Jaguar document we read confirms that.', {miles: miles(sheets[sheets.length - 1].intervalMiles), sheet: n.sheet.title}))),
     h('div.ws-sheet', [h('div.ws-row-head', [h('h3', n.sheet.title), badge(n.sheet, {title: n.sheet.title})]), sheetTasks(app, n.sheet),
       (jobs.length > 0 || loose.length > 0) && h('button.ws-btn', {type: 'button', onclick: () => { for (const id of jobs) if (!onList(app.store.get(), 'job', id)) toggleList(app.store, 'job', id); addParts(app.store, loose); toast(t('{what} added to the shopping list', {what: addWords(jobs, loose)})); }}, [icon('cart'), t('Add {what} to the shopping list', {what: addWords(jobs, loose)})]),
       h('button.ws-btn', {type: 'button', onclick: () => { saved.lastMiles = M; saved.lastDate = isoToday(); persist(); renderPlan(app); toast(t('Service recorded for today')); }}, [icon('check'), t('I did this service today')])]),
@@ -153,7 +155,7 @@ function serviceOutput(app, redraw) {
       return soon.length > 0 && h('div.ws-sheet', [h('h3', t('Do at the same time')), h('p.ws-small.ws-mute', t('Due within {miles} of this service. Doing them now saves a second visit.', {miles: miles(ALSO_MILES)})), h('ul.ws-tasks', soon.map(({r, st}) => h('li', [h('span', `${r.title}, ${st.when}`), h('div.ws-chips', jobLinks(app, r.tasks.flatMap((x) => x.jobs ?? [])))]))),
         also.length > 0 && h('button.ws-btn', {type: 'button', onclick: () => { for (const id of also) if (!onList(app.store.get(), 'job', id)) toggleList(app.store, 'job', id); toast(t('{what} added to the shopping list', {what: addWords(also, [])})); }}, [icon('cart'), t('Add {what} to the shopping list', {what: addWords(also, [])})])]);
     })(),
-    section('timed', t('Other intervals'), rows.length, h('ul.ws-svc', rows.map(({r}) => timedRow(app, r, M, D, L, redraw, v)))),
+    section('timed', t('Other regular jobs'), rows.length, h('ul.ws-svc', rows.map(({r}) => timedRow(app, r, M, D, L, redraw, v)))),
     ageBlock, noteBlock, ref,
   ];
 }
@@ -222,14 +224,15 @@ function checkCard(app, i, s) {
   return h(`article.ws-check${state ? `.is-${state}` : ''}`, {'data-rec': i.id}, [
     h('header', [h('h4', i.check), i.decider !== 'minor' && h(`span.ws-tag${i.decider === 'walk' ? '.ws-tag--warn' : ''}`, t(DECIDER[i.decider].word)), badge(i, {title: i.check})]),
     vinTag(i, s.variant),
-    h('p', i.how),
-    h('p.ws-small', [h('strong', t('Bad means: ')), i.bad]),
-    state === 'bad' && h('p.ws-small', [h('strong', t('Cost: ')), i.cost ? `${gbp(i.cost.gbp)}. ${i.cost.note ?? ''}` : h('span.ws-none', t('No sourced price'))]),
+    h('p', gloss(i.how)),
+    h('p.ws-small', [h('strong', t('Bad means: ')), gloss(i.bad)]),
+    state === 'bad' && h('p.ws-small', [h('strong', t('Cost: ')), i.cost ? `${gbp(i.cost.gbp)}. ${i.cost.note ?? ''}` : h('span.ws-none', t('No price found'))]),
     h('div.ws-okbad', [
       h('button.ws-ok', {type: 'button', 'aria-pressed': String(state === 'ok'), 'data-fk': `ok-${i.id}`, onclick: () => setCheck(app, i.id, 'ok')}, [icon('check'), t('OK')]),
       h('button.ws-bad', {type: 'button', 'aria-pressed': String(state === 'bad'), 'data-fk': `bad-${i.id}`, onclick: () => setCheck(app, i.id, 'bad')}, [icon('x'), t('Bad')]),
     ]),
     weak && h('div.ws-chips', [h('button.ws-chip', {type: 'button', onclick: () => { nav.diagnose = {page: 'weak', id: weak.id}; app.store.set({mode: 'diagnose'}); }}, t('Weak spot: {what}', {what: weak.title})), showButton(app, weak.parts ?? [])]),
+    weak && foldedTutorials(app, app.store.get(), 'weakspots', weak.id),
   ]);
 }
 
@@ -237,36 +240,36 @@ function reportText(s0) {
   const s = inspectScope(s0);
   const st = inspectStats(s);
   const c = s.candidate;
-  const row = (i) => `- ${colon(i.area, i.check)}${s.checks[i.id] === 'bad' ? `. ${t('Cost: ')}${i.cost ? gbp(i.cost.gbp) : t('no sourced price')}` : ''}`;
+  const row = (i) => `- ${colon(i.area, i.check)}${s.checks[i.id] === 'bad' ? `. ${t('Cost: ')}${i.cost ? gbp(i.cost.gbp) : t('no price found')}` : ''}`;
   return [
     t('Inspection of a {car}, {date}', {car: carLabel(s.variant), date: fmtDate(new Date())}),
     c?.name || null, c?.vin ? `VIN ${c.vin}` : null, c?.price != null ? t('Asking {price}', {price: money(c.price)}) : null, c?.notes || null,
     saved.miles != null ? miles(saved.miles) : null,
     t('{ok} OK, {bad} bad, {none} not checked of {total}', {ok: st.ok.length, bad: st.bad.length, none: st.list.length - st.ok.length - st.bad.length, total: st.list.length}),
-    `${t('Sourced cost of faults: ')}${st.bad.length ? totalText(st) : t('none')}`,
+    `${t('Known cost of faults: ')}${st.bad.length ? totalText(st) : t('none')}`,
     st.bad.length ? `\n${t('Bad')}\n${st.bad.map(row).join('\n')}` : '',
     st.ok.length ? `\n${t('OK')}\n${st.ok.map(row).join('\n')}` : '',
   ].filter((x) => x != null && x !== '').join('\n');
 }
 
 const totalText = (st) => {
-  if (st.high === 0) return plural(st.unpriced, 'No sourced price for this fault', 'No sourced price for these {n} faults');
+  if (st.high === 0) return plural(st.unpriced, 'No price found for this fault', 'No price found for these {n} faults');
   const total = st.high === st.low ? money(st.low) : priceSpan(money(st.low), money(st.high));
-  return st.unpriced ? t('{total}, plus {n} with no sourced price', {total, n: st.unpriced}) : total;
+  return st.unpriced ? t('{total}, plus {n} with no price found', {total, n: st.unpriced}) : total;
 };
 
 function inspectReport(s0) {
   const s = inspectScope(s0);
   const st = inspectStats(s);
   const none = st.list.filter((i) => !s.checks[i.id]);
-  const row = (i) => h('tr', [h('td.ws-card-area', i.area), h('td', [h('strong', i.check), s.checks[i.id] === 'bad' && h('br'), s.checks[i.id] === 'bad' && i.bad]), h('td.ws-card-end', s.checks[i.id] === 'bad' ? (i.cost ? gbp(i.cost.gbp) : t('No sourced price')) : s.checks[i.id] === 'ok' ? t('OK') : '')]);
+  const row = (i) => h('tr', [h('td.ws-card-area', i.area), h('td', [h('strong', i.check), s.checks[i.id] === 'bad' && h('br'), s.checks[i.id] === 'bad' && i.bad]), h('td.ws-card-end', s.checks[i.id] === 'bad' ? (i.cost ? gbp(i.cost.gbp) : t('No price found')) : s.checks[i.id] === 'ok' ? t('OK') : '')]);
   return h('article.ws-card', [
     h('header.ws-card-head', h('div', [h('p.ws-card-kicker', t('XK8 Workshop inspection report')), h('h1', carLabel(s.variant)), h('p', [fmtDate(new Date()), saved.miles != null ? `, ${miles(saved.miles)}` : ''])])),
-    h('section', [h('h2', t('Summary')), h('p', t('{ok} OK, {bad} bad, {none} not checked, of {total} checks.', {ok: st.ok.length, bad: st.bad.length, none: none.length, total: st.list.length})), h('p', [h('strong', t('Sourced cost of faults: ')), st.bad.length ? totalText(st) : t('none')])]),
+    h('section', [h('h2', t('Summary')), h('p', t('{ok} OK, {bad} bad, {none} not checked, of {total} checks.', {ok: st.ok.length, bad: st.bad.length, none: none.length, total: st.list.length})), h('p', [h('strong', t('Known cost of faults: ')), st.bad.length ? totalText(st) : t('none')])]),
     st.bad.length > 0 && h('section', [h('h2', t('Faults found')), h('table', h('tbody', st.bad.map(row)))]),
     st.ok.length > 0 && h('section', [h('h2', t('Passed')), h('table', h('tbody', st.ok.map(row)))]),
     none.length > 0 && h('section', [h('h2', t('Not checked')), h('table', h('tbody', none.map(row)))]),
-    h('footer.ws-card-foot', t('Costs are sourced prices from the data files, often parts only and not adjusted for age. They are a guide, not a quote.')),
+    h('footer.ws-card-foot', t('Costs are the prices we found, often for parts only and not adjusted for age. They are a guide, not a quote.')),
   ]);
 }
 
@@ -274,7 +277,7 @@ function inspectReport(s0) {
 function candidateBar(app, s) {
   const c = s.candidate;
   const choose = (id) => {
-    if (id === 'new') { const n = {id: `c${Date.now()}`, name: t('Candidate {n}', {n: saved.candidates.length + 1}), vin: '', price: null, notes: '', checks: {}, variant: null}; saved.candidates.push(n); saved.candidate = n.id; } else saved.candidate = id || null;
+    if (id === 'new') { const n = {id: `c${Date.now()}`, name: t('Car {n}', {n: saved.candidates.length + 1}), vin: '', price: null, notes: '', checks: {}, variant: null}; saved.candidates.push(n); saved.candidate = n.id; } else saved.candidate = id || null;
     persist(); renderPlan(app);
   };
   const field = (label, key, type = 'text') => {
@@ -296,9 +299,8 @@ function candidateBar(app, s) {
     h('div.ws-filters', [
       pickFrom(t('Car being checked'), saved.candidate ?? '', [['', t('My car')], ...saved.candidates.map((x) => [x.id, x.name || x.vin || x.id]), ['new', t('Add a car to view')]], choose),
     ]),
-    c && h('div.ws-form', [field(t('Name or reg'), 'name'), field(t('VIN or serial'), 'vin'), field(t('Asking price (£)'), 'price', 'number'), h('label.ws-field', [h('span', t('Notes')), notes])]),
-    c && h('p.ws-small.ws-mute', c.variant ? t('Checking a {car}. Your own car stays as it is.', {car: carLabel(c.variant)}) : t('Using your car\'s checklist until the VIN reads. Your own car stays as it is.')),
-    c && h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: () => { if (confirm(t('Delete {what} and its marks?', {what: c.name || t('this car')}))) { saved.candidates = saved.candidates.filter((x) => x !== c); saved.candidate = null; persist(); renderPlan(app); } }}, t('Delete this car')),
+    c && h('details.ws-more', {open: ui.candOpen, ontoggle: (e) => { ui.candOpen = e.target.open; }}, [h('summary', t('Its name, VIN and price (optional)')), h('div.ws-form', [field(t('Name or reg'), 'name'), field(t('VIN or serial'), 'vin'), field(t('Asking price (£)'), 'price', 'number'), h('label.ws-field', [h('span', t('Notes')), notes])]), h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: () => { if (confirm(t('Delete {what} and its marks?', {what: c.name || t('this car')}))) { saved.candidates = saved.candidates.filter((x) => x !== c); saved.candidate = null; persist(); renderPlan(app); } }}, t('Delete this car'))]),
+    c && h('p.ws-small.ws-mute', c.variant ? t('Checking a {car}. Your own car stays as it is.', {car: carLabel(c.variant)}) : t('Marks here stay apart from your own car. Add the VIN and the list fits this car.')),
   ];
 }
 
@@ -312,7 +314,7 @@ function verdict(st) {
     : haggle.length ? plural(haggle.length, '{n} fault to haggle over. None is a reason to walk away.', '{n} faults to haggle over. None is a reason to walk away.') : t('Nothing bad marked yet.');
   const priced = st.bad.length - st.unpriced;
   const cost = priceSpan(money(st.low), money(st.high));
-  return h(`div.ws-band.ws-band--${st.bad.length || st.ok.length ? band : 'none'}`, [h('span.ws-band-word', walk.length ? t('Walk') : haggle.length ? t('Haggle') : st.ok.length ? t('OK') : t('To do')), h('div', [h('strong', word), h('p', line), left > 0 && h('p', plural(left, '{n} walk-away check still to do.', '{n} walk-away checks still to do.')), priced > st.unpriced && h('p', st.unpriced ? t('Sourced cost: {cost}, plus {n} with no price.', {cost, n: st.unpriced}) : t('Sourced cost: {cost}, all faults priced.', {cost}))])]);
+  return h(`div.ws-band.ws-band--${st.bad.length || st.ok.length ? band : 'none'}`, [h('span.ws-band-word', walk.length ? t('Walk') : haggle.length ? t('Haggle') : st.ok.length ? t('OK') : t('To do')), h('div', [h('strong', word), h('p', line), left > 0 && h('p', plural(left, '{n} walk-away check still to do.', '{n} walk-away checks still to do.')), priced > st.unpriced && h('p', st.unpriced ? t('Known cost: {cost}, plus {n} with no price.', {cost, n: st.unpriced}) : t('Known cost: {cost}, all faults priced.', {cost}))])]);
 }
 
 function inspectTab(app, s0) {
@@ -321,9 +323,11 @@ function inspectTab(app, s0) {
   const total = st.list.length;
   const areas = [...new Set(st.list.map((i) => i.area))];
   const clear = () => { if (!confirm(t('Clear every OK and Bad mark?'))) return; if (s.candidate) { s.candidate.checks = {}; persist(); renderPlan(app); } else app.store.set({checks: {}}); };
-  const show = (i) => ui.inspectShow === 'all' || (ui.inspectShow === 'viewing' && i.viewing) || (ui.inspectShow === 'todo' && !s.checks[i.id]) || (ui.inspectShow === 'bad' && s.checks[i.id] === 'bad');
+  const show = (i) => ui.inspectShow === 'all' || (ui.inspectShow === 'walk' && i.decider === 'walk' && i.viewing) || (ui.inspectShow === 'viewing' && i.viewing) || (ui.inspectShow === 'todo' && !s.checks[i.id]) || (ui.inspectShow === 'bad' && s.checks[i.id] === 'bad');
   setPrintable(() => inspectReport(app.store.get()));
   return [
+    h('p', t('Go round the car with this list and tap OK or Bad. It gives you a verdict, and a cost to argue about if you are buying.')),
+    foldedTutorials(app, s0, 'basics', 'buying', t('Buying an XK8 or XKR')),
     candidateBar(app, s),
     verdict(st),
     h('div.ws-tally', [
@@ -333,18 +337,18 @@ function inspectTab(app, s0) {
         h('div', [h('dt', t('Bad')), h('dd', st.bad.length)]),
       ]),
     ]),
-    h('div.ws-actions', [
-      h('button.ws-btn', {type: 'button', onclick: printNow}, [icon('print'), t('Print report')]),
-      h('button.ws-btn', {type: 'button', onclick: async () => toast(await copyText(reportText(app.store.get())) ? t('Report copied') : t('This browser blocked the copy'))}, [icon('copy'), t('Copy report')]),
-      (st.ok.length + st.bad.length) > 0 && h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: clear}, t('Clear')),
-    ]),
-    h('div.ws-tabs.ws-tabs--small', {role: 'tablist'}, [['all', N('All')], ['viewing', N('On a viewing')], ['todo', N('To do')], ['bad', N('Bad')]].map(([k, word]) => h('button', {type: 'button', role: 'tab', 'aria-selected': String(ui.inspectShow === k), onclick: () => { ui.inspectShow = k; renderPlan(app); }}, t(word)))),
+    h('div.ws-tabs.ws-tabs--small', {role: 'tablist'}, [['walk', N('Walk-away checks')], ['viewing', N('On a viewing')], ['all', N('All')], ['todo', N('To do')], ['bad', N('Bad')]].map(([k, word]) => h('button', {type: 'button', role: 'tab', 'aria-selected': String(ui.inspectShow === k), onclick: () => { ui.inspectShow = k; renderPlan(app); }}, t(word)))),
     areas.map((a) => {
       const inArea = st.list.filter((i) => i.area === a).sort((x, y) => DECIDER[x.decider].rank - DECIDER[y.decider].rank);
       const shown = inArea.filter(show);
       if (!shown.length) return null;
       return section(`insp-${a}`, a, t('{n} of {total}', {n: inArea.filter((i) => s.checks[i.id]).length, total: inArea.length}), shown.map((i) => checkCard(app, i, s)));
     }),
+    h('div.ws-actions', [
+      h('button.ws-btn', {type: 'button', onclick: printNow}, [icon('print'), t('Print report')]),
+      h('button.ws-btn', {type: 'button', onclick: async () => toast(await copyText(reportText(app.store.get())) ? t('Report copied') : t('This browser blocked the copy'))}, [icon('copy'), t('Copy report')]),
+      (st.ok.length + st.bad.length) > 0 && h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: clear}, t('Clear')),
+    ]),
   ];
 }
 
@@ -360,8 +364,8 @@ function upgradeCard(app, u, s) {
     h('header', [h('span.ws-tag', t(UP_CATS[u.category] ?? cap(u.category))), badge(u, {title: u.title})]),
     h('h4', u.title),
     u.verdict && h('p.ws-up-verdict', h('strong', u.verdict)),
-    h('p.ws-price', u.costGbp ? gbp(u.costGbp) : h('span.ws-none', t('No sourced price'))),
-    h('p.ws-small.ws-mute', [`${t('Difficulty {n} of 5. Parts price only, labour not sourced.', {n: u.difficulty})} `, u.reversible ? t('Reversible.') : t('Not reversible.'), appliesText(u.appliesTo) ? ` ${t('For {who}.', {who: appliesText(u.appliesTo)})}` : '']),
+    h('p.ws-price', u.costGbp ? gbp(u.costGbp) : h('span.ws-none', t('No price found'))),
+    h('p.ws-small.ws-mute', [`${t('Difficulty {n} of 5. Price for parts only: we found no labour cost.', {n: u.difficulty})} `, u.reversible ? t('Reversible.') : t('Not reversible.'), appliesText(u.appliesTo) ? ` ${t('For {who}.', {who: appliesText(u.appliesTo)})}` : '']),
     vinTag(u, s.variant),
     u.caution && callout('warn', t('Watch out'), h('p', T(u.caution))),
     h('p', T(u.why)),
@@ -386,9 +390,9 @@ function upgradesTab(app, s) {
       pickFrom(t('Budget'), ui.upBudget, words(BUDGETS), (x) => set({upBudget: +x})),
       pickFrom(t('Order'), ui.upCheap ? 'cheap' : 'worth', [['worth', t('Most worth doing')], ['cheap', t('Cheapest first')]], (x) => set({upCheap: x === 'cheap'})),
     ]),
-    h('p.ws-foot-note', t(ui.upBudget ? (ui.upCheap ? '{n} with a sourced price that fits, cheapest first. Prices are from the data files and many are old.' : '{n} with a sourced price that fits, most worth doing first. Prices are from the data files and many are old.') : (ui.upCheap ? '{n} with a sourced price, cheapest first. Prices are from the data files and many are old.' : '{n} with a sourced price, most worth doing first. Prices are from the data files and many are old.'), {n: priced.length})),
+    h('p.ws-foot-note', t(ui.upBudget ? (ui.upCheap ? '{n} with a known price that fits, cheapest first. Many of these prices are old.' : '{n} with a known price that fits, most worth doing first. Many of these prices are old.') : (ui.upCheap ? '{n} with a known price, cheapest first. Many of these prices are old.' : '{n} with a known price, most worth doing first. Many of these prices are old.'), {n: priced.length})),
     priced.map((u) => upgradeCard(app, u, s)),
-    unpriced.length > 0 && section('up-noprice', t('No sourced price'), unpriced.length, h('p.ws-small.ws-mute', t('These stay listed because nobody could say what they cost, not because they are cheap.')), unpriced.map((u) => upgradeCard(app, u, s))),
+    unpriced.length > 0 && section('up-noprice', t('No price found'), unpriced.length, h('p.ws-small.ws-mute', t('These stay listed because nobody could say what they cost, not because they are cheap.')), unpriced.map((u) => upgradeCard(app, u, s))),
     !priced.length && !unpriced.length && h('p.ws-empty', t('No upgrades in this category for this car.')),
   ];
 }
@@ -461,7 +465,7 @@ const sellers = (market) => {
   return {home: list.filter((n) => home.test(en(n, 'region'))), rest: list.filter((n) => !home.test(en(n, 'region')))};
 };
 
-const fluidText = (f) => colon(f.name, `${f.spec ?? t('no sourced spec')}, ${f.capacityL != null ? `${dec(f.capacityL)} L` : t('capacity not sourced')}`);
+const fluidText = (f) => colon(f.name, `${f.spec ?? t('no specification found')}, ${f.capacityL != null ? `${dec(f.capacityL)} L` : t('capacity not found')}`);
 
 function listText(s, list) {
   const v = s.variant;
@@ -472,14 +476,14 @@ function listText(s, list) {
     for (const p of list.parts) {
       const rec = data.parts.byId.get(p.id);
       const n = numbersFor(rec, v);
-      lines.push(colon(`${saved.have[`p:${p.id}`] ? t('[have] ') : ''}${p.qty} x ${partName(p.id)}`, n.best ? `${noText(n.best)}${n.maybe ? `, ${t('check your VIN')}` : ''}` : t('no part number sourced')));
+      lines.push(colon(`${saved.have[`p:${p.id}`] ? t('[have] ') : ''}${p.qty} x ${partName(p.id)}`, n.best ? `${noText(n.best)}${n.maybe ? `, ${t('check your VIN')}` : ''}` : t('no part number found')));
       for (const other of n.pair) lines.push(colon(`${p.qty} x ${partName(p.id)}`, noText(other)));
       if (n.extras.length) lines.push(`    ${t('with it: {list}', {list: n.extras.map(noText).join('; ')})}`);
       if (n.alts.length) lines.push(`    ${t('or: {list}', {list: n.alts.map(noText).join('; ')})}`);
     }
   }
   if (list.fluids.length) { lines.push('', t('Fluids')); for (const f of list.fluids) lines.push(fluidText(f.fluid)); }
-  if (list.consumables.length) { lines.push('', t('Consumables')); for (const c of list.consumables) lines.push(c.text); }
+  if (list.consumables.length) { lines.push('', t('Things you use up')); for (const c of list.consumables) lines.push(c.text); }
   if (list.upgrades.length) { lines.push('', t('Upgrades')); for (const u of list.upgrades) { lines.push(colon(u.title, gbp(u.costGbp))); for (const x of u.partsNeeded) lines.push(`  ${x}`); } }
   return lines.join('\n');
 }
@@ -490,9 +494,9 @@ function shoppingCard(s, list) {
   const v = s.variant;
   return h('article.ws-card', [
     h('header.ws-card-head', h('div', [h('p.ws-card-kicker', t('XK8 Workshop shopping list')), h('h1', t(v.serial ? '{car}, serial {serial}' : '{car}', {car: carLabel(v), serial: v.serial})), list.jobs.length > 0 && h('p', list.jobs.map((j) => j.title).join(', '))])),
-    list.parts.length > 0 && h('section', [h('h2', t('Parts')), h('table', h('tbody', list.parts.map((p) => h('tr', [h('td.ws-card-qty', h('span.ws-card-box')), h('td.ws-card-qty', `${p.qty} x`), h('td', [h('strong', partName(p.id)), h('br'), (() => { const n = numbersFor(data.parts.byId.get(p.id), v); return n.best ? [h('strong', noText(n.best)), n.extras.length > 0 && [h('br'), t('With it: {list}', {list: n.extras.map(noText).join('; ')})], n.alts.length > 0 && [h('br'), t('Or: {list}', {list: n.alts.map(noText).join('; ')})]] : t('No part number sourced'); })()])]))))]),
+    list.parts.length > 0 && h('section', [h('h2', t('Parts')), h('table', h('tbody', list.parts.map((p) => h('tr', [h('td.ws-card-qty', h('span.ws-card-box')), h('td.ws-card-qty', `${p.qty} x`), h('td', [h('strong', partName(p.id)), h('br'), (() => { const n = numbersFor(data.parts.byId.get(p.id), v); return n.best ? [h('strong', noText(n.best)), n.extras.length > 0 && [h('br'), t('With it: {list}', {list: n.extras.map(noText).join('; ')})], n.alts.length > 0 && [h('br'), t('Or: {list}', {list: n.alts.map(noText).join('; ')})]] : t('No part number found'); })()])]))))]),
     list.fluids.length > 0 && h('section', [h('h2', t('Fluids')), h('ul', list.fluids.map((f) => h('li', fluidText(f.fluid))))]),
-    list.consumables.length > 0 && h('section', [h('h2', t('Consumables')), h('ul', list.consumables.map((c) => h('li', c.text)))]),
+    list.consumables.length > 0 && h('section', [h('h2', t('Things you use up')), h('ul', list.consumables.map((c) => h('li', c.text)))]),
     list.upgrades.length > 0 && h('section', [h('h2', t('Upgrades')), h('ul', list.upgrades.map((u) => h('li', [h('strong', u.title), `: ${gbp(u.costGbp)}. ${u.partsNeeded.join('; ')}`])))]),
     h('section', [h('h2', t('Where to buy')), h('ul', sellers(v.market).home.slice(0, 8).map((n) => h('li', [h('strong', n.name), `, ${n.url.replace(/^https?:\/\//, '')}`])))]),
   ]);
@@ -501,7 +505,7 @@ function shoppingCard(s, list) {
 /** The number to quote, large, with what goes with it and what can replace it, all labelled. */
 function shopNumbers(rec, v) {
   const n = numbersFor(rec, v);
-  if (!n.best) return h('p.ws-none', t('No part number sourced for this car'));
+  if (!n.best) return h('p.ws-none', t('No part number found for this car'));
   const row = (x) => h('li', [h('code', x.no), x.desc && h('span', ` ${x.desc}`), vinTag(x, v)]);
   return h('div.ws-pn', [
     h('p.ws-pn-best', [h('code', n.best.no), n.best.desc && h('span', ` ${n.best.desc}`), n.maybe ? h('span.ws-tag.ws-tag--vin', t('Check your VIN')) : vinTag(n.best, v)]),
@@ -537,10 +541,10 @@ function listTab(app, s) {
   return [
     h('dl.ws-facts.ws-list-sum', [
       h('div', [h('dt', t('Parts')), h('dd', list.parts.length)]),
-      list.jobs.length > 0 && h('div', [h('dt', t('DIY time, est.')), h('dd', hours.length ? t('{n} h', {n: dec(hours.reduce((a, j) => a + j.hoursDiy, 0).toFixed(1))}) : t('Not sourced'))]),
-      h('div', [h('dt', t('Sourced cost')), h('dd', priced.length ? (low === high ? money(low) : priceSpan(money(low), money(high))) : t('None'))]),
+      list.jobs.length > 0 && h('div', [h('dt', t('Your time, estimated')), h('dd', hours.length ? t('{n} h', {n: dec(hours.reduce((a, j) => a + j.hoursDiy, 0).toFixed(1))}) : t('Not found'))]),
+      h('div', [h('dt', t('Known cost')), h('dd', priced.length ? (low === high ? money(low) : priceSpan(money(low), money(high))) : t('None'))]),
     ]),
-    h('p.ws-small.ws-mute', priced.length ? plural(priced.length, 'Covers {n} upgrade. Parts have no sourced prices: ask your supplier.', 'Covers {n} upgrades. Parts have no sourced prices: ask your supplier.') : t('Parts have no sourced prices: ask your supplier.')),
+    h('p.ws-small.ws-mute', priced.length ? plural(priced.length, 'Covers {n} upgrade. We have no prices for parts: ask your supplier.', 'Covers {n} upgrades. We have no prices for parts: ask your supplier.') : t('We have no prices for parts: ask your supplier.')),
     h('div.ws-actions', [
       h('button.ws-btn', {type: 'button', onclick: async () => toast(await copyText(listText(app.store.get(), shopping(app.store.get()))) ? t('List copied') : t('This browser blocked the copy'))}, [icon('copy'), t('Copy list')]),
       h('button.ws-btn', {type: 'button', onclick: printNow}, [icon('print'), t('Print list')]),
@@ -549,7 +553,7 @@ function listTab(app, s) {
     list.jobs.length > 0 && section('listjobs', t('Chosen jobs'), list.jobs.length, h('ul.ws-picked', list.jobs.map((j) => h('li', [h('button.ws-link', {type: 'button', onclick: () => openJob(app, j.id)}, j.title), h('span.ws-mute', hoursText(j.hoursDiy)), h('button.ws-x', {type: 'button', 'aria-label': t('Take {what} off the list', {what: j.title}), onclick: () => refsOff('job', j.id)}, icon('x'))])))),
     list.parts.length > 0 && section('listparts', t('Parts'), list.parts.length,
       h('p.ws-small.ws-mute', t('Each part once, with the number to quote for this car. Quantity is the most any one job needs.')),
-      missing > 0 && h('p.ws-none', plural(missing, '{n} of these has no sourced part number.', '{n} of these have no sourced part number.')),
+      missing > 0 && h('p.ws-none', plural(missing, 'We have no part number for {n} of these.|one', 'We have no part number for {n} of these.')),
       h('ul.ws-parts', list.parts.map((p) => {
         const rec = data.parts.byId.get(p.id);
         return h(`li.ws-part${saved.have[`p:${p.id}`] ? '.is-have' : ''}`, [
@@ -561,15 +565,15 @@ function listTab(app, s) {
         ]);
       }))),
     list.fluids.length > 0 && section('listfluids', t('Fluids'), list.fluids.length, list.fluids.map((f) => [fluidBlock(f.fluid, v), h('p.ws-small.ws-mute', t('For: {list}', {list: f.for.join(', ')}))])),
-    list.consumables.length > 0 && section('listcons', t('Consumables'), list.consumables.length, h('ul.ws-plain', list.consumables.map((c) => h('li', c.text)))),
-    list.upgrades.length > 0 && section('listup', t('Upgrades'), list.upgrades.length, list.upgrades.map((u) => h('div.ws-picked-up', [h('div.ws-row-head', [h('strong', u.title), h('button.ws-x', {type: 'button', 'aria-label': t('Take {what} off the list', {what: u.title}), onclick: () => refsOff('upgrade', u.id)}, icon('x'))]), h('p.ws-price', u.costGbp ? gbp(u.costGbp) : h('span.ws-none', t('No sourced price'))), h('ul.ws-plain', u.partsNeeded.map((x) => h('li', x)))]))),
+    list.consumables.length > 0 && section('listcons', t('Things you use up'), list.consumables.length, h('ul.ws-plain', list.consumables.map((c) => h('li', c.text)))),
+    list.upgrades.length > 0 && section('listup', t('Upgrades'), list.upgrades.length, list.upgrades.map((u) => h('div.ws-picked-up', [h('div.ws-row-head', [h('strong', u.title), h('button.ws-x', {type: 'button', 'aria-label': t('Take {what} off the list', {what: u.title}), onclick: () => refsOff('upgrade', u.id)}, icon('x'))]), h('p.ws-price', u.costGbp ? gbp(u.costGbp) : h('span.ws-none', t('No price found'))), h('ul.ws-plain', u.partsNeeded.map((x) => h('li', x)))]))),
     buy,
   ];
 }
 
 // ---- tools -----------------------------------------------------------------------------------------------------------------
 
-const KIND_ORDER = [['special', N('Special tools')], ['diagnostic', N('Diagnostic')], ['lift', N('Lifting')], ['hand', N('Hand tools')], ['consumable', N('Workshop consumables')]];
+const KIND_ORDER = [['special', N('Special tools')], ['diagnostic', N('Testing tools')], ['lift', N('Lifting')], ['hand', N('Hand tools')], ['consumable', N('Workshop supplies')]];
 
 function toolsTab(app, s) {
   const list = shopping(s);
@@ -599,7 +603,7 @@ const RESEARCH = /\b(?:OCR|Cloudflare|web search|the brief|Cross-check|strings s
 const gapList = (key, owner) => {
   const gaps = owner.gaps;
   const shown = (gaps ?? []).map((g, i) => [g, en(owner, 'gaps')[i]]).filter(([, english]) => !RESEARCH.test(english)).map(([g]) => g);
-  return shown.length ? section(key, t('What could not be sourced'), shown.length, h('ul.ws-plain.ws-small', shown.map((g) => h('li', g)))) : null;
+  return shown.length ? section(key, t('What we could not find'), shown.length, h('ul.ws-plain.ws-small', shown.map((g) => h('li', g)))) : null;
 };
 
 function fluidsTab(app, s) {
@@ -622,8 +626,8 @@ function torqueRow(rec, s) {
   const more = h('div.ws-tqrow-more');
   return h(`details.ws-tqrow${warn ? '.is-weak' : ''}`, {ontoggle: (e) => { if (e.target.open && !more.childElementCount) more.append(torqueBlock(rec, s.units, s.variant)); }}, [
     h('summary', [
-      h('span.ws-tqrow-main', [h('span', rec.label), h('span.ws-tqrow-meta', [badge(rec, {title: rec.label, value: f.text}), warn && h('span.ws-tag.ws-tag--warn', t('Verify first')), rec.reuse && /^replace/i.test(en(rec, 'reuse')) && h('span.ws-tag', t('New bolt')), vinTag(rec, s.variant)])]),
-      h('span.ws-tqrow-val', f.value != null ? [h('b', f.value), h('small', f.unit)] : f.stages.length ? h('small', plural(f.stages.length, '{n} stages|one', '{n} stages')) : h('span.ws-none', t('Not sourced'))),
+      h('span.ws-tqrow-main', [h('span', rec.label), h('span.ws-tqrow-meta', [badge(rec, {title: rec.label, value: f.text}), warn && h('span.ws-tag.ws-tag--warn', t('Check this first')), rec.reuse && /^replace/i.test(en(rec, 'reuse')) && h('span.ws-tag', t('New bolt')), vinTag(rec, s.variant)])]),
+      h('span.ws-tqrow-val', f.value != null ? [h('b', f.value), h('small', f.unit)] : f.stages.length ? h('small', plural(f.stages.length, '{n} stages|one', '{n} stages')) : h('span.ws-none', t('Not found'))),
     ]),
     more,
   ]);
@@ -638,22 +642,23 @@ function torquesTab(app, s) {
     const base = ui.tqAll ? data.torques.items : forVariant(data.torques.items, v);
     const words = fold(ui.tqQ).split(/\s+/).filter(Boolean);
     const list = base.filter((x) => (!ui.tqSys || x.system === ui.tqSys) && words.every((w) => fold(`${x.label} ${en(x, 'label')} ${x.system} ${x.id} ${(x.parts ?? []).map(partName).join(' ')}`).includes(w)));
-    count.textContent = ui.tqAll ? t('{n} of {total} torques, all cars.', {n: list.length, total: base.length}) : t('{n} of {total} torques for a {car}.', {n: list.length, total: base.length, car: carLabel(v)});
+    count.textContent = ui.tqAll ? t('{n} of {total} figures, all cars.', {n: list.length, total: base.length}) : t('{n} of {total} figures for a {car}.', {n: list.length, total: base.length, car: carLabel(v)});
     const bySys = new Map();
     for (const x of list) (bySys.get(x.system) ?? bySys.set(x.system, []).get(x.system)).push(x);
     out.replaceChildren(...[...bySys].sort((a, b) => collate(sysName(a[0]), sysName(b[0]))).flatMap(([sysKey, rows]) => [h('h3.ws-head', sysName(sysKey)), ...rows.map((x) => torqueRow(x, st))]));
-    if (!list.length) out.append(h('p.ws-empty', t('No torque matches that.')));
+    if (!list.length) out.append(h('p.ws-empty', t('No figure matches that.')));
   };
-  const q = h('input.ws-search', {type: 'search', placeholder: t('Search torques: drain plug, caliper'), 'aria-label': t('Search torques'), 'data-fk': 'tqq', autocomplete: 'off'});
+  const q = h('input.ws-search', {type: 'search', placeholder: t('Search: drain plug, caliper'), 'aria-label': t('Search the tightening figures'), 'data-fk': 'tqq', autocomplete: 'off'});
   q.value = ui.tqQ;
   let raf = 0;
   q.addEventListener('input', () => { ui.tqQ = q.value; cancelAnimationFrame(raf); raf = requestAnimationFrame(redraw); });
   const systems = [...new Set(data.torques.items.map((x) => x.system))].sort((a, b) => collate(sysName(a), sysName(b)));
   redraw();
   return [
+    torquePlain(),
     q,
     h('div.ws-filters', [
-      pickFrom(t('System'), ui.tqSys, [['', t('All systems')], ...systems.map((x) => [x, sysName(x)])], (x) => { ui.tqSys = x; redraw(); }),
+      pickFrom(t('Which part'), ui.tqSys, [['', t('All parts of the car')], ...systems.map((x) => [x, sysName(x)])], (x) => { ui.tqSys = x; redraw(); }),
       h('button.ws-toggle', {type: 'button', 'aria-pressed': String(ui.tqAll), onclick: (e) => { ui.tqAll = !ui.tqAll; e.currentTarget.setAttribute('aria-pressed', String(ui.tqAll)); redraw(); }}, t('All cars')),
     ]),
     count, out,
@@ -670,8 +675,8 @@ function paint(app, s, root) {
   setPrintable(null);
   const tab = TAB_VIEW[saved.tab] ? saved.tab : 'service';
   const count = listRefs(s.list).length;
-  const strip = h('div.ws-tabs.ws-tabs--plan', {role: 'tablist', 'aria-label': t('Plan')}, TABS.map(([k, word]) => h('button', {type: 'button', role: 'tab', 'aria-selected': String(k === tab), 'data-fk': `tab-${k}`, onclick: () => { saved.tab = k; persist(); paint(app, app.store.get(), root); }}, [t(word), k === 'list' && count > 0 && h('span.ws-count', count)])));
-  paintView(root, `plan-${tab}`, [h('h2.vh', t('Plan: {tab}', {tab: t(TABS.find(([k]) => k === tab)[1])})), strip, h('div.ws-tabbody', [TAB_VIEW[tab](app, s)].flat(4).filter(Boolean))]);
+  const strip = h('div.ws-tabs.ws-tabs--plan', {role: 'tablist', 'aria-label': t('Upkeep')}, TABS.map(([k, word]) => h('button', {type: 'button', role: 'tab', 'aria-selected': String(k === tab), 'data-fk': `tab-${k}`, onclick: () => { saved.tab = k; persist(); paint(app, app.store.get(), root); }}, [t(word), k === 'list' && count > 0 && h('span.ws-count', count)])));
+  paintView(root, `plan-${tab}`, [h('h2.vh', t('Upkeep: {tab}', {tab: t(TABS.find(([k]) => k === tab)[1])})), strip, h('div.ws-tabbody', [TAB_VIEW[tab](app, s)].flat(4).filter(Boolean))]);
   // Sideways only: scrollIntoView would also move the list under a finger.
   const on = strip.querySelector('[aria-selected="true"]');
   if (on) strip.scrollLeft = Math.max(0, on.offsetLeft - (strip.clientWidth - on.offsetWidth) / 2);
@@ -689,6 +694,16 @@ function preparePlanItem(item) {
 
 export function mount(el, app) {
   if (nav.planTab) { saved.tab = nav.planTab; nav.planTab = null; }
+  if (nav.planBuy) { // a car that is not yours: its marks stay apart from your own, and the list starts short, with what would make you walk away
+    nav.planBuy = false;
+    ui.inspectShow = 'walk';
+    if (!candidate()) {
+      const last = saved.candidates[saved.candidates.length - 1];
+      if (last) saved.candidate = last.id;
+      else { const n = {id: `c${Date.now()}`, name: t('Car {n}', {n: 1}), vin: '', price: null, notes: '', checks: {}, variant: null}; saved.candidates.push(n); saved.candidate = n.id; }
+    }
+    persist();
+  }
   const item = nav.planItem;
   nav.planItem = null;
   if (item) preparePlanItem(item);

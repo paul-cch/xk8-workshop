@@ -10380,7 +10380,7 @@
    "what": "The downpipe with the catalytic converter built in, one per bank.",
    "why": "4.2 numbers are in the catalogue; 4.0 downpipes are see salesman.",
    "location": "From each manifold down to the underfloor pipes.",
-   "accessNotes": "Four studs fix the top flange to the manifold, with a gasket. Two nuts and bolts fix the lower end to a bracket on the engine.",
+   "accessNotes": "Four studs fix the top flange to the manifold, with a gasket. Two nuts and bolts fix the lower end to a bracket on the engine. On a 4.0 the bottom slides into the front silencer under a clamp. On a 4.2 it is a flange with nuts and a gasket.",
    "wear": "age",
    "partNumbers": [
     {
@@ -12013,7 +12013,8 @@
     "transmission.zf5-cooler-pipe-nut",
     "transmission.zf6-cooler-tubes",
     "transmission.zf6-cooler-tubes-to-cooler",
-    "transmission.zf6-cooler-tubes-to-pan"
+    "transmission.zf6-cooler-tubes-to-pan",
+    "transmission.sc5-cooler-pipes-to-radiator"
    ],
    "jobs": [
     "radiator"
@@ -18103,7 +18104,9 @@
    "fasteners": [
     "wheels.spare-retainer"
    ],
-   "jobs": [],
+   "jobs": [
+    "flat-battery"
+   ],
    "faults": [],
    "appliesTo": {},
    "src": [
@@ -26673,7 +26676,7 @@
    "name": "Converter to silencer gasket",
    "system": "exhaust",
    "paired": true,
-   "what": "The gasket between the catalytic converter and the front silencer.",
+   "what": "The gasket between the catalytic converter and the front silencer on a 4.2. The 4.0 joint is a clamped slip joint with no gasket.",
    "why": "One-use, and it goes when the silencer drops.",
    "location": null,
    "accessNotes": null,
@@ -26699,7 +26702,11 @@
     "exhaust-flange"
    ],
    "faults": [],
-   "appliesTo": {},
+   "appliesTo": {
+    "engine": [
+     "4.2"
+    ]
+   },
    "src": [
     "sng2013",
     "wm"
@@ -27799,7 +27806,8 @@
     "arb-drop-links",
     "front-dampers-springs",
     "wheel-bearing-front",
-    "lower-ball-joint"
+    "lower-ball-joint",
+    "vee-mounts"
    ],
    "faults": [],
    "appliesTo": {},

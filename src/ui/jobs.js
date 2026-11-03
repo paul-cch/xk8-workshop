@@ -2,7 +2,9 @@
 // A step sets state.job, and pose.js does the lifting and ghosting. The camera does not follow state.job, so this file flies it.
 import {applies, appliesStatus, brakesAreOption, brakesOf, convertTorqueText, data, en, forVariant, formatTorque, jobSteps, jobsFor, partName, provenance, stepFluids, stepTorques, stepWarn} from '../data.js';
 import {N, andList, dec, fixed, isFrench, plural, pounds, t} from '../i18n.js';
-import {CONF, DISCLAIMER, badge, bodyName, carName, h, systemName, torqueBlock as baseTorqueBlock, toast, torqueWarning} from './widgets.js';
+import {basicsBlock, stepWatch, watchSection} from './tutorials.js';
+import {CONF, DISCLAIMER, badge, bodyName, carYear, h, systemName, torqueBlock as baseTorqueBlock, toast, torqueWarning} from './widgets.js';
+import {gloss} from './terms.js';
 
 // ---- icons -----------------------------------------------------------------------------------
 
@@ -16,6 +18,8 @@ const ICON = {
   car: '<path d="M3 16.5v-3.5l2.4-1.2L7.6 7.5h8.8l2.2 4.3L21 13v3.5"/><path d="M3 16.5h2M9 16.5h6M19 16.5h2"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/>',
   x: '<path d="m6 6 12 12M18 6 6 18"/>',
   copy: '<path d="M9 9h11v11H9z"/><path d="M15 9V4H4v11h5"/>',
+  play: '<path d="M8 5.5v13l10.5-6.5L8 5.5Z" fill="currentColor"/>',
+  out: '<path d="M10 5H5v14h14v-5"/><path d="M14 4.5h5.5V10M19.5 4.5 11 13"/>',
 };
 export function icon(name) {
   const s = document.createElement('span');
@@ -28,15 +32,15 @@ export function icon(name) {
 // ---- words ------------------------------------------------------------------------------------
 
 export const sysName = systemName;
-export const carLabel = (v) => `${v.my} ${carName(v)}${v.market === 'us' ? `, ${t('US')}` : ''}`;
-export const hoursText = (x) => (x == null ? t('not sourced') : x < 1 ? t('{n} min', {n: Math.round(x * 60)}) : t('{n} h', {n: dec(x)}));
+export const carLabel = (v) => `${carYear(v)}${v.market === 'us' ? `, ${t('US')}` : ''}`;
+export const hoursText = (x) => (x == null ? t('not known') : x < 1 ? t('{n} min', {n: Math.round(x * 60)}) : t('{n} h', {n: dec(x)}));
 export const money = pounds;
 /** A price as the data has it, with no thousands separator. */
 export const rawPounds = (n) => (isFrench() ? `${n} £` : `£${n}`);
 /** Two prices. */
 export const priceSpan = (low, high) => t('{low} to {high}', {low, high});
 /** A [low, high] price, or the words the brief asks for when there is none. */
-export const gbp = (r) => (!r || r[0] == null ? t('No sourced price') : r[0] === r[1] ? money(r[0]) : priceSpan(money(r[0]), money(r[1])));
+export const gbp = (r) => (!r || r[0] == null ? t('No price found') : r[0] === r[1] ? money(r[0]) : priceSpan(money(r[0]), money(r[1])));
 
 /** An appliesTo in plain words: "4.0, supercharged, to MY2002". Empty for "every car". */
 export function appliesText(a) {
@@ -72,6 +76,13 @@ export function section(key, title, count, ...kids) {
     h('summary', h('span', title), count != null && h('span.ws-count', count)), kids);
 }
 
+const openedFolds = new Set();
+/** The same section, shut until someone opens it: what an expert wants sits one tap behind the plain answer. */
+export function fold(key, title, count, ...kids) {
+  return h('details.ws-sec', {open: openedFolds.has(key), ontoggle: (e) => { if (e.target.open) openedFolds.add(key); else openedFolds.delete(key); }},
+    h('summary', h('span', title), count != null && h('span.ws-count', count)), kids);
+}
+
 export const pips = (n, of = 5) => h('span.ws-pips', {role: 'img', 'aria-label': t('{n} of {of}', {n, of})}, Array.from({length: of}, (_, i) => h(`i${i < n ? '.on' : ''}`)));
 
 /** A chip that shows a part on the car. Accent means the part in work, so only step focus parts use it. */
@@ -79,13 +90,13 @@ export const partChip = (app, id, opts = {}) => h(`button.ws-chip${opts.accent ?
 
 /** Lights parts on the car and flies there. Returns {shown, exact}: exact false means the nearest modelled neighbour. */
 export function showOnCar(app, ids) {
-  const {store, registry, rig} = app;
+  const {store, registry} = app;
   const res = ids.map((id) => ({want: id, ...registry.resolve(id)}));
   const first = res.find((r) => r.exact) ?? res.find((r) => r.id);
   if (!first) return {shown: null, exact: false};
   store.set({selected: first.want, isolate: [...new Set(res.map((r) => r.id).filter(Boolean))], view: null});
   app.ui.lower?.();
-  rig.flyToPart(first.id);
+  app.ui.showWhere(first.id); // with the car around it: a part filling the screen does not say where it is
   return {shown: first.id, exact: first.exact};
 }
 export const clearCar = (app) => app.store.set({selected: null, isolate: null, view: 'hero'});
@@ -107,30 +118,19 @@ export function showButton(app, ids, label = t('Show on the car')) {
   const note = h('small.ws-mute');
   return h('span.ws-show', h('button.ws-btn', {type: 'button', onclick: () => {
     const r = showOnCar(app, usable);
-    note.textContent = !r.shown ? t('Not modelled, and nothing near it is either.') : r.exact ? '' : t('Not modelled: showing the nearest part, {part}.', {part: partName(r.shown)});
+    note.textContent = !r.shown ? t('Not in the 3D car, and nothing near it is either.') : r.exact ? '' : t('Not in the 3D car: showing the nearest part, {part}.', {part: partName(r.shown)});
   }}, icon('car'), label), note);
 }
 
-/**
- * widgets.js' torque block, for the rail. The long note folds away unless the value is in question, and Nm in the note
- * follows the units. The size at arm's length comes from content.css.
- */
-export function torqueBlock(rec, units, v) {
-  const el = baseTorqueBlock(rec, units, {variant: v});
-  const note = el.querySelector('.tq-note');
-  if (note) {
-    note.textContent = convertTorqueText(note.textContent, units);
-    if (!torqueWarning(rec)) note.replaceWith(h('details.ws-more', [h('summary', t('Notes')), note.cloneNode(true)]));
-  }
-  return el;
-}
+/** widgets.js' torque block for this car. The size at arm's length comes from content.css. */
+export const torqueBlock = (rec, units, v, opts = {}) => baseTorqueBlock(rec, units, {variant: v, ...opts});
 
 /** A fluid with spec, capacity and anything missing said out loud. */
 export function fluidBlock(fl, v) {
   return h(`article.ws-fluid${provenance(fl).weak ? '.is-weak' : ''}`,
     h('header', h('h4', fl.name), badge(fl, {title: fl.name})),
-    h('p.ws-fluid-cap', fl.capacityL != null ? [h('b', dec(fl.capacityL)), ' L', v?.market === 'us' && ` ${t('({n} US qt)', {n: fixed(fl.capacityL * 1.0567, 1)})}`] : h('span.ws-none', t('Capacity not sourced'))),
-    h('p', fl.spec ?? h('span.ws-none', t('No sourced spec'))),
+    h('p.ws-fluid-cap', fl.capacityL != null ? [h('b', dec(fl.capacityL)), ' L', v?.market === 'us' && ` ${t('({n} US qt)', {n: fixed(fl.capacityL * 1.0567, 1)})}`] : h('span.ws-none', t('Capacity not found'))),
+    h('p', fl.spec ?? h('span.ws-none', t('No specification found'))),
     fl.capacityNote && h('p.ws-small', fl.capacityNote),
     fl.changeInterval && h('p.ws-small', h('strong', t('Interval: ')), fl.changeInterval),
     fl.brands?.length > 0 && h('p.ws-small', h('strong', t('Brands: ')), fl.brands.join(', ')),
@@ -142,7 +142,7 @@ export function fluidBlock(fl, v) {
 export function partNumbers(part, v) {
   if (!part) return null;
   const list = forVariant(part.partNumbers ?? [], v);
-  if (!list.length) return h('p.ws-none', t('No part number sourced for this car'));
+  if (!list.length) return h('p.ws-none', t('No part number found for this car'));
   const row = (n) => h('li', h('code', n.no), n.desc && h('span', ` ${n.desc}`), n.conf && badge(n, {file: 'parts', title: t('Part number {no}', {no: n.no}), value: n.no}), vinTag(n, v));
   return h('div.ws-pn', h('ul', list.slice(0, 3).map(row)),
     list.length > 3 && h('details.ws-more', h('summary', plural(list.length - 3, '{n} more numbers|one', '{n} more numbers')), h('ul', list.slice(3).map(row))));
@@ -151,9 +151,9 @@ export function partNumbers(part, v) {
 export function toolRow(tool, extra, units = 'nm') {
   const T = (x) => convertTorqueText(x, units);
   return h('li.ws-tool',
-    h('div.ws-tool-head', h('strong', tool.name), tool.size && h('span.ws-mute', T(tool.size)), tool.jdNumber && h('code', tool.jdNumber), tool.kind === 'special' && h('span.ws-tag', t('Special tool')), tool.kind === 'diagnostic' && h('span.ws-tag', t('Diagnostic'))),
+    h('div.ws-tool-head', h('strong', tool.name), tool.size && h('span.ws-mute', T(tool.size)), tool.jdNumber && h('code', tool.jdNumber), tool.kind === 'special' && h('span.ws-tag', t('Special tool')), tool.kind === 'diagnostic' && h('span.ws-tag', t('Testing tool'))),
     (tool.kind === 'special' || tool.kind === 'diagnostic') && tool.why && h('p.ws-small', T(tool.why)),
-    tool.altDiy && h('p.ws-small', h('strong', t('DIY alternative: ')), T(tool.altDiy)),
+    tool.altDiy && h('p.ws-small', h('strong', t('Without this tool: ')), T(tool.altDiy)),
     tool.costGbp && h('p.ws-small.ws-mute', gbp(tool.costGbp)),
     extra);
 }
@@ -161,7 +161,7 @@ export function toolRow(tool, extra, units = 'nm') {
 // ---- mode root, printing, nav between modes ------------------------------------------------------
 
 /** Cross-mode requests: another mode sets these, then switches mode. Saves import cycles. */
-export const nav = {planTab: null, planItem: null, diagnose: null};
+export const nav = {planTab: null, planItem: null, planBuy: false, diagnose: null, diagnoseHome: false};
 
 /**
  * Mounts a mode. render(state, root) runs on the keys given, only while this mode is on screen. Nothing else leaks: the
@@ -262,8 +262,10 @@ export const openJob = (app, id, step = null) => app.store.set({mode: 'jobs', jo
 
 // ---- jobs list -------------------------------------------------------------------------------------
 
-const TIME_LIMITS = [[0, N('Time')], [1, N('Up to 1 h')], [3, N('Up to 3 h')], [6, N('Up to 6 h')]];
-const DIFF_LIMITS = [[0, N('Difficulty')], [2, N('Easy, 1 to 2')], [3, N('Up to 3')], [4, N('Up to 4')]];
+const TIME_LIMITS = [[0, N('How long')], [1, N('Up to 1 h')], [3, N('Up to 3 h')], [6, N('Up to 6 h')]];
+const DIFF_LIMITS = [[0, N('How hard')], [2, N('Easy ones')], [3, N('Up to medium')], [4, N('Up to hard')]];
+// The plain answer to Can I do this myself? Each job's diy.answer in data/jobs.json picks one.
+const ANSWER = {yes: N('Yes'), care: N('Yes, with care'), skilled: N('Only with experience'), garage: N('Best left to a garage')};
 const filters = {system: '', diff: 0, time: 0, noLift: false};
 
 const usageCache = new Map();
@@ -312,12 +314,13 @@ export function carryOn(s) {
   return step < steps.length ? {id: job.id, title: job.title, step, of: steps.length, stepTitle: steps[step].title} : null;
 }
 
-function variantNote(job, v) {
+/** How a job fits this car. The list says only what limits the job: a count of hidden steps reads like a warning there. */
+function variantNote(job, v, {list = false} = {}) {
   const steps = jobSteps(job, v);
   const a = appliesText(job.appliesTo);
   const bits = [];
   if (a) bits.push(t('{what} only.', {what: `${a[0].toUpperCase()}${a.slice(1)}`}));
-  if (steps.length < job.steps.length) bits.push(t('{n} of {total} steps are for this car.', {n: steps.length, total: job.steps.length}));
+  if (!list && steps.length < job.steps.length) bits.push(t('Steps for other cars are hidden.'));
   const maybe = steps.filter((st) => appliesStatus(st.appliesTo, v) === 'maybe').length;
   if (maybe) bits.push(plural(maybe, '{n} depend on your VIN.|one', '{n} depend on your VIN.'));
   return bits.join(' ');
@@ -327,12 +330,12 @@ function jobRow(app, job, s, u) {
   const v = s.variant;
   const steps = jobSteps(job, v);
   const done = doneCount(s, job, steps);
-  const note = variantNote(job, v);
+  const note = variantNote(job, v, {list: true});
   return h('button.ws-row.ws-job', {type: 'button', 'data-fk': `job-${job.id}`, onclick: () => openJob(app, job.id)},
-    h('span.ws-row-main', h('strong', job.title), h('span.ws-job-why', usageLine(u) || t('Not called for by the schedule or fault lists')), note && h('span.ws-job-note', note)),
+    h('span.ws-row-main', h('strong', job.title), h('span.ws-job-why', t('Can I do it? {answer}', {answer: t(ANSWER[job.diy.answer])})), note && h('span.ws-job-note', note)),
     h('span.ws-job-meta',
       h('span.ws-job-stat', pips(job.difficulty), h('span', hoursText(job.hoursDiy))),
-      h('span.ws-job-tags', !job.liftNeeded && h('span.ws-tag.ws-tag--good', t('No lift')), job.specialTools && h('span.ws-tag', t('Special tools')), job.conf === 'community' && h('span.ws-tag.ws-tag--community', t('Community')),
+      h('span.ws-job-tags', !job.liftNeeded && h('span.ws-tag.ws-tag--good', t('No jacking up')), job.specialTools && h('span.ws-tag', t('Special tools')), job.conf === 'community' && h('span.ws-tag.ws-tag--community', CONF.community.word),
         done > 0 && h('span.ws-tag.ws-tag--ink', done >= steps.length ? t('Done') : t('Step {n} of {total}', {n: resumeIndex(s, job, steps) + 1, total: steps.length})))));
 }
 
@@ -351,20 +354,21 @@ function renderList(app, s, root) {
   const set = (patch) => { Object.assign(filters, patch); renderList(app, app.store.get(), root); };
   const active = filters.system || filters.diff || filters.time || filters.noLift;
   paintView(root, 'list', [
-    h('header.ws-top', h('h2', t('Jobs|mode')), h('p.ws-mute', t('For a {car}, most needed first.', {car: carLabel(v)}))),
+    h('header.ws-top', h('h2', t('Fix or service something')), h('p.ws-mute', t('For a {car}, most needed first.', {car: carLabel(v)}))),
     going.length > 0 && h('div.ws-resume', going.map((j) => {
       const st = jobSteps(j, v);
       const i = resumeIndex(s, j, st);
       return h('button.ws-row.ws-row--ink', {type: 'button', onclick: () => openJob(app, j.id, i)}, h('span.ws-row-main', h('strong', t('Carry on: {job}', {job: j.title})), h('span', t('Step {n} of {total}, {title}', {n: i + 1, total: st.length, title: st[i]?.title ?? ''}))), icon('right'));
     })),
-    h('div.ws-filters.ws-filters--jobs', {role: 'group', 'aria-label': t('Filter jobs')},
-      select(t('System'), filters.system, [['', t('System')], ...systems.map((x) => [x, sysName(x)])], (x) => set({system: x})),
-      select(t('Difficulty'), filters.diff, DIFF_LIMITS.map(([k, x]) => [k, t(x)]), (x) => set({diff: +x})),
-      select(t('Time'), filters.time, TIME_LIMITS.map(([k, x]) => [k, t(x)]), (x) => set({time: +x})),
-      h('button.ws-toggle', {type: 'button', 'aria-pressed': String(filters.noLift), 'data-fk': 'nolift', onclick: () => set({noLift: !filters.noLift})}, t('No lift'))),
+    basicsBlock(app, s, () => renderList(app, app.store.get(), root)),
+    fold('filters', t('Narrow the list'), active ? t('{n} of {total}', {n: shown.length, total: all.length}) : null, h('div.ws-filters.ws-filters--jobs', {role: 'group', 'aria-label': t('Narrow the list')},
+      select(t('Which part'), filters.system, [['', t('Which part')], ...systems.map((x) => [x, sysName(x)])], (x) => set({system: x})),
+      select(t('How hard'), filters.diff, DIFF_LIMITS.map(([k, x]) => [k, t(x)]), (x) => set({diff: +x})),
+      select(t('How long'), filters.time, TIME_LIMITS.map(([k, x]) => [k, t(x)]), (x) => set({time: +x})),
+      h('button.ws-toggle', {type: 'button', 'aria-pressed': String(filters.noLift), 'data-fk': 'nolift', onclick: () => set({noLift: !filters.noLift})}, t('No jacking up')))),
     shown.length ? h('div.ws-list', shown.map((j) => jobRow(app, j, s, u.get(j.id))))
       : h('div.ws-empty', h('p', t('No job fits those filters on this car.')), active && h('button.ws-btn', {type: 'button', onclick: () => set({system: '', diff: 0, time: 0, noLift: false})}, t('Clear filters'))),
-    h('p.ws-foot-note', t('{n} of {total} jobs. Ranked by how often the service schedule, faults and weak spots call for each one. Hours are DIY estimates: no book times were found.', {n: shown.length, total: all.length})),
+    h('p.ws-foot-note', t('{n} of {total} jobs. The ones owners need most come first. Times are estimates: no Jaguar times were found.', {n: shown.length, total: all.length})),
     other.length > 0 && h('p.ws-foot-note', t('Not for this car: {jobs}.', {jobs: other.map((j) => j.title).join(', ')})),
   ]);
 }
@@ -434,6 +438,38 @@ function jobHeader(app, job, s) {
 
 const SAFETY_SHOWN = 3;
 
+/** What the job needs, in a list a beginner can read. The hand tools are one line, and the full list is one tap below. */
+function needs(job, kit) {
+  const names = (kind) => kit.tools.filter((x) => x.kind === kind).map((x) => x.name);
+  const special = [...names('special'), ...names('diagnostic')];
+  const own = kit.tools.filter((x) => NOT_ORDINARY.has(x.id)).map((x) => x.name);
+  const out = [...own, ...(job.needs ?? [])];
+  if (kit.tools.some((x) => x.kind === 'hand' && !NOT_ORDINARY.has(x.id) && !x.id.startsWith('torque-wrench'))) out.push(t('Ordinary hand tools'));
+  if (job.tools.some((id) => id.startsWith('torque-wrench'))) out.push(t('A torque wrench'));
+  out.push(...names('lift'));
+  out.push(...special.slice(0, NEEDS_NAMED), special.length > NEEDS_NAMED && plural(special.length - NEEDS_NAMED, 'and {n} more special tool', 'and {n} more special tools'));
+  return out.filter(Boolean);
+}
+const NEEDS_NAMED = 4;
+// Hand tools by kind, but not ones a beginner has or can guess: a step stops dead without them, so the list names them.
+const NOT_ORDINARY = new Set(['jump-leads', 'battery-charger', 'piston-retract-tool', 'multimeter', 'bleed-kit', 'spark-plug-socket', 'oil-filter-strap-wrench', 'vacuum-brush', 'fluid-pump', 'coil-spring-compressor', 'fuel-line-disconnect']);
+
+/** The plain answer that leads every job: who it suits, what it takes, how long, and when to stop. */
+function diyAnswer(job, kit, seen) {
+  const time = job.hoursDiy;
+  const list = needs(job, kit);
+  return h('section.ws-diy', {'aria-label': t('Can I do this myself?')},
+    h('h3', t('Can I do this myself?')),
+    h('p.ws-diy-answer', t(ANSWER[job.diy.answer])),
+    h('dl',
+      h('dt', t('Who it suits')), h('dd', gloss(job.diy.suits, seen)),
+      list.length > 0 && [h('dt', t('What you need')), h('dd', h('ul.ws-plain', list.map((x) => h('li', x))))],
+      time != null && [h('dt', t('How long it really takes')), h('dd', t('About {time} if you have done it before. Allow twice that the first time.', {time: hoursText(time)}), time >= WEEKEND_H && ` ${t('Keep a whole weekend free.')}`, ' ', h('span.ws-mute', t('This is an estimate, not a Jaguar figure.')))],
+      h('dt', t('When to stop and call a garage')), h('dd', gloss(job.diy.stop, seen))));
+}
+const WEEKEND_H = 6;
+const SUMMARY_FIRST = new Set(['flat-battery']); // someone standing at a dead car needs the one sentence that gets them in before anything else
+
 function renderOverview(app, job, s, root) {
   const v = s.variant;
   const {store} = app;
@@ -445,40 +481,50 @@ function renderOverview(app, job, s, root) {
   const gaps = jobGaps(job, v);
   const d = doneFor(s, job);
   const T = (x) => convertTorqueText(x, s.units);
+  const seen = new Set(); // the summary and the answer mark a word first, so the warnings carry as few underlines as they can
+  const answer = diyAnswer(job, kit, seen);
+  const summary = gloss(T(job.summary), seen);
+  const safety = (x) => h('li', gloss(T(x), seen));
+  const u = usage(v).get(job.id);
   const body = [
     h('button.ws-back', {type: 'button', onclick: () => leaveJob(app)}, icon('left'), t('All jobs')),
     h('header.ws-top', h('h2', job.title)),
-    h('div.ws-safety', {role: 'alert'}, h('h3', icon('warn'), t('Safety first')), h('ul', job.safety.slice(0, SAFETY_SHOWN).map((x) => h('li', T(x)))),
-      job.safety.length > SAFETY_SHOWN && h('details.ws-more', h('summary', plural(job.safety.length - SAFETY_SHOWN, '{n} more safety notes|one', '{n} more safety notes')), h('ul', job.safety.slice(SAFETY_SHOWN).map((x) => h('li', T(x)))))),
-    h('p.ws-disclaimer', t(DISCLAIMER)),
-    h('p', T(job.summary)),
-    job.conf === 'community' && callout('warn', t('Community-sourced job'), h('p', t('No Jaguar procedure backs this job. The steps come from owners and forums, so read each one against the car before you commit.'))),
-    job.conf === 'single' && callout('warn', t('Single-source job'), h('p', t('One source only. Nothing has confirmed these steps.'))),
-    h('dl.ws-facts',
-      h('div', h('dt', t('Difficulty')), h('dd', pips(job.difficulty), ` ${t('{n} of 5', {n: job.difficulty})}`)),
-      h('div', h('dt', t('DIY time')), h('dd', t('{time} est.', {time: hoursText(job.hoursDiy)}))),
-      h('div', h('dt', t('Book time')), h('dd.ws-none', job.hoursBook == null ? t('Not sourced') : hoursText(job.hoursBook))),
-      h('div', h('dt', t('Lift or stands')), h('dd', job.liftNeeded ? t('Needed') : t('Not needed'))),
-      h('div', h('dt', t('Special tools')), h('dd', job.specialTools ? t('Needed') : t('None'))),
-      h('div', h('dt', t('Source')), h('dd', badge(job, {title: job.title})))),
+    SUMMARY_FIRST.has(job.id) && h('p.ws-summary', summary),
+    answer,
+    !SUMMARY_FIRST.has(job.id) && h('p.ws-summary', summary),
+    h('div.ws-safety', {role: 'alert'}, h('h3', icon('warn'), t('Safety first')), h('ul', job.safety.slice(0, SAFETY_SHOWN).map(safety)),
+      job.safety.length > SAFETY_SHOWN && h('details.ws-more', h('summary', plural(job.safety.length - SAFETY_SHOWN, '{n} more safety notes|one', '{n} more safety notes')), h('ul', job.safety.slice(SAFETY_SHOWN).map(safety)))),
+    watchSection(app, s, job),
+    job.conf === 'community' && callout('warn', t('Written from owners\' reports'), h('p', t('No Jaguar procedure backs this job. The steps come from owners and forums, so read each one against the car before you commit.'))),
+    job.conf === 'single' && callout('warn', t('From one source'), h('p', t('One source only. Nothing has confirmed these steps.'))),
     note && h('p.ws-carnote', h('strong', t('On your {car}: ', {car: carLabel(v)})), note),
     brakeChoice(app, job, v),
     job.liftNeeded && job.id !== 'jacking-stands' && h('button.ws-row', {type: 'button', onclick: () => openJob(app, 'jacking-stands')}, h('span.ws-row-main', h('strong', t('Where to jack and where the stands go')), h('span', t('Read this before lifting the car'))), icon('right')),
     jobHeader(app, job, s),
-    section('parts', t('Parts'), kit.parts.length,
+    fold('parts', t('Parts'), kit.parts.length,
       kit.parts.length ? h('ul.ws-parts', kit.parts.map((p) => partRow(p, v))) : h('p.ws-none', t('No parts are listed for this job.')),
       kit.otherParts > 0 && h('p.ws-small.ws-mute', plural(kit.otherParts, '{n} part is for other cars and left out.', '{n} parts are for other cars and left out.'))),
-    section('consumables', t('Consumables'), kit.consumables.length, kit.consumables.length ? h('ul.ws-plain', kit.consumables.map((x) => h('li', x))) : h('p.ws-none', t('None listed.'))),
-    kit.fluids.length > 0 && section('fluids', t('Fluids for this car'), kit.fluids.length, kit.fluids.map((f) => fluidBlock(f, v))),
-    section('tools', t('Tools'), kit.tools.length, h('ul.ws-tools', kit.tools.map((tool) => toolRow(tool, null, s.units)))),
-    section('steps', t('Steps'), t('{n} of {total} done', {n: done, total: steps.length}), h('ol.ws-steplist', steps.map((st, i) => h('li', h('button.ws-row', {type: 'button', onclick: () => go(app, job, i)},
+    fold('consumables', t('Things you use up'), kit.consumables.length, kit.consumables.length ? h('ul.ws-plain', kit.consumables.map((x) => h('li', x))) : h('p.ws-none', t('None listed.'))),
+    kit.fluids.length > 0 && fold('fluids', t('Fluids for this car'), kit.fluids.length, kit.fluids.map((f) => fluidBlock(f, v))),
+    fold('tools', t('Tools'), kit.tools.length, h('ul.ws-tools', kit.tools.map((tool) => toolRow(tool, null, s.units)))),
+    fold('steps', t('Steps'), t('{n} of {total} done', {n: done, total: steps.length}), h('ol.ws-steplist', steps.map((st, i) => h('li', h('button.ws-row', {type: 'button', onclick: () => go(app, job, i)},
       h('span.ws-stepno', {class: d.has(job.steps.indexOf(st)) ? 'is-done' : ''}, d.has(job.steps.indexOf(st)) ? icon('check') : i + 1),
       h('span.ws-row-main', h('strong', st.title), stepWarn(st, v) && h('span.ws-steplist-warn', t('Has a warning')))))))),
-    kit.torques.length > 0 && section('torques', t('Torques in this job'), kit.torques.length, kit.torques.map((rec) => torqueBlock(rec, s.units, v))),
+    kit.torques.length > 0 && fold('torques', t('Tightening figures in this job'), kit.torques.length, kit.torques.map((rec) => torqueBlock(rec, s.units, v))),
+    fold('details', t('The details'), null,
+      h('dl.ws-facts',
+        h('div', h('dt', t('Difficulty')), h('dd', pips(job.difficulty), ` ${t('{n} of 5', {n: job.difficulty})}`)),
+        h('div', h('dt', t('Time to do it yourself')), h('dd', t('{time} est.', {time: hoursText(job.hoursDiy)}))),
+        h('div', h('dt', t('Garage book time')), h('dd.ws-none', job.hoursBook == null ? t('Not found') : hoursText(job.hoursBook))),
+        h('div', h('dt', t('Jacking up')), h('dd', job.liftNeeded ? t('Needed') : t('Not needed'))),
+        h('div', h('dt', t('Special tools')), h('dd', job.specialTools ? t('Needed') : t('None'))),
+        h('div', h('dt', t('Source')), h('dd', badge(job, {title: job.title})))),
+      h('p.ws-small.ws-mute', t('Why it is on the list: {why}', {why: usageLine(u) || t('not called for by the schedule or fault lists')}))),
     gaps.length > 0 && section('gaps', t('What the sources could not confirm'), gaps.length, h('ul.ws-plain.ws-small', gaps.map((g) => h('li', g)))),
+    h('p.ws-disclaimer', t(DISCLAIMER)),
     done > 0 && h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: () => { const st = store.get(); const n = {...st.doneSteps}, l = {...st.lastStep}; delete n[job.id]; delete l[job.id]; store.set({doneSteps: n, lastStep: l, lastJob: st.lastJob === job.id ? null : st.lastJob}); }}, t('Clear the ticks on this job')),
   ];
-  const foot = h('div.ws-foot', h('button.ws-big.ws-big--go', {type: 'button', 'data-fk': 'start', onclick: () => go(app, job, Math.min(at, steps.length))},
+  const foot = h('div.ws-foot.ws-foot--thin', h('button.ws-big.ws-big--go', {type: 'button', 'data-fk': 'start', onclick: () => go(app, job, Math.min(at, steps.length))},
     done === 0 && s.lastStep?.[job.id] == null ? t('Start the job') : at >= steps.length ? t('Check it worked') : t('Resume at step {n} of {total}', {n: at + 1, total: steps.length}), icon('right')));
   setPrintable(() => jobCard(job, s));
   paintView(root, `job-${job.id}`, body, foot);
@@ -497,7 +543,7 @@ function stepDoneToggle(app, job, st) {
 function standIn(missing) {
   const shown = [...new Set(missing.map((m) => m.id).filter(Boolean))].map(partName);
   const parts = missing.map((m) => partName(m.want)).join(', ');
-  return shown.length ? t('Not modelled: {parts}. The view lights {shown} instead.', {parts, shown: shown.join(', ')}) : t('Not modelled: {parts}.', {parts});
+  return shown.length ? t('Not in the 3D car: {parts}. It lights {shown} instead.', {parts, shown: shown.join(', ')}) : t('Not in the 3D car: {parts}.', {parts});
 }
 
 function renderStep(app, job, s, i, root) {
@@ -510,25 +556,30 @@ function renderStep(app, job, s, i, root) {
   const done = doneFor(s, job).has(job.steps.indexOf(st));
   const missing = st.focus.map((want) => ({want, ...app.registry.resolve(want)})).filter((r) => !r.exact);
   const count = doneCount(s, job, steps);
-  const blocks = torques.map((t) => torqueBlock(t, s.units, v));
+  const blocks = torques.map((rec, n) => torqueBlock(rec, s.units, v, {plain: n === 0}));
   const pinned = s.garage && blocks.length === 1; // the one figure that has to read at arm's length stays in view
-  const early = blocks.length <= EARLY_TORQUES; // a step listing every bolt of a housing keeps its text first
+  const seen = new Set(); // the text marks a word first, so the warning carries as few underlines as it can
+  const text = stepText(T(st.text), seen);
+  const check = st.check && gloss(T(st.check), seen);
+  const tip = st.tip && gloss(T(st.tip), seen);
+  const warning = stepWarn(st, v) && stepWarning(T(stepWarn(st, v)), seen);
   const body = [
     h('div.ws-stephead', h('button.ws-back', {type: 'button', onclick: () => go(app, job, null)}, icon('left'), h('span', job.title)), h('p.ws-stepcount', {'aria-live': 'polite'}, t('Step {n} of {total}', {n: i + 1, total: steps.length}))),
     h('div.ws-progress', {role: 'progressbar', 'aria-valuemin': 0, 'aria-valuemax': steps.length, 'aria-valuenow': count}, h('i', {style: `width:${(count / steps.length) * 100}%`})),
     pinned && h('div.ws-pin', blocks),
     h('h2.ws-steptitle', st.title),
     vinTag(st, v),
-    stepWarn(st, v) && stepWarning(T(stepWarn(st, v))),
-    early && !pinned && blocks,
-    st.torque.length > 0 && !torques.length && h('p.ws-none', t('No sourced figure for your car. Any number in the text is from another model.')),
-    h('p.ws-steptext', T(st.text)),
-    unsized(st) && h('p.ws-small.ws-mute', t('Socket size not sourced for this step. Check it on the car before you start.')),
-    !early && blocks,
+    warning,
+    text,
+    stepTools(job, st),
+    unsized(st) && h('p.ws-small.ws-mute', t('We do not know the socket size for this step. Check it on the car before you start.')),
+    st.torque.length > 0 && !torques.length && h('p.ws-none', t('We have no figure for your car. Any number in the text is from another model.')),
+    !pinned && blocks,
+    stepWatch(app, s, job, st),
     fluids.map((f) => fluidBlock(f, v)),
     (st.fluid?.length ?? 0) > 0 && !fluids.length && h('p.ws-none', t('This step lists fluids for other cars only.')),
-    st.check && callout('ok', t('Check'), h('p', T(st.check))),
-    st.tip && callout('tip', t('Tip'), h('p', T(st.tip))),
+    st.check && callout('ok', t('Check'), h('p', check)),
+    st.tip && callout('tip', t('Tip'), h('p', tip)),
     st.focus.length > 0 && h('div.ws-focus', h('span.ws-label', t('Working on')), st.focus.map((id) => partChip(app, id, {accent: true}))),
     missing.length > 0 && h('p.ws-small.ws-mute', standIn(missing)),
     st.remove.length > 0 && h('p.ws-small', h('strong', t('Comes off: ')), st.remove.map(partName).join(', ')),
@@ -538,21 +589,32 @@ function renderStep(app, job, s, i, root) {
   const last = i === steps.length - 1;
   const foot = h('div.ws-foot', {dataset: {peek: ''}}, h('div.ws-nextprev',
     h('button.ws-tick', {type: 'button', role: 'checkbox', 'aria-checked': String(done), 'aria-label': t('Step done'), 'data-fk': 'tick', onclick: () => stepDoneToggle(app, job, st)}, [h('span.ws-box', done ? icon('check') : null), h('span', t('Done'))]),
-    h('button.ws-big', {type: 'button', 'data-fk': 'prev', 'aria-label': i === 0 ? t('Back to the job overview') : t('Previous step'), onclick: () => go(app, job, i === 0 ? null : i - 1)}, [icon('left'), i === 0 ? t('Job') : t('Back')]),
-    h('button.ws-big.ws-big--go', {type: 'button', 'data-fk': 'next', 'aria-label': last ? t('Done, check it worked') : t('Done, next step'), onclick: () => doneAndNext(app, job, i)}, [last ? t('Finish') : t('Next'), icon('right')])));
+    h('button.ws-big', {type: 'button', 'data-fk': 'prev', 'aria-label': i === 0 ? t('Back to the job overview') : t('Previous step'), onclick: () => go(app, job, i === 0 ? null : i - 1)}, [icon('left'), i === 0 ? t('Job|back') : t('Back')]),
+    h('button.ws-big.ws-big--go', {type: 'button', 'data-fk': 'next', 'aria-label': last ? t('Check it worked') : t('Next step'), onclick: () => go(app, job, i + 1)}, [last ? t('Finish') : t('Next'), icon('right')])));
   setPrintable(() => jobCard(job, s));
   paintView(root, `step-${job.id}-${i}`, body, foot);
 }
 
-const EARLY_TORQUES = 2;
+const STEP_LINES = 3; // from this many sentences a step reads as a list of actions
+const SENTENCE = /(?<=[.!?])\s+(?=[A-ZÀ-Ý])/u;
+/** A step's text: a list when it packs in several actions, so a greasy finger can keep its place. */
+function stepText(text, seen) {
+  const lines = text.split(SENTENCE);
+  return lines.length < STEP_LINES ? h('p.ws-steptext', gloss(text, seen)) : h('ol.ws-steptext.ws-steplines', lines.map((x) => h('li', gloss(x, seen))));
+}
+/** What this step is done with, when the step says. */
+function stepTools(job, st) {
+  const list = (st.tools ?? []).filter((id) => job.tools.includes(id)).map((id) => data.tools.byId.get(id)?.name).filter(Boolean);
+  return list.length > 0 && h('p.ws-step-tools', h('strong', t('You need: ')), list.join(', '));
+}
 const FASTENS = /\b(?:undo|slacken|bolts?|nuts?|guide pins?|tighten)\b/i, SIZED = /\b\d+(?:\.\d+)?\s?mm\b|\b\d+\/\d+ inch\b|\bT\d{2}\b|\bTorx\b|\bAllen\b|\bhex\b|\bM\d+\b|\bby hand\b/i;
 /** A step that turns a fastener and does not say what with. The sources rarely give socket sizes, and none is guessed here. */
 const unsized = (st) => (st.torque.length > 0 || FASTENS.test(en(st, 'text'))) && !SIZED.test(`${en(st, 'text')} ${en(st, 'tip') ?? ''}`);
 
 /** The warning at the top of a step: its first sentence stays loud, the rest is one tap away. */
-function stepWarning(text) {
+function stepWarning(text, seen) {
   const [first, ...rest] = text.split(/(?<=[.!?])\s+/);
-  return h('div.ws-safety.ws-safety--step', {role: 'alert'}, h('p', icon('warn'), ' ', first), rest.length > 0 && h('details.ws-more', h('summary', t('More')), h('p', rest.join(' '))));
+  return h('div.ws-safety.ws-safety--step', {role: 'alert'}, h('p', icon('warn'), ' ', gloss(first, seen)), rest.length > 0 && h('details.ws-more', h('summary', t('More')), h('p', gloss(rest.join(' '), seen))));
 }
 
 function renderVerify(app, job, s, root) {
@@ -576,26 +638,19 @@ function renderVerify(app, job, s, root) {
 
 const go = (app, job, step) => app.store.set({job: {id: job.id, step}, selected: null, isolate: null, view: step == null ? app.store.get().view : null});
 const leaveJob = (app) => app.store.set({job: null, selected: null, isolate: null, view: 'hero'});
-/** Next means done: the natural press records the step. The Done box, there or on the step list, takes a tick back. */
-function doneAndNext(app, job, i) {
-  const s = app.store.get();
-  const steps = jobSteps(job, s.variant);
-  const n = job.steps.indexOf(steps[i]);
-  const d = doneFor(s, job);
-  if (!d.has(n)) { d.add(n); app.store.set({doneSteps: {...s.doneSteps, [job.id]: [...d].sort((a, b) => a - b)}}); }
-  go(app, job, i + 1);
-}
 
 /** A named view moves the camera only when it changes, and a step may have left the camera anywhere. */
 const backToWhole = (app) => { app.store.set({view: null}); app.store.set({view: 'hero'}); };
 
 const LIFT_SETTLE_MS = 420; // lifts ease over about this long: frame a lifted part once it has arrived
-let flyTimer = 0;
+const MARK_AZ = 165, MARK_EL = 12, MARK_DIST = 2.6, MARK_S = 0.9; // behind the car and a little to its right
+let flyTimer = 0, marked = false;
 function flyForJob(app, s) {
   clearTimeout(flyTimer);
   const job = s.job && app.data.jobs.byId.get(s.job.id);
   if (!job) return;
   const steps = jobSteps(job, s.variant);
+  if (marked) { marked = false; app.pick.setLabels([]); app.pick.setAutoLabels(true); }
   if (s.job.step == null) { // the overview shows where the job happens on the car
     const ids = [...new Set(steps.flatMap((st) => st.focus).map((id) => app.registry.resolve(id).id).filter(Boolean))];
     app.store.set({isolate: ids.length ? ids : null});
@@ -604,6 +659,15 @@ function flyForJob(app, s) {
   }
   const st = steps[s.job.step];
   if (!st) { backToWhole(app); return; }
+  if (st.mark) { // a place on the car with no part of its own, like a keyhole: seen from where you would stand, with a label on it
+    const [x, y, z] = st.mark.at;
+    if (app.store.get().view) app.store.set({view: null});
+    marked = true;
+    app.pick.setAutoLabels(false);
+    app.pick.setLabels([{point: st.mark.at, text: st.mark.text, accent: true}]);
+    flyTimer = setTimeout(() => app.rig.fly({az: MARK_AZ, el: MARK_EL, dist: MARK_DIST, x, y, z}, MARK_S), 0);
+    return;
+  }
   // A step with no part of its own, like refitting a wheel, stays with the work: the nearest step before it that has one.
   const near = [...steps.slice(0, s.job.step + 1).reverse(), ...steps.slice(s.job.step + 1)].find((x) => x.focus.some((id) => app.registry.resolve(id).id));
   const target = near?.focus.map((id) => app.registry.resolve(id)).find((r) => r.id);
@@ -633,8 +697,7 @@ function step(app, by) {
   const n = jobSteps(job, s.variant).length;
   const to = s.job.step + by;
   if (to < 0) go(app, job, null);
-  else if (by > 0 && to <= n) doneAndNext(app, job, s.job.step);
-  else if (to <= n) go(app, job, to);
+  else if (to <= n) go(app, job, to); // Next only moves: reading ahead must not record work as done. The Done box does that
 }
 
 // ---- print card ----------------------------------------------------------------------------------------
@@ -644,24 +707,24 @@ export function jobCard(job, s) {
   const v = s.variant;
   const T = (x) => convertTorqueText(x, s.units);
   const kit = jobKit(job, v);
-  const pn = (p) => forVariant(data.parts.byId.get(p.part)?.partNumbers ?? [], v).map((n) => `${n.no}${n.desc ? ` (${n.desc})` : ''}`).join(', ') || t('No part number sourced');
+  const pn = (p) => forVariant(data.parts.byId.get(p.part)?.partNumbers ?? [], v).map((n) => `${n.no}${n.desc ? ` (${n.desc})` : ''}`).join(', ') || t('No part number found');
   // Not f.text: its ", then" joins onto stages that often start "Then a further".
-  const tq = (rec) => { const f = formatTorque(rec, s.units); return f.stages.length ? f.stages.join('; ') : f.value != null ? `${f.value} ${f.unit}${f.alt ? ` (${f.alt})` : ''}` : t('Not sourced'); };
+  const tq = (rec) => { const f = formatTorque(rec, s.units); return f.stages.length ? f.stages.join('; ') : f.value != null ? `${f.value} ${f.unit}${f.alt ? ` (${f.alt})` : ''}` : t('Not found'); };
   const trust = provenance(job, v).scope?.word ?? CONF[job.conf]?.word ?? job.conf;
-  const fluidLine = (f) => `${f.spec ?? t('no sourced spec')}, ${f.capacityL != null ? `${dec(f.capacityL)} L` : t('capacity not sourced')}`;
+  const fluidLine = (f) => `${f.spec ?? t('no specification found')}, ${f.capacityL != null ? `${dec(f.capacityL)} L` : t('capacity not found')}`;
   return h('article.ws-card',
     h('header.ws-card-head', h('div', h('p.ws-card-kicker', t(v.serial ? 'XK8 Workshop job card, {car}, serial {serial}' : 'XK8 Workshop job card, {car}', {car: carLabel(v), serial: v.serial})), h('h1', job.title), h('p', T(job.summary))),
-      h('dl', h('div', h('dt', t('Difficulty')), h('dd', t('{n} of 5', {n: job.difficulty}))), h('div', h('dt', t('DIY time')), h('dd', t('{time} est.', {time: hoursText(job.hoursDiy)}))), h('div', h('dt', t('Book time')), h('dd', t('Not sourced'))), h('div', h('dt', t('Lift')), h('dd', job.liftNeeded ? t('Needed') : t('Not needed'))), h('div', h('dt', t('Source')), h('dd', trust)))),
+      h('dl', h('div', h('dt', t('Difficulty')), h('dd', t('{n} of 5', {n: job.difficulty}))), h('div', h('dt', t('Time to do it yourself')), h('dd', t('{time} est.', {time: hoursText(job.hoursDiy)}))), h('div', h('dt', t('Garage book time')), h('dd', t('Not found'))), h('div', h('dt', t('Jacking up')), h('dd', job.liftNeeded ? t('Needed') : t('Not needed'))), h('div', h('dt', t('Source')), h('dd', trust)))),
     h('section.ws-card-safety', h('h2', t('Safety first')), h('ul', job.safety.map((x) => h('li', T(x))))),
     h('p.ws-disclaimer', t(DISCLAIMER)),
-    job.conf === 'community' && h('p.ws-card-warn', t('Community-sourced job: no Jaguar procedure backs it.')),
-    job.conf === 'single' && h('p.ws-card-warn', t('Single-source job: nothing has confirmed these steps.')),
+    job.conf === 'community' && h('p.ws-card-warn', t('Written from owners\' reports: no Jaguar procedure backs it.')),
+    job.conf === 'single' && h('p.ws-card-warn', t('From one source: nothing has confirmed these steps.')),
     h('div.ws-card-two',
       h('section', h('h2', t('Parts')), kit.parts.length ? h('table', h('tbody', kit.parts.map((p) => h('tr', h('td.ws-card-qty', `${p.qty} x`), h('td', h('strong', partName(p.part)), h('br'), pn(p)))))) : h('p', t('None listed.')),
-        kit.consumables.length > 0 && [h('h2', t('Consumables')), h('ul', kit.consumables.map((x) => h('li', x)))],
+        kit.consumables.length > 0 && [h('h2', t('Things you use up')), h('ul', kit.consumables.map((x) => h('li', x)))],
         kit.fluids.length > 0 && [h('h2', t('Fluids')), h('ul', kit.fluids.map((f) => h('li', h('strong', f.name), `: ${fluidLine(f)}`)))]),
-      h('section', h('h2', t('Tools')), h('ul', kit.tools.map((tool) => h('li', h('strong', tool.name), tool.size && ` ${T(tool.size)}`, tool.jdNumber && ` (${tool.jdNumber})`, tool.altDiy && h('span', `. ${t('DIY: {how}', {how: T(tool.altDiy)})}`)))))),
-    kit.torques.length > 0 && h('section', h('h2', t('Torques')), h('table.ws-card-tq', h('tbody', kit.torques.map((rec) => h('tr', h('td', rec.label, rec.reuse && h('em', ` ${rec.reuse}`), torqueWarning(rec) && h('em', ` ${torqueWarning(rec)}`)), h('td', tq(rec))))))),
+      h('section', h('h2', t('Tools')), h('ul', kit.tools.map((tool) => h('li', h('strong', tool.name), tool.size && ` ${T(tool.size)}`, tool.jdNumber && ` (${tool.jdNumber})`, tool.altDiy && h('span', `. ${t('Without it: {how}', {how: T(tool.altDiy)})}`)))))),
+    kit.torques.length > 0 && h('section', h('h2', t('Tightening figures')), h('table.ws-card-tq', h('tbody', kit.torques.map((rec) => h('tr', h('td', rec.label, rec.reuse && h('em', ` ${rec.reuse}`), torqueWarning(rec) && h('em', ` ${torqueWarning(rec)}`)), h('td', tq(rec))))))),
     h('section', h('h2', t('Steps')), h('ol.ws-card-steps', kit.steps.map((st) => {
       const ts = stepTorques(st, v);
       return h('li', h('span.ws-card-box'), h('div', h('h3', st.title), stepWarn(st, v) && h('p.ws-card-warn', t('Warning: {what}', {what: T(stepWarn(st, v))})), h('p', T(st.text)),
@@ -669,7 +732,7 @@ export function jobCard(job, s) {
     }))),
     job.verify.length > 0 && h('section', h('h2', t('Check it worked')), h('ul', job.verify.map((x) => h('li', x)))),
     h('section.ws-card-notes', h('h2', t('Notes')), h('p', t('Date and mileage:')), h('div.ws-card-lines')),
-    h('footer.ws-card-foot', t('Step text is written for this project. Values come from the data files, with sources in the app. Confidence: {word}.', {word: trust})));
+    h('footer.ws-card-foot', t('Step text is written for this project. Figures come with their sources in the app. Where they come from: {word}.', {word: trust})));
 }
 
 // ---- mount -----------------------------------------------------------------------------------------------
@@ -717,6 +780,7 @@ export function mount(el, app) {
   const stop = modeRoot(el, app, 'jobs', ['job', 'variant', 'units', 'doneSteps', 'list', 'garage', 'lang'], render, () => {
     document.removeEventListener('keydown', onKey);
     clearTimeout(flyTimer);
+    if (marked) { marked = false; app.pick.setLabels([]); app.pick.setAutoLabels(true); }
     if (store.get().isolate) store.set({isolate: null});
     if (!store.get().view) backToWhole(app); // a step left the camera on one part
   });

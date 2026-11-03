@@ -1,30 +1,38 @@
 {
  "ui": {
-  "strings": 950,
-  "chars": 23050
+  "strings": 1115,
+  "chars": 28764
  },
  "jobs": {
-  "strings": 1334,
-  "chars": 116076
+  "strings": 1422,
+  "chars": 126874
  },
  "parts": {
-  "strings": 2946,
-  "chars": 111496
+  "strings": 2943,
+  "chars": 111647
  },
  "dtc": {
   "strings": 1246,
   "chars": 62338
  },
  "reference": {
-  "strings": 1234,
-  "chars": 71483
+  "strings": 1246,
+  "chars": 73022
  },
  "advice": {
-  "strings": 1597,
-  "chars": 109663
+  "strings": 1599,
+  "chars": 110392
+ },
+ "tutorials": {
+  "strings": 523,
+  "chars": 53704
+ },
+ "terms": {
+  "strings": 134,
+  "chars": 6696
  },
  "total": {
-  "strings": 9307,
-  "chars": 494106
+  "strings": 10228,
+  "chars": 573437
  }
 }

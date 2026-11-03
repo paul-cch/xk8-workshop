@@ -119,6 +119,12 @@
    "url": "http://jagrepair.com/images/TSB/TSB2/XJ_XK/303Engine/303-32%20VVT%20bolt.pdf",
    "publisher": "Jaguar Cars",
    "kind": "factory"
+  },
+  "jtis-x308": {
+   "title": "Jaguar Technical Information System (JTIS) v2.1, XJ Range service manual data, MY1998 to MY2001 (datasets jwj1998en, jxj1999en, jzj2001en). Another model, used only as a cross-check",
+   "url": "https://archive.org/details/jtis-21-cd",
+   "publisher": "Jaguar Cars",
+   "kind": "factory"
   }
  },
  "items": [
@@ -3525,7 +3531,7 @@
    "reuse": null,
    "threadlock": null,
    "appliesTo": {},
-   "note": "New gasket and O-ring. Applies to 4.0 and 4.2. JTIS 303-03.",
+   "note": "New gasket and O-ring. Applies to 4.0 and 4.2. Two owner videos tighten these bolts to a plain 13 Nm, with no source. All JTIS years and the 2003-06 manual say 8 Nm plus 90 degrees. JTIS 303-03.",
    "src": [
     "jtis-my1997",
     "jtis-my1998",
@@ -3533,7 +3539,8 @@
     "jtis-my2000",
     "jtis-my2001",
     "jtis-my2002",
-    "jtis-my2003"
+    "jtis-my2003",
+    "wm"
    ],
    "conf": "factory"
   },
@@ -3666,7 +3673,7 @@
      "4.2"
     ]
    },
-   "note": "JTIS 309-00.",
+   "note": "4.2 only. The 4.0 has no nuts at this joint: it is a slip joint with a Torca clamp. JTIS 309-00.",
    "src": [
     "jtis-my2003"
    ],
@@ -3721,7 +3728,7 @@
      "4.0"
     ]
    },
-   "note": "JTIS 309-00.",
+   "note": "JTIS 309-00 lists 39-51 Nm and 303-01 lists 42-54 Nm for this joint, so 42-51 Nm fits both. JTIS 309-00.",
    "src": [
     "jtis-my1997",
     "jtis-my1998",
@@ -3730,7 +3737,7 @@
     "jtis-my2001",
     "jtis-my2002"
    ],
-   "conf": "factory"
+   "conf": "single"
   },
   {
    "id": "exhaust.downpipe-bracket-bolt-my2003-on",
@@ -3831,7 +3838,7 @@
      "4.0"
     ]
    },
-   "note": "JTIS 303-01 lists 15-20 Nm for this joint on 1997-2002 cars and 309-00 lists 14-18 Nm. JTIS 309-00.",
+   "note": "JTIS 309-00 lists 14-18 Nm and 303-01 lists 15-20 Nm for this joint, so 15-18 Nm fits both. An owner video quotes 60-80 Nm for these nuts, which is the Torca clamp row of the same table: no factory document gives it for these nuts. JTIS 309-00.",
    "src": [
     "jtis-my1997",
     "jtis-my1998",
@@ -3861,11 +3868,12 @@
      "4.2"
     ]
    },
-   "note": "JTIS 303-01 lists 15-20 Nm for this joint on 1997-2002 cars and 309-00 lists 14-18 Nm. JTIS 309-00.",
+   "note": "JTIS 309-00 and the 2003-06 manual table and procedures all give 20 Nm.",
    "src": [
-    "jtis-my2003"
+    "jtis-my2003",
+    "wm"
    ],
-   "conf": "single"
+   "conf": "factory"
   },
   {
    "id": "exhaust.oxygen-sensor-my1997-1998",
@@ -4000,14 +4008,15 @@
      "4.0"
     ]
    },
-   "note": "303-01 lists 50-60 Nm for the Torca clamps on 1997-2002 while 309-00 lists 60-80 Nm. JTIS 309-00.",
+   "note": "Unresolved: Jaguar's own figures disagree. JTIS 309-00 lists 60-80 Nm and 303-01 lists 50-60 Nm, and only 60 Nm fits both. The exhaust section for the X308, another model, lists 52-68 Nm, which 60 Nm also fits. JTIS 309-00.",
    "src": [
     "jtis-my1997",
     "jtis-my1998",
     "jtis-my1999",
     "jtis-my2000",
     "jtis-my2001",
-    "jtis-my2002"
+    "jtis-my2002",
+    "jtis-x308"
    ],
    "conf": "single"
   },
@@ -4030,11 +4039,12 @@
      "4.2"
     ]
    },
-   "note": "303-01 lists 50-60 Nm for the Torca clamps on 1997-2002 while 309-00 lists 60-80 Nm. JTIS 309-00.",
+   "note": "JTIS 309-00 and the 2003-06 manual agree on 50 Nm. The 4.0 clamps have their own figures.",
    "src": [
-    "jtis-my2003"
+    "jtis-my2003",
+    "wm"
    ],
-   "conf": "single"
+   "conf": "factory"
   },
   {
    "id": "induction.egr-pipe-to-manifold-my1997-2002",
@@ -4304,6 +4314,37 @@
    "src": [
     "jtis-my1998",
     "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002"
+   ],
+   "conf": "factory"
+  },
+  {
+   "id": "transmission.sc5-cooler-pipes-to-radiator",
+   "system": "transmission",
+   "label": "Gearbox cooler pipes to radiator, XKR 4.0",
+   "parts": [
+    "transmission.oil-cooler-pipes"
+   ],
+   "nm": 20,
+   "lbft": 15,
+   "stages": null,
+   "sequence": null,
+   "reuse": null,
+   "threadlock": null,
+   "appliesTo": {
+    "myFrom": 2000,
+    "myTo": 2002,
+    "induction": [
+     "sc"
+    ],
+    "engine": [
+     "4.0"
+    ]
+   },
+   "note": "JTIS 303-03A radiator procedure for supercharged cars, MY2000-2002. The 30-40 Nm banjo bolt is the other end of these pipes, at the gearbox.",
+   "src": [
     "jtis-my2000",
     "jtis-my2001",
     "jtis-my2002"
@@ -7099,7 +7140,7 @@
    "appliesTo": {
     "myFrom": 1998
    },
-   "note": "JTIS 205-02 tabulates \"lower fulcrum\" at 90-110 Nm and \"wishbone pivot\" at 80-100 Nm for 1998-on, against the 204-02 figures here. JTIS 204-02.",
+   "note": "The rear hub procedure prints 90-110 Nm for this nut in every model year, and JTIS 205-02 tabulates \"lower fulcrum\" at 90-110 Nm and \"wishbone pivot\" at 80-100 Nm. 90-110 Nm fits this table and the procedure. JTIS 204-02.",
    "src": [
     "jtis-my1998",
     "jtis-my1999",
@@ -8593,7 +8634,7 @@
    "reuse": null,
    "threadlock": null,
    "appliesTo": {},
-   "note": "JTIS 204-02.",
+   "note": "The rear hub procedure prints 7-10 Nm, and the table prints 8-10 Nm, which fits both. JTIS 204-02.",
    "src": [
     "jtis-my1997",
     "jtis-my1998",
@@ -8695,7 +8736,7 @@
   {
    "id": "wheels.wheel-nut-steel",
    "system": "wheels",
-   "label": "Wheel nut, steel wheel",
+   "label": "Wheel nut, space-saver spare only",
    "parts": [
     "wheels.wheel-nut"
    ],
@@ -8706,16 +8747,19 @@
    "reuse": null,
    "threadlock": null,
    "appliesTo": {
-    "myTo": 1999,
+    "myTo": 2002,
     "engine": [
      "4.0"
     ]
    },
-   "note": "JTIS 204-04.",
+   "note": "The only steel wheel JTIS lists is the narrow 3.5J X 18 with a 135/80 R 18 tyre, which reads as the space-saver spare. Road wheels are alloy. JTIS 204-04.",
    "src": [
     "jtis-my1997",
     "jtis-my1998",
-    "jtis-my1999"
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002"
    ],
    "conf": "factory"
   },

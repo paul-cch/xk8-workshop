@@ -234,6 +234,9 @@ for (const j of db.jobs?.items || []) {
     refs(sl, 'part', s.install);
     refs(sl, 'torque', s.torque);
     refs(sl, 'fluid', s.fluid);
+    for (const id of s.tools ?? []) if (!(j.tools ?? []).includes(id)) add('bad step tool', `${sl}: ${id} is not in the job's tools`);
+    for (const k of s.closed ?? []) if (k !== 'boot' && k !== 'bonnet') add('bad step closed', `${sl}: ${k}`);
+    if (s.mark && (typeof s.mark.text !== 'string' || !Array.isArray(s.mark.at) || s.mark.at.length !== 3)) add('bad step mark', sl);
     for (const p of s.remove || []) out.add(p);
     for (const p of s.install || []) {
       // A step with its own appliesTo is a variant branch, so a second install is expected.
@@ -314,12 +317,94 @@ for (const name of ['torques', 'fluids', 'jobs', 'faults', 'dtc', 'weakspots']) 
   for (const it of db[name]?.items || []) if (!SYSTEMS.has(it.system)) add('bad enum', `${labelOf(name, it)}: system ${it.system}`);
 }
 
+// ---- tutorials ------------------------------------------------------------------------------
+// Not a fact file: a tutorial carries a link and a fit, not src and conf, so it has its own shape. See docs/data-contract.md.
+
+const TUTORIAL_KINDS = new Set(['video', 'guide', 'forum']);
+const TUTORIAL_FITS = new Set(['exact', 'same-engine', 'general']);
+const TUTORIAL_LANGS = new Set(['en', 'fr']);
+const TUTORIAL_FOR = { jobs: 'job', faults: 'fault', weakspots: 'weakspot', parts: 'part' };
+const BASICS = new Set(['jacking', 'torque-wrench', 'fault-codes', 'brake-bleed', 'toolkit', 'buying', 'what-goes-wrong']);
+
+function checkTutorials(d) {
+  for (const k of ['sources', 'items', 'gaps', 'order']) if (!(k in d)) add('missing required field', `tutorials.json: top-level ${k}`);
+  const seen = new Set();
+  for (const r of d.items || []) {
+    const label = `tutorials:${r.id}`;
+    for (const k of ['id', 'kind', 'title', 'source', 'lang', 'fit', 'for', 'why']) if (!(k in r) || r[k] === '' || r[k] == null) add('missing required field', `${label}: ${k}`);
+    if (seen.has(r.id)) add('duplicate id', label);
+    seen.add(r.id);
+    if (!TUTORIAL_KINDS.has(r.kind)) add('bad enum', `${label}: kind ${r.kind}`);
+    if (!TUTORIAL_FITS.has(r.fit)) add('bad enum', `${label}: fit ${r.fit}`);
+    if (!TUTORIAL_LANGS.has(r.lang)) add('bad enum', `${label}: lang ${r.lang}`);
+    checkAppliesTo(`${label}.appliesTo`, r.appliesTo);
+    if (r.kind === 'video') {
+      if (!/^yt-[\w-]{11}$/.test(r.id)) add('bad tutorial', `${label}: a video id is yt- and its 11 character YouTube id`);
+      if (!Number.isInteger(r.seconds) || r.seconds <= 0) add('bad tutorial', `${label}: seconds ${r.seconds}`);
+    } else {
+      if (!/^https?:\/\//.test(r.url ?? '')) add('bad tutorial', `${label}: no url`);
+      if ('seconds' in r || 'embeddable' in r || r.steps) add('bad tutorial', `${label}: only a video has seconds, embeddable or steps`);
+    }
+    if (!Object.keys(r.for ?? {}).length) add('bad tutorial', `${label}: linked to nothing`);
+    for (const [kind, list] of Object.entries(r.for ?? {})) {
+      if (kind === 'basics') { for (const b of list) if (!BASICS.has(b)) add('bad tutorial', `${label}: basics topic ${b}`); } else if (TUTORIAL_FOR[kind]) refs(label, TUTORIAL_FOR[kind], list);
+      else add('bad tutorial', `${label}: for.${kind}`);
+    }
+    for (const s of r.steps || []) {
+      const job = db.jobs?.items.find((j) => j.id === s.job);
+      const where = `${label} ${s.job} step ${s.step}`;
+      if (!r.for?.jobs?.includes(s.job)) add('bad tutorial', `${where}: not one of this film's jobs`);
+      if (!job || !Number.isInteger(s.step) || s.step < 0 || s.step >= job.steps.length) { add('bad tutorial', `${where}: no such step`); continue; }
+      if (!Number.isInteger(s.atSec) || s.atSec < 0 || s.atSec >= r.seconds) add('bad tutorial', `${where}: atSec ${s.atSec} is outside a ${r.seconds} s film`);
+      // Steps are found by position. A step that moved would send a person to the wrong moment, so its title is kept to catch that.
+      const title = s.research?.stepTitle, now = job.steps.findIndex((x) => x.title === title);
+      if (now >= 0 && now !== s.step) add('tutorial step moved', `${where}: "${title}" is now step ${now}`);
+      else if (now < 0) warn('tutorial step retitled', `${where}: was "${title}", now "${job.steps[s.step].title}"`);
+    }
+  }
+  const byId = new Map((d.items || []).map((r) => [r.id, r]));
+  for (const [job, list] of Object.entries(d.order ?? {})) {
+    if (!ids.job.has(job)) add('dangling cross-reference', `tutorials.order -> job ${job}`);
+    if (new Set(list).size !== list.length) add('bad tutorial', `tutorials.order.${job}: repeats an id`);
+    for (const id of list) if (!byId.get(id)?.for?.jobs?.includes(job)) add('bad tutorial', `tutorials.order.${job}: ${id} is not linked to this job`);
+  }
+  for (const r of d.items || []) for (const job of r.for?.jobs ?? []) if (!d.order?.[job]?.includes(r.id)) add('bad tutorial', `tutorials:${r.id}: missing from order.${job}`);
+}
+// The advice that leads each job, and the tap-to-explain words. Terms are plain definitions, so they carry no src or conf.
+const DIY_ANSWERS = new Set(['yes', 'care', 'skilled', 'garage']);
+for (const j of db.jobs?.items ?? []) {
+  if (!DIY_ANSWERS.has(j.diy?.answer)) add('bad advice', `jobs:${j.id}: diy.answer is ${j.diy?.answer}`);
+  for (const k of ['suits', 'stop']) if (typeof j.diy?.[k] !== 'string' || !j.diy[k].trim()) add('bad advice', `jobs:${j.id}: diy.${k} is empty`);
+}
+const termsPath = join(DATA, 'terms.json');
+if (!existsSync(termsPath)) add('unparsable file', 'terms.json is missing');
+else {
+  try {
+    db.terms = JSON.parse(readFileSync(termsPath, 'utf8'));
+    const seenWords = new Map();
+    for (const r of db.terms.items) {
+      if (!r.id || !r.term || !r.def || !r.words?.length || !r.wordsFr?.length) add('bad term', `terms:${r.id}: needs id, term, def, words and wordsFr`);
+      if (r.def?.length > 200) add('bad term', `terms:${r.id}: a definition stays short, this is ${r.def.length} characters`);
+      for (const w of [...r.words.map((x) => `en ${x}`), ...r.wordsFr.map((x) => `fr ${x}`)]) {
+        const key = w.toLowerCase();
+        if (seenWords.has(key) && seenWords.get(key) !== r.id) add('bad term', `terms:${r.id}: "${w}" is also a word of ${seenWords.get(key)}`);
+        seenWords.set(key, r.id);
+      }
+    }
+  } catch (e) { add('unparsable file', `terms.json: ${e.message}`); }
+}
+const tutorialsPath = join(DATA, 'tutorials.json');
+if (!existsSync(tutorialsPath)) add('unparsable file', 'tutorials.json is missing');
+else {
+  try { db.tutorials = JSON.parse(readFileSync(tutorialsPath, 'utf8')); checkTutorials(db.tutorials); } catch (e) { add('unparsable file', `tutorials.json: ${e.message}`); }
+}
+
 // ---- report ---------------------------------------------------------------------------------
 
 function table() {
   const rows = [['file', 'items', 'sources', 'gaps', 'factory', 'corroborated', 'single', 'community']];
   const total = rows[0].slice(1).map(() => 0);
-  for (const name of FILES) {
+  for (const name of [...FILES, 'tutorials', 'terms']) {
     const d = db[name];
     if (!d) continue;
     const c = { factory: 0, corroborated: 0, single: 0, community: 0 };

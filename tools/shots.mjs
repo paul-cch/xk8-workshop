@@ -71,6 +71,7 @@ await p.waitForFunction(() => window.__xk8 || document.querySelector('#boot')?.t
 const booted = await p.evaluate(() => !!window.__xk8);
 if (!booted) throw new Error(await p.evaluate(() => document.querySelector('#boot').textContent));
 const bootMs = Date.now() - t0;
+await p.addStyleTag({content: '.move-hint{display:none!important}'}); // the first-visit hint is not part of the shot
 
 const report = {viewport: vpArg, bootMs, stats: null, shots: [], input: null, bench: null, errors};
 report.gpu = await p.evaluate(() => {

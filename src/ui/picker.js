@@ -1,7 +1,7 @@
 // The car picker: read a VIN, or choose year, engine, supercharger, body and market. It sets the variant everywhere and
 // says what that car is prone to. Everything shown is read from variants.json and weakspots.json.
 import {appliesStatus, data, decodeVin, specFor} from '../data.js';
-import {N, t} from '../i18n.js';
+import {N, t, isFrench} from '../i18n.js';
 import {fitVariant} from '../state.js';
 import {badge, carName, dialog, fill, h, proneTo, seg, specBadge, toast} from './widgets.js';
 
@@ -16,9 +16,9 @@ export function carFacts(v) {
   const s = specFor(v);
   return h('dl.facts', [
     fact(N('Engine'), [s.engineCode, `${s.displacementCc} cc`].filter(Boolean).join(', '), s, 'engineCode'),
-    fact(N('Power'), s.powerBhp != null ? t('{bhp} bhp at {rpm} rpm', {bhp: s.powerBhp, rpm: s.powerRpm}) : null, s, 'powerPs'),
+    fact(N('Power'), s.powerBhp != null ? t('{bhp} bhp at {rpm} rpm', {bhp: isFrench() ? s.powerPs ?? s.powerBhp : s.powerBhp, rpm: s.powerRpm}) : null, s, 'powerPs'), // French reads metric horsepower, a different number
     fact(N('Torque|engine output'), s.torqueNm != null ? t('{nm} Nm at {rpm} rpm', {nm: s.torqueNm, rpm: s.torqueRpm}) : null, s, 'torqueNm'),
-    fact(N('Gearbox'), s.transmission, s, 'gearRatios'),
+    fact(N('Gearbox'), s.transmission.replace(/(\d)-speed automatic/, (_, n) => t('{n}-speed automatic', {n})), s, 'gearRatios'),
     fact(N('Tyres'), s.tyresFront === s.tyresRear ? s.tyresFront : t('{front} front, {rear} rear', {front: s.tyresFront, rear: s.tyresRear}), s, 'tyresFront'),
   ]);
 }
@@ -47,7 +47,7 @@ export function openPicker(app) {
   const engine = seg({label: t('Engine'), options: [{value: '4.0', label: '4.0'}, {value: '4.2', label: '4.2'}], value: draft.engine, onChange: (v) => { draft.engine = v; fit('engine'); }});
   const induction = seg({label: t('Supercharged'), options: [{value: 'na', label: t('No, XK8')}, {value: 'sc', label: t('Yes, XKR')}], value: draft.induction, onChange: (v) => { draft.induction = v; fit('induction'); }});
   const body = seg({label: t('Body'), options: [{value: 'coupe', label: t('Coupe')}, {value: 'convertible', label: t('Convertible')}], value: draft.body, onChange: (v) => { draft.body = v; fit('body'); }});
-  const market = seg({label: t('Market'), options: [{value: 'uk', label: t('UK and Europe')}, {value: 'us', label: t('US and Canada')}], value: draft.market ?? 'uk', onChange: (v) => { draft.market = v; refresh(); }});
+  const market = seg({label: t('Sold in'), options: [{value: 'uk', label: t('UK and Europe')}, {value: 'us', label: t('US and Canada')}], value: draft.market ?? 'uk', onChange: (v) => { draft.market = v; refresh(); }});
   const wheels = seg({label: t('Wheels'), options: [{value: '', label: t('As built')}, {value: '17', label: '17'}, {value: '18', label: '18'}, {value: '20', label: '20 Sepang'}], value: draft.wheels ?? '', onChange: (v) => { if (v) draft.wheels = v; else delete draft.wheels; refresh(); }});
   year.value = draft.my;
   year.addEventListener('change', () => { draft.my = +year.value; fit('my'); });
@@ -104,7 +104,7 @@ export function openPicker(app) {
       h('p.pick-name', carName(draft)),
       h('p.pick-label', [spec.label, ' ', badge({conf: spec.conf, src: spec.src}, {file: 'variants', title: spec.label})]),
       carFacts(draft),
-      h('h3.lab', t('Prone to')),
+      h('h3.lab', t('Known weak spots')),
       h('div.weak-list', weak.map((w) => weakRow(w, draft, () => { apply(); app.ui.open('weakspot', w.id); }))),
     );
     useCar.textContent = t('Use this {car}', {car: carName(draft)});
@@ -113,12 +113,12 @@ export function openPicker(app) {
   function apply() {
     store.set({variant: {...draft}, chosen: true, linked: null});
     d.close();
-    toast(t('{car} set. Parts, torques and jobs now fit this car.', {car: carName(draft)}));
+    toast(t('{car} set. Everything here now fits this car.', {car: carName(draft)}));
   }
   useCar.addEventListener('click', apply);
 
   const left = h('div.pick-form', [
-    h('h3.lab', t('Read your VIN')),
+    h('h3.lab', t('Your VIN, the long number on the car')),
     vin,
     vinOut,
     h('p.pick-hint', data.variants.vin.plateLocations?.text),
@@ -129,7 +129,7 @@ export function openPicker(app) {
     h('div.pick-field', [h('span', t('Engine')), engine]),
     h('div.pick-field', [h('span', t('Supercharged')), induction]),
     h('div.pick-field', [h('span', t('Body')), body]),
-    h('div.pick-field', [h('span', t('Market')), market]),
+    h('div.pick-field', [h('span', t('Sold in')), market]),
     h('div.pick-field', [h('span', t('Wheels')), wheels]),
   ]);
 

@@ -383,6 +383,18 @@
    "url": "https://archive.org/details/jaguar-xk8-xkr-vehicle-literature",
    "publisher": "Jaguar Cars",
    "kind": "factory"
+  },
+  "jlvee": {
+   "title": "[xk8] Front subframe V Mounts",
+   "url": "https://forums.jag-lovers.com/t/xk8-front-subframe-v-mounts/246980",
+   "publisher": "Jag-lovers",
+   "kind": "forum"
+  },
+  "jfvee": {
+   "title": "Vee Mount Repair Instructions",
+   "url": "https://www.jaguarforums.com/forum/xk8-xkr-x100-17/vee-mount-repair-instructions-161091/",
+   "publisher": "Jaguar Forums",
+   "kind": "forum"
   }
  },
  "items": [
@@ -442,7 +454,11 @@
      "fluid": [],
      "warn": "Never jack on the aluminium crossbeam.",
      "tip": "One owner suggests raising the rear a little instead so the pan drains towards the plug at the front. Either works.",
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands"
+     ]
     },
     {
      "title": "Open the filler",
@@ -474,7 +490,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "oil-filter-strap-wrench"
+     ]
     },
     {
      "title": "Drain",
@@ -490,7 +509,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Look at the old oil for metal flakes or a milky look."
+     "check": "Look at the old oil for metal flakes or a milky look.",
+     "tools": [
+      "drain-pan"
+     ]
     },
     {
      "title": "Swap the filter",
@@ -511,7 +533,12 @@
      "fluid": [],
      "warn": null,
      "tip": "Check the old seal came off with the filter.",
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60",
+      "oil-filter-strap-wrench",
+      "oil-filter-wrench-303-752"
+     ]
     },
     {
      "title": "Refit the plug",
@@ -531,7 +558,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Fill",
@@ -587,7 +617,12 @@
     "tsb-303-51",
     "jtis-my1997"
    ],
-   "conf": "corroborated"
+   "conf": "corroborated",
+   "diy": {
+    "answer": "yes",
+    "suits": "A good first job. If you can use a socket and get the car safely on stands or ramps, you can do this.",
+    "stop": "Stop if the drain plug will not turn or its thread feels loose, or if you cannot get the car safely off the ground."
+   }
   },
   {
    "id": "air-filter",
@@ -680,7 +715,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "screwdriver-flat"
+     ]
     },
     {
      "title": "Fit the new element",
@@ -731,7 +769,12 @@
     "jrmaf",
     "jrjensen"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "yes",
+    "suits": "Anyone. It is a few clips and one intake pipe.",
+    "stop": "Stop if the plastic breather tube cracks, or if the engine runs badly afterwards. An air leak upsets the fuelling."
+   }
   },
   {
    "id": "brake-pads-front",
@@ -805,11 +848,17 @@
      "fluid": [],
      "warn": "Jack on the body crossmember, never on the aluminium suspension crossbeam. The Vehicle Care book says not to use jacking equipment under the front cross member, without saying which one. Jaguar's workshop text puts the jack on the body crossmember and forbids the aluminium suspension crossbeam, so that is the one to keep off. No photo confirms this reading: if you cannot tell them apart, stop and read the Jacking page.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands",
+      "wheel-chocks",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Remove the caliper housing",
-     "text": "Do one side, then repeat on the other, up to refitting the wheels. Unclip the anti-rattle spring, pull the dust covers off the guide pins, undo both pins and lift the caliper housing off the carrier. Tie it up with wire.",
+     "text": "Do one side, then repeat on the other, up to refitting the wheels. Unclip the anti-rattle spring, pull the dust covers off the guide pins, undo both pins and lift the caliper housing off the caliper carrier. Tie it up with stiff wire, so its weight does not hang on the brake hose.",
      "focus": [
       "brakes.caliper-front"
      ],
@@ -828,7 +877,10 @@
       "brakes": [
        "standard"
       ]
-     }
+     },
+     "tools": [
+      "wire-tie"
+     ]
     },
     {
      "title": "Remove the pads",
@@ -874,7 +926,7 @@
     },
     {
      "title": "Clean",
-     "text": "Vacuum off the dust and clean all mating surfaces and the piston face.",
+     "text": "Vacuum off the dust with the vacuum brush. Then clean all mating surfaces and the piston face with brake cleaner on a cloth.",
      "focus": [
       "brakes.caliper-front"
      ],
@@ -884,11 +936,14 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "vacuum-brush"
+     ]
     },
     {
      "title": "Push the piston back",
-     "text": "Slowly retract the piston into the housing. Watch the reservoir, which can overflow as the fluid comes back.",
+     "text": "Slowly push the piston back into the housing with the piston retract tool. Watch the reservoir, which can overflow as the fluid comes back.",
      "focus": [
       "brakes.caliper-front"
      ],
@@ -898,7 +953,10 @@
      "fluid": [],
      "warn": "Mop any spilled fluid off the paint immediately with clean water.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "piston-retract-tool"
+     ]
     },
     {
      "title": "Fit new pads",
@@ -942,7 +1000,7 @@
     },
     {
      "title": "Refit the caliper",
-     "text": "Seat the housing on the carrier, tighten the guide pins to 25-30 Nm, refit the dust covers and clip on the anti-rattle spring. Repeat on the other side.",
+     "text": "Seat the housing on the caliper carrier, tighten the guide pins to 25-30 Nm, refit the dust covers and clip on the anti-rattle spring. Repeat on the other side.",
      "focus": [],
      "remove": [],
      "install": [
@@ -961,7 +1019,10 @@
       "brakes": [
        "standard"
       ]
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Refit wheels and lower",
@@ -979,7 +1040,13 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Every nut clicks at 88-102 Nm."
+     "check": "Every nut clicks at 88-102 Nm.",
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack",
+      "axle-stands",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Pump the pedal",
@@ -1012,7 +1079,12 @@
    "src": [
     "wm"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "A careful beginner, with someone experienced to check the work. Brakes are not a job to guess at.",
+    "stop": "Stop if a bolt will not move, a hose looks damaged, or the pedal is not firm before you drive. Never drive with a soft pedal."
+   }
   },
   {
    "id": "brake-pads-rear",
@@ -1084,11 +1156,17 @@
      "fluid": [],
      "warn": "Use the wood block. The jack head must not bear directly on the subframe.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands",
+      "wheel-chocks",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Remove the caliper housing",
-     "text": "Do one side, then repeat on the other, up to refitting the wheels. Unclip the anti-rattle spring, pull off the dust covers, undo the guide pins, lift the housing off the carrier and tie it aside.",
+     "text": "Do one side, then repeat on the other, up to refitting the wheels. Unclip the anti-rattle spring, pull off the dust covers, undo the guide pins, lift the housing off the caliper carrier and tie it aside.",
      "focus": [
       "brakes.caliper-rear"
      ],
@@ -1107,7 +1185,10 @@
       "brakes": [
        "standard"
       ]
-     }
+     },
+     "tools": [
+      "wire-tie"
+     ]
     },
     {
      "title": "Remove the pads",
@@ -1153,7 +1234,7 @@
     },
     {
      "title": "Clean and retract",
-     "text": "Clean the mating surfaces and piston face. Slowly push the piston back while watching the reservoir.",
+     "text": "Clean the mating surfaces and piston face with brake cleaner on a cloth. Slowly push the piston back with the piston retract tool while watching the reservoir.",
      "focus": [
       "brakes.caliper-rear"
      ],
@@ -1163,7 +1244,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "piston-retract-tool"
+     ]
     },
     {
      "title": "Fit new pads",
@@ -1226,7 +1310,10 @@
       "brakes": [
        "standard"
       ]
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Refit wheels and lower",
@@ -1244,7 +1331,13 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Every nut clicks at 88-102 Nm."
+     "check": "Every nut clicks at 88-102 Nm.",
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack",
+      "axle-stands",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Pump the pedal",
@@ -1277,7 +1370,12 @@
    "src": [
     "wm"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "A careful beginner, with someone experienced to check the work. Brakes are not a job to guess at.",
+    "stop": "Stop if a bolt will not move, a hose looks damaged, or the pedal is not firm before you drive. Never drive with a soft pedal."
+   }
   },
   {
    "id": "cabin-filter",
@@ -1408,7 +1506,12 @@
     "wm",
     "jtp922"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "yes",
+    "suits": "Anyone with a little patience. The fiddly part is getting the wiper arms off without marking the car.",
+    "stop": "Stop if a wiper arm will not lift off. Forcing it can crack the windscreen."
+   }
   },
   {
    "id": "battery-drain-test",
@@ -1485,7 +1588,10 @@
      "fluid": [],
      "warn": "Jaguar warns that the electronic throttle on the XK8 can draw more than most meter fuses take.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "multimeter"
+     ]
     },
     {
      "title": "Put the meter in series",
@@ -1499,7 +1605,10 @@
      "fluid": [],
      "warn": "Stay on the 10 A range or higher. Do not crank, and do not drop to the low mA range until the current has fallen, or you will blow the meter's fuse.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "multimeter"
+     ]
     },
     {
      "title": "Put the car to sleep",
@@ -1513,7 +1622,10 @@
      "fluid": [],
      "warn": "Do not open a door from now on. That fires the window drop motors through the meter.",
      "tip": "The battery is in the boot, so plan how you will leave it open without keeping modules awake. If the reading stays high, rule out the boot light and boot switch first.",
-     "check": null
+     "check": null,
+     "tools": [
+      "multimeter"
+     ]
     },
     {
      "title": "Wait 60 minutes",
@@ -1541,7 +1653,10 @@
      "fluid": [],
      "warn": "Pulling a fuse wakes modules and takes about 45 minutes to settle again. It can also reset the fault, so it goes undiagnosed.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "multimeter"
+     ]
     },
     {
      "title": "Reconnect",
@@ -1558,7 +1673,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "multimeter"
+     ]
     }
    ],
    "verify": [
@@ -1577,7 +1695,12 @@
     "jfstart1",
     "battery-care"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "Someone happy to use a meter and careful around a battery.",
+    "stop": "Stop if the reading stays high and you cannot find why. An auto electrician can trace it."
+   }
   },
   {
    "id": "spark-plugs",
@@ -1680,7 +1803,10 @@
      "fluid": [],
      "warn": null,
      "tip": "The 4.0 coil is held by two bolts.",
-     "check": "Look down each well. Oil here means a cam cover seal or overfilling. The oil filler side is prone to overfill residue, so rule that out first."
+     "check": "Look down each well. Oil here means a cam cover seal or overfilling. The oil filler side is prone to overfill residue, so rule that out first.",
+     "tools": [
+      "long-nose-pliers"
+     ]
     },
     {
      "title": "Remove the plugs",
@@ -1731,7 +1857,10 @@
      ],
      "warn": "JagRepair used anti-seize on the threads. It reduces friction, so the same torque clamps harder. If you use it, keep it thin and do not exceed the figure.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Refit coils",
@@ -1750,7 +1879,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Close up",
@@ -1769,7 +1901,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     }
    ],
    "verify": [
@@ -1789,7 +1924,12 @@
     "jtp922",
     "jtp925"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "A patient owner with a torque wrench. It takes time more than skill.",
+    "stop": "Stop if a plug stays tight all the way out, or a new one will not start by hand. A damaged thread in the aluminium head is a garage repair."
+   }
   },
   {
    "id": "coil-on-plug",
@@ -1886,7 +2026,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Inspect the boot for tracking and the well for oil."
+     "check": "Inspect the boot for tracking and the well for oil.",
+     "tools": [
+      "torque-wrench-low"
+     ]
     },
     {
      "title": "Rebuild",
@@ -1916,7 +2059,12 @@
     "jrplug",
     "jrez"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "yes",
+    "suits": "Most owners. It is a quick swap once the cover is off.",
+    "stop": "Stop if the misfire stays after a new coil. The cause is somewhere else, and a garage can test for it."
+   }
   },
   {
    "id": "brake-bleed",
@@ -1965,7 +2113,12 @@
      "fluid": [],
      "warn": "Jack points only. See the front and rear raising steps in the pad jobs.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Fill the reservoir",
@@ -1995,7 +2148,11 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "spanner-bleed-nipple",
+      "bleed-kit"
+     ]
     },
     {
      "title": "Brembo: two nipples",
@@ -2009,7 +2166,11 @@
      "fluid": [],
      "warn": null,
      "tip": "Fit two hoses and two bottles.",
-     "check": null
+     "check": null,
+     "tools": [
+      "spanner-bleed-nipple",
+      "bleed-kit"
+     ]
     },
     {
      "title": "Tighten the nipple",
@@ -2027,7 +2188,12 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-low",
+      "spanner-bleed-nipple",
+      "bleed-kit"
+     ]
     },
     {
      "title": "Work round the car",
@@ -2074,7 +2240,12 @@
     "wm",
     "jtp922"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "Someone careful who has done brake pads, with a helper for the pedal or a one-person bleeding kit.",
+    "stop": "Stop if the pedal stays soft or the reservoir runs dry. Do not drive the car: call a garage or a mobile mechanic."
+   }
   },
   {
    "id": "brake-discs-front",
@@ -2153,11 +2324,17 @@
      "fluid": [],
      "warn": "Jack on the body crossmember, never on the aluminium suspension crossbeam. The Vehicle Care book says not to use jacking equipment under the front cross member, without saying which one. Jaguar's workshop text puts the jack on the body crossmember and forbids the aluminium suspension crossbeam, so that is the one to keep off. No photo confirms this reading: if you cannot tell them apart, stop and read the Jacking page.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands",
+      "wheel-chocks",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Remove caliper and pads",
-     "text": "Unclip the anti-rattle spring, remove the dust covers and guide pins, lift off the caliper housing and tie it up. Take out the pads and discard them.",
+     "text": "Unclip the anti-rattle spring, remove the dust covers and guide pins, lift off the caliper housing and tie it up with stiff wire. Take out the pads and discard them.",
      "focus": [
       "brakes.caliper-front"
      ],
@@ -2172,11 +2349,14 @@
      "fluid": [],
      "warn": "Never hang the caliper on its hose.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "wire-tie"
+     ]
     },
     {
-     "title": "Remove the carrier",
-     "text": "Undo the two carrier bolts at the vertical link and take the carrier off.",
+     "title": "Remove the caliper carrier",
+     "text": "Undo the two carrier bolts at the vertical link and take the caliper carrier off.",
      "focus": [
       "brakes.caliper-carrier-front"
      ],
@@ -2220,11 +2400,14 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "dial-gauge"
+     ]
     },
     {
-     "title": "Refit the carrier",
-     "text": "Fit the carrier and tighten the bolts to the figure below for your car.",
+     "title": "Refit the caliper carrier",
+     "text": "Fit the caliper carrier and tighten the bolts to the figure below for your car.",
      "focus": [
       "brakes.caliper-carrier-front"
      ],
@@ -2242,11 +2425,14 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     },
     {
      "title": "Fit pads and caliper",
-     "text": "Slowly retract the piston, clean its face, peel the shim backing and fit the pads. Seat the housing, tighten the guide pins to 25-30 Nm, refit the dust covers and spring. Repeat on the other side.",
+     "text": "Slowly push the piston back with the piston retract tool, clean its face, peel the shim backing and fit the pads. Seat the housing, tighten the guide pins to 25-30 Nm, refit the dust covers and spring. Repeat on the other side.",
      "focus": [],
      "remove": [],
      "install": [
@@ -2261,7 +2447,11 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60",
+      "piston-retract-tool"
+     ]
     },
     {
      "title": "Refit wheels and lower",
@@ -2279,7 +2469,13 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Every nut clicks at 88-102 Nm."
+     "check": "Every nut clicks at 88-102 Nm.",
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack",
+      "axle-stands",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Pump the pedal",
@@ -2312,7 +2508,12 @@
    "src": [
     "wm"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "A careful owner who has already done pads, with someone experienced to check the work.",
+    "stop": "Stop if a bolt will not move, a hose looks damaged, or the pedal is not firm before you drive. Never drive with a soft pedal."
+   }
   },
   {
    "id": "brake-discs-rear",
@@ -2390,11 +2591,17 @@
      "fluid": [],
      "warn": "Use the wood block. The jack head must not bear directly on the subframe.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands",
+      "wheel-chocks",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Remove caliper and pads",
-     "text": "Unclip the anti-rattle spring, remove the dust covers and guide pins, take the housing off the carrier and tie it up. Take the pads out.",
+     "text": "Unclip the anti-rattle spring, remove the dust covers and guide pins, take the housing off the caliper carrier and tie it up with stiff wire. Take the pads out.",
      "focus": [
       "brakes.caliper-rear"
      ],
@@ -2409,11 +2616,14 @@
      "fluid": [],
      "warn": "Never hang the caliper on its hose.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "wire-tie"
+     ]
     },
     {
-     "title": "Remove the carrier",
-     "text": "Undo the two bolts and take the carrier off the hub carrier.",
+     "title": "Remove the caliper carrier",
+     "text": "Undo the two bolts and take the caliper carrier off the hub carrier.",
      "focus": [
       "brakes.caliper-carrier-rear"
      ],
@@ -2455,7 +2665,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Shoes have a 2 mm minimum thickness."
+     "check": "Shoes have a 2 mm minimum thickness.",
+     "tools": [
+      "vacuum-brush"
+     ]
     },
     {
      "title": "Fit the disc",
@@ -2485,7 +2698,11 @@
      "fluid": [],
      "warn": "The return spring must sit between the adjuster spokes, or the adjuster can wander.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "wheel-nut-socket",
+      "screwdriver-flat"
+     ]
     },
     {
      "title": "Check run-out",
@@ -2499,11 +2716,14 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "dial-gauge"
+     ]
     },
     {
      "title": "Refit carrier, pads, caliper",
-     "text": "Tighten the carrier bolts to the figure below for your car. Retract the piston slowly, fit the pads with new shims, seat the housing, tighten the guide pins to 25-30 Nm, fit the dust covers and spring. Repeat on the other side.",
+     "text": "Tighten the caliper carrier bolts to the figure below for your car. Push the piston back slowly with the piston retract tool, fit the pads with new shims, seat the housing, tighten the guide pins to 25-30 Nm, fit the dust covers and spring. Repeat on the other side.",
      "focus": [],
      "remove": [],
      "install": [
@@ -2522,7 +2742,11 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200",
+      "piston-retract-tool"
+     ]
     },
     {
      "title": "Refit wheels and lower",
@@ -2540,7 +2764,13 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Every nut clicks at 88-102 Nm."
+     "check": "Every nut clicks at 88-102 Nm.",
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack",
+      "axle-stands",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Pump the pedal",
@@ -2573,7 +2803,12 @@
    "src": [
     "wm"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "skilled",
+    "suits": "Someone who has already done front brakes. The handbrake shoes inside the disc make this one fiddlier.",
+    "stop": "Stop if the disc will not come off with the adjuster backed off, or the handbrake does not hold afterwards."
+   }
   },
   {
    "id": "coolant-drain-refill",
@@ -2643,7 +2878,11 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands"
+     ]
     },
     {
      "title": "Drain",
@@ -2659,7 +2898,10 @@
      "fluid": [],
      "warn": null,
      "tip": "The block has its own drain plug at the rear left side if you want the system fully empty.",
-     "check": null
+     "check": null,
+     "tools": [
+      "drain-pan"
+     ]
     },
     {
      "title": "Close the drain",
@@ -2678,7 +2920,11 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60",
+      "drain-pan"
+     ]
     },
     {
      "title": "First fill",
@@ -2723,7 +2969,10 @@
       "induction": [
        "sc"
       ]
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Run it hot",
@@ -2778,7 +3027,12 @@
     "jtp925",
     "jrez"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "A careful owner with stands, and the time to let the engine cool right down.",
+    "stop": "Stop if the temperature climbs or the heater stays cold after bleeding. Trapped air can overheat the engine."
+   }
   },
   {
    "id": "accessory-belt",
@@ -2943,7 +3197,10 @@
      "fluid": [],
      "warn": "The 4.2 manual disagrees with itself on the idler: 45 Nm in the engine table, 40 Nm in the accessory table, 25 Nm in the front cover job.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Fit the belt",
@@ -3008,7 +3265,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     }
    ],
    "verify": [
@@ -3027,7 +3287,12 @@
     "jtp922",
     "jtis-my1997"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "A careful owner with the right tool for the tensioner. You work from above, so no jacking up.",
+    "stop": "Stop if the idler bolt will not move. On 1997-2002 cars it is left-hand thread, so turning it the normal way only tightens it."
+   }
   },
   {
    "id": "maf-clean",
@@ -3123,7 +3388,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Any air leak after the MAF will give lean fault codes."
+     "check": "Any air leak after the MAF will give lean fault codes.",
+     "tools": [
+      "torque-wrench-low"
+     ]
     }
    ],
    "verify": [
@@ -3140,7 +3408,12 @@
     "wm",
     "jrmaf"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "yes",
+    "suits": "Most owners. It is one sensor, one plug and a can of the right cleaner.",
+    "stop": "Stop if the fault comes back after cleaning. The sensor wire is fragile and a new sensor is expensive, so have it tested first."
+   }
   },
   {
    "id": "throttle-body-clean",
@@ -3261,7 +3534,12 @@
     "jrtb",
     "wm"
    ],
-   "conf": "community"
+   "conf": "community",
+   "diy": {
+    "answer": "care",
+    "suits": "A careful owner who accepts the risk. This is owner advice: Jaguar gives no procedure.",
+    "stop": "Stop if the blade does not move freely, or warning lights appear afterwards. Early bodies have a coating, so wipe gently."
+   }
   },
   {
    "id": "arb-drop-links",
@@ -3320,7 +3598,13 @@
      "fluid": [],
      "warn": "Jack on the body crossmember, never on the aluminium suspension crossbeam. The Vehicle Care book says not to use jacking equipment under the front cross member, without saying which one. Jaguar's workshop text puts the jack on the body crossmember and forbids the aluminium suspension crossbeam, so that is the one to keep off. No photo confirms this reading: if you cannot tell them apart, stop and read the Jacking page.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands",
+      "wheel-chocks",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Front link: top nut",
@@ -3367,7 +3651,10 @@
      "fluid": [],
      "warn": "Hold the flats while torquing or the boot tears.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     },
     {
      "title": "Refit wheels and lower",
@@ -3385,7 +3672,13 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Every nut clicks at 88-102 Nm."
+     "check": "Every nut clicks at 88-102 Nm.",
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack",
+      "axle-stands",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Rear link",
@@ -3418,7 +3711,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     }
    ],
    "verify": [
@@ -3433,7 +3729,12 @@
    "src": [
     "wm"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "A careful owner with stands and a torque wrench. A good first suspension job.",
+    "stop": "Stop if a nut spins with its ball pin and will not hold, or a rubber boot tears."
+   }
   },
   {
    "id": "thermostat-housing",
@@ -3502,7 +3803,10 @@
      ],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "drain-pan"
+     ]
     },
     {
      "title": "Replace the thermostat, 4.0 NA",
@@ -3530,7 +3834,10 @@
       "induction": [
        "na"
       ]
-     }
+     },
+     "tools": [
+      "torque-wrench-low"
+     ]
     },
     {
      "title": "Replace the thermostat, 4.0 SC",
@@ -3558,7 +3865,10 @@
       "induction": [
        "sc"
       ]
-     }
+     },
+     "tools": [
+      "torque-wrench-low"
+     ]
     },
     {
      "title": "Make room for the housing",
@@ -3656,7 +3966,7 @@
     },
     {
      "title": "Fit the new housing",
-     "text": "4.0: fit new seals and a new housing. Start the rear bolts by screwdriver, then nip them with the open spanner. The book figure is 10 Nm, and JagRepair says the rear pair could not be torqued, so hand judgement is needed. Do not reuse the old seals.",
+     "text": "4.0: fit new seals and a new housing. Start the rear bolts by screwdriver, then nip them with the open spanner. JTIS prints no torque for these housing bolts on a 4.0: its 8-10 Nm is for the cover bolts, and the 4.2 housing is 10 Nm. JagRepair says the rear pair could not be torqued, so hand judgement is needed. Do not reuse the old seals.",
      "focus": [
       "cooling.thermostat-housing"
      ],
@@ -3678,7 +3988,10 @@
       "induction": [
        "na"
       ]
-     }
+     },
+     "tools": [
+      "torque-wrench-low"
+     ]
     },
     {
      "title": "Replace the thermostat, 4.2 NA",
@@ -3706,7 +4019,10 @@
       "induction": [
        "na"
       ]
-     }
+     },
+     "tools": [
+      "torque-wrench-low"
+     ]
     },
     {
      "title": "Replace the thermostat, 4.2 SC",
@@ -3734,7 +4050,10 @@
       "induction": [
        "sc"
       ]
-     }
+     },
+     "tools": [
+      "torque-wrench-low"
+     ]
     },
     {
      "title": "Refit hoses and fan",
@@ -3792,7 +4111,12 @@
     "jtis-my1997",
     "jtis-my2000"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "skilled",
+    "suits": "Someone who has done a coolant change. The thermostat is simple, but on a 4.0 the housing bolts sit under the intake manifold.",
+    "stop": "Stop if a bolt shears or the old plastic housing breaks up. A broken bolt in the engine is a garage job."
+   }
   },
   {
    "id": "water-pump",
@@ -3865,7 +4189,10 @@
      ],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "drain-pan"
+     ]
     },
     {
      "title": "Supercharger belt, 4.0 SC",
@@ -3997,7 +4324,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Fit the pulley, 4.2",
@@ -4021,7 +4351,10 @@
        "4.2"
       ],
       "myFrom": 2003
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Fit the pulley, 4.0",
@@ -4045,7 +4378,10 @@
        "4.0"
       ],
       "myTo": 2002
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Refit the belt",
@@ -4138,7 +4474,12 @@
     "jtis-my1997",
     "jtis-my2000"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "A careful owner who has done the drive belt and a coolant change.",
+    "stop": "Stop if a pump bolt feels close to shearing, or coolant leaks after the refill. Follow the tightening figures exactly."
+   }
   },
   {
    "id": "crossover-pipe",
@@ -4192,7 +4533,10 @@
      ],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "drain-pan"
+     ]
     },
     {
      "title": "Unplug the sensor",
@@ -4250,7 +4594,7 @@
      ],
      "torque": [],
      "fluid": [],
-     "warn": "No published torque was found for these bolts. The neighbouring thermostat housing bolts are 10 Nm.",
+     "warn": "No published torque was found for these bolts. The thermostat housing bolts next to them are 10 Nm on a 4.2.",
      "tip": null,
      "check": null
     },
@@ -4294,7 +4638,12 @@
     "jrpump",
     "jfvalley2"
    ],
-   "conf": "single"
+   "conf": "single",
+   "diy": {
+    "answer": "care",
+    "suits": "A careful owner who has done a coolant change. Expect the old pipe to be brittle.",
+    "stop": "Stop if a hose will not come free or the old pipe breaks up. No tightening figure is on record for these bolts, so do not force them."
+   }
   },
   {
    "id": "fuel-filter",
@@ -4381,7 +4730,11 @@
        "4.0"
       ],
       "myTo": 2002
-     }
+     },
+     "tools": [
+      "axle-stands",
+      "fuel-pressure-tool-310-058"
+     ]
     },
     {
      "title": "Release fuel pressure, 2003 on",
@@ -4401,7 +4754,10 @@
        "4.2"
       ],
       "myFrom": 2003
-     }
+     },
+     "tools": [
+      "fuel-pressure-gauge-310-012"
+     ]
     },
     {
      "title": "Drain the tank, 1997-2002",
@@ -4421,7 +4777,10 @@
        "4.0"
       ],
       "myTo": 2002
-     }
+     },
+     "tools": [
+      "drain-pan"
+     ]
     },
     {
      "title": "Raise the rear",
@@ -4437,7 +4796,13 @@
      "fluid": [],
      "warn": "Use the wood block. The jack head must not bear directly on the subframe.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands",
+      "wheel-chocks",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Find the filter",
@@ -4471,7 +4836,10 @@
        "4.0"
       ],
       "myTo": 2002
-     }
+     },
+     "tools": [
+      "drain-pan"
+     ]
     },
     {
      "title": "Disconnect the lines, 2003 on",
@@ -4532,7 +4900,10 @@
        "4.0"
       ],
       "myTo": 2002
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Fit the new filter, 2003 on",
@@ -4556,7 +4927,10 @@
        "4.2"
       ],
       "myFrom": 2003
-     }
+     },
+     "tools": [
+      "torque-wrench-low"
+     ]
     },
     {
      "title": "Refit wheels and lower",
@@ -4574,7 +4948,13 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Every nut clicks at 88-102 Nm."
+     "check": "Every nut clicks at 88-102 Nm.",
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack",
+      "axle-stands",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Prime and check",
@@ -4590,7 +4970,10 @@
      "fluid": [],
      "warn": "Any wet joint: stop and fix it before the car moves.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-low"
+     ]
     }
    ],
    "verify": [
@@ -4610,7 +4993,12 @@
     "jtis-my1997",
     "jtis-my2002"
    ],
-   "conf": "corroborated"
+   "conf": "corroborated",
+   "diy": {
+    "answer": "skilled",
+    "suits": "Someone comfortable working on fuel lines. Petrol under pressure is the real risk here.",
+    "stop": "Stop if you cannot release the pressure, or you see or smell a leak afterwards. Do not run the car."
+   }
   },
   {
    "id": "gearbox-service",
@@ -4709,7 +5097,11 @@
      "fluid": [],
      "warn": "Level matters here. Use four stands at matched heights, or a lift.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "drain-pan"
+     ]
     },
     {
      "title": "Crack the fill plug first",
@@ -4723,7 +5115,11 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "drain-pan",
+      "adaptor-307-452"
+     ]
     },
     {
      "title": "Drain, 6HP26",
@@ -4744,7 +5140,11 @@
       "engine": [
        "4.2"
       ]
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60",
+      "drain-pan"
+     ]
     },
     {
      "title": "Change pan and filter, 6HP26",
@@ -4769,7 +5169,13 @@
       "engine": [
        "4.2"
       ]
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60",
+      "torx-t27",
+      "torx-t40",
+      "drain-pan"
+     ]
     },
     {
      "title": "Drain and filter, 5HP24",
@@ -4802,7 +5208,13 @@
       "induction": [
        "na"
       ]
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60",
+      "torx-t27",
+      "torx-t40",
+      "drain-pan"
+     ]
     },
     {
      "title": "Drain, W5A580",
@@ -4827,7 +5239,11 @@
        "sc"
       ],
       "myTo": 2002
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60",
+      "drain-pan"
+     ]
     },
     {
      "title": "Fill",
@@ -4851,7 +5267,10 @@
       "induction": [
        "na"
       ]
-     }
+     },
+     "tools": [
+      "fluid-pump"
+     ]
     },
     {
      "title": "Fill",
@@ -4873,7 +5292,11 @@
       "engine": [
        "4.2"
       ]
-     }
+     },
+     "tools": [
+      "fluid-pump",
+      "drain-pan"
+     ]
     },
     {
      "title": "Reconnect",
@@ -4889,7 +5312,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Circulate",
@@ -4908,7 +5334,11 @@
       "engine": [
        "4.2"
       ]
-     }
+     },
+     "tools": [
+      "trolley-jack",
+      "axle-stands"
+     ]
     },
     {
      "title": "Fill and set the level, W5A580",
@@ -4933,7 +5363,11 @@
        "sc"
       ],
       "myTo": 2002
-     }
+     },
+     "tools": [
+      "drain-pan",
+      "dipstick-307-379"
+     ]
     },
     {
      "title": "Set the level, 5HP24",
@@ -4960,7 +5394,11 @@
       "induction": [
        "na"
       ]
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60",
+      "axle-stands"
+     ]
     },
     {
      "title": "Set the level, 6HP26",
@@ -5000,7 +5438,11 @@
       "engine": [
        "4.2"
       ]
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60",
+      "adaptor-307-452"
+     ]
     },
     {
      "title": "Repeat if you want",
@@ -5014,7 +5456,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "drain-pan"
+     ]
     }
    ],
    "verify": [
@@ -5038,7 +5483,12 @@
     "jtis-my1997",
     "jtis-my2000"
    ],
-   "conf": "corroborated"
+   "conf": "corroborated",
+   "diy": {
+    "answer": "skilled",
+    "suits": "An experienced home mechanic. The level must be set with the car dead level, and some gearboxes need Jaguar tools.",
+    "stop": "Stop if you are not sure of the level, or the gearbox slips or will not select a gear. Too much fluid is as bad as too little."
+   }
   },
   {
    "id": "diff-oil",
@@ -5088,7 +5538,10 @@
      "fluid": [],
      "warn": "Rear jack point goes on the subframe with a block of wood.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack"
+     ]
     },
     {
      "title": "Find the plug",
@@ -5102,7 +5555,10 @@
      "fluid": [],
      "warn": null,
      "tip": "Owners have gone in with a stack of extensions rather than drilling the boot floor. Some use a piece of square stock about an inch long in the plug, then a ratchet from the side.",
-     "check": null
+     "check": null,
+     "tools": [
+      "axle-stands"
+     ]
     },
     {
      "title": "Remove the plug",
@@ -5132,7 +5588,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Measure what comes out. Jaguar's fill is 1.9 L in the spec book and 1.8 L in the 4.2 manual."
+     "check": "Measure what comes out. Jaguar's fill is 1.9 L in the spec book and 1.8 L in the 4.2 manual.",
+     "tools": [
+      "fluid-pump"
+     ]
     },
     {
      "title": "Pump in",
@@ -5148,7 +5607,10 @@
      ],
      "warn": null,
      "tip": "A forum owner used synthetic 75W-140 to match the old oil's thickness. That is not the Jaguar spec.",
-     "check": null
+     "check": null,
+     "tools": [
+      "fluid-pump"
+     ]
     },
     {
      "title": "Refit the plug",
@@ -5179,7 +5641,12 @@
     "jldiff",
     "jfdiff"
    ],
-   "conf": "community"
+   "conf": "community",
+   "diy": {
+    "answer": "care",
+    "suits": "A careful owner with stands and a hand pump. There is no drain plug, and Jaguar calls this oil filled for life.",
+    "stop": "Stop if the fill plug will not turn. A rounded plug is a garage job, and no tightening figure is published for it."
+   }
   },
   {
    "id": "hood-hydraulics",
@@ -5242,7 +5709,10 @@
      ],
      "warn": "The two sources disagree. If in doubt fill to the upper mark with the hood down and do not overfill.",
      "tip": "Three-tier boot platforms make access tighter, but the pump can still stay in place.",
-     "check": null
+     "check": null,
+     "tools": [
+      "fluid-syringe"
+     ]
     },
     {
      "title": "Fluid colour",
@@ -5273,7 +5743,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trim-tools"
+     ]
     },
     {
      "title": "Open the pump valve",
@@ -5370,7 +5843,9 @@
      ],
      "remove": [],
      "install": [],
-     "torque": [],
+     "torque": [
+      "electrical.battery-ground-cable"
+     ],
      "fluid": [],
      "warn": "The hood will not run with the valve left open.",
      "tip": null,
@@ -5393,7 +5868,10 @@
      ],
      "warn": null,
      "tip": null,
-     "check": "Run the engine for full voltage while cycling, as Jaguar bulletin 501-11 advises."
+     "check": "Run the engine for full voltage while cycling, as Jaguar bulletin 501-11 advises.",
+     "tools": [
+      "trim-tools"
+     ]
     }
    ],
    "verify": [
@@ -5415,7 +5893,12 @@
     "jrram",
     "jtis-my1997"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "skilled",
+    "suits": "An experienced owner with patience and plenty of cloths. The system works at high pressure.",
+    "stop": "Stop if a ram or hose leaks badly, or the hood moves unevenly after the work."
+   }
   },
   {
    "id": "door-handle-lock",
@@ -5500,7 +5983,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trim-tools"
+     ]
     },
     {
      "title": "Door casing off",
@@ -5564,7 +6050,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "pencil-marker"
+     ]
     },
     {
      "title": "Latch: remove",
@@ -5610,7 +6099,10 @@
      "fluid": [],
      "warn": "Check handle and lock function now, with the door open.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "pencil-marker"
+     ]
     },
     {
      "title": "Water shedder back",
@@ -5642,7 +6134,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "If you disconnect the battery, the window drop may need resetting."
+     "check": "If you disconnect the battery, the window drop may need resetting.",
+     "tools": [
+      "trim-tools"
+     ]
     }
    ],
    "verify": [
@@ -5658,7 +6153,12 @@
    "src": [
     "wm"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "A patient owner. No heavy work, but a lot of small rods and clips inside the door.",
+    "stop": "Stop if the door will not latch or open properly. Test it with the door open before you shut it."
+   }
   },
   {
    "id": "window-regulator",
@@ -5755,7 +6255,10 @@
      "fluid": [],
      "warn": "This measurement sets the glass alignment.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "vernier-calipers"
+     ]
     },
     {
      "title": "Take it out",
@@ -5845,7 +6348,12 @@
    "src": [
     "wm"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "A patient owner with a helper to hold the glass.",
+    "stop": "Stop if the glass binds or sits crooked. Its position is set by a measurement, and a garage can reset it."
+   }
   },
   {
    "id": "alternator",
@@ -5976,7 +6484,11 @@
      "fluid": [],
      "warn": "Never jack on the aluminium crossbeam.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands"
+     ]
     },
     {
      "title": "Ducts off",
@@ -6088,7 +6600,11 @@
        "4.2"
       ],
       "myFrom": 2003
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60",
+      "trolley-jack"
+     ]
     },
     {
      "title": "Fit the new unit, 4.0",
@@ -6111,7 +6627,11 @@
        "4.0"
       ],
       "myTo": 2002
-     }
+     },
+     "tools": [
+      "torque-wrench-10-60",
+      "trolley-jack"
+     ]
     },
     {
      "title": "Rebuild",
@@ -6144,7 +6664,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     }
    ],
    "verify": [
@@ -6162,7 +6685,12 @@
     "wm",
     "jtis-my2000"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "skilled",
+    "suits": "Someone with a good tool set and stands. You work from above and below, in tight space.",
+    "stop": "Stop if a bolt will not move, or the battery warning stays on afterwards. The alternator's main lead is always live, so disconnect the battery first."
+   }
   },
   {
    "id": "sc-belt",
@@ -6239,7 +6767,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "belt-tensioner-release-303-631"
+     ]
     },
     {
      "title": "Move the tensioner",
@@ -6270,7 +6801,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Reconnect and relearn",
@@ -6286,7 +6820,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     }
    ],
    "verify": [
@@ -6306,7 +6843,12 @@
     "wm",
     "jtp922"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "A careful owner with the Jaguar tensioner tool.",
+    "stop": "Stop if the tensioner will not release with the right tool. Do not lever it: the spring is strong."
+   }
   },
   {
    "id": "front-dampers-springs",
@@ -6374,7 +6916,13 @@
      "fluid": [],
      "warn": "Jack on the body crossmember, never on the aluminium suspension crossbeam. The Vehicle Care book says not to use jacking equipment under the front cross member, without saying which one. Jaguar's workshop text puts the jack on the body crossmember and forbids the aluminium suspension crossbeam, so that is the one to keep off. No photo confirms this reading: if you cannot tell them apart, stop and read the Jacking page.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands",
+      "wheel-chocks",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Support the wishbone",
@@ -6389,7 +6937,10 @@
      "fluid": [],
      "warn": "The suspension must remain jacked throughout, to protect the ball joints.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack"
+     ]
     },
     {
      "title": "Free the top",
@@ -6432,7 +6983,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack"
+     ]
     },
     {
      "title": "Release the upper wishbone",
@@ -6482,7 +7036,11 @@
      "fluid": [],
      "warn": "The spring is under extreme tension. Never remove the nut outside the tool, and keep your face out of line.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60",
+      "spring-compressor-204-476"
+     ]
     },
     {
      "title": "Align the assembly",
@@ -6527,7 +7085,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     },
     {
      "title": "Raise home",
@@ -6543,7 +7104,11 @@
      "fluid": [],
      "warn": "A misaligned adaptive damper connector will be damaged.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60",
+      "trolley-jack"
+     ]
     },
     {
      "title": "Bottom nut",
@@ -6559,7 +7124,11 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack"
+     ]
     },
     {
      "title": "Refit wheels and lower",
@@ -6577,7 +7146,13 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Every nut clicks at 88-102 Nm."
+     "check": "Every nut clicks at 88-102 Nm.",
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack",
+      "axle-stands",
+      "wheel-nut-socket"
+     ]
     }
    ],
    "verify": [
@@ -6595,7 +7170,12 @@
     "wm",
     "jtis-my1997"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "skilled",
+    "suits": "An experienced home mechanic with the proper spring compressor. A compressed spring can kill.",
+    "stop": "Stop if you do not have the right compressor, or you lose track of the shims. They set the front wheel alignment."
+   }
   },
   {
    "id": "rear-dampers-springs",
@@ -6665,7 +7245,13 @@
      "fluid": [],
      "warn": "Use the wood block. The jack head must not bear directly on the subframe.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands",
+      "wheel-chocks",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Caliper aside",
@@ -6681,7 +7267,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "wire-tie"
+     ]
     },
     {
      "title": "Sensor",
@@ -6709,7 +7298,10 @@
      "fluid": [],
      "warn": "This mark is your rear toe setting. Do not skip it.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "pencil-marker"
+     ]
     },
     {
      "title": "Free the hub carrier",
@@ -6767,7 +7359,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack"
+     ]
     },
     {
      "title": "Take it out",
@@ -6784,7 +7379,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack"
+     ]
     },
     {
      "title": "Strip",
@@ -6798,7 +7396,10 @@
      "fluid": [],
      "warn": "A compressed spring holds a lot of energy. Slacken the compressors evenly, side to side, and never unbolt the damper from a compressed spring with your face in line.",
      "tip": "On adaptive dampers the spanner goes inside the socket.",
-     "check": null
+     "check": null,
+     "tools": [
+      "pencil-marker"
+     ]
     },
     {
      "title": "Build up",
@@ -6818,7 +7419,7 @@
     },
     {
      "title": "Tighten the top nut",
-     "text": "Compress the damper, pop the temporary bolt in, then hold the flats and tighten the top nut to 30-40 Nm, or 16-18 Nm on adaptive damping.",
+     "text": "Compress the damper, pop the temporary bolt in, then hold the flats and tighten the top nut to the figure below for your car. Adaptive damping has its own lower figure.",
      "focus": [
       "rear-suspension.damper"
      ],
@@ -6833,7 +7434,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Install",
@@ -6879,11 +7483,14 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     },
     {
      "title": "Rejoin the hub carrier",
-     "text": "Shims back on the sleeve in their original places. Offer up the carrier and fit the pin with its eccentric flange in the wishbone groove. Align your mark, then hold the pin and tighten the nut to 88-118 Nm.",
+     "text": "Shims back on the sleeve in their original places. Offer up the carrier and fit the pin with its eccentric flange in the wishbone groove. Align your mark, then hold the pin and tighten the nut to the figure below for your car.",
      "focus": [
       "rear-suspension.pivot-pin"
      ],
@@ -6898,7 +7505,11 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200",
+      "pencil-marker"
+     ]
     },
     {
      "title": "Caliper and sensor",
@@ -6914,7 +7525,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Refit wheels and lower",
@@ -6932,7 +7546,13 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Every nut clicks at 88-102 Nm."
+     "check": "Every nut clicks at 88-102 Nm.",
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack",
+      "axle-stands",
+      "wheel-nut-socket"
+     ]
     }
    ],
    "verify": [
@@ -6951,13 +7571,18 @@
     "britparts",
     "jtis-my1997"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "garage",
+    "suits": "A specialist, or a very experienced home mechanic with the spring compressors and straps.",
+    "stop": "Stop if a compressor does not sit square on the spring. Have the wheel alignment checked afterwards in any case."
+   }
   },
   {
    "id": "exhaust-flange",
    "title": "Exhaust flange and gaskets",
    "system": "exhaust",
-   "summary": "Two flanged joints on each bank: the catalytic converter to manifold at the top, and the converter to front silencer below. Soak old nuts well in advance. Gaskets are one-use.",
+   "summary": "On a 4.2, each bank has two flanged joints: the catalytic converter to manifold at the top, and the converter to front silencer below. On a 4.0 only the top joint is flanged: the converter pipe slides into the front silencer and a Torca clamp holds it. Soak old nuts well in advance. Gaskets are one-use.",
    "difficulty": 3,
    "hoursDiy": 3,
    "hoursBook": null,
@@ -7006,7 +7631,11 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands"
+     ]
     },
     {
      "title": "Soak the nuts",
@@ -7024,7 +7653,7 @@
     },
     {
      "title": "Lower flange: drop the silencer",
-     "text": "Slacken the clamps behind the front silencer and pull the rear section free. Remove the flange nuts at both converters and lower the front silencer. Discard both gaskets.",
+     "text": "Slacken the clamps behind the front silencer and pull the rear section free. 4.2: remove the flange nuts at both converters, lower the front silencer and discard both gaskets. 4.0: there are no nuts or gaskets here. Slacken the clamps at both converters and slide the silencer off the converter pipes.",
      "focus": [
       "exhaust.front-silencer"
      ],
@@ -7072,7 +7701,7 @@
     },
     {
      "title": "Refit the cat",
-     "text": "Fit a new gasket and hang the converter loosely. Lower the car if you need to reach the top nuts. Refit the shield bracket on SC cars. Tighten the nuts: 4.0 14-18 Nm, 4.2 20 Nm. Reconnect the sensors in their noted positions.",
+     "text": "Fit a new gasket and hang the converter loosely, with the bracket bolts in but not tight. Lower the car if you need to reach the top nuts. Refit the shield bracket on SC cars. Tighten the nuts: 4.0 14-18 Nm, 4.2 20 Nm. Reconnect the sensors in their noted positions.",
      "focus": [],
      "remove": [],
      "install": [
@@ -7083,13 +7712,16 @@
       "exhaust.manifold-to-downpipe-nuts-my2003-on"
      ],
      "fluid": [],
-     "warn": null,
+     "warn": "One video says 60-80 Nm for these nuts. That is the clamp figure, not a figure for these nuts. Do not use it here.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Refit the silencer",
-     "text": "Fit new gaskets and the front silencer, with nuts at 47 Nm. Join the rear section and tighten the clamps to 50 Nm. Bracket bolts on the converter are 47 Nm.",
+     "text": "Tighten the converter bracket bolts: 4.0 39-51 Nm, 4.2 47 Nm. 4.2: fit new gaskets and the front silencer, with nuts at 47 Nm, then join the rear section and tighten the clamps to 50 Nm. 4.0: clean the joints, push the silencer onto the converter pipes and then onto the rear section, and set each joint between its marks. Tighten the rear clamps, then the converter clamps, to 60-80 Nm.",
      "focus": [],
      "remove": [],
      "install": [
@@ -7105,12 +7737,15 @@
      ],
      "fluid": [],
      "warn": null,
-     "tip": null,
-     "check": null
+     "tip": "Jaguar's 4.0 figures for the clamps disagree: 60-80 Nm in the exhaust section, 50-60 Nm in the engine section. Only 60 Nm fits both. This is not resolved.",
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     }
    ],
    "verify": [
-    "No blow at either flange on a cold start",
+    "No blow at any exhaust joint on a cold start",
     "No exhaust touching the body",
     "No new oxygen sensor codes"
    ],
@@ -7119,9 +7754,20 @@
    ],
    "appliesTo": {},
    "src": [
-    "wm"
+    "wm",
+    "jtis-my1997",
+    "jtis-my1998",
+    "jtis-my1999",
+    "jtis-my2000",
+    "jtis-my2001",
+    "jtis-my2002"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "care",
+    "suits": "Someone with stands and patience. Old exhaust fixings are often stuck fast.",
+    "stop": "Stop if a stud or nut will not move, or breaks. Heating and drilling them out is a garage job."
+   }
   },
   {
    "id": "starter",
@@ -7188,7 +7834,11 @@
      "fluid": [],
      "warn": "Never jack on the aluminium crossbeam.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands"
+     ]
     },
     {
      "title": "Clear the duct",
@@ -7279,7 +7929,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Cables",
@@ -7296,7 +7949,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Finish",
@@ -7328,7 +7984,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     }
    ],
    "verify": [
@@ -7347,7 +8006,12 @@
     "jfstart2",
     "jtis-my2000"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "skilled",
+    "suits": "An experienced home mechanic. The upper bolt is very hard to reach, and the car must be well up on stands.",
+    "stop": "Stop if you cannot reach the upper bolt, or the car is not high enough to work under safely."
+   }
   },
   {
    "id": "wheel-bearing-front",
@@ -7431,7 +8095,13 @@
      "fluid": [],
      "warn": "Jack on the body crossmember, never on the aluminium suspension crossbeam. The Vehicle Care book says not to use jacking equipment under the front cross member, without saying which one. Jaguar's workshop text puts the jack on the body crossmember and forbids the aluminium suspension crossbeam, so that is the one to keep off. No photo confirms this reading: if you cannot tell them apart, stop and read the Jacking page.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands",
+      "wheel-chocks",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Diagnose first",
@@ -7520,7 +8190,10 @@
      "fluid": [],
      "warn": "Do not let the link hang on the lower joint.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "ball-joint-splitter-204-293"
+     ]
     },
     {
      "title": "Strip the hub",
@@ -7536,7 +8209,11 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "wheel-nut-socket",
+      "abs-rotor-socket-206-066a"
+     ]
     },
     {
      "title": "Press out the hub",
@@ -7552,7 +8229,10 @@
      "fluid": [],
      "warn": "This ruins the bearing. Never refit it.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "axle-stands"
+     ]
     },
     {
      "title": "Press out the bearing",
@@ -7583,7 +8263,7 @@
      "torque": [],
      "fluid": [],
      "warn": "The circlip gap must sit at the bottom so water drains out.",
-     "tip": null,
+     "tip": "One owner's write-up says 6 tons according to Jaguar. Every JTIS year and the 2003-06 manual say 3 tons.",
      "check": null
     },
     {
@@ -7600,7 +8280,10 @@
      "fluid": [],
      "warn": "Do not press on the wheel studs.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "axle-stands"
+     ]
     },
     {
      "title": "Fit the rotor nut",
@@ -7618,7 +8301,11 @@
      "fluid": [],
      "warn": null,
      "tip": "The earlier socket 206-066 is limited to 190 Nm. From XKR VIN A41332 the 206-066A tool must be shortened by 13 mm to fit.",
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200",
+      "abs-rotor-socket-206-066a"
+     ]
     },
     {
      "title": "Back on the car",
@@ -7636,7 +8323,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     },
     {
      "title": "Brakes",
@@ -7656,7 +8346,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     },
     {
      "title": "Refit wheels and lower",
@@ -7674,7 +8367,13 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Every nut clicks at 88-102 Nm."
+     "check": "Every nut clicks at 88-102 Nm.",
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack",
+      "axle-stands",
+      "wheel-nut-socket"
+     ]
     }
    ],
    "verify": [
@@ -7695,7 +8394,12 @@
     "jtis-my1997",
     "tsb-206-06"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "garage",
+    "suits": "A specialist, or a home mechanic with a workshop press and the Jaguar tools.",
+    "stop": "Stop before you begin if you have no press. The bearing cannot be changed without one, and the hub nut is very tight."
+   }
   },
   {
    "id": "wheel-bearing-rear",
@@ -7779,7 +8483,13 @@
      "fluid": [],
      "warn": "Use the wood block. The jack head must not bear directly on the subframe.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands",
+      "wheel-chocks",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Slacken the handbrake cable",
@@ -7840,7 +8550,10 @@
      "fluid": [],
      "warn": "The hub can release suddenly under load. Tighten progressively and keep your face out of line.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Backplate",
@@ -7870,7 +8583,10 @@
      "fluid": [],
      "warn": "Pivot shims go back in the same places.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "pencil-marker"
+     ]
     },
     {
      "title": "Press out and strip",
@@ -7929,7 +8645,10 @@
      "fluid": [],
      "warn": "Do not use excessive force when levering.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "dial-gauge"
+     ]
     },
     {
      "title": "Choose the shim",
@@ -7982,7 +8701,7 @@
     },
     {
      "title": "Tighten in order",
-     "text": "Fit the collar and a new hub nut, loose. Tighten the pivot pin nut to 90-110 Nm. Fit the speed sensor at 7-10 Nm with a new tie strap. Refit shoes and disc. With holding tool 204-195 on, tighten the hub nut to 304-336 Nm.",
+     "text": "Fit the collar and a new hub nut, loose. Tighten the pivot pin nut to the figure below for your car. Fit the speed sensor at 8-10 Nm with a new tie strap. Refit shoes and disc. With holding tool 204-195 on, tighten the hub nut to 304-336 Nm.",
      "focus": [],
      "remove": [],
      "install": [
@@ -7999,7 +8718,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     },
     {
      "title": "Refit wheels and lower",
@@ -8017,7 +8739,13 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Every nut clicks at 88-102 Nm."
+     "check": "Every nut clicks at 88-102 Nm.",
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack",
+      "axle-stands",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Handbrake and alignment",
@@ -8052,7 +8780,12 @@
     "jtis-my2002",
     "jtis-my2003"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "garage",
+    "suits": "A specialist, or a home mechanic with a workshop press and the Jaguar tools.",
+    "stop": "Stop before you begin if you have no press, dial gauge and hub puller. The bearing has to be set up exactly."
+   }
   },
   {
    "id": "lower-ball-joint",
@@ -8115,7 +8848,13 @@
      "fluid": [],
      "warn": "Jack on the body crossmember, never on the aluminium suspension crossbeam. The Vehicle Care book says not to use jacking equipment under the front cross member, without saying which one. Jaguar's workshop text puts the jack on the body crossmember and forbids the aluminium suspension crossbeam, so that is the one to keep off. No photo confirms this reading: if you cannot tell them apart, stop and read the Jacking page.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands",
+      "wheel-chocks",
+      "wheel-nut-socket"
+     ]
     },
     {
      "title": "Free the link",
@@ -8143,7 +8882,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "strong-wire"
+     ]
     },
     {
      "title": "Split the ball joint",
@@ -8157,7 +8899,10 @@
      "fluid": [],
      "warn": "Do not use tool 211-098 here. It damages the gaiter.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "ball-joint-splitter-204-293"
+     ]
     },
     {
      "title": "Remove the wishbone",
@@ -8203,7 +8948,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "axle-stands"
+     ]
     },
     {
      "title": "Build the wishbone",
@@ -8219,7 +8967,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     },
     {
      "title": "Refit the wishbone",
@@ -8236,7 +8987,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     },
     {
      "title": "Damper and fulcrums",
@@ -8255,7 +9009,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     },
     {
      "title": "Link",
@@ -8271,7 +9028,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Refit wheels and lower",
@@ -8289,7 +9049,13 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": "Every nut clicks at 88-102 Nm."
+     "check": "Every nut clicks at 88-102 Nm.",
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack",
+      "axle-stands",
+      "wheel-nut-socket"
+     ]
     }
    ],
    "verify": [
@@ -8308,7 +9074,12 @@
     "ph",
     "jtis-my1997"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "skilled",
+    "suits": "An experienced home mechanic with a ball joint splitter and the use of a press.",
+    "stop": "Stop if the joint will not split with the right tool. Have the wheel alignment checked afterwards."
+   }
   },
   {
    "id": "radiator",
@@ -8401,7 +9172,12 @@
      ],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands",
+      "drain-pan"
+     ]
     },
     {
      "title": "Fan and hoses off",
@@ -8542,27 +9318,32 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Rejoin the pipes",
-     "text": "Uncap and fit new O-rings. Gearbox cooler pipes 20 Nm. Receiver drier pipe 10 Nm. A/C pipes 10 Nm. Clean any oil residue.",
+     "text": "Uncap and fit new O-rings. Gearbox cooler pipes at the radiator: 20 Nm on a 4.2 and on an XKR 4.0 from MY2000. JTIS prints no figure for other 4.0 cars. Receiver drier pipe 10 Nm. A/C pipes 10 Nm. Clean any oil residue.",
      "focus": [
       "transmission.oil-cooler-pipes"
      ],
      "remove": [],
      "install": [],
      "torque": [
-      "transmission.zf5-cooler-pipe-nut",
-      "transmission.sc5-cooler-banjo",
       "transmission.zf6-cooler-tubes-to-cooler",
       "hvac.condenser-lines",
-      "hvac.ac-receiver-drier-pipes"
+      "hvac.ac-receiver-drier-pipes",
+      "transmission.sc5-cooler-pipes-to-radiator"
      ],
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Finish",
@@ -8596,7 +9377,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     }
    ],
    "verify": [
@@ -8615,7 +9399,12 @@
     "wm",
     "jtis-my1997"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "skilled",
+    "suits": "An experienced home mechanic, with a specialist booked to recover the air conditioning first.",
+    "stop": "Stop before any air conditioning pipe is undone. The refrigerant must be recovered by a specialist first."
+   }
   },
   {
    "id": "propshaft-coupling",
@@ -8676,7 +9465,11 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "axle-stands"
+     ]
     },
     {
      "title": "Exhaust out of the way",
@@ -8734,7 +9527,10 @@
      "fluid": [],
      "warn": "The manual says the coupling and its fixings must never be loosened or removed from the shaft.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "pencil-marker"
+     ]
     },
     {
      "title": "Unbolt and remove",
@@ -8791,11 +9587,14 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     },
     {
      "title": "Rebuild",
-     "text": "Refit the mounting plate, lever and cable. Adjust the handbrake so it applies in 3 to 5 clicks. Refit the silencer with new gaskets.",
+     "text": "Refit the mounting plate, lever and cable. Adjust the handbrake so it applies in 3 to 5 clicks. Refit the silencer as in the exhaust job: new gaskets on a 4.2, clamps only on a 4.0.",
      "focus": [],
      "remove": [],
      "install": [
@@ -8809,7 +9608,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     }
    ],
    "verify": [
@@ -8829,13 +9631,18 @@
     "jrujoint",
     "tsb-205-02"
    ],
-   "conf": "corroborated"
+   "conf": "corroborated",
+   "diy": {
+    "answer": "skilled",
+    "suits": "An experienced home mechanic. Jaguar's own manual says not to disturb the coupling.",
+    "stop": "Stop if you have not marked everything. The shaft must go back as it came to stay in balance. A vibration afterwards needs a specialist."
+   }
   },
   {
    "id": "vee-mounts",
    "title": "Vee mounts (front crossbeam rear mounts)",
    "system": "front-suspension",
-   "summary": "Vendors use the name vee mount for the rubber mount at the rear of the front subframe. The X100 manual calls these crossbeam rear mountings. No factory job exists for the mount alone, so this cuts down the crossbeam lowering sequence from the front anti-roll bar procedure. Treat it as a method to think through, not a tested recipe. It is unverified: no source describes this cut-down method.",
+   "summary": "Vendors use the name vee mount for the rubber mount at the rear of the front subframe. The X100 manual calls these crossbeam rear mountings. Jaguar has no job for the mount alone. This follows one owner's 2006 write-up of lowering only the rear of the crossbeam on a jack, with torques from the factory crossbeam job. It is one owner's method at his own risk, not a factory job. Another owner warns that the centre Torx bolt rounds off, and then the whole crossbeam has to come down.",
    "difficulty": 4,
    "hoursDiy": 5,
    "hoursBook": null,
@@ -8850,13 +9657,15 @@
     "torque-wrench-40-200",
     "wheel-nut-socket",
     "engine-support-beam-303-021",
-    "wood-blocks"
+    "wood-blocks",
+    "torx-t40",
+    "torx-t55"
    ],
    "parts": [
     {
      "part": "front-suspension.vee-mount",
      "qty": 2,
-     "note": "XJ-class listing is MNC2360AB. An XK8-confirmed number was not found. Check by VIN."
+     "note": "SNG Barratt's XK8 catalogue lists MJA2360AH, qty 2. Check by VIN."
     }
    ],
    "consumables": [
@@ -8882,26 +9691,30 @@
      "install": [],
      "torque": [],
      "fluid": [],
-     "warn": "The factory job also frees the front engine mounts. Cutting this step down is a judgement call.",
+     "warn": "The factory job supports the engine because it also frees the front engine mounts. The owner's write-up mentions neither. Supporting it here is the cautious choice.",
      "tip": null,
      "check": null
     },
     {
      "title": "Raise and strip",
-     "text": "Raise the front as in the front raising step. Remove the alternator front cooling duct. Remove the undertray, discarding its eight scrivets. Convertibles: remove the cruciform strut.",
+     "text": "Raise the front as in the front raising step and take off the front wheels. Remove the alternator front cooling duct. Remove the undertray, discarding its eight scrivets. Convertibles: remove the cruciform strut.",
      "focus": [
       "body.undertray"
      ],
      "remove": [
       "electrical.alternator-cooling-duct",
-      "body.undertray"
+      "body.undertray",
+      "wheels.front-wheel"
      ],
      "install": [],
      "torque": [],
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack"
+     ]
     },
     {
      "title": "Support the crossbeam",
@@ -8915,11 +9728,14 @@
      "fluid": [],
      "warn": "Wood block between jack and crossbeam.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack"
+     ]
     },
     {
      "title": "Release the rear mounting",
-     "text": "Remove the mounting centre bolt holding the crossbeam rear mounting to the body. One side at a time is the safer way to think about it, with the jack still under the beam. This step is unverified. The factory sequence also frees both dampers at the lower mounts, both anti-roll links, the front engine mounts and the front brackets before lowering, so the beam may not drop with those attached.",
+     "text": "Undo the four 13 mm steering rack bolts and support the rack so it does not hang on its pipes. Undo the front and rear lower wishbone bolts on both sides, 21 mm and 18 mm in the owner's account, and swing each wishbone clear of the small mount bolts. With the jack still under the beam, undo the centre T55 bolt and the four T40 bolts on each side. Do both sides before lowering: the owner needed both undone to lever the new mount onto its peg. Jaguar's own sequence instead frees the dampers, anti-roll links, engine mounts and front brackets, and the owner's account mentions none of those.",
      "focus": [
       "front-suspension.vee-mount"
      ],
@@ -8927,13 +9743,18 @@
      "install": [],
      "torque": [],
      "fluid": [],
-     "warn": "Do not force the beam down with the dampers attached. That loads the brake pipes and the rack.",
+     "warn": "Keep the jack under the beam at all times. If the centre bolt head starts to round off, stop: one owner says the whole crossbeam then has to come down to reach it.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack",
+      "torx-t40",
+      "torx-t55"
+     ]
     },
     {
      "title": "Lower a little",
-     "text": "Lower the crossbeam only enough to reach the mount. Watch the brake pipes, steering and wiring as it moves. The factory sequence releases the front brackets too if more drop is needed.",
+     "text": "Lower the rear of the crossbeam gently on the jack until the mounts just clear. Bring the jack back up until it only just holds the beam, and lock it so nothing drops unnoticed. Watch the brake pipes, steering and wiring as it moves. The owner found the beam stopped dropping on its own after a short way, but do not rely on that.",
      "focus": [
       "front-suspension.crossbeam"
      ],
@@ -8943,11 +9764,14 @@
      "fluid": [],
      "warn": "Check every pipe and loom for slack before lowering further.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack"
+     ]
     },
     {
      "title": "Swap the mount",
-     "text": "Unbolt the mount from the crossbeam and fit the new one. Mount to crossbeam bolts are 26-34 Nm.",
+     "text": "Lift out the old mount. It may come apart, and its centre can corrode onto the tapered body peg and need levering off. Lever the new mount onto the peg, between the beam and the body. Fit the centre bolt and the four T40 bolts loosely on each side so the beam lines itself up.",
      "focus": [
       "front-suspension.vee-mount"
      ],
@@ -8957,46 +9781,64 @@
      "install": [
       "front-suspension.vee-mount"
      ],
-     "torque": [
-      "front-suspension.crossbeam-rear-mount"
-     ],
+     "torque": [],
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torx-t40",
+      "torx-t55"
+     ]
     },
     {
      "title": "Raise and secure",
-     "text": "Raise the crossbeam and fit the rear mounting bolt to the body at 77-103 Nm. Repeat for the other side.",
+     "text": "Jack the crossbeam back up gently, and stop before it starts to lift the car off its stands: the beam is not made to carry the car. Tighten the centre bolt to the body at 77-103 Nm and the four mount to crossbeam bolts at 26-34 Nm. Repeat for the other side.",
      "focus": [
       "front-suspension.vee-mount"
      ],
      "remove": [],
      "install": [],
      "torque": [
-      "front-suspension.crossbeam-rear-mount-body"
+      "front-suspension.crossbeam-rear-mount-body",
+      "front-suspension.crossbeam-rear-mount"
      ],
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack",
+      "axle-stands"
+     ]
     },
     {
      "title": "Rebuild",
-     "text": "If the front brackets were released, fit them at 77-103 Nm, starting the front bolts loose, tightening the rear bolt, then the front ones. Remove the jack. Refit the strut, undertray, duct, engine support and covers.",
+     "text": "Refit the lower wishbone bolts and tighten each to 113-153 Nm, rear then front. Refit the rack bolts to the figure below. If the front brackets were released, fit them at 77-103 Nm, starting the front bolts loose, tightening the rear bolt, then the front ones. Remove the jack. Refit the strut, undertray, duct, engine support and covers. Refit the front wheels, lower to the ground and torque the nuts to 88-102 Nm.",
      "focus": [],
      "remove": [],
      "install": [
       "body.undertray",
-      "electrical.alternator-cooling-duct"
+      "electrical.alternator-cooling-duct",
+      "wheels.front-wheel"
      ],
      "torque": [
-      "front-suspension.crossbeam-front-mount"
+      "front-suspension.crossbeam-front-mount",
+      "front-suspension.lower-wishbone-rear-fulcrum",
+      "front-suspension.lower-wishbone-front-fulcrum",
+      "steering.rack-mounting-bracket",
+      "wheels.wheel-nut-alloy-my1997-2002",
+      "wheels.wheel-nut-alloy-my2003-on"
      ],
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200",
+      "trolley-jack"
+     ]
     },
     {
      "title": "Reconnect and relearn",
@@ -9012,7 +9854,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     }
    ],
    "verify": [
@@ -9031,9 +9876,16 @@
     "mossv",
     "mossvx",
     "fcpsub",
-    "jtis-my1997"
+    "jtis-my1997",
+    "jlvee",
+    "jfvee"
    ],
-   "conf": "community"
+   "conf": "single",
+   "diy": {
+    "answer": "skilled",
+    "suits": "An experienced home mechanic with an engine support beam. Jaguar has no procedure for this mount alone.",
+    "stop": "Stop if you cannot support the engine and the crossbeam properly. Check the part fits your car before you start."
+   }
   },
   {
    "id": "sc-coupler",
@@ -9141,7 +9993,10 @@
      ],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "drain-pan"
+     ]
     },
     {
      "title": "Disconnect",
@@ -9171,7 +10026,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "hose-clamp-pliers"
+     ]
     },
     {
      "title": "Belt off",
@@ -9187,7 +10045,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "belt-tensioner-release-303-631"
+     ]
     },
     {
      "title": "Thermostat housing",
@@ -9233,7 +10094,11 @@
      "fluid": [],
      "warn": "Bolt count and torque for the Jaguar nose were not found. Later engine write-ups do not transfer directly.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "drain-pan",
+      "plastic-mallet"
+     ]
     },
     {
      "title": "Swap the coupler",
@@ -9284,11 +10149,14 @@
      "fluid": [],
      "warn": "Check the spacer plate alignment first. Guide pins made from M8 threaded rod help hold the gaskets.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Rebuild",
-     "text": "Thermostat housing with new seals: 4.0 8-10 Nm, 4.2 10 Nm. Belt on. Elbow with new gasket and seals (4.2: 24 Nm. No figure sourced for the 4.0.) Reconnect all hoses and plugs. Refit outlet pipe and EGR tube. Refit the throttle body.",
+     "text": "Thermostat housing with new seals: 4.2 10 Nm. JTIS prints no housing figure for the 4.0, only 8-10 Nm for the cover. Belt on. Elbow with new gasket and seals (4.2: 24 Nm. No figure sourced for the 4.0.) Reconnect all hoses and plugs. Refit outlet pipe and EGR tube. Refit the throttle body.",
      "focus": [],
      "remove": [],
      "install": [
@@ -9305,7 +10173,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Reconnect and relearn",
@@ -9321,7 +10192,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Refill and test",
@@ -9365,7 +10239,12 @@
     "paramount",
     "jtis-my2000"
    ],
-   "conf": "community"
+   "conf": "community",
+   "diy": {
+    "answer": "garage",
+    "suits": "A specialist or a supercharger rebuilder. Jaguar has no procedure for this.",
+    "stop": "Stop before you open the nose of the supercharger. The bolt tightness and sealant are not known, so ask a rebuilder first."
+   }
   },
   {
    "id": "valley-hoses",
@@ -9450,7 +10329,10 @@
      ],
      "warn": "With the glass still up and the battery off, shutting a door can foul the seal or the hood rail.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "drain-pan"
+     ]
     },
     {
      "title": "Unload the top",
@@ -9617,7 +10499,10 @@
      "fluid": [],
      "warn": "The 4.2 manual says 22 Nm and the V8 page of the spec book says 21 Nm.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Rebuild",
@@ -9636,7 +10521,10 @@
      "fluid": [],
      "warn": "The 4.2 manual table and EGR tube procedure say 20 Nm for that nut. Its intake manifold procedure alone says 60 Nm, which could strip a fine stud.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Refit the supercharger",
@@ -9677,7 +10565,10 @@
      ],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     }
    ],
    "verify": [
@@ -9701,7 +10592,12 @@
     "jrez",
     "jtis-my1997"
    ],
-   "conf": "community"
+   "conf": "community",
+   "diy": {
+    "answer": "garage",
+    "suits": "A specialist, or a very experienced home mechanic. The intake manifold has to come off.",
+    "stop": "Stop if you lose track of a connection, or anything falls into an intake port."
+   }
   },
   {
    "id": "chain-tensioners",
@@ -9784,7 +10680,10 @@
      "fluid": [],
      "warn": null,
      "tip": "Do one bank at a time.",
-     "check": null
+     "check": null,
+     "tools": [
+      "wire-tie"
+     ]
     },
     {
      "title": "Doors open, battery off",
@@ -9830,7 +10729,10 @@
      "fluid": [],
      "warn": null,
      "tip": "Check you can reach the lower rear cam cover bolt on the right bank before going further. It needs a short socket, universal joint and long extension.",
-     "check": null
+     "check": null,
+     "tools": [
+      "wire-tie"
+     ]
     },
     {
      "title": "Cam covers off",
@@ -9860,7 +10762,13 @@
      "fluid": [],
      "warn": "Clockwise only. Never rely on the jack alone while the sensor is off.",
      "tip": "303-531 is the 4.0 peg and 303-645 the 2003-on 4.2 tool. The Laser kit pin combines the two designs, so that kit does both.",
-     "check": null
+     "check": null,
+     "tools": [
+      "cam-locking-303-530",
+      "crank-setting-peg-303-531",
+      "trolley-jack",
+      "axle-stands"
+     ]
     },
     {
      "title": "Lock the cams (method A)",
@@ -9875,7 +10783,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "cam-locking-303-530"
+     ]
     },
     {
      "title": "Free the sprocket (method A)",
@@ -9889,7 +10800,10 @@
      "fluid": [],
      "warn": "A flat hex will not reach, as the access is at an angle. Jensen countered the bolt with the Jaguar tool, and the 4.2 manual uses it the same way, but the Laser sheet says not to load its own version of that tool against sprocket bolts. Follow the note for the tool you own.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "chain-tension-tool-303-532"
+     ]
     },
     {
      "title": "Tie and unbolt (method B)",
@@ -9904,7 +10818,10 @@
      "fluid": [],
      "warn": "Mark or keep the caps by their numbers and arrows. Do not forget to cut the tie at the end.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "wire-tie"
+     ]
     },
     {
      "title": "Remove the tensioner",
@@ -9938,7 +10855,10 @@
      "fluid": [],
      "warn": "Pull the red pin. Forgetting it leaves the chain slack. Check LB and RB markings.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-low"
+     ]
     },
     {
      "title": "Reassemble (method A)",
@@ -9954,7 +10874,11 @@
      "fluid": [],
      "warn": "The bolt has no key behind it, so this step sets the cam timing. The 4.2 figure of 20 Nm plus 90 degrees does not apply to a 4.0.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200",
+      "chain-tension-tool-303-532"
+     ]
     },
     {
      "title": "Reassemble (method B)",
@@ -9971,7 +10895,10 @@
      "fluid": [],
      "warn": "Cut the cable tie before closing up.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-low"
+     ]
     },
     {
      "title": "Primary tensioners",
@@ -9995,11 +10922,14 @@
      "fluid": [],
      "warn": "Tool and step detail here come from the 4.2 manual. The torques are 4.0 figures from JTIS.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-40-200"
+     ]
     },
     {
      "title": "Check, then close up",
-     "text": "Remove the cam locks, rags and ties. Method A: raise the car on stands again and take the peg out. Turn the crank clockwise by hand through two full turns, then refit the peg and locks to prove the timing is unchanged, and take them off. Slack on the right bank with the bridge off can be normal, as Jensen found, and goes when the cams are set. Before fitting each cam cover, fit new seals, bolt O-rings and plug well seals, and apply a 3 mm by 12 mm bead of approved silicone at the two points where the head meets the front cover. Fit the cover straight down at once without smearing the bead. Tighten to 10 Nm, inside outward; MY2000 data says 11 Nm. Refit the crank sensor at 8-12 Nm, the grommet, plugs, coils and intake, and lower the car.",
+     "text": "Remove the cam locks, rags and ties. Method A: raise the car on stands again and take the peg out. Turn the crank clockwise by hand through two full turns, then refit the peg and locks to prove the timing is unchanged, and take them off. Slack on the right bank with the bridge off can be normal, as Jensen found, and goes when the cams are set. Before fitting each cam cover, fit new seals, bolt O-rings and plug well seals, and apply a 3 mm by 12 mm bead of approved silicone at the two points where the head meets the front cover. Fit the cover straight down at once without smearing the bead. Tighten to 10 Nm, inside outward; MY2000 data says 11 Nm. Refit the crank sensor at the figure below for your car, then the grommet, plugs, coils and intake, and lower the car.",
      "focus": [
       "engine.cam-cover"
      ],
@@ -10023,7 +10953,12 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60",
+      "trolley-jack",
+      "axle-stands"
+     ]
     },
     {
      "title": "Reconnect and relearn",
@@ -10039,7 +10974,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-low"
+     ]
     },
     {
      "title": "First start",
@@ -10084,7 +11022,12 @@
     "jtis-my2000",
     "tsb-303-68"
    ],
-   "conf": "corroborated"
+   "conf": "corroborated",
+   "diy": {
+    "answer": "garage",
+    "suits": "A specialist, or a very experienced home mechanic with the Jaguar setting tools. Get the timing wrong and the valves hit the pistons.",
+    "stop": "Stop if a chain has jumped. Do not crank the engine: have the car taken to a specialist."
+   }
   },
   {
    "id": "chain-tensioner-42",
@@ -10165,7 +11108,13 @@
      "fluid": [],
      "warn": "Clockwise only. The timing chains can bind if the crank is turned backwards.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "crank-setting-peg-303-645",
+      "trolley-jack",
+      "axle-stands",
+      "spark-plug-socket"
+     ]
     },
     {
      "title": "Cam cover off",
@@ -10196,7 +11145,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "cam-locking-303-530"
+     ]
     },
     {
      "title": "Remove the sprocket bolt",
@@ -10210,7 +11162,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "ribe-socket-303-1077a"
+     ]
     },
     {
      "title": "Remove the tensioner",
@@ -10244,7 +11199,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-low"
+     ]
     },
     {
      "title": "New sprocket bolt",
@@ -10260,7 +11218,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-10-60"
+     ]
     },
     {
      "title": "Close up",
@@ -10279,7 +11240,12 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-low",
+      "trolley-jack",
+      "spark-plug-socket"
+     ]
     },
     {
      "title": "Reconnect and relearn",
@@ -10295,7 +11261,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "torque-wrench-low"
+     ]
     }
    ],
    "verify": [
@@ -10316,7 +11285,12 @@
     "wm",
     "laser"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "garage",
+    "suits": "A specialist, or a very experienced home mechanic with the Jaguar setting tools. Get the timing wrong and the valves hit the pistons.",
+    "stop": "Stop if the setting tools do not fit as the steps describe. Do not turn the engine until you know why."
+   }
   },
   {
    "id": "jacking-stands",
@@ -10375,7 +11349,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "wheel-chocks"
+     ]
     },
     {
      "title": "Lift the front",
@@ -10389,7 +11366,10 @@
      "fluid": [],
      "warn": "Never put the jack head on the aluminium suspension crossbeam, and never lift by one front wheel. The Vehicle Care book says not to use jacking equipment under the front cross member, without saying which one. Jaguar's workshop text puts the jack on the body crossmember and forbids the aluminium suspension crossbeam, so that is the one to keep off. No photo confirms this reading: if you cannot tell them apart, stop and read the Jacking page.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack"
+     ]
     },
     {
      "title": "Set the front stands",
@@ -10403,7 +11383,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "axle-stands"
+     ]
     },
     {
      "title": "Lift the rear",
@@ -10417,7 +11400,10 @@
      "fluid": [],
      "warn": "Use the wood block.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack"
+     ]
     },
     {
      "title": "Set the rear stands",
@@ -10431,7 +11417,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "axle-stands"
+     ]
     },
     {
      "title": "With the car's own jack",
@@ -10445,7 +11434,10 @@
      "fluid": [],
      "warn": "With one rear wheel off the ground, Park does not hold the car. Chock the other wheels. Do not start the engine with the car on a jack, and never work under it.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "trolley-jack"
+     ]
     }
    ],
    "src": [
@@ -10455,7 +11447,12 @@
     "vc-my2002",
     "hb-my2004"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "yes",
+    "suits": "Every owner who works on the car should learn this first.",
+    "stop": "Stop if the ground is soft or sloping, or the car moves on the stands. Lower it and start again."
+   }
   },
   {
    "id": "flat-battery",
@@ -10502,11 +11499,14 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "closed": [
+      "boot"
+     ]
     },
     {
      "title": "Open the boot",
-     "text": "Use the black-headed key in the boot lid lock: turn it 90 degrees clockwise, then back to vertical to take it out. The green-headed valet key will not open the boot.",
+     "text": "The keyhole is hidden in the badge on the back of the boot lid, on the right as you stand behind the car: between the X and the K of the name. Use the black-headed key: turn it 90 degrees clockwise, then back to vertical to take it out. The green-headed valet key will not open the boot.",
      "focus": [
       "body.boot-lid"
      ],
@@ -10516,7 +11516,18 @@
      "fluid": [],
      "warn": null,
      "tip": "The handbook says to disarm the alarm before using the key. Whether the alarm sounds with a flat battery is not stated.",
-     "check": null
+     "check": null,
+     "closed": [
+      "boot"
+     ],
+     "mark": {
+      "text": "The keyhole, in the badge",
+      "at": [
+       -2.53,
+       0.72,
+       0.35
+      ]
+     }
     },
     {
      "title": "Reach the battery",
@@ -10547,13 +11558,16 @@
      "fluid": [],
      "warn": "Follow the order exactly, and keep the booster to 12 volts.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "jump-leads"
+     ]
     },
     {
      "title": "Connect the leads",
      "text": "Red lead from booster positive to your battery positive. Black lead from booster negative to the spare wheel retaining bolt, which is the earth point and must be at least 305 mm (12 in) from the battery.",
      "focus": [
-      "electrical.battery"
+      "wheels.spare"
      ],
      "remove": [],
      "install": [],
@@ -10561,7 +11575,10 @@
      "fluid": [],
      "warn": "Do not connect the black lead to the negative terminal of the flat battery.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "jump-leads"
+     ]
     },
     {
      "title": "Start and wait",
@@ -10575,7 +11592,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "jump-leads"
+     ]
     },
     {
      "title": "Disconnect in reverse",
@@ -10592,7 +11612,10 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "jump-leads"
+     ]
     },
     {
      "title": "Or charge it",
@@ -10606,7 +11629,10 @@
      "fluid": [],
      "warn": "If you take the leads off the battery: ignition off first, negative lead off first, and partly open a window, because the door glass will not drop with the battery out.",
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "battery-charger"
+     ]
     },
     {
      "title": "What resets afterwards",
@@ -10620,15 +11646,27 @@
      "fluid": [],
      "warn": null,
      "tip": null,
-     "check": null
+     "check": null,
+     "tools": [
+      "jump-leads"
+     ]
     }
    ],
    "src": [
     "hb-my2004",
     "hb-my2003",
-    "vc-my2002"
+    "vc-my2002",
+    "wm"
    ],
-   "conf": "factory"
+   "conf": "factory",
+   "diy": {
+    "answer": "yes",
+    "suits": "Any owner. The order of the leads is what matters.",
+    "stop": "Stop if the battery may be frozen, or it is swollen or leaking. Call roadside help."
+   },
+   "needs": [
+    "A second car or another 12 volt booster to start from"
+   ]
   }
  ],
  "gaps": [
@@ -10638,7 +11676,7 @@
   "Brake option: the pad jobs now follow the brake type you choose. The disc jobs are written for the standard sliding caliper. Brembo caliper removal for a disc change was not written up, so a Brembo car should follow its own manual there.",
   "AJ26 versus AJ27 differences in tensioner work were not separated. JTIS has a 4.0 primary tensioner procedure that was not written up as steps here, so the primary tensioner step is a pointer with 4.0 torques only.",
   "Conflicts in sources kept in step text: spark plug 27 vs 28 Nm, starter 45 vs 43 Nm, supercharger bolts 24, 20 and 21 Nm, intake manifold 22 vs 21 Nm, accessory idler bolt 45, 40 and 25 Nm, crank sensor 10 vs 7 Nm, diff fill 1.9 vs 1.8 L, 4.2 oil fill 7.0 L in the spec book vs 7.6 to 7.8 L from owners, and roof pump level marks (manual vs JagRepair).",
-  "Vee mounts: Moss and FCP use the term for the rear of the front subframe on XJ-class cars. MNC2360AB is listed for X308 and not for X100. FCP lists MJA2595AC for XK8 with no location stated. No XK8 source confirmed the term or the part, and no factory procedure exists for the mount alone. The rear of the car has separate subframe mounts (A-frame bushes), and the job brief may have meant those. The rear mount job was not written.",
+  "Vee mounts: SNG Barratt's XK8 catalogue lists Vee mounting MJA2360AH, qty 2, and lists Subframe bush MJA2595A separately, so FCP's MJA2595AC looks like the rear subframe bush, as a Jaguar Forums reply also says. No factory procedure exists for the mount alone. The rear of the car has separate subframe mounts (A-frame bushes). The rear mount job was not written.",
   "Gearbox: JTIS gives the W5A580 drain, refill and level steps and the 5HP24 level check, now in the job. JTIS does not give a 5HP24 filter change. 5HP24 pan and filter torques come from the ZF repair manual. W5A580 pan and filter service steps were not written up.",
   "Propshaft: no factory coupling replacement exists, and the manual forbids disturbing it. No balancing procedure or 4.0 two-piece shaft notes were found. Model year of the change from one-piece to two-piece is from a single post. The myTo 1998 step limit is an inference from that post.",
   "No torque found for: diff fill plug, crossover pipe bolts, supercharger nose bolts.",
@@ -10650,8 +11688,10 @@
   "Throttle body: no cleaning procedure in this manual. One owner quotes a 4.2 warning not to clean it, which this copy does not contain. Throttle body fixing torques: 10 Nm on 4.2 (manual), AJ26 18-24 Nm and AJ27 21 Nm (JagRepair).",
   "Exhaust flange steps are 4.2 factory steps and were not cross-checked on a 4.0. JagRepair's alternator and throttle body cleaning pages are photos only and were not used.",
   "Search budget ran out during this research. Later fetches used URLs already found. Jag-lovers XK library pages, JTIS and jagrepair HTTPS were refused or unreachable. Three Jaguar Owners Club threads returned 403 on direct fetch, so their claims rest on search result extracts.",
-  "Vee mounts: the cut-down method is unverified. The factory crossbeam lowering also frees dampers, anti-roll links, engine mounts and front brackets, so the job may not work as written.",
+  "Vee mounts: the method rests on one owner's 2006 Jag-lovers write-up, which worked on his car, with figures from the factory table. No second account of this route was found. The factory crossbeam lowering frees dampers, anti-roll links, engine mounts and front brackets instead. Whether the Torx sizes hold on later cars is not known: one poster says Torx up to at least 2000.",
   "Jacking: JTIS 100-02, the same text from MY1997 to MY2004, puts the workshop jack under the front body crossmember and forbids the aluminium suspension crossbeam. The Vehicle Care book warns against jacking under 'the front cross member' without saying which. That warning is read here as the suspension crossbeam, but no photo confirms it. Handbooks describe the car's own jack for wheel changes only.",
-  "Valley hoses: MY2000-on NA and 4.2 evidence is absent. Bulletin 303-48a covers 1997-99 VIN 010343-042635 only."
+  "Valley hoses: MY2000-on NA and 4.2 evidence is absent. Bulletin 303-48a covers 1997-99 VIN 010343-042635 only.",
+  "Exhaust: JTIS prints \"Information not available at this time\" for the supercharged 4.0 converter and front silencer. The 4.0 steps come from the non-supercharged procedure. An owner video says all 4.0 cars have the slide fit, and the 4.0 supercharged clamp part number supports that, but no factory text confirms it for the XKR.",
+  "4.0 thermostat housing to block bolts: JTIS prints no figure in any year, only 8-10 Nm for the cover. Gearbox cooler pipes at the radiator: no figure for the non-supercharged 4.0, or for the XKR before MY2000."
  ]
 }

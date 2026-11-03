@@ -4,7 +4,7 @@
 //
 //   node tools/i18n-check.mjs                 every group, all must exist
 //   node tools/i18n-check.mjs jobs            one group
-//   node tools/i18n-check.mjs --partial       groups with no file yet are skipped, and strings not done yet are only counted
+//   node tools/i18n-check.mjs --partial       strings not done yet are only counted, and groups with no file yet are skipped unless named
 //
 // Fails on: a source string with no translation; French identical to English when it holds ordinary English words; a different
 // set of numbers; a changed {placeholder}; a changed code or part number token; changed space at either end of the string.
@@ -14,7 +14,7 @@ import {fileURLToPath} from 'node:url';
 import {ENGLISH} from './i18n-words.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const GROUPS = ['ui', 'jobs', 'parts', 'dtc', 'reference', 'advice'];
+const GROUPS = ['ui', 'jobs', 'parts', 'dtc', 'reference', 'advice', 'tutorials', 'terms'];
 const args = process.argv.slice(2);
 const partial = args.includes('--partial');
 const named = args.filter((a) => !a.startsWith('--'));
@@ -68,8 +68,9 @@ for (const g of wanted) {
   const source = read(srcFile);
   const file = path.join(ROOT, 'i18n/fr', `${g}.json`);
   if (!fs.existsSync(file)) {
-    rows.push([g, source.length, 0, partial ? 'skipped' : 'NO FILE']);
-    if (!partial) { failed++; lines.push(`${g}: i18n/fr/${g}.json does not exist`); }
+    const excused = partial && !named.includes(g); // a group asked for by name has to be there
+    rows.push([g, source.length, 0, excused ? 'skipped' : 'NO FILE']);
+    if (!excused) { failed++; lines.push(`${g}: i18n/fr/${g}.json does not exist`); }
     continue;
   }
   let fr;

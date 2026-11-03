@@ -49,7 +49,7 @@ for (const name of pickVps) {
   }
   if (want('tree')) {
     await set({selected: null, xray: false, view: 'hero'});
-    await p.evaluate(() => { document.querySelector('[data-mode=explore]').querySelectorAll('.tree-head')[4]?.click(); document.querySelector('[data-mode=explore]').scrollTo(0, 320); });
+    await p.evaluate(() => { document.querySelector('.ex-parts').open = true; document.querySelector('[data-mode=explore]').querySelectorAll('.tree-head')[4]?.click(); document.querySelector('[data-mode=explore]').scrollTo(0, 320); });
     await shot('tree');
   }
   if (want('search')) {
@@ -93,11 +93,11 @@ for (const name of pickVps) {
   if (want('section')) {
     await set({mode: 'run'});
     await p.waitForTimeout(800);
-    await p.evaluate(() => [...document.querySelectorAll('.btn')].find((b) => b.textContent === 'Section view').click());
+    await p.evaluate(() => [...document.querySelectorAll('.btn')].find((b) => b.textContent === 'Cut the engine open').click());
     await p.waitForTimeout(1600);
     await p.screenshot({path: path.join(OUT, `${name}-section.png`)});
     console.log(`${name}-section`);
-    await p.evaluate(() => [...document.querySelectorAll('.btn')].find((b) => b.textContent === 'Timing chains only').click());
+    await p.evaluate(() => [...document.querySelectorAll('.btn')].find((b) => b.textContent === 'Just the timing chains').click());
     await p.waitForTimeout(1600);
     await p.screenshot({path: path.join(OUT, `${name}-chains.png`)});
     console.log(`${name}-chains`);

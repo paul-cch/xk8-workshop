@@ -1,4 +1,5 @@
 // Uploads a build folder to Cloudflare Pages' asset store and prints the manifest for the deployment call.
+// A release's _worker.js and _routes.json stay out of the upload: they go in that call as multipart fields.
 //   PAGES_JWT=... node tools/deploy-pages.mjs /path/to/dist
 // PAGES_JWT is the short-lived token from the project's upload-token endpoint. Hashes need only be stable 32-hex ids.
 import crypto from 'node:crypto';
@@ -16,7 +17,9 @@ const post = async (url, body) => {
   if (!j.success) throw new Error(`${url}: ${JSON.stringify(j.errors)}`);
   return j.result;
 };
-const files = fs.readdirSync(dir).filter((f) => fs.statSync(path.join(dir, f)).isFile()).map((f) => {
+// The server files are deployment fields, not assets. Uploaded as assets they would be public and the server would stay off.
+const SERVER = new Set(['_worker.js', '_routes.json']);
+const files = fs.readdirSync(dir).filter((f) => !SERVER.has(f) && fs.statSync(path.join(dir, f)).isFile()).map((f) => {
   const b64 = fs.readFileSync(path.join(dir, f)).toString('base64');
   const ext = path.extname(f);
   return {name: `/${f}`, b64, type: MIME[ext] ?? 'application/octet-stream', hash: crypto.createHash('sha256').update(b64 + ext.slice(1)).digest('hex').slice(0, 32)};

@@ -1,0 +1,1003 @@
+{
+ "sources": {},
+ "items": [
+  {
+   "id": "axle-stand",
+   "term": "Axle stand",
+   "words": [
+    "axle stand",
+    "axle stands",
+    "stands"
+   ],
+   "wordsFr": [
+    "chandelle",
+    "chandelles"
+   ],
+   "def": "A strong metal stand that holds the car once it has been jacked up. Never go under a car held only by a jack."
+  },
+  {
+   "id": "jack",
+   "term": "Jack",
+   "words": [
+    "jack",
+    "jacks",
+    "trolley jack",
+    "workshop jack"
+   ],
+   "wordsFr": [
+    "cric",
+    "crics",
+    "cric rouleur"
+   ],
+   "def": "A tool that lifts the car. A trolley jack rolls on small wheels and lifts as you pump its handle. It lifts, but it does not hold the car safely."
+  },
+  {
+   "id": "jacking-point",
+   "term": "Jacking point",
+   "words": [
+    "jacking point",
+    "jacking points",
+    "jack point",
+    "jack points"
+   ],
+   "wordsFr": [
+    "point de levage",
+    "points de levage"
+   ],
+   "def": "A strengthened place under the car where a jack or axle stand can safely push. Pushing anywhere else can bend the car or let it fall."
+  },
+  {
+   "id": "chock",
+   "term": "Wheel chock",
+   "words": [
+    "wheel chock",
+    "wheel chocks",
+    "chock",
+    "chocks"
+   ],
+   "wordsFr": [
+    "cale de roue",
+    "cales de roue",
+    "calez",
+    "calez les roues"
+   ],
+   "def": "A wedge pushed against a tyre so that the car cannot roll."
+  },
+  {
+   "id": "crossbeam",
+   "term": "Crossbeam",
+   "words": [
+    "crossbeam"
+   ],
+   "wordsFr": [
+    "traverse de suspension",
+    "traverse de suspension en aluminium",
+    "traverse avant en aluminium",
+    "traverse en aluminium"
+   ],
+   "def": "The big aluminium beam under the front of the car that carries the suspension and steering. It is not a jacking point."
+  },
+  {
+   "id": "crossmember",
+   "term": "Crossmember",
+   "words": [
+    "crossmember",
+    "crossmembers"
+   ],
+   "wordsFr": [
+    "traverse de caisse",
+    "traverse de caisse avant"
+   ],
+   "def": "A steel beam that runs across the body of the car. It is stronger than the panels around it."
+  },
+  {
+   "id": "subframe",
+   "term": "Subframe",
+   "words": [
+    "subframe",
+    "subframes"
+   ],
+   "wordsFr": [
+    "berceau",
+    "berceaux"
+   ],
+   "def": "A separate frame bolted under the car. It carries the suspension and sometimes the engine."
+  },
+  {
+   "id": "torque",
+   "term": "Torque",
+   "words": [
+    "torque",
+    "torques"
+   ],
+   "wordsFr": [
+    "couple de serrage",
+    "couples de serrage",
+    "couple"
+   ],
+   "def": "How tight a bolt is, measured as a turning force. Too loose and it can work free. Too tight and it can snap or strip its thread."
+  },
+  {
+   "id": "torque-wrench",
+   "term": "Torque wrench",
+   "words": [
+    "torque wrench",
+    "torque wrenches"
+   ],
+   "wordsFr": [
+    "clé dynamométrique",
+    "clés dynamométriques"
+   ],
+   "def": "A wrench you set to a figure. It clicks or shows you when the bolt has reached the right tightness."
+  },
+  {
+   "id": "bleed",
+   "term": "Bleed",
+   "words": [
+    "bleed",
+    "bleeding",
+    "bleeds",
+    "bled"
+   ],
+   "wordsFr": [
+    "purger",
+    "purge",
+    "purgez",
+    "purgé",
+    "purgée"
+   ],
+   "def": "To let trapped air out of a system full of liquid. Air in the brakes makes the pedal soft. Air in the cooling system can overheat the engine."
+  },
+  {
+   "id": "nipple",
+   "term": "Bleed nipple",
+   "words": [
+    "bleed nipple",
+    "bleed nipples",
+    "nipple",
+    "nipples"
+   ],
+   "wordsFr": [
+    "vis de purge",
+    "purgeur",
+    "purgeurs"
+   ],
+   "def": "A small valve on a brake caliper. You open it to let out air and old fluid."
+  },
+  {
+   "id": "ball-joint",
+   "term": "Ball joint",
+   "words": [
+    "ball joint",
+    "ball joints"
+   ],
+   "wordsFr": [
+    "rotule",
+    "rotules"
+   ],
+   "def": "A ball in a socket that lets a suspension or steering part swivel. A worn one knocks, and if it fails the wheel can collapse."
+  },
+  {
+   "id": "tensioner",
+   "term": "Tensioner",
+   "words": [
+    "tensioner",
+    "tensioners"
+   ],
+   "wordsFr": [
+    "tendeur",
+    "tendeurs"
+   ],
+   "def": "A part that keeps a chain or belt tight by pushing on it, with a spring or with oil pressure."
+  },
+  {
+   "id": "fault-code",
+   "term": "Fault code",
+   "words": [
+    "fault code",
+    "fault codes"
+   ],
+   "wordsFr": [
+    "code défaut",
+    "codes défaut"
+   ],
+   "def": "A short code, such as P0340, that the car's computer stores when it sees a problem. A code reader shows it."
+  },
+  {
+   "id": "wishbone",
+   "term": "Wishbone",
+   "words": [
+    "wishbone",
+    "wishbones"
+   ],
+   "wordsFr": [
+    "triangle",
+    "triangles"
+   ],
+   "def": "A triangular suspension arm that joins the wheel to the car."
+  },
+  {
+   "id": "bush",
+   "term": "Bush",
+   "words": [
+    "bush",
+    "bushes"
+   ],
+   "wordsFr": [
+    "silentbloc",
+    "silentblocs"
+   ],
+   "def": "A rubber sleeve in a suspension joint. It lets the joint move without metal touching metal."
+  },
+  {
+   "id": "damper",
+   "term": "Damper",
+   "words": [
+    "damper",
+    "dampers"
+   ],
+   "wordsFr": [
+    "amortisseur",
+    "amortisseurs"
+   ],
+   "def": "What most people call a shock absorber. It stops the car bouncing on its springs."
+  },
+  {
+   "id": "anti-roll-bar",
+   "term": "Anti-roll bar",
+   "words": [
+    "anti-roll bar",
+    "anti-roll bars"
+   ],
+   "wordsFr": [
+    "barre stabilisatrice",
+    "barres stabilisatrices"
+   ],
+   "def": "A metal bar that links the left and right suspension to keep the car level in corners."
+  },
+  {
+   "id": "caliper",
+   "term": "Caliper",
+   "words": [
+    "caliper",
+    "calipers"
+   ],
+   "wordsFr": [
+    "étrier",
+    "étriers"
+   ],
+   "def": "The clamp over the brake disc. It squeezes the pads against the disc to slow the car."
+  },
+  {
+   "id": "guide-pin",
+   "term": "Guide pin",
+   "words": [
+    "guide pin",
+    "guide pins"
+   ],
+   "wordsFr": [
+    "colonnette",
+    "colonnettes",
+    "axe de guidage",
+    "axes de guidage"
+   ],
+   "def": "A smooth pin that the brake caliper slides on, so that the pads wear evenly."
+  },
+  {
+   "id": "brake-disc",
+   "term": "Brake disc",
+   "words": [
+    "brake disc",
+    "brake discs",
+    "disc",
+    "discs"
+   ],
+   "wordsFr": [
+    "disque de frein",
+    "disques de frein",
+    "disque",
+    "disques"
+   ],
+   "def": "The metal plate that turns with the wheel. The pads grip it to stop the car."
+  },
+  {
+   "id": "brake-fluid",
+   "term": "Brake fluid",
+   "words": [
+    "brake fluid"
+   ],
+   "wordsFr": [
+    "liquide de frein"
+   ],
+   "def": "The liquid that carries the push of your foot from the pedal to the brakes. It strips paint and soaks up water over time."
+  },
+  {
+   "id": "hub",
+   "term": "Hub",
+   "words": [
+    "hub",
+    "hubs"
+   ],
+   "wordsFr": [
+    "moyeu",
+    "moyeux"
+   ],
+   "def": "The centre that the wheel bolts to. It spins on the wheel bearing."
+  },
+  {
+   "id": "steering-rack",
+   "term": "Steering rack",
+   "words": [
+    "steering rack",
+    "rack"
+   ],
+   "wordsFr": [
+    "crémaillère de direction",
+    "crémaillère"
+   ],
+   "def": "The toothed bar that moves the front wheels when you turn the steering wheel."
+  },
+  {
+   "id": "gasket",
+   "term": "Gasket",
+   "words": [
+    "gasket",
+    "gaskets"
+   ],
+   "wordsFr": [
+    "joint",
+    "joints"
+   ],
+   "def": "A flat seal between two metal faces, so that oil, water or gas cannot leak out."
+  },
+  {
+   "id": "o-ring",
+   "term": "O-ring",
+   "words": [
+    "o-ring",
+    "o-rings",
+    "O ring"
+   ],
+   "wordsFr": [
+    "joint torique",
+    "joints toriques"
+   ],
+   "def": "A rubber ring that seals a joint. Fit a new one whenever the joint is opened."
+  },
+  {
+   "id": "sump",
+   "term": "Sump",
+   "words": [
+    "sump"
+   ],
+   "wordsFr": [
+    "carter d'huile"
+   ],
+   "def": "The pan at the bottom of the engine that holds the oil."
+  },
+  {
+   "id": "drain-plug",
+   "term": "Drain plug",
+   "words": [
+    "drain plug",
+    "drain plugs"
+   ],
+   "wordsFr": [
+    "bouchon de vidange",
+    "bouchons de vidange"
+   ],
+   "def": "The bolt you undo to let old oil or coolant out."
+  },
+  {
+   "id": "dipstick",
+   "term": "Dipstick",
+   "words": [
+    "dipstick",
+    "dipsticks"
+   ],
+   "wordsFr": [
+    "jauge d'huile",
+    "jauge"
+   ],
+   "def": "The thin metal rod you pull out to check a fluid level."
+  },
+  {
+   "id": "coolant",
+   "term": "Coolant",
+   "words": [
+    "coolant"
+   ],
+   "wordsFr": [
+    "liquide de refroidissement"
+   ],
+   "def": "The mix of water and antifreeze that carries heat away from the engine."
+  },
+  {
+   "id": "expansion-tank",
+   "term": "Expansion tank",
+   "words": [
+    "expansion tank",
+    "header tank"
+   ],
+   "wordsFr": [
+    "vase d'expansion"
+   ],
+   "def": "The plastic bottle where you check and top up the coolant. It is under pressure when hot."
+  },
+  {
+   "id": "thermostat",
+   "term": "Thermostat",
+   "words": [
+    "thermostat"
+   ],
+   "wordsFr": [
+    "thermostat"
+   ],
+   "def": "A valve that stays shut until the engine is warm, then lets coolant through to the radiator."
+  },
+  {
+   "id": "idler",
+   "term": "Idler",
+   "words": [
+    "idler",
+    "idlers"
+   ],
+   "wordsFr": [
+    "galet",
+    "galets"
+   ],
+   "def": "A wheel that spins freely to guide a belt."
+  },
+  {
+   "id": "pulley",
+   "term": "Pulley",
+   "words": [
+    "pulley",
+    "pulleys"
+   ],
+   "wordsFr": [
+    "poulie",
+    "poulies"
+   ],
+   "def": "A grooved wheel that a belt runs round."
+  },
+  {
+   "id": "alternator",
+   "term": "Alternator",
+   "words": [
+    "alternator"
+   ],
+   "wordsFr": [
+    "alternateur"
+   ],
+   "def": "The generator, driven by a belt, that charges the battery while the engine runs."
+  },
+  {
+   "id": "timing-chain",
+   "term": "Timing chain",
+   "words": [
+    "timing chain",
+    "timing chains"
+   ],
+   "wordsFr": [
+    "chaîne de distribution",
+    "chaînes de distribution"
+   ],
+   "def": "A chain inside the engine that keeps the valves in step with the pistons. If it slips, the engine can be badly damaged."
+  },
+  {
+   "id": "camshaft",
+   "term": "Camshaft",
+   "words": [
+    "camshaft",
+    "camshafts"
+   ],
+   "wordsFr": [
+    "arbre à cames",
+    "arbres à cames"
+   ],
+   "def": "A turning shaft whose lobes open and close the engine's valves."
+  },
+  {
+   "id": "bank",
+   "term": "Bank",
+   "words": [
+    "bank",
+    "banks"
+   ],
+   "wordsFr": [
+    "banc",
+    "bancs"
+   ],
+   "def": "One of the two rows of cylinders in this V8 engine."
+  },
+  {
+   "id": "cylinder-head",
+   "term": "Cylinder head",
+   "words": [
+    "cylinder head",
+    "cylinder heads"
+   ],
+   "wordsFr": [
+    "culasse",
+    "culasses"
+   ],
+   "def": "The top part of the engine, which holds the valves and spark plugs."
+  },
+  {
+   "id": "spark-plug",
+   "term": "Spark plug",
+   "words": [
+    "spark plug",
+    "spark plugs"
+   ],
+   "wordsFr": [
+    "bougie",
+    "bougies"
+   ],
+   "def": "It screws into the engine and makes the spark that lights the fuel."
+  },
+  {
+   "id": "coil",
+   "term": "Coil",
+   "words": [
+    "coil",
+    "coils",
+    "coil-on-plug"
+   ],
+   "wordsFr": [
+    "bobine",
+    "bobines"
+   ],
+   "def": "It turns battery power into the high voltage a spark plug needs. This engine has one for each plug."
+  },
+  {
+   "id": "misfire",
+   "term": "Misfire",
+   "words": [
+    "misfire",
+    "misfires",
+    "misfiring"
+   ],
+   "wordsFr": [
+    "raté d'allumage",
+    "ratés d'allumage",
+    "raté",
+    "ratés"
+   ],
+   "def": "When a cylinder does not fire properly. The engine shakes or runs rough."
+  },
+  {
+   "id": "injector",
+   "term": "Injector",
+   "words": [
+    "injector",
+    "injectors"
+   ],
+   "wordsFr": [
+    "injecteur",
+    "injecteurs"
+   ],
+   "def": "A small valve that sprays fuel into the engine."
+  },
+  {
+   "id": "throttle-body",
+   "term": "Throttle body",
+   "words": [
+    "throttle body",
+    "throttle bodies"
+   ],
+   "wordsFr": [
+    "corps de papillon"
+   ],
+   "def": "The valve that lets air into the engine. The accelerator pedal controls it."
+  },
+  {
+   "id": "maf",
+   "term": "MAF sensor",
+   "words": [
+    "MAF sensor",
+    "mass air flow sensor",
+    "MAF"
+   ],
+   "wordsFr": [
+    "débitmètre d'air",
+    "débitmètre"
+   ],
+   "def": "The mass air flow sensor. It measures the air going into the engine."
+  },
+  {
+   "id": "ecm",
+   "term": "ECM",
+   "words": [
+    "ECM"
+   ],
+   "wordsFr": [
+    "ECM",
+    "calculateur moteur"
+   ],
+   "def": "The engine control module: the computer that runs the engine."
+  },
+  {
+   "id": "manifold",
+   "term": "Manifold",
+   "words": [
+    "manifold",
+    "manifolds"
+   ],
+   "wordsFr": [
+    "collecteur",
+    "collecteurs"
+   ],
+   "def": "A branched pipe that carries air into the engine, or exhaust gas out of it."
+  },
+  {
+   "id": "breather",
+   "term": "Breather",
+   "words": [
+    "breather",
+    "breathers"
+   ],
+   "wordsFr": [
+    "reniflard",
+    "reniflards"
+   ],
+   "def": "A small pipe that lets fumes out of the engine and back into the air intake."
+  },
+  {
+   "id": "supercharger",
+   "term": "Supercharger",
+   "words": [
+    "supercharger",
+    "superchargers"
+   ],
+   "wordsFr": [
+    "compresseur",
+    "compresseurs"
+   ],
+   "def": "A belt-driven air pump that forces extra air into the engine. XKR cars have one."
+  },
+  {
+   "id": "catalytic-converter",
+   "term": "Catalytic converter",
+   "words": [
+    "catalytic converter",
+    "catalytic converters"
+   ],
+   "wordsFr": [
+    "catalyseur",
+    "catalyseurs"
+   ],
+   "def": "The part of the exhaust that cleans the gases before they leave the car."
+  },
+  {
+   "id": "flange",
+   "term": "Flange",
+   "words": [
+    "flange",
+    "flanges"
+   ],
+   "wordsFr": [
+    "bride",
+    "brides"
+   ],
+   "def": "A flat rim with bolt holes, where two pipes or parts join."
+  },
+  {
+   "id": "propshaft",
+   "term": "Propshaft",
+   "words": [
+    "propshaft",
+    "propshafts"
+   ],
+   "wordsFr": [
+    "arbre de transmission"
+   ],
+   "def": "The long shaft that carries power from the gearbox to the back of the car."
+  },
+  {
+   "id": "flexible-coupling",
+   "term": "Flexible coupling",
+   "words": [
+    "flexible coupling",
+    "flexible couplings"
+   ],
+   "wordsFr": [
+    "flector",
+    "flectors"
+   ],
+   "def": "A rubber joint in the propshaft that takes out vibration."
+  },
+  {
+   "id": "differential",
+   "term": "Differential",
+   "words": [
+    "differential",
+    "diff"
+   ],
+   "wordsFr": [
+    "différentiel",
+    "pont"
+   ],
+   "def": "The gears at the back that send power to both rear wheels and let them turn at different speeds."
+  },
+  {
+   "id": "earth",
+   "term": "Battery ground",
+   "words": [
+    "battery ground",
+    "earth lead",
+    "earth"
+   ],
+   "wordsFr": [
+    "masse de la batterie",
+    "masse"
+   ],
+   "def": "The negative side of the electrics, joined to the metal of the car. It is also called the earth."
+  },
+  {
+   "id": "relay",
+   "term": "Relay",
+   "words": [
+    "relay",
+    "relays"
+   ],
+   "wordsFr": [
+    "relais"
+   ],
+   "def": "A small electric switch. A weak current uses it to turn on a stronger one."
+  },
+  {
+   "id": "multimeter",
+   "term": "Multimeter",
+   "words": [
+    "multimeter",
+    "multimeters"
+   ],
+   "wordsFr": [
+    "multimètre",
+    "multimètres"
+   ],
+   "def": "A handheld tester that measures volts, amps and resistance."
+  },
+  {
+   "id": "self-locking",
+   "term": "Self-locking nut",
+   "words": [
+    "self-locking nut",
+    "self-locking nuts",
+    "self-locking"
+   ],
+   "wordsFr": [
+    "écrou autobloquant",
+    "écrous autobloquants",
+    "autobloquant",
+    "autobloquants",
+    "autobloquante",
+    "autobloquantes"
+   ],
+   "def": "A nut or bolt with a grip built in, so that it will not shake loose. The grip wears out, so it can only be reused so many times."
+  },
+  {
+   "id": "spanner",
+   "term": "Spanner",
+   "words": [
+    "spanner",
+    "spanners"
+   ],
+   "wordsFr": [
+    "clé plate",
+    "clés plates"
+   ],
+   "def": "A hand tool with a shaped end that grips a nut or bolt head."
+  },
+  {
+   "id": "socket",
+   "term": "Socket",
+   "words": [
+    "socket",
+    "sockets"
+   ],
+   "wordsFr": [
+    "douille",
+    "douilles"
+   ],
+   "def": "A metal cup that fits over a nut or bolt head and turns on a handle."
+  },
+  {
+   "id": "stud",
+   "term": "Stud",
+   "words": [
+    "stud",
+    "studs"
+   ],
+   "wordsFr": [
+    "goujon",
+    "goujons"
+   ],
+   "def": "A bolt with no head, fixed into a part so that a nut can go on the free end."
+  },
+  {
+   "id": "shim",
+   "term": "Shim",
+   "words": [
+    "shim",
+    "shims"
+   ],
+   "wordsFr": [
+    "cale de réglage",
+    "cales de réglage",
+    "cale sélective",
+    "cales neuves",
+    "cales d'origine",
+    "cale choisie"
+   ],
+   "def": "A thin metal spacer used to set a gap or an angle exactly."
+  },
+  {
+   "id": "left-hand-thread",
+   "term": "Left-hand thread",
+   "words": [
+    "left-hand thread"
+   ],
+   "wordsFr": [
+    "filetage à gauche",
+    "pas à gauche"
+   ],
+   "def": "A bolt that undoes clockwise, the opposite way to a normal bolt."
+  },
+  {
+   "id": "circlip",
+   "term": "Circlip",
+   "words": [
+    "circlip",
+    "circlips"
+   ],
+   "wordsFr": [
+    "circlip",
+    "circlips"
+   ],
+   "def": "A springy metal ring that sits in a groove to hold a part in place."
+  },
+  {
+   "id": "vin",
+   "term": "VIN",
+   "words": [
+    "VIN"
+   ],
+   "wordsFr": [
+    "VIN"
+   ],
+   "def": "Vehicle identification number: the 17-character code that identifies your car. It is on a plate on the car."
+  },
+  {
+   "id": "restricted-performance",
+   "term": "Restricted performance",
+   "words": [
+    "restricted performance",
+    "limp mode"
+   ],
+   "wordsFr": [
+    "performances limitées",
+    "restricted performance"
+   ],
+   "def": "A warning and a safe mode: the car limits its power to protect itself until the fault is fixed."
+  },
+  {
+   "id": "carrier",
+   "term": "Caliper carrier",
+   "words": [
+    "caliper carrier",
+    "caliper carriers"
+   ],
+   "wordsFr": [
+    "support d'étrier",
+    "supports d'étrier",
+    "chape"
+   ],
+   "def": "The bracket bolted to the car that the brake caliper sits on. The pads and caliper slide on it."
+  },
+  {
+   "id": "anti-rattle-spring",
+   "term": "Anti-rattle spring",
+   "words": [
+    "anti-rattle spring",
+    "anti-rattle springs"
+   ],
+   "wordsFr": [
+    "ressort anti-bruit",
+    "ressorts anti-bruit"
+   ],
+   "def": "A thin metal spring clip on a brake caliper. It holds the pads and caliper still, so they do not rattle."
+  },
+  {
+   "id": "mating-surface",
+   "term": "Mating surface",
+   "words": [
+    "mating surface",
+    "mating surfaces"
+   ],
+   "wordsFr": [
+    "plan de contact",
+    "plans de contact"
+   ],
+   "def": "A face where two parts meet. It must be clean and flat so the parts sit true."
+  },
+  {
+   "id": "bedding-in",
+   "term": "Bedding in",
+   "words": [
+    "bedding-in",
+    "bedding in",
+    "bed in"
+   ],
+   "wordsFr": [
+    "rodage"
+   ],
+   "def": "Gentle use of new brake pads, so they wear to fit the disc. Hard stops too soon can spoil them."
+  },
+  {
+   "id": "booster",
+   "term": "Booster",
+   "words": [
+    "booster"
+   ],
+   "wordsFr": [
+    "batterie d'appoint"
+   ],
+   "def": "In a jump start, the good battery or jump pack that gives the flat battery power."
+  },
+  {
+   "id": "r-clip",
+   "term": "R clip",
+   "words": [
+    "R clip",
+    "R clips"
+   ],
+   "wordsFr": [
+    "goupille en R",
+    "goupilles en R"
+   ],
+   "def": "A springy wire clip shaped like a letter R. It stops a pin sliding out."
+  },
+  {
+   "id": "nm",
+   "term": "Nm",
+   "words": [
+    "Nm"
+   ],
+   "wordsFr": [
+    "Nm"
+   ],
+   "def": "Newton metres, the unit for how tight a bolt is. You set this number on a torque wrench."
+  },
+  {
+   "id": "hub-carrier",
+   "term": "Hub carrier",
+   "words": [
+    "hub carrier",
+    "hub carriers"
+   ],
+   "wordsFr": [
+    "porte-moyeu",
+    "porte-moyeux"
+   ],
+   "def": "The heavy part that holds the wheel bearing and hub. The suspension arms bolt to it."
+  },
+  {
+   "id": "brake-booster",
+   "term": "Brake booster",
+   "words": [
+    "brake booster",
+    "brake servo",
+    "booster vacuum",
+    "booster type"
+   ],
+   "wordsFr": [
+    "servofrein"
+   ],
+   "def": "The round unit behind the brake pedal. It uses engine vacuum to make the pedal easier to press."
+  }
+ ],
+ "gaps": []
+}

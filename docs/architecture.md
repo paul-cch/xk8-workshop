@@ -103,25 +103,29 @@ shareable deep link, e.g. `#/job/chain-tensioners/4?v=4.0-na-coupe-1999`.
 
 ## Product
 
-Five modes. The 3D car is always present, and every list item drives it.
+The audience is an owner who has never held a torque wrench. The first screen is four plain choices, with the car beside them. Everything an expert needs stays, one tap or one scroll behind. Five modes, named on screen The car, Run it, Fix it, What's wrong and Upkeep. In the code they stay `explore run jobs diagnose plan`. The 3D car is always present, and every list item drives it.
 
-- **Explore**: systems toggle show/ghost/hide; explode slider; x-ray; tap a part for what it
+- **Explore**: systems toggle show/ghost/hide; explode slider (Take it apart); x-ray (See through it); tap a part for what it
   does, why you care, part numbers, torques, tools, jobs and faults for this variant.
 - **Run**: rpm, throttle, gear, steering, suspension travel, roof. Live panels read real
-  numbers: mean piston speed, road speed in gear, wheel travel, firing order. The chain
-  and valve gear can be isolated and watched at any speed.
-- **Jobs**: pick a job, see difficulty, hours, tools and parts, then step through. Each step
-  flies the camera in, lifts the parts off, shows the torque in your units. Steps tick
-  off, persist, and print as a job card.
-- **Diagnose**: search symptoms in plain words or type a fault code; follow tests with
-  what each result means; jump to the job.
+  numbers, with mean piston speed and firing order under The numbers. Show me how it works opens the engine cut
+  open and slowed down, with the four strokes in words in step with the piston. The chains have their own button.
+- **Jobs**: pick a job, read the plain answer to Can I do this myself?, watch it being done, then step
+  through. Each step flies the camera in, lifts the parts off, shows the torque in your units,
+  and offers the film at that moment where one is recorded. On a phone the film sits over the car,
+  and Next moves it to the new step's moment where one is recorded. Next only moves on: the Done box
+  records a step. Steps persist and print as a job card.
+- **Diagnose**: six plain symptoms, or words or a fault code in the box. A complaint in ordinary words
+  reaches the likely faults through the `SAYS` table in `diagnose.js`, in both languages, and jobs that may
+  help come with them. If nothing fits every word, the closest matches show instead of a dead end.
 - **Plan**: service schedule by mileage and age, upgrades with honest value, walk-round
   inspection checklist, shopping list combined across chosen jobs.
 
-Global: car picker (VIN decoder or manual), one search box over everything, units toggle,
+Global: car picker (VIN decoder or manual), one search box over everything, which puts what a word means first and finds
+pages by what they are for, units toggle,
 garage mode (large type, high contrast, keeps the screen awake where supported), provenance
-badge on every number (factory, corroborated, single, community) with the source one tap
-away, a loud warning when a safety-critical value is below `corroborated`.
+badge on every number (From Jaguar, Several sources agree, One source, Owners say) with the source one tap
+away, workshop words in running text that explain themselves on a tap, a loud warning when a safety-critical value is below `corroborated`.
 
 ## Design rules
 
@@ -135,7 +139,12 @@ From the teardown skill, which applies here.
 - Test on an integrated GPU. Tiers cover pixel ratio, AO, MSAA and shadow size. Start
   light on touch devices. Warm shaders with `warm.js` (MIT, from the teardown kit, keep
   the credit).
-- Page under 1 MB raw if possible. Measure it. No external requests at runtime.
+- Page under 1 MB raw if possible. Measure it. The page, its data and the car need nothing from outside. Tutorials are the one
+  exception, on demand only: thumbnails load from `i.ytimg.com` when a job, or a fault, weak spot or part panel that has
+  tutorials, is opened, lazily and with no referrer. A film loads from `www.youtube-nocookie.com` only after a tap. The Jobs
+  list and anything folded fetch nothing until opened. Written guides are plain links. Offline, a thumbnail is a plain panel
+  with a play button and a tap says why no film can play. From `file://` YouTube refuses the embed (its error 153), and the
+  player's Open on YouTube link still works.
 - Each part gets real geometry built from its dimensions. Fix a collision with a number.
 - Roughness at least 0.45 on big metal surfaces, envMapIntensity about 0.5. Paint is the
   exception and gets a clearcoat.

@@ -15,5 +15,19 @@ export const headBoltLabels = () => BOLT_X.flatMap((x, i) => [
   {point: car(BANK.B, x, BOLT_Y, BOLT_W), text: String(OUTER_SIDE[i])},
 ]);
 
+// Where the cutaway's labels sit, in a bank's frame, mm from the crank axis along the cylinder. Places to point at, not specifications.
+const PISTON_Y = 175, VALVE_Y = 245, PLUG_Y = 290;
+
+/** The parts of one cut cylinder, on bank A. names are the words in the reader's language. */
+export const sectionLabels = (row, names) => {
+  const x = ROWS[row - 1];
+  return [
+    {point: car(BANK.A, x, PISTON_Y, 0), text: names.piston},
+    {point: car(BANK.A, x, VALVE_Y, 22), text: names.valve},
+    {point: car(BANK.A, x, PLUG_Y, 0), text: names.plug},
+    {point: car(BANK.A, x, 0, 0), text: names.crank},
+  ];
+};
+
 /** 1A to 4A and 1B to 4B on the cam covers: row 1 is at the front, A is the car's right. */
 export const cylinderLabels = () => ROWS.flatMap((x, i) => ['A', 'B'].map((name) => ({point: car(BANK[name], x, COVER.top, 0), text: `${i + 1}${name}`})));

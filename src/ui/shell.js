@@ -2,7 +2,7 @@
 // camera views, the first screen, idle orbit with handback, garage mode, global keys, and app.ui, which every panel uses
 // to move between records. Panels own what is inside the dock. What the dock covers is reported to the stage.
 import * as THREE from 'three';
-import {data, forVariant, partName} from '../data.js';
+import {data, partName} from '../data.js';
 import {N, STAGE_LABEL, t} from '../i18n.js';
 import {MODES} from '../state.js';
 import * as explore from './explore.js';
@@ -10,18 +10,23 @@ import * as run from './run.js';
 import * as jobs from './jobs.js';
 import * as diagnose from './diagnose.js';
 import * as plan from './plan.js';
+import * as feedback from './feedback.js';
 import {nav} from './jobs.js';
 import {openPicker} from './picker.js';
 import {openSearch, recordBody} from './search.js';
-import {badge, carName, carTag, dialog, fill, h, proneTo, seg, toast} from './widgets.js';
+import {explain} from './terms.js';
+import {showBasics} from './tutorials.js';
+import {badge, carName, carTag, carYear, dialog, fill, h, lessons, proneTo, seg, toast} from './widgets.js';
 
 const PANELS = {explore, run, jobs, diagnose, plan};
 const KEEP = new Set(['explore', 'run']); // these hold their own state across visits; the others mount on each visit
-const TITLES = {explore: N('Explore'), run: N('Run'), jobs: N('Jobs|mode'), diagnose: N('Diagnose'), plan: N('Plan')};
+const TITLES = {explore: N('The car'), run: N('Run it'), jobs: N('Fix it'), diagnose: N('What\'s wrong'), plan: N('Upkeep')};
 const VIEWS = [['hero', N('Whole car')], ['side', N('Side')], ['front', N('Front')], ['rear', N('Rear')], ['top', N('Top')], ['underside', N('Under')], ['engine-bay', N('Engine bay')], ['boot', N('Boot')], ['wheel-fr', N('Wheel')]];
 const SNAP_WORD = {peek: N('peek'), half: N('half'), full: N('full')};
 const SKINS = new Set(['body', 'roof', 'interior']);
 const RAIL = '(min-width: 1000px), (orientation: landscape) and (min-width: 640px)';
+const HINT_S = 12; // how long the first-visit hint stays if nobody touches it
+const APART_MS = 1500; // the car coming apart, from a button: the slider follows the finger instead
 const IDLE_S = 25; // quiet time before the car starts turning again: the teardown handback
 const ORBIT_DEG_S = 7;
 const ORBIT_MAX_S = 240; // then rest, so a forgotten phone does not cook
@@ -138,18 +143,12 @@ function firstScreen(app) {
   const years = data.variants.items;
   const from = Math.min(...years.map((r) => r.myFrom)), to = Math.max(...years.map((r) => r.myTo));
   const el = h('div.intro');
-  /** The counts follow the car on show, and all of it follows the language. */
-  el.paint = (v) => {
-    const n = (d) => forVariant(d.items, v).length;
+  /** The words follow the language. The four choices are the first thing in the panel: explore.js draws them. */
+  el.paint = () => {
     el.replaceChildren(
-      h('p.intro-kick', t('Jaguar XK8 and XKR, X100, {from} to {to}', {from, to})),
+      h('p.intro-kick', t('Jaguar XK8 and XKR, {from} to {to}', {from, to})),
       h('p.intro-title', t('XK8 Workshop')),
-      h('p.intro-lead', [h('span.intro-short', t('A working 3D car to take apart, with the real torques, part numbers and jobs.')), h('span.intro-count', ` ${t('For your exact car: {parts} parts, {torques} torques, {jobs} jobs.', {parts: n(data.parts), torques: n(data.torques), jobs: n(data.jobs)})}`)]),
-      h('p.intro-go', t('Drag to turn it. Tap any part.')),
-      h('div.intro-btns', [
-        h('button.btn.intro-watch', {type: 'button', onclick: () => app.ui.watch()}, t('Watch the engine run')),
-        h('button.btn.intro-car', {type: 'button', onclick: () => app.ui.openCar()}, t('Set up your car')),
-      ]),
+      h('p.intro-lead', t('A working 3D car, with plain help for owners.')),
     );
   };
   return el;
@@ -164,6 +163,8 @@ export function mount(el, app) {
   const automated = navigator.webdriver && !location.search.includes('orbit');
 
   // ---- what panels call ------------------------------------------------------------------------
+  let apartFrame = 0;
+  const say = (notice) => toast(typeof notice === 'function' ? notice() : notice);
   const ui = {
     autoXray: false, focusTorque: null, focusWeak: null, lookupFrom: null,
     /** Select a part from a list: go to Explore, make it visible, fly to it. A job in hand is kept: the banner goes back to it. */
@@ -183,11 +184,48 @@ export function mount(el, app) {
       if (fly && store.get().view) store.set({view: null}); // leaving a job hands the camera back to the whole car: this flight takes it
       if (fly && r.id) { if (inside) showWhere(r.id); else rig.flyToPart(r.id); }
     },
-    /** The hook: straight to the engine running, with the chains in the open. */
+    /** How it works: straight to the engine cut open and slowed down, with the four strokes in words. */
     watch() {
       store.set({mode: 'run', selected: null});
-      ui.showChains?.(true);
+      ui.showHow?.(true);
       if (!rail) sheet.to('peek');
+    },
+    /** The running engine, with the whole car around it. */
+    startEngine() {
+      store.set({mode: 'run', selected: null});
+      if (!rail) sheet.to('peek');
+    },
+    /** The four ways in: what has gone wrong, a job to do, how it works, a car to buy. */
+    begin(what) {
+      if (what === 'how') { ui.watch(); return; }
+      ui.lookupFrom = null;
+      if (what === 'wrong') { nav.diagnoseHome = true; goto('diagnose'); }
+      if (what === 'fix') store.set({mode: 'jobs', job: null, selected: null, isolate: null});
+      if (what === 'buy') { nav.planTab = 'inspect'; nav.planBuy = true; goto('plan'); if (!rail) sheet.to('full'); } // a list to read: it gets the screen
+    },
+    /** One of the basics, opened in Fix it. */
+    lesson(id) {
+      showBasics(id);
+      ui.lookupFrom = null;
+      store.set({mode: 'jobs', job: null, selected: null, isolate: null});
+      show('jobs');
+      lift('full');
+      requestAnimationFrame(() => panelEl.jobs.querySelector('.tut-topics')?.scrollIntoView({block: 'start'}));
+    },
+    /** The car coming apart or going back, with the slider following. Reduced motion jumps. */
+    takeApart(on) {
+      cancelAnimationFrame(apartFrame);
+      const to = on ? 1 : 0, from = store.get().explode;
+      if (store.get().mode !== 'explore' || store.get().selected) store.set({mode: 'explore', selected: null});
+      if (on) { dismiss(); store.set({view: null}); store.set({view: 'hero'}); }
+      if (calm.matches) { store.set({explode: to}); return; }
+      const t0 = performance.now();
+      const step = (now) => {
+        const k = Math.min(1, (now - t0) / APART_MS);
+        store.set({explode: from + (to - from) * (k * k * (3 - 2 * k))});
+        if (k < 1) apartFrame = requestAnimationFrame(step);
+      };
+      apartFrame = requestAnimationFrame(step);
     },
     /** Brings a block to the top of the panel once the sheet has stopped moving, so nothing is cut off and no stage is above it. */
     reveal(node) {
@@ -203,8 +241,35 @@ export function mount(el, app) {
     sheetChanged() { if (rail === false) sheetFor(); report(); },
     /** Showing a part from a full sheet would move the car behind it. */
     lower() { if (rail === false && sheet.snap === 'full' && !stepOn) sheet.to('half'); },
-    /** Go to any record. kind is a search kind: part job fault dtc torque fluid weakspot upgrade inspect tool service vendor. */
+    /** A film goes over the car on a phone, and the sheet sits under it. False where there is no room for that. */
+    filmOver(node) {
+      if (rail !== false) return false;
+      film = node;
+      node.classList.add('tut-over');
+      el.append(node);
+      root.classList.add('film-over');
+      sheetFor();
+      sheet.to('full');
+      return true;
+    },
+    /** Asks for more of the screen. Never lowers the sheet. */
+    raise(to) { lift(to); },
+    /** The film has gone. */
+    film() {
+      if (!film) return;
+      film = null;
+      root.classList.remove('film-over');
+      if (rail === false) { sheetFor(); sheet.to(stepOn && !store.get().garage ? 'half' : stepOn ? 'full' : sheet.snap); }
+    },
+    /** Go to any record. kind is a search kind: term page part job fault dtc torque fluid weakspot upgrade inspect tool service vendor. */
     open(kind, id) {
+      if (kind === 'term') return explain(data.terms.byId.get(id));
+      if (kind === 'page') {
+        if (id.startsWith('basics:')) return ui.lesson(id.slice('basics:'.length));
+        if (id === 'apart') return ui.takeApart(true);
+        if (id === 'service') { nav.planTab = 'service'; return goto('plan'); }
+        return ui.begin(id);
+      }
       if (kind === 'part') return ui.select(id);
       if (kind === 'job') { ui.lookupFrom = null; return store.set({mode: 'jobs', job: {id, step: null}, selected: null, isolate: null}); }
       if (kind === 'fault' || kind === 'dtc') { nav.diagnose = {page: kind === 'dtc' ? 'code' : 'fault', id}; return goto('diagnose'); }
@@ -230,6 +295,7 @@ export function mount(el, app) {
     toast,
   };
   app.ui = ui;
+  lessons.open = ui.lesson;
 
   // ---- frame ----------------------------------------------------------------------------------
   const modes = h('nav.modes');
@@ -259,10 +325,10 @@ export function mount(el, app) {
   // Under about 900 px wide the rail's top bar has no room for these: one button holds them.
   const menuBtn = h('button.toggle.top-menu', {type: 'button', onclick: () => {
     const d = dialog({title: t('Settings'), body: [
-      h('h3.lab', t('Torque units')),
-      seg({label: t('Torque units'), options: [{value: 'nm', label: 'Nm'}, {value: 'lbft', label: 'lb ft'}], value: store.get().units, onChange: (v) => store.set({units: v}), className: 'seg-wide'}),
-      h('h3.lab', t('Garage mode')),
-      h('button.btn.menu-garage', {type: 'button', onclick: () => { store.set({garage: !store.get().garage}); d.close(); }}, store.get().garage ? t('Turn garage mode off') : t('Turn garage mode on')),
+      h('h3.lab', t('Tightening units')),
+      seg({label: t('Tightening units'), options: [{value: 'nm', label: 'Nm'}, {value: 'lbft', label: 'lb ft'}], value: store.get().units, onChange: (v) => store.set({units: v}), className: 'seg-wide'}),
+      h('h3.lab', t('Large text')),
+      h('button.btn.menu-garage', {type: 'button', onclick: () => { store.set({garage: !store.get().garage}); d.close(); }}, store.get().garage ? t('Turn large text off') : t('Turn large text on')),
     ]});
   }});
   const heading = h('h1.vh');
@@ -284,7 +350,7 @@ export function mount(el, app) {
   }});
   viewBar.append(orbitBtn);
 
-  const skip = h('button.skip', {type: 'button', onclick: () => { store.set({mode: 'explore', selected: null}); requestAnimationFrame(() => { document.getElementById('part-list')?.querySelector('button')?.focus(); }); }});
+  const skip = h('button.skip', {type: 'button', onclick: () => { store.set({mode: 'explore', selected: null}); requestAnimationFrame(() => { const list = document.getElementById('part-list'); const fold = list?.closest('details'); if (fold) fold.open = true; list?.querySelector('button')?.focus(); }); }});
   const live = h('div.vh', {'aria-live': 'polite'});
   const picked = h('div.picked', {hidden: true});
   const banner = h('div.banner', {hidden: true, role: 'status'});
@@ -295,8 +361,10 @@ export function mount(el, app) {
   let introOn = !store.get().chosen && !app.noGL;
   let introEl = firstScreen(app);
   const hots = h('div.hots');
+  const hint = h('div.move-hint', {hidden: true, role: 'status'});
   viewBar.prepend(partBar);
-  el.replaceChildren(skip, top, dock, viewBar, introEl, hots, picked, banner, stripBtn, live);
+  el.replaceChildren(skip, top, dock, viewBar, introEl, hots, hint, picked, banner, stripBtn, live);
+  feedback.mount(app, {top, before: menuBtn, dock: dockBody});
   introEl.paint(store.get().variant);
 
   // ---- panels ---------------------------------------------------------------------------------
@@ -317,17 +385,18 @@ export function mount(el, app) {
     searchWords.textContent = t('Search everything');
     searchWords.dataset.short = t('Find'); // the narrow top bar shows this one
     carBtn.setAttribute('aria-label', t('Your car. Change it'));
-    units.setAttribute('aria-label', t('Torque units'));
+    units.setAttribute('aria-label', t('Tightening units'));
     langs.setAttribute('aria-label', t('Language'));
-    garage.textContent = t('Garage');
-    garage.title = t('Large high-contrast type, and the screen stays on');
+    garage.textContent = t('Large text');
+    garage.title = t('Large, high-contrast text, and the screen stays on');
     menuBtn.textContent = t('Menu');
     dock.setAttribute('aria-label', t('Panel'));
     viewBar.setAttribute('aria-label', t('Camera views'));
     for (const [name, label] of VIEWS) viewBtn[name].textContent = t(label);
-    orbitBtn.textContent = t('Orbit');
+    orbitBtn.textContent = t('Spin');
     skip.textContent = t('Skip to the parts list');
     hots.setAttribute('aria-label', t('Start with what this car is known for'));
+    paintHint();
     stage.renderer.domElement.setAttribute('aria-label', t(STAGE_LABEL));
     sheet?.say();
   }
@@ -351,6 +420,7 @@ export function mount(el, app) {
   let rail = null;
   let stepOn = false;
   let zoomed = false;
+  let film = null; // the player, while it sits over the car
   const overlay = () => el.querySelector('.chain-tag:not([hidden])')?.offsetHeight ?? 0; // the chain caption sits above the car, not on it
   const report = () => {
     const isRail = rail;
@@ -363,15 +433,15 @@ export function mount(el, app) {
     }
     // On a phone the heading sits above the car, not on it, and the camera buttons sit below it.
     const intro = introOn && introEl ? introEl.offsetHeight + 12 : 0;
-    const row = introOn ? CAPTION_ROW : stepOn || store.get().garage ? 0 : VIEW_ROW;
+    const row = introOn ? (el.querySelector('.hot-cap')?.offsetHeight ? CAPTION_ROW : 0) : stepOn || store.get().garage || root.classList.contains('run-how') ? 0 : VIEW_ROW;
     stage.setInsets({top: above + intro + overlay(), right: 0, bottom: Math.min(sheet.h, sheet.half) + modes.offsetHeight + row, left: 0});
   };
   const sheetFor = () => {
     const panel = panelEl[store.get().mode];
     const node = [...panel.querySelectorAll('[data-peek]')].find((n) => n.offsetHeight > 0);
     const reach = !node ? 84 : node.closest('.ws') ? node.offsetHeight : node.getBoundingClientRect().bottom - panel.getBoundingClientRect().top + panel.scrollTop;
-    const strip = stepOn ? Math.max(STRIP_MIN, window.innerHeight * STRIP_SHARE) : null;
-    sheet.measure(modes.offsetHeight, top.offsetHeight + (banner.hidden ? 0 : banner.offsetHeight), reach + grip.offsetHeight + 1, strip);
+    const strip = stepOn && !film ? Math.max(STRIP_MIN, window.innerHeight * STRIP_SHARE) : null;
+    sheet.measure(modes.offsetHeight, top.offsetHeight + (banner.hidden ? 0 : banner.offsetHeight) + (film?.offsetHeight ?? 0), reach + grip.offsetHeight + 1, strip);
   };
   /** In a step on a phone the text comes first: no mode bar, no camera buttons, and the car a strip that opens on request. */
   function paintStep(s) {
@@ -413,6 +483,7 @@ export function mount(el, app) {
   dock.addEventListener('focusin', (e) => { if (!stepOn && e.target.matches?.(TYPED)) lift('full'); });
 
   /** The whole car, from the side the part is on, with the sightline cut to it. A part means nothing without the car around it. */
+  ui.showWhere = showWhere;
   function showWhere(id) {
     if (rail) { rig.flyToPart(id, {minDist: SEE_IT_M}); return; }
     const b = registry.partBox(id);
@@ -436,7 +507,7 @@ export function mount(el, app) {
         store.set({view: null});
         paintPartBar(store.get());
       }}, zoomed ? t('Whole car') : t('Zoom in')),
-      h('button.view', {type: 'button', 'aria-pressed': String(iso), onclick: () => store.set({isolate: iso ? null : [id], locate: iso})}, t('Isolate')),
+      h('button.view', {type: 'button', 'aria-pressed': String(iso), onclick: () => store.set({isolate: iso ? null : [id], locate: iso})}, t('Just this part')),
     );
   }
 
@@ -451,12 +522,15 @@ export function mount(el, app) {
     if (app.noGL) rows.push(h('div.banner-row', h('span.banner-text', t('The 3D view is not available in this browser. Every torque, job, fault and part number still works.'))));
     if (s.linked) {
       const own = s.linked.own;
-      rows.push(h('div.banner-row', [
-        h('span.banner-text', t(own ? 'Viewing a {car}, not your car.' : 'Viewing a {car} from a shared link.', {car: `${s.variant.my} ${carName(s.variant)}`})),
+      const car = carYear(s.variant);
+      rows.push(h('div.banner-row.banner-link', [
+        h('span.banner-text.banner-long', t(own ? 'Viewing a {car}, not your car.' : 'Viewing a {car} from a shared link.', {car})),
+        h('span.banner-text.banner-short', {'aria-hidden': 'true'}, car), // a phone has one line for this: the car and the two ways out
         own && h('button.link', {type: 'button', onclick: () => store.set({variant: own, linked: null})}, t('Back to my car')),
         h('button.link', {type: 'button', onclick: () => store.set({linked: null, chosen: true})}, t('Make this my car')),
       ]));
     }
+    if (frenchOffer) rows.push(h('div.banner-row', {lang: 'fr'}, [h('span.banner-text', 'Voir ce site en français ?'), h('button.link', {type: 'button', onclick: async () => { frenchOffer = false; paintBanner(store.get()); await app.setLang('fr'); }}, 'Oui'), h('button.link', {type: 'button', onclick: () => { frenchOffer = false; paintBanner(store.get()); }}, 'Non merci')]));
     const job = s.mode === 'jobs' ? null : ui.lookupFrom ?? s.job;
     const rec = job && data.jobs.byId.get(job.id);
     if (rec) rows.push(h('div.banner-row', [h('span.banner-text', rec.title), h('button.link', {type: 'button', onclick: backToJob}, job.step == null ? t('Back to the job') : t('Back to step {n}', {n: job.step + 1}))]));
@@ -465,6 +539,10 @@ export function mount(el, app) {
     if (rail === false) sheetFor();
     report();
   }
+
+  // A phone set to French gets the offer once, in French. The language stays a choice, and a link's own language stands.
+  let frenchOffer = !store.get().langOffered && store.get().lang !== 'fr' && !location.hash.includes('l=') && /^fr\b/i.test(navigator.language ?? '');
+  if (frenchOffer) store.set({langOffered: true});
 
   // ---- first screen, hot spots, idle orbit ------------------------------------------------------
   const spots = [];
@@ -518,6 +596,22 @@ export function mount(el, app) {
       s.node.hidden = p.y < above || p.y > H - b;
     }
   }
+  // The hint goes the first time the car is touched, with a tap on Got it, on any change of screen, or after a few seconds. It
+  // is saved as shown when it appears, so it comes once, whatever happens next.
+  let hintTimer = 0;
+  function hideHint() { clearTimeout(hintTimer); hint.hidden = true; }
+  function paintHint() {
+    const touch = matchMedia('(pointer: coarse)').matches;
+    hint.replaceChildren(h('span', touch ? t('Drag to turn the car. Pinch to zoom. Tap a part to see what it is.') : t('Drag to turn the car. Scroll to zoom. Click a part to see what it is.')), h('button.link', {type: 'button', onclick: hideHint}, t('Got it')));
+  }
+  function offerHint() {
+    const s = store.get();
+    if (s.hinted || app.noGL || s.mode !== 'explore' || s.selected) return;
+    hint.hidden = false;
+    if (rail === false && introOn && introEl) { hint.style.top = `${Math.round(introEl.getBoundingClientRect().bottom) + 6}px`; hint.style.bottom = 'auto'; } // between the heading and the car, not across the car
+    store.set({hinted: true});
+    hintTimer = setTimeout(hideHint, HINT_S * 1000);
+  }
   function dismiss() {
     if (!introOn) return;
     introOn = false;
@@ -549,7 +643,7 @@ export function mount(el, app) {
   for (const ev of ['pointerdown', 'wheel', 'keydown']) window.addEventListener(ev, (e) => {
     touched();
     if (e.type !== 'keydown' || e.target === stage.renderer.domElement) {
-      if (e.target === stage.renderer.domElement) dismiss();
+      if (e.target === stage.renderer.domElement) { dismiss(); hideHint(); }
     }
   }, {capture: true, passive: true});
   setInterval(() => {
@@ -589,7 +683,7 @@ export function mount(el, app) {
   const paintPicked = (s) => {
     const inOther = s.selected && s.mode !== 'explore' && s.mode !== 'jobs' && data.parts.byId.has(s.selected);
     picked.hidden = !inOther;
-    if (inOther) picked.replaceChildren(h('span', partName(s.selected)), h('button.link', {type: 'button', onclick: () => ui.select(s.selected, {fly: false})}, t('Open in Explore')));
+    if (inOther) picked.replaceChildren(h('span', partName(s.selected)), h('button.link', {type: 'button', onclick: () => ui.select(s.selected, {fly: false})}, t('See this part')));
   };
 
   store.subscribe((s, ch) => {
@@ -611,7 +705,7 @@ export function mount(el, app) {
       dockTitle.textContent = t(TITLES[s.mode]);
       show(s.mode);
       if (!rail) { sheetFor(); lift(); }
-      if (s.mode !== 'explore') dismiss();
+      if (s.mode !== 'explore') { dismiss(); hideHint(); } else offerHint();
       if (s.mode === 'jobs') ui.lookupFrom = null;
     }
     if (ch.has('mode') || ch.has('job') || ch.has('garage')) paintStep(s);
@@ -619,7 +713,7 @@ export function mount(el, app) {
     if (ch.has('chosen') || ch.has('linked')) paintCar(s);
     if (ch.has('chosen') && s.chosen) dismiss();
     if (ch.has('mode') || ch.has('job') || ch.has('linked') || ch.has('variant')) paintBanner(s);
-    if (ch.has('notice') && s.notice) { toast(s.notice); store.set({notice: null}); }
+    if (ch.has('notice') && s.notice) { say(s.notice); store.set({notice: null}); }
     if (ch.has('units')) units.set(s.units);
     if (ch.has('view') || ch.has('job') || ch.has('mode')) paintViews(s);
     if (ch.has('view') && s.view && s.view !== 'hero') dismiss();
@@ -645,7 +739,7 @@ export function mount(el, app) {
     garage.setAttribute('aria-pressed', on);
     if (say) {
       const awake = await keepAwake(on);
-      if (on) toast(awake ? t('Garage mode. The screen stays on.') : t('Garage mode. This browser cannot keep the screen on: turn off auto-lock.'));
+      if (on) toast(awake ? t('Large text on. The screen stays on.') : t('Large text on. This browser cannot keep the screen on: turn off auto-lock.'));
     } else if (on) keepAwake(true);
     requestAnimationFrame(layout);
   }
@@ -676,8 +770,9 @@ export function mount(el, app) {
   if (s.selected && s.mode === 'explore' && data.parts.byId.has(s.selected)) ui.select(s.selected);
   paintBanner(s);
   paintPartBar(s);
-  if (s.notice) { toast(s.notice); store.set({notice: null}); }
+  if (s.notice) { say(s.notice); store.set({notice: null}); }
   paintStep(s);
   if (rail === false && !stepOn) sheet.to(app.noGL ? 'full' : s.selected || s.mode !== 'explore' ? 'half' : 'peek');
+  offerHint();
   document.fonts?.ready?.then(layout);
 }

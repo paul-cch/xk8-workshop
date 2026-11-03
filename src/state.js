@@ -44,6 +44,8 @@ export const initialState = () => ({
   sim: {running: false, rpm: 0, throttle: 0, gear: 0, speedMph: 0, steer: 0, bumpF: 0, bumpR: 0, roof: 0, timeScale: 1, open: {bonnet: 0, boot: 0, doorL: 0, doorR: 0}},
   view: 'hero',
   garage: false,
+  hinted: false, // the first-visit hint on moving the car has been shown
+  langOffered: false, // a phone set to French has been offered the French page
 });
 
 export function createStore(init = initialState()) {
@@ -115,7 +117,7 @@ export function parseHash(hash) {
   const v = parseVariantCode(q.get('v'));
   if (v) {
     patch.variant = fitVariant(v);
-    if (variantCode(patch.variant) !== variantCode({...v, market: v.market === 'us' ? 'us' : 'uk'})) patch.notice = t('No such car was built. Showing the nearest, MY{my}.', {my: patch.variant.my});
+    if (variantCode(patch.variant) !== variantCode({...v, market: v.market === 'us' ? 'us' : 'uk'})) patch.notice = () => t('No such car was built. Showing the nearest, model year {my}.', {my: patch.variant.my}); // said when shown: a link is read before French has loaded
   }
   if (LANGS.includes(q.get('l'))) patch.lang = q.get('l'); // no l says nothing: the language is a setting, and links stay short
   if (q.has('p') || seg.length) patch.selected = q.get('p') || null;
@@ -197,6 +199,8 @@ const SHAPE = {
   checks: eachValue((v) => (v === 'ok' || v === 'bad' ? v : undefined)),
   list: (v) => (Array.isArray(v) ? v.filter((r) => listRef(r) !== undefined) : undefined),
   garage: (v) => (typeof v === 'boolean' ? v : undefined),
+  hinted: (v) => (typeof v === 'boolean' ? v : undefined),
+  langOffered: (v) => (typeof v === 'boolean' ? v : undefined),
 };
 const SAVED = Object.keys(SHAPE);
 

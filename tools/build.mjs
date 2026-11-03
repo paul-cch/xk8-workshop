@@ -42,7 +42,7 @@ if (RELEASE && !/^https:\/\//.test(SITE)) {
 
 // ---- data ----------------------------------------------------------------------------------
 
-const FILES = ['variants', 'parts', 'torques', 'fluids', 'service', 'jobs', 'tools', 'faults', 'dtc', 'weakspots', 'inspect', 'upgrades', 'vendors', 'facts'];
+const FILES = ['variants', 'parts', 'torques', 'fluids', 'service', 'jobs', 'tools', 'faults', 'dtc', 'weakspots', 'inspect', 'upgrades', 'vendors', 'facts', 'tutorials', 'terms'];
 // A file's gaps list ships only where a panel shows it: these four decide whether a value can be trusted.
 const KEEP_GAPS = new Set(['variants', 'torques', 'fluids', 'jobs']);
 
@@ -133,7 +133,7 @@ async function bundle(version, frVersion) {
 }
 
 const readCss = () => {
-  const parts = ['src/stage/stage.css', 'src/ui/style.css', 'src/ui/content.css'].map((f) => path.join(ROOT, f)).filter((f) => fs.existsSync(f));
+  const parts = ['src/stage/stage.css', 'src/ui/style.css', 'src/ui/content.css', 'src/ui/feedback.css', 'src/ui/tutorials.css'].map((f) => path.join(ROOT, f)).filter((f) => fs.existsSync(f));
   return parts.map((f) => fs.readFileSync(f, 'utf8')).join('\n')
     .replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s*\n\s*/g, '').replace(/\s*([{};,>])\s*/g, '$1').replace(/:\s+/g, ':');
 };
@@ -267,7 +267,7 @@ const manifest = () => JSON.stringify({
 const serviceWorker = (version) => `const V='xk8-${version}';const F=['./','fr.js','manifest.webmanifest','icon-192.png','icon-512.png','icon-maskable-512.png'];
 self.addEventListener('install',(e)=>e.waitUntil(caches.open(V).then((c)=>c.addAll(F)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',(e)=>e.waitUntil(caches.keys().then((k)=>Promise.all(k.filter((x)=>x!==V).map((x)=>caches.delete(x)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',(e)=>{if(e.request.method!=='GET'||new URL(e.request.url).origin!==location.origin)return;e.respondWith(caches.match(e.request,{ignoreSearch:true}).then((r)=>r||fetch(e.request).catch(()=>caches.match('./'))))});
+self.addEventListener('fetch',(e)=>{const u=new URL(e.request.url);if(e.request.method!=='GET'||u.origin!==location.origin||/^\\/(?:api\\/|inbox(?:\\/|$))/.test(u.pathname))return;e.respondWith(caches.match(e.request,{ignoreSearch:true}).then((r)=>r||fetch(e.request).catch(()=>caches.match('./'))))});
 `;
 
 // ---- run -----------------------------------------------------------------------------------
@@ -292,6 +292,12 @@ fs.writeFileSync(path.join(DIST, 'sw.js'), serviceWorker(version));
 fs.writeFileSync(path.join(DIST, 'icon-192.png'), icon(192, false));
 fs.writeFileSync(path.join(DIST, 'icon-512.png'), icon(512, false));
 fs.writeFileSync(path.join(DIST, 'icon-maskable-512.png'), icon(512, true));
+
+// The feedback server goes out with a release and nowhere else. A stale copy from an earlier release build must not stay behind.
+for (const f of ['_worker.js', '_routes.json']) {
+  fs.rmSync(path.join(DIST, f), {force: true});
+  if (RELEASE) fs.copyFileSync(path.join(ROOT, 'worker', f), path.join(DIST, f));
+}
 
 // The share card. A release renders a new one; other builds carry the last one over, so no output folder is without it.
 const OG = path.join(DIST, 'og.png'), LAST_OG = path.join(ROOT, 'dist/og.png');

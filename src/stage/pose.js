@@ -93,7 +93,7 @@ export function pose(state, clock, ctx, raw = false) {
   const steps = job ? jobSteps(job, state.variant) : [];
   const step = job && state.job.step != null ? steps[state.job.step] : null;
   const facts = step ? factsFor(job, steps, registry) : null;
-  sim.open = openings(state, ctx.views, facts?.needs ?? []);
+  sim.open = openings(state, ctx.views, (facts?.needs ?? []).filter((k) => !step?.closed?.includes(k)));
   const offCar = step ? offCarSet(steps, state.job.step) : new Set();
   const focus = new Set();
   for (const id of step?.focus ?? []) { const r = registry.resolve(id); if (r.id) focus.add(r.id); }

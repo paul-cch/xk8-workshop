@@ -1541,7 +1541,7 @@
     "255/45 R18, 2"
    ],
    "jobs": [],
-   "caution": "Check load and speed rating: factory was 96 and 99 with W or Y. Check your door or armrest label. Stay near stock rolling diameter. Nut torque is 102 Nm and Jaguar says retighten after 500 miles.",
+   "caution": "Check load and speed rating: factory was 96 and 99 with W or Y. Check your door or armrest label. Stay near stock rolling diameter. Nut torque is 88-102 Nm and Jaguar says retighten after 500 miles.",
    "appliesTo": {},
    "note": "Set of four on 1 Nov 2026 Blackcircles listings: 245/45R18 £66.99 to £209.99 each, 255/45R18 £79.99 to £222.41 each. The site sells with local fitting: confirm the price includes it.",
    "src": [
@@ -2439,7 +2439,7 @@
    "costGbp": null,
    "partsNeeded": [
     "Wheels with your car's matching size",
-    "Jaguar wheel nuts, torque 102 Nm"
+    "Jaguar wheel nuts, torque 88-102 Nm"
    ],
    "jobs": [],
    "caution": "Brembo cars: 19 inch Apollo is the known non-fitter. Later big-brake cars may not fit earlier wheels. 20 inch cars run 2.1 bar rear. Offsets come from one member's post and wheel stamps, not a Jaguar table, so check your stamp.",

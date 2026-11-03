@@ -810,7 +810,7 @@
     {
      "label": "Weak battery or low voltage",
      "likelihood": "high",
-     "test": "Charge the battery fully, then have it load tested. Jaguar says investigate if open circuit voltage sits around 12.45 to 12.49 V. If the message clears with a healthy battery, the battery was the cause.",
+     "test": "Charge the battery fully, then ask a garage or battery shop to test it under load. You can check it yourself with a multimeter: Jaguar says investigate if it reads around 12.45 to 12.49 V with nothing switched on. If the message clears with a healthy battery, the battery was the cause.",
      "fix": "Fit a good battery and clear the codes.",
      "parts": [
       "electrical.battery"
@@ -933,7 +933,7 @@
    "conf": "factory",
    "first": [
     "Check the battery first: a weak battery alone can trigger this.",
-    "Read the codes.",
+    "Read the codes, with a code reader or at any garage.",
     "If a cylinder code shows, swap that coil with the next cylinder, then check its plug."
    ],
    "drive": "If the check engine light is flashing, treat it as stop: ease off, stop somewhere safe and read the code. See P1313 and P1314."
@@ -1051,7 +1051,7 @@
     {
      "label": "Low battery",
      "likelihood": "high",
-     "test": "Charge and load test the battery first. A 2003 XK8 with P0780, P0781, P0782 and P0773 was quoted a $7,300 gearbox. A good battery and software reflash cured it.",
+     "test": "Charge the battery first, and ask a garage or battery shop to test it under load. A 2003 XK8 with P0780, P0781, P0782 and P0773 was quoted a $7,300 gearbox. A good battery and software reflash cured it.",
      "fix": "Fit a good battery, clear codes and recheck. Reflash the TCM if needed.",
      "parts": [
       "electrical.battery"
@@ -1486,7 +1486,7 @@
    "symptom": "Cranks but will not start",
    "system": "fuel",
    "when": "Any time",
-   "urgency": "stop",
+   "urgency": "soon",
    "causes": [
     {
      "label": "Selector not reading Park",
@@ -1568,14 +1568,15 @@
     "jtis-my2000",
     "wm"
    ],
-   "conf": "corroborated"
+   "conf": "corroborated",
+   "drive": "It will not start, so there is nothing to drive yet. Work through the causes below."
   },
   {
    "id": "no-crank",
    "symptom": "Nothing happens when you turn the key",
    "system": "electrical",
    "when": "Any time",
-   "urgency": "stop",
+   "urgency": "soon",
    "causes": [
     {
      "label": "Flat battery",
@@ -1626,7 +1627,8 @@
     "jag-dtc-9702",
     "tsb-414-06A"
    ],
-   "conf": "corroborated"
+   "conf": "corroborated",
+   "drive": "It will not start, so there is nothing to drive yet. Most often this is a flat battery, so start there."
   },
   {
    "id": "long-crank-hot",
@@ -2184,7 +2186,7 @@
     {
      "label": "Failing secondary chain tensioner",
      "likelihood": "high",
-     "test": "Jaguar recognises rattle at start and idle up to VIN A24195. Take off the cam covers and inspect. Original plastic bodies crack with no warning. Look for cracks, loose pieces and worn slippers.",
+     "test": "Jaguar recognises rattle at start and idle up to VIN A24195. Checking it means taking off the cam covers, so ask a garage unless you are confident with that job. Original plastic bodies crack with no warning. Look for cracks, loose pieces and worn slippers.",
      "fix": "Fit revised tensioners in pairs. If a primary has failed, change all four. Use the shorter bolts. Secondary tensioner bolts are 10 to 14 Nm, per TSB 303-30.",
      "parts": [
       "engine.chain-tensioner-secondary"
@@ -2221,7 +2223,7 @@
     {
      "label": "Worn upper chain tensioner, 4.2",
      "likelihood": "med",
-     "test": "Take off the cam covers and inspect the two upper tensioners. The 4.2 has the later design, but owners report the upper pair as the most prone. Look for cracks, loose pieces and worn slippers.",
+     "test": "Checking the two upper tensioners means taking off the cam covers, so ask a garage unless you are confident with that job. The 4.2 has the later design, but owners report the upper pair as the most prone. Look for cracks, loose pieces and worn slippers.",
      "fix": "Replace the worn tensioner, one bank at a time.",
      "parts": [
       "engine.chain-tensioner-secondary"
@@ -2323,7 +2325,7 @@
     {
      "label": "Chain has jumped",
      "likelihood": "high",
-     "test": "Do not keep cranking or driving. Remove the cam covers and check timing. Forum posts say one tooth makes it run rough and two or more can wreck the engine.",
+     "test": "Do not keep cranking or driving. Have a garage take off the cam covers and check the timing. Forum posts say one tooth makes it run rough and two or more can wreck the engine.",
      "fix": "Replace tensioners and guides, reset timing, and check valves.",
      "parts": [
       "engine.chain-tensioner-primary",
@@ -2946,7 +2948,7 @@
     {
      "label": "Battery itself",
      "likelihood": "high",
-     "test": "Fully charge and load test. Open circuit around 12.45 to 12.49 V means run a drain test.",
+     "test": "Charge it fully, and ask a garage or battery shop to test it under load. You can check it yourself with a multimeter: around 12.45 to 12.49 V with nothing switched on means something is draining it, so run the battery check job or ask a garage.",
      "fix": "Replace it.",
      "parts": [
       "electrical.battery"

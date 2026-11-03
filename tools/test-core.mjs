@@ -306,7 +306,14 @@ const v2001 = {engine: '4.0', induction: 'na', body: 'coupe', my: 2001, market: 
 assert.equal(search('oil capacity', {variant: v2001})[0].kind, 'fluid');
 assert.equal(search('5w30', {variant: v2001})[0].kind, 'fluid');
 assert.equal(search('jump start', {variant: v2001})[0].id, 'flat-battery');
-assert.ok(search('jacking point', {variant: v2001}).slice(0, 3).some((r) => r.id === 'jacking-stands'));
+assert.equal(search('jacking point', {variant: v2001})[0].kind, 'term', 'what a word means comes first');
+assert.ok(search('jacking point', {variant: v2001}).slice(0, 4).some((r) => r.id === 'jacking-stands'));
+assert.equal(search('bleed the brakes', {variant: v2001})[0].id, 'bleed', 'filler words go, and the meaning comes first');
+assert.equal(search('what is a torque', {variant: v2001})[0].id, 'torque');
+assert.equal(search('buying', {variant: v2001})[0].id, 'buy', 'a page can be found by what it is for');
+assert.equal(search('what to check when buying', {variant: v2001})[0].id, 'buy');
+assert.equal(search('how engine works', {variant: v2001})[0].id, 'how');
+assert.equal(search('how tight wheel nuts', {variant: v2001})[0].kind, 'torque', 'how tight asks for the figure');
 assert.equal(search('tyre pressure', {variant: v2001})[0].kind, 'fact');
 // Brake option: standard cars never see Brembo pad steps, and the 4.2 XKR does
 const titles = (v) => jobSteps(data.jobs.byId.get('brake-pads-front'), v).map((s) => s.text).join(' ');

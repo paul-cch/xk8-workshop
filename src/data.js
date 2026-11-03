@@ -1,8 +1,8 @@
 // Access to data/*.json: decoding, variant filtering, torque formatting, cross-references, VIN reading and search.
 // No three.js and no DOM except loadData(), so node can test it. Every list a panel shows should pass through here.
-import {N, dec, fold, isFrench, plural, t, tr} from './i18n.js';
+import {N, dec, fold, getLang, isFrench, plural, t, tr} from './i18n.js';
 
-const FILES = ['variants', 'parts', 'torques', 'fluids', 'service', 'jobs', 'tools', 'faults', 'dtc', 'weakspots', 'inspect', 'upgrades', 'vendors', 'facts'];
+const FILES = ['variants', 'parts', 'torques', 'fluids', 'service', 'jobs', 'tools', 'faults', 'dtc', 'weakspots', 'inspect', 'upgrades', 'vendors', 'facts', 'tutorials', 'terms'];
 
 /**
  * The fields that hold reading text, one list per data file. docs/i18n.md says what stays out: ids, part numbers, codes,
@@ -15,7 +15,7 @@ export const TRANSLATABLE = {
   torques: ['items.*.label', 'items.*.note', 'items.*.stages', 'items.*.sequence', 'items.*.reuse', 'items.*.threadlock', 'gaps'],
   fluids: ['items.*.name', 'items.*.spec', 'items.*.capacityNote', 'items.*.changeInterval', 'items.*.note', 'items.*.brands', 'gaps'],
   service: ['items.*.title', 'items.*.tasks.*.text'],
-  jobs: ['items.*.title', 'items.*.summary', 'items.*.parts.*.note', 'items.*.consumables', 'items.*.safety', 'items.*.verify', 'items.*.steps.*.title', 'items.*.steps.*.text', 'items.*.steps.*.warn', 'items.*.steps.*.tip', 'items.*.steps.*.check', 'items.*.steps.*.warnOn.*.text'],
+  jobs: ['items.*.title', 'items.*.summary', 'items.*.parts.*.note', 'items.*.consumables', 'items.*.safety', 'items.*.verify', 'items.*.steps.*.title', 'items.*.steps.*.text', 'items.*.steps.*.warn', 'items.*.steps.*.tip', 'items.*.steps.*.check', 'items.*.steps.*.warnOn.*.text', 'items.*.steps.*.mark.text', 'items.*.diy.suits', 'items.*.diy.stop', 'items.*.needs'],
   tools: ['items.*.name', 'items.*.why', 'items.*.altDiy', 'items.*.size'],
   faults: ['items.*.symptom', 'items.*.when', 'items.*.risk', 'items.*.drive', 'items.*.first', 'items.*.urgencyOn.*.drive', 'items.*.causes.*.label', 'items.*.causes.*.test', 'items.*.causes.*.fix'],
   dtc: ['items.*.title', 'items.*.meaning', 'items.*.causes', 'items.*.note', 'items.*.first', 'items.*.band.title', 'items.*.band.text'],
@@ -24,6 +24,8 @@ export const TRANSLATABLE = {
   upgrades: ['items.*.title', 'items.*.why', 'items.*.what', 'items.*.verdict', 'items.*.caution', 'items.*.note', 'items.*.partsNeeded'],
   vendors: ['items.*.region', 'items.*.sells', 'items.*.note'],
   facts: ['items.*.title', 'items.*.answer', 'items.*.detail', 'items.*.keywords', 'items.*.note'],
+  tutorials: ['items.*.why', 'items.*.caution'],
+  terms: ['items.*.term', 'items.*.def'],
 };
 
 /** Calls fn(owner, key) for every translatable field of one file's data. */
@@ -74,6 +76,7 @@ export function initData(raw) {
   for (const r of data.dtc.items) (byCode.get(r.code) ?? byCode.set(r.code, []).get(r.code)).push(r);
   data.dtc.byCode = byCode;
   buildRefs();
+  buildTutorials();
   searchIndex = null;
   return data;
 }
@@ -187,8 +190,8 @@ export function provenance(rec, v = provCar) {
   const sources = (rec.src ?? []).map((k) => file?.sources?.[k]).filter(Boolean);
   let scope = null;
   if (v && rec.conf === 'factory') {
-    if (v.my >= 2005 && (name === 'torques' || name === 'fluids' || name === 'jobs')) scope = {word: t('factory to MY2004'), says: t('The Jaguar data read here stops at MY2004. This value is assumed to carry over to your car.')};
-    else if (name === 'jobs' && v.engine === '4.0') scope = {word: t('factory, 4.2 manual'), says: t('The main procedure is from the 4.2 workshop manual. Steps marked as checked were read against JTIS for the 4.0. The rest may differ on your car.')};
+    if (v.my >= 2005 && (name === 'torques' || name === 'fluids' || name === 'jobs')) scope = {word: t('From Jaguar, to 2004'), says: t('The Jaguar data we read stops at the 2004 model year. We assume this figure carries over to your car.')};
+    else if (name === 'jobs' && v.engine === '4.0') scope = {word: t('From Jaguar, 4.2 manual'), says: t('The main procedure is from the 4.2 workshop manual. Steps marked as checked were read against JTIS, the dealer manual, for the 4.0. The rest may differ on your car.')};
   }
   return {conf: rec.conf ?? null, sources, weak: rec.conf != null && CONF_RANK[rec.conf] < CONF_RANK.corroborated, scope};
 }
@@ -293,6 +296,37 @@ export const faultFor = (f, v) => [f.urgencyOn ?? []].flat().find((r) => applies
 /** A step's warning on this car: warnOn rows that fit, then the warning for every car. */
 export const stepWarn = (st, v) => [...(st.warnOn ?? []).filter((r) => applies(r.appliesTo, v)).map((r) => r.text), st.warn].filter(Boolean).join(' ') || null;
 
+// ---- Tutorials ------------------------------------------------------------------------------
+
+const FIT_RANK = {exact: 0, 'same-engine': 1, general: 2};
+let tutorialIndex = new Map();
+
+function buildTutorials() {
+  tutorialIndex = new Map();
+  for (const r of data.tutorials.items) for (const [kind, ids] of Object.entries(r.for)) for (const id of ids) push(tutorialIndex, `${kind}:${id}`, r);
+}
+
+/**
+ * The films and guides for one job, fault, weak spot, part or basics topic that fit this car. kind is a key of a record's
+ * `for`. The reader's language comes first. Within it a job follows the checked order in tutorials.json, and the rest go by fit.
+ */
+export function tutorialsFor(kind, id, v) {
+  const order = kind === 'jobs' ? data.tutorials.order?.[id] ?? [] : [];
+  const rank = (r) => (order.length ? order.indexOf(r.id) : FIT_RANK[r.fit] * 2 + (r.kind === 'video' ? 0 : 1));
+  const other = (r) => (r.lang === getLang() ? 0 : 1);
+  return forVariant(tutorialIndex.get(`${kind}:${id}`) ?? [], v).sort((a, b) => other(a) - other(b) || rank(a) - rank(b));
+}
+
+/** The film that shows this step on this car and the second to start at, or null. A time only ever comes from the data. */
+export function stepTutorial(job, step, v) {
+  const n = job.steps.indexOf(step);
+  for (const rec of tutorialsFor('jobs', job.id, v)) {
+    const at = rec.steps?.find((x) => x.job === job.id && x.step === n);
+    if (at) return {rec, atSec: at.atSec};
+  }
+  return null;
+}
+
 // A part's dimensions block in words. Keys carry their unit at the end, so one reader does for all 219 of them.
 const DIM_WORD = {qty: N('Quantity'), boltPattern: N('Bolt pattern (PCD)'), centreBoreMm: N('Centre bore'), hubBoreMm: N('Hub bore'), dipBeam: N('Dipped beam'), sizes: N('Sizes'), minThickMm: N('Minimum thickness'), maxRunoutMm: N('Maximum runout'), capacityAh: N('Capacity'), group: N('Battery group'), din: N('DIN group')};
 const DIM_UNIT = [[/Mm(?=\d|Low|High|Min|Max|$)/, 'mm'], [/In$/, 'in'], [/CuIn$/, 'cu in'], [/Litres$|L$/, 'L'], [/Deg$/, N('degrees')], [/Kg$/, 'kg'], [/Lb$/, 'lb'], [/Cc(?=\d|$)/, 'cc'], [/Psi$/, 'psi'], [/Bar(?:Min|Max)?$/, 'bar'], [/G$/, 'g'], [/Ml(?:Min|Max)$/, 'ml'], [/TempC$/, 'C'], [/Ah$/, 'Ah'], [/Kw$/, 'kW'], [/W$/, 'W'], [/Rpm$/, N('rpm')], [/Nmm$/, 'N/mm'], [/Micron$/, N('micron')]];
@@ -388,8 +422,26 @@ export function decodeVin(input) {
 
 // ---- Search ---------------------------------------------------------------------------------
 
-const STOP = new Set(['a', 'an', 'and', 'at', 'for', 'from', 'i', 'in', 'is', 'it', 'its', 'my', 'of', 'on', 'or', 'the', 'to', 'when', 'with', 'car', 'jaguar', 'what', 'why', 'does', 'do', 'how', 'much', 'many', 'will', 'not', 'wont', 'dont', 'cant', 'there', 'this', 'off', 'open', 'going', 'goes', 'keeps', 'get', 'where', 'which']);
-const STOP_FR = new Set([...STOP, 'au', 'aux', 'avec', 'ca', 'ce', 'ces', 'cette', 'c', 'comment', 'combien', 'd', 'dans', 'de', 'des', 'du', 'elle', 'en', 'est', 'et', 'il', 'j', 'je', 'l', 'la', 'le', 'les', 'ma', 'mes', 'mon', 'n', 'ne', 'ou', 'par', 'pas', 'plus', 'pour', 'pourquoi', 'quand', 'que', 'quel', 'quelle', 'quelles', 'quels', 'qui', 'quoi', 's', 'sa', 'se', 'ses', 'son', 'sont', 'sur', 'un', 'une', 'voiture', 'y']);
+/** The basics, for a beginner: one plain sentence each, and the words people use for them. tutorials.js draws them under Fix it. */
+export const BASICS = [
+  {id: 'jacking', word: N('Jacking up safely'), lead: N('Lifting the car so it cannot fall on you: where the jack goes, where the stands go, and why a jack alone is never enough.'), find: N('jack jacking lift lifting raise stands axle stands safely')},
+  {id: 'torque-wrench', word: N('Using a torque wrench'), lead: N('A torque wrench tightens a bolt to an exact figure: you set the number, and it clicks when the bolt is tight enough.'), find: N('torque wrench tight tightness tighten tightening figure nm click')},
+  {id: 'fault-codes', word: N('Reading fault codes'), lead: N('The car stores a code when something goes wrong. A code reader plugs into a socket by the driver\'s door and shows it, and any garage can read it for you.'), find: N('codes code reader read reading scanner obd diagnostic scan')},
+  {id: 'brake-bleed', word: N('Bleeding the brakes'), lead: N('Bleeding pushes air out of the brake pipes through a small screw on each brake. Air in the fluid makes the pedal go soft.'), find: N('bleed bleeding air spongy soft pedal nipple')},
+  {id: 'toolkit', word: N('The tools to start with'), lead: N('What is worth buying first, and what can wait until a job needs it.'), find: N('tools toolkit starter kit beginner buy tools')},
+  {id: 'buying', word: N('Buying an XK8 or XKR'), lead: N('What people pay, what goes wrong, and what to look at before you hand over any money.'), find: N('buying buy buyer guide price worth')},
+  {id: 'what-goes-wrong', word: N('What goes wrong on these cars'), lead: N('The faults these cars are known for, and which of them matter most.'), find: N('common problems reliability known faults weak spots wrong')},
+];
+/** The screens a person asks for by name. The id is what app.ui.open goes to. */
+export const PAGES = [
+  {id: 'buy', word: N('Check a car before you buy'), lead: N('The list to take to a viewing, and what should make you walk away.'), find: N('buy buying buyer purchase purchasing viewing view inspection inspect check used second hand saturday')},
+  {id: 'how', word: N('How the engine works'), lead: N('The engine cut open and slowed right down, one stroke at a time.'), find: N('how engine works work working runs running piston pistons strokes four stroke cutaway explain')},
+  {id: 'apart', word: N('Take it apart'), lead: N('Watch the whole car come apart in 3D.'), find: N('take apart explode exploded dismantle strip')},
+  {id: 'service', word: N('Service schedule'), lead: N('What is due on your car, by mileage and by age.'), find: N('service servicing schedule maintenance due interval mileage')},
+];
+
+const STOP = new Set(['a', 'an', 'and', 'at', 'for', 'from', 'i', 'in', 'is', 'it', 'its', 'my', 'of', 'on', 'or', 'the', 'to', 'when', 'with', 'car', 'jaguar', 'what', 'whats', 'why', 'does', 'do', 'how', 'much', 'many', 'will', 'not', 'wont', 'dont', 'cant', 'there', 'this', 'off', 'open', 'going', 'goes', 'keeps', 'get', 'where', 'which', 'mean', 'means', 'meaning', 'are', 'be', 'can', 'should', 'me', 'you', 'your', 'that']);
+const STOP_FR = new Set([...STOP, 'au', 'aux', 'avec', 'ca', 'ce', 'ces', 'cette', 'c', 'comment', 'combien', 'd', 'dans', 'de', 'des', 'du', 'elle', 'en', 'est', 'et', 'il', 'j', 'je', 'l', 'la', 'le', 'les', 'ma', 'mes', 'mon', 'n', 'ne', 'ou', 'par', 'pas', 'plus', 'pour', 'pourquoi', 'quand', 'que', 'quel', 'quelle', 'quelles', 'quels', 'qui', 'quoi', 's', 'sa', 'se', 'ses', 'son', 'sont', 'sur', 'un', 'une', 'voiture', 'y', 'veut', 'veux', 'dire', 'signifie', 'cest', 'peut', 'peux', 'faut', 'on', 'nous', 'vous', 'ai', 'a']);
 // Both Englishes, and how owners say it. Each word finds what the data calls it. Search aid only, not a fact.
 const SYNONYMS = {
   trunk: ['boot'], fender: ['wing'], windshield: ['windscreen'], tire: ['tyre'], tires: ['tyre'], muffler: ['silencer'], rotor: ['disc'], rotors: ['disc'], wrench: ['spanner'], gas: ['fuel', 'petrol'], petrol: ['fuel'], transmission: ['gearbox'], gearbox: ['transmission'], antifreeze: ['coolant'], tensioners: ['tensioner'], overheating: ['overheat', 'temperature'], soft: ['hood', 'roof'], hood: ['bonnet', 'roof'], headlight: ['headlamp'], headlights: ['headlamp'], taillight: ['tail'],
@@ -410,7 +462,7 @@ function synonymsOf(word) {
 // Words that say which kind of answer is wanted. They steer the ranking and are not searched for themselves.
 const INTENT = [
   [/\b(?:how much|capacity|capacities|litres?|liters?|quarts?|grade|viscosity|what oil|which oil|type of (?:oil|fluid))\b/g, 'fluid'],
-  [/\b(?:torque|tighten(?:ing)?|nm|lb ?ft|ft ?lb)\b/g, 'torque'],
+  [/\b(?:how tight|torque|tighten(?:ing)?|nm|lb ?ft|ft ?lb)\b/g, 'torque'],
   [/\b(?:part (?:number|no)|number|part no)\b/g, 'part'],
 ];
 // The same for a French query, after accents are folded. English stays searchable in French, so these can land on English words.
@@ -441,7 +493,7 @@ function allDocs() {
   for (const j of data.jobs.items) add({kind: 'job', id: j.id, title: j.title, sub: j.summary, ref: j, fields: [['title', j.title], ['body', j.summary], ['deep', j.steps.map((s) => s.title).join(' ')]]});
   for (const f of data.faults.items) add({kind: 'fault', id: f.id, title: f.symptom, sub: f.when, ref: f, fields: [['title', f.symptom], ['body', f.when], ['deep', f.causes.map((c) => c.label).join(' ')]]});
   for (const [code, list] of data.dtc.byCode) add({kind: 'dtc', id: code, title: `${code} ${list[0].title}`, sub: list[0].meaning, ref: list[0], fields: [['code', code], ['title', list[0].title], ['body', list.map((d) => d.meaning).join(' ')]]});
-  for (const t of data.torques.items) add({kind: 'torque', id: t.id, title: t.label, sub: formatTorque(t).text, ref: t, fields: [['title', t.label], ['deep', 'torque']]});
+  for (const t of data.torques.items) add({kind: 'torque', id: t.id, title: t.label, sub: formatTorque(t).text, ref: t, fields: [['title', t.label], ['deep', isFrench() ? 'torque couple serrage' : 'torque']]});
   // SAE grades are one word to a person typing 5w30, and on the bottle.
   for (const f of data.fluids.items) add({kind: 'fluid', id: f.id, title: f.name, sub: f.spec, ref: f, fields: [['title', f.name], ['body', f.spec], ['deep', 'spec specification'], ['code', (f.spec ?? '').match(/\d+W-\d+/g)?.map((g) => g.replace('-', '')).join(' ') ?? '']]});
   for (const f of data.facts.items) add({kind: 'fact', id: f.id, title: f.title, sub: f.answer, ref: f, fields: [['title', f.title], ['body', f.answer], ['deep', f.keywords ?? '']]});
@@ -451,6 +503,10 @@ function allDocs() {
   for (const t of data.tools.items) add({kind: 'tool', id: t.id, title: t.name, sub: t.size ?? t.why, ref: t, fields: [['title', t.name], ['title', t.size], ['code', t.jdNumber], ['body', t.why]]});
   for (const s of data.service.items) add({kind: 'service', id: s.id, title: s.title, sub: plural(s.tasks.length, '{n} tasks|one', '{n} tasks'), ref: s, fields: [['title', s.title], ['deep', s.tasks.map((x) => x.text).join(' ')]]});
   for (const n of data.vendors.items) add({kind: 'vendor', id: n.id, title: n.name, sub: n.sells, ref: n, fields: [['title', n.name], ['body', n.sells]]});
+  // The words people use are in both languages: an English word still finds the page on a French screen.
+  const page = (id, p) => add({kind: 'page', id, title: t(p.word), sub: t(p.lead), ref: p, fields: [['title', p.find], ['title', t(p.find)], ['body', t(p.word)], ['body', p.word]]});
+  for (const p of PAGES) page(p.id, p);
+  for (const p of BASICS) page(`basics:${p.id}`, p);
   return docs;
 }
 
@@ -474,6 +530,23 @@ function buildIndex() {
   return {docs, post, sorted: [...post.keys()].sort()};
 }
 
+/** A French verb or noun cut back to what its forms share: purger, purge and purgeur are one word to a person searching. */
+const FR_ENDING = /(?:ements?|ations?|ages?|euses?|eurs?|er|ez|ent|ant|ons|ees?|es|e|s)$/;
+const stemFr = (w) => (w.length > 4 ? w.replace(FR_ENDING, '') : w);
+
+// A word in the query that the terms list explains. "torque wrench" beats "torque", and a word inside a longer one is not offered.
+const plainWords = (s) => ` ${fold(s).replace(/[^a-z0-9]+/g, ' ').trim()} `;
+function termHits(query) {
+  const q = plainWords(query);
+  const hits = [];
+  for (const rec of data.terms.items) {
+    const forms = [rec.term, ...rec.words, ...(isFrench() ? rec.wordsFr : [])].map(plainWords);
+    const best = forms.filter((w) => q.includes(w)).sort((a, b) => b.length - a.length)[0];
+    if (best) hits.push({rec, word: best});
+  }
+  return hits.sort((a, b) => b.word.length - a.word.length).filter((h, i, all) => !all.slice(0, i).some((x) => x.word.includes(h.word)));
+}
+
 const lowerBound = (a, x) => { let lo = 0, hi = a.length; while (lo < hi) { const m = (lo + hi) >> 1; if (a[m] < x) lo = m + 1; else hi = m; } return lo; };
 
 function closeTo(a, b) { // one edit at most
@@ -495,14 +568,19 @@ function lookup(ix, word) {
   const hits = new Map();
   const merge = (token, k, min = 0) => { for (const [d, w] of ix.post.get(token)) if (w >= min) hits.set(d, Math.max(hits.get(d) ?? 0, w * k)); };
   const suffix = isFrench() ? /^(?:s|es|ed|ing|d|x|e|ee|ees)$/ : /^(?:s|es|ed|ing|d)$/;
-  for (const w of [word, ...(synonymsOf(word) ?? [])]) {
-    const syn = w === word ? 1 : 0.7;
+  const one = word.length > 3 && word.endsWith('s') && !word.endsWith('ss') ? word.slice(0, -1) : null; // nuts finds nut
+  for (const w of [word, ...(one ? [one] : []), ...(synonymsOf(word) ?? [])]) {
+    const syn = w === word ? 1 : w === one ? 0.9 : 0.7;
     const known = ix.post.has(w); // a whole word finds its own forms, not longer words that start with it: tow is not tower
     for (let i = lowerBound(ix.sorted, w), n = 0; i < ix.sorted.length && ix.sorted[i].startsWith(w) && n < 60; i++, n++) {
       const t = ix.sorted[i];
       if (known && t !== w && !suffix.test(t.slice(w.length))) continue;
       merge(t, (t === w ? 1 : 0.6) * syn);
     }
+  }
+  if (isFrench() && word.length > 4) { // the verb finds the noun, and the other way round
+    const stem = stemFr(word);
+    for (let i = lowerBound(ix.sorted, stem), n = 0; i < ix.sorted.length && ix.sorted[i].startsWith(stem) && n < 60; i++, n++) if (stemFr(ix.sorted[i]) === stem) merge(ix.sorted[i], 0.8);
   }
   if (!hits.size && word.length >= 5 && !CODE_WORD.test(word)) for (const t of ix.sorted) if (t[0] === word[0] && closeTo(t, word)) merge(t, 0.4, WEIGHT.title);
   return hits;
@@ -515,13 +593,16 @@ export function nearCodes(code, limit = 6) {
 }
 
 /**
- * One box over everything. Returns [{kind, id, title, sub, ref, score, status}], best first. kind is one of part, job,
- * fault, dtc, torque, fluid, weakspot, upgrade, inspect, tool, service, vendor. Pass kinds to narrow.
- * With variant set, records that cannot fit the car drop out, and status says 'yes' or 'maybe'.
+ * One box over everything. Returns [{kind, id, title, sub, ref, score, status}], best first. kind is one of term, page, part, job,
+ * fault, dtc, torque, fluid, weakspot, upgrade, inspect, tool, service, vendor, fact. Pass kinds to narrow. What a word means comes
+ * first: someone asking what bleeding is wants that before a list of parts. With variant set, records that cannot fit the car drop
+ * out, and status says 'yes' or 'maybe'.
  */
 export function search(query, {variant = null, limit = 30, kinds = null} = {}) {
   searchIndex ??= buildIndex();
   const fr = isFrench();
+  const meanings = !kinds || kinds.includes('term') ? termHits(query).slice(0, 2).map(({rec}, i) => ({kind: 'term', id: rec.id, title: rec.term, sub: rec.def, ref: rec, score: 1e6 - i, status: 'yes'})) : [];
+  const whole = plainWords(query);
   // A French apostrophe joins two words (l'étrier). An English one sits inside a word (won't).
   let text = fr ? fold(query).replace(/(\w)['’]t\b/g, '$1t').replace(/['’]/g, ' ') : String(query ?? '').toLowerCase().replace(/['’]/g, '');
   for (const [re, to] of fr ? [...PHRASES_FR, ...PHRASES] : PHRASES) text = text.replace(re, to);
@@ -530,7 +611,7 @@ export function search(query, {variant = null, limit = 30, kinds = null} = {}) {
   if (SYMPTOM.test(text) || (fr && SYMPTOM_FR.test(text))) want.add('fault');
   let words = tokens(text);
   if (!words.length) words = tokens(query); // "torque" alone still looks for the word
-  if (!words.length) return [];
+  if (!words.length) return meanings;
   const score = new Map(), seen = new Map();
   for (const w of words) for (const [d, s] of lookup(searchIndex, w)) {
     score.set(d, (score.get(d) ?? 0) + s);
@@ -546,7 +627,9 @@ export function search(query, {variant = null, limit = 30, kinds = null} = {}) {
     const fits = variant ? (doc.kind === 'dtc' ? data.dtc.byCode.get(doc.id) : [doc.ref]).map((r) => appliesStatus(r.appliesTo, variant)) : ['yes'];
     const status = fits.includes('yes') ? 'yes' : fits.includes('maybe') ? 'maybe' : 'no';
     if (status === 'no') continue;
-    out.push({...doc, score: s * (seen.get(d) === words.length ? 3 : 1) * (want.has(doc.kind) ? 6 : doc.kind === 'fact' ? 2.5 : doc.kind === 'fluid' && FLUID_WORDS.test(query) ? 2.5 : 1), status});
+    const phrase = whole.trim().includes(' ') && plainWords(doc.title).replace(/s /g, ' ').includes(whole.replace(/s /g, ' ')) ? 3 : 1; // the words as typed, in order, in the name of the thing
+    const blank = doc.kind === 'torque' && doc.ref.nm == null && !doc.ref.stages?.length ? 0.3 : 1; // a row that only says we have no figure is rarely the answer
+    out.push({...doc, score: phrase * blank * s * (seen.get(d) === words.length ? 3 : 1) * (want.has(doc.kind) ? 6 : doc.kind === 'fact' || doc.kind === 'page' ? 2.5 : doc.kind === 'fluid' && FLUID_WORDS.test(query) ? 2.5 : 1), status});
   }
-  return out.sort((a, b) => b.score - a.score).slice(0, limit);
+  return [...meanings, ...out.sort((a, b) => b.score - a.score)].slice(0, limit);
 }

@@ -13,8 +13,8 @@ import {SYNONYM_LINES, data, dimensionWords, eachText, initData} from '../src/da
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'i18n/source');
-const GROUP_OF = {jobs: 'jobs', parts: 'parts', dtc: 'dtc', torques: 'reference', fluids: 'reference', service: 'reference', tools: 'reference', vendors: 'reference', variants: 'reference', facts: 'reference', faults: 'advice', weakspots: 'advice', inspect: 'advice', upgrades: 'advice'};
-const GROUPS = ['ui', 'jobs', 'parts', 'dtc', 'reference', 'advice']; // a string used twice lands in the first group that has it
+const GROUP_OF = {jobs: 'jobs', parts: 'parts', dtc: 'dtc', torques: 'reference', fluids: 'reference', service: 'reference', tools: 'reference', vendors: 'reference', variants: 'reference', facts: 'reference', faults: 'advice', weakspots: 'advice', inspect: 'advice', upgrades: 'advice', tutorials: 'tutorials', terms: 'terms'};
+const GROUPS = ['ui', 'jobs', 'parts', 'dtc', 'reference', 'advice', 'tutorials', 'terms']; // a string used twice lands in the first group that has it
 const KEEP_GAPS = new Set(['variants', 'torques', 'fluids', 'jobs']); // as tools/build.mjs: other files' gaps never reach the page
 
 // ---- a small JS tokenizer: comments, strings, templates and regexes ------------------------------------------------------
@@ -136,6 +136,8 @@ const IGNORED = [
   /^uniform vec3|^float offset|^\(min-width/, // shader and media query text
   /^(?:20 Sepang|cu in|noopener noreferrer|spec specification)$/, // a wheel's name, a unit, a rel value, what search indexes for every fluid
   /^(?:battery flat|release latch|cranks start|transmission fluid|stop lamp)$/, // what a search phrase turns into
+  /^(?:torque couple serrage)$/, // what search indexes for every torque in French
+  /^(?:Voir ce site en français \?|Oui|Non merci)$/, // said in French to a phone set to French, whatever language the page is in
 ];
 const WORDISH = (s) => /[a-z]/i.test(s) && (/\s/.test(s.trim()) || /^[A-Z][a-z]{2,}$/.test(s.trim()));
 const CODEISH = /^[a-z-]+\.[\w.-]*$|^[\w-]+$|^[a-z]+\[|^\.|^--|^<|^translate|^prov |^\d+ \d+ /;

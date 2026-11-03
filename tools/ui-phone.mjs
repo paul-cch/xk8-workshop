@@ -93,7 +93,7 @@ if (want('scroll')) {
   for (const y of [700, 1965, 3307]) {
     await p.evaluate((t) => { document.querySelector('.ws-scroll').scrollTop = t; }, y);
     await p.waitForTimeout(100);
-    const box = await p.evaluate(() => { const b = [...document.querySelectorAll('.ws-bad')].find((x) => { const r = x.getBoundingClientRect(); return r.top > 300 && r.bottom < 600; }); b?.scrollIntoView({block: 'nearest'}); return b ? b.dataset.fk : null; });
+    const box = await p.evaluate(() => { const b = [...document.querySelectorAll('.ws-bad')].find((x) => x.getBoundingClientRect().top > 300); b?.scrollIntoView({block: 'center'}); return b ? b.dataset.fk : null; });
     await p.locator(`[data-fk="${box}"]`).tap();
     await p.waitForTimeout(250);
     out.push(await p.evaluate(() => document.querySelector('.ws-scroll').scrollTop));
