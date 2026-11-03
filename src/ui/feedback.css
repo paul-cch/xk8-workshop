@@ -49,7 +49,7 @@ input.fb-input { height: 48px; }
 .fb-left:empty { display: none; }
 .fb-left { color: var(--ink-2); font-size: .85rem; }
 .fb-note { margin-top: 6px; color: var(--ink-2); font-size: .85rem; line-height: 1.4; }
-.fb-problem { padding: 8px 10px; background: #fbf0da; color: #5c3900; font-weight: 600; }
+.fb-problem { padding: 8px 10px; border-radius: var(--r); background: var(--warn-bg); color: var(--warn); font-weight: 600; }
 /* Stays in view on a small phone: nobody should have to find it after writing. */
 .fb-send { position: sticky; bottom: 0; flex: none; width: 100%; min-height: 52px; margin-top: 6px; background: var(--ink); color: var(--paper); white-space: normal; box-shadow: 0 0 0 6px var(--paper); }
 .fb-send:disabled { color: var(--line); }

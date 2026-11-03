@@ -8,6 +8,7 @@ import {DISCLAIMER, badge, block, carLine, carName, copyButton, fill, h, proneTo
 import {gloss} from './terms.js';
 import {carryOn, priceSpan, rawPounds, setPrintable, showNumbers} from './jobs.js';
 import {foldedTutorials, tutorialList} from './tutorials.js';
+import {serviceDue} from './plan.js';
 import {weakRow} from './picker.js';
 
 const GROUPS = [[N('Outside'), ['body', 'roof']], [N('Cabin'), ['interior', 'hvac']], [N('Engine bay'), ['engine', 'induction', 'fuel', 'ignition', 'cooling', 'exhaust']], [N('Gearbox and drive'), ['transmission', 'driveline']], [N('Wheels and suspension'), ['front-suspension', 'rear-suspension', 'steering', 'brakes', 'wheels']], [N('Electrics'), ['electrical']]];
@@ -50,10 +51,20 @@ export function mount(el, app) {
 
   // ---- what shows at the sheet's lowest height: the four ways in, the two things to play with, and a job in hand ----
   const peek = h('div.ex-peek', {dataset: {peek: ''}});
+  /** Your car's next service, once Upkeep knows the mileage. Before that, the way to tell it. */
+  const URGENCY = {overdue: ['stop', N('Overdue')], due: ['soon', N('Due')], ok: ['safe', N('Later')]};
+  function dueRow(s) {
+    const due = serviceDue(s.variant);
+    const go = () => app.ui.open('page', 'service');
+    if (!due) return h('button.ws-row.ex-due', {type: 'button', onclick: go}, h('span.ws-row-main', [h('strong', t('Service')), h('span', t('Enter your mileage to see what is due.'))]));
+    const [band, word] = URGENCY[due.status];
+    return h('button.ws-row.ex-due', {type: 'button', onclick: go}, [h(`span.ws-urg.ws-urg--${band}`, t(word)), h('span.ws-row-main', [h('strong', due.title), h('span', due.when)])]);
+  }
   function renderPeek() {
     const s = get();
     const job = carryOn(s);
     fill(peek,
+      s.chosen && dueRow(s),
       job && h('button.ws-row.ws-row--ink.ex-carry', {type: 'button', onclick: () => store.set({mode: 'jobs', job: {id: job.id, step: job.step}, selected: null, isolate: null})}, [h('span.ws-row-main', [h('strong', t('Carry on: {job}', {job: job.title})), h('span', job.stepTitle ? t('Step {n} of {total}, {title}', {n: job.step + 1, total: job.of, title: job.stepTitle}) : t('Step {n} of {total}', {n: job.step + 1, total: job.of}))])]),
       h('div.choices', {role: 'group', 'aria-label': t('What do you want to do?')}, CHOICES.map(([what, word]) => h('button.choice', {type: 'button', dataset: {what}, onclick: () => app.ui.begin(what)}, t(word)))),
     );

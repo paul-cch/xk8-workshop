@@ -225,6 +225,7 @@ const el=document.getElementById.bind(document);
 const fr=(()=>{const h=location.hash;if(/[?&]l=en\\b/.test(h))return false;if(/[?&]l=fr\\b/.test(h))return true;try{return JSON.parse(localStorage.getItem('xk8-workshop')).lang==='fr'}catch(e){return false}})();
 const T=${JSON.stringify(Object.fromEntries(Object.entries(BOOT_TEXT).map(([k, en]) => [k, [en, fr[en] ?? en]]))).replace(/</g, '\\u003c')};
 const say=(k)=>T[k][fr?1:0];
+try{const m=JSON.parse(localStorage.getItem('xk8-workshop')).theme;if(m==='dark'||(m!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){if(matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.classList.add('dark')}
 if(fr){document.documentElement.lang='fr';document.querySelector('#boot .boot-text').textContent=say('open')}
 const fail=(m)=>{const b=el('boot');if(b)b.textContent=m};
 if(!window.DecompressionStream){fail(say('browser'));return}

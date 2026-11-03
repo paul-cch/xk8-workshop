@@ -95,16 +95,32 @@ mocked.
 ## Publishing
 
 ```
-SITE_URL=https://xk8.paulcouach.com DIST_DIR=/tmp/xk8-rel node tools/build.mjs --release    # npm run release
+CLOUDFLARE_API_TOKEN=<token> CLOUDFLARE_ACCOUNT_ID=<account> npm run deploy    # release, upload, deployment
+npm run deploy -- --dry-run                                                  # what would be sent, with no token
+```
+
+`tools/deploy.mjs` builds the release into `/tmp/xk8-rel`, gets an upload token from
+`GET /accounts/{account_id}/pages/projects/xk8-workshop/upload-token`, uploads the static files with the functions in
+`tools/deploy-pages.mjs`, then sends `POST /accounts/{account_id}/pages/projects/xk8-workshop/deployments` as multipart with
+`manifest`, `branch=main`, `_worker.js` and `_routes.json`, and prints the deployment URL. The API token needs Account >
+Cloudflare Pages > Edit. Without the two variables it exits 2. Pass a folder, `node tools/deploy.mjs <folder>`, to deploy a
+release already built.
+
+With no token on the machine, the Executor route still works by hand:
+
+```
+npm run release
 PAGES_JWT=<upload token> node tools/deploy-pages.mjs /tmp/xk8-rel
 ```
 
-Get the token from the project's Cloudflare upload-token endpoint, then create the deployment with the printed manifest.
+Get the upload token from Executor's Cloudflare tools, then create the deployment through them with the printed manifest and
+`_worker.js` and `_routes.json` as multipart fields.
 
 The feedback server needs more:
 
 - The Pages project needs a KV namespace bound as `FEEDBACK` and a secret `INBOX_HASH`. Without them the page keeps messages
   on the person's device and retries, and `/inbox` says it is not set up.
 - A release build puts `_worker.js` and `_routes.json` in the output folder. They are not static files, and
-  `tools/deploy-pages.mjs` leaves them out of the upload and the manifest. Attach them to the deployment request as multipart
-  fields named `_worker.js` and `_routes.json`. A deployment without them switches the feedback server off.
+  `tools/deploy-pages.mjs` leaves them out of the upload and the manifest. They go in the deployment request as multipart
+  fields named `_worker.js` and `_routes.json`. A deployment without them switches the feedback server off, so
+  `tools/deploy.mjs` refuses a folder that lacks either.

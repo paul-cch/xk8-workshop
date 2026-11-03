@@ -4,7 +4,7 @@
    The accent means the part in work, so it marks focus-part chips and nothing else. Red, amber and green are for
    safety and urgency only. */
 
-.ws {
+.ws, .tut, .ex-peek {
   --ws-stop: #a31d17;
   --ws-stop-bg: #fbeae8;
   --ws-soon: #7a4a00;
@@ -12,6 +12,8 @@
   --ws-safe: #15613c;
   --ws-safe-bg: #e3f2e9;
   --ws-tip-bg: #e9eff4;
+}
+.ws {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -361,7 +363,7 @@ html.job-step .ws-scroll .ws-call p { font-size: 1.12em; line-height: 1.45; }
   #ui .ws-tile:hover { background: var(--fill); }
 }
 
-.ws-disclaimer{font-size:12.5px;line-height:1.45;color:#5b626b;margin:10px 0 0}
+.ws-disclaimer { font-size: 12.5px; line-height: 1.45; color: var(--ink-3); margin: 10px 0 0; }
 
 /* Can I do this myself? */
 .ws-diy { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px 14px; border: 1px solid var(--line); background: var(--sheet); }

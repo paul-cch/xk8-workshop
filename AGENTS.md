@@ -29,10 +29,11 @@ Node 20 or later, then `npm install`. Playwright's Chromium and WebKit are neede
 |---|---|---|
 | `npm run build` | writes `dist/` | 2 s |
 | `npm test` | data validator, core, powertrain, chassis and feedback tests, French check. Stops at the first failure | 1 s |
-| `npm run test:ui` | builds, then real clicks in Chromium and WebKit: UI flows, French flows, sweep, French sweep, iPhone flows, phone check | 8 min |
+| `npm run test:ui` | builds, then real clicks in Chromium and WebKit: UI flows, French flows, sweep, French sweep, iPhone flows, phone check, clipped text | 8 min |
 | `npm run test:jobs` | builds, then steps through every job and sweeps each lifted part. Exits 1 today on 5 known lift crossings, see `docs/status.md` | 12 min |
 | `npm run shots` | builds, then screenshots the default states to `dist-shots/`. Pass options after `--` | 20 s |
 | `npm run release` | the build to publish, with a fresh share card, in `/tmp/xk8-rel` | 6 s |
+| `npm run deploy` | release, then publish to Cloudflare Pages. Only when Paul asks, see Deploy | release plus upload |
 
 There is no dev server. Open `dist/index.html` in a browser after a build.
 
@@ -69,6 +70,7 @@ Quiet, like Linear or Apple Notes. Before you add words or a control, check that
 - **Sentence case.** No spaced capitals. Mono only for values a person copies or compares: torques, part numbers, codes.
 - **Soft controls.** Fills from `--fill` and `--fill-2`, corners from `--r-sm`, `--r` and `--r-lg`, hairlines from `--line-soft`. One ink-filled action per view: Next, Start the job, Send. The tokens are at the top of `src/ui/style.css`. Shared shapes and hover states are in `src/ui/system.css`, which loads last.
 - **Settings stay out of the way.** Units and large text live behind the gear in the top bar. Language stays visible, because someone who cannot read the page must still be able to find their own.
+- **Dark (`html.dark`) is the same scale inverted.** Use the tokens, never a fixed colour, and check a change with the device set to dark. The 3D backdrop and floor shadow follow through `stage.setDark()`.
 - **Large text (`html.garage`) undoes the softness**: black on white, solid outlines. Check it with `npm run shots` after any style change.
 
 The interface CSS is packed into the bundle with the code, and only `src/stage/stage.css` is inline in the page. Shapes that test helpers rely on, such as 44 px touch targets and the feedback button's clearance, are checked in `tools/ui-flows.mjs`.
@@ -86,15 +88,23 @@ shoot the French page and a newcomer's screens on phone and desktop.
 
 ## Deploy
 
-Only when Paul asks. The site goes up by direct upload to a Cloudflare Pages project.
+Only when Paul asks. The site goes up by direct upload to the Cloudflare Pages project `xk8-workshop`.
 
-1. `npm run release`. It needs `SITE_URL`, which the script sets, and writes the page, `og.png`, `_worker.js` and
-   `_routes.json` to `/tmp/xk8-rel`.
-2. `PAGES_JWT=<upload token> node tools/deploy-pages.mjs /tmp/xk8-rel`. The token comes from the project's upload-token
-   endpoint. This uploads the static files and prints the manifest.
-3. Create the deployment with that manifest. Attach `_worker.js` and `_routes.json` to the same request as multipart fields
-   with those names. Without them the feedback server switches off. Uploaded as static files they would be public and the
-   server would still be off.
+```
+CLOUDFLARE_API_TOKEN=<token> CLOUDFLARE_ACCOUNT_ID=<account> npm run deploy
+```
+
+`tools/deploy.mjs` runs `npm run release` into `/tmp/xk8-rel`, gets an upload token, uploads the static files, then creates
+the deployment on branch `main` with `_worker.js` and `_routes.json` attached as multipart fields, and prints its URL. The
+API token needs Account > Cloudflare Pages > Edit. Without the two variables it says what it needs and exits 2. It refuses a
+folder that lacks `_worker.js` or `_routes.json`, because a deployment without them switches the feedback server off.
+
+- `npm run deploy -- --dry-run` builds the release and prints the manifest and the size of each field, and sends nothing.
+- `node tools/deploy.mjs <folder>` deploys a folder already built with `--release` instead of building one.
+
+With no token on the machine, the Executor route still works by hand: Executor's Cloudflare tools give the upload token,
+`PAGES_JWT=<upload token> node tools/deploy-pages.mjs /tmp/xk8-rel` uploads the files and prints the manifest, and the
+deployment call carries the manifest with `_worker.js` and `_routes.json` as multipart fields. See `docs/status.md`.
 
 The Pages project needs a KV namespace bound as `FEEDBACK` and the `INBOX_HASH` secret. Details, and how to read the inbox,
 are in `docs/status.md`.

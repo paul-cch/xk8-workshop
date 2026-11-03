@@ -1113,5 +1113,16 @@
  "Your serial: {serial}.": "Votre n° de série : {serial}.",
  "Your time, estimated": "Votre temps, estimé",
  "Your VIN, the long number on the car": "Votre VIN, le long numéro sur la voiture",
- "Zoom in": "Zoomer"
+ "Zoom in": "Zoomer",
+ "Appearance": "Apparence",
+ "Auto|appearance": "Auto",
+ "Light|appearance": "Clair",
+ "Dark|appearance": "Sombre",
+ "Hands-free": "Mains libres",
+ "Hands-free on. Say next, back, repeat, torque or done. Your browser's speech service hears what you say.": "Mains libres activé. Dites suivant, précédent, répète, couple ou fait. Le service vocal de votre navigateur entend ce que vous dites.",
+ "Hands-free on. This browser cannot listen, so each step is read aloud.": "Mains libres activé. Ce navigateur ne peut pas écouter : chaque étape est donc lue à voix haute.",
+ "newton metres|spoken": "newtons-mètres",
+ "pound feet|spoken": "livres-pieds",
+ "No tightening figure in this step.": "Aucun couple de serrage dans cette étape.",
+ "The microphone is blocked, so each step is read aloud instead.": "Le micro est bloqué : chaque étape est donc lue à voix haute à la place."
 }

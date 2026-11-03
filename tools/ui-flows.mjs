@@ -1135,6 +1135,63 @@ await wk.close();
   }
 }
 
+// ---- dark, the car's next service, hands-free ----------------------------------------------------------------------------------
+{
+  const dark = await open({viewport: {width: 1440, height: 900}, colorScheme: 'dark'}, '#/explore?v=4.0-na-coupe-1999');
+  check('a device set to dark gets the dark page from the first frame', await dark.evaluate(() => document.documentElement.classList.contains('dark')));
+  const ink = () => dark.evaluate(() => getComputedStyle(document.querySelector('.dock')).backgroundColor);
+  const darkBg = await ink();
+  await dark.click('.top-menu');
+  await dark.click('dialog[open] .seg-wide button:text-is("Light")');
+  await dark.keyboard.press('Escape');
+  check('Light in Settings overrides the device', await dark.evaluate(() => !document.documentElement.classList.contains('dark') && window.__xk8.store.get().theme === 'light') && (await ink()) !== darkBg, `${darkBg} -> ${await ink()}`);
+  await dark.evaluate(() => window.__xk8.store.set({theme: 'dark', garage: true}));
+  check('large text stays black on white in dark', await dark.evaluate(() => getComputedStyle(document.querySelector('.dock')).backgroundColor === 'rgb(255, 255, 255)'));
+  await dark.evaluate(() => window.__xk8.store.set({garage: false}));
+  check('no page errors in dark', !dark.errors.length, dark.errors.join(' | '));
+  await dark.context().close();
+
+  const home = await open({viewport: {width: 1440, height: 900}}, '#/explore?v=4.0-na-coupe-1999');
+  await home.evaluate(() => window.__xk8.store.set({linked: null, chosen: true}));
+  await home.waitForTimeout(200);
+  check('with no mileage the home asks for it', /Enter your mileage/.test(await home.textContent('.ex-due')));
+  await home.evaluate(() => localStorage.setItem('xk8-workshop-plan', JSON.stringify({miles: 29400, lastMiles: 20100, lastDate: new Date(Date.now() - 300 * 864e5).toISOString().slice(0, 10)})));
+  await home.reload();
+  await home.waitForFunction(() => window.__xk8, null, {timeout: 120000});
+  await home.waitForTimeout(300);
+  const due = await home.textContent('.ex-due');
+  check('with a mileage the home says which service and how far off', /30,000 mile service/.test(due) && /in 600 miles/.test(due) && /Due/.test(due), due);
+  await home.click('.ex-due');
+  await home.waitForTimeout(400);
+  check('and it opens the service tab', (await S(home)).mode === 'plan' && /Service/.test(await home.textContent('.ws-tabs--plan [aria-selected=true]')));
+  await home.context().close();
+
+  const hf = await open({viewport: {width: 390, height: 844}, hasTouch: true, isMobile: true, deviceScaleFactor: 2}, '#/explore?v=4.0-na-coupe-1999');
+  await hf.evaluate(() => {
+    window.__said = [];
+    speechSynthesis.speak = (u) => { window.__said.push(u.text); u.onend?.(); };
+    speechSynthesis.cancel = () => {};
+    window.__xk8.store.set({linked: null, chosen: true, mode: 'jobs', job: {id: 'oil-filter', step: 3}, selected: null});
+  });
+  await hf.waitForTimeout(500);
+  await hf.locator('.ws-handsfree').tap();
+  await hf.waitForTimeout(200);
+  const said = await hf.evaluate(() => window.__said);
+  check('hands-free reads the step as it turns on', said.length === 1 && /^Drain\./.test(said[0]), said[0]?.slice(0, 60));
+  check('and says what it can do', /Hands-free on/.test(await hf.textContent('.toast')));
+  await hf.evaluate(() => window.__xk8.ui.handsFree.use && null);
+  await hf.locator('.ws-big--go').tap();
+  await hf.waitForTimeout(400);
+  const next = await hf.evaluate(() => ({said: window.__said, step: window.__xk8.store.get().job.step, pressed: document.querySelector('.ws-handsfree').getAttribute('aria-pressed')}));
+  check('the next step is read once when it opens, and hands-free stays on', next.step === 4 && next.said.length === 2 && next.pressed === 'true', JSON.stringify(next).slice(0, 160));
+  check('units are spoken as words', !/\bNm\b/.test(next.said.join(' ')));
+  await hf.evaluate(() => window.__xk8.store.set({job: null}));
+  await hf.waitForTimeout(200);
+  check('leaving the job turns hands-free off', await hf.evaluate(() => !window.__xk8.ui.handsFree.on));
+  check('no page errors with hands-free', !hf.errors.length, hf.errors.join(' | '));
+  await hf.context().close();
+}
+
 await browser.close();
 console.log(fails ? `${fails} failed` : 'all passed');
 process.exit(fails ? 1 : 0);

@@ -44,6 +44,7 @@ export const initialState = () => ({
   sim: {running: false, rpm: 0, throttle: 0, gear: 0, speedMph: 0, steer: 0, bumpF: 0, bumpR: 0, roof: 0, timeScale: 1, open: {bonnet: 0, boot: 0, doorL: 0, doorR: 0}},
   view: 'hero',
   garage: false,
+  theme: 'auto', // auto follows the device; light or dark is the owner's choice
   hinted: false, // the first-visit hint on moving the car has been shown
   langOffered: false, // a phone set to French has been offered the French page
 });
@@ -199,6 +200,7 @@ const SHAPE = {
   checks: eachValue((v) => (v === 'ok' || v === 'bad' ? v : undefined)),
   list: (v) => (Array.isArray(v) ? v.filter((r) => listRef(r) !== undefined) : undefined),
   garage: (v) => (typeof v === 'boolean' ? v : undefined),
+  theme: (v) => (['auto', 'light', 'dark'].includes(v) ? v : undefined),
   hinted: (v) => (typeof v === 'boolean' ? v : undefined),
   langOffered: (v) => (typeof v === 'boolean' ? v : undefined),
 };
