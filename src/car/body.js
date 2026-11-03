@@ -647,6 +647,8 @@ function oval(S, {x, y, a, b, tilt = 0, k = 0, push = .0008, e = 1}) {
   return g;
 }
 
+const plateInk = new Map();
+
 /**
  * A number plate as UK plates are laid out: black characters 79 mm tall on the plate colour, 14 mm strokes, 11 mm between
  * characters and a wider gap between the two groups. The mark is invented. Drawn as strokes, so it needs no font and no canvas.
@@ -672,14 +674,29 @@ function plateTexture(field) {
     }
     at += cw + gap;
   }
-  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
-    let best = 1e9;
+  // Each stroke only inks pixels within half + .5 of it, so each one visits only its own box: the same pixels as testing
+  // every stroke at every pixel, in a hundredth of the time. Both plates share one ink mask.
+  const key = `${W}x${H}`;
+  let ink = plateInk.get(key);
+  if (!ink) {
+    const best = new Float64Array(W * H).fill(1e9), reach = half + 2;
     for (const [ax, ay, bx, by] of segs) {
-      const dx = bx - ax, dy = by - ay, t = Math.max(0, Math.min(1, ((x + .5 - ax) * dx + (y + .5 - ay) * dy) / (dx * dx + dy * dy || 1)));
-      best = Math.min(best, Math.hypot(x + .5 - ax - dx * t, y + .5 - ay - dy * t));
+      const dx = bx - ax, dy = by - ay;
+      const x0 = Math.max(0, Math.floor(Math.min(ax, bx) - reach)), x1 = Math.min(W - 1, Math.ceil(Math.max(ax, bx) + reach));
+      const y0 = Math.max(0, Math.floor(Math.min(ay, by) - reach)), y1 = Math.min(H - 1, Math.ceil(Math.max(ay, by) + reach));
+      for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) {
+        const t = Math.max(0, Math.min(1, ((x + .5 - ax) * dx + (y + .5 - ay) * dy) / (dx * dx + dy * dy || 1)));
+        const dist = Math.hypot(x + .5 - ax - dx * t, y + .5 - ay - dy * t), o = y * W + x;
+        if (dist < best[o]) best[o] = dist;
+      }
     }
-    const ink = Math.max(0, Math.min(1, half + .5 - best)), i = (y * W + x) * 4;
-    for (let k = 0; k < 3; k++) d[i + k] = 255 * (field[k] * (1 - ink) + .03 * ink);
+    ink = new Float64Array(W * H);
+    for (let o = 0; o < W * H; o++) ink[o] = Math.max(0, Math.min(1, half + .5 - best[o]));
+    plateInk.set(key, ink);
+  }
+  for (let o = 0; o < W * H; o++) {
+    const i = o * 4, k0 = ink[o];
+    for (let k = 0; k < 3; k++) d[i + k] = 255 * (field[k] * (1 - k0) + .03 * k0);
     d[i + 3] = 255;
   }
   const t = new THREE.DataTexture(d, W, H);

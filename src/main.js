@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import {applies, carDims, data, jobSteps, loadData, setProvenanceCar, specFor, translateData} from './data.js';
 import {getLang, loadFrench, t, useLanguage} from './i18n.js';
 import {clearSaved, connectHash, connectStorage, parseHash, store} from './state.js';
-import {buildCar, updateCar} from './car/index.js';
+import {buildCar, startSurfaces, updateCar} from './car/index.js';
 import {setDetail} from './car/kit.js';
 import {lookMaterials, materials} from './car/materials.js';
 import {registry} from './car/registry.js';
@@ -53,6 +53,9 @@ function withoutGpu(ctx) {
 async function boot() {
   const marks = [['start', performance.now()]];
   const mark = (name) => marks.push([name, performance.now()]);
+  setDetail(matchMedia('(pointer: coarse)').matches ? 0.6 : 1);
+  // The body surface is sampled in workers from here, while the data loads and the rest of the car builds.
+  const surfaces = startSurfaces(globalThis.__xk8SurfaceWorker);
   await loadData();
   mark('data');
   registry.setData(data.parts);
@@ -60,7 +63,6 @@ async function boot() {
   const wanted = parseHash(location.hash).lang ?? store.get().lang;
   connectHash(store, window, setLang);
   await setLang(wanted);
-  setDetail(matchMedia('(pointer: coarse)').matches ? 0.6 : 1);
 
   const v = store.get().variant;
   const ctx = {registry, data, materials, variant: v, spec: specFor(v), dims: carDims(v), views: null};
@@ -69,10 +71,10 @@ async function boot() {
   if (gl) {
     try { stage = createStage(document.getElementById('stage'), {tier: new URLSearchParams(location.search).get('tier')}); } catch (e) { console.warn(e); gl = false; }
   }
-  if (gl) stage.scene.add(registry.root);
+  if (gl) { stage.scene.add(registry.root); stage.hold(true); } // no frames until the car is whole: the cover hides them anyway
   mark('stage');
   // The car is built with or without a GPU: the parts list reads what is modelled from it.
-  await buildCar(ctx, (done) => say(t('Building the car, {n} percent', {n: Math.round(done * 100)})), mark);
+  await buildCar(ctx, (done) => say(t('Building the car, {n} percent', {n: Math.round(done * 100)})), mark, surfaces);
   mark('car');
   say(t('Starting up'));
   preparePose(registry);
@@ -114,13 +116,16 @@ async function boot() {
   mark('warm');
   mount(document.getElementById('ui'), app);
   mark('ui');
-  stage.invalidate();
+  if (gl) stage.hold(false); else stage.invalidate();
 
   const cover = document.getElementById('boot');
   cover.classList.add('gone');
   setTimeout(() => cover.remove(), 500);
   exposeDebug(app);
-  window.__xk8.bootMarks = marks.map(([n, t], i) => [n, Math.round(t - (marks[i - 1]?.[1] ?? 0))]);
+  const steps = () => marks.map(([n, t], i) => [n, Math.round(t - (marks[i - 1]?.[1] ?? 0))]);
+  window.__xk8.bootMarks = steps();
+  // and the first frame of the finished car, which tools/perf.mjs reads after it has settled
+  requestAnimationFrame(() => requestAnimationFrame(() => { mark('frame'); window.__xk8.bootMarks = steps(); }));
 }
 
 /** tools/shots.mjs drives the page through this. Small, and useful in the console too. */

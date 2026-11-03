@@ -209,12 +209,13 @@ export function createStage(canvas, {tier = null} = {}) {
   const frameFns = new Set();
   const frames = [];
   let raf = 0, last = 0, skip = 0, restTimer = 0, restPending = false, atRest = false, shadowDirty = true, shadowAt = 0, framesDrawn = 0;
+  let held = false; // while the car is built behind the loading cover: no frame is drawn, so none is wasted on half a car
 
   function invalidate() {
     clearTimeout(restTimer);
     restPending = false;
     atRest = false;
-    if (!raf) raf = requestAnimationFrame(frame);
+    if (!raf && !held) raf = requestAnimationFrame(frame);
   }
   /** After a part moves: the floor shadow and the sun's map redraw, at most five times a second. */
   const markShadows = () => { shadowDirty = true; };
@@ -309,6 +310,16 @@ export function createStage(canvas, {tier = null} = {}) {
     /** How far the bonnet is open, 0 to 1. */
     setBayLamp(k) { bayFill.intensity = BAY_LAMP * k; },
     invalidate, markShadows, project, resize, warm, setTier,
+    /**
+     * Holds frames while on is true, then draws one with a fresh floor shadow. The boot holds them while it builds the car
+     * under its cover: every frame drawn there would link programs one by one and bake the shadow of an unfinished car.
+     */
+    hold(on) {
+      held = on;
+      if (on) { cancelAnimationFrame(raf); raf = 0; return; }
+      shadowDirty = true;
+      invalidate();
+    },
     /** fn(dt, now) runs before each frame. Return true to keep frames coming. Returns the unsubscribe function. */
     onFrame(fn) { frameFns.add(fn); invalidate(); return () => frameFns.delete(fn); },
     /** Pixels the UI covers on each side. The car centres in what is left. */

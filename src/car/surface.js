@@ -77,7 +77,19 @@ function hit(f, ox, oy, oz, dx, dy, dz, guess, far) {
  * round these two points at the ends of the car and run transverse between them. base is another surface on the same
  * spine and lattice, and same(x, y) says where this solid is sure to match it: those points copy, and the rays are saved.
  */
-export function sampleSurface(f, {spine, rows = 340, cols = 160, sRange = null, base = null, same = null}) {
+export function sampleSurface(f, opts) {
+  return fromLattice(sampleLattice(f, opts));
+}
+
+/** A surface from a sampled lattice record, here or one sampled in a worker: {lat, raw, rows, cols, r0, r1}. */
+export function fromLattice(rec) {
+  const out = makeSurface(rec.lat, rec.rows, rec.cols, {r0: rec.r0, r1: rec.r1});
+  out.raw = rec.raw;
+  out.rec = rec;
+  return out;
+}
+
+function sampleLattice(f, {spine, rows = 340, cols = 160, sRange = null, base = null, same = null}) {
   const [nx, ny] = spine.nose, [tx, ty] = spine.tail;
   const mid = nx - tx, cap = 0.62; // cap length: about the radius of the end of the car, so cells stay square
   const capArc = cap * Math.PI / 2, total = 2 * capArc + mid;
@@ -117,9 +129,7 @@ export function sampleSurface(f, {spine, rows = 340, cols = 160, sRange = null, 
       lat[o] = (prev[o - cols * 3] + 2 * prev[o] + prev[o + cols * 3]) / 4;
     }
   }
-  const out = makeSurface(lat, rows, cols, {r0, r1});
-  out.raw = raw;
-  return out;
+  return {lat, raw, rows, cols, r0, r1};
 }
 
 /**
@@ -613,21 +623,28 @@ const BUMPER_FROM = 0.72; // of the way along the surface: the rear bumper's ski
 const LOW_Y = 0.5; // below this the coupe, convertible and hood solids are the same solid, to well past their blend radius
 const LATE_X = [-1.68, 1.58]; // and the last cars' valances change nothing between these
 
+/** The surface each solid is sampled on top of, as [body, opts], or null. */
+function baseOf(body, opts) {
+  if (opts.facelift) return [body, {...opts, facelift: false}];
+  if (!opts.bumper && (body === 'convertible' || body === 'hood')) return ['coupe', opts];
+  return null;
+}
+
 /** What each solid can take from one already sampled: rays are most of the page's start-up time. */
 function reuse(body, opts) {
-  if (opts.facelift) return {base: bodySurface(body, {...opts, facelift: false}), same: (x) => x > LATE_X[0] && x < LATE_X[1]};
-  if (!opts.bumper && body === 'convertible') return {base: bodySurface('coupe', opts), same: (x, y) => y < LOW_Y};
-  if (!opts.bumper && body === 'hood') return {base: bodySurface('coupe', opts), same: (x, y) => y < LOW_Y};
-  return {};
+  const b = baseOf(body, opts);
+  if (!b) return {};
+  return {base: bodySurface(...b), same: opts.facelift ? (x) => x > LATE_X[0] && x < LATE_X[1] : (x, y) => y < LOW_Y};
 }
 
 const cache = new Map();
+const surfaceKey = (body, opts) => `${body}:${!!opts.bumper}:${!!opts.facelift}:${opts.rows ?? 340}`;
 /**
  * The sampled surface, built once. opts: bumper, the rear bumper's skin, which stands proud of the tail; facelift, the
  * last cars' deeper valances.
  */
 export function bodySurface(body = 'coupe', opts = {}) {
-  const key = `${body}:${!!opts.bumper}:${!!opts.facelift}:${opts.rows ?? 340}`;
+  const key = surfaceKey(body, opts);
   if (!cache.has(key)) {
     const spine = opts.bumper ? SPINE_BUMPER : SPINE;
     const rows = opts.rows ?? 340;
@@ -635,4 +652,56 @@ export function bodySurface(body = 'coupe', opts = {}) {
     cache.set(key, sampleSurface(makeField({body, ...opts}), {spine, rows, cols: opts.cols ?? 170, base: base?.raw, same, sRange: opts.bumper ? [Math.floor(rows * BUMPER_FROM), rows - 1] : null}));
   }
   return cache.get(key);
+}
+
+/** Puts a lattice sampled elsewhere into the cache, unless that surface is already here. */
+export function seedSurface(body, opts, rec) {
+  const key = surfaceKey(body, opts);
+  if (!cache.has(key)) cache.set(key, fromLattice(rec));
+}
+
+/**
+ * Samples surfaces in workers while the page builds the rest of the car: the rays are the slowest part of start-up, and a
+ * phone has cores to spare. jobs: [body, opts] pairs, in the order they are wanted. A job whose base surface (baseOf) is
+ * still out waits for it, then goes to the next free worker with the base's lattice. src is surface-worker.js as text,
+ * put in the page by tools/build.mjs. Resolves when every job is in the cache, or as soon as a worker fails: bodySurface
+ * then samples what is missing on this thread, as before. Same code, same numbers: a worker's lattice is the one this
+ * thread would have sampled.
+ */
+export function prefetchSurfaces(jobs, src, workers = 3) {
+  if (!src || typeof Worker === 'undefined' || typeof Blob === 'undefined') return Promise.resolve();
+  return new Promise((resolve) => {
+    let url = null, finished = false;
+    const pool = [], todo = [...jobs], landed = new Set();
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      for (const w of pool) w.terminate();
+      if (url) URL.revokeObjectURL(url);
+      resolve();
+    };
+    const ready = ([body, opts]) => { const b = baseOf(body, opts); return !b || cache.has(surfaceKey(...b)); };
+    const next = (w) => {
+      const i = todo.findIndex(ready);
+      w.idle = i < 0;
+      if (w.idle) return;
+      const [body, opts] = todo.splice(i, 1)[0], b = baseOf(body, opts);
+      w.postMessage({body, opts, base: b && [...b, cache.get(surfaceKey(...b)).rec]});
+    };
+    try {
+      url = URL.createObjectURL(new Blob([src], {type: 'text/javascript'}));
+      for (let k = 0; k < Math.min(workers, jobs.length); k++) pool.push(new Worker(url));
+    } catch { finish(); return; }
+    for (const w of pool) {
+      w.onmessage = ({data}) => {
+        seedSurface(data.body, data.opts, data.rec);
+        landed.add(surfaceKey(data.body, data.opts));
+        if (landed.size === jobs.length) { finish(); return; }
+        next(w);
+        for (const o of pool) if (o.idle) next(o); // a base just landed: a job that waited for it can go now
+      };
+      w.onerror = (e) => { e.preventDefault?.(); finish(); };
+    }
+    for (const w of pool) next(w);
+  });
 }

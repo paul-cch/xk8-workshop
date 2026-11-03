@@ -132,6 +132,16 @@ async function bundle(version, frVersion) {
   return res.outputFiles[0].text;
 }
 
+// The body surface sampler as a worker of its own. The page carries it as text and starts it from a Blob, so it still opens
+// from file:// as one file. See prefetchSurfaces() in src/car/surface.js.
+async function bundleWorker() {
+  const res = await build({
+    entryPoints: [path.join(ROOT, 'src/car/surface-worker.js')],
+    bundle: true, format: 'iife', minify: true, write: false, target: 'es2022', legalComments: 'none', plugins: [threePlugin], logLevel: 'warning',
+  });
+  return res.outputFiles[0].text;
+}
+
 // stage.css styles the page before the bundle runs: the studio and the loading screen. The rest of the look travels packed inside
 // the bundle, gzipped with the code, and goes into the page as the bundle starts: as plain text it would cost the page 80 KB.
 const BOOT_CSS = ['src/stage/stage.css'];
@@ -283,7 +293,7 @@ const fr = french();
 const frJs = `window.__xk8fr=${JSON.stringify(fr)};\n`;
 const frVersion = createHash('sha1').update(frJs).digest('hex').slice(0, 10); // a new dictionary is a new URL, past any HTTP cache
 const uiCss = readCss(UI_CSS);
-const code = await bundle(provisional, frVersion);
+const code = `globalThis.__xk8SurfaceWorker=${JSON.stringify(await bundleWorker())};\n${await bundle(provisional, frVersion)}`;
 const js = PACK ? `document.head.append(Object.assign(document.createElement('style'),{textContent:${JSON.stringify(uiCss)}}));\n${code}` : code;
 const css = PACK ? readCss(BOOT_CSS) : readCss([...BOOT_CSS, ...UI_CSS]);
 const version = createHash('sha1').update(js).update(data.gzip).update(css).update(frJs).digest('hex').slice(0, 10);

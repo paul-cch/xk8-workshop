@@ -20,39 +20,83 @@ export function createRegistry() {
   const makeInstance = (part, object, opts, side) => {
     const rig = new THREE.Group();
     rig.name = part.id;
-    rig.add(object);
     const flip = side === 'mirror' ? -1 : 1;
     if (flip < 0) rig.scale.z = -1;
     root.add(rig);
-    const meshes = [];
+    const flipZ = (a) => (a ? [a[0], a[1], a[2] * flip] : null);
+    const inst = {part, rig, object: null, meshes: [], side, variant: opts.variant ?? null, follows: opts.follows ?? null, explode: flipZ(opts.explode), lift: flipZ(opts.lift), cur: [0, 0, 0], look: 'solid', rest: null};
+    part.instances.push(inst);
+    if (object) attach(inst, object, opts);
+    return inst;
+  };
+  const attach = (inst, object, opts) => {
+    inst.rig.add(object);
+    inst.object = object;
+    inst.rest = null;
     object.traverse((o) => {
       if (!o.isMesh) return;
-      o.userData.partId = part.id;
+      o.userData.partId = inst.part.id;
       o.userData.base = o.material;
       o.userData.layer = opts.noPick ? LAYER.GHOST : o.material.transparent ? LAYER.GLASS : LAYER.SOLID;
       o.layers.set(o.userData.layer);
       o.castShadow = o.receiveShadow = true;
-      meshes.push(o);
+      inst.meshes.push(o);
     });
-    const flipZ = (a) => (a ? [a[0], a[1], a[2] * flip] : null);
-    const inst = {part, rig, object, meshes, side, variant: opts.variant ?? null, follows: opts.follows ?? null, explode: flipZ(opts.explode), lift: flipZ(opts.lift), cur: [0, 0, 0], look: 'solid', rest: null};
-    part.instances.push(inst);
-    return inst;
   };
 
-  /** See docs/interfaces.md. Adding the same id again adds another instance: another form of the part, say 17 and 18 inch wheels. */
-  function add(id, object, opts = {}) {
+  // Forms of a part that the car on show does not have wait here, as builders, until fill() runs them: a phone shows the
+  // car sooner. Their rigs are made at once, so the order of parts, instances and the scene is the order add() was called
+  // in, and a filled car is the car add() would have built straight away.
+  let later = null; // (opts) => true for an instance that may wait
+  const queue = [];
+  const run = (job) => {
+    const object = job.build();
+    const mirror = job.opts.mirror ? object.clone(true) : null; // cloned first, as in add()
+    attach(job.insts[0], object, job.opts);
+    if (mirror) attach(job.insts[1], mirror, job.opts);
+    job.done?.({object, mirror});
+  };
+
+  /**
+   * See docs/interfaces.md. Adding the same id again adds another instance: another form of the part, say 17 and 18 inch
+   * wheels. object may be a function that builds it: then, for a form the car on show does not have, it waits for fill().
+   * done({object, mirror}) runs once the object exists, now or then.
+   */
+  function add(id, object, opts = {}, done = null) {
     let part = parts.get(id);
     if (!part) {
       part = {id, system: id.split('.')[0], instances: [], group: opts.group ?? null, view: opts.view ?? null};
       parts.set(id, part);
       if (partsData && !partsData.byId.has(id)) unknown.push(id);
     }
+    if (typeof object === 'function') {
+      if (!(later && opts.variant && later(opts))) object = object();
+      else {
+        const insts = [makeInstance(part, null, opts, 'primary')];
+        if (opts.mirror) insts.push(makeInstance(part, null, opts, 'mirror'));
+        queue.push({build: object, opts, insts, done});
+        return {object: null, mirror: null};
+      }
+    }
     // cloned first: makeInstance puts a Material in userData, and clone() runs userData through JSON
     const mirror = opts.mirror ? object.clone(true) : null;
     makeInstance(part, object, opts, 'primary');
     if (mirror) makeInstance(part, mirror, opts, 'mirror');
+    done?.({object, mirror});
     return {object, mirror};
+  }
+
+  /**
+   * Builds waiting forms for up to budget ms, or all of them, and returns how many still wait. ids: only the forms of these
+   * parts. Rest bounds of filled instances are dropped, so call preparePose() again once nothing waits.
+   */
+  function fill(budget = Infinity, ids = null) {
+    const end = performance.now() + budget;
+    for (let i = 0; i < queue.length && performance.now() < end;) {
+      if (ids && !ids.has(queue[i].insts[0].part.id)) { i++; continue; }
+      run(queue.splice(i, 1)[0]);
+    }
+    return queue.length;
   }
 
   /** Resting bounds of one instance, in car space, without any pose offset. Cached: call after the part is built. */
@@ -140,7 +184,10 @@ export function createRegistry() {
   }
 
   return {
-    root, add, resolve, report, restBox, currentBox, partBox, nearest,
+    root, add, fill, resolve, report, restBox, currentBox, partBox, nearest,
+    /** Lets forms wait: pred(opts) is true for an instance whose variant the car on show does not have. null builds all at once. */
+    deferWhen(pred) { later = pred; },
+    get waiting() { return queue.length; },
     get: (id) => parts.get(id) ?? null,
     has: (id) => parts.has(id),
     all: () => [...parts.values()],
