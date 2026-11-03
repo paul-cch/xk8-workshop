@@ -324,6 +324,8 @@ export function mount(el, app) {
   // Units and large text are set once and left: one quiet button holds them, on every screen.
   const menuBtn = h('button.toggle.top-menu', {type: 'button', onclick: () => {
     const d = dialog({title: t('Settings'), body: [
+      h('h3.lab', t('Appearance')),
+      seg({label: t('Appearance'), options: [{value: 'auto', label: t('Auto|appearance')}, {value: 'light', label: t('Light|appearance')}, {value: 'dark', label: t('Dark|appearance')}], value: store.get().theme, onChange: (v) => store.set({theme: v}), className: 'seg-wide'}),
       h('h3.lab', t('Tightening units')),
       seg({label: t('Tightening units'), options: [{value: 'nm', label: 'Nm'}, {value: 'lbft', label: 'lb ft'}], value: store.get().units, onChange: (v) => store.set({units: v}), className: 'seg-wide'}),
       h('h3.lab', t('Large text')),
@@ -715,6 +717,7 @@ export function mount(el, app) {
     if (ch.has('view') || ch.has('job') || ch.has('mode')) paintViews(s);
     if (ch.has('view') && s.view && s.view !== 'hero') dismiss();
     if (ch.has('garage')) applyGarage(s.garage, true);
+    if (ch.has('theme') || ch.has('garage')) applyTheme();
     if (ch.has('selected') || ch.has('mode')) {
       if (s.selected) {
         dismiss();
@@ -729,7 +732,17 @@ export function mount(el, app) {
       paintPicked(s);
     }
     if (ch.has('selected') || ch.has('mode') || ch.has('isolate')) paintPartBar(s);
-  }, ['mode', 'job', 'variant', 'chosen', 'linked', 'notice', 'units', 'view', 'garage', 'selected', 'isolate', 'lang']);
+  }, ['mode', 'job', 'variant', 'chosen', 'linked', 'notice', 'units', 'view', 'garage', 'selected', 'isolate', 'lang', 'theme']);
+
+  // ---- light and dark ----------------------------------------------------------------------------
+  const deviceDark = matchMedia('(prefers-color-scheme: dark)');
+  function applyTheme() {
+    const s = store.get();
+    const dark = s.theme === 'dark' || (s.theme === 'auto' && deviceDark.matches);
+    root.classList.toggle('dark', dark);
+    stage.setDark?.(dark && !s.garage); // large text is black on white whatever the setting
+  }
+  deviceDark.addEventListener('change', applyTheme);
 
   async function applyGarage(on, say) {
     root.classList.toggle('garage', on);
@@ -756,6 +769,7 @@ export function mount(el, app) {
   paintCar(s);
   paintViews(s);
   applyGarage(s.garage, false);
+  applyTheme();
   show(s.mode);
   root.classList.toggle('has-intro', introOn);
   root.classList.toggle('no-gl', !!app.noGL);

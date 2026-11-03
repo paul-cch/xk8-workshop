@@ -107,5 +107,5 @@ export function createFloor(renderer, scene) {
     renderer.shadowMap.autoUpdate = auto;
   }
 
-  return {plane, bake, setStrength(k) { plane.material.uniforms.strength.value = k; }};
+  return {plane, bake, setStrength(k) { plane.material.uniforms.strength.value = k; }, setInk(hex) { plane.material.uniforms.ink.value.set(hex); }};
 }

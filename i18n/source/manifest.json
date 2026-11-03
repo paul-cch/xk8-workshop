@@ -1,7 +1,7 @@
 {
  "ui": {
-  "strings": 1099,
-  "chars": 28073
+  "strings": 1110,
+  "chars": 28446
  },
  "jobs": {
   "strings": 1422,
@@ -32,7 +32,7 @@
   "chars": 6696
  },
  "total": {
-  "strings": 10212,
-  "chars": 572746
+  "strings": 10223,
+  "chars": 573119
  }
 }

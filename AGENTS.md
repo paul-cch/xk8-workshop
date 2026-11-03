@@ -69,6 +69,7 @@ Quiet, like Linear or Apple Notes. Before you add words or a control, check that
 - **Sentence case.** No spaced capitals. Mono only for values a person copies or compares: torques, part numbers, codes.
 - **Soft controls.** Fills from `--fill` and `--fill-2`, corners from `--r-sm`, `--r` and `--r-lg`, hairlines from `--line-soft`. One ink-filled action per view: Next, Start the job, Send. The tokens are at the top of `src/ui/style.css`. Shared shapes and hover states are in `src/ui/system.css`, which loads last.
 - **Settings stay out of the way.** Units and large text live behind the gear in the top bar. Language stays visible, because someone who cannot read the page must still be able to find their own.
+- **Dark (`html.dark`) is the same scale inverted.** Use the tokens, never a fixed colour, and check a change with the device set to dark. The 3D backdrop and floor shadow follow through `stage.setDark()`.
 - **Large text (`html.garage`) undoes the softness**: black on white, solid outlines. Check it with `npm run shots` after any style change.
 
 The interface CSS is packed into the bundle with the code, and only `src/stage/stage.css` is inline in the page. Shapes that test helpers rely on, such as 44 px touch targets and the feedback button's clearance, are checked in `tools/ui-flows.mjs`.

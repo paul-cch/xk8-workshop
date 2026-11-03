@@ -24,16 +24,17 @@ const ENV_SIZE = {fine: 512, phone: 256}; // the reflection map's face: paint re
 // Neutral tone mapping takes the darkest channel off all three, which on a dark green paint means no red at all. Keep a quarter of it.
 THREE.ShaderChunk.tonemapping_pars_fragment = THREE.ShaderChunk.tonemapping_pars_fragment.replace('float offset = x < 0.08 ? x - 6.25 * x * x : 0.04;', 'float offset = 0.25 * ( x < 0.08 ? x - 6.25 * x * x : 0.04 );');
 export const BACKDROP = {top: '#f4f5f6', mid: '#eceef0', low: '#e2e4e7'};
+const BACKDROP_DARK = {top: '#1f2124', mid: '#18191c', low: '#121315'}; // the dark page: the studio dims, the car's lights stay
 
-const backdrop = () => {
+const backdrop = (tone) => {
   const c = document.createElement('canvas');
   c.width = 4;
   c.height = 512;
   const g = c.getContext('2d');
   const gr = g.createLinearGradient(0, 0, 0, 512);
-  gr.addColorStop(0, BACKDROP.top);
-  gr.addColorStop(0.58, BACKDROP.mid);
-  gr.addColorStop(1, BACKDROP.low);
+  gr.addColorStop(0, tone.top);
+  gr.addColorStop(0.58, tone.mid);
+  gr.addColorStop(1, tone.low);
   g.fillStyle = gr;
   g.fillRect(0, 0, 4, 512);
   const tex = new THREE.CanvasTexture(c);
@@ -110,7 +111,7 @@ export function createStage(canvas, {tier = null} = {}) {
   renderer.info.autoReset = false; // counts stay whole-frame, across every pass
 
   const scene = new THREE.Scene();
-  scene.background = backdrop();
+  scene.background = backdrop(document.documentElement.classList.contains('dark') && !document.documentElement.classList.contains('garage') ? BACKDROP_DARK : BACKDROP);
   const envSize = matchMedia('(pointer: coarse)').matches ? ENV_SIZE.phone : ENV_SIZE.fine;
   scene.environment = environment(renderer, envSize);
   scene.environmentIntensity = 0.95;
@@ -308,6 +309,8 @@ export function createStage(canvas, {tier = null} = {}) {
     renderer, scene, camera, sun, size, insets,
     /** How far the bonnet is open, 0 to 1. */
     setBayLamp(k) { bayFill.intensity = BAY_LAMP * k; },
+    /** The backdrop behind the car, for the dark or light page. */
+    setDark(on) { scene.background?.dispose?.(); scene.background = backdrop(on ? BACKDROP_DARK : BACKDROP); floor.setInk(on ? '#000000' : '#20262c'); invalidate(); },
     invalidate, markShadows, project, resize, warm, setTier,
     /** fn(dt, now) runs before each frame. Return true to keep frames coming. Returns the unsubscribe function. */
     onFrame(fn) { frameFns.add(fn); invalidate(); return () => frameFns.delete(fn); },

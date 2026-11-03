@@ -64,6 +64,15 @@ function nextSheet(M, D, L, sheets) {
   return {sheet, target, assumed: target > top, nextMiles, milesLeft, monthsLeft, every, dueDate: D ? addMonths(D, every) : null, status, missed: Math.max(0, passed - 1)};
 }
 
+/** For the home screen: the next service and how far off it is, or null before a mileage is entered. */
+export function serviceDue(v) {
+  if (saved.miles == null) return null;
+  const {sheets} = serviceSets(v);
+  if (!sheets.length) return null;
+  const n = nextSheet(saved.miles, saved.lastDate || null, saved.lastMiles, sheets);
+  return {status: n.status, title: t('{miles} mile service', {miles: num(Math.round(n.target))}), when: n.milesLeft <= 0 ? t('{d} over', {d: miles(-n.milesLeft)}) : t('in {d}', {d: miles(n.milesLeft)})};
+}
+
 /** A repeating item. With no record of it being done, it is assumed done when last due, and the row says so. */
 function timedStatus(r, M, D, L) {
   const mark = saved.done[r.id];

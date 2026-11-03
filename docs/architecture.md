@@ -93,6 +93,8 @@ shareable deep link, e.g. `#/job/chain-tensioners/4?v=4.0-na-coupe-1999`.
 
 The audience is an owner who has never held a torque wrench. The first screen is four plain choices, with the car beside them, and nothing that repeats the mode bar. The look is quiet on purpose: see Interface style in `AGENTS.md`. Everything an expert needs stays, one tap or one scroll behind. Five modes, named on screen The car, Run it, Fix it, What's wrong and Upkeep. In the code they stay `explore run jobs diagnose plan`. The 3D car is always present, and every list item drives it.
 
+- **Home** (Explore with nothing selected): a job to carry on and the car's next service from Upkeep's mileage, then the
+  four plain choices.
 - **Explore**: systems toggle show/ghost/hide; explode slider (Take it apart); x-ray (See through it); tap a part for what it
   does, why you care, part numbers, torques, tools, jobs and faults for this variant.
 - **Run**: rpm, throttle, gear, steering, suspension travel, roof. Live panels read real
@@ -102,7 +104,8 @@ The audience is an owner who has never held a torque wrench. The first screen is
   through. Each step flies the camera in, lifts the parts off, shows the torque in your units,
   and offers the film at that moment where one is recorded. On a phone the film sits over the car,
   and Next moves it to the new step's moment where one is recorded. Next only moves on: the Done box
-  records a step. Steps persist and print as a job card.
+  records a step. Steps persist and print as a job card. Hands-free (`src/ui/handsfree.js`) reads each step aloud, keeps the screen awake and, where the browser
+  can listen, moves on at a spoken next, back, repeat, torque, done or stop, in English or French.
 - **Diagnose**: six plain symptoms, or words or a fault code in the box. A complaint in ordinary words
   reaches the likely faults through the `SAYS` table in `diagnose.js`, in both languages, and jobs that may
   help come with them. If nothing fits every word, the closest matches show instead of a dead end.
@@ -110,7 +113,7 @@ The audience is an owner who has never held a torque wrench. The first screen is
   inspection checklist, shopping list combined across chosen jobs.
 
 Global: car picker (VIN decoder or manual), one search box over everything, which puts what a word means first and finds
-pages by what they are for, a settings button with units and
+pages by what they are for, a settings button with appearance (auto, light, dark), units and
 garage mode (large type, high contrast, keeps the screen awake where supported), provenance
 badge on every number (From Jaguar, Several sources agree, One source, Owners say) with the source one tap
 away, workshop words in running text that explain themselves on a tap, a loud warning when a safety-critical value is below `corroborated`.

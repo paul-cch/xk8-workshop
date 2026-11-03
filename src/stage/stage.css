@@ -1,5 +1,10 @@
 /* The stage's own overlay. Everything else lives in src/ui/style.css. */
 :root { --stage-bg: #eceef0; --ink: #1b2024; --accent: #f2570b; }
+html.dark:not(.garage) { --stage-bg: #17191c; --ink: #e9eaec; }
+html.dark:not(.garage) #boot { color: #9aa0a8; }
+html.dark:not(.garage) .label { background: rgba(32, 34, 38, .92); box-shadow: 0 1px 4px rgba(0, 0, 0, .4); }
+html.dark:not(.garage) .labels line, html.dark:not(.garage) .labels circle { stroke: #c3c7cd; }
+html.dark:not(.garage) .labels circle { fill: #c3c7cd; stroke: #17191c; }
 html, body { margin: 0; height: 100%; background: var(--stage-bg); overflow: hidden; overscroll-behavior: none; }
 #app { position: fixed; inset: 0; }
 #stage { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; }

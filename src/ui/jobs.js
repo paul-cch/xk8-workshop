@@ -5,12 +5,14 @@ import {N, andList, dec, fixed, isFrench, plural, pounds, t} from '../i18n.js';
 import {basicsBlock, stepWatch, watchSection} from './tutorials.js';
 import {CONF, DISCLAIMER, badge, bodyName, carYear, h, systemName, torqueBlock as baseTorqueBlock, toast, torqueWarning} from './widgets.js';
 import {gloss} from './terms.js';
+import {handsFree} from './handsfree.js';
 
 // ---- icons -----------------------------------------------------------------------------------
 
 const ICON = {
   warn: '<path d="M12 3.5 2.5 20h19L12 3.5Z"/><path d="M12 10v5M12 17.6v.4"/>',
   check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>',
   left: '<path d="m14.5 5-7 7 7 7"/>',
   right: '<path d="m9.5 5 7 7-7 7"/>',
   print: '<path d="M7 9V3.5h10V9M7 17H4V9.5h16V17h-3"/><path d="M7 14h10v6.5H7z"/>',
@@ -582,7 +584,7 @@ function renderStep(app, job, s, i, root) {
     // What comes off or goes back, unless it is the part already shown above as the one being worked on.
     st.remove.some((id) => !st.focus.includes(id)) && h('p.ws-small', h('strong', t('Comes off: ')), st.remove.map(partName).join(', ')),
     st.install.some((id) => !st.focus.includes(id)) && h('p.ws-small', h('strong', t('Goes back: ')), st.install.map(partName).join(', ')),
-    h('div.ws-actions', h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: () => app.ui.openSearch()}, t('Look something up')), h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: printNow}, icon('print'), t('Print job card'))),
+    h('div.ws-actions', h('button.ws-btn.ws-btn--quiet.ws-handsfree', {type: 'button', 'aria-pressed': String(handsFree.on), 'data-fk': 'handsfree', onclick: () => handsFree.toggle()}, icon('mic'), t('Hands-free')), h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: () => app.ui.openSearch()}, t('Look something up')), h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: printNow}, icon('print'), t('Print job card'))),
   ];
   const last = i === steps.length - 1;
   const foot = h('div.ws-foot', {dataset: {peek: ''}}, h('div.ws-nextprev',
@@ -591,6 +593,20 @@ function renderStep(app, job, s, i, root) {
     h('button.ws-big.ws-big--go', {type: 'button', 'data-fk': 'next', 'aria-label': last ? t('Check it worked') : t('Next step'), onclick: () => go(app, job, i + 1)}, [last ? t('Finish') : t('Next'), icon('right')])));
   setPrintable(() => jobCard(job, s));
   paintView(root, `step-${job.id}-${i}`, body, foot);
+  // Hands-free: the same buttons, by voice, and the step read out once when it opens.
+  const tq = (rec) => { const f = formatTorque(rec, s.units); return `${rec.label}: ${f.stages.length ? f.stages.join(', ') : f.value != null ? `${f.value} ${f.unit}` : t('Not found')}`; };
+  const figures = torques.map(tq).join('. ');
+  const warn = stepWarn(st, v);
+  const speech = [st.title, warn && T(warn), T(st.text), figures].filter(Boolean).join('. ');
+  handsFree.use({
+    next: () => go(app, job, i + 1),
+    back: () => go(app, job, i === 0 ? null : i - 1),
+    repeat: () => handsFree.say(speech),
+    torque: () => handsFree.say(figures || t('No tightening figure in this step.')),
+    done: () => { if (!doneFor(app.store.get(), job).has(job.steps.indexOf(st))) stepDoneToggle(app, job, st); go(app, job, i + 1); },
+    changed: () => root.querySelector('.ws-handsfree')?.setAttribute('aria-pressed', String(handsFree.on)),
+  });
+  handsFree.read(`${job.id}:${i}`, speech);
 }
 
 const STEP_LINES = 3; // from this many sentences a step reads as a list of actions
@@ -749,6 +765,7 @@ export function mount(el, app) {
   const {store} = app;
   /** Frames the part in work again after the sheet has moved. */
   app.ui.reframe = () => { if (store.get().mode === 'jobs') flyForJob(app, store.get()); };
+  app.ui.handsFree = handsFree; // tests reach it here
   const keyOf = (s) => (s.job ? `${s.job.id}:${s.job.step}` : '');
   let shown = null;
   const render = (s, root) => {
@@ -762,6 +779,7 @@ export function mount(el, app) {
       else renderStep(app, job, s, s.job.step, root);
     } else {
       setPrintable(null);
+      if (handsFree.on) handsFree.toggle(false);
       renderList(app, s, root);
     }
     const key = keyOf(s);
@@ -777,6 +795,7 @@ export function mount(el, app) {
   document.addEventListener('keydown', onKey);
   const stop = modeRoot(el, app, 'jobs', ['job', 'variant', 'units', 'doneSteps', 'list', 'garage', 'lang'], render, () => {
     document.removeEventListener('keydown', onKey);
+    if (handsFree.on) handsFree.toggle(false);
     clearTimeout(flyTimer);
     if (marked) { marked = false; app.pick.setLabels([]); app.pick.setAutoLabels(true); }
     if (store.get().isolate) store.set({isolate: null});
