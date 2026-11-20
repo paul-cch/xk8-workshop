@@ -18,7 +18,12 @@ On 20 November 2026 the touch trials passed on both: `node tools/android-trial.m
 mode, and both tests in `tools/ios-trial/` on the iPhone 17 Pro simulator. A release bundle for Google Play built and
 signed with a throwaway key. `npm run test:ui` passed 8 of 8 on the Mac the same day.
 
+The feedback worker that accepts the two app origins went live on 20 November 2026, deployment `631560f4`. The site's
+files are still the build of 3 November: the page changes since then are not published.
+
 Not done yet, and each needs Paul:
+
+- Publishing the current page needs a Cloudflare API token, see Publishing below.
 
 - No physical phone has run either app.
 - The Mac has an Apple Development certificate for the team in the Xcode project, but Xcode is not signed in to the
@@ -132,15 +137,12 @@ npm run deploy -- --dry-run                                                  # w
 Cloudflare Pages > Edit. Without the two variables it exits 2. Pass a folder, `node tools/deploy.mjs <folder>`, to deploy a
 release already built.
 
-With no token on the machine, the Executor route still works by hand:
-
-```
-npm run release
-PAGES_JWT=<upload token> node tools/deploy-pages.mjs /tmp/xk8-rel
-```
-
-Get the upload token from Executor's Cloudflare tools, then create the deployment through them with the printed manifest and
-`_worker.js` and `_routes.json` as multipart fields.
+With no token on the machine, Executor's Cloudflare tools can still create a deployment, but since 20 November 2026 they
+no longer give the upload token, so they cannot upload new files. That leaves one thing they can do: put a new
+`_worker.js` live while the site's files stay as they are. Download the live files, work out their manifest with
+`assetFiles` and `manifestOf` from `tools/deploy-pages.mjs`, and create the deployment through Executor with that
+manifest, `_worker.js` and `_routes.json`. Try it on another branch first, which gives a preview address, then on `main`.
+A new page needs the token.
 
 The feedback server needs more:
 

@@ -122,9 +122,8 @@ folder that lacks `_worker.js` or `_routes.json`, because a deployment without t
 - `npm run deploy -- --dry-run` builds the release and prints the manifest and the size of each field, and sends nothing.
 - `node tools/deploy.mjs <folder>` deploys a folder already built with `--release` instead of building one.
 
-With no token on the machine, the Executor route still works by hand: Executor's Cloudflare tools give the upload token,
-`PAGES_JWT=<upload token> node tools/deploy-pages.mjs /tmp/xk8-rel` uploads the files and prints the manifest, and the
-deployment call carries the manifest with `_worker.js` and `_routes.json` as multipart fields. See `docs/status.md`.
+With no token on the machine, Executor's Cloudflare tools can put a new `_worker.js` live over the files already
+published, but they can no longer upload new files, so a new page needs the token. See `docs/status.md`.
 
 The Pages project needs a KV namespace bound as `FEEDBACK` and the `INBOX_HASH` secret. Details, and how to read the inbox,
 are in `docs/status.md`.
