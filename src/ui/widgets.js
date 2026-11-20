@@ -247,3 +247,19 @@ export function range({label, min, max, step = 1, value = min, format = String, 
 
 /** A labelled block in a panel: the manual's section rule. */
 export const block = (title, ...kids) => h('section.blk', [title && h('h3.lab', title), ...kids]);
+
+/** Wraps a search input with a 44 px clear button, replacing the stripped browser cancel control. */
+export function searchField(input, {leading = null, className = ''} = {}) {
+  const clear = h('button.field-clear', {type: 'button', hidden: !input.value, 'aria-label': t('Clear'), onclick: () => {
+    input.value = '';
+    sync();
+    input.dispatchEvent(new Event('input', {bubbles: true}));
+    input.focus();
+  }});
+  clear.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg>';
+  const sync = () => { clear.hidden = !input.value; };
+  input.addEventListener('input', sync);
+  const wrap = h('div.field-search', {class: className}, [leading, input, clear]);
+  wrap.sync = sync;
+  return wrap;
+}

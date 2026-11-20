@@ -43,6 +43,61 @@ npm run build
 Then open `dist/index.html`. It needs no server. `npm test` runs the fast checks. The rest of the commands are in
 [AGENTS.md](AGENTS.md).
 
+## Run it on a phone
+
+The Android and iOS apps include the 3D car, workshop data, English and French. Videos, external guides and sending
+feedback use the network. The installed app saves your car, service mileage and job progress on the device.
+
+Use Node 22 or later for Capacitor. From the repository root, run this after checkout and after changes to the workshop.
+
+```sh
+npm ci
+npm run mobile:sync
+```
+
+- **Android** — Open `android/` in Android Studio and run **app** on a device or emulator. With JDK 21 and the Android SDK
+  configured, `cd android && ./gradlew assembleDebug` builds `app/build/outputs/apk/debug/app-debug.apk`.
+- **iPhone** — On a Mac, open `ios/App/App.xcodeproj` in Xcode 26 or later. Choose the **App** scheme and an iPhone
+  simulator. For a physical phone, select your development team in Signing & Capabilities, then select the phone and run.
+
+For a garage trial, install the app and turn on airplane mode before opening it. Switch languages, turn the car with a
+finger and open **Fix it → Engine oil and filter**. Start the job, mark the first step done and advance. Close the app
+and reopen it. **Carry on** should open the same step with the first tick saved. **Share PDF** opens the phone’s share sheet with the job card attached.
+Inspection reports and shopping lists use the same action.
+
+The app assets build into `dist-mobile/`. The feedback API's allowed origins are in `worker/_worker.js`.
+Mobile feedback delivery needs that version of the worker deployed to the existing Pages project.
+
+### Check the apps
+
+Both checks drive the installed app with real touches: touch target sizes, French, search, and turning and tapping the car.
+
+- **Android** — With the debug app open on an emulator or a phone that `adb devices` lists, run
+  `node tools/android-trial.mjs`.
+- **iPhone** — On a Mac with [XcodeGen](https://github.com/yonaskolb/XcodeGen), install the app fresh on a booted
+  simulator, then:
+
+  ```sh
+  cd tools/ios-trial && xcodegen generate
+  xcodebuild test -project GarageTrial.xcodeproj -scheme GarageTrial -destination 'platform=iOS Simulator,name=<simulator>'
+  ```
+
+### Store builds
+
+Neither app is in a store yet. Both projects are at version 0.1.0, build 1: raise `versionCode` and `versionName` in
+`android/app/build.gradle`, and the version and build in Xcode, for each upload.
+
+- **Google Play** — Make an upload key once and keep it, and its password, outside the repository:
+
+  ```sh
+  keytool -genkeypair -keystore ~/xk8-upload.jks -alias upload -keyalg RSA -keysize 2048 -validity 10000
+  ```
+
+  Then `cd android && XK8_UPLOAD_KEYSTORE=~/xk8-upload.jks XK8_UPLOAD_PASSWORD=<password> ./gradlew bundleRelease` writes
+  the signed `app/build/outputs/bundle/release/app-release.aab`. Without the two variables the bundle is unsigned.
+- **App Store** — The Xcode project names its development team. Sign in to that Apple account under Xcode > Settings >
+  Accounts, then use Product > Archive and Distribute App. Use your own team for a fork.
+
 ## Docs
 
 - [Architecture](docs/architecture.md) and [interfaces](docs/interfaces.md): how the code fits together

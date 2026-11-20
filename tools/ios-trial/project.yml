@@ -1,0 +1,38 @@
+# Drives the installed iPhone app with real taps, from a second app that only hosts the tests.
+# Garage: an oil-and-filter job that survives a relaunch, in both languages, then the share sheet.
+# TouchWorkshop: 48 pt touch targets, French, search, and the layout in landscape.
+#
+# On a Mac, with the app built and freshly installed on a booted simulator (README, "Run it on a phone").
+# Garage starts the job from nothing, so uninstall the app first if it has been used:
+#   brew install xcodegen
+#   cd tools/ios-trial && xcodegen generate
+#   xcodebuild test -project GarageTrial.xcodeproj -scheme GarageTrial -destination 'platform=iOS Simulator,name=<simulator>'
+name: GarageTrial
+options:
+  bundleIdPrefix: com.paulcouach.xk8trial
+  deploymentTarget:
+    iOS: "16.4"
+settings:
+  GENERATE_INFOPLIST_FILE: YES
+  CODE_SIGNING_ALLOWED: NO
+targets:
+  TrialHost:
+    type: application
+    platform: iOS
+    sources: [Runner]
+  GarageTests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [Tests]
+    dependencies:
+      - target: TrialHost
+    settings:
+      TEST_TARGET_NAME: TrialHost
+schemes:
+  GarageTrial:
+    build:
+      targets:
+        TrialHost: all
+        GarageTests: [test]
+    test:
+      targets: [GarageTests]

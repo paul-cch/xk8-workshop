@@ -241,6 +241,19 @@ const S = (p) => p.evaluate(() => { const s = window.__xk8.store.get(); return {
   const sheetTop = () => p.evaluate(() => document.querySelector('.dock').getBoundingClientRect().top);
   const insets = () => p.evaluate(() => window.__xk8.stage.insets.bottom);
   const t0 = await sheetTop();
+  const targets = await p.locator('.top button:visible, .modes button:visible').evaluateAll((buttons) =>
+    buttons.filter((button) => button.offsetHeight < 48 || button.offsetWidth < 48).map((button) => button.outerHTML.slice(0, 80)));
+  check('the main phone controls have 48-by-48 touch targets', !targets.length, targets.join(', '));
+  check('only the five destinations occupy the bottom bar', await p.locator('.modes button:visible').count() === 5);
+  await p.getByRole('button', {name: 'Search everything'}).tap();
+  check('header Search opens a focused search field', await p.locator('.sb-input').evaluate((el) => el === document.activeElement));
+  await p.fill('.sb-input', 'oil');
+  await p.locator('.dlg-search .field-clear').tap();
+  check('search clear button empties and keeps focus', await p.inputValue('.sb-input') === '' && await p.locator('.sb-input').evaluate((el) => el === document.activeElement));
+  await p.locator('.dlg-search .dlg-close').tap();
+  await touch('touchStart', 195, t0 + 18);
+  await cdp.send('Input.dispatchTouchEvent', {type: 'touchCancel', touchPoints: []});
+  check('an interrupted grip tap keeps the current sheet height', Math.abs(await sheetTop() - t0) < 2);
   const free = await p.evaluate(() => { const {h, insets} = {h: window.__xk8.stage.size.h, insets: window.__xk8.stage.insets}; return h - insets.top - insets.bottom; });
   check('the sheet starts with the four choices, and the car keeps its room', t0 > PHONE_H * 0.45 && free > 150, `${t0}, ${free} px of car`);
   await drag(195, t0 + 18, PHONE_H * 0.5);
@@ -257,13 +270,33 @@ const S = (p) => p.evaluate(() => { const s = window.__xk8.store.get(); return {
   await drag(195, t3 + 18, t3 + 120, 60, 0);
   const t4 = await sheetTop();
   check('a flick down lands on peek', Math.abs(t4 - t0) < 12, t4);
+  await p.locator('.dock-grip').evaluate((button) => button.click());
+  await p.waitForTimeout(400);
+  check('button activation expands the sheet without dragging', Math.abs(await sheetTop() - t1) < 12);
+  await p.locator('.dock-grip').press('ArrowDown');
+  await p.waitForTimeout(400);
+  await drag(195, t0 + 80, t0 - 110, 200, 0);
+  check('swiping up on peek content expands the sheet', (await sheetTop()) < t0 - 40, await sheetTop());
+  await p.locator('.dock-grip').press('ArrowDown');
+  await p.waitForTimeout(400);
 
   await p.evaluate(async () => { const x = window.__xk8; x.store.set({view: 'side'}); await x.settle(); });
   const c = await p.evaluate(() => window.__xk8.stage.project([1.294, 0.33, 0.8]));
-  await p.touchscreen.tap(c.x, c.y);
+  await touch('touchStart', c.x, c.y);
+  await touch('touchMove', c.x + 34, c.y);
+  await touch('touchMove', c.x, c.y);
+  await touch('touchEnd');
+  await p.waitForTimeout(300);
+  check('an orbit ending at its starting point does not select a part', !(await S(p)).selected);
+  await p.evaluate(async () => { const x = window.__xk8; x.store.set({view: 'side'}); await x.settle(); });
+  const wheel = await p.evaluate(() => window.__xk8.stage.project([1.294, 0.33, 0.8]));
+  const tapStart = Date.now() / 1000;
+  await cdp.send('Input.dispatchTouchEvent', {type: 'touchStart', touchPoints: [{x: wheel.x, y: wheel.y}], timestamp: tapStart});
+  await p.waitForTimeout(480); // a busy renderer delivers the lift late, after a short physical tap
+  await cdp.send('Input.dispatchTouchEvent', {type: 'touchEnd', touchPoints: [], timestamp: tapStart + 0.045});
   await p.waitForTimeout(700);
   const s = await S(p);
-  check('tap on the car selects a part', !!s.selected, s.selected);
+  check('a short tap on the car selects a part even when delivery is delayed', !!s.selected, s.selected);
   check('sheet rises for the part', (await sheetTop()) < t0 - 10, await sheetTop());
   await p.evaluate(() => window.__xk8.ui.select('engine.chain-tensioner-secondary'));
   await p.waitForTimeout(800);
@@ -286,6 +319,17 @@ const S = (p) => p.evaluate(() => { const s = window.__xk8.store.get(); return {
   });
   const small = await audit();
   check('touch targets at least 44 px, Explore', small.length === 0, small.slice(0, 8).join(', '));
+  await p.locator('.mode[data-mode=jobs]').tap();
+  await p.waitForTimeout(400);
+  check('the job list opens immediately below the phone header', Math.abs(await sheetTop() - await p.locator('.top').evaluate((el) => el.getBoundingClientRect().bottom)) < 6);
+  await p.setViewportSize({width: 667, height: 375});
+  await p.waitForSelector('html.touch-nav.layout-rail');
+  check('landscape puts the tabs under the list and leaves the car beside it', await p.evaluate(() => {
+    const tabs = document.querySelector('.modes').getBoundingClientRect(), panel = document.querySelector('.dock').getBoundingClientRect();
+    return tabs.left > 100 && Math.abs(tabs.top - panel.bottom) < 2 && Math.abs(tabs.left - panel.left) < 2;
+  }));
+  await p.setViewportSize({width: 390, height: PHONE_H});
+  await p.waitForSelector('html.layout-sheet');
   await p.evaluate(() => window.__xk8.store.set({selected: null, xray: false}));
   for (const [name, patch] of [['Run', {mode: 'run'}], ['Jobs', {mode: 'jobs'}], ['a job', {mode: 'jobs', job: {id: 'brake-pads-front', step: null}}], ['a step', {mode: 'jobs', job: {id: 'brake-pads-front', step: 2}}], ['Diagnose', {mode: 'diagnose', job: null}], ['Plan', {mode: 'plan', job: null}]]) {
     await p.evaluate((x) => window.__xk8.store.set(x), patch);
@@ -614,7 +658,7 @@ for (const [name, device, opener] of [['iPhone', PHONE, (d) => openWk('', CAR, d
   const p = await open({viewport: {width: 1440, height: 900}}, '#/explore?v=4.0-na-coupe-1999');
   await p.evaluate(() => window.__xk8.store.set({linked: null, chosen: true}));
   await p.waitForTimeout(150);
-  check('modes have ordinary names', (await p.locator('.top .mode:not(.mode-search)').allTextContents()).join('|') === 'The car|Run it|Fix it|What\'s wrong|Upkeep', (await p.locator('.top .mode:not(.mode-search)').allTextContents()).join('|'));
+  check('modes have ordinary names', (await p.locator('.top .mode').allTextContents()).join('|') === 'The car|Run it|Fix it|What\'s wrong|Upkeep', (await p.locator('.top .mode').allTextContents()).join('|'));
   check('Explode is Take it apart, X-ray is See through it', /Take it apart/.test(await p.textContent('[data-name=explode]')) && await p.locator('.tool-xray', {hasText: 'See through it'}).count() === 1);
   const page = await p.textContent('#ui');
   check('the jargon is gone from the home screen', !/\b(?:Explode|X-ray|Ghost|Isolate|Skin off|Chassis|Drivetrain|Prone to)\b/.test(page), page.match(/\b(?:Explode|X-ray|Ghost|Isolate|Skin off|Chassis|Drivetrain|Prone to)\b/)?.[0]);
@@ -1119,6 +1163,20 @@ await wk.close();
   }
   {
     const p = await open(PHONE_DEV);
+    const insetGrowth = await p.evaluate(() => {
+      const root = document.documentElement.style;
+      const heights = () => ['.top', '.modes'].map((selector) => document.querySelector(selector).getBoundingClientRect().height);
+      root.setProperty('--safe-t', '0px');
+      root.setProperty('--safe-b', '0px');
+      const before = heights();
+      root.setProperty('--safe-t', '62px');
+      root.setProperty('--safe-b', '34px');
+      const after = heights();
+      root.removeProperty('--safe-t');
+      root.removeProperty('--safe-b');
+      return after.map((height, index) => height - before[index]);
+    });
+    check('the phone bars leave one safe inset for the notch and home indicator', insetGrowth[0] === 62 && insetGrowth[1] === 34, insetGrowth.join(', '));
     await p.locator('.choice[data-what=how]').tap();
     await p.waitForTimeout(1500);
     const how = await p.evaluate(() => { const s = window.__xk8.store.get(); const b = [...document.querySelectorAll('.run-watch button')].find((x) => x.textContent === 'Slowest').getBoundingClientRect(); return {section: s.sim.section, speed: s.sim.timeScale, on: document.querySelectorAll('.how-steps li.on').length, line: document.querySelector('.how-line').textContent, labels: [...document.querySelectorAll('.label')].map((x) => x.textContent).join('|'), sticky: getComputedStyle(document.querySelector('.dash')).position, reach: b.bottom <= document.querySelector('.modes').getBoundingClientRect().top}; });

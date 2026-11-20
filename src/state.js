@@ -216,10 +216,10 @@ export function readSaved(saved) {
 }
 
 /** Restores saved fields, then saves them whenever they change. Private browsing just loses persistence. */
-export function connectStorage(st, storage = globalThis.localStorage) {
+export async function connectStorage(st, storage = globalThis.localStorage) {
   if (!storage) return () => {};
   try {
-    st.set(readSaved(JSON.parse(storage.getItem(KEY) || 'null')));
+    st.set(readSaved(JSON.parse(await storage.getItem(KEY) || 'null')));
   } catch { /* a bad entry is replaced on the next save */ }
   const own = (s) => (s.linked ? {...s, variant: s.linked.own ?? initialState().variant, chosen: !!s.linked.own} : s);
   return st.subscribe((s) => {
@@ -229,6 +229,7 @@ export function connectStorage(st, storage = globalThis.localStorage) {
 }
 
 /** Clears everything this page saves. The boot failure screen offers it. */
-export function clearSaved(storage = globalThis.localStorage) {
-  try { storage.removeItem(KEY); storage.removeItem(`${KEY}-plan`); } catch { /* nothing to clear */ }
+export async function clearSaved(storage = globalThis.localStorage) {
+  try { await Promise.all([storage.removeItem(KEY), storage.removeItem(`${KEY}-plan`)]); }
+  catch { /* reloading must still work when storage is unavailable */ }
 }

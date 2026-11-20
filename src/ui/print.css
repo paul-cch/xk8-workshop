@@ -1,0 +1,40 @@
+/* Used for browser printing and the PDF shared by the installed app. */
+@page { size: A4; margin: 13mm 13mm 15mm; }
+html.ws-printing, html.ws-printing body { height: auto !important; overflow: visible !important; background: #fff !important; }
+html.ws-printing #app { display: none !important; }
+html.ws-printing .ws-print { display: block; }
+.ws-card { color: #000; font: 10pt/1.36 -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.ws-card h1 { margin: 1mm 0; font-size: 19pt; line-height: 1.12; }
+.ws-card h2 { margin: 4mm 0 1.5mm; padding-bottom: .8mm; border-bottom: 1.2pt solid #000; font-size: 10.5pt; letter-spacing: .03em; text-transform: uppercase; break-after: avoid; }
+.ws-card h3 { margin: 0; font-size: 10.5pt; break-after: avoid; }
+.ws-card p { margin: .8mm 0; }
+.ws-card ul { margin: 0; padding-left: 4.5mm; }
+.ws-card li { margin: .5mm 0; }
+.ws-card table { width: 100%; border-collapse: collapse; }
+.ws-card td { padding: .9mm 1.5mm .9mm 0; border-bottom: .4pt solid #999; vertical-align: top; }
+.ws-card tr { break-inside: avoid; }
+.ws-card-qty { width: 1%; white-space: nowrap; }
+.ws-card-area { width: 34mm; }
+.ws-card-end { width: 36mm; text-align: right; }
+.ws-card-head { display: flex; justify-content: space-between; gap: 6mm; break-inside: avoid; }
+.ws-card-head > div { flex: 1 1 auto; min-width: 0; }
+.ws-card-head dl { flex: 0 0 44mm; margin: 0; border: .8pt solid #000; }
+.ws-card-head dl > div { display: flex; justify-content: space-between; gap: 2mm; padding: .6mm 1.5mm; }
+.ws-card-head dl > div + div { border-top: .4pt solid #999; }
+.ws-card-head dt { font-size: 8pt; }
+.ws-card-head dd { margin: 0; font-size: 8.5pt; font-weight: 700; text-align: right; }
+.ws-card-kicker { font-size: 8.5pt; letter-spacing: .03em; text-transform: uppercase; }
+.ws-card-safety { margin-top: 3mm; padding: 1mm 3mm 2mm; border: 2pt solid #000; break-inside: avoid; }
+.ws-card-safety h2 { margin-top: 1mm; border: 0; }
+.ws-card-warn { font-weight: 700; }
+.ws-card-two { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+.ws-card-tq td:last-child { width: 62mm; font-weight: 700; font-size: 10.5pt; text-align: right; }
+.ws-card-tq em { font-size: 8.5pt; }
+.ws-card-steps { margin: 0; padding: 0; list-style: none; counter-reset: st; }
+.ws-card-steps > li { display: flex; gap: 3mm; margin: 0; padding: 1.4mm 0; border-bottom: .4pt solid #999; counter-increment: st; break-inside: avoid; }
+.ws-card-steps h3::before { content: counter(st) '. '; }
+.ws-card-box { display: inline-block; flex: none; width: 4.4mm; height: 4.4mm; margin-top: .4mm; border: 1pt solid #000; }
+.ws-card-tqline strong { font-size: 11.5pt; }
+.ws-card-foot { margin-top: 4mm; font-size: 8pt; color: #333; }
+.ws-card-notes { break-inside: avoid; }
+.ws-card-lines { height: 32mm; background: repeating-linear-gradient(to bottom, transparent 0, transparent 7.5mm, #999 7.5mm, #999 8mm); }

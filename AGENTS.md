@@ -2,12 +2,14 @@
 
 An interactive 3D workshop for the Jaguar XK8 and XKR (X100, 1996 to 2006), live at https://xk8.paulcouach.com. Vanilla ES
 modules and three.js, bundled by esbuild into one self-contained `dist/index.html` that opens from `file://` and offline.
-French loads on demand as `dist/fr.js`. A Cloudflare Pages worker runs a private feedback inbox.
+French loads on demand as `dist/fr.js`. A Cloudflare Pages worker runs a private feedback inbox. The same code ships as
+Android and iPhone apps, wrapped by Capacitor.
 
 ## Layout
 
 ```
 src/main.js, state.js, data.js, i18n.js   boot, the store and URL hash, data access, the language system
+src/mobile.js                             what only the installed apps do: storage, Android Back, sharing a PDF
 src/sim/      pure maths, no three.js: engine, gearing, suspension, steering
 src/car/      the car, built from code, one module per area, plus the part registry
 src/stage/    renderer, camera, picking, and pose.js, the only thing that moves parts
@@ -15,7 +17,8 @@ src/ui/       the interface, one file per mode, and the CSS
 data/         the research data set, one JSON file per kind of record
 i18n/         source/: extracted English strings. fr/: their French
 worker/       _worker.js and _routes.json, the feedback server
-tools/        build, tests, browser checks, screenshots, deploy upload. Each file starts with what it does and how to run it
+android/, ios/   the Capacitor app projects. `capacitor.config.json` names the app and points them at `dist-mobile/`
+tools/        build, tests, browser checks, app trials, screenshots, deploy upload. Each file starts with what it does and how to run it
 docs/         architecture, interfaces, data contract, i18n contract, research, status
 ```
 
@@ -32,6 +35,7 @@ Node 20 or later, then `npm install`. Playwright's Chromium and WebKit are neede
 | `npm run test:ui` | builds, then real clicks in Chromium and WebKit: UI flows, French flows, sweep, French sweep, iPhone flows, phone check, clipped text | 8 min |
 | `npm run test:jobs` | builds, then steps through every job and sweeps each lifted part. Exits 1 today on 5 known lift crossings, see `docs/status.md` | 12 min |
 | `npm run shots` | builds, then screenshots the default states to `dist-shots/`. Pass options after `--` | 20 s |
+| `npm run mobile:sync` | writes `dist-mobile/` and copies it into `android/` and `ios/`. Node 22 or later | 3 s |
 | `npm run release` | the build to publish, with a fresh share card, in `/tmp/xk8-rel` | 6 s |
 | `npm run deploy` | release, then publish to Cloudflare Pages. Only when Paul asks, see Deploy | release plus upload |
 
@@ -39,9 +43,25 @@ There is no dev server. Open `dist/index.html` in a browser after a build.
 
 Other tools, each run as `node tools/<name>.mjs`: `coverage` (modelled parts), `lift-solve` (rewrites `src/car/lifts.js`),
 `assemble` (does each variant hold together), `perf`, `silhouette` (body against reference photos, needs `ref/`),
-`sound-check`, `fr-shots`, `plain-shots`, `harness-powertrain`, `harness-chassis`.
+`sound-check`, `fr-shots`, `plain-shots`, `harness-powertrain`, `harness-chassis`, `android-trial` (real touches on the
+installed Android app). `tools/ios-trial/` holds the same for iPhone, as Xcode UI tests.
 
 Run `npm test` before you finish any change. Run `npm run test:ui` after a change to `src/ui/` or anything a person sees.
+
+## Mobile apps
+
+The apps are the website's code with three differences, all behind `installed` from `src/mobile.js`: saved state goes to
+the phone's preferences store, Android's Back button closes the open dialog or steps back, and a job card leaves as a PDF
+through the share sheet. Anything else belongs in the shared code, so the website gets it too.
+
+- `node tools/build.mjs --mobile` writes plain files to `dist-mobile/`, unpacked, with no service worker. `cap sync`
+  copies them into both projects. Those copies are ignored by git, so run `npm run mobile:sync` after a checkout and after
+  any change to `src/` or `data/`, before building either app.
+- Hand edits in `android/` and `ios/` survive a sync, apart from the Capacitor files that say they are generated.
+- After a change a phone user would notice, run the trials: `node tools/android-trial.mjs` against an emulator, and
+  `tools/ios-trial/` on a Mac. Building, signing and store builds are in the README under "Run it on a phone".
+- The feedback worker lists the apps' origins. An app can send feedback only once that worker is deployed.
+- Signing keys never go in the repo. Android reads its upload key from `XK8_UPLOAD_KEYSTORE` and `XK8_UPLOAD_PASSWORD`.
 
 ## Hard rules
 

@@ -2,6 +2,29 @@
 
 Live at https://xk8.paulcouach.com. The older address, https://xk8-workshop.pages.dev, serves the same site.
 
+## Mobile app trial
+
+Version 0.1.0 ran on an Android 15 emulator and an iPhone 17 Pro simulator on 19 November 2026.
+Both opened the bundled 3D car and French workshop offline. Android used airplane mode. On iOS, Web Inspector
+blocked HTTP and HTTPS during a fresh load with caching disabled, and a separate test request confirmed the block.
+
+The oil-and-filter job resumed at step two after a relaunch. Both platforms opened the system share sheet with
+the three-page A4 job card attached. Android also produced an inspection report and a shopping list as PDFs,
+and retained the selected car and service mileage.
+On Android, the system Back button closed Settings, returned from a job to its list, and returned home from the first screen.
+The [README](../README.md#run-it-on-a-phone) has the build and trial commands.
+
+On 20 November 2026 the touch trials passed on both: `node tools/android-trial.mjs` on the Android 15 emulator in airplane
+mode, and both tests in `tools/ios-trial/` on the iPhone 17 Pro simulator. A release bundle for Google Play built and
+signed with a throwaway key. `npm run test:ui` passed 8 of 8 on the Mac the same day.
+
+Not done yet, and each needs Paul:
+
+- No physical phone has run either app.
+- The Mac has an Apple Development certificate for the team in the Xcode project, but Xcode is not signed in to the
+  account, so it cannot yet build for a real iPhone or archive for the App Store.
+- There is no Google Play upload key and no listing in either store.
+
 ## Last full check
 
 Run on 2 and 3 November 2026 on an Apple M3. The commands are in `AGENTS.md`.
@@ -23,8 +46,10 @@ Run on 2 and 3 November 2026 on an Apple M3. The commands are in `AGENTS.md`.
 
 ## Known problems
 
-- Never tried on a real phone. WebKit with the iPhone profile is the closest test.
-- iPhone offline is unproven. Offline reload works in Chromium. In WebKit the service worker takes control, but the offline
+- Physical phones still need a garage trial.
+- `npm run test:ui` wants a Mac. On the Linux box on 20 November 2026, `ui-flows` timed out on a click under software
+  rendering, with the Android emulator running beside it.
+- Offline reload of the website on iPhone is unproven. Offline reload works in Chromium. In WebKit the service worker takes control, but the offline
   reload hit a harness error.
 - Phone boot, emulated: the interface is up at 1.9 s and the first frame drawn at about 2.05 s. The body build is the largest part left, 0.5 s.
 - Lift paths cross a solid part: coil and intake pipe through the cam cover, drive belt through the tensioner, vertical link
@@ -65,7 +90,8 @@ Run on 2 and 3 November 2026 on an Apple M3. The commands are in `AGENTS.md`.
 
 ## Feedback inbox
 
-The speech-bubble button in the top bar sends a message to a private inbox. A job step or part panel also has a "Something
+The speech-bubble button in the top bar opens the private feedback form. On phones narrower than 360 CSS pixels, open
+Settings and tap **Send feedback**. A job step or part panel also has a "Something
 wrong here?" link, which fills in what the message is about.
 
 1. Open https://xk8.paulcouach.com/inbox.

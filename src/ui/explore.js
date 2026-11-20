@@ -4,9 +4,9 @@
 import {appliesStatus, data, dimensionRows, forVariant, formatTorque, partName, refsFor, search, urgencyOf} from '../data.js';
 import {N, dec, pct, plural, t} from '../i18n.js';
 import {headBoltLabels} from './engine-labels.js';
-import {DISCLAIMER, badge, block, carLine, carName, copyButton, fill, h, proneTo, range, rich, seg, systemName, toggle, torqueBlock} from './widgets.js';
+import {DISCLAIMER, badge, block, carLine, carName, copyButton, fill, h, proneTo, range, rich, searchField, seg, systemName, toggle, torqueBlock} from './widgets.js';
 import {gloss} from './terms.js';
-import {carryOn, priceSpan, rawPounds, setPrintable, showNumbers} from './jobs.js';
+import {carryOn, icon, priceSpan, rawPounds, setPrintable, showNumbers} from './jobs.js';
 import {foldedTutorials, tutorialList} from './tutorials.js';
 import {serviceDue} from './plan.js';
 import {weakRow} from './picker.js';
@@ -56,16 +56,16 @@ export function mount(el, app) {
   function dueRow(s) {
     const due = serviceDue(s.variant);
     const go = () => app.ui.open('page', 'service');
-    if (!due) return h('button.ws-row.ex-due', {type: 'button', onclick: go}, h('span.ws-row-main', [h('strong', t('Service')), h('span', t('Enter your mileage to see what is due.'))]));
+    if (!due) return h('button.ws-row.ex-due', {type: 'button', onclick: go}, [h('span.ws-row-main', [h('strong', t('Service')), h('span', t('Enter your mileage to see what is due.'))]), icon('right')]);
     const [band, word] = URGENCY[due.status];
-    return h('button.ws-row.ex-due', {type: 'button', onclick: go}, [h(`span.ws-urg.ws-urg--${band}`, t(word)), h('span.ws-row-main', [h('strong', due.title), h('span', due.when)])]);
+    return h('button.ws-row.ex-due', {type: 'button', onclick: go}, [h(`span.ws-urg.ws-urg--${band}`, t(word)), h('span.ws-row-main', [h('strong', due.title), h('span', due.when)]), icon('right')]);
   }
   function renderPeek() {
     const s = get();
     const job = carryOn(s);
     fill(peek,
       s.chosen && dueRow(s),
-      job && h('button.ws-row.ws-row--ink.ex-carry', {type: 'button', onclick: () => store.set({mode: 'jobs', job: {id: job.id, step: job.step}, selected: null, isolate: null})}, [h('span.ws-row-main', [h('strong', t('Carry on: {job}', {job: job.title})), h('span', job.stepTitle ? t('Step {n} of {total}, {title}', {n: job.step + 1, total: job.of, title: job.stepTitle}) : t('Step {n} of {total}', {n: job.step + 1, total: job.of}))])]),
+      job && h('button.ws-row.ws-row--ink.ex-carry', {type: 'button', onclick: () => store.set({mode: 'jobs', job: {id: job.id, step: job.step}, selected: null, isolate: null})}, [h('span.ws-row-main', [h('strong', t('Carry on: {job}', {job: job.title})), h('span', job.stepTitle ? t('Step {n} of {total}, {title}', {n: job.step + 1, total: job.of, title: job.stepTitle}) : t('Step {n} of {total}', {n: job.step + 1, total: job.of}))]), icon('right')]),
       h('div.choices', {role: 'group', 'aria-label': t('What do you want to do?')}, CHOICES.map(([what, word]) => h('button.choice', {type: 'button', dataset: {what}, onclick: () => app.ui.begin(what)}, t(word)))),
     );
   }
@@ -85,9 +85,9 @@ export function mount(el, app) {
     const tools = h('div.ex-tools', [explode, h('div.ex-tool-row', [xray, reset])]);
     // ---- home: your car, what it is prone to, the systems tree ----
     presets = seg({label: t('How much of the car to show'), options: PRESETS.map((p, i) => ({value: i, label: t(p.label)})), value: 0, className: 'seg-wide', onChange: (i) => store.set({systems: PRESETS[i].systems})});
-    filter = h('input.filter', {type: 'search', placeholder: t('Find a part'), 'aria-label': t('Find a part in the list'), autocomplete: 'off', spellcheck: 'false'});
+    filter = h('input.filter', {type: 'search', enterkeyhint: 'search', placeholder: t('Find a part'), 'aria-label': t('Find a part in the list'), autocomplete: 'off', spellcheck: 'false'});
     filter.addEventListener('input', runFilter);
-    const parts = h('details.ws-sec.ex-parts', {open: partsOpen, ontoggle: (e) => { partsOpen = e.target.open; }}, [h('summary', h('span', t('All the parts'))), filter, flat, tree]);
+    const parts = h('details.ws-sec.ex-parts', {open: partsOpen, ontoggle: (e) => { partsOpen = e.target.open; }}, [h('summary', h('span', t('All the parts'))), searchField(filter), flat, tree]);
     home = h('div.ex-home', [
       h('div.ex-show.blk', {'aria-label': t('Look inside the car'), role: 'group'}, [presets, tools]),
       carBlock,
@@ -285,14 +285,15 @@ export function mount(el, app) {
     if (id && (!changed || changed.has('selected') || changed.has('variant') || changed.has('units'))) renderPart(id);
     if (!id && shown) setPrintable(null);
     if (!id) shown = null;
-    if (changed?.has('selected') || !changed) app.ui.sheetChanged?.(); // the peek differs between home and a part
+    const peekChanged = !changed || changed.has('lastJob') || changed.has('lastStep') || changed.has('chosen') || changed.has('doneSteps') || changed.has('mode');
+    if (peekChanged) renderPeek();
+    if (changed?.has('selected') || peekChanged) app.ui.sheetChanged?.(); // the peek differs between home, service due, carry on, and a part
     if (!changed || changed.has('xray')) xray.set(s.xray);
     if (!changed || changed.has('explode')) { explode.set(s.explode); }
     reset.hidden = !(s.explode > 0 || s.xray || s.isolate || Object.keys(s.systems).length);
     if (changed?.has('systems') || !changed) for (const [sys, row] of rows) row.state.set(s.systems[sys] ?? 'show');
     if (changed?.has('systems')) presets.set(PRESETS.findIndex((p) => cleanSystems(p.systems, s.systems)));
     if (changed?.has('variant')) { renderCar(); buildTree(); runFilter(); }
-    if (!changed || changed.has('lastJob') || changed.has('lastStep') || changed.has('chosen') || changed.has('doneSteps') || changed.has('mode')) renderPeek();
     stage.invalidate();
   }
 

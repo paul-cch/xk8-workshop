@@ -191,14 +191,22 @@ export function createCameraRig({stage, registry, store, dims}) {
   };
   const zoom = (f) => { goal.dist = clamp(goal.dist * f, DIST_MIN, DIST_MAX); };
 
+  const TOUCH_SLOP_PX = 5;
   canvas.addEventListener('pointerdown', (e) => {
     canvas.setPointerCapture(e.pointerId);
-    pointers.set(e.pointerId, {x: e.clientX, y: e.clientY, button: e.button, shift: e.shiftKey});
+    pointers.set(e.pointerId, {x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, dragging: e.pointerType !== 'touch', button: e.button, shift: e.shiftKey});
     pinch = null;
   });
   canvas.addEventListener('pointermove', (e) => {
     const p = pointers.get(e.pointerId);
     if (!p) return;
+    if (pointers.size < 2 && !p.dragging) {
+      if (Math.hypot(e.clientX - p.startX, e.clientY - p.startY) < TOUCH_SLOP_PX) return;
+      p.dragging = true;
+      p.x = e.clientX;
+      p.y = e.clientY;
+      return;
+    }
     const dx = e.clientX - p.x, dy = e.clientY - p.y;
     p.x = e.clientX;
     p.y = e.clientY;

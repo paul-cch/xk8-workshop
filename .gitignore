@@ -4,6 +4,7 @@
 .wrangler/
 dist-shots/
 dist/
+dist-mobile/
 node_modules/
 ref/downloads/
 ref/teardown/
