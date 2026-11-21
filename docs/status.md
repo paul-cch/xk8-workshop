@@ -18,12 +18,11 @@ On 20 November 2026 the touch trials passed on both: `node tools/android-trial.m
 mode, and both tests in `tools/ios-trial/` on the iPhone 17 Pro simulator. A release bundle for Google Play built and
 signed with a throwaway key. `npm run test:ui` passed 8 of 8 on the Mac the same day.
 
-The feedback worker that accepts the two app origins went live on 20 November 2026, deployment `631560f4`. The site's
-files are still the build of 3 November: the page changes since then are not published.
+The feedback worker that accepts the two app origins went live on 20 November 2026. The current page followed on
+21 November, deployment `b0076689`: every file on the live address matched the release, the worker answered both app
+origins and refused an unknown one, and `/inbox` loaded.
 
 Not done yet, and each needs Paul:
-
-- Publishing the current page needs a Cloudflare API token, see Publishing below.
 
 - No physical phone has run either app.
 - The Mac has an Apple Development certificate for the team in the Xcode project, but Xcode is not signed in to the
@@ -136,6 +135,10 @@ npm run deploy -- --dry-run                                                  # w
 `manifest`, `branch=main`, `_worker.js` and `_routes.json`, and prints the deployment URL. The API token needs Account >
 Cloudflare Pages > Edit. Without the two variables it exits 2. Pass a folder, `node tools/deploy.mjs <folder>`, to deploy a
 release already built.
+
+The release build draws the share card in Chromium on the Metal backend, so it needs a Mac. On Linux `tools/og.mjs` times
+out and nothing is deployed. From Linux, build the release on the Mac, copy the folder back and pass it to
+`tools/deploy.mjs`. The deployment of 21 November 2026 went out that way.
 
 With no token on the machine, Executor's Cloudflare tools can still create a deployment, but since 20 November 2026 they
 no longer give the upload token, so they cannot upload new files. That leaves one thing they can do: put a new

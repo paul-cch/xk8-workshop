@@ -121,6 +121,7 @@ folder that lacks `_worker.js` or `_routes.json`, because a deployment without t
 
 - `npm run deploy -- --dry-run` builds the release and prints the manifest and the size of each field, and sends nothing.
 - `node tools/deploy.mjs <folder>` deploys a folder already built with `--release` instead of building one.
+- The release build needs a Mac: it draws the share card on Chromium's Metal backend, and times out on Linux.
 
 With no token on the machine, Executor's Cloudflare tools can put a new `_worker.js` live over the files already
 published, but they can no longer upload new files, so a new page needs the token. See `docs/status.md`.
