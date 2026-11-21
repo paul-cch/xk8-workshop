@@ -6,6 +6,7 @@ import {basicsBlock, stepWatch, watchSection} from './tutorials.js';
 import {CONF, DISCLAIMER, badge, bodyName, carYear, h, systemName, torqueBlock as baseTorqueBlock, toast, torqueWarning} from './widgets.js';
 import {gloss} from './terms.js';
 import {handsFree} from './handsfree.js';
+import {installed, shareCard} from '../mobile.js';
 
 // ---- icons -----------------------------------------------------------------------------------
 
@@ -15,12 +16,17 @@ const ICON = {
   mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>',
   left: '<path d="m14.5 5-7 7 7 7"/>',
   right: '<path d="m9.5 5 7 7-7 7"/>',
+  share: '<path d="M12 15V3m-4 4 4-4 4 4M6 11H4v10h16V11h-2"/>',
   print: '<path d="M7 9V3.5h10V9M7 17H4V9.5h16V17h-3"/><path d="M7 14h10v6.5H7z"/>',
   cart: '<path d="M3 4.5h2.5L8 16h10l2-8.5H6.5"/><circle cx="9.5" cy="19.5" r="1.2"/><circle cx="16.5" cy="19.5" r="1.2"/>',
   car: '<path d="M3 16.5v-3.5l2.4-1.2L7.6 7.5h8.8l2.2 4.3L21 13v3.5"/><path d="M3 16.5h2M9 16.5h6M19 16.5h2"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/>',
   x: '<path d="m6 6 12 12M18 6 6 18"/>',
   copy: '<path d="M9 9h11v11H9z"/><path d="M15 9V4H4v11h5"/>',
   play: '<path d="M8 5.5v13l10.5-6.5L8 5.5Z" fill="currentColor"/>',
+  wrench: '<path d="M20.8 6.2 17 10l-3-3 3.8-3.8a5.8 5.8 0 0 0-7.4 7.4L3.8 17a2.3 2.3 0 0 0 3.2 3.2l6.4-6.5a5.8 5.8 0 0 0 7.4-7.5Z"/>',
+  pulse: '<path d="M2 12h5l3-8 4 16 3-8h5"/>',
+  clipboard: '<rect x="5" y="5" width="14" height="16" rx="2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m8.5 14 2.3 2.3 4.7-5"/>',
+  search: '<circle cx="10" cy="10" r="6.5"/><path d="m15 15 5.5 5.5"/>',
   out: '<path d="M10 5H5v14h14v-5"/><path d="M14 4.5h5.5V10M19.5 4.5 11 13"/>',
 };
 export function icon(name) {
@@ -233,7 +239,15 @@ function fillPrint() {
 }
 addEventListener('beforeprint', fillPrint); // Ctrl+P gets the same card as the button
 addEventListener('afterprint', () => document.documentElement.classList.remove('ws-printing'));
-export const printNow = () => { fillPrint(); window.print(); };
+export function cardButton(label, selector = 'button.ws-btn') {
+  const output = async () => {
+    if (!printable) return;
+    if (!installed) { fillPrint(); window.print(); return; }
+    try { await shareCard(printable()); }
+    catch { toast(t('The PDF could not be shared.')); }
+  };
+  return h(selector, {type: 'button', onclick: output}, icon(installed ? 'share' : 'print'), installed ? t('Share PDF') : label);
+}
 
 // ---- shopping list refs ----------------------------------------------------------------------------
 
@@ -432,7 +446,7 @@ function jobHeader(app, job, s) {
   const added = onList(s, 'job', job.id);
   return h('div.ws-actions',
     h('button.ws-btn', {type: 'button', 'data-fk': 'addlist', 'aria-pressed': String(added), onclick: () => { toggleList(app.store, 'job', job.id); toast(added ? t('Taken off the shopping list') : t('Parts added to the shopping list')); }}, icon(added ? 'check' : 'cart'), added ? t('On shopping list') : t('Add parts to shopping list')),
-    h('button.ws-btn', {type: 'button', onclick: printNow}, icon('print'), t('Print job card')));
+    cardButton(t('Print job card')));
 }
 
 const SAFETY_SHOWN = 3;
@@ -564,7 +578,7 @@ function renderStep(app, job, s, i, root) {
   const warning = stepWarn(st, v) && stepWarning(T(stepWarn(st, v)), seen);
   const body = [
     h('div.ws-stephead', h('button.ws-back', {type: 'button', onclick: () => go(app, job, null)}, icon('left'), h('span', job.title)), h('p.ws-stepcount', {'aria-live': 'polite'}, t('Step {n} of {total}', {n: i + 1, total: steps.length}))),
-    h('div.ws-progress', {role: 'progressbar', 'aria-valuemin': 0, 'aria-valuemax': steps.length, 'aria-valuenow': count}, h('i', {style: `width:${(count / steps.length) * 100}%`})),
+    h('div.ws-progress', {role: 'progressbar', 'aria-valuemin': 0, 'aria-valuemax': steps.length, 'aria-valuenow': count}, h('i.ws-progress-pos', {style: `width:${((i + 1) / steps.length) * 100}%`}), h('i', {style: `width:${(count / steps.length) * 100}%`})),
     pinned && h('div.ws-pin', blocks),
     h('h2.ws-steptitle', st.title),
     vinTag(st, v),
@@ -584,7 +598,7 @@ function renderStep(app, job, s, i, root) {
     // What comes off or goes back, unless it is the part already shown above as the one being worked on.
     st.remove.some((id) => !st.focus.includes(id)) && h('p.ws-small', h('strong', t('Comes off: ')), st.remove.map(partName).join(', ')),
     st.install.some((id) => !st.focus.includes(id)) && h('p.ws-small', h('strong', t('Goes back: ')), st.install.map(partName).join(', ')),
-    h('div.ws-actions', h('button.ws-btn.ws-btn--quiet.ws-handsfree', {type: 'button', 'aria-pressed': String(handsFree.on), 'data-fk': 'handsfree', onclick: () => handsFree.toggle()}, icon('mic'), t('Hands-free')), h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: () => app.ui.openSearch()}, t('Look something up')), h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: printNow}, icon('print'), t('Print job card'))),
+    h('div.ws-actions', h('button.ws-btn.ws-btn--quiet.ws-handsfree', {type: 'button', 'aria-pressed': String(handsFree.on), 'data-fk': 'handsfree', onclick: () => handsFree.toggle()}, icon('mic'), t('Hands-free')), h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: () => app.ui.openSearch()}, t('Look something up')), cardButton(t('Print job card'), 'button.ws-btn.ws-btn--quiet')),
   ];
   const last = i === steps.length - 1;
   const foot = h('div.ws-foot', {dataset: {peek: ''}}, h('div.ws-nextprev',

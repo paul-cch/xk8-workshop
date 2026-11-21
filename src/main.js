@@ -14,6 +14,10 @@ import {applyPose, pose, preparePose} from './stage/pose.js';
 import {createStage} from './stage/stage.js';
 import {createTunnel} from './stage/tunnel.js';
 import {mount} from './ui/shell.js';
+import {loadPlan} from './ui/plan.js';
+import {connectAndroidBack, installed, workshopStorage} from './mobile.js';
+
+let storage;
 
 /** The loader's cover says what it is doing, so a slow phone never looks stuck. */
 const say = (text) => { const n = document.querySelector('#boot .boot-text'); if (n) n.textContent = text; };
@@ -56,10 +60,12 @@ async function boot() {
   setDetail(matchMedia('(pointer: coarse)').matches ? 0.6 : 1);
   // The body surface is sampled in workers from here, while the data loads and the rest of the car builds.
   const surfaces = startSurfaces(globalThis.__xk8SurfaceWorker);
+  if (installed) await connectAndroidBack();
   await loadData();
   mark('data');
   registry.setData(data.parts);
-  connectStorage(store);
+  storage = await workshopStorage();
+  await Promise.all([connectStorage(store, storage), loadPlan(storage)]);
   const wanted = parseHash(location.hash).lang ?? store.get().lang;
   connectHash(store, window, setLang);
   await setLang(wanted);
@@ -227,7 +233,7 @@ boot().catch((e) => {
   reset.type = 'button';
   reset.className = 'boot-reset';
   reset.textContent = t('Reset saved data and reload');
-  reset.addEventListener('click', () => { clearSaved(); location.hash = ''; location.reload(); });
+  reset.addEventListener('click', async () => { await clearSaved(storage); location.hash = ''; location.reload(); });
   const words = document.createElement('p');
   words.textContent = t('The workshop did not start: {why}', {why: e.message});
   cover.replaceChildren(words, reset);

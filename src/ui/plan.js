@@ -2,10 +2,10 @@
 // chosen car, and a missing value is said out loud. Mileage and "have it" ticks live in this file's own localStorage key.
 import {appliesStatus, convertTorqueText, data, decodeVin, en, forVariant, formatTorque, partName} from '../data.js';
 import {N, both, collate, colon, dec, fmtDate, fold, num, plural, t} from '../i18n.js';
-import {badge, copyText, h, toast, torquePlain, torqueWarning} from './widgets.js';
+import {badge, copyText, h, searchField, toast, torquePlain, torqueWarning} from './widgets.js';
 import {gloss} from './terms.js';
 import {foldedTutorials} from './tutorials.js';
-import {addParts, appliesText, callout, carLabel, fluidBlock, gbp, hoursText, icon, jobKit, listRefs, modeRoot, money, nav, onList, openJob, openSection, paintView, priceSpan, printNow, section, setPrintable, showButton, sysName, toggleList, toolRow, torqueBlock, vinTag} from './jobs.js';
+import {addParts, appliesText, callout, carLabel, fluidBlock, gbp, hoursText, icon, jobKit, listRefs, modeRoot, money, nav, onList, openJob, openSection, paintView, priceSpan, cardButton, section, setPrintable, showButton, sysName, toggleList, toolRow, torqueBlock, vinTag} from './jobs.js';
 
 const TABS = [['service', N('Service')], ['inspect', N('Check a car')], ['upgrades', N('Upgrades')], ['list', N('Shopping list')], ['tools', N('Tools')], ['fluids', N('Fluids')], ['torques', N('Tightening figures')]];
 
@@ -14,16 +14,18 @@ const blank = () => ({tab: 'service', miles: null, lastDate: '', lastMiles: null
 const isMap = (x) => !!x && typeof x === 'object' && !Array.isArray(x);
 const count = (x) => (Number.isFinite(x) && x >= 0 ? x : null);
 /** Saved values that have the right shape. Anything else takes its default: a bad entry cannot stop the page. */
-const saved = (() => {
+let saved = blank(), planStorage;
+export async function loadPlan(storage) {
+  planStorage = storage;
   const b = blank();
   try {
-    const x = JSON.parse(localStorage.getItem(KEY) || 'null');
-    if (!isMap(x)) return b;
-    return {tab: typeof x.tab === 'string' ? x.tab : b.tab, miles: count(x.miles), lastDate: typeof x.lastDate === 'string' ? x.lastDate : '', lastMiles: count(x.lastMiles),
+    const x = JSON.parse(await storage.getItem(KEY) || 'null');
+    if (!isMap(x)) return;
+    saved = {tab: typeof x.tab === 'string' ? x.tab : b.tab, miles: count(x.miles), lastDate: typeof x.lastDate === 'string' ? x.lastDate : '', lastMiles: count(x.lastMiles),
       done: isMap(x.done) ? Object.fromEntries(Object.entries(x.done).filter(([, m]) => isMap(m) && count(m.miles) != null && typeof m.date === 'string')) : {}, have: isMap(x.have) ? x.have : {}, candidates: Array.isArray(x.candidates) ? x.candidates.filter((c) => isMap(c) && typeof c.id === 'string').map((c) => ({...c, checks: isMap(c.checks) ? c.checks : {}})) : [], candidate: typeof x.candidate === 'string' ? x.candidate : null};
-  } catch { return b; }
-})();
-const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch { /* private mode: lasts the session */ } };
+  } catch { /* invalid data: use the defaults */ }
+}
+const persist = () => { try { planStorage.setItem(KEY, JSON.stringify(saved)); } catch { /* private mode: lasts the session */ } };
 
 const ui = {candOpen: false, upBudget: 0, upCat: '', upCheap: false, tqQ: '', tqSys: '', tqAll: false, flAll: false, toolsAll: false, inspectShow: 'all'};
 
@@ -173,7 +175,7 @@ function serviceTab(app) {
   const out = h('div.ws-svc-out');
   const redraw = () => out.replaceChildren(...[serviceOutput(app, redraw)].flat(3).filter(Boolean));
   const mileField = (label, key, placeholder) => {
-    const i = h('input', {type: 'number', inputmode: 'numeric', min: '0', step: '1', placeholder, 'data-fk': `svc-${key}`});
+    const i = h('input', {type: 'number', inputmode: 'numeric', enterkeyhint: 'done', min: '0', step: '1', placeholder, 'data-fk': `svc-${key}`});
     if (saved[key] != null) i.value = saved[key];
     i.addEventListener('input', () => { const n = parseInt(i.value, 10); saved[key] = Number.isFinite(n) && n >= 0 ? n : null; persist(); redraw(); });
     return h('label.ws-field', [h('span', label), i]);
@@ -354,7 +356,7 @@ function inspectTab(app, s0) {
       return section(`insp-${a}`, a, t('{n} of {total}', {n: inArea.filter((i) => s.checks[i.id]).length, total: inArea.length}), shown.map((i) => checkCard(app, i, s)));
     }),
     h('div.ws-actions', [
-      h('button.ws-btn', {type: 'button', onclick: printNow}, [icon('print'), t('Print report')]),
+      cardButton(t('Print report')),
       h('button.ws-btn', {type: 'button', onclick: async () => toast(await copyText(reportText(app.store.get())) ? t('Report copied') : t('This browser blocked the copy'))}, [icon('copy'), t('Copy report')]),
       (st.ok.length + st.bad.length) > 0 && h('button.ws-btn.ws-btn--quiet', {type: 'button', onclick: clear}, t('Clear')),
     ]),
@@ -556,7 +558,7 @@ function listTab(app, s) {
     h('p.ws-small.ws-mute', priced.length ? plural(priced.length, 'Covers {n} upgrade. We have no prices for parts: ask your supplier.', 'Covers {n} upgrades. We have no prices for parts: ask your supplier.') : t('We have no prices for parts: ask your supplier.')),
     h('div.ws-actions', [
       h('button.ws-btn', {type: 'button', onclick: async () => toast(await copyText(listText(app.store.get(), shopping(app.store.get()))) ? t('List copied') : t('This browser blocked the copy'))}, [icon('copy'), t('Copy list')]),
-      h('button.ws-btn', {type: 'button', onclick: printNow}, [icon('print'), t('Print list')]),
+      cardButton(t('Print list')),
     ]),
     list.skipped.length > 0 && callout('warn', t('Not for this car'), h('p', t('Left out because they do not fit a {car}: {jobs}.', {car: carLabel(v), jobs: list.skipped.map((j) => j.title).join(', ')}))),
     list.jobs.length > 0 && section('listjobs', t('Chosen jobs'), list.jobs.length, h('ul.ws-picked', list.jobs.map((j) => h('li', [h('button.ws-link', {type: 'button', onclick: () => openJob(app, j.id)}, j.title), h('span.ws-mute', hoursText(j.hoursDiy)), h('button.ws-x', {type: 'button', 'aria-label': t('Take {what} off the list', {what: j.title}), onclick: () => refsOff('job', j.id)}, icon('x'))])))),
@@ -653,7 +655,7 @@ function torquesTab(app, s) {
     out.replaceChildren(...[...bySys].sort((a, b) => collate(sysName(a[0]), sysName(b[0]))).flatMap(([sysKey, rows]) => [h('h3.ws-head', sysName(sysKey)), ...rows.map((x) => torqueRow(x, st))]));
     if (!list.length) out.append(h('p.ws-empty', t('No figure matches that.')));
   };
-  const q = h('input.ws-search', {type: 'search', placeholder: t('Search: drain plug, caliper'), 'aria-label': t('Search the tightening figures'), 'data-fk': 'tqq', autocomplete: 'off'});
+  const q = h('input.ws-search', {type: 'search', enterkeyhint: 'search', placeholder: t('Search: drain plug, caliper'), 'aria-label': t('Search the tightening figures'), 'data-fk': 'tqq', autocomplete: 'off'});
   q.value = ui.tqQ;
   let raf = 0;
   q.addEventListener('input', () => { ui.tqQ = q.value; cancelAnimationFrame(raf); raf = requestAnimationFrame(redraw); });
@@ -661,7 +663,7 @@ function torquesTab(app, s) {
   redraw();
   return [
     torquePlain(),
-    q,
+    searchField(q),
     h('div.ws-filters', [
       pickFrom(t('Which part'), ui.tqSys, [['', t('All parts of the car')], ...systems.map((x) => [x, sysName(x)])], (x) => { ui.tqSys = x; redraw(); }),
       h('button.ws-toggle', {type: 'button', 'aria-pressed': String(ui.tqAll), onclick: (e) => { ui.tqAll = !ui.tqAll; e.currentTarget.setAttribute('aria-pressed', String(ui.tqAll)); redraw(); }}, t('All cars')),

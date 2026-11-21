@@ -1,15 +1,10 @@
-/* The feedback button and form. The button lives in the top bar so that it is on every screen and over no control. */
+/* The feedback button and form. On the narrowest phones the form opens from Settings. */
 .fb-btn { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 44px; padding: 0 8px !important; }
 .fb-btn svg { flex: none; display: block; }
 @media (min-width: 1300px) { .layout-rail .fb-word { display: inline; } }
 html.layout-sheet .fb-btn { min-width: 44px; padding: 0 !important; }
-/* The bar had no room to spare for one more button. On a phone everything but the car's name gives a little, in px so garage mode
-   does not take it back. Heights stay 44. */
 @media (max-width: 430px) {
   html.layout-sheet .top { gap: 2px; padding-right: 4px; }
-  html.layout-sheet .car-btn { padding: 0 2px 0 6px; }
-  html.layout-sheet .seg-lang button { min-width: 38px; padding: 0 3px; font-size: 13px; }
-  html.layout-sheet .fb-btn { min-width: 44px; }
 }
 /* Narrow landscape: the mode words stay whole, on less padding. */
 @media (max-width: 720px) {

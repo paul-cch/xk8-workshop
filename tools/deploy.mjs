@@ -5,7 +5,7 @@
 //   node tools/deploy.mjs [<folder>] --dry-run                                  builds the requests, prints the manifest and
 //                                                                               field sizes, and sends nothing. No token needed
 // The token needs Account > Cloudflare Pages > Edit. Exits 2 when the token or the account id is missing.
-// Without a token on the machine, the Executor route in docs/status.md still works by hand.
+// Without a token on the machine, docs/status.md says what Executor's Cloudflare tools can still do.
 import {spawnSync} from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -25,7 +25,7 @@ if (!dry && (!token || !account)) {
   CLOUDFLARE_API_TOKEN   an API token with Account > Cloudflare Pages > Edit
   CLOUDFLARE_ACCOUNT_ID  the account that owns the Pages project ${PROJECT}
 Missing: ${[!token && 'CLOUDFLARE_API_TOKEN', !account && 'CLOUDFLARE_ACCOUNT_ID'].filter(Boolean).join(', ')}.
-Add --dry-run to see what would be sent without them. With no token on this machine, use the Executor route in docs/status.md.`);
+Add --dry-run to see what would be sent without them. With no token on this machine, see Publishing in docs/status.md.`);
   process.exit(2);
 }
 

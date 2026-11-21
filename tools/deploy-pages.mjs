@@ -2,8 +2,8 @@
 // A release's _worker.js and _routes.json stay out of the upload: they go in that call as multipart fields.
 //   PAGES_JWT=... node tools/deploy-pages.mjs /path/to/dist
 // PAGES_JWT is the short-lived token from the project's upload-token endpoint. Hashes need only be stable 32-hex ids.
-// tools/deploy.mjs does the whole deploy with these functions. Run this file by hand only for the Executor route, where the
-// token and the deployment call go through Executor's Cloudflare tools.
+// tools/deploy.mjs does the whole deploy with these functions. Run this file by hand only when you already hold an upload
+// token and will make the deployment call yourself.
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';

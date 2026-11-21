@@ -3,6 +3,7 @@
 // PWA files beside it (manifest, service worker, icons). Prints raw and gzipped sizes.
 //
 //   node tools/build.mjs             normal build
+//   node tools/build.mjs --mobile    write the assets shipped inside both native apps to dist-mobile/
 //   node tools/build.mjs --analyze   also lists the largest modules in the bundle
 //   node tools/build.mjs --no-pack   leave the JS as plain inline text, for debugging
 //   SITE_URL=https://example.com/xk8/ node tools/build.mjs --release
@@ -21,9 +22,10 @@ import zlib from 'node:zlib';
 import {BOOT_TEXT, DOC_DESC, DOC_TITLE, STAGE_LABEL} from '../src/i18n.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DIST = process.env.DIST_DIR ? path.resolve(process.env.DIST_DIR) : path.join(ROOT, 'dist');
 const args = new Set(process.argv.slice(2));
-const PACK = !args.has('--no-pack');
+const MOBILE = args.has('--mobile');
+const DIST = MOBILE ? path.join(ROOT, 'dist-mobile') : path.resolve(process.env.DIST_DIR || path.join(ROOT, 'dist'));
+const PACK = !MOBILE && !args.has('--no-pack');
 const KB = (n) => `${(n / 1024).toFixed(1)} KB`;
 const gz = (b) => zlib.gzipSync(b, {level: 9});
 
@@ -109,6 +111,15 @@ const threePlugin = {
   },
 };
 
+// The website never reaches the app-only code in src/mobile.js, so the plugins it would load stay out of the page.
+const noAppPlugins = {
+  name: 'no-app-plugins',
+  setup(b) {
+    b.onResolve({filter: /^@(capacitor|capgo)\//}, (a) => ({path: a.path, namespace: 'app-only'}));
+    b.onLoad({filter: /.*/, namespace: 'app-only'}, () => ({contents: 'export {}'}));
+  },
+};
+
 async function bundle(version, frVersion) {
   const res = await build({
     entryPoints: [path.join(ROOT, 'src/main.js')],
@@ -120,8 +131,8 @@ async function bundle(version, frVersion) {
     target: 'es2022',
     legalComments: 'none',
     drop: ['debugger'],
-    define: {__VERSION__: JSON.stringify(version), __FR_VERSION__: JSON.stringify(frVersion)},
-    plugins: [threePlugin],
+    define: {__MOBILE__: String(MOBILE), __VERSION__: JSON.stringify(version), __FR_VERSION__: JSON.stringify(frVersion)},
+    plugins: MOBILE ? [threePlugin] : [threePlugin, noAppPlugins],
     logLevel: 'warning',
   });
   if (res.metafile) {
@@ -220,6 +231,15 @@ const FAVICON = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><re
 
 // Runs before anything else. Decodes both payloads, starts the bundle, and shows a plain message if it cannot.
 // The few words it can show before fr.js exists travel in the page, so a French reader sees French from the first frame.
+const loadAssets = MOBILE
+  ? `window.__xk8boot={data:fetch('workshop.json').then(r=>{if(!r.ok)throw new Error(say('unpack'));return r.text()})};`
+  : `if(!window.DecompressionStream){fail(say('browser'));return}
+const bytes=(id)=>{const n=el(id),s=atob(n.textContent);n.remove();const u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u};
+const text=(u)=>new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+window.__xk8boot={data:text(bytes('xk8-data'))};
+${PACK ? `text(bytes('xk8-js')).then((c)=>{const s=document.createElement('script');s.type='module';s.textContent=c;document.body.append(s)}).catch((e)=>{console.error(e);fail(say('unpack'))});` : ''}
+if(/^https?:$/.test(location.protocol)){const l=document.createElement('link');l.rel='manifest';l.href='manifest.webmanifest';document.head.append(l);if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}`;
+
 const LOADER = (fr) => `(()=>{
 const el=document.getElementById.bind(document);
 const fr=(()=>{const h=location.hash;if(/[?&]l=en\\b/.test(h))return false;if(/[?&]l=fr\\b/.test(h))return true;try{return JSON.parse(localStorage.getItem('xk8-workshop')).lang==='fr'}catch(e){return false}})();
@@ -228,15 +248,10 @@ const say=(k)=>T[k][fr?1:0];
 try{const m=JSON.parse(localStorage.getItem('xk8-workshop')).theme;if(m==='dark'||(m!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){if(matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.classList.add('dark')}
 if(fr){document.documentElement.lang='fr';document.querySelector('#boot .boot-text').textContent=say('open')}
 const fail=(m)=>{const b=el('boot');if(b)b.textContent=m};
-if(!window.DecompressionStream){fail(say('browser'));return}
-const bytes=(id)=>{const n=el(id),s=atob(n.textContent);n.remove();const u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u};
-const text=(u)=>new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
-window.__xk8boot={data:text(bytes('xk8-data'))};
-${PACK ? `text(bytes('xk8-js')).then((c)=>{const s=document.createElement('script');s.type='module';s.textContent=c;document.body.append(s)}).catch((e)=>{console.error(e);fail(say('unpack'))});` : ''}
-if(/^https?:$/.test(location.protocol)){const l=document.createElement('link');l.rel='manifest';l.href='manifest.webmanifest';document.head.append(l);if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+${loadAssets}
 })()`;
 
-const page = ({css, js, data, fr}) => `<!doctype html>
+const page = ({css, printCss, js, data, fr}) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -255,16 +270,17 @@ ${SITE ? `<meta property="og:url" content="${SITE}">\n<link rel="canonical" href
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="icon" href="data:image/svg+xml,${encodeURIComponent(FAVICON)}">
-<link rel="apple-touch-icon" href="icon-192.png">
+${MOBILE ? '' : '<link rel="apple-touch-icon" href="icon-192.png">'}
 <style>${css}</style>
+<style id="card-style" media="print">${printCss}</style>
 </head>
 <body>
 <div id="app"><canvas id="stage" tabindex="0" aria-label="${STAGE_LABEL}"></canvas><div id="ui"></div><div id="boot" role="status"><div><span class="boot-text">${BOOT_TEXT.open}</span><span class="boot-bar"></span></div></div></div>
 <noscript><p>XK8 Workshop is an interactive 3D page and needs JavaScript.</p></noscript>
-<script type="text/plain" id="xk8-data">${data}</script>
+${MOBILE ? '' : `<script type="text/plain" id="xk8-data">${data}</script>`}
 ${PACK ? `<script type="text/plain" id="xk8-js">${js}</script>` : ''}
 <script>${LOADER(fr)}</script>
-${PACK ? '' : `<script type="module">${js.replace(/<\/script/g, '<\\/script')}</script>`}
+${MOBILE ? '<script type="module" src="workshop.js"></script>' : PACK ? '' : `<script type="module">${js.replace(/<\/script/g, '<\\/script')}</script>`}
 </body>
 </html>
 `;
@@ -294,16 +310,29 @@ const fr = french();
 const frJs = `window.__xk8fr=${JSON.stringify(fr)};\n`;
 const frVersion = createHash('sha1').update(frJs).digest('hex').slice(0, 10); // a new dictionary is a new URL, past any HTTP cache
 const uiCss = readCss(UI_CSS);
+const printCss = readCss(['src/ui/print.css']);
 const code = `globalThis.__xk8SurfaceWorker=${JSON.stringify(await bundleWorker())};\n${await bundle(provisional, frVersion)}`;
 const js = PACK ? `document.head.append(Object.assign(document.createElement('style'),{textContent:${JSON.stringify(uiCss)}}));\n${code}` : code;
 const css = PACK ? readCss(BOOT_CSS) : readCss([...BOOT_CSS, ...UI_CSS]);
-const version = createHash('sha1').update(js).update(data.gzip).update(css).update(frJs).digest('hex').slice(0, 10);
+const version = createHash('sha1').update(js).update(data.gzip).update(css).update(printCss).update(frJs).digest('hex').slice(0, 10);
 const jsGz = gz(js);
-const html = page({css, js: PACK ? jsGz.toString('base64') : js, data: data.gzip.toString('base64'), fr});
+const html = page({css, printCss, js: PACK ? jsGz.toString('base64') : js, data: data.gzip.toString('base64'), fr});
 
 fs.mkdirSync(DIST, {recursive: true});
 fs.writeFileSync(path.join(DIST, 'index.html'), html);
 fs.writeFileSync(path.join(DIST, 'fr.js'), frJs);
+if (MOBILE) {
+  fs.writeFileSync(path.join(DIST, 'workshop.json'), data.json);
+  fs.writeFileSync(path.join(DIST, 'workshop.js'), js);
+  const packages = Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).dependencies);
+  const notices = [fs.readFileSync(path.join(ROOT, 'THIRD_PARTY_NOTICES.md'), 'utf8')];
+  for (const name of packages) {
+    notices.push(name + '\n' + fs.readFileSync(path.join(ROOT, 'node_modules', name, 'LICENSE'), 'utf8'));
+  }
+  fs.writeFileSync(path.join(DIST, 'licenses.txt'), notices.join('\n\n'));
+  console.log('dist-mobile/  workshop, car and both languages ready for Capacitor');
+  process.exit(0);
+}
 fs.writeFileSync(path.join(DIST, 'manifest.webmanifest'), manifest());
 fs.writeFileSync(path.join(DIST, 'sw.js'), serviceWorker(version));
 fs.writeFileSync(path.join(DIST, 'icon-192.png'), icon(192, false));
