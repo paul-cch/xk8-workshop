@@ -27,3 +27,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ```
 
 three.js is used under the MIT licence: https://github.com/mrdoob/three.js/blob/dev/LICENSE
+
+The mobile apps include Capacitor and its App and Preferences plugins under the MIT licence.
+The unmodified [Capgo PDF Generator](https://github.com/Cap-go/capacitor-pdf-generator) is licensed under MPL 2.0.
+The mobile bundle includes the licence texts in `licenses.txt`.

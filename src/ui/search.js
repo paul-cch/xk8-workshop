@@ -2,8 +2,8 @@
 // A combobox over a list: arrow keys move, Enter opens, and every row goes somewhere and moves the view.
 import {codeIn, data, forVariant, formatTorque, nearCodes, search} from '../data.js';
 import {N, dec, plural, t} from '../i18n.js';
-import {rawPounds} from './jobs.js';
-import {carName, dialog, h, torqueWarning} from './widgets.js';
+import {icon, rawPounds} from './jobs.js';
+import {carName, dialog, h, searchField, torqueWarning} from './widgets.js';
 
 const KIND = {term: N('What it means'), page: N('Page'), part: N('Part'), job: N('Job'), fault: N('Fault'), dtc: N('Code'), torque: N('How tight'), fluid: N('Fluid'), weakspot: N('Weak spot'), upgrade: N('Upgrade'), inspect: N('Check'), tool: N('Tool'), service: N('Service'), vendor: N('Supplier'), fact: N('Answer')};
 const TRY = [N('tensioner'), N('wheel nut'), 'P0340', N('coolant'), N('rough idle'), N('lower ball joint')];
@@ -28,7 +28,8 @@ export function openSearch(app, initial = '') {
   let results = [], active = -1, onlyMine = true;
   const keyboard = matchMedia('(hover: hover)');
 
-  const input = h('input.sb-input', {type: 'search', placeholder: t('A part, a job, a fault, a code'), 'aria-label': t('Search everything'), autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', role: 'combobox', 'aria-expanded': 'true', 'aria-controls': 'sr-list', 'aria-autocomplete': 'list'});
+  const input = h('input.sb-input', {type: 'search', enterkeyhint: 'search', placeholder: t('A part, a job, a fault, a code'), 'aria-label': t('Search everything'), autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', role: 'combobox', 'aria-expanded': 'true', 'aria-controls': 'sr-list', 'aria-autocomplete': 'list'});
+  const field = searchField(input, {leading: icon('search'), className: 'field-search--modal'});
   const list = h('div.sb-list', {id: 'sr-list', role: 'listbox', 'aria-label': t('Results')});
   const count = h('p.sb-count', {role: 'status'});
   const mine = h('button.toggle.sb-mine', {type: 'button', 'aria-pressed': 'true', onclick: () => { onlyMine = !onlyMine; mine.setAttribute('aria-pressed', onlyMine); run(); }}, t('Only my car: {car}', {car: carName(store.get().variant)}));
@@ -53,12 +54,13 @@ export function openSearch(app, initial = '') {
 
   function suggestions() {
     const v = store.get().variant;
-    list.replaceChildren(h('p.sb-hint', t('Try')), h('div.sb-try', TRY.map((word) => h('button.chip', {type: 'button', onclick: () => { input.value = t(word); run(); input.focus(); }}, t(word)))));
+    list.replaceChildren(h('p.sb-hint', t('Try')), h('div.sb-try', TRY.map((word) => h('button.chip', {type: 'button', onclick: () => { input.value = t(word); field.sync(); run(); input.focus(); }}, t(word)))));
     const n = (d2) => forVariant(d2.items, v).length;
     count.textContent = t('{parts} parts, {torques} torques, {jobs} jobs and {faults} faults on this car.', {parts: n(data.parts), torques: n(data.torques), jobs: n(data.jobs), faults: n(data.faults)});
   }
 
   function run() {
+    field.sync();
     const q = input.value.trim();
     active = -1;
     input.removeAttribute('aria-activedescendant');
@@ -71,7 +73,7 @@ export function openSearch(app, initial = '') {
     if (results.length) { if (keyboard.matches) activate(0); } // on a phone a dark first row looks like a choice already made
     else if (code) {
       const near = nearCodes(code);
-      if (near.length) list.append(h('p.sb-hint', t('Close to it, in case of a misread digit')), h('div.sb-try', near.map((c) => h('button.chip', {type: 'button', onclick: () => { input.value = c; run(); input.focus(); }}, c))));
+      if (near.length) list.append(h('p.sb-hint', t('Close to it, in case of a misread digit')), h('div.sb-try', near.map((c) => h('button.chip', {type: 'button', onclick: () => { input.value = c; field.sync(); run(); input.focus(); }}, c))));
     } else if (onlyMine) list.append(h('button.chip', {type: 'button', onclick: () => mine.click()}, t('Search all XK8s and XKRs instead')));
   }
 
@@ -87,7 +89,7 @@ export function openSearch(app, initial = '') {
     if (row) go(+row.dataset.i);
   });
 
-  const d = dialog({title: t('Search'), className: 'dlg-search', body: [h('div.sb-box', [input, mine]), count, list]});
+  const d = dialog({title: t('Search'), className: 'dlg-search', body: [h('div.sb-box', [field, mine]), count, list]});
   input.value = initial;
   run();
   input.focus();

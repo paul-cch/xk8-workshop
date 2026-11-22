@@ -1,0 +1,15 @@
+{
+  "appId": "com.paulcouach.xk8workshop",
+  "appName": "XK8 Workshop",
+  "webDir": "dist-mobile",
+  "backgroundColor": "#eceef0",
+  "server": {
+    "hostname": "xk8-workshop.localhost"
+  },
+  "plugins": {
+    "SystemBars": {
+      "insetsHandling": "native",
+      "initialViewportFitValueHint": "cover"
+    }
+  }
+}

@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "node tools/build.mjs",
+    "mobile:sync": "node tools/build.mjs --mobile && cap sync",
     "test": "node tools/check.mjs validate-data test-core test-powertrain test-chassis test-feedback i18n-extract:--check i18n-check",
     "test:ui": "node tools/check.mjs build ui-flows fr-flows sweep i18n-sweep iphone-flows ui-phone clip-check",
     "test:jobs": "node tools/build.mjs && node tools/job-walk.mjs",
@@ -16,9 +17,16 @@
     "deploy": "node tools/deploy.mjs"
   },
   "dependencies": {
+    "@capacitor/android": "8.6.2",
+    "@capacitor/app": "8.1.2",
+    "@capacitor/core": "8.6.2",
+    "@capacitor/ios": "8.6.2",
+    "@capacitor/preferences": "8.0.1",
+    "@capgo/capacitor-pdf-generator": "8.0.53",
     "three": "0.186.1"
   },
   "devDependencies": {
+    "@capacitor/cli": "8.6.2",
     "esbuild": "0.28.1",
     "playwright": "1.58.2"
   }

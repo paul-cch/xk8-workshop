@@ -23,6 +23,7 @@ src/main.js               boot only
 src/state.js              the store and URL hash sync
 src/data.js               data access, variant filtering, search, unit conversion, the TRANSLATABLE list
 src/i18n.js               t() and the number, plural and date helpers
+src/mobile.js             the installed apps' storage, Android Back button and PDF sharing, loaded only in a mobile build
 src/sim/kin.js            pure maths, no three.js: crank, pistons, valves, chain, gearing,
                           road speed, suspension travel, steering, roof stroke
 src/car/index.js          every car module in build order
@@ -117,6 +118,24 @@ pages by what they are for, a settings button with appearance (auto, light, dark
 garage mode (large type, high contrast, keeps the screen awake where supported), provenance
 badge on every number (From Jaguar, Several sources agree, One source, Owners say) with the source one tap
 away, workshop words in running text that explain themselves on a tap, a loud warning when a safety-critical value is below `corroborated`.
+
+## Mobile apps
+
+Capacitor wraps the same page in an Android and an iPhone app. `node tools/build.mjs --mobile` sets `__MOBILE__` and
+writes `dist-mobile/`: `index.html`, `workshop.js`, `workshop.json` and `fr.js` as plain files, because an app has no
+download to shrink and no cache to manage. The website build leaves `__MOBILE__` false, so esbuild drops the Capacitor
+plugins from it.
+
+`src/mobile.js` is the only module that knows about the app shell, and the rest of the code asks it three things:
+
+- `workshopStorage()` gives the store the phone's preferences store in place of `localStorage`, which a phone may clear.
+  Writes queue, so a tick always lands after the edit before it.
+- `connectAndroidBack()` makes Back close the open dialog, then step back through the page's history, then leave the app.
+- `shareCard(card)` turns a job card, inspection report or shopping list into a PDF and opens the share sheet, where the
+  website prints. Both use `src/ui/print.css`.
+
+The 3D car, the data and both languages are inside the app, so it works with no signal. Films, outside guides and
+sending feedback need the network.
 
 ## Design rules
 

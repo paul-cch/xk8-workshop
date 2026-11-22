@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">XK8 Workshop</string>
+    <string name="title_activity_main">XK8 Workshop</string>
+    <string name="package_name">com.paulcouach.xk8workshop</string>
+    <string name="custom_url_scheme">com.paulcouach.xk8workshop</string>
+</resources>

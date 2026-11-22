@@ -74,7 +74,8 @@ const signIn = async (env, ip = IP) => (await postForm(env, '/inbox', {password:
 }
 {
   const env = fresh();
-  for (const [name, origin, want] of [['live origin', SITE, 204], ['the older Pages address', 'https://xk8-workshop.pages.dev', 204], ['file:// origin', 'null', 204]]) {
+  for (const [name, origin, want] of [['live origin', SITE, 204], ['the older Pages address', 'https://xk8-workshop.pages.dev', 204], ['file:// origin', 'null', 204],
+    ['iOS app', 'capacitor://xk8-workshop.localhost', 204], ['Android app', 'https://xk8-workshop.localhost', 204]]) {
     const r = await call(env, '/api/feedback', {method: 'OPTIONS', headers: {origin, 'access-control-request-method': 'POST', 'access-control-request-headers': 'content-type'}});
     check(`preflight from the ${name}`, r.status === want && r.headers.get('access-control-allow-origin') === origin && /content-type/.test(r.headers.get('access-control-allow-headers')) && /POST/.test(r.headers.get('access-control-allow-methods')), r.status);
   }

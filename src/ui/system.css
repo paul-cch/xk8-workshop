@@ -18,47 +18,114 @@
 .filter:focus, .vin-input:focus, .pick-year:focus, #ui .ws-search:focus, #ui .ws-field input:focus, .fb-input:focus { background: var(--sheet); border-color: var(--line); box-shadow: 0 0 0 3px var(--fill-2); }
 
 /* Cards: a white surface with a hairline, never a black box. */
-.choice, .ws-diy, #ui .ws-rescue, #ui .tut-go { border: 0; border-radius: var(--r-lg); background: var(--sheet); box-shadow: var(--lift); }
+.choice, .ws-diy, #ui .ws-rescue, #ui .tut-go, #ui .ex-due { border: 0; border-radius: var(--r-lg); background: var(--sheet); box-shadow: var(--lift); }
+#ui .ex-due { padding: 10px 14px; min-height: 52px; }
+#ui .ex-carry { border-radius: var(--r-lg); padding: 10px 14px; }
+.sb-mine { border-radius: 999px !important; }
+.sb-mine[aria-pressed='true'] { background: var(--fill-2) !important; color: var(--ink) !important; box-shadow: inset 0 0 0 1px var(--line); }
 
 /* Lists: rows light up under the pointer instead of underlining. */
 @media (hover: hover) {
   .btn:hover, .toggle:hover, #ui .ws-btn:hover, .chip:hover, .copy:hover, .code:hover, #ui .ws-chip:hover { box-shadow: none; background: var(--fill-2); }
   .btn[aria-pressed='true']:hover, .toggle[aria-pressed='true']:hover { background: var(--ink); }
+  .sb-mine[aria-pressed='true']:hover { background: var(--fill-2); }
   .mode:hover:not([aria-current='page']) { background: var(--fill); }
   .search-btn:hover { background: var(--fill-2); color: var(--ink-2); }
   .car-btn:hover { background: var(--fill); }
   .car-btn:hover b { text-decoration: none; }
-  .choice:hover, #ui .tut-go:hover { box-shadow: var(--lift), 0 2px 8px rgba(20, 24, 32, .06); }
+  .choice:hover, #ui .tut-go:hover, #ui .ex-due:hover { box-shadow: var(--lift), 0 2px 8px rgba(20, 24, 32, .06); }
   .weak:hover, .part:hover, .row:hover { background: var(--fill); }
   .weak:hover .weak-title, .part:hover .part-name, .row:hover .row-title { text-decoration: none; }
   .view:hover:not([aria-pressed='true']) { background: var(--fill-2); }
+  .field-clear:hover { background: var(--fill); color: var(--ink); }
 }
 .weak, .part, .row { border-radius: var(--r); padding-left: 8px; padding-right: 8px; margin: 0 -8px; width: calc(100% + 16px); border-top: 0; }
 
+/* Immediate touch feedback on every interactive control (replaces stripped tap highlight). */
+.btn, .toggle, #ui .ws-btn, .go, #ui .ws-big, #ui .ws-tick, #ui .ws-ok, #ui .ws-bad, #ui .ws-toggle,
+.chip, .copy, .code, #ui .ws-chip, .choice, #ui .ws-tile, #ui .ws-rescue, #ui .tut-go, #ui .ex-due, #ui .ex-carry,
+.view, .strip-btn, .hot-cap, .dlg-close, .field-clear, .car-btn, .search-btn, .top-menu, .fb-btn {
+  transition: transform 90ms ease, background-color 110ms ease, opacity 90ms ease;
+}
+.btn:active:not(:disabled), .toggle:active:not(:disabled), #ui .ws-btn:active:not(:disabled),
+.go:active:not(:disabled), #ui .ws-big:active:not(:disabled), #ui .ws-tick:active:not(:disabled),
+#ui .ws-ok:active:not(:disabled), #ui .ws-bad:active:not(:disabled), #ui .ws-toggle:active:not(:disabled),
+.chip:active:not(:disabled), .copy:active:not(:disabled), .code:active:not(:disabled), #ui .ws-chip:active:not(:disabled),
+.strip-btn:active, .hot-cap:active {
+  transform: scale(.975);
+  opacity: .88;
+}
+.choice:active, #ui .ws-tile:active, #ui .ws-rescue:active, #ui .tut-go:active, #ui .ex-due:active, #ui .ex-carry:active {
+  transform: scale(.985);
+  opacity: .9;
+}
+.weak:active, .part:active, .row:active, #ui .ws-row:active:not(.ws-row--ink):not(:disabled), .sr:active,
+.dlg-close:active, .field-clear:active, .car-btn:active, .search-btn:active, .top-menu:active, .fb-btn:active,
+.view:active:not([aria-pressed='true']) {
+  background: var(--fill-2);
+}
+html.touch-nav .mode:active .ws-i { transform: scale(.9); }
+
 /* ---- over the car ----------------------------------------------------------------------------------- */
-.hot-text, .picked, .strip-btn, .chain-tag, .run-hud { border-radius: var(--r); }
+.hot-text, .picked, .chain-tag, .run-hud { border-radius: var(--r); }
 .picked, .strip-btn { border: 0; box-shadow: var(--float); }
 .toast, .move-hint { border-radius: var(--r-lg); box-shadow: var(--float); }
 .fire li, .bar { border-radius: var(--r-sm); }
 
 /* ---- dialogs ------------------------------------------------------------------------------------------ */
 @media (hover: hover) { .sr:hover:not([aria-selected='true']) { background: var(--fill); } }
-@media (max-width: 640px) { .dlg[open] { border-radius: 14px 14px 0 0; border-top: 0; } .dlg-search[open] { border-radius: 0; } }
+@media (max-width: 640px) { .dlg[open] { border-radius: 20px 20px 0 0; border-top: 0; } .dlg-search[open] { border-radius: 0; } }
 
 /* ---- phone ------------------------------------------------------------------------------------------- */
-html.layout-sheet .mode { height: 58px; margin: 0; border-radius: 0; background: none; }
-html.layout-sheet .mode[aria-current='page'] { background: none; color: var(--ink); font-weight: 650; }
-html.layout-sheet .car-btn { height: auto; }
+html.touch-nav .modes .mode { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; height: 62px; min-width: 0; margin: 0; padding: 0 1px; border-radius: var(--r); background: none; font-size: .64rem; letter-spacing: -.02em; line-height: 1.15; }
+html.touch-nav .mode .ws-i { display: grid; place-items: center; width: 48px; height: 28px; border-radius: 14px; font-size: 20px; transition: background-color .15s, transform 90ms ease; }
+html.touch-nav .mode-label { min-height: 0; white-space: nowrap; }
+html.touch-nav.garage .mode-label { white-space: normal; }
+html.touch-nav .mode[aria-current='page'] .ws-i { background: var(--fill-2); }
+html.touch-nav.garage .mode[aria-current='page'] .ws-i { background: var(--ink); color: var(--paper); }
+html.touch-nav .modes .mode[aria-current='page'] { background: none; color: var(--ink); font-weight: 650; }
+html.touch-nav .top .car-btn { position: relative; flex: 0 1 auto; margin-right: auto; min-width: var(--tap); height: auto; min-height: var(--tap); padding: 4px 22px 4px 8px; }
+html.touch-nav .top .car-btn::after { content: ''; position: absolute; right: 7px; top: 50%; width: 6px; height: 6px; margin-top: -4px; border-right: 1.6px solid var(--ink-3); border-bottom: 1.6px solid var(--ink-3); transform: rotate(45deg); pointer-events: none; }
+html.touch-nav .top .search-btn { display: inline-flex; flex: none; justify-content: center; width: var(--tap); height: var(--tap); padding: 0; color: var(--ink-2); background: none; }
+html.touch-nav .search-btn > .ws-i { display: inline-flex; font-size: 21px; }
+html.touch-nav .search-btn > :not(.ws-i) { display: none; }
+/* Keep 48x48 touch targets on EN/FR while visually sitting as a proportional 36px pill in the 56px header. */
+html.touch-nav .top .seg-lang { position: relative; padding: 0; gap: 0; background: none; margin: 0 2px; }
+html.touch-nav .top .seg-lang::before { content: ''; position: absolute; inset: 6px 0; border-radius: calc(var(--r) + 2px); background: var(--fill); pointer-events: none; }
+html.touch-nav .top .seg-lang button { position: relative; z-index: 1; background: none; box-shadow: none; }
+html.touch-nav .top .seg-lang button[aria-pressed='true']::before { content: ''; position: absolute; inset: 8px 2px; z-index: -1; border-radius: 7px; background: var(--sheet); box-shadow: var(--lift); }
+html.touch-nav.garage .top .seg-lang { box-shadow: none; background: none; }
+html.touch-nav.garage .top .seg-lang::before { background: #fff; box-shadow: inset 0 0 0 1.5px #000; }
+html.touch-nav.garage .top .seg-lang button[aria-pressed='true'] { background: none; color: #fff; }
+html.touch-nav.garage .top .seg-lang button[aria-pressed='true']::before { background: #000; box-shadow: none; }
+
+/* A phone on its side keeps the car beside the panel and the tabs under the panel. */
+html.touch-nav.layout-rail .modes { left: auto; width: var(--rail); padding-right: env(safe-area-inset-right, 0px); }
+html.touch-nav.layout-rail .dock { top: calc(56px + var(--safe-t)); bottom: calc(62px + var(--safe-b)); padding-right: env(safe-area-inset-right, 0px); }
+html.touch-nav.layout-rail .top { height: 56px; padding-inline: max(8px, env(safe-area-inset-left, 0px)) max(8px, env(safe-area-inset-right, 0px)); }
+html.touch-nav.layout-rail .intro { top: calc(62px + var(--safe-t)); left: max(14px, env(safe-area-inset-left, 0px)); }
+html.touch-nav.layout-rail .banner, html.touch-nav.layout-rail .chain-tag { top: calc(56px + var(--safe-t)); }
+html.touch-nav.layout-rail.job-step .modes { display: none; }
+html.touch-nav.layout-rail.job-step .dock { bottom: 0; }
+
+/* Dark sheet separation. */
+html.dark:not(.garage) .dock.is-sheet { box-shadow: 0 -1px 0 var(--line), 0 -12px 36px rgba(0, 0, 0, .48); }
 
 /* ---- large text: black on white, nothing faint ----------------------------------------------------------- */
-html.garage .seg, html.garage .btn, html.garage .toggle, html.garage .chip, html.garage .copy, html.garage .code, html.garage .choice, html.garage #ui .ws-btn, html.garage #ui .ws-big, html.garage #ui .ws-chip, html.garage #ui .ws-tick { box-shadow: inset 0 0 0 1.5px #000; background: #fff; }
-html.garage .seg button[aria-pressed='true'], html.garage .btn[aria-pressed='true'], html.garage .toggle[aria-pressed='true'], html.garage #ui .ws-big--go { background: #000; color: #fff; }
+html.garage .seg, html.garage .btn, html.garage .toggle, html.garage .chip, html.garage .copy, html.garage .code, html.garage .choice, html.garage #ui .ex-due, html.garage #ui .tut-go, html.garage .hot-cap, html.garage .strip-btn, html.garage #ui .ws-btn, html.garage #ui .ws-big, html.garage #ui .ws-chip, html.garage #ui .ws-tick { box-shadow: inset 0 0 0 1.5px #000; background: #fff; }
+html.garage .seg:not(.seg-lang) button[aria-pressed='true'], html.garage .btn[aria-pressed='true'], html.garage .toggle[aria-pressed='true'], html.garage .sb-mine[aria-pressed='true'], html.garage #ui .ws-big--go { background: #000 !important; color: #fff !important; }
+html.garage:not(.touch-nav) .seg-lang button[aria-pressed='true'] { background: #000 !important; color: #fff !important; }
+html.touch-nav.garage .top .seg-lang { box-shadow: none; background: none; }
+html.touch-nav.garage .top .seg-lang::before { background: #fff; box-shadow: inset 0 0 0 1.5px #000; }
+html.touch-nav.garage .top .seg-lang button[aria-pressed='true'] { background: none; color: #fff; }
+html.touch-nav.garage .top .seg-lang button[aria-pressed='true']::before { background: #000; box-shadow: none; }
+html.garage #ui .ws-nextprev .ws-big { font-size: 1.12em; padding: 8px 6px; }
 html.garage .views { background: #fff; box-shadow: inset 0 0 0 1.5px #000; }
 html.garage .ws-tag, html.garage .ws-lik, html.garage .ws-urg, html.garage .vin-tag { background: #fff; box-shadow: inset 0 0 0 1px #000; color: #000; }
 
 /* ---- top bar extras: settings and feedback are icons ---------------------------------------------------- */
 .top .top-menu, .top .fb-btn { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 36px; min-width: 36px; height: 36px; min-height: 36px; padding: 0 !important; color: var(--ink-2); }
-html.layout-sheet .top .top-menu, html.layout-sheet .top .fb-btn { width: 44px; min-height: 44px; }
+html.touch-nav .top .top-menu, html.touch-nav .top .fb-btn { width: var(--tap); height: var(--tap); }
 .top .seg-lang { margin: 0 4px; }
 .ex-legal { padding: 4px var(--pad) 28px; color: var(--ink-3); }
 .ex-show { padding-top: 12px; }
@@ -74,3 +141,11 @@ html.garage .link, html.garage #ui .ws-link { color: #000; text-decoration: unde
 .ws-need { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
 .ws-need li { padding: 2px 8px; border-radius: var(--r-sm); background: var(--fill); font-size: .87rem; }
 .part-lead { margin: 0 var(--pad) 14px; font-size: 1.02rem; color: var(--ink-2); }
+
+.menu-feedback { display: none; }
+@media (max-width: 359px) {
+  html.touch-nav .top .fb-btn { display: none; }
+  .menu-feedback { display: block; margin-top: 12px; }
+  html.touch-nav .mode-label { white-space: normal; }
+  html.touch-nav.garage .modes .mode { font-size: .74rem; }
+}

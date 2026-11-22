@@ -5,7 +5,8 @@ import * as THREE from 'three';
 import {LAYER} from '../car/registry.js';
 import {partName} from '../data.js';
 
-const TAP_PX = 6, TAP_MS = 400, HOVER_MS = 60;
+const TAP_PX = 6, TAP_TOUCH_PX = 12, TAP_MS = 400, HOVER_MS = 60;
+const tapSlop = (e) => (e.pointerType === 'touch' ? TAP_TOUCH_PX : TAP_PX);
 const SVG = 'http://www.w3.org/2000/svg';
 
 export function createPicker({stage, registry, store, rig}) {
@@ -68,19 +69,23 @@ export function createPicker({stage, registry, store, rig}) {
   let down = null, busy = false, lastHover = 0, lastTap = {id: null, t: 0};
   const local = (e) => { const r = canvas.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
 
-  canvas.addEventListener('pointerdown', (e) => { down = {x: e.clientX, y: e.clientY, t: performance.now(), button: e.button}; });
+  // A second finger belongs to the camera, even when that finger stays still during a pinch.
+  canvas.addEventListener('pointerdown', (e) => {
+    down = e.isPrimary && e.button === 0 ? {id: e.pointerId, x: e.clientX, y: e.clientY, t: e.timeStamp} : null;
+  });
+  canvas.addEventListener('pointercancel', () => { down = null; });
   canvas.addEventListener('pointerup', async (e) => {
     const d = down;
     down = null;
-    if (!d || d.button !== 0 || Math.hypot(e.clientX - d.x, e.clientY - d.y) > TAP_PX || performance.now() - d.t > TAP_MS) return;
+    if (!d || d.id !== e.pointerId || Math.hypot(e.clientX - d.x, e.clientY - d.y) > tapSlop(e) || e.timeStamp - d.t > TAP_MS) return;
     const id = await pickAt(...local(e));
-    const now = performance.now();
-    if (id && lastTap.id === id && now - lastTap.t < 350) rig?.flyToPart(id);
-    lastTap = {id, t: now};
+    if (id && lastTap.id === id && e.timeStamp - lastTap.t < 350) rig?.flyToPart(id);
+    lastTap = {id, t: e.timeStamp};
     store.set({selected: id});
   });
   canvas.addEventListener('pointermove', async (e) => {
-    if (e.pointerType !== 'mouse' || down || busy) return;
+    if (down?.id === e.pointerId && Math.hypot(e.clientX - down.x, e.clientY - down.y) > tapSlop(e)) down = null;
+    if (e.pointerType !== 'mouse' || e.buttons || down || busy) return;
     const now = performance.now();
     if (now - lastHover < HOVER_MS) return;
     lastHover = now;

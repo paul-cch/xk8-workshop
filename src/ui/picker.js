@@ -124,7 +124,7 @@ export function openPicker(app) {
     h('p.pick-hint', data.variants.vin.plateLocations?.text),
     examples.length > 0 && h('details.ws-more.pick-eg', [h('summary', t('See an example')), h('div.pick-eg-list', examples.map((e) => h('button.chip', {type: 'button', title: e.car, onclick: () => { vin.value = e.vin; readVin(e.vin); }}, e.vin)))]),
     h('h3.lab', t('Or choose')),
-    h('div.pick-field', [h('span', t('Model year')), year]),
+    h('div.pick-field', [h('span', t('Model year')), h('div.pick-select', year)]),
     h('p.pick-hint', t('Model year is not always the registration year: a car can be registered a year either side.')),
     h('div.pick-field', [h('span', t('Engine')), engine]),
     h('div.pick-field', [h('span', t('Supercharged')), induction]),

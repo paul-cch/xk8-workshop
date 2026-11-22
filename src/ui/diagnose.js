@@ -5,7 +5,7 @@ import {N, fold, isFrench, plural, t} from '../i18n.js';
 import {cylinderLabels} from './engine-labels.js';
 import {gloss} from './terms.js';
 import {closePlayer, tutorialList} from './tutorials.js';
-import {badge, h, toast} from './widgets.js';
+import {badge, h, searchField, toast} from './widgets.js';
 import {addParts, appliesText, callout, carLabel, clearCar, gbp, hoursText, icon, modeRoot, nav, openJob, paintView, pips, showButton, showNumbers, sysName, vinTag} from './jobs.js';
 
 const URGENCY = {
@@ -232,8 +232,9 @@ function renderHome(app, s, root) {
     if (typing) renderResults(app, box, v);
   };
   const input = homeSearch(app, box, v, redraw);
+  const field = searchField(input);
   arrowThrough(box, input);
-  const chips = h('div.ws-said', {role: 'group', 'aria-label': t('What is the car doing?')}, SAYS.filter((x) => x.word).map((x) => h('button.ws-chip', {type: 'button', onclick: () => { route.q = t(x.word); input.value = route.q; redraw(); app.ui.raise('full'); setTimeout(() => box.scrollIntoView({block: 'start', behavior: 'smooth'}), 380); }}, t(x.word))));
+  const chips = h('div.ws-said', {role: 'group', 'aria-label': t('What is the car doing?')}, SAYS.filter((x) => x.word).map((x) => h('button.ws-chip', {type: 'button', onclick: () => { route.q = t(x.word); input.value = route.q; field.sync(); redraw(); app.ui.raise('full'); setTimeout(() => box.scrollIntoView({block: 'start', behavior: 'smooth'}), 380); }}, t(x.word))));
   const paintBrowse = () => {
     browse.replaceChildren(
       h('div.ws-tabs', {role: 'tablist'}, BROWSE.map(([k, word]) => h('button', {type: 'button', role: 'tab', 'aria-selected': String(route.browse === k), onclick: () => { route.browse = k; paintBrowse(); }}, t(word)))),
@@ -243,7 +244,7 @@ function renderHome(app, s, root) {
   redraw();
   paintView(root, 'home', [
     h('header.ws-top', [h('h2', t('What\'s wrong?'))]),
-    input, chips, box, h('div.ws-pin-row', {hidden: route.q.trim().length > 0}, flatBattery(app)), browse,
+    field, chips, box, h('div.ws-pin-row', {hidden: route.q.trim().length > 0}, flatBattery(app)), browse,
   ]);
 }
 

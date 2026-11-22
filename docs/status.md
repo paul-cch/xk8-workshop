@@ -2,6 +2,33 @@
 
 Live at https://xk8.paulcouach.com. The older address, https://xk8-workshop.pages.dev, serves the same site.
 
+## Mobile app trial
+
+Version 0.1.0 ran on an Android 15 emulator and an iPhone 17 Pro simulator on 19 November 2026.
+Both opened the bundled 3D car and French workshop offline. Android used airplane mode. On iOS, Web Inspector
+blocked HTTP and HTTPS during a fresh load with caching disabled, and a separate test request confirmed the block.
+
+The oil-and-filter job resumed at step two after a relaunch. Both platforms opened the system share sheet with
+the three-page A4 job card attached. Android also produced an inspection report and a shopping list as PDFs,
+and retained the selected car and service mileage.
+On Android, the system Back button closed Settings, returned from a job to its list, and returned home from the first screen.
+The [README](../README.md#run-it-on-a-phone) has the build and trial commands.
+
+On 20 November 2026 the touch trials passed on both: `node tools/android-trial.mjs` on the Android 15 emulator in airplane
+mode, and both tests in `tools/ios-trial/` on the iPhone 17 Pro simulator. A release bundle for Google Play built and
+signed with a throwaway key. `npm run test:ui` passed 8 of 8 on the Mac the same day.
+
+The feedback worker that accepts the two app origins went live on 20 November 2026. The current page followed on
+21 November, deployment `b0076689`: every file on the live address matched the release, the worker answered both app
+origins and refused an unknown one, and `/inbox` loaded.
+
+Not done yet, and each needs Paul:
+
+- No physical phone has run either app.
+- The Mac has an Apple Development certificate for the team in the Xcode project, but Xcode is not signed in to the
+  account, so it cannot yet build for a real iPhone or archive for the App Store.
+- There is no Google Play upload key and no listing in either store.
+
 ## Last full check
 
 Run on 2 and 3 November 2026 on an Apple M3. The commands are in `AGENTS.md`.
@@ -23,8 +50,10 @@ Run on 2 and 3 November 2026 on an Apple M3. The commands are in `AGENTS.md`.
 
 ## Known problems
 
-- Never tried on a real phone. WebKit with the iPhone profile is the closest test.
-- iPhone offline is unproven. Offline reload works in Chromium. In WebKit the service worker takes control, but the offline
+- Physical phones still need a garage trial.
+- `npm run test:ui` wants a Mac. On the Linux box on 20 November 2026, `ui-flows` timed out on a click under software
+  rendering, with the Android emulator running beside it.
+- Offline reload of the website on iPhone is unproven. Offline reload works in Chromium. In WebKit the service worker takes control, but the offline
   reload hit a harness error.
 - Phone boot, emulated: the interface is up at 1.9 s and the first frame drawn at about 2.05 s. The body build is the largest part left, 0.5 s.
 - Lift paths cross a solid part: coil and intake pipe through the cam cover, drive belt through the tensioner, vertical link
@@ -65,7 +94,8 @@ Run on 2 and 3 November 2026 on an Apple M3. The commands are in `AGENTS.md`.
 
 ## Feedback inbox
 
-The speech-bubble button in the top bar sends a message to a private inbox. A job step or part panel also has a "Something
+The speech-bubble button in the top bar opens the private feedback form. On phones narrower than 360 CSS pixels, open
+Settings and tap **Send feedback**. A job step or part panel also has a "Something
 wrong here?" link, which fills in what the message is about.
 
 1. Open https://xk8.paulcouach.com/inbox.
@@ -106,15 +136,16 @@ npm run deploy -- --dry-run                                                  # w
 Cloudflare Pages > Edit. Without the two variables it exits 2. Pass a folder, `node tools/deploy.mjs <folder>`, to deploy a
 release already built.
 
-With no token on the machine, the Executor route still works by hand:
+The release build draws the share card in Chromium on the Metal backend, so it needs a Mac. On Linux `tools/og.mjs` times
+out and nothing is deployed. From Linux, build the release on the Mac, copy the folder back and pass it to
+`tools/deploy.mjs`. The deployment of 21 November 2026 went out that way.
 
-```
-npm run release
-PAGES_JWT=<upload token> node tools/deploy-pages.mjs /tmp/xk8-rel
-```
-
-Get the upload token from Executor's Cloudflare tools, then create the deployment through them with the printed manifest and
-`_worker.js` and `_routes.json` as multipart fields.
+With no token on the machine, Executor's Cloudflare tools can still create a deployment, but since 20 November 2026 they
+no longer give the upload token, so they cannot upload new files. That leaves one thing they can do: put a new
+`_worker.js` live while the site's files stay as they are. Download the live files, work out their manifest with
+`assetFiles` and `manifestOf` from `tools/deploy-pages.mjs`, and create the deployment through Executor with that
+manifest, `_worker.js` and `_routes.json`. Try it on another branch first, which gives a preview address, then on `main`.
+A new page needs the token.
 
 The feedback server needs more:
 

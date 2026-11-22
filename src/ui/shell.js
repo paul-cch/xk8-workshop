@@ -11,7 +11,7 @@ import * as jobs from './jobs.js';
 import * as diagnose from './diagnose.js';
 import * as plan from './plan.js';
 import * as feedback from './feedback.js';
-import {nav} from './jobs.js';
+import {icon, nav} from './jobs.js';
 import {openPicker} from './picker.js';
 import {openSearch, recordBody} from './search.js';
 import {explain} from './terms.js';
@@ -21,6 +21,7 @@ import {badge, carName, carTag, carYear, dialog, fill, h, lessons, proneTo, seg,
 const PANELS = {explore, run, jobs, diagnose, plan};
 const KEEP = new Set(['explore', 'run']); // these hold their own state across visits; the others mount on each visit
 const TITLES = {explore: N('The car'), run: N('Run it'), jobs: N('Fix it'), diagnose: N('What\'s wrong'), plan: N('Upkeep')};
+const MODE_ICON = {explore: 'car', run: 'play', jobs: 'wrench', diagnose: 'pulse', plan: 'clipboard'};
 const VIEWS = [['hero', N('Whole car')], ['side', N('Side')], ['front', N('Front')], ['rear', N('Rear')], ['top', N('Top')], ['underside', N('Under')], ['engine-bay', N('Engine bay')], ['boot', N('Boot')], ['wheel-fr', N('Wheel')]];
 const SNAP_WORD = {peek: N('peek'), half: N('half'), full: N('full')};
 const SKINS = new Set(['body', 'roof', 'interior']);
@@ -59,7 +60,7 @@ function createSheet(dock, grip, body, {onSnap}) {
   sheet.say = () => grip.setAttribute('aria-label', sheet.moved ? t('Panel height: {name}. Press to change.', {name: t(SNAP_WORD[sheet.snap])}) : t('Panel height'));
   sheet.measure = (bar, top, peek, strip = null) => {
     const avail = window.innerHeight - bar;
-    sheet.full = Math.round(avail - top - 4);
+    sheet.full = Math.round(avail - top - 2);
     sheet.half = strip != null ? sheet.full - Math.round(strip) : Math.round(Math.min(sheet.full, avail * 0.5));
     sheet.peek = Math.min(peek, sheet.half);
     dock.style.height = `${sheet.full}px`;
@@ -71,8 +72,9 @@ function createSheet(dock, grip, body, {onSnap}) {
     sheet.moved = true;
     sheet.say();
     const next = sheet[name];
+    const growing = next > sheet.h;
     place(next, true);
-    if (next > sheet.h) fitBody();
+    if (growing) fitBody();
     onSnap(name);
     setTimeout(fitBody, 340);
   };
@@ -95,36 +97,59 @@ function createSheet(dock, grip, body, {onSnap}) {
     place(Math.max(sheet.peek * 0.8, Math.min(sheet.full, drag.h + drag.y - y)), false);
   };
 
-  grip.addEventListener('pointerdown', (e) => { grip.setPointerCapture(e.pointerId); begin(e.clientY); });
-  grip.addEventListener('pointermove', (e) => { if (drag) move(e.clientY); });
-  const up = () => {
-    if (!drag) return;
-    const d = drag;
+  let gripPointer = null, dragged = false;
+  grip.addEventListener('pointerdown', (e) => {
+    if (!e.isPrimary || e.button !== 0) return;
+    gripPointer = e.pointerId;
+    dragged = false;
+    grip.setPointerCapture(e.pointerId);
+    begin(e.clientY);
+  });
+  grip.addEventListener('pointermove', (e) => { if (e.pointerId === gripPointer && drag) move(e.clientY); });
+  grip.addEventListener('pointerup', (e) => {
+    if (e.pointerId !== gripPointer || !drag) return;
+    dragged = drag.moved;
+    if (dragged) release(drag.v, drag.lastT);
+    gripPointer = null;
     drag = null;
-    if (d.moved) release(d.v, d.lastT);
-    else sheet.to(SNAPS[(SNAPS.indexOf(sheet.snap) + 1) % SNAPS.length]);
+    fitBody();
+  });
+  const cancel = () => {
+    drag = null;
+    place(sheet[sheet.snap], false);
+    fitBody();
   };
-  grip.addEventListener('pointerup', up);
-  grip.addEventListener('pointercancel', up);
+  grip.addEventListener('pointercancel', (e) => {
+    if (e.pointerId !== gripPointer) return;
+    gripPointer = null;
+    cancel();
+  });
+  grip.addEventListener('click', (e) => {
+    if (!dragged || e.detail === 0) sheet.to(SNAPS[(SNAPS.indexOf(sheet.snap) + 1) % SNAPS.length]);
+    dragged = false;
+  });
   grip.addEventListener('keydown', (e) => {
     const i = SNAPS.indexOf(sheet.snap);
     if (e.key === 'ArrowUp') { e.preventDefault(); sheet.to(SNAPS[Math.min(2, i + 1)]); }
     if (e.key === 'ArrowDown') { e.preventDefault(); sheet.to(SNAPS[Math.max(0, i - 1)]); }
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sheet.to(SNAPS[(i + 1) % 3]); }
   });
 
-  // Pulling down on a list already at its top lowers the sheet, as a greasy thumb expects. Sliders are left alone.
+  // Pulling down on a list already at its top lowers the sheet, and swiping up on a peek sheet expands it. Sliders are left alone.
   let pull = null;
   body.addEventListener('touchstart', (e) => {
-    if (e.touches.length !== 1 || e.target.closest('input[type=range]') || !dock.classList.contains('is-sheet')) { pull = null; return; }
-    pull = {y: e.touches[0].clientY, scroller: e.target.closest('.ws-scroll') ?? e.target.closest('.panel'), on: false};
+    if (pull?.on) cancel();
+    if (e.touches.length !== 1 || e.target.closest('input[type=range], .tut-topics, .ws-tabs') || !dock.classList.contains('is-sheet')) { pull = null; return; }
+    pull = {x: e.touches[0].clientX, y: e.touches[0].clientY, scroller: e.target.closest('.ws-scroll') ?? e.target.closest('.panel'), on: false};
   }, {passive: true});
   body.addEventListener('touchmove', (e) => {
     if (!pull) return;
     const y = e.touches[0].clientY, dy = y - pull.y;
     if (!pull.on) {
+      if (Math.abs(e.touches[0].clientX - pull.x) > Math.max(8, Math.abs(dy))) { pull = null; return; }
       if (Math.abs(dy) < 8) return;
-      if (dy < 0 || (pull.scroller?.scrollTop ?? 0) > 0 || sheet.snap === 'peek') { pull = null; return; }
+      const canLower = dy > 0 && (pull.scroller?.scrollTop ?? 0) <= 0 && sheet.snap !== 'peek';
+      const canRaise = dy < 0 && (sheet.snap === 'peek' || (sheet.snap === 'half' && (pull.scroller?.scrollTop ?? 0) <= 0));
+      if (!canLower && !canRaise) { pull = null; return; }
       pull.on = true;
       begin(y);
     }
@@ -135,6 +160,7 @@ function createSheet(dock, grip, body, {onSnap}) {
     if (pull?.on && drag) { const d = drag; drag = null; release(d.v, d.lastT); }
     pull = null;
   });
+  body.addEventListener('touchcancel', () => { if (pull?.on) cancel(); pull = null; });
   return sheet;
 }
 
@@ -160,6 +186,7 @@ export function mount(el, app) {
   const root = document.documentElement;
   const calm = matchMedia('(prefers-reduced-motion: reduce)');
   const wide = matchMedia(RAIL);
+  const shortTouch = matchMedia('(pointer: coarse) and (orientation: landscape) and (max-height: 520px) and (max-width: 999px)');
   // Automated screenshots must hold still: every other builder's shots read a settled frame.
   const automated = navigator.webdriver && !location.search.includes('orbit');
 
@@ -242,15 +269,14 @@ export function mount(el, app) {
     sheetChanged() { if (rail === false) sheetFor(); report(); },
     /** Showing a part from a full sheet would move the car behind it. */
     lower() { if (rail === false && sheet.snap === 'full' && !stepOn) sheet.to('half'); },
-    /** A film goes over the car on a phone, and the sheet sits under it. False where there is no room for that. */
+    /** The phone plays a film in the car's space, beside or above the written steps. */
     filmOver(node) {
-      if (rail !== false) return false;
+      if (!root.classList.contains('touch-nav')) return false;
       film = node;
       node.classList.add('tut-over');
       el.append(node);
       root.classList.add('film-over');
-      sheetFor();
-      sheet.to('full');
+      if (!rail) { sheetFor(); sheet.to('full'); }
       return true;
     },
     /** Asks for more of the screen. Never lowers the sheet. */
@@ -310,13 +336,10 @@ export function mount(el, app) {
     }});
     modes.append(modeBtn[m]);
   }
-  const searchMode = h('button.mode.mode-search', {type: 'button', onclick: () => ui.openSearch()});
-  modes.append(searchMode);
-
   const brandName = h('span.brand-name');
   const brand = h('button.brand', {type: 'button', onclick: () => { store.set({mode: 'explore', selected: null, view: 'hero'}); }}, brandName);
   const searchWords = h('span');
-  const searchBtn = h('button.search-btn', {type: 'button', onclick: () => ui.openSearch()}, [searchWords, h('kbd', /Mac|iP/.test(navigator.platform) ? 'Cmd K' : 'Ctrl K')]);
+  const searchBtn = h('button.search-btn', {type: 'button', onclick: () => ui.openSearch()}, [icon('search'), searchWords, h('kbd', /Mac|iP/.test(navigator.platform) ? 'Cmd K' : 'Ctrl K')]);
   const carBtn = h('button.car-btn', {type: 'button', onclick: () => ui.openCar()});
   // Each language names itself, so a reader who cannot read the page can still find their own.
   const langs = seg({options: [{value: 'en', label: 'EN', aria: 'English'}, {value: 'fr', label: 'FR', aria: 'Français'}], value: store.get().lang, onChange: async (v) => { await app.setLang(v); langs.set(store.get().lang); }, className: 'seg-lang'});
@@ -330,6 +353,7 @@ export function mount(el, app) {
       seg({label: t('Tightening units'), options: [{value: 'nm', label: 'Nm'}, {value: 'lbft', label: 'lb ft'}], value: store.get().units, onChange: (v) => store.set({units: v}), className: 'seg-wide'}),
       h('h3.lab', t('Large text')),
       h('button.btn.menu-garage', {type: 'button', onclick: () => { store.set({garage: !store.get().garage}); d.close(); }}, store.get().garage ? t('Turn large text off') : t('Turn large text on')),
+      h('button.btn.menu-feedback', {type: 'button', onclick: () => { d.close(); ui.feedback(); }}, t('Send feedback')),
     ]});
   }});
   const heading = h('h1.vh');
@@ -380,8 +404,11 @@ export function mount(el, app) {
   /** Every fixed word in the frame. Runs once at the start and again on a change of language. */
   function paintWords() {
     modes.setAttribute('aria-label', t('Modes'));
-    for (const m of MODES) { modeBtn[m].textContent = t(TITLES[m]); panelEl[m].setAttribute('aria-label', t(TITLES[m])); }
-    searchMode.textContent = t('Search');
+    for (const m of MODES) {
+      modeBtn[m].replaceChildren(icon(MODE_ICON[m]), h('span.mode-label', t(TITLES[m])));
+      panelEl[m].setAttribute('aria-label', t(TITLES[m]));
+    }
+    searchBtn.setAttribute('aria-label', t('Search everything'));
     heading.textContent = brandName.textContent = t('XK8 Workshop');
     brand.title = t('Back to the whole car');
     searchWords.textContent = t('Search everything');
@@ -443,6 +470,10 @@ export function mount(el, app) {
     const strip = stepOn && !film ? Math.max(STRIP_MIN, window.innerHeight * STRIP_SHARE) : null;
     sheet.measure(modes.offsetHeight, top.offsetHeight + (banner.hidden ? 0 : banner.offsetHeight) + (film?.offsetHeight ?? 0), reach + grip.offsetHeight + 1, strip);
   };
+  function entryHeight(s) {
+    if (app.noGL || ['jobs', 'diagnose', 'plan'].includes(s.mode)) return 'full';
+    return s.mode === 'explore' && !s.selected ? 'peek' : 'half';
+  }
   /** In a step on a phone the text comes first: no mode bar, no camera buttons, and the car a strip that opens on request. */
   function paintStep(s) {
     const open = s.mode === 'jobs' && s.job?.step != null;
@@ -454,20 +485,31 @@ export function mount(el, app) {
     root.classList.toggle('in-step', on);
     stripBtn.hidden = !on;
     if (rail === false) sheetFor(); // runs after layout() has cleared the sheet's transform: in rail mode it would write it back
-    if (on) { sheet.to(s.garage ? 'full' : 'half'); paintStrip(); } else if (rail === false) sheet.to('half');
+    if (on) { sheet.to(s.garage ? 'full' : 'half'); paintStrip(); } else if (rail === false) sheet.to(entryHeight(s));
   }
   function layout() {
     const next = wide.matches;
-    if (next !== rail) {
+    const changed = next !== rail;
+    if (changed) {
       rail = next;
       dock.classList.toggle('is-sheet', !rail);
       root.classList.toggle('layout-rail', rail);
       root.classList.toggle('layout-sheet', !rail);
       rig.views.hero.fill = rail ? HERO_FILL.rail : HERO_FILL.sheet;
-      if (rail) { top.insertBefore(modes, spacer); dock.style.height = ''; dock.style.transform = ''; dockBody.style.height = ''; grip.tabIndex = -1; } else { el.insertBefore(modes, dock.nextSibling); grip.tabIndex = 0; }
+      if (rail) { dock.style.height = ''; dock.style.transform = ''; dockBody.style.height = ''; }
+      grip.tabIndex = rail ? -1 : 0;
+    }
+    const tabs = !rail || shortTouch.matches;
+    root.classList.toggle('touch-nav', tabs);
+    if (tabs && modes.parentElement !== el) {
+      el.insertBefore(modes, dock.nextSibling);
+      langs.after(searchBtn);
+    } else if (!tabs && modes.parentElement !== top) {
+      top.insertBefore(modes, spacer);
+      top.insertBefore(searchBtn, carBtn);
     }
     paintStep(store.get());
-    if (!rail) sheetFor();
+    if (!rail) { sheetFor(); if (film && changed) sheet.to('full'); }
     report();
   }
   sheet = createSheet(dock, grip, dockBody, {onSnap: (name) => {
@@ -478,6 +520,7 @@ export function mount(el, app) {
   paintWords();
   new ResizeObserver(() => layout()).observe(el);
   wide.addEventListener('change', layout);
+  shortTouch.addEventListener('change', layout);
   layout();
   const lift = (to = 'half') => { if (!rail && SNAPS.indexOf(sheet.snap) < SNAPS.indexOf(to)) sheet.to(to); };
   dock.addEventListener('focusin', (e) => { if (!stepOn && e.target.matches?.(TYPED)) lift('full'); });
@@ -496,9 +539,11 @@ export function mount(el, app) {
 
   /** Zoom and isolate, on the car area: they act on the picture, not on the facts in the panel. */
   function paintPartBar(s) {
+    const wasHidden = partBar.hidden;
     const id = s.mode === 'explore' && s.selected && data.parts.byId.has(s.selected) ? registry.resolve(s.selected).id : null;
     partBar.hidden = !id;
     if (!id) return;
+    if (wasHidden) requestAnimationFrame(() => { viewBar.scrollLeft = 0; });
     const iso = (s.isolate ?? []).includes(id);
     partBar.replaceChildren(
       h('button.view', {type: 'button', onclick: () => {
@@ -678,6 +723,8 @@ export function mount(el, app) {
   const paintViews = (s) => {
     const inStep = s.mode === 'jobs' && s.job?.step != null; // the camera is on the work: no named view is showing, whatever the last one was
     for (const [name, b] of Object.entries(viewBtn)) b.setAttribute('aria-pressed', !inStep && s.view === name);
+    const active = !inStep && !s.selected && partBar.hidden && s.view && viewBtn[s.view];
+    if (active && viewBar.scrollWidth > viewBar.clientWidth) viewBar.scrollTo({left: Math.max(0, active.offsetLeft - (viewBar.clientWidth - active.offsetWidth) / 2), behavior: calm.matches ? 'auto' : 'smooth'});
   };
 
   const paintPicked = (s) => {
@@ -704,7 +751,7 @@ export function mount(el, app) {
       for (const m of MODES) modeBtn[m].setAttribute('aria-current', m === s.mode ? 'page' : 'false');
       dockTitle.textContent = t(TITLES[s.mode]);
       show(s.mode);
-      if (!rail) { sheetFor(); lift(); }
+      if (!rail) { sheetFor(); sheet.to(entryHeight(s)); }
       if (s.mode !== 'explore') { dismiss(); hideHint(); } else offerHint();
       if (s.mode === 'jobs') ui.lookupFrom = null;
     }
@@ -782,7 +829,7 @@ export function mount(el, app) {
   paintPartBar(s);
   if (s.notice) { say(s.notice); store.set({notice: null}); }
   paintStep(s);
-  if (rail === false && !stepOn) sheet.to(app.noGL ? 'full' : s.selected || s.mode !== 'explore' ? 'half' : 'peek');
+  if (rail === false && !stepOn) sheet.to(entryHeight(s));
   offerHint();
   document.fonts?.ready?.then(layout);
 }

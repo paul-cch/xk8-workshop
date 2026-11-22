@@ -21,7 +21,8 @@
 // to the next, and without INBOX_HASH it cannot be checked against a guessed address. It never goes in a message.
 
 // The address people use, the Pages address it grew from, whose old pages may still be open, and a file:// copy.
-const ORIGINS = new Set(['https://xk8.paulcouach.com', 'https://xk8-workshop.pages.dev', 'null']);
+const ORIGINS = new Set(['https://xk8.paulcouach.com', 'https://xk8-workshop.pages.dev', 'null',
+  'capacitor://xk8-workshop.localhost', 'https://xk8-workshop.localhost']);
 const KINDS = new Map([['wrong', 'Something is wrong'], ['idea', 'An idea'], ['thanks', 'Thank you']]);
 const ABOUT = new Map([['step', 'Job step'], ['part', 'Part']]);
 const MAX = {message: 2000, contact: 200, page: 500, car: 60, about: 300};
